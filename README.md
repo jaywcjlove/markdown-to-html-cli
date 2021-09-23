@@ -1,12 +1,39 @@
 markdown-to-html-cli
 ---
 
+[![Build and Test](https://github.com/jaywcjlove/markdown-to-html-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/markdown-to-html-cli/actions/workflows/ci.yml)
+[![Coverage Status](https://jaywcjlove.github.io/markdown-to-html-cli/badges.svg)](https://jaywcjlove.github.io/markdown-to-html-cli/lcov-report/)
+
 Command line tool generates markdown as html.
+
+## Usage
+
+Used in Github Actions.
+
+```yml
+- run: npm i markdown-to-html-cli -g
+- run: markdown-to-html --output coverage/index.html
+```
 
 ## Install
 
 ```shell
 $ npm i markdown-to-html-cli
+```
+
+## Configure in package.json
+
+```js
+{
+  "markdown-to-html": {
+    "title": "markdown-to-html-cli",
+    "style": "body { color: red; }",
+    "meta": [
+      { "description": "Command line tool generates markdown as html." },
+      { "keywords": "store,localStorage,lightweight,JavaScript" }
+    ],
+  }
+}
 ```
 
 ## Command Help
@@ -35,21 +62,6 @@ Example:
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npm markdown-to-html-cli --output coverage/index.html
   npm markdown-to-html-cli --source README.md
-```
-
-## Configure in package.json
-
-```js
-{
-  "markdown-to-html": {
-    "title": "markdown-to-html-cli",
-    "style": "body { color: red; }",
-    "meta": [
-      { "description": "Command line tool generates markdown as html." },
-      { "keywords": "store,localStorage,lightweight,JavaScript" }
-    ],
-  }
-}
 ```
 
 ## Development
