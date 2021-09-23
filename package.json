@@ -50,6 +50,6 @@
     "minimist": "1.2.5"
   },
   "devDependencies": {
-    "tsbb": "^3.3.0"
+    "tsbb": "3.3.0"
   }
 }
