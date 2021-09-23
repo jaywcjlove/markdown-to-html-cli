@@ -37,17 +37,21 @@ export interface MDToHTMLOptions {
   }
 }
 
-export function run() {
+export function run(opts = {} as RunArgvs) {
   const argvs: RunArgvs = minimist(process.argv.slice(2), {
     alias: {
       help: 'h',
+      version: 'v',
       source: 's',
       output: 'o',
     },
     default: {
-      source: 'README.md',
-      markdown: '',
-      output: 'index.html',
+      version: opts.v || opts.version || false,
+      help: opts.h || opts.help || false,
+      source: opts.s || opts.source || 'README.md',
+      markdown: opts.markdown || '',
+      description: opts.description || '',
+      output: opts.o || opts.output || 'index.html',
     },
   });
   if (argvs.h || argvs.help) {
@@ -57,7 +61,7 @@ export function run() {
   }
   if (argvs.v || argvs.version) {
     console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);
-    return;
+    return pkg.version;
   }
   if (argvs.source && !argvs.markdown) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();

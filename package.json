@@ -31,6 +31,11 @@
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/?!(.*)"
+    ]
+  },
   "dependencies": {
     "@types/minimist": "1.2.2",
     "@types/fs-extra": "9.0.13",
