@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">93.75% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/16</span>
+                <span class='fraction'>15/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -123,10 +123,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -137,9 +137,9 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">379x</span>
+<span class="cline-any cline-yes">379x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -166,12 +166,12 @@ import { githubCorners } from './nodes/githubCorners';
 &nbsp;
 import { RunArgvs, MDToHTMLOptions } from './';
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >create(</span>argvs: RunArgvs, options: MDToHTMLOptions = <span class="branch-0 cbranch-no" title="branch not covered" >{})</span> {
+export function create(argvs: RunArgvs, options: MDToHTMLOptions = {}) {
   // default github css.
-  const cssStr = <span class="cstat-no" title="statement not covered" >fs.readFileSync(path.resolve(__dirname, 'github.css'));</span>
-  const { markdown } = <span class="cstat-no" title="statement not covered" >argvs || {};</span>
-  const { document = <span class="branch-0 cbranch-no" title="branch not covered" >{},</span> wrap = <span class="branch-0 cbranch-no" title="branch not covered" >{ wrapper: 'div.wmde-markdown' } </span>} = <span class="cstat-no" title="statement not covered" >options;</span>
-<span class="cstat-no" title="statement not covered" >  return unified()</span>
+  const cssStr = fs.readFileSync(path.resolve(__dirname, 'github.css'));
+  const { markdown } = argvs || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+  const { document = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
+  return unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkRehype)
@@ -181,10 +181,10 @@ export function <span class="fstat-no" title="function not covered" >create(</sp
     })
     .use(rehypeFormat)
     .use(rehypeWrap, { ...wrap })
-    .use(rehypeRewrite, <span class="fstat-no" title="function not covered" >(n</span>ode, index, parent) =&gt; {
-      const className = <span class="cstat-no" title="statement not covered" >node.properties ? (node.properties as any).className || [] : [];</span>
-<span class="cstat-no" title="statement not covered" >      if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {</span>
-<span class="cstat-no" title="statement not covered" >        node.children = [githubCorners({ href: argvs['github-corners'] }), ...(node.children as Array&lt;any&gt;)];</span>
+    .use(rehypeRewrite, (node, index, parent) =&gt; {
+      const className = node.properties ? (node.properties as any).className || [] : [];
+      if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {
+        node.children = [githubCorners({ href: argvs['github-corners'] }), ...(node.children as Array&lt;any&gt;)];
       }
     })
     .use(rehypePrism)
@@ -199,7 +199,7 @@ export function <span class="fstat-no" title="function not covered" >create(</sp
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Thu Sep 23 2021 17:30:28 GMT+0000 (Coordinated Universal Time)
+                at Thu Sep 23 2021 17:30:53 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
