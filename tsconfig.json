@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "ES2020",
+    // "module": "es2015",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    // "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "outDir": "lib",
+    "baseUrl": "."
+  },
+  "include": ["src/**/*"]
+}

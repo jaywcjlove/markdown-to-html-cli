@@ -1,0 +1,55 @@
+{
+  "name": "markdown-to-html-cli",
+  "version": "1.0.0",
+  "description": "Command line tool generates markdown as html.",
+  "exports": "./lib/index.js",
+  "bin": {
+    "markdown-to-html": "lib/cli.js",
+    "markdown-to-html-cli": "lib/cli.js"
+  },
+  "type": "module",
+  "scripts": {
+    "start": "node lib/cli.js",
+    "watch": "tsbb watch --disable-babel --file-names src/cli.ts",
+    "build": "tsbb build --disable-babel --file-names src/cli.ts && npm run fix",
+    "fix": "tsc-esm-fix --target='lib' --ext='.js'",
+    "test": "npm run build && tsbb test",
+    "coverage": "npm run build && tsbb test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaywcjlove/markdown-to-html-cli.git"
+  },
+  "keywords": [
+    "markdown-to-html-cli",
+    "markdown-to-html",
+    "markdown",
+    "html",
+    "cli"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  },
+  "dependencies": {
+    "@types/minimist": "1.2.2",
+    "@types/fs-extra": "9.0.12",
+    "@mapbox/rehype-prism": "0.8.0",
+    "tsc-esm-fix": "2.7.2",
+    "fs-extra": "10.0.0",
+    "unified": "10.1.0",
+    "rehype-attr": "2.0.3",
+    "rehype-document": "6.0.0",
+    "rehype-stringify": "9.0.2",
+    "rehype-format": "4.0.0",
+    "rehype-rewrite": "2.1.2",
+    "rehype-wrap": "1.0.10",
+    "remark-gfm": "2.0.0",
+    "remark-parse": "10.0.0",
+    "remark-rehype": "9.0.0",
+    "minimist": "1.2.5"
+  },
+  "devDependencies": {
+    "tsbb": "^3.3.0"
+  }
+}
