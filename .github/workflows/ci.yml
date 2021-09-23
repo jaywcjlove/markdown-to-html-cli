@@ -16,7 +16,7 @@ jobs:
       - run: npm install
       - run: npm run build
       - run: npm run coverage
-      - run: node lib/cli.js --output coverage/index.html
+      - run: node lib/cli.js --output coverage/index.html --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
 
       - run: npm i coverage-badges-cli -g
       - run: coverage-badges
