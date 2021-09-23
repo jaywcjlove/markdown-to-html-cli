@@ -98,7 +98,7 @@ export function run() {
       options.document.meta.push({ author: argvs.author });
     }
   }
-  if (mth.document.meta) {
+  if (mth.document && mth.document.meta) {
     options.document.meta = mth.document.meta;
   }
   const output = path.resolve(argvs.output);
