@@ -4,6 +4,7 @@
 esm
 cjs
 lib
+index.html
 package-lock.json
 __snapshots__
 
