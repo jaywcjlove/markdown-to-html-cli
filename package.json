@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@types/minimist": "1.2.2",
-    "@types/fs-extra": "9.0.12",
+    "@types/fs-extra": "9.0.13",
     "@mapbox/rehype-prism": "0.8.0",
     "tsc-esm-fix": "2.7.2",
     "fs-extra": "10.0.0",
