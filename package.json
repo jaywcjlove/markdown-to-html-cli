@@ -1,6 +1,6 @@
 {
   "name": "markdown-to-html-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli/",
   "exports": "./lib/index.js",
@@ -10,7 +10,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node lib/cli.js",
+    "start": "node lib/cli.js --github-corners https://github.com/jaywcjlove/markdown-to-html-cli",
     "watch": "tsbb watch --disable-babel --file-names src/cli.ts",
     "build": "tsbb build --disable-babel --file-names src/cli.ts && npm run fix",
     "fix": "tsc-esm-fix --target='lib' --ext='.js'",
