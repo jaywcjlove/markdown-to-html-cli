@@ -82,12 +82,18 @@ export function run(opts = {} as RunArgvs) {
     }
     if (pgkData['markdown-to-html']) {
       mth = pgkData['markdown-to-html'];
-      if (!options.document.title) {
+
+      const { title, meta } = options.document;
+      options.document = { title, meta, ...mth.document };
+
+      if (mth.document.title) {
         options.document.title = mth.document.title;
       }
+
       if (!options.wrap) {
         options.wrap = mth.wrap;
       }
+
       if (!argvs['github-corners'] && mth['github-corners']) {
         argvs['github-corners'] = mth['github-corners'];
       }

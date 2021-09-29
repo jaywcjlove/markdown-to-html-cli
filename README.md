@@ -27,8 +27,12 @@ $ npm i markdown-to-html-cli
 ```js
 {
   "markdown-to-html": {
-    "title": "markdown-to-html-cli",
-    "style": "body { color: red; }",
+    "document": {
+      "title": "markdown-to-html-cli",
+      "description": "Command line tool generates markdown as html.",
+      "style": "body { color: red; }"
+    },
+    "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli",
     "meta": [
       { "description": "Command line tool generates markdown as html." },
       { "keywords": "store,localStorage,lightweight,JavaScript" }
@@ -36,6 +40,10 @@ $ npm i markdown-to-html-cli
   }
 }
 ```
+
+- [`name`](https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L2) -> `'markdown-to-html'.title` - The `<title>` tag is required in HTML documents!
+- [`description`](https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L4) -> `'markdown-to-html'.description` - Define a description of your web page.
+- [`repository.url`](https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L22) -> `'markdown-to-html'.github-corners` - Define a description of your web page.
 
 ## Command Help
 
