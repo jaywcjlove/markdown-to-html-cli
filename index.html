@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta description="Command line tool generates markdown as html.">
     <meta keywords="markdown-to-html-cli,markdown-to-html,markdown,html,cli">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>">
     <style>.task-list-item {
 list-style-type: none
 }
@@ -431,15 +432,16 @@ Options:
   --source, -s       The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: README.md
   --markdown         Markdown string.
   --description      Define a description of your web page.
+  --favicon          Add a Favicon to your Site.
   --keywords         Define keywords <span class="token keyword">for</span> search engines.
   --title            The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
   --author           Define the author of a page.
-  --description      Describe metadata within an HTML document.
   --github-corners   Add a Github corner to your project page.
 
 Example:
 
   <span class="token function">npm</span> markdown-to-html-cli
+  <span class="token function">npm</span> markdown-to-html     --title<span class="token operator">=</span><span class="token string">"Hello World!"</span>
   <span class="token function">npm</span> markdown-to-html-cli --markdown<span class="token operator">=</span><span class="token string">"Hello World!"</span>
   <span class="token function">npm</span> markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   <span class="token function">npm</span> markdown-to-html-cli --output coverage/index.html
@@ -462,10 +464,12 @@ Example:
   description<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   <span class="token doc-comment comment">/** Define keywords for search engines */</span>
   keywords<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+  <span class="token doc-comment comment">/** Add a Favicon to your Site */</span>
+  favicon<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
   <span class="token doc-comment comment">/** Define the author of a page */</span>
   author<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
-<span class="token keyword module">export</span> <span class="token keyword">interface</span> <span class="token class-name"><span class="token maybe-class-name">MDToHTMLOptions</span></span> <span class="token punctuation">{</span>
+<span class="token keyword module">export</span> <span class="token keyword">interface</span> <span class="token class-name"><span class="token maybe-class-name">MDToHTMLOptions</span></span> <span class="token keyword">extends</span> <span class="token class-name"><span class="token maybe-class-name">RunArgvs</span></span> <span class="token punctuation">{</span>
   <span class="token string">'github-corners'</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token maybe-class-name">RunArgvs</span><span class="token punctuation">[</span><span class="token string">'github-corners'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
   <span class="token dom variable">document</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token maybe-class-name">Options</span><span class="token punctuation">;</span>
   <span class="token doc-comment comment">/**
@@ -479,6 +483,8 @@ Example:
   <span class="token punctuation">}</span><span class="token punctuation">;</span>
 <span class="token punctuation">}</span>
 <span class="token keyword module">export</span> <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span>opts<span class="token operator">?</span><span class="token operator">:</span> <span class="token maybe-class-name">RunArgvs</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
+<span class="token keyword module">export</span> <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">cliHelp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
+<span class="token keyword module">export</span> <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">exampleHelp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token keyword">void</span><span class="token punctuation">;</span>
 </code></pre>
     <h2 id="development"><a class="anchor" aria-hidden="true" tabindex="-1" href="#development"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path></svg></a>Development</h2>
     <pre class="language-bash"><code class="language-bash">$ <span class="token function">npm</span> i
