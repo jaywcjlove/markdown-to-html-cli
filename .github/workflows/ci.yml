@@ -51,7 +51,7 @@ jobs:
           tag: ${{ steps.create_tag.outputs.version }}
           token: ${{ secrets.GITHUB_TOKEN }}
           body: |
-            [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/coverage-badges-cli@${{steps.changelog.outputs.version}}/file/README.md)
+            [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/markdown-to-html-cli@${{steps.changelog.outputs.version}}/file/README.md)
 
             ${{ steps.changelog.outputs.compareurl }}
             
