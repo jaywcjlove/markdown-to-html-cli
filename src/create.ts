@@ -21,7 +21,7 @@ import { octiconLink } from './nodes/octiconLink';
 
 import { RunArgvs, MDToHTMLOptions } from './';
 
-export function create(argvs: RunArgvs, options: MDToHTMLOptions = {}) {
+export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
   // default github css.
   const cssStr = fs.readFileSync(path.resolve(__dirname, 'github.css'));
   const { markdown } = argvs || {};
@@ -35,6 +35,7 @@ export function create(argvs: RunArgvs, options: MDToHTMLOptions = {}) {
     .use(rehypeAutolinkHeadings)
     .use(rehypeDocument, {
       ...document,
+      link: document.link ? document.link : [],
       style: [cssStr.toString(), ...(Array.isArray(document.style) ? document.style : [document.style]) ],
     })
     .use(rehypeFormat)

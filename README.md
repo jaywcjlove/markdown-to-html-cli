@@ -59,15 +59,16 @@ Options:
   --source, -s       The path of the target file "README.md". Default: README.md
   --markdown         Markdown string.
   --description      Define a description of your web page.
+  --favicon          Add a Favicon to your Site.
   --keywords         Define keywords for search engines.
   --title            The `<title>` tag is required in HTML documents!
   --author           Define the author of a page.
-  --description      Describe metadata within an HTML document.
   --github-corners   Add a Github corner to your project page.
 
 Example:
 
   npm markdown-to-html-cli
+  npm markdown-to-html     --title="Hello World!"
   npm markdown-to-html-cli --markdown="Hello World!"
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npm markdown-to-html-cli --output coverage/index.html
@@ -93,10 +94,12 @@ export interface RunArgvs extends ParsedArgs {
   description?: string;
   /** Define keywords for search engines */
   keywords?: string;
+  /** Add a Favicon to your Site */
+  favicon?: string;
   /** Define the author of a page */
   author?: string;
 }
-export interface MDToHTMLOptions {
+export interface MDToHTMLOptions extends RunArgvs {
   'github-corners'?: RunArgvs['github-corners'];
   document?: Options;
   /**
@@ -110,6 +113,8 @@ export interface MDToHTMLOptions {
   };
 }
 export declare function run(opts?: RunArgvs): any;
+export declare function cliHelp(): void;
+export declare function exampleHelp(): void;
 ```
 
 ## Development

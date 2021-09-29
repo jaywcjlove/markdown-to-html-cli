@@ -20,11 +20,13 @@ export interface RunArgvs extends ParsedArgs {
   description?: string;
   /** Define keywords for search engines */
   keywords?: string;
+  /** Add a Favicon to your Site */
+  favicon?: string;
   /** Define the author of a page */
   author?: string;
 }
 
-export interface MDToHTMLOptions {
+export interface MDToHTMLOptions extends RunArgvs {
   'github-corners'?: RunArgvs['github-corners'];
   document?: Options
   /**
@@ -67,56 +69,51 @@ export function run(opts = {} as RunArgvs) {
   if (argvs.source && !argvs.markdown) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
-  const options: MDToHTMLOptions = { document: { title: argvs.title, meta: [] } };
+
+  const options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
   const projectPkg = path.resolve(process.cwd(), 'package.json');
 
   let pgkData: any = {};
-  let mth: MDToHTMLOptions = {}
   if (fs.existsSync(projectPkg)) {
     pgkData = fs.readJSONSync(projectPkg);
     if (pgkData.name && !options.document.title) {
       options.document.title = pgkData.name;
     }
     if (pgkData.repository && !argvs['github-corners']) {
-      argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url
+      argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
     }
     if (pgkData['markdown-to-html']) {
-      mth = pgkData['markdown-to-html'];
-
-      const { title, meta } = options.document;
-      options.document = { title, meta, ...mth.document };
-
-      if (mth.document.title) {
-        options.document.title = mth.document.title;
+      const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
+      const { title, meta, link } = options.document;
+      options.document = { title, meta, link, ...mth.document };
+      if (!options.favicon && mth.favicon) {
+        options.favicon = mth.favicon;
       }
-
-      if (!options.wrap) {
+      if (!options.wrap && mth.wrap) {
         options.wrap = mth.wrap;
       }
-
-      if (!argvs['github-corners'] && mth['github-corners']) {
+      if (mth['github-corners']) {
         argvs['github-corners'] = mth['github-corners'];
       }
     }
   }
-
+  if (Array.isArray(options.document.link) && options.favicon) {
+    options.document.link.push({ rel: 'icon', href: options.favicon });
+  }
   if (Array.isArray(options.document.meta)) {
-    if (argvs.description) {
-      options.document.meta.push({ description: argvs.description });
+    if (options.description) {
+      options.document.meta.push({ description: options.description });
     } else if (pgkData.description) {
       options.document.meta.push({ description: pgkData.description });
     }
-    if (argvs.keywords) {
-      options.document.meta.push({ keywords: argvs.keywords });
+    if (options.keywords) {
+      options.document.meta.push({ keywords: options.keywords });
     } else if (pgkData.keywords && Array.isArray(pgkData.keywords)) {
       options.document.meta.push({ keywords: pgkData.keywords.join(',') });
     }
-    if (argvs.author) {
-      options.document.meta.push({ author: argvs.author });
+    if (typeof options.author === 'string') {
+      options.document.meta.push({ author: options.author });
     }
-  }
-  if (mth.document && mth.document.meta) {
-    options.document.meta = mth.document.meta;
   }
   const output = path.resolve(argvs.output);
   const strMarkdown = create(argvs, options);
@@ -133,16 +130,17 @@ export function cliHelp() {
   console.log('    --source, -s      ', 'The path of the target file "README.md".', 'Default: README.md');
   console.log('    --markdown        ', 'Markdown string.');
   console.log('    --description     ', 'Define a description of your web page.');
+  console.log('    --favicon         ', 'Add a Favicon to your Site.');
   console.log('    --keywords        ', 'Define keywords for search engines.');
   console.log('    --title           ', 'The `<title>` tag is required in HTML documents!');
   console.log('    --author          ', 'Define the author of a page.');
-  console.log('    --description     ', 'Describe metadata within an HTML document.');
   console.log('    --github-corners  ', 'Add a Github corner to your project page.');
 }
 
 export function exampleHelp() {
   console.log('\n  Example:\n');
   console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli');
+  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"');
   console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"');
   console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli');
   console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html');
