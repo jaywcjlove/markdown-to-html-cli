@@ -10,7 +10,7 @@
   },
   "type": "module",
   "scripts": {
-    "start": "node lib/cli.js --github-corners https://github.com/jaywcjlove/markdown-to-html-cli",
+    "start": "node lib/cli.js",
     "watch": "tsbb watch --disable-babel --file-names src/cli.ts",
     "build": "tsbb build --disable-babel --file-names src/cli.ts && npm run fix",
     "fix": "tsc-esm-fix --target='lib' --ext='.js'",

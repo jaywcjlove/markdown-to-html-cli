@@ -25,6 +25,7 @@ export interface RunArgvs extends ParsedArgs {
 }
 
 export interface MDToHTMLOptions {
+  'github-corners'?: RunArgvs['github-corners'];
   document?: Options
   /**
    * rehype-wrap Options
@@ -76,6 +77,9 @@ export function run(opts = {} as RunArgvs) {
     if (pgkData.name && !options.document.title) {
       options.document.title = pgkData.name;
     }
+    if (pgkData.repository && !argvs['github-corners']) {
+      argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url
+    }
     if (pgkData['markdown-to-html']) {
       mth = pgkData['markdown-to-html'];
       if (!options.document.title) {
@@ -83,6 +87,9 @@ export function run(opts = {} as RunArgvs) {
       }
       if (!options.wrap) {
         options.wrap = mth.wrap;
+      }
+      if (!argvs['github-corners'] && mth['github-corners']) {
+        argvs['github-corners'] = mth['github-corners'];
       }
     }
   }

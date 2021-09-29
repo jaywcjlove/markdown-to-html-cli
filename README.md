@@ -65,6 +65,44 @@ Example:
   npm markdown-to-html-cli --source README.md
 ```
 
+## API 
+
+```ts
+import { ParsedArgs } from 'minimist';
+import { Options } from 'rehype-document';
+export interface RunArgvs extends ParsedArgs {
+  version?: string;
+  source?: string;
+  output?: string;
+  /** Add a Github corner to your project page */
+  'github-corners'?: string;
+  /** Markdown string. */
+  markdown?: string;
+  /** The `<title>` tag is required in HTML documents! */
+  title?: string;
+  /** Define a description of your web page */
+  description?: string;
+  /** Define keywords for search engines */
+  keywords?: string;
+  /** Define the author of a page */
+  author?: string;
+}
+export interface MDToHTMLOptions {
+  'github-corners'?: RunArgvs['github-corners'];
+  document?: Options;
+  /**
+   * rehype-wrap Options
+   * Wrap selected elements with a given element
+   * https://github.com/mrzmmr/rehype-wrap/tree/2402bcdb8ea25bd0948cda72e96d16e65a18c1e9#options
+   */
+  wrap?: {
+    selector?: string;
+    wrapper?: string;
+  };
+}
+export declare function run(opts?: RunArgvs): any;
+```
+
 ## Development
 
 ```bash
