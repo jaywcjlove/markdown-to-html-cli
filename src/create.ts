@@ -5,11 +5,12 @@ import rehypeDocument from 'rehype-document';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
 import stringify from 'rehype-stringify';
-import slug from 'rehype-slug';
+import rehypeSlug from 'rehype-slug';
 import rehypeFormat from 'rehype-format';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 // @ts-ignore
 import rehypeWrap from 'rehype-wrap';
+import rehypeRaw from 'rehype-raw';
 import rehypeRewrite from 'rehype-rewrite';
 import rehypeAttrs from 'rehype-attr';
 import remarkGfm from 'remark-gfm';
@@ -28,8 +29,9 @@ export function create(argvs: RunArgvs, options: MDToHTMLOptions = {}) {
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
-    .use(remarkRehype)
-    .use(slug)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
     .use(rehypeDocument, {
       ...document,

@@ -52,6 +52,7 @@
     "rehype-format": "4.0.0",
     "rehype-rewrite": "2.1.2",
     "rehype-wrap": "1.0.10",
+    "rehype-raw": "6.1.0",
     "remark-gfm": "2.0.0",
     "remark-parse": "10.0.0",
     "remark-rehype": "9.1.0",
