@@ -28,7 +28,9 @@ export interface RunArgvs extends ParsedArgs {
 
 export interface MDToHTMLOptions extends RunArgvs {
   'github-corners'?: RunArgvs['github-corners'];
-  document?: Options
+  document?: Options;
+  /** rewrite URLs of href and src attributes. */
+  reurls?: Record<string, string>;
   /**
    * rehype-wrap Options
    * Wrap selected elements with a given element
@@ -94,6 +96,9 @@ export function run(opts = {} as RunArgvs) {
       }
       if (mth['github-corners']) {
         argvs['github-corners'] = mth['github-corners'];
+      }
+      if (mth.reurls) {
+        options.reurls = mth.reurls;
       }
     }
   }

@@ -36,7 +36,11 @@ $ npm i markdown-to-html-cli
         { "keywords": "store,localStorage,lightweight,JavaScript" }
       ]
     },
-    "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli"
+    "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli",
+    "reurls": {
+      "README-zh.md": "index.zh.html",
+      "README.md": "index.html"
+    }
   }
 }
 ```

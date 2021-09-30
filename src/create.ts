@@ -13,6 +13,8 @@ import rehypeWrap from 'rehype-wrap';
 import rehypeRaw from 'rehype-raw';
 import rehypeRewrite from 'rehype-rewrite';
 import rehypeAttrs from 'rehype-attr';
+// @ts-ignore
+import rehypeUrls from 'rehype-urls';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import remarkParse from 'remark-parse';
@@ -25,7 +27,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
   // default github css.
   const cssStr = fs.readFileSync(path.resolve(__dirname, 'github.css'));
   const { markdown } = argvs || {};
-  const { document = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
+  const { document = {}, reurls = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -33,6 +35,12 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
     .use(rehypeRaw)
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
+    .use(rehypeUrls, (url: any) => {
+      if (reurls[url.href]) {
+        url.path = reurls[url.href];
+        return url.path;
+      }
+    })
     .use(rehypeDocument, {
       ...document,
       link: document.link ? document.link : [],
