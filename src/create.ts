@@ -16,6 +16,7 @@ import rehypeAttrs from 'rehype-attr';
 // @ts-ignore
 import rehypeUrls from 'rehype-urls';
 import remarkGfm from 'remark-gfm';
+import remarkGemoji from 'remark-gemoji';
 import remarkRehype from 'remark-rehype';
 import remarkParse from 'remark-parse';
 import { githubCorners } from './nodes/githubCorners';
@@ -31,6 +32,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
+    .use(remarkGemoji)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeSlug)
