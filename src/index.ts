@@ -102,6 +102,9 @@ export function run(opts = {} as RunArgvs) {
       }
     }
   }
+  if (argvs['github-corners']) {
+    argvs['github-corners'] = argvs['github-corners'].replace(/^git[+]/, '')
+  }
   if (Array.isArray(options.document.link) && options.favicon) {
     options.document.link.push({ rel: 'icon', href: options.favicon });
   }
