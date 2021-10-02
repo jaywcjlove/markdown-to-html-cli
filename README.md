@@ -104,9 +104,11 @@ export interface RunArgvs extends ParsedArgs {
   /** Define the author of a page */
   author?: string;
 }
-export interface MDToHTMLOptions extends RunArgvs {
+export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   'github-corners'?: RunArgvs['github-corners'];
   document?: Options;
+  /** rewrite URLs of href and src attributes. */
+  reurls?: Record<string, string>;
   /**
    * rehype-wrap Options
    * Wrap selected elements with a given element
@@ -117,7 +119,7 @@ export interface MDToHTMLOptions extends RunArgvs {
     wrapper?: string;
   };
 }
-export declare function run(opts?: RunArgvs): any;
+export declare function run(opts?: Omit<RunArgvs, "_">): any;
 export declare function cliHelp(): void;
 export declare function exampleHelp(): void;
 ```
