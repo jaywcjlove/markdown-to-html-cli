@@ -106,7 +106,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     argvs['github-corners'] = argvs['github-corners'].replace(/^git[+]/, '')
   }
   if (Array.isArray(options.document.link) && options.favicon) {
-    options.document.link.push({ rel: 'icon', href: options.favicon });
+    options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });
   }
   if (Array.isArray(options.document.meta)) {
     if (options.description) {
