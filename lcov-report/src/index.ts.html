@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.55% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>58/72</span>
+                <span class='fraction'>66/72</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">77.33% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>50/75</span>
+                <span class='fraction'>58/75</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80.55% </span>
+                <span class="strong">91.66% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>58/72</span>
+                <span class='fraction'>66/72</span>
             </div>
         
             
@@ -300,19 +300,19 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -413,7 +413,7 @@ export interface MDToHTMLOptions extends Omit&lt;RunArgvs, '_'&gt; {
   }
 }
 &nbsp;
-export function run(opts = {} as RunArgvs) {
+export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
   const argvs: RunArgvs = minimist(process.argv.slice(2), {
     alias: {
       help: 'h',
@@ -455,20 +455,20 @@ export function run(opts = {} as RunArgvs) {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (pgkData.repository &amp;&amp; !argvs['github-corners']) {
       argvs['github-corners'] = typeof pgkData.repository === 'string' ? <span class="branch-0 cbranch-no" title="branch not covered" >pgkData.repository </span>: pgkData.repository.url;
     }
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (pgkData['markdown-to-html']) {
-      const mth = <span class="cstat-no" title="statement not covered" >pgkData['markdown-to-html'] as MDToHTMLOptions;</span>
-      const { title, meta, link } = <span class="cstat-no" title="statement not covered" >options.document;</span>
-<span class="cstat-no" title="statement not covered" >      options.document = { title, meta, link, ...mth.document };</span>
-<span class="cstat-no" title="statement not covered" >      if (!options.favicon &amp;&amp; mth.favicon) {</span>
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (pgkData['markdown-to-html']) {
+      const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
+      const { title, meta, link } = options.document;
+      options.document = { title, meta, link, ...mth.document };
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!options.favicon &amp;&amp; mth.favicon) {
 <span class="cstat-no" title="statement not covered" >        options.favicon = mth.favicon;</span>
       }
-<span class="cstat-no" title="statement not covered" >      if (!options.wrap &amp;&amp; mth.wrap) {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (!options.wrap &amp;&amp; mth.wrap) {
 <span class="cstat-no" title="statement not covered" >        options.wrap = mth.wrap;</span>
       }
-<span class="cstat-no" title="statement not covered" >      if (mth['github-corners']) {</span>
-<span class="cstat-no" title="statement not covered" >        argvs['github-corners'] = mth['github-corners'];</span>
+      <span class="missing-if-branch" title="else path not taken" >E</span>if (mth['github-corners']) {
+        argvs['github-corners'] = mth['github-corners'];
       }
-<span class="cstat-no" title="statement not covered" >      if (mth.reurls) {</span>
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (mth.reurls) {
 <span class="cstat-no" title="statement not covered" >        options.reurls = mth.reurls;</span>
       }
     }
@@ -532,7 +532,7 @@ export function exampleHelp() {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Oct 02 2021 14:28:16 GMT+0000 (Coordinated Universal Time)
+                at Sat Oct 02 2021 14:36:49 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
