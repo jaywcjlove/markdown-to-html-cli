@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">32.35% </span>
+                <span class="strong">91.17% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>11/34</span>
+                <span class='fraction'>31/34</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">66.66% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/3</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">43.75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -129,7 +129,9 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,16 +184,18 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">668x</span>
+<span class="cline-any cline-yes">331x</span>
+<span class="cline-any cline-yes">331x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">331x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -253,17 +257,19 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
     })
     .use(rehypeFormat)
     .use(rehypeWrap, { ...wrap })
-    .use(rehypeRewrite, <span class="fstat-no" title="function not covered" >(n</span>ode, index, parent) =&gt; {
-<span class="cstat-no" title="statement not covered" >      if (node.type == 'element') {</span>
-        const className = <span class="cstat-no" title="statement not covered" >node.properties ? (Array.isArray(node.properties.className) ? node.properties.className : [node.properties.className]) : [];</span>
-<span class="cstat-no" title="statement not covered" >        if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {</span>
-<span class="cstat-no" title="statement not covered" >          node.children = [githubCorners({ href: argvs['github-corners'] }), ...node.children];</span>
-        }
-<span class="cstat-no" title="statement not covered" >        if (/h(1|2|3|4|5|6)/.test(node.tagName) &amp;&amp; node.children &amp;&amp; Array.isArray(node.children) &amp;&amp; node.children.length &gt; 0) {</span>
-          const child = <span class="cstat-no" title="statement not covered" >node.children[0];</span>
-<span class="cstat-no" title="statement not covered" >          if (child &amp;&amp; child.type === 'element' &amp;&amp; child.properties) {</span>
-<span class="cstat-no" title="statement not covered" >            child.properties = { class: 'anchor', ...child.properties };</span>
-<span class="cstat-no" title="statement not covered" >            child.children = [octiconLink()];</span>
+    .use(rehypeRewrite, {
+      rewrite: (node, index, parent) =&gt; {
+        if (node.type == 'element') {
+          const className = node.properties ? (Array.isArray(node.properties.className) ? node.properties.className : [node.properties.className]) : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
+          if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {
+            node.children = [githubCorners({ href: argvs['github-corners'] }), ...node.children];
+          }
+          if (/h(1|2|3|4|5|6)/.test(node.tagName) &amp;&amp; node.children &amp;&amp; Array.isArray(node.children) &amp;&amp; node.children.length &gt; 0) {
+            const child = node.children[0];
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (child &amp;&amp; child.type === 'element' &amp;&amp; child.properties) {
+              child.properties = { class: 'anchor', ...child.properties };
+              child.children = [octiconLink()];
+            }
           }
         }
       }
@@ -280,7 +286,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Oct 02 2021 18:29:28 GMT+0000 (Coordinated Universal Time)
+                at Sat Oct 02 2021 18:34:22 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
