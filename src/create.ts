@@ -67,7 +67,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
         }
       }
     })
-    .use(rehypePrism)
+    .use(rehypePrism, { ignoreMissing: true })
     .use(rehypeAttrs, { properties: 'attr' })
     .use(stringify)
     .processSync(markdown)
