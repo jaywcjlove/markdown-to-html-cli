@@ -44,7 +44,7 @@
     "@types/minimist": "1.2.2",
     "@types/fs-extra": "9.0.13",
     "@mapbox/rehype-prism": "0.8.0",
-    "tsc-esm-fix": "2.7.2",
+    "tsc-esm-fix": "2.7.3",
     "fs-extra": "10.0.0",
     "unified": "10.1.0",
     "rehype-attr": "2.0.4",
