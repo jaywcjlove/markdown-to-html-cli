@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.62% </span>
+                <span class="strong">88.23% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>29/32</span>
+                <span class='fraction'>30/34</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">86.66% </span>
+                <span class="strong">87.5% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/15</span>
+                <span class='fraction'>14/16</span>
             </div>
         
             
@@ -128,7 +128,8 @@
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
-<a name='L72'></a><a href='#L72'>72</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -182,15 +183,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">629x</span>
-<span class="cline-any cline-yes">629x</span>
+<span class="cline-any cline-yes">314x</span>
+<span class="cline-any cline-yes">314x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">314x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">629x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -252,16 +254,17 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
     .use(rehypeFormat)
     .use(rehypeWrap, { ...wrap })
     .use(rehypeRewrite, (node, index, parent) =&gt; {
-      const className = node.properties ? (node.properties as any).className || [] : [];
-      if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {
-        node.children = [githubCorners({ href: argvs['github-corners'] }), ...(node.children as Array&lt;any&gt;)];
-      }
-&nbsp;
-      if (node.type === 'element' &amp;&amp; /h(1|2|3|4|5|6)/.test((node as any).tagName) &amp;&amp; Array.isArray(node.children)) {
-        const child = node.children &amp;&amp; node.children[0];
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (child &amp;&amp; child.properties) {
-          child.properties = { class: 'anchor', ...child.properties };
-          child.children = [octiconLink()];
+      if (node.type == 'element') {
+        const className = node.properties ? (Array.isArray(node.properties.className) ? node.properties.className : [node.properties.className]) : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
+        if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {
+          node.children = [githubCorners({ href: argvs['github-corners'] }), ...node.children];
+        }
+        if (/h(1|2|3|4|5|6)/.test(node.tagName) &amp;&amp; node.children &amp;&amp; Array.isArray(node.children) &amp;&amp; node.children.length &gt; 0) {
+          const child = node.children[0];
+          <span class="missing-if-branch" title="else path not taken" >E</span>if (child &amp;&amp; child.type === 'element' &amp;&amp; child.properties) {
+            child.properties = { class: 'anchor', ...child.properties };
+            child.children = [octiconLink()];
+          }
         }
       }
     })
@@ -277,7 +280,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sat Oct 02 2021 13:52:59 GMT+0000 (Coordinated Universal Time)
+                at Sat Oct 02 2021 14:27:49 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
