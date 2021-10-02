@@ -1,8 +1,10 @@
+import { Element } from 'hast';
+
 interface GithubCorners {
   href?: string;
 }
 
-export function githubCorners(opts: GithubCorners) {
+export function githubCorners(opts: GithubCorners): Element {
   const { href } = opts;
   if (!href) {
     return;
@@ -33,10 +35,12 @@ export function githubCorners(opts: GithubCorners) {
             tagName: 'path',
             properties: {
               d: 'M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z'
-            }
+            },
+            children: [],
           }, {
             type: 'element',
             tagName: 'path',
+            children: [],
             properties: {
               style: 'transform-origin: 130px 106px;',
               className: 'octo-arm',
@@ -46,6 +50,7 @@ export function githubCorners(opts: GithubCorners) {
           }, {
             type: 'element',
             tagName: 'path',
+            children: [],
             properties: {
               className: 'octo-body',
               fill: 'currentColor',

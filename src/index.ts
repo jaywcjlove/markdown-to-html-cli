@@ -26,7 +26,7 @@ export interface RunArgvs extends ParsedArgs {
   author?: string;
 }
 
-export interface MDToHTMLOptions extends RunArgvs {
+export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   'github-corners'?: RunArgvs['github-corners'];
   document?: Options;
   /** rewrite URLs of href and src attributes. */

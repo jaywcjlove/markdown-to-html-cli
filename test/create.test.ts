@@ -27,6 +27,57 @@ display: none
 margin: 0 .2em .25em -1.6em;
 vertical-align: middle
 }
+.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 {
+font-weight: 600;
+line-height: 1.25;
+margin-bottom: 16px;
+margin-top: 24px
+}
+.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor {
+float: left;
+padding-right: 4px;
+margin-left: -20px;
+line-height: 1
+}
+.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link {
+visibility: hidden;
+vertical-align: middle
+}
+.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link {
+visibility: visible
+}
+.github-corner:hover .octo-arm {
+-webkit-animation: octocat-wave .56s ease-in-out;
+animation: octocat-wave .56s ease-in-out
+}
+@-webkit-keyframes octocat-wave {
+0%, to {
+-webkit-transform: rotate(0);
+transform: rotate(0);
+}
+20%, 60% {
+-webkit-transform: rotate(-25deg);
+transform: rotate(-25deg);
+}
+40%, 80% {
+-webkit-transform: rotate(10deg);
+transform: rotate(10deg);
+}
+}
+@keyframes octocat-wave {
+0%, to {
+-webkit-transform: rotate(0);
+transform: rotate(0)
+}
+20%, 60% {
+-webkit-transform: rotate(-25deg);
+transform: rotate(-25deg);
+}
+40%, 80% {
+-webkit-transform: rotate(10deg);
+transform: rotate(10deg);
+}
+}
 .wmde-markdown {
 font-size: 16px;
 line-height: 1.5;
@@ -365,6 +416,57 @@ display: none
 .task-list-item-checkbox {
 margin: 0 .2em .25em -1.6em;
 vertical-align: middle
+}
+.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 {
+font-weight: 600;
+line-height: 1.25;
+margin-bottom: 16px;
+margin-top: 24px
+}
+.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor {
+float: left;
+padding-right: 4px;
+margin-left: -20px;
+line-height: 1
+}
+.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link {
+visibility: hidden;
+vertical-align: middle
+}
+.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link {
+visibility: visible
+}
+.github-corner:hover .octo-arm {
+-webkit-animation: octocat-wave .56s ease-in-out;
+animation: octocat-wave .56s ease-in-out
+}
+@-webkit-keyframes octocat-wave {
+0%, to {
+-webkit-transform: rotate(0);
+transform: rotate(0);
+}
+20%, 60% {
+-webkit-transform: rotate(-25deg);
+transform: rotate(-25deg);
+}
+40%, 80% {
+-webkit-transform: rotate(10deg);
+transform: rotate(10deg);
+}
+}
+@keyframes octocat-wave {
+0%, to {
+-webkit-transform: rotate(0);
+transform: rotate(0)
+}
+20%, 60% {
+-webkit-transform: rotate(-25deg);
+transform: rotate(-25deg);
+}
+40%, 80% {
+-webkit-transform: rotate(10deg);
+transform: rotate(10deg);
+}
 }
 .wmde-markdown {
 font-size: 16px;
@@ -706,6 +808,57 @@ display: none
 margin: 0 .2em .25em -1.6em;
 vertical-align: middle
 }
+.wmde-markdown h1,.wmde-markdown h2,.wmde-markdown h3,.wmde-markdown h4,.wmde-markdown h5,.wmde-markdown h6 {
+font-weight: 600;
+line-height: 1.25;
+margin-bottom: 16px;
+margin-top: 24px
+}
+.wmde-markdown h1 .anchor,.wmde-markdown h2 .anchor,.wmde-markdown h3 .anchor,.wmde-markdown h4 .anchor,.wmde-markdown h5 .anchor,.wmde-markdown h6 .anchor {
+float: left;
+padding-right: 4px;
+margin-left: -20px;
+line-height: 1
+}
+.wmde-markdown h1 .octicon-link,.wmde-markdown h2 .octicon-link,.wmde-markdown h3 .octicon-link,.wmde-markdown h4 .octicon-link,.wmde-markdown h5 .octicon-link,.wmde-markdown h6 .octicon-link {
+visibility: hidden;
+vertical-align: middle
+}
+.wmde-markdown h1:hover .octicon-link,.wmde-markdown h2:hover .octicon-link,.wmde-markdown h3:hover .octicon-link,.wmde-markdown h4:hover .octicon-link,.wmde-markdown h5:hover .octicon-link,.wmde-markdown h6:hover .octicon-link {
+visibility: visible
+}
+.github-corner:hover .octo-arm {
+-webkit-animation: octocat-wave .56s ease-in-out;
+animation: octocat-wave .56s ease-in-out
+}
+@-webkit-keyframes octocat-wave {
+0%, to {
+-webkit-transform: rotate(0);
+transform: rotate(0);
+}
+20%, 60% {
+-webkit-transform: rotate(-25deg);
+transform: rotate(-25deg);
+}
+40%, 80% {
+-webkit-transform: rotate(10deg);
+transform: rotate(10deg);
+}
+}
+@keyframes octocat-wave {
+0%, to {
+-webkit-transform: rotate(0);
+transform: rotate(0)
+}
+20%, 60% {
+-webkit-transform: rotate(-25deg);
+transform: rotate(-25deg);
+}
+40%, 80% {
+-webkit-transform: rotate(10deg);
+transform: rotate(10deg);
+}
+}
 .wmde-markdown {
 font-size: 16px;
 line-height: 1.5;
@@ -1021,6 +1174,6 @@ color: #0a53c1;
   expect(create({
     markdown: 'Hello World!', 'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli', _: []
   }, {
-    document: { style: ['body { background: red; }', 'body { color: red; }'] }
+    document: { style: ['body { background: red; }', 'body { color: red; }'] },
   })).toEqual(html);
 });

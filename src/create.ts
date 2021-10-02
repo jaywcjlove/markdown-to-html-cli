@@ -51,16 +51,17 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
     .use(rehypeFormat)
     .use(rehypeWrap, { ...wrap })
     .use(rehypeRewrite, (node, index, parent) => {
-      const className = node.properties ? (node.properties as any).className || [] : [];
-      if(node.type == 'element' && className.includes('wmde-markdown') && argvs['github-corners']) {
-        node.children = [githubCorners({ href: argvs['github-corners'] }), ...(node.children as Array<any>)];
-      }
-
-      if (node.type === 'element' && /h(1|2|3|4|5|6)/.test((node as any).tagName) && Array.isArray(node.children)) {
-        const child = node.children && node.children[0];
-        if (child && child.properties) {
-          child.properties = { class: 'anchor', ...child.properties };
-          child.children = [octiconLink()];
+      if (node.type == 'element') {
+        const className = node.properties ? (Array.isArray(node.properties.className) ? node.properties.className : [node.properties.className]) : [];
+        if(node.type == 'element' && className.includes('wmde-markdown') && argvs['github-corners']) {
+          node.children = [githubCorners({ href: argvs['github-corners'] }), ...node.children];
+        }
+        if (/h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
+          const child = node.children[0];
+          if (child && child.type === 'element' && child.properties) {
+            child.properties = { class: 'anchor', ...child.properties };
+            child.children = [octiconLink()];
+          }
         }
       }
     })
