@@ -46,7 +46,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
     .use(rehypeDocument, {
       ...document,
       link: document.link ? document.link : [],
-      style: [cssStr.toString(), ...(Array.isArray(document.style) ? document.style : [document.style]) ],
+      style: [cssStr.toString().replace(/\n/g, ''), ...(Array.isArray(document.style) ? document.style : [document.style]) ],
     })
     .use(rehypeFormat)
     .use(rehypeWrap, { ...wrap })
