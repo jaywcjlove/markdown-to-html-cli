@@ -44,7 +44,7 @@
     "tsc-esm-fix": "2.7.2",
     "fs-extra": "10.0.0",
     "unified": "10.1.0",
-    "rehype-attr": "2.0.3",
+    "rehype-attr": "2.0.4",
     "rehype-autolink-headings": "6.1.0",
     "rehype-document": "6.0.0",
     "rehype-slug": "5.0.0",
