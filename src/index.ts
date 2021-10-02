@@ -42,7 +42,7 @@ export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   }
 }
 
-export function run(opts = {} as RunArgvs) {
+export function run(opts = {} as Omit<RunArgvs, '_'>) {
   const argvs: RunArgvs = minimist(process.argv.slice(2), {
     alias: {
       help: 'h',

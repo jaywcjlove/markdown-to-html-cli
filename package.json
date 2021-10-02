@@ -11,8 +11,8 @@
   "type": "module",
   "scripts": {
     "start": "node lib/cli.js",
-    "watch": "tsbb watch --disable-babel --file-names src/cli.ts",
-    "build": "tsbb build --disable-babel --file-names src/cli.ts && npm run fix",
+    "watch": "tsbb watch --disable-babel -f src/cli.ts",
+    "build": "tsbb build --disable-babel -f src/cli.ts && npm run fix",
     "fix": "tsc-esm-fix --target='lib' --ext='.js'",
     "test": "npm run build && tsbb test",
     "coverage": "npm run build && tsbb test --coverage"
@@ -36,6 +36,9 @@
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/?!(.*)"
     ]
+  },
+  "markdown-to-html": {
+    "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli.git"
   },
   "dependencies": {
     "@types/minimist": "1.2.2",

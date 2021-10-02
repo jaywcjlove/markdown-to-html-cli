@@ -10,12 +10,12 @@ it('cliHelp test case', async () => {
   expect(cliHelp()).toBeUndefined();
   expect(exampleHelp()).toBeUndefined();
   expect(run()).toBeUndefined();
-  expect(run({ help: true, _: [] })).toBeUndefined();
-  expect(typeof run({ v: true, _: [] })).toEqual('string');
+  expect(run({ help: true })).toBeUndefined();
+  expect(typeof run({ v: true })).toEqual('string');
 });
 
 it('description options test case', async () => {
-  expect(run({ description: 'description test case.', _: [] })).toBeUndefined();
+  expect(run({ description: 'description test case.' })).toBeUndefined();
 });
 
 
