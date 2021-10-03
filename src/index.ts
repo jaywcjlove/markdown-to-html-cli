@@ -18,6 +18,8 @@ export interface RunArgvs extends ParsedArgs {
   markdown?: string;
   /** The `<title>` tag is required in HTML documents! */
   title?: string;
+  /** Specify the configuration file. Default: `<process.cwd()>/package.json` */
+  config?: string;
   /** Define a description of your web page */
   description?: string;
   /** Define keywords for search engines */
@@ -49,6 +51,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     alias: {
       help: 'h',
       version: 'v',
+      config: 'c',
       source: 's',
       output: 'o',
     },
@@ -74,8 +77,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   }
 
   const options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
-  const projectPkg = path.resolve(process.cwd(), 'package.json');
-
+  const projectPkg = path.resolve(process.cwd(), opts.config || argvs.config || 'package.json');
   let pgkData: any = {};
   if (fs.existsSync(projectPkg)) {
     pgkData = fs.readJSONSync(projectPkg);
