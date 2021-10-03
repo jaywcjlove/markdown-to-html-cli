@@ -88,7 +88,7 @@ Example:
 
 ## Markdown Supports Style
 
-Use HTML comments `<!--rehype:xxx-->`<!--rehype:style=color: red;--> to let Markdown support style customization.
+Use HTML comments [`<!--rehype:xxx-->`](https://github.com/jaywcjlove/rehype-attr)<!--rehype:style=color: red;--> to let Markdown support style customization.
 
 ```markdown
 ## Title
