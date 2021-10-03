@@ -136,7 +136,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
 
   Options:\n
     --author          Define the author of a page.
-    --config          Specify the configuration file. Default: "<process.cwd()>/package.json".
+    --config, -o      Specify the configuration file. Default: "<process.cwd()>/package.json".
     --description     Define a description of your web page.
     --favicon         Add a Favicon to your Site.
     --github-corners  Add a Github corner to your project page.
