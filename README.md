@@ -60,22 +60,24 @@ Usage: markdown-to-html [options] [--help|h]
 
 Options:
 
-  --version, -v      Show version number
-  --help, -h         Displays help information.
-  --output, -o       Output static pages to the specified directory. Default: index.html
-  --source, -s       The path of the target file "README.md". Default: README.md
-  --markdown         Markdown string.
-  --description      Define a description of your web page.
-  --favicon          Add a Favicon to your Site.
-  --keywords         Define keywords for search engines.
-  --title            The `<title>` tag is required in HTML documents!
-  --author           Define the author of a page.
-  --github-corners   Add a Github corner to your project page.
+  --author          Define the author of a page.
+  --config          Specify the configuration file. Default: "<process.cwd()>/package.json".
+  --description     Define a description of your web page.
+  --favicon         Add a Favicon to your Site.
+  --github-corners  Add a Github corner to your project page.
+  --keywords        Define keywords for search engines.
+  --markdown        Markdown string.
+  --output, -o      Output static pages to the specified directory. Default: "index.html"
+  --source, -s      The path of the target file "README.md". Default: "README.md"
+  --title           The `<title>` tag is required in HTML documents!
+  --version, -v     Show version number
+  --help, -h        Displays help information.
 
 Example:
 
   npm markdown-to-html-cli
   npm markdown-to-html     --title="Hello World!"
+  npm markdown-to-html     --config="config/conf.json"
   npm markdown-to-html-cli --markdown="Hello World!"
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npm markdown-to-html-cli --output coverage/index.html
