@@ -59,22 +59,24 @@
 
 Options:
 
-  --version, -v      Show version number
-  --help, -h         Displays <span class="token builtin class-name">help</span> information.
-  --output, -o       Output static pages to the specified directory. Default: index.html
-  --source, -s       The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: README.md
-  --markdown         Markdown string.
-  --description      Define a description of your web page.
-  --favicon          Add a Favicon to your Site.
-  --keywords         Define keywords <span class="token keyword">for</span> search engines.
-  --title            The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
-  --author           Define the author of a page.
-  --github-corners   Add a Github corner to your project page.
+  --author          Define the author of a page.
+  --config          Specify the configuration file. Default: <span class="token string">"&#x3C;process.cwd()>/package.json"</span><span class="token builtin class-name">.</span>
+  --description     Define a description of your web page.
+  --favicon         Add a Favicon to your Site.
+  --github-corners  Add a Github corner to your project page.
+  --keywords        Define keywords <span class="token keyword">for</span> search engines.
+  --markdown        Markdown string.
+  --output, -o      Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
+  --source, -s      The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
+  --title           The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
+  --version, -v     Show version number
+  --help, -h        Displays <span class="token builtin class-name">help</span> information.
 
 Example:
 
   <span class="token function">npm</span> markdown-to-html-cli
   <span class="token function">npm</span> markdown-to-html     --title<span class="token operator">=</span><span class="token string">"Hello World!"</span>
+  <span class="token function">npm</span> markdown-to-html     --config<span class="token operator">=</span><span class="token string">"config/conf.json"</span>
   <span class="token function">npm</span> markdown-to-html-cli --markdown<span class="token operator">=</span><span class="token string">"Hello World!"</span>
   <span class="token function">npm</span> markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   <span class="token function">npm</span> markdown-to-html-cli --output coverage/index.html
