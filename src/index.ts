@@ -4,6 +4,8 @@ import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
 import { create } from './create';
 
+export * from './create';
+
 const pkg = fs.readJSONSync(path.resolve(__dirname, '..', 'package.json'));
 
 export interface RunArgvs extends ParsedArgs {
@@ -60,8 +62,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     },
   });
   if (argvs.h || argvs.help) {
-    cliHelp();
-    exampleHelp();
+    console.log(`${cliHelp}${exampleHelp}`);
     return;
   }
   if (argvs.v || argvs.version) {
@@ -129,29 +130,29 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
 }
 
-export function cliHelp() {
-  console.log('\n  Usage: markdown-to-html [options] [--help|h]');
-  console.log('\n  Options:\n');
-  console.log('    --version, -v     ', 'Show version number');
-  console.log('    --help, -h        ', 'Displays help information.');
-  console.log('    --output, -o      ', 'Output static pages to the specified directory.', 'Default: index.html');
-  console.log('    --source, -s      ', 'The path of the target file "README.md".', 'Default: README.md');
-  console.log('    --markdown        ', 'Markdown string.');
-  console.log('    --description     ', 'Define a description of your web page.');
-  console.log('    --favicon         ', 'Add a Favicon to your Site.');
-  console.log('    --keywords        ', 'Define keywords for search engines.');
-  console.log('    --title           ', 'The `<title>` tag is required in HTML documents!');
-  console.log('    --author          ', 'Define the author of a page.');
-  console.log('    --github-corners  ', 'Add a Github corner to your project page.');
-}
+export const cliHelp = `\n  Usage: markdown-to-html [options] [--help|h]
 
-export function exampleHelp() {
-  console.log('\n  Example:\n');
-  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli');
-  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"');
-  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"');
-  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli');
-  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html');
-  console.log('    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md');
-  console.log('\n');
-}
+  Options:
+    --version, -v     Show version number
+    --help, -h        Displays help information.
+    --output, -o      Output static pages to the specified directory. Default: index.html
+    --source, -s      The path of the target file "README.md". Default: README.md
+    --markdown        Markdown string.
+    --description     Define a description of your web page.
+    --favicon         Add a Favicon to your Site.
+    --keywords        Define keywords for search engines.
+    --title           The \`<title>\` tag is required in HTML documents!
+    --author          Define the author of a page.
+    --github-corners  Add a Github corner to your project page.
+`;
+
+export const exampleHelp =`\n  Example:
+
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli
+    \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md
+  
+`;
