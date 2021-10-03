@@ -26,6 +26,8 @@ $ npm i markdown-to-html-cli
 
 ## Configure in package.json
 
+The configuration can be specified through `--config="config/conf.json"`.
+
 ```js
 {
   "markdown-to-html": {
@@ -82,6 +84,17 @@ Example:
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npm markdown-to-html-cli --output coverage/index.html
   npm markdown-to-html-cli --source README.md
+```
+
+## Markdown Supports Style
+
+Use HTML comments `<!--rehype:xxx-->`<!--rehype:style=color: red;--> to let Markdown support style customization.
+
+```markdown
+## Title
+<!--rehype:style=display: flex; height: 230px; align-items: center; justify-content: center; font-size: 38px;-->
+
+Markdown Supports **Style**<!--rehype:style=color: red;-->
 ```
 
 ## API 
