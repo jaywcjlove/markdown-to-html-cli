@@ -87,6 +87,7 @@ Example:
 ```ts
 import { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
+export * from './create';
 export interface RunArgvs extends ParsedArgs {
   version?: string;
   source?: string;
@@ -97,6 +98,8 @@ export interface RunArgvs extends ParsedArgs {
   markdown?: string;
   /** The `<title>` tag is required in HTML documents! */
   title?: string;
+  /** Specify the configuration file. Default: `<process.cwd()>/package.json` */
+  config?: string;
   /** Define a description of your web page */
   description?: string;
   /** Define keywords for search engines */
@@ -122,8 +125,8 @@ export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   };
 }
 export declare function run(opts?: Omit<RunArgvs, "_">): any;
-export declare function cliHelp(): void;
-export declare function exampleHelp(): void;
+export declare const cliHelp: string;
+export declare const exampleHelp: string;
 ```
 
 ## Development

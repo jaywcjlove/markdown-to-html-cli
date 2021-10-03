@@ -132,7 +132,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
 }
 
-export const cliHelp = `\n  Usage: markdown-to-html [options] [--help|h]
+export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
 
   Options:
     --version, -v     Show version number
@@ -148,7 +148,7 @@ export const cliHelp = `\n  Usage: markdown-to-html [options] [--help|h]
     --github-corners  Add a Github corner to your project page.
 `;
 
-export const exampleHelp =`\n  Example:
+export const exampleHelp: string =`\n  Example:
 
     \x1b[35mnpm\x1b[0m markdown-to-html-cli
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"
