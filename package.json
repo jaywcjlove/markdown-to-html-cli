@@ -1,6 +1,7 @@
 {
   "name": "markdown-to-html-cli",
   "version": "2.0.2",
+  "license": "MIT",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli/",
   "exports": "./lib/index.js",
@@ -28,7 +29,6 @@
     "html",
     "cli"
   ],
-  "license": "MIT",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
@@ -38,7 +38,10 @@
     ]
   },
   "markdown-to-html": {
-    "github-corners": "https://github.com/jaywcjlove/markdown-to-html-cli.git"
+    "reurls": {
+      "README-zh.md": "index.zh.html",
+      "README.md": "index.html"
+    }
   },
   "dependencies": {
     "@mapbox/rehype-prism": "0.8.0",
