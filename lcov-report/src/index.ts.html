@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.82% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>45/46</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">89.7% </span>
+                <span class="strong">92.64% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>61/68</span>
+                <span class='fraction'>63/68</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.82% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>45/46</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
@@ -211,7 +211,11 @@
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L155'></a><a href='#L155'>155</a>
+<a name='L156'></a><a href='#L156'>156</a>
+<a name='L157'></a><a href='#L157'>157</a>
+<a name='L158'></a><a href='#L158'>158</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -220,6 +224,8 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -299,14 +305,14 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -369,6 +375,7 @@
 import path from 'path';
 import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
+import { RehypeRewriteOptions } from 'rehype-rewrite';
 import { create } from './create';
 &nbsp;
 export * from './create';
@@ -401,6 +408,8 @@ export interface MDToHTMLOptions extends Omit&lt;RunArgvs, '_'&gt; {
   'github-corners'?: RunArgvs['github-corners'];
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
+  /** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */
+  rewrite?: RehypeRewriteOptions['rewrite'];
   /** rewrite URLs of href and src attributes. */
   reurls?: Record&lt;string, string&gt;;
   /**
@@ -452,15 +461,15 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
     if (pgkData.name &amp;&amp; !options.document.title) {
       options.document.title = pgkData.name;
     }
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (pgkData.repository &amp;&amp; !argvs['github-corners']) {
+    if (pgkData.repository &amp;&amp; !argvs['github-corners']) {
       argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
     }
     <span class="missing-if-branch" title="else path not taken" >E</span>if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
       options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
-      <span class="missing-if-branch" title="if path not taken" >I</span>if (mth['github-corners']) {
-<span class="cstat-no" title="statement not covered" >        argvs['github-corners'] = mth['github-corners'];</span>
+      if (mth['github-corners']) {
+        argvs['github-corners'] = mth['github-corners'];
       }
     }
   }
@@ -526,7 +535,7 @@ export const exampleHelp: string =`\n  Example:
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Mon Oct 04 2021 20:02:38 GMT+0000 (Coordinated Universal Time)
+                at Mon Oct 04 2021 21:02:59 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
