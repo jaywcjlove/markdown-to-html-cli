@@ -54,3 +54,21 @@ it('options.document=undefined test case', async () => {
   const html = create({ document: undefined });
   expect(html.indexOf('<!doctype html>') === -1).toBeTruthy();
 });
+
+it('github-corners test case', async () => {
+  let html = create({
+    markdown: 'Hello World!',
+    'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
+    document: {},
+  });
+  expect(html.indexOf('<body><a aria-label="View source on GitHub"') > 0).toBeTruthy();
+
+  html = create({
+    markdown: 'Hello World!',
+    'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
+    document: undefined,
+  });
+  expect(html.indexOf('<a aria-label="View source on GitHub" target="__blank" class="github-corner"') === 0).toBeTruthy();
+  expect(html.indexOf('https://github.com/jaywcjlove/markdown-to-html-cli') > -1).toBeTruthy();
+});
+

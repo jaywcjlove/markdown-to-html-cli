@@ -44,17 +44,15 @@ export function create(options = {} as CreateOptions) {
     .use(rehypeAutolinkHeadings)
     .use(rehypeWrap, { ...wrap })
     .use(rehypeRewrite, {
-      rewrite: (node, index, parent) => {
-        if (node.type == 'element') {
-          if(node.tagName === 'body' && options['github-corners']) {
-            node.children = [githubCorners({ href: options['github-corners'] }), ...node.children];
-          }
-          if (/h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
-            const child = node.children[0];
-            if (child && child.type === 'element' && child.properties) {
-              child.properties = { class: 'anchor', ...child.properties };
-              child.children = [octiconLink()];
-            }
+      rewrite: (node) => {
+        if (options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
+          node.children = [githubCorners({ href: options['github-corners'] }), ...node.children];
+        }
+        if (node.type == 'element' && /h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
+          const child = node.children[0];
+          if (child && child.type === 'element' && child.properties) {
+            child.properties = { className: 'anchor', ...child.properties };
+            child.children = [octiconLink()];
           }
         }
       }
