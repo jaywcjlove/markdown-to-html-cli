@@ -8,7 +8,7 @@ markdown-to-html-cli
 [![Coverage Status](https://jaywcjlove.github.io/markdown-to-html-cli/badges.svg)](https://jaywcjlove.github.io/markdown-to-html-cli/lcov-report/)
 [![English Document](https://jaywcjlove.github.io/sb/lang/english.svg)](README.md)
 
-将 Markdown 文本转换为 HTML，提供命令行工具和方法。
+将 Markdown 文本转换为 HTML，提供命令行工具和方法。如果您是简单的将少量 markdown 文件（或文本）转换成 HTML 页面，这将对你很有帮助。
 
 ## Usage
 

@@ -8,7 +8,7 @@ markdown-to-html-cli
 [![Coverage Status](https://jaywcjlove.github.io/markdown-to-html-cli/badges.svg)](https://jaywcjlove.github.io/markdown-to-html-cli/lcov-report/)
 [![中文文档](https://jaywcjlove.github.io/sb/lang/chinese.svg)](README-zh.md)
 
-Converts markdown text to HTML, Provide command line tools and methods.
+Converts markdown text to HTML, Provide command line tools and methods. If you are simply converting a small number of Markdown files (or text) into HTML pages, this is very helpful for you.
 
 ## Usage
 
