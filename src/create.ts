@@ -46,8 +46,7 @@ export function create(options = {} as CreateOptions) {
     .use(rehypeRewrite, {
       rewrite: (node, index, parent) => {
         if (node.type == 'element') {
-          const className = node.properties ? (Array.isArray(node.properties.className) ? node.properties.className : [node.properties.className]) : [];
-          if(node.type == 'element' && className.includes('wmde-markdown') && options['github-corners']) {
+          if(node.tagName === 'body' && options['github-corners']) {
             node.children = [githubCorners({ href: options['github-corners'] }), ...node.children];
           }
           if (/h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
