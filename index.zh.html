@@ -24,17 +24,17 @@
         <a href="https://www.npmjs.com/package/markdown-to-html-cli"><img src="https://img.shields.io/npm/v/markdown-to-html-cli.svg" alt="npm version"></a>
         <a href="https://github.com/jaywcjlove/markdown-to-html-cli/actions/workflows/ci.yml"><img src="https://github.com/jaywcjlove/markdown-to-html-cli/actions/workflows/ci.yml/badge.svg" alt="Build and Test"></a>
         <a href="https://jaywcjlove.github.io/markdown-to-html-cli/lcov-report/"><img src="https://jaywcjlove.github.io/markdown-to-html-cli/badges.svg" alt="Coverage Status"></a>
-        <a href="index.zh.html"><img src="https://jaywcjlove.github.io/sb/lang/chinese.svg" alt="中文文档"></a>
+        <a href="index.html"><img src="https://jaywcjlove.github.io/sb/lang/english.svg" alt="English Document"></a>
       </p>
-      <p>Converts markdown text to HTML, Provide command line tools and methods.</p>
+      <p>将 Markdown 文本转换为 HTML，提供命令行工具和方法。</p>
       <h2 id="usage"><a class="anchor" aria-hidden="true" tabindex="-1" href="#usage"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
           </svg></a>Usage</h2>
-      <p>Used in Github <a href="https://github.com/actions">Actions</a>.</p>
+      <p>在 Github 中使用 <a href="https://github.com/actions">Actions</a>。</p>
       <pre class="language-yml"><code class="language-yml"><span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> npm i markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html<span class="token punctuation">-</span>cli <span class="token punctuation">-</span>g
 <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html <span class="token punctuation">-</span><span class="token punctuation">-</span>output coverage/index.html
 </code></pre>
-      <p>Using With Command.</p>
+      <p>使用命令</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
   <span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"markdown-to-html --output coverage/index.html"</span>
@@ -44,7 +44,7 @@
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-      <p>Used in <a href="https://nodejs.org/">Nodejs</a>.</p>
+      <p>在 <a href="https://nodejs.org/">Nodejs</a> 中使用。</p>
       <pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> create <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'markdown-to-html-cli'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
@@ -55,15 +55,15 @@
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// => HTML String</span>
 </code></pre>
-      <h2 id="install"><a class="anchor" aria-hidden="true" tabindex="-1" href="#install"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+      <h2 id="安装"><a class="anchor" aria-hidden="true" tabindex="-1" href="#安装"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
-          </svg></a>Install</h2>
-      <pre class="language-shell"><code class="language-shell">$ <span class="token function">npm</span> i markdown-to-html-cli
+          </svg></a>安装</h2>
+      <pre class="language-bash"><code class="language-bash">$ <span class="token function">npm</span> i markdown-to-html-cli
 </code></pre>
-      <h2 id="configure-in-packagejson"><a class="anchor" aria-hidden="true" tabindex="-1" href="#configure-in-packagejson"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+      <h2 id="在-packagejson-中配置"><a class="anchor" aria-hidden="true" tabindex="-1" href="#在-packagejson-中配置"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
-          </svg></a>Configure in package.json</h2>
-      <p>The configuration can be specified through <code>--config="config/conf.json"</code>, It can be in <code>package.json</code> by default.</p>
+          </svg></a>在 package.json 中配置</h2>
+      <p>可以通过 <code>--config="config/conf.json"</code> 指定配置，默认可以在 <code>package.json</code>。</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
   <span class="token string">"markdown-to-html"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
     <span class="token string">"document"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
@@ -90,9 +90,9 @@
         <li><a href="https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L22"><code>repository.url</code></a> -> <code>'markdown-to-html'.github-corners</code> - Define a description of your web page.</li>
         <li><a href="https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L24-L30"><code>keywords</code></a> -> <code>'markdown-to-html'.document.meta</code> - Define a description of your web page.</li>
       </ul>
-      <h2 id="command-help"><a class="anchor" aria-hidden="true" tabindex="-1" href="#command-help"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+      <h2 id="命令帮助"><a class="anchor" aria-hidden="true" tabindex="-1" href="#命令帮助"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
-          </svg></a>Command Help</h2>
+          </svg></a>命令帮助</h2>
       <pre class="language-bash"><code class="language-bash">Usage: markdown-to-html <span class="token punctuation">[</span>options<span class="token punctuation">]</span> <span class="token punctuation">[</span>--help<span class="token operator">|</span>h<span class="token punctuation">]</span>
 
 Options:
@@ -123,18 +123,18 @@ Example:
       <h2 id="markdown-features"><a class="anchor" aria-hidden="true" tabindex="-1" href="#markdown-features"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
           </svg></a>Markdown Features</h2>
-      <h3 id="supports-for-css-style"><a class="anchor" aria-hidden="true" tabindex="-1" href="#supports-for-css-style"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+      <h3 id="支持-css-样式定义"><a class="anchor" aria-hidden="true" tabindex="-1" href="#支持-css-样式定义"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
-          </svg></a>Supports for CSS Style</h3>
-      <p>Use HTML comments <a href="https://github.com/jaywcjlove/rehype-attr" style="color: red;"><code>&#x3C;!--rehype:xxx--></code></a><!--rehype:style=color: red;--> to let Markdown support style customization.</p>
+          </svg></a>支持 CSS 样式定义</h3>
+      <p>使用 HTML 注释 <a href="https://github.com/jaywcjlove/rehype-attr" style="color: red;"><code>&#x3C;!--rehype:xxx--></code></a><!--rehype:style=color: red;--> 让 Markdown 支持样式自定义。</p>
       <pre class="language-markdown"><code class="language-markdown"><span class="token title important"><span class="token punctuation">##</span> Title</span>
 <span class="token comment">&#x3C;!--rehype:style=display: flex; height: 230px; align-items: center; justify-content: center; font-size: 38px;--></span>
 
 Markdown Supports <span class="token bold"><span class="token punctuation">**</span><span class="token content">Style</span><span class="token punctuation">**</span></span><span class="token comment">&#x3C;!--rehype:style=color: red;--></span>
 </code></pre>
-      <h3 id="support-for-gfm-footnotes"><a class="anchor" aria-hidden="true" tabindex="-1" href="#support-for-gfm-footnotes"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
+      <h3 id="支持-gfm-注脚"><a class="anchor" aria-hidden="true" tabindex="-1" href="#支持-gfm-注脚"><svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true">
             <path fill-rule="evenodd" d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"></path>
-          </svg></a>Support for <a href="https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/">GFM footnotes</a></h3>
+          </svg></a>支持 <a href="https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/">GFM 注脚</a></h3>
       <pre class="language-markdown"><code class="language-markdown">Here is a simple footnote[^1]. With some additional text after it.
 
 <span class="token url-reference url"><span class="token punctuation">[</span><span class="token variable">^1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> My</span> reference.
