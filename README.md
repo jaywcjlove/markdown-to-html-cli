@@ -102,7 +102,8 @@ Markdown Supports **Style**<!--rehype:style=color: red;-->
 ```ts
 import { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
-export * from './create';
+export interface CreateOptions extends MDToHTMLOptions { }
+export declare function create(options?: CreateOptions): string;
 export interface RunArgvs extends ParsedArgs {
   version?: string;
   source?: string;
@@ -126,6 +127,7 @@ export interface RunArgvs extends ParsedArgs {
 }
 export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   'github-corners'?: RunArgvs['github-corners'];
+  /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
   /** rewrite URLs of href and src attributes. */
   reurls?: Record<string, string>;
@@ -142,6 +144,7 @@ export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
 export declare function run(opts?: Omit<RunArgvs, "_">): any;
 export declare const cliHelp: string;
 export declare const exampleHelp: string;
+
 ```
 
 ## Development
