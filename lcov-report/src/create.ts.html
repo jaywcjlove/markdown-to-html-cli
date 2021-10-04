@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.17% </span>
+                <span class="strong">94.87% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>31/34</span>
+                <span class='fraction'>37/39</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -159,10 +159,10 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
-<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -171,34 +171,34 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">49x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">562x</span>
+<span class="cline-any cline-yes">282x</span>
+<span class="cline-any cline-yes">282x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">282x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">62x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">616x</span>
-<span class="cline-any cline-yes">297x</span>
-<span class="cline-any cline-yes">297x</span>
-<span class="cline-any cline-yes">6x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">297x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-yes">18x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -216,53 +216,46 @@ import rehypeSlug from 'rehype-slug';
 import rehypeFormat from 'rehype-format';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 // @ts-ignore
+import rehypeUrls from 'rehype-urls';
+// @ts-ignore
 import rehypeWrap from 'rehype-wrap';
 import rehypeRaw from 'rehype-raw';
 import rehypeRewrite from 'rehype-rewrite';
 import rehypeAttrs from 'rehype-attr';
-// @ts-ignore
-import rehypeUrls from 'rehype-urls';
 import remarkGfm from 'remark-gfm';
 import remarkGemoji from 'remark-gemoji';
 import remarkRehype from 'remark-rehype';
 import remarkParse from 'remark-parse';
 import { githubCorners } from './nodes/githubCorners';
 import { octiconLink } from './nodes/octiconLink';
+import { MDToHTMLOptions } from './';
 &nbsp;
-import { RunArgvs, MDToHTMLOptions } from './';
+export interface CreateOptions extends MDToHTMLOptions { }
 &nbsp;
-export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
+export function create(options = {} as CreateOptions) {
   // default github css.
   const cssStr = fs.readFileSync(path.resolve(__dirname, 'github.css'));
-  const { markdown } = argvs || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
-  const { document = {}, reurls = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
+  const { markdown, document, reurls = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
     .use(remarkGemoji)
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
+    .use(document ? rehypeDocument : undefined, {
+      ...document,
+      link: document &amp;&amp; document.link ? (Array.isArray(document.link) ? document.link : [document.link]) : [],
+      style: [cssStr.toString().replace(/\n/g, ''), ...(document ? (Array.isArray(document.style) ? document.style : [document.style]) : []) ],
+    })
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
-    .use(rehypeUrls, (url: any) =&gt; {
-      if (reurls[url.href]) {
-        url.path = reurls[url.href];
-        return url.path;
-      }
-    })
-    .use(rehypeDocument, {
-      ...document,
-      link: document.link ? document.link : [],
-      style: [cssStr.toString().replace(/\n/g, ''), ...(Array.isArray(document.style) ? document.style : [document.style]) ],
-    })
-    .use(rehypeFormat)
     .use(rehypeWrap, { ...wrap })
     .use(rehypeRewrite, {
       rewrite: (node, index, parent) =&gt; {
         if (node.type == 'element') {
           const className = node.properties ? (Array.isArray(node.properties.className) ? node.properties.className : [node.properties.className]) : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
-          if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; argvs['github-corners']) {
-            node.children = [githubCorners({ href: argvs['github-corners'] }), ...node.children];
+          if(node.type == 'element' &amp;&amp; className.includes('wmde-markdown') &amp;&amp; options['github-corners']) {
+            node.children = [githubCorners({ href: options['github-corners'] }), ...node.children];
           }
           if (/h(1|2|3|4|5|6)/.test(node.tagName) &amp;&amp; node.children &amp;&amp; Array.isArray(node.children) &amp;&amp; node.children.length &gt; 0) {
             const child = node.children[0];
@@ -276,6 +269,13 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
     })
     .use(rehypePrism, { ignoreMissing: true })
     .use(rehypeAttrs, { properties: 'attr' })
+    .use(rehypeUrls, (url: any) =&gt; {
+      if (reurls[url.href]) {
+        url.path = reurls[url.href];
+        return url.path;
+      }
+    })
+    .use(rehypeFormat)
     .use(stringify)
     .processSync(markdown)
     .toString();
@@ -286,7 +286,7 @@ export function create(argvs: RunArgvs, options = {} as MDToHTMLOptions) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Oct 03 2021 20:32:07 GMT+0000 (Coordinated Universal Time)
+                at Mon Oct 04 2021 14:31:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>

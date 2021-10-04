@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>52/52</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.3% </span>
+                <span class="strong">91.17% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>72/78</span>
+                <span class='fraction'>62/68</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>52/52</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
@@ -211,15 +211,7 @@
 <a name='L152'></a><a href='#L152'>152</a>
 <a name='L153'></a><a href='#L153'>153</a>
 <a name='L154'></a><a href='#L154'>154</a>
-<a name='L155'></a><a href='#L155'>155</a>
-<a name='L156'></a><a href='#L156'>156</a>
-<a name='L157'></a><a href='#L157'>157</a>
-<a name='L158'></a><a href='#L158'>158</a>
-<a name='L159'></a><a href='#L159'>159</a>
-<a name='L160'></a><a href='#L160'>160</a>
-<a name='L161'></a><a href='#L161'>161</a>
-<a name='L162'></a><a href='#L162'>162</a>
-<a name='L163'></a><a href='#L163'>163</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L155'></a><a href='#L155'>155</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -228,6 +220,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -312,15 +305,6 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -415,6 +399,7 @@ export interface RunArgvs extends ParsedArgs {
 &nbsp;
 export interface MDToHTMLOptions extends Omit&lt;RunArgvs, '_'&gt; {
   'github-corners'?: RunArgvs['github-corners'];
+  /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
   /** rewrite URLs of href and src attributes. */
   reurls?: Record&lt;string, string&gt;;
@@ -459,7 +444,7 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
 &nbsp;
-  const options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
+  let options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
   const projectPkg = path.resolve(process.cwd(), opts.config || argvs.config || 'package.json');
   let pgkData: any = {};
   <span class="missing-if-branch" title="else path not taken" >E</span>if (fs.existsSync(projectPkg)) {
@@ -473,18 +458,9 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
     <span class="missing-if-branch" title="else path not taken" >E</span>if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
-      options.document = { title, meta, link, ...mth.document };
-      if (!options.favicon &amp;&amp; mth.favicon) {
-        options.favicon = mth.favicon;
-      }
-      if (!options.wrap &amp;&amp; mth.wrap) {
-        options.wrap = mth.wrap;
-      }
+      options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
       if (mth['github-corners']) {
         argvs['github-corners'] = mth['github-corners'];
-      }
-      if (mth.reurls) {
-        options.reurls = mth.reurls;
       }
     }
   }
@@ -510,7 +486,7 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
     }
   }
   const output = path.resolve(argvs.output);
-  const strMarkdown = create(argvs, options);
+  const strMarkdown = create({ ...argvs, ...options });
   fs.writeFileSync(output, strMarkdown);
   console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
 }
@@ -550,7 +526,7 @@ export const exampleHelp: string =`\n  Example:
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Oct 03 2021 20:32:07 GMT+0000 (Coordinated Universal Time)
+                at Mon Oct 04 2021 14:31:41 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
