@@ -12,7 +12,7 @@ markdown-to-html-cli
 
 ## Usage
 
-在 Github 中使用 [Actions](https://github.com/actions)。
+在 Github [Actions](https://github.com/actions) 中使用。
 
 ```yml
 - run: npm i markdown-to-html-cli -g
