@@ -43,11 +43,16 @@ export function create(options = {} as CreateOptions) {
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
     .use(rehypeWrap, { ...wrap })
+    .use(rehypePrism, { ignoreMissing: true })
+    .use(rehypeAttrs, { properties: 'attr' })
+    .use(rehypeUrls, (url: any) => {
+      if (reurls[url.href]) {
+        url.path = reurls[url.href];
+        return url.path;
+      }
+    })
     .use(rehypeRewrite, {
       rewrite: (node, index, parent) => {
-        if (rewrite && typeof rewrite === 'function') {
-          rewrite(node, index, parent);
-        }
         if (options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
           node.children = [githubCorners({ href: options['github-corners'] }), ...node.children];
         }
@@ -58,14 +63,9 @@ export function create(options = {} as CreateOptions) {
             child.children = [octiconLink()];
           }
         }
-      }
-    })
-    .use(rehypePrism, { ignoreMissing: true })
-    .use(rehypeAttrs, { properties: 'attr' })
-    .use(rehypeUrls, (url: any) => {
-      if (reurls[url.href]) {
-        url.path = reurls[url.href];
-        return url.path;
+        if (rewrite && typeof rewrite === 'function') {
+          rewrite(node, index, parent);
+        }
       }
     })
     .use(rehypeFormat)
