@@ -32,6 +32,7 @@ export interface RunArgvs extends ParsedArgs {
 
 export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   'github-corners'?: RunArgvs['github-corners'];
+  /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
   /** rewrite URLs of href and src attributes. */
   reurls?: Record<string, string>;
@@ -76,7 +77,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
 
-  const options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
+  let options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
   const projectPkg = path.resolve(process.cwd(), opts.config || argvs.config || 'package.json');
   let pgkData: any = {};
   if (fs.existsSync(projectPkg)) {
@@ -90,18 +91,9 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
-      options.document = { title, meta, link, ...mth.document };
-      if (!options.favicon && mth.favicon) {
-        options.favicon = mth.favicon;
-      }
-      if (!options.wrap && mth.wrap) {
-        options.wrap = mth.wrap;
-      }
+      options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
       if (mth['github-corners']) {
         argvs['github-corners'] = mth['github-corners'];
-      }
-      if (mth.reurls) {
-        options.reurls = mth.reurls;
       }
     }
   }
@@ -127,7 +119,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     }
   }
   const output = path.resolve(argvs.output);
-  const strMarkdown = create(argvs, options);
+  const strMarkdown = create({ ...argvs, ...options });
   fs.writeFileSync(output, strMarkdown);
   console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
 }
