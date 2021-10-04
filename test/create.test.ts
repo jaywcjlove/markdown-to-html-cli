@@ -72,3 +72,14 @@ it('github-corners test case', async () => {
   expect(html.indexOf('https://github.com/jaywcjlove/markdown-to-html-cli') > -1).toBeTruthy();
 });
 
+it('rewrite test case', async () => {
+  let html = create({
+    markdown: 'Hello World!',
+    rewrite: (node) => {
+      if (node.type === 'element' && node.tagName === 'p') {
+        node.properties.className = 'test';
+      }
+    }
+  });
+  expect(html.indexOf('<p class="test">Hello World!</p>') > 0).toBeTruthy();
+});

@@ -2,6 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
+import { RehypeRewriteOptions } from 'rehype-rewrite';
 import { create } from './create';
 
 export * from './create';
@@ -34,6 +35,8 @@ export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
   'github-corners'?: RunArgvs['github-corners'];
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
+  /** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */
+  rewrite?: RehypeRewriteOptions['rewrite'];
   /** rewrite URLs of href and src attributes. */
   reurls?: Record<string, string>;
   /**

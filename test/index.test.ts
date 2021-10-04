@@ -69,10 +69,10 @@ it('config test case', async () => {
 it('keywords test case', async () => {
   await FS.mkdirs('test/demo');
   await FS.writeJSON('test/demo/config.json', {
-    "repository": "https://github.com/jaywcjlove/markdown-to-html-cli.git",
     "keywords": ["html", "cli"],
     "markdown-to-html": {
       "favicon": "data:image/svg+xml",
+      'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli.git',
       "reurls": {
         "README.md": "index.html"
       },
@@ -82,5 +82,6 @@ it('keywords test case', async () => {
   expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', keywords: 'html,cli', markdown: 'Hello World! [](README.md)' })).toBeUndefined();
   const htmlStr = await FS.readFile('test/demo/index.html');
   expect(htmlStr.toString().indexOf('html,cli') > 0).toBeTruthy();
+  expect(htmlStr.toString().indexOf('https://github.com/jaywcjlove/markdown-to-html-cli.git') > 0).toBeTruthy();
   await FS.remove('test/demo');
 });

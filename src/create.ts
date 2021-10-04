@@ -28,7 +28,7 @@ export interface CreateOptions extends MDToHTMLOptions { }
 export function create(options = {} as CreateOptions) {
   // default github css.
   const cssStr = fs.readFileSync(path.resolve(__dirname, 'github.css'));
-  const { markdown, document, reurls = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
+  const { markdown, document, rewrite, reurls = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -44,7 +44,10 @@ export function create(options = {} as CreateOptions) {
     .use(rehypeAutolinkHeadings)
     .use(rehypeWrap, { ...wrap })
     .use(rehypeRewrite, {
-      rewrite: (node) => {
+      rewrite: (node, index, parent) => {
+        if (rewrite && typeof rewrite === 'function') {
+          rewrite(node, index, parent);
+        }
         if (options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
           node.children = [githubCorners({ href: options['github-corners'] }), ...node.children];
         }
