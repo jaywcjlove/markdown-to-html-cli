@@ -6,20 +6,20 @@ markdown-to-html-cli
 [![npm version](https://img.shields.io/npm/v/markdown-to-html-cli.svg)](https://www.npmjs.com/package/markdown-to-html-cli)
 [![Build and Test](https://github.com/jaywcjlove/markdown-to-html-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/jaywcjlove/markdown-to-html-cli/actions/workflows/ci.yml)
 [![Coverage Status](https://jaywcjlove.github.io/markdown-to-html-cli/badges.svg)](https://jaywcjlove.github.io/markdown-to-html-cli/lcov-report/)
-[![中文文档](https://jaywcjlove.github.io/sb/lang/chinese.svg)](README-zh.md)
+[![English Document](https://jaywcjlove.github.io/sb/lang/english.svg)](README.md)
 
-Converts markdown text to HTML, Provide command line tools and methods.
+将 Markdown 文本转换为 HTML，提供命令行工具和方法。
 
 ## Usage
 
-Used in Github [Actions](https://github.com/actions).
+在 Github 中使用 [Actions](https://github.com/actions)。
 
 ```yml
 - run: npm i markdown-to-html-cli -g
 - run: markdown-to-html --output coverage/index.html
 ```
 
-Using With Command.
+使用命令
 
 ```js
 {
@@ -32,7 +32,7 @@ Using With Command.
 }
 ```
 
-Used in [Nodejs](https://nodejs.org).
+在 [Nodejs](https://nodejs.org) 中使用。
 
 ```js
 import { create } from 'markdown-to-html-cli';
@@ -46,15 +46,15 @@ const html = create({
 // => HTML String
 ```
 
-## Install
+## 安装
 
-```shell
+```bash
 $ npm i markdown-to-html-cli
 ```
 
-## Configure in package.json
+## 在 package.json 中配置
 
-The configuration can be specified through `--config="config/conf.json"`, It can be in `package.json` by default.
+可以通过 `--config="config/conf.json"` 指定配置，默认可以在 `package.json`。
 
 ```js
 {
@@ -83,7 +83,7 @@ The configuration can be specified through `--config="config/conf.json"`, It can
 - [`repository.url`](https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L22) -> `'markdown-to-html'.github-corners` - Define a description of your web page.
 - [`keywords`](https://github.com/jaywcjlove/markdown-to-html-cli/blob/308ca37aa5b9ae846a7835092a183d0ed73a8dc4/package.json#L24-L30) -> `'markdown-to-html'.document.meta` - Define a description of your web page.
 
-## Command Help
+## 命令帮助
 
 ```bash
 Usage: markdown-to-html [options] [--help|h]
@@ -116,9 +116,9 @@ Example:
 
 ## Markdown Features
 
-### Supports for CSS Style
+### 支持 CSS 样式定义
 
-Use HTML comments [`<!--rehype:xxx-->`](https://github.com/jaywcjlove/rehype-attr)<!--rehype:style=color: red;--> to let Markdown support style customization.
+使用 HTML 注释 [`<!--rehype:xxx-->`](https://github.com/jaywcjlove/rehype-attr)<!--rehype:style=color: red;--> 让 Markdown 支持样式自定义。
 
 ```markdown
 ## Title
@@ -127,7 +127,7 @@ Use HTML comments [`<!--rehype:xxx-->`](https://github.com/jaywcjlove/rehype-att
 Markdown Supports **Style**<!--rehype:style=color: red;-->
 ```
 
-### Support for [GFM footnotes](https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/)
+### 支持 [GFM 注脚](https://github.blog/changelog/2021-09-30-footnotes-now-supported-in-markdown-fields/)
 
 ```markdown
 Here is a simple footnote[^1]. With some additional text after it.
