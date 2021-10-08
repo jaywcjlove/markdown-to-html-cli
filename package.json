@@ -68,6 +68,6 @@
     "unified": "10.1.0"
   },
   "devDependencies": {
-    "tsbb": "3.4.1"
+    "tsbb": "3.4.4"
   }
 }
