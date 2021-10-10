@@ -95,6 +95,7 @@ Options:
   --description     Define a description of your web page.
   --favicon         Add a Favicon to your Site.
   --github-corners  Add a Github corner to your project page.
+  --github-corners-fork  Github corners style.
   --keywords        Define keywords for search engines.
   --markdown        Markdown string.
   --output, -o      Output static pages to the specified directory. Default: "index.html"
@@ -110,6 +111,7 @@ Example:
   npm markdown-to-html     --config="config/conf.json"
   npm markdown-to-html-cli --markdown="Hello World!"
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
+  npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
   npm markdown-to-html-cli --output coverage/index.html
   npm markdown-to-html-cli --source README.md
 ```

@@ -4,14 +4,14 @@
   "license": "MIT",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli/",
+  "type": "module",
   "exports": "./lib/index.js",
   "bin": {
     "markdown-to-html": "lib/cli.js",
     "markdown-to-html-cli": "lib/cli.js"
   },
-  "type": "module",
   "scripts": {
-    "start": "node lib/cli.js --github-corners-fork --github-corners 'https://www.baidu.com'",
+    "start": "node lib/cli.js --github-corners-fork --github-corners 'https://jaywcjlove.github.io'",
     "watch": "tsbb watch --disable-babel -f src/cli.ts",
     "build": "tsbb build --disable-babel -f src/cli.ts && npm run fix",
     "fix": "tsc-esm-fix --target='lib' --ext='.js'",

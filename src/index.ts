@@ -136,6 +136,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --description     Define a description of your web page.
     --favicon         Add a Favicon to your Site.
     --github-corners  Add a Github corner to your project page.
+    --github-corners-fork  Github corners style.
     --keywords        Define keywords for search engines.
     --markdown        Markdown string.
     --output, -o      Output static pages to the specified directory. Default: "index.html"
@@ -152,6 +153,7 @@ export const exampleHelp: string =`\n  Example:
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--config\x1b[0m="config/conf.json"
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove --github-corners-fork
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md
   
