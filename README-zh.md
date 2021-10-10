@@ -144,12 +144,14 @@ import { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
 export interface CreateOptions extends MDToHTMLOptions { }
 export declare function create(options?: CreateOptions): string;
-export interface RunArgvs extends ParsedArgs {
+export interface RunArgvs extends Omit<ParsedArgs, '_'> {
   version?: string;
   source?: string;
   output?: string;
-  /** Add a Github corner to your project page */
+  /** Add a Github corner to your project page. */
   'github-corners'?: string;
+  /** Github corners style. */
+  'github-corners-fork'?: boolean;
   /** Markdown string. */
   markdown?: string;
   /** The `<title>` tag is required in HTML documents! */
@@ -165,10 +167,11 @@ export interface RunArgvs extends ParsedArgs {
   /** Define the author of a page */
   author?: string;
 }
-export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
-  'github-corners'?: RunArgvs['github-corners'];
+export interface MDToHTMLOptions extends RunArgvs {
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
+  /** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */
+  rewrite?: RehypeRewriteOptions['rewrite'];
   /** rewrite URLs of href and src attributes. */
   reurls?: Record<string, string>;
   /**
@@ -184,7 +187,6 @@ export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
 export declare function run(opts?: Omit<RunArgvs, "_">): any;
 export declare const cliHelp: string;
 export declare const exampleHelp: string;
-
 ```
 
 ## Development
