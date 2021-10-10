@@ -1,5 +1,6 @@
 import FS from 'fs-extra';
 import { githubCorners } from '../src/nodes/githubCorners';
+import { githubCornersFork } from '../src/nodes/githubCornersFork';
 import { cliHelp, exampleHelp, run } from '../src';
 import pkg from '../package.json';
 
@@ -7,6 +8,7 @@ console.log = jest.fn();
 
 it('githubCorners test case', async () => {
   expect(githubCorners({ })).toBeUndefined();
+  expect(githubCornersFork({ })).toBeUndefined();
   expect(Object.keys(githubCorners({ href: 'https://github.com/jaywcjlove/markdown-to-html-cli' }))).toEqual(expect.arrayContaining(['type', 'tagName', 'properties', 'children']));
 });
 

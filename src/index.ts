@@ -9,12 +9,14 @@ export * from './create';
 
 const pkg = fs.readJSONSync(path.resolve(__dirname, '..', 'package.json'));
 
-export interface RunArgvs extends ParsedArgs {
+export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   version?: string;
   source?: string;
   output?: string;
-  /** Add a Github corner to your project page */
+  /** Add a Github corner to your project page. */
   'github-corners'?: string;
+  /** Github corners style. */
+  'github-corners-fork'?: boolean;
   /** Markdown string. */
   markdown?: string;
   /** The `<title>` tag is required in HTML documents! */
@@ -31,8 +33,7 @@ export interface RunArgvs extends ParsedArgs {
   author?: string;
 }
 
-export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
-  'github-corners'?: RunArgvs['github-corners'];
+export interface MDToHTMLOptions extends RunArgvs {
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
   /** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */
@@ -51,7 +52,7 @@ export interface MDToHTMLOptions extends Omit<RunArgvs, '_'> {
 }
 
 export function run(opts = {} as Omit<RunArgvs, '_'>) {
-  const argvs: RunArgvs = minimist(process.argv.slice(2), {
+  const argvs = minimist<RunArgvs>(process.argv.slice(2), {
     alias: {
       help: 'h',
       version: 'v',

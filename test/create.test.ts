@@ -70,6 +70,14 @@ it('github-corners test case', async () => {
   });
   expect(html.indexOf('<a aria-label="View source on GitHub" target="__blank" class="github-corner"') === 0).toBeTruthy();
   expect(html.indexOf('https://github.com/jaywcjlove/markdown-to-html-cli') > -1).toBeTruthy();
+
+  html = create({
+    'github-corners-fork': true,
+    'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
+    markdown: 'Hello World!',
+    document: {},
+  });
+  expect(html.indexOf('data-ribbon="Fork me on GitHub"') > 0).toBeTruthy();
 });
 
 it('rewrite test case', async () => {
