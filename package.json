@@ -43,6 +43,9 @@
       "README.md": "index.html"
     }
   },
+  "files": [
+    "lib"
+  ],
   "dependencies": {
     "@mapbox/rehype-prism": "0.8.0",
     "@types/fs-extra": "9.0.13",
