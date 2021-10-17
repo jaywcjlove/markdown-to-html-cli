@@ -5,6 +5,7 @@
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli/",
   "type": "module",
+  "types": "./lib/index.d.ts",
   "exports": "./lib/index.js",
   "bin": {
     "markdown-to-html": "lib/cli.js",
