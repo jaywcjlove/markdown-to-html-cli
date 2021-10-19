@@ -47,7 +47,7 @@ it('options.document.style=[] test case', async () => {
 });
 
 it('options=undefined test case', async () => {
-  expect(create()).toEqual('\n<div class="wmde-markdown"></div>\n');
+  expect(create()).toEqual('\n<div class="markdown-body"></div>\n');
 });
 
 it('options.document=undefined test case', async () => {

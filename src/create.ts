@@ -28,7 +28,7 @@ export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options = {} as MDToHTMLOptions) {
   // default github css.
-  const { markdown, document, rewrite, reurls = {}, wrap = { wrapper: 'div.wmde-markdown' } } = options;
+  const { markdown, document, rewrite, reurls = {}, wrap = { wrapper: 'div.markdown-body' } } = options;
   let cssStr = fs.readFileSync(path.resolve(__dirname, 'styles', 'github.css')).toString();
   if (options['github-corners-fork'] && options['github-corners']) {
     let cssFork = fs.readFileSync(path.resolve(__dirname, 'styles', 'github-fork-ribbon.css')).toString();

@@ -137,6 +137,22 @@ Here is a simple footnote[^1]. With some additional text after it.
 [^1]: My reference.
 ```
 
+### [Task lists](https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#task-lists)
+
+To create a task list, preface list items with a regular space character followed by `[ ]`. To mark a task as complete, use `[x]`.
+
+```markdown
+- [x] #739
+- [ ] https://github.com/octo-org/octo-repo/issues/740
+- [ ] Add delight to the experience when all tasks are complete :tada:
+```
+
+If a task list item description begins with a parenthesis, you'll need to escape it with `\`:
+
+```markdown
+- [ ] \(Optional) Open a followup issue
+```
+
 ## API
 
 ```ts
