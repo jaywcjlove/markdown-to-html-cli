@@ -15,6 +15,7 @@ import rehypeWrap from 'rehype-wrap';
 import rehypeRaw from 'rehype-raw';
 import rehypeRewrite from 'rehype-rewrite';
 import rehypeAttrs from 'rehype-attr';
+import rehypeVideo from 'rehype-video';
 import remarkGfm from 'remark-gfm';
 import remarkGemoji from 'remark-gemoji';
 import remarkRehype from 'remark-rehype';
@@ -39,6 +40,7 @@ export function create(options = {} as MDToHTMLOptions) {
     .use(remarkGfm)
     .use(remarkGemoji)
     .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeVideo)
     .use(rehypeRaw)
     .use(document ? rehypeDocument : undefined, {
       ...document,

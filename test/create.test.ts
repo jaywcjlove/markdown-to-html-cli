@@ -80,14 +80,14 @@ it('github-corners test case', async () => {
   expect(html.indexOf('data-ribbon="Fork me on GitHub"') > 0).toBeTruthy();
 });
 
-it('rewrite test case', async () => {
+it('video preview test case', async () => {
   let html = create({
-    markdown: 'Hello World!',
+    markdown: 'test\n\nhttps://user-images.githubusercontent.com/1680273/138299599-88547edd-859c-44c9-8b52-2cc06f7f2dd3.mov',
     rewrite: (node) => {
       if (node.type === 'element' && node.tagName === 'p') {
         node.properties.className = 'test';
       }
     }
   });
-  expect(html.indexOf('<p class="test">Hello World!</p>') > 0).toBeTruthy();
+  expect(html.indexOf('<video muted controls') > 0).toBeTruthy();
 });

@@ -1,7 +1,7 @@
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  max-width: 1024px;
+  max-width: 960px;
   margin: 28px auto 60px auto;
   color: #24292f;
   background-color: #ffffff;
@@ -15,6 +15,31 @@
   display: inline-block;
   fill: currentColor;
   vertical-align: text-bottom;
+}
+
+.markdown-body .octicon-video {
+  border: 1px solid #d0d7de !important;
+  border-radius: 6px !important;
+  display: block;
+}
+
+.markdown-body .octicon-video summary {
+  border-bottom: 1px solid #d0d7de !important;
+  padding: 8px 16px !important;
+  cursor: pointer;
+}
+.markdown-body .octicon-video > video {
+  display: block !important;
+  max-width: 100% !important;
+}
+.markdown-body details.octicon-video:not([open])>*:not(summary) {
+  display: none !important;
+}
+.markdown-body details.octicon-video:not([open]) > summary {
+  border-bottom: 0 !important;
+}
+.markdown-body .octicon-video summary > svg + span {
+  margin: 4px !important;
 }
 
 .markdown-body h1:hover .anchor .octicon-link:before,
