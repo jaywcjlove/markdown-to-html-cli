@@ -63,7 +63,7 @@
     "rehype-slug": "5.0.0",
     "rehype-stringify": "9.0.2",
     "rehype-urls": "1.1.1",
-    "rehype-video": "1.1.1",
+    "rehype-video": "1.1.0",
     "rehype-wrap": "1.0.10",
     "remark-gemoji": "7.0.0",
     "remark-gfm": "3.0.0",
