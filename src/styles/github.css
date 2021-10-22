@@ -31,6 +31,8 @@
 .markdown-body .octicon-video > video {
   display: block !important;
   max-width: 100% !important;
+  padding: 2px;
+  box-sizing: border-box;
 }
 .markdown-body details.octicon-video:not([open])>*:not(summary) {
   display: none !important;
