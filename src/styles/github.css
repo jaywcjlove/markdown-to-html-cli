@@ -1,8 +1,11 @@
+body { margin: 0; }
+
 .markdown-body {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
   max-width: 960px;
   margin: 28px auto 60px auto;
+  padding: 8px;
   color: #24292f;
   background-color: #ffffff;
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
