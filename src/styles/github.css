@@ -36,6 +36,8 @@ body { margin: 0; }
   max-width: 100% !important;
   padding: 2px;
   box-sizing: border-box;
+  border-bottom-right-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
 }
 .markdown-body details.octicon-video:not([open])>*:not(summary) {
   display: none !important;
