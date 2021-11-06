@@ -66,9 +66,9 @@
     "rehype-video": "1.1.1",
     "rehype-wrap": "1.0.10",
     "remark-gemoji": "7.0.0",
-    "remark-gfm": "3.0.0",
+    "remark-gfm": "3.0.1",
     "remark-parse": "10.0.0",
-    "remark-rehype": "10.0.0",
+    "remark-rehype": "10.0.1",
     "tsc-esm-fix": "2.7.3",
     "unified": "10.1.0"
   },
