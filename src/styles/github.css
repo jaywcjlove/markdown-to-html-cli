@@ -335,6 +335,13 @@ body { margin: 0; }
 .markdown-body ol ol ol {
   list-style-type: lower-alpha;
 }
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .markdown-body dd {
   margin-left: 0;
@@ -415,17 +422,6 @@ body { margin: 0; }
   color: #cf222e;
 }
 
-.markdown-body .anchor {
-  float: left;
-  padding-right: 4px;
-  margin-left: -20px;
-  line-height: 1;
-}
-
-.markdown-body .anchor:focus {
-  outline: none;
-}
-
 .markdown-body p,
 .markdown-body blockquote,
 .markdown-body ul,
@@ -465,6 +461,18 @@ body { margin: 0; }
   visibility: hidden;
 }
 
+
+.markdown-body .anchor {
+  float: left;
+  padding-right: 4px;
+  margin-left: -20px;
+  line-height: 1;
+  min-width: 16px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
 .markdown-body h1:hover .anchor,
 .markdown-body h2:hover .anchor,
 .markdown-body h3:hover .anchor,
@@ -811,9 +819,7 @@ body { margin: 0; }
   filter: invert(50%);
 }
 
-
-
-
+/** language color **/
 .markdown-body .token.tag .attr-value {
   color: #032f62;
 }
@@ -834,9 +840,11 @@ body { margin: 0; }
   color: black;
 }
 .markdown-body code[class*="language-"] .token.selector,
-.markdown-body code[class*="language-"] .token.attr-name,
 .markdown-body code[class*="language-"] .token.string,
+.markdown-body code[class*="language-"] .token.attr-name,
+.markdown-body code[class*="language-"] .token.content,
 .markdown-body code[class*="language-"] .token.char,
+.markdown-body code[class*="language-"] .token.class-name,
 .markdown-body code[class*="language-"] .token.function,
 .markdown-body code[class*="language-"] .token.builtin {
   color: #6f42c1;
@@ -848,9 +856,6 @@ body { margin: 0; }
 .markdown-body code[class*="language-"] .token.deleted {
   color: #b31d28;
   background-color: #ffeef0;
-}
-.markdown-body code[class*="language-"] .token.class-name {
-  color: #6f42c1;
 }
 .markdown-body code[class*="language-"] .code-block {
   color: #032f62;
@@ -867,10 +872,12 @@ body { margin: 0; }
 }
 .markdown-body code[class*="language-"] .token.operator,
 .markdown-body code[class*="language-"] .token.entity,
-.markdown-body code[class*="language-"] .token.url,
 .markdown-body code[class*="language-"] .token.variable {
   color: #d73a49;
   background: rgba(255, 255, 255, 0.5);
+}
+.markdown-body code[class*="language-"] .token.url {
+  color: #0027ff;
 }
 .markdown-body code[class*="language-"] .token.atrule,
 .markdown-body code[class*="language-"] .token.attr-value {
