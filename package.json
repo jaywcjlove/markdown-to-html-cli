@@ -70,7 +70,7 @@
     "remark-parse": "10.0.1",
     "remark-rehype": "10.0.1",
     "tsc-esm-fix": "2.7.3",
-    "unified": "10.1.0"
+    "unified": "10.1.1"
   },
   "devDependencies": {
     "tsbb": "3.5.1"
