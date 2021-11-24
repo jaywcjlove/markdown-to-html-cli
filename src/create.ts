@@ -1,5 +1,6 @@
 import fs from 'fs-extra';
-import path from 'path';
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { unified } from 'unified';
 import rehypeDocument from 'rehype-document';
 // @ts-ignore
@@ -25,14 +26,16 @@ import { githubCornersFork } from './nodes/githubCornersFork';
 import { octiconLink } from './nodes/octiconLink';
 import { MDToHTMLOptions } from './';
 
+// https://stackoverflow.com/questions/46745014/alternative-for-dirname-in-node-when-using-the-experimental-modules-flag
+export const _dirname = dirname(fileURLToPath(import.meta.url));
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options = {} as MDToHTMLOptions) {
   // default github css.
   const { markdown, document, rewrite, reurls = {}, wrap = { wrapper: 'div.markdown-body' } } = options;
-  let cssStr = fs.readFileSync(path.resolve(__dirname, 'styles', 'github.css')).toString();
+  let cssStr = fs.readFileSync(path.resolve(_dirname, 'styles', 'github.css')).toString();
   if (options['github-corners-fork'] && options['github-corners']) {
-    let cssFork = fs.readFileSync(path.resolve(__dirname, 'styles', 'github-fork-ribbon.css')).toString();
+    let cssFork = fs.readFileSync(path.resolve(_dirname, 'styles', 'github-fork-ribbon.css')).toString();
     cssStr = `${cssStr}${cssFork}`;
   }
   return unified()

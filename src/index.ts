@@ -3,11 +3,11 @@ import path from 'path';
 import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
-import { create } from './create';
+import { create, _dirname } from './create';
 
 export * from './create';
 
-const pkg = fs.readJSONSync(path.resolve(__dirname, '..', 'package.json'));
+const pkg = fs.readJSONSync(path.resolve(_dirname, '..', 'package.json'));
 
 export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   version?: string;
