@@ -27,7 +27,8 @@ import { octiconLink } from './nodes/octiconLink';
 import { MDToHTMLOptions } from './';
 
 // https://stackoverflow.com/questions/46745014/alternative-for-dirname-in-node-when-using-the-experimental-modules-flag
-export const _dirname = dirname(fileURLToPath(import.meta.url));
+// export const _dirname = dirname(fileURLToPath(import.meta.url));
+export const _dirname = __dirname;
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options = {} as MDToHTMLOptions) {

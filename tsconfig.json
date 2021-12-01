@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "module": "ES2020",
+    "module": "ESNext",
+    "allowJs": true,
     // "module": "es2015",
     "target": "ESNext",
     "esModuleInterop": true,
