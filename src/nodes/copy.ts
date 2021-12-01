@@ -18,8 +18,8 @@ export function copyElement(str: string = 'test'): Element {
           ariaHidden: 'true',
           viewBox: '0 0 16 16',
           fill: 'currentColor',
-          height: 16,
-          width: 16,
+          height: 12,
+          width: 12,
         },
         children: [
           {
@@ -49,8 +49,8 @@ export function copyElement(str: string = 'test'): Element {
           ariaHidden: 'true',
           viewBox: '0 0 16 16',
           fill: 'currentColor',
-          height: 16,
-          width: 16,
+          height: 12,
+          width: 12,
         },
         children: [
           {
