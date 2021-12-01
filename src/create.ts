@@ -33,7 +33,6 @@ export const _dirname = __dirname;
 export interface CreateOptions extends MDToHTMLOptions { }
 
 const script = `function copied(target, str) {
-  console.log('str', str)
   target.classList.add('active');
   copyTextToClipboard(target.dataset.code, function() {
     setTimeout(() => {
