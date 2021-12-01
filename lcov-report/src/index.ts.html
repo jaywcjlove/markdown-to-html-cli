@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/46</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">92.64% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/68</span>
+                <span class='fraction'>63/68</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/46</span>
+                <span class='fraction'>46/46</span>
             </div>
         
             
@@ -54,8 +54,14 @@
         <p class="quiet">
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input oninput="onInput()" type="search" id="fileSearch">
+            </div>
+        </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -226,7 +232,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -271,7 +277,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -288,66 +294,66 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -365,7 +371,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -386,7 +392,7 @@ import { create, _dirname } from './create';
 &nbsp;
 export * from './create';
 &nbsp;
-const pkg = <span class="cstat-no" title="statement not covered" >fs.readJSONSync(path.resolve(_dirname, '..', 'package.json'));</span>
+const pkg = fs.readJSONSync(path.resolve(_dirname, '..', 'package.json'));
 &nbsp;
 export interface RunArgvs extends Omit&lt;ParsedArgs, '_'&gt;  {
   version?: string;
@@ -430,8 +436,8 @@ export interface MDToHTMLOptions extends RunArgvs {
   }
 }
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >run(</span>opts = <span class="branch-0 cbranch-no" title="branch not covered" >{} as Omit&lt;RunArgvs, '_'&gt;)</span> {
-  const argvs = <span class="cstat-no" title="statement not covered" >minimist&lt;RunArgvs&gt;(process.argv.slice(2), {</span>
+export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
+  const argvs = minimist&lt;RunArgvs&gt;(process.argv.slice(2), {
     alias: {
       help: 'h',
       version: 'v',
@@ -448,66 +454,66 @@ export function <span class="fstat-no" title="function not covered" >run(</span>
       output: opts.o || opts.output || 'index.html',
     },
   });
-<span class="cstat-no" title="statement not covered" >  if (argvs.h || argvs.help) {</span>
-<span class="cstat-no" title="statement not covered" >    console.log(`${cliHelp}${exampleHelp}`);</span>
-<span class="cstat-no" title="statement not covered" >    return;</span>
+  if (argvs.h || argvs.help) {
+    console.log(`${cliHelp}${exampleHelp}`);
+    return;
   }
-<span class="cstat-no" title="statement not covered" >  if (argvs.v || argvs.version) {</span>
-<span class="cstat-no" title="statement not covered" >    console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);</span>
-<span class="cstat-no" title="statement not covered" >    return pkg.version;</span>
+  if (argvs.v || argvs.version) {
+    console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);
+    return pkg.version;
   }
-<span class="cstat-no" title="statement not covered" >  if (argvs.source &amp;&amp; !argvs.markdown) {</span>
-<span class="cstat-no" title="statement not covered" >    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();</span>
+  if (argvs.source &amp;&amp; !argvs.markdown) {
+    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
 &nbsp;
-  let options = <span class="cstat-no" title="statement not covered" >{ ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;</span>
-  const projectPkg = <span class="cstat-no" title="statement not covered" >path.resolve(process.cwd(), opts.config || argvs.config || 'package.json');</span>
-  let pgkData: any = <span class="cstat-no" title="statement not covered" >{};</span>
-<span class="cstat-no" title="statement not covered" >  if (fs.existsSync(projectPkg)) {</span>
-<span class="cstat-no" title="statement not covered" >    pgkData = fs.readJSONSync(projectPkg);</span>
-<span class="cstat-no" title="statement not covered" >    if (pgkData.name &amp;&amp; !options.document.title) {</span>
-<span class="cstat-no" title="statement not covered" >      options.document.title = pgkData.name;</span>
+  let options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
+  const projectPkg = path.resolve(process.cwd(), opts.config || argvs.config || 'package.json');
+  let pgkData: any = {};
+  if (fs.existsSync(projectPkg)) {
+    pgkData = fs.readJSONSync(projectPkg);
+    if (pgkData.name &amp;&amp; !options.document.title) {
+      options.document.title = pgkData.name;
     }
-<span class="cstat-no" title="statement not covered" >    if (pgkData.repository &amp;&amp; !argvs['github-corners']) {</span>
-<span class="cstat-no" title="statement not covered" >      argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;</span>
+    if (pgkData.repository &amp;&amp; !argvs['github-corners']) {
+      argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
     }
-<span class="cstat-no" title="statement not covered" >    if (pgkData['markdown-to-html']) {</span>
-      const mth = <span class="cstat-no" title="statement not covered" >pgkData['markdown-to-html'] as MDToHTMLOptions;</span>
-      const { title, meta, link } = <span class="cstat-no" title="statement not covered" >options.document;</span>
-<span class="cstat-no" title="statement not covered" >      options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }</span>
-<span class="cstat-no" title="statement not covered" >      if (mth['github-corners']) {</span>
-<span class="cstat-no" title="statement not covered" >        argvs['github-corners'] = mth['github-corners'];</span>
+    if (pgkData['markdown-to-html']) {
+      const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
+      const { title, meta, link } = options.document;
+      options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
+      if (mth['github-corners']) {
+        argvs['github-corners'] = mth['github-corners'];
       }
     }
   }
-<span class="cstat-no" title="statement not covered" >  if (argvs['github-corners']) {</span>
-<span class="cstat-no" title="statement not covered" >    argvs['github-corners'] = argvs['github-corners'].replace(/^git[+]/, '')</span>
+  if (argvs['github-corners']) {
+    argvs['github-corners'] = argvs['github-corners'].replace(/^git[+]/, '')
   }
-<span class="cstat-no" title="statement not covered" >  if (Array.isArray(options.document.link) &amp;&amp; options.favicon) {</span>
-<span class="cstat-no" title="statement not covered" >    options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });</span>
+  if (Array.isArray(options.document.link) &amp;&amp; options.favicon) {
+    options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });
   }
-<span class="cstat-no" title="statement not covered" >  if (Array.isArray(options.document.meta)) {</span>
-<span class="cstat-no" title="statement not covered" >    if (options.description) {</span>
-<span class="cstat-no" title="statement not covered" >      options.document.meta.push({ description: options.description });</span>
-    } else <span class="cstat-no" title="statement not covered" >if (pgkData.description) {</span>
-<span class="cstat-no" title="statement not covered" >      options.document.meta.push({ description: pgkData.description });</span>
+  if (Array.isArray(options.document.meta)) {
+    if (options.description) {
+      options.document.meta.push({ description: options.description });
+    } else if (pgkData.description) {
+      options.document.meta.push({ description: pgkData.description });
     }
-<span class="cstat-no" title="statement not covered" >    if (options.keywords) {</span>
-<span class="cstat-no" title="statement not covered" >      options.document.meta.push({ keywords: options.keywords });</span>
-    } else <span class="cstat-no" title="statement not covered" >if (pgkData.keywords &amp;&amp; Array.isArray(pgkData.keywords)) {</span>
-<span class="cstat-no" title="statement not covered" >      options.document.meta.push({ keywords: pgkData.keywords.join(',') });</span>
+    if (options.keywords) {
+      options.document.meta.push({ keywords: options.keywords });
+    } else if (pgkData.keywords &amp;&amp; Array.isArray(pgkData.keywords)) {
+      options.document.meta.push({ keywords: pgkData.keywords.join(',') });
     }
-<span class="cstat-no" title="statement not covered" >    if (typeof options.author === 'string') {</span>
-<span class="cstat-no" title="statement not covered" >      options.document.meta.push({ author: options.author });</span>
+    if (typeof options.author === 'string') {
+      options.document.meta.push({ author: options.author });
     }
   }
-  const output = <span class="cstat-no" title="statement not covered" >path.resolve(argvs.output);</span>
-  const strMarkdown = <span class="cstat-no" title="statement not covered" >create({ ...argvs, ...options });</span>
-<span class="cstat-no" title="statement not covered" >  fs.writeFileSync(output, strMarkdown);</span>
-<span class="cstat-no" title="statement not covered" >  console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);</span>
+  const output = path.resolve(argvs.output);
+  const strMarkdown = create({ ...argvs, ...options });
+  fs.writeFileSync(output, strMarkdown);
+  console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
 }
 &nbsp;
-export const cliHelp: string = <span class="cstat-no" title="statement not covered" >`\n  Usage: markdown-to-html [options] [--help|h]</span>
+export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
 &nbsp;
   Options:\n
     --author          Define the author of a page.
@@ -525,7 +531,7 @@ export const cliHelp: string = <span class="cstat-no" title="statement not cover
     --help, -h        Displays help information.
 `;
 &nbsp;
-export const exampleHelp: string =<span class="cstat-no" title="statement not covered" >`\n  Example:</span>
+export const exampleHelp: string =`\n  Example:
 &nbsp;
     \x1b[35mnpm\x1b[0m markdown-to-html-cli
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"
@@ -544,7 +550,7 @@ export const exampleHelp: string =<span class="cstat-no" title="statement not co
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Wed Nov 24 2021 16:24:22 GMT+0000 (Coordinated Universal Time)
+                at Wed Dec 01 2021 08:55:40 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../prettify.js"></script>
