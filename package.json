@@ -4,7 +4,9 @@
   "license": "MIT",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli/",
+  "type": "module",
   "main": "./lib/index.js",
+  "exports": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "bin": {
     "markdown-to-html": "lib/cli.js",
@@ -12,8 +14,8 @@
   },
   "scripts": {
     "start": "node lib/cli.js --github-corners-fork --github-corners 'https://jaywcjlove.github.io'",
-    "watch": "tsbb watch --no-esm -f src/cli.ts",
-    "build": "tsbb build --no-esm -f src/cli.ts && npm run fix",
+    "watch": "tsbb watch --disable-babel --no-esm -f src/cli.ts",
+    "build": "tsbb build --disable-babel --no-esm -f src/cli.ts && npm run fix",
     "fix": "tsc-esm-fix --target='lib' --ext='.js'",
     "test": "npm run build && tsbb test",
     "coverage": "npm run build && tsbb test --coverage"
