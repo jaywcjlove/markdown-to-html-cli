@@ -7,7 +7,7 @@ export function copyElement(str: string = 'test'): Element {
     properties: {
       onclick: 'copied(this)',
       'data-code': str,
-      class: 'copied',
+      className: 'copied',
     },
     children: [
       {

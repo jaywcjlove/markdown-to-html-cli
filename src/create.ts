@@ -110,7 +110,7 @@ export function create(options = {} as MDToHTMLOptions) {
         }
         if (node.type == 'element' && node.tagName === 'pre') {
           const code = getCodeStr(node.children);
-          node.children.unshift(copyElement(code));
+          node.children.push(copyElement(code));
         }
         if (rewrite && typeof rewrite === 'function') {
           rewrite(node, index, parent);
