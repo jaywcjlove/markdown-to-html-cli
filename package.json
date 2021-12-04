@@ -54,7 +54,7 @@
     "@types/minimist": "1.2.2",
     "fs-extra": "10.0.0",
     "minimist": "1.2.5",
-    "rehype-attr": "2.0.6",
+    "rehype-attr": "2.0.7",
     "rehype-autolink-headings": "6.1.0",
     "rehype-document": "6.0.0",
     "rehype-format": "4.0.0",
