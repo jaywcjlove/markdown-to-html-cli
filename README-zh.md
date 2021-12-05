@@ -155,6 +155,11 @@ If a task list item description begins with a parenthesis, you'll need to escape
 
 ## API
 
+```js
+import 'markdown-to-html-cli/github-fork-ribbon.css';
+import 'markdown-to-html-cli/github.css';
+```
+
 ```ts
 import { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
