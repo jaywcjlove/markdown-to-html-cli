@@ -57,7 +57,7 @@
     "fs-extra": "10.0.0",
     "minimist": "1.2.5",
     "rehype-attr": "2.0.7",
-    "rehype-autolink-headings": "6.1.0",
+    "rehype-autolink-headings": "6.1.1",
     "rehype-document": "6.0.1",
     "rehype-format": "4.0.1",
     "rehype-meta": "^3.1.0",
