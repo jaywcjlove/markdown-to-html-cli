@@ -75,7 +75,7 @@
     "unified": "10.1.1"
   },
   "devDependencies": {
-    "tsc-esm-fix": "2.7.5",
+    "tsc-esm-fix": "2.7.7",
     "tsbb": "3.5.4"
   }
 }
