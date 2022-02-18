@@ -76,6 +76,6 @@
   },
   "devDependencies": {
     "tsc-esm-fix": "2.7.5",
-    "tsbb": "3.5.4"
+    "tsbb": "3.7.0"
   }
 }
