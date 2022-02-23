@@ -17,6 +17,7 @@ Used in Github [Actions](https://github.com/actions).
 ```yml
 - run: npm i markdown-to-html-cli -g
 - run: markdown-to-html --output coverage/index.html
+- run: markdown-to-html --source src/README.md --output coverage/index.html
 ```
 
 Using With Command.
