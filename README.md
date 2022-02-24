@@ -219,6 +219,16 @@ $ npm run build
 $ npm run watch
 ```
 
+## Contributors
+
+As always, thanks to our amazing contributors!
+
+<a href="https://github.com/jaywcjlove/markdown-to-html-cli/graphs/contributors">
+  <img src="https://jaywcjlove.github.io/markdown-to-html-cli/CONTRIBUTORS.svg" />
+</a>
+
+Made with [github-action-contributors](https://github.com/jaywcjlove/github-action-contributors).
+
 ## License
 
 MIT © [Kenny Wong](https://wangchujiang.com/)

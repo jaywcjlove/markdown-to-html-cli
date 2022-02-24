@@ -17,6 +17,7 @@ markdown-to-html-cli
 ```yml
 - run: npm i markdown-to-html-cli -g
 - run: markdown-to-html --output coverage/index.html
+- run: markdown-to-html --source src/README.md --output coverage/index.html
 ```
 
 使用命令
@@ -217,6 +218,16 @@ $ npm i
 $ npm run build
 $ npm run watch
 ```
+
+## Contributors
+
+As always, thanks to our amazing contributors!
+
+<a href="https://github.com/jaywcjlove/markdown-to-html-cli/graphs/contributors">
+  <img src="https://jaywcjlove.github.io/markdown-to-html-cli/CONTRIBUTORS.svg" />
+</a>
+
+Made with [github-action-contributors](https://github.com/jaywcjlove/github-action-contributors).
 
 ## License
 
