@@ -7,6 +7,7 @@ import { create, _dirname } from './create';
 import { formatConfig } from './utils';
 
 export * from './create';
+export * from './utils';
 
 const pkg = fs.readJSONSync(path.resolve(_dirname, '..', 'package.json'));
 

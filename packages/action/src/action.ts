@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { RunArgvs } from './'
 import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@actions/core';
-import { formatConfig } from './utils';
-import { create } from './create';
+import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
 
 ;(async () => {
   try {

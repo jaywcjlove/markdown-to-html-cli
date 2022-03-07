@@ -45,7 +45,7 @@ outputs:
 
 runs:
   using: 'node12'
-  main: 'dist/action.js'
+  main: 'packages/action/dist/action.js'
 
 branding:
   icon: 'list'

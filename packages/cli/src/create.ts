@@ -3,7 +3,6 @@ import path from 'path';
 import { unified } from 'unified';
 import { ElementContent } from 'hast';
 import rehypeDocument from 'rehype-document';
-import { fileURLToPath } from 'url';
 // @ts-ignore
 import rehypePrism from '@mapbox/rehype-prism';
 import stringify from 'rehype-stringify';
@@ -30,10 +29,10 @@ import { MDToHTMLOptions } from './';
 
 // https://stackoverflow.com/questions/46745014/alternative-for-dirname-in-node-when-using-the-experimental-modules-flag
 // export const _dirname = dirname(fileURLToPath(import.meta.url));
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
+// const filename = fileURLToPath(import.meta.url);
+// const dirname = path.dirname(filename);
 
-export const _dirname = dirname;
+export const _dirname = __dirname;
 export interface CreateOptions extends MDToHTMLOptions { }
 
 const script = `function copied(target, str) {

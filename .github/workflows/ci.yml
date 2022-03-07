@@ -1,4 +1,4 @@
-name: Build and Test
+name: CI
 on:
   push:
     branches:
@@ -14,11 +14,14 @@ jobs:
           node-version: 14
 
       - run: npm install
+      - run: npm run hoist
       - run: npm run build
-      - run: cp -rp src/styles/*.css ./
+
+      - run: cp -rp packages/cli/src/styles/*.css ./
       - run: npm run coverage
-      - run: node lib/cli.js --output coverage/index.html --github-corners https://github.com/jaywcjlove/markdown-to-html-cli  --favicon 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>'
-      - run: node lib/cli.js -s README-zh.md --output coverage/index.zh.html --github-corners https://github.com/jaywcjlove/markdown-to-html-cli  --favicon 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>'
+
+      - run: node packages/cli/lib/cli.js --output coverage/index.html --github-corners https://github.com/jaywcjlove/markdown-to-html-cli  --favicon 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>'
+      - run: node packages/cli/lib/cli.js -s README-zh.md --output coverage/index.zh.html --github-corners https://github.com/jaywcjlove/markdown-to-html-cli  --favicon 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>'
 
       - name: Test Converts markdown text to HTML
         uses: ./
@@ -38,24 +41,28 @@ jobs:
           output: coverage/CONTRIBUTORS.svg
           avatarSize: 42
 
+      - name: Create Tag
+        id: create_tag
+        uses: jaywcjlove/create-tag-action@v1.3.6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          package-path: packages/cli/package.json
+
+      - name: get tag version
+        id: tag_version
+        uses: jaywcjlove/changelog-generator@v1.5.0
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
+          commit_message: ${{steps.tag_version.outputs.tag}} ${{ github.event.head_commit.message }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage
 
-      - name: Create Tag
-        id: create_tag
-        uses: jaywcjlove/create-tag-action@v1.2.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          package-path: ./package.json
-
       - name: Generate Changelog
         id: changelog
-        uses: jaywcjlove/changelog-generator@v1.4.6
+        uses: jaywcjlove/changelog-generator@v1.5.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
           head-ref: ${{steps.create_tag.outputs.version}}
           filter-author: (小弟调调™|Renovate Bot)
           filter: '[R|r]elease[d]\s+[v|V]\d(\.\d+){0,2}'
@@ -70,10 +77,16 @@ jobs:
           body: |
             [![](https://img.shields.io/badge/Open%20in-unpkg-blue)](https://uiwjs.github.io/npm-unpkg/#/pkg/markdown-to-html-cli@${{steps.changelog.outputs.version}}/file/README.md)
 
-            ${{ steps.changelog.outputs.compareurl }}
+            Documentation ${{ steps.changelog.outputs.tag }}: https://raw.githack.com/kktjs/ncc/${{ steps.changelog.outputs.gh-pages-short-hash }}/index.html  
+            Comparing Changes: ${{ steps.changelog.outputs.compareurl }} 
             
             ${{ steps.changelog.outputs.changelog }}
 
-      - run: npm install @jsdevtools/npm-publish -g
-      - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
+      # - run: npm install @jsdevtools/npm-publish -g
+      # - run: npm-publish --token="${{ secrets.NPM_TOKEN }}" ./package.json
 
+      - name: 📦 markdown-to-html-cli publish to NPM
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: packages/cli/package.json

@@ -1,4 +1,4 @@
-import { create } from '../src/create';
+import { create } from '../packages/cli/src';
 
 it('options test case', async () => {
   const html = create({

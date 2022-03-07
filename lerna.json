@@ -1,0 +1,23 @@
+{
+  "version": "3.2.5",
+  "packages": ["packages/*"],
+  "command": {
+    "create": {
+      "homepage": "https://github.com/kktjs/kkt",
+      "license": "MIT"
+    },
+    "version": {
+      "allowBranch": "main",
+      "exact": true,
+      "message": "chore(release): %s"
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--no-package-lock"],
+      "yarnClientArgs": ["--no-yarn-lock"],
+      "forceLocal": true
+    },
+    "publish": {
+      "ignorePrepublish": true
+    }
+  }
+}
