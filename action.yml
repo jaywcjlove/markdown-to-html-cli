@@ -42,6 +42,8 @@ outputs:
     description: Output static pages to the specified directory
   markdown:
     description: Markdown string
+  html:
+    description: HTML string
 
 runs:
   using: 'node12'

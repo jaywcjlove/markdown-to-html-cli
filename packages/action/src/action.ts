@@ -35,9 +35,10 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     info(`${opts}`);
     endGroup();
 
-    const strMarkdown = create({ ...opts });
+    const htmlStr = create({ ...opts });
     info(`Output Path: "${outputPath}"`);
-    fs.writeFileSync(outputPath, strMarkdown);
+    setOutput('html', htmlStr);
+    fs.writeFileSync(outputPath, htmlStr);
   } catch (error) {
     console.log('error::', error)
     setFailed(error.message);

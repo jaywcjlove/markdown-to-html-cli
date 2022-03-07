@@ -18,6 +18,14 @@ markdown-to-html-cli
 - run: npm i markdown-to-html-cli -g
 - run: markdown-to-html --output coverage/index.html
 - run: markdown-to-html --source src/README.md --output coverage/index.html
+# or
+- name: Converts Markdown to HTML
+  uses: jaywcjlove/markdown-to-html-cli@main
+  with:
+    source: README-zh.md
+    output: coverage/action.html
+    github-corners: https://github.com/jaywcjlove/markdown-to-html-cli
+    favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
 ```
 
 使用命令
@@ -52,6 +60,20 @@ const html = create({
 ```bash
 $ npm i markdown-to-html-cli
 ```
+
+## Github [Actions](https://github.com/actions)
+
+```yml
+- name: Converts Markdown to HTML
+  uses: jaywcjlove/markdown-to-html-cli@main
+  with:
+    source: README-zh.md
+    output: coverage/action.html
+    github-corners: https://github.com/jaywcjlove/markdown-to-html-cli
+    favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
+```
+
+Input Parameters
 
 ## 在 package.json 中配置
 
