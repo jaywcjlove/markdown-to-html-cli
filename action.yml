@@ -1,0 +1,52 @@
+name: 'Converts markdown text to HTML'
+author: 'Kenny Wong'
+description: 'Converts markdown text to HTML, Provide command line tools and methods. If you are simply converting a small number of Markdown files (or text) into HTML pages, this is very helpful for you.'
+inputs:
+  output:
+    description: Output static pages to the specified directory.
+    default: index.html
+    required: false
+
+  source:
+    description: The path of the target file "README.md".
+    default: README.md
+    required: false
+
+  description:
+    description: Define a description of your web page.
+    default: ''
+    required: false
+
+  config:
+    description: Specify the configuration file.
+    default: package.json
+    required: false
+
+  markdown:
+    description: Markdown string
+    default: ''
+    required: false
+
+  favicon:
+    description: Add a Favicon to your Site.
+    default: ''
+    required: false
+
+  github-corners:
+    description: Add a Github corner to your project page.
+    default: ''
+    required: false
+
+outputs:
+  output:
+    description: Output static pages to the specified directory
+  markdown:
+    description: Markdown string
+
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'list'
+  color: 'blue'

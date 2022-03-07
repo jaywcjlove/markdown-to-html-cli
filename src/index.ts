@@ -4,6 +4,7 @@ import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
 import { create, _dirname } from './create';
+import { formatConfig } from './utils';
 
 export * from './create';
 
@@ -80,48 +81,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   if (argvs.source && !argvs.markdown) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
-
-  let options = { ...opts, ...argvs, document: { title: argvs.title, meta: [], link: [] } } as MDToHTMLOptions;
-  const projectPkg = path.resolve(process.cwd(), opts.config || argvs.config || 'package.json');
-  let pgkData: any = {};
-  if (fs.existsSync(projectPkg)) {
-    pgkData = fs.readJSONSync(projectPkg);
-    if (pgkData.name && !options.document.title) {
-      options.document.title = pgkData.name;
-    }
-    if (pgkData.repository && !argvs['github-corners']) {
-      argvs['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
-    }
-    if (pgkData['markdown-to-html']) {
-      const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
-      const { title, meta, link } = options.document;
-      options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
-      if (mth['github-corners']) {
-        argvs['github-corners'] = mth['github-corners'];
-      }
-    }
-  }
-  if (argvs['github-corners']) {
-    argvs['github-corners'] = argvs['github-corners'].replace(/^git[+]/, '')
-  }
-  if (Array.isArray(options.document.link) && options.favicon) {
-    options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });
-  }
-  if (Array.isArray(options.document.meta)) {
-    if (options.description) {
-      options.document.meta.push({ description: options.description });
-    } else if (pgkData.description) {
-      options.document.meta.push({ description: pgkData.description });
-    }
-    if (options.keywords) {
-      options.document.meta.push({ keywords: options.keywords });
-    } else if (pgkData.keywords && Array.isArray(pgkData.keywords)) {
-      options.document.meta.push({ keywords: pgkData.keywords.join(',') });
-    }
-    if (typeof options.author === 'string') {
-      options.document.meta.push({ author: options.author });
-    }
-  }
+  const options = formatConfig({ ...opts, ...argvs });
   const output = path.resolve(argvs.output);
   const strMarkdown = create({ ...argvs, ...options });
   fs.writeFileSync(output, strMarkdown);
