@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import fs from 'fs';
 import path from 'path';
 import { RunArgvs } from './'
 import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@actions/core';
@@ -16,7 +16,7 @@ import { create } from './create';
     const corners = getInput('github-corners');
     const options: RunArgvs = {}
     if (source && !markdown) {
-      options.markdown = fs.readFileSync(path.resolve(source)).toString();
+      options.markdown = (await fs.promises.readFile(path.resolve(source))).toString();
     } else {
       options.markdown = markdown;
     }
@@ -39,7 +39,6 @@ import { create } from './create';
     const strMarkdown = create({ ...opts });
     info(`Output Path: "${outputPath}"`);
     fs.writeFileSync(outputPath, strMarkdown);
-    
   } catch (error) {
     setFailed(error.message);
   }
