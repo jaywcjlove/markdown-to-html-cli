@@ -44,7 +44,7 @@ outputs:
     description: Markdown string
 
 runs:
-  using: 'node16'
+  using: 'node12'
   main: 'dist/action.js'
 
 branding:
