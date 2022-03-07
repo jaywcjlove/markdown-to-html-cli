@@ -44947,8 +44947,6 @@ var external_path_ = __webpack_require__(1017);
 var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
 // EXTERNAL MODULE: ../../node_modules/@actions/core/lib/core.js
 var lib_core = __webpack_require__(2898);
-// EXTERNAL MODULE: ../../node_modules/fs-extra/lib/index.js
-var lib = __webpack_require__(7215);
 // EXTERNAL MODULE: ../../node_modules/minimist/index.js
 var node_modules_minimist = __webpack_require__(2748);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
@@ -65696,7 +65694,7 @@ var Collector = /*#__PURE__*/function () {
   return Collector;
 }();
 // EXTERNAL MODULE: ../../node_modules/css-selector-parser/lib/index.js
-var css_selector_parser_lib = __webpack_require__(9510);
+var lib = __webpack_require__(9510);
 // EXTERNAL MODULE: ../../node_modules/nth-check/lib/index.js
 var nth_check_lib = __webpack_require__(2990);
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/parse.js
@@ -65716,7 +65714,7 @@ var nth_check_lib = __webpack_require__(2990);
 
 var nthCheck = nth_check_lib/* default */.ZP;
 var nth = new Set(['nth-child', 'nth-last-child', 'nth-of-type', 'nth-last-of-type']);
-var parser = new css_selector_parser_lib/* CssSelectorParser */.N(); // @ts-expect-error: hush.
+var parser = new lib/* CssSelectorParser */.N(); // @ts-expect-error: hush.
 
 var compile = zwitch('type', {
   handlers: {
@@ -98982,7 +98980,7 @@ function copyElement() {
 // const filename = fileURLToPath(import.meta.url);
 // const dirname = path.dirname(filename);
 
-var _dirname = /file:\/\/(.+)\/[^/]/.exec("file:///Users/wangchujiang/git-project/github/markdown-to-html-cli/packages/cli/lib/create.js")[1];
+var create_dirname = /file:\/\/(.+)\/[^/]/.exec("file:///Users/wangchujiang/git-project/github/markdown-to-html-cli/packages/cli/lib/create.js")[1];
 var script = "function copied(target, str) {\n  target.classList.add('active');\n  copyTextToClipboard(target.dataset.code, function() {\n    setTimeout(() => {\n      target.classList.remove('active');\n    }, 2000);\n  });\n}";
 
 var getCodeStr = function getCodeStr() {
@@ -99010,10 +99008,10 @@ function lib_create_create() {
       wrap = _options$wrap === void 0 ? {
     wrapper: 'div.markdown-body'
   } : _options$wrap;
-  var cssStr = external_fs_.readFileSync(external_path_.resolve(_dirname, 'styles', 'github.css')).toString();
+  var cssStr = external_fs_.readFileSync(external_path_.resolve(create_dirname, 'styles', 'github.css')).toString();
 
   if (options['github-corners-fork'] && options['github-corners']) {
-    var cssFork = external_fs_.readFileSync(external_path_.resolve(_dirname, 'styles', 'github-fork-ribbon.css')).toString();
+    var cssFork = external_fs_.readFileSync(external_path_.resolve(create_dirname, 'styles', 'github-fork-ribbon.css')).toString();
     cssStr = "".concat(cssStr).concat(cssFork);
   }
 
@@ -99071,6 +99069,8 @@ function lib_create_create() {
     }
   }).use(rehypeFormat).use(rehypeStringify).processSync(markdown).toString();
 }
+// EXTERNAL MODULE: ../../node_modules/fs-extra/lib/index.js
+var fs_extra_lib = __webpack_require__(7215);
 ;// CONCATENATED MODULE: ../cli/lib/utils.js
 
 
@@ -99087,8 +99087,8 @@ function utils_formatConfig(opts) {
   var projectPkg = external_path_.resolve(process.cwd(), opts.config || 'package.json');
   var pgkData = {};
 
-  if (lib.existsSync(projectPkg)) {
-    pgkData = lib.readJSONSync(projectPkg);
+  if (fs_extra_lib.existsSync(projectPkg)) {
+    pgkData = fs_extra_lib.readJSONSync(projectPkg);
 
     if (pgkData.name && !options.document.title) {
       options.document.title = pgkData.name;
@@ -99169,7 +99169,6 @@ function utils_formatConfig(opts) {
 
 
 
-var pkg = lib.readJSONSync(external_path_.resolve(_dirname, '..', 'package.json'));
 function run() {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var argvs = minimist(process.argv.slice(2), {
@@ -99196,6 +99195,7 @@ function run() {
   }
 
   if (argvs.v || argvs.version) {
+    var pkg = fs.readJSONSync(path.resolve(_dirname, '..', 'package.json'));
     console.log("\n \x1B[35mmarkdown-to-html-cli\x1B[0m v".concat(pkg.version, "\n"));
     return pkg.version;
   }
