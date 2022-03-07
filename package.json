@@ -82,11 +82,11 @@
     "unified": "~10.1.1"
   },
   "devDependencies": {
-    "@kkt/ncc": "~1.0.9",
-    "@actions/core": "~1.6.0",
-    "husky": "~7.0.4",
-    "lint-staged": "~12.3.5",
-    "tsc-esm-fix": "~2.7.7",
-    "tsbb": "~3.7.2"
+    "@kkt/ncc": "1.0.9",
+    "@actions/core": "1.6.0",
+    "husky": "7.0.4",
+    "lint-staged": "12.3.5",
+    "tsc-esm-fix": "2.7.7",
+    "tsbb": "3.7.2"
   }
 }
