@@ -1,6 +1,6 @@
 name: 'Converts markdown text to HTML'
 author: 'Kenny Wong'
-description: 'Converts markdown text to HTML, Provide command line tools and methods. If you are simply converting a small number of Markdown files (or text) into HTML pages, this is very helpful for you.'
+description: 'Converts markdown text to HTML, Provide command line tools and methods.'
 inputs:
   output:
     description: Output static pages to the specified directory.
