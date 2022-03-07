@@ -15,6 +15,7 @@ import { create } from './create';
     const markdown = getInput('markdown');
     const corners = getInput('github-corners');
     const options: RunArgvs = {}
+    info(`source: ${path.resolve(source)}`);
     if (source && !markdown) {
       options.markdown = (await fs.promises.readFile(path.resolve(source))).toString();
     } else {
