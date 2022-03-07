@@ -1,15 +1,12 @@
 {
   "compilerOptions": {
-    "module": "esnext",
-    // "target": "es2015",
-    "target": "esnext",
-    // "module": "commonjs",
-    "allowJs": true,
+    "module": "commonjs",
     "esModuleInterop": true,
     "declaration": true,
+    "target": "es2017",
     "noImplicitAny": true,
+    "resolveJsonModule": true,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,

@@ -39,6 +39,7 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     info(`Output Path: "${outputPath}"`);
     fs.writeFileSync(outputPath, strMarkdown);
   } catch (error) {
+    console.log('error::', error)
     setFailed(error.message);
   }
-});
+})();
