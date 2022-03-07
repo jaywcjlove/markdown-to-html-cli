@@ -29,6 +29,13 @@
     ]
   },
   "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/packages/cli/**/*.{tsx,ts}"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "json-summary"
+    ],
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/?!(.*)"
     ]
