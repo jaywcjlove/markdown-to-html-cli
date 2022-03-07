@@ -9,8 +9,6 @@ import { formatConfig } from './utils';
 export * from './create';
 export * from './utils';
 
-const pkg = fs.readJSONSync(path.resolve(_dirname, '..', 'package.json'));
-
 export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   version?: string;
   source?: string;
@@ -75,7 +73,9 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     console.log(`${cliHelp}${exampleHelp}`);
     return;
   }
-  if (argvs.v || argvs.version) {
+  const pkgPath = path.resolve(_dirname, '..', 'package.json')
+  if ((argvs.v || argvs.version) && fs.existsSync(pkgPath)) {
+    const pkg = fs.readJSONSync(pkgPath);
     console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);
     return pkg.version;
   }
