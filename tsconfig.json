@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "ESNext",
+    "module": "commonjs",
     "allowJs": true,
     // "module": "es2015",
-    "target": "ESNext",
+    // "target": "ESNext",
     "esModuleInterop": true,
     "declaration": true,
     "noImplicitAny": true,
