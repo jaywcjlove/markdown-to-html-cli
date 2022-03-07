@@ -36,11 +36,11 @@
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>使用命令</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"start"</span><span class="token operator">:</span> <span class="token string">"markdown-to-html --output coverage/index.html"</span>
+  <span class="token string-property property">"scripts"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">"start"</span><span class="token operator">:</span> <span class="token string">"markdown-to-html --output coverage/index.html"</span>
   <span class="token punctuation">}</span><span class="token punctuation">,</span>
-  <span class="token string">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"markdown-to-html-cli"</span><span class="token operator">:</span> <span class="token string">"latest"</span>
+  <span class="token string-property property">"devDependencies"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">"markdown-to-html-cli"</span><span class="token operator">:</span> <span class="token string">"latest"</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code><div onclick="copied(this)" data-code="{
@@ -56,9 +56,9 @@
       <pre class="language-js"><code class="language-js"><span class="token keyword module">import</span> <span class="token imports"><span class="token punctuation">{</span> create <span class="token punctuation">}</span></span> <span class="token keyword module">from</span> <span class="token string">'markdown-to-html-cli'</span><span class="token punctuation">;</span>
 
 <span class="token keyword">const</span> html <span class="token operator">=</span> <span class="token function">create</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-  markdown<span class="token operator">:</span> <span class="token string">'Hello World! **Bold**\n# Title'</span><span class="token punctuation">,</span>
-  <span class="token dom variable">document</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    style<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'body { background: red; }'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">markdown</span><span class="token operator">:</span> <span class="token string">'Hello World! **Bold**\n# Title'</span><span class="token punctuation">,</span>
+  <span class="token literal-property property">document</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token literal-property property">style</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">'body { background: red; }'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">// => HTML String</span>
@@ -79,21 +79,21 @@ const html = create({
       <h2 id="在-packagejson-中配置"><a class="anchor" aria-hidden="true" tabindex="-1" href="#在-packagejson-中配置"><span class="octicon octicon-link"></span></a>在 package.json 中配置</h2>
       <p>可以通过 <code>--config="config/conf.json"</code> 指定配置，默认可以在 <code>package.json</code>。</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
-  <span class="token string">"markdown-to-html"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-    <span class="token string">"document"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token string">"title"</span><span class="token operator">:</span> <span class="token string">"markdown-to-html-cli"</span><span class="token punctuation">,</span>
-      <span class="token string">"description"</span><span class="token operator">:</span> <span class="token string">"Command line tool generates markdown as html."</span><span class="token punctuation">,</span>
-      <span class="token string">"style"</span><span class="token operator">:</span> <span class="token string">"body { color: red; }"</span><span class="token punctuation">,</span>
-      <span class="token string">"meta"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-        <span class="token punctuation">{</span> <span class="token string">"description"</span><span class="token operator">:</span> <span class="token string">"Command line tool generates markdown as html."</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
-        <span class="token punctuation">{</span> <span class="token string">"keywords"</span><span class="token operator">:</span> <span class="token string">"store,localStorage,lightweight,JavaScript"</span> <span class="token punctuation">}</span>
+  <span class="token string-property property">"markdown-to-html"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    <span class="token string-property property">"document"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"title"</span><span class="token operator">:</span> <span class="token string">"markdown-to-html-cli"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"description"</span><span class="token operator">:</span> <span class="token string">"Command line tool generates markdown as html."</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"style"</span><span class="token operator">:</span> <span class="token string">"body { color: red; }"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"meta"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span> <span class="token string-property property">"description"</span><span class="token operator">:</span> <span class="token string">"Command line tool generates markdown as html."</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span> <span class="token string-property property">"keywords"</span><span class="token operator">:</span> <span class="token string">"store,localStorage,lightweight,JavaScript"</span> <span class="token punctuation">}</span>
       <span class="token punctuation">]</span>
     <span class="token punctuation">}</span><span class="token punctuation">,</span>
-    <span class="token string">"favicon"</span><span class="token operator">:</span> <span class="token string">"data:image/svg+xml,&#x3C;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>&#x3C;text y=%22.9em%22 font-size=%2290%22>🌐&#x3C;/text>&#x3C;/svg>"</span><span class="token punctuation">,</span>
-    <span class="token string">"github-corners"</span><span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/markdown-to-html-cli"</span><span class="token punctuation">,</span>
-    <span class="token string">"reurls"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-      <span class="token string">"README-zh.md"</span><span class="token operator">:</span> <span class="token string">"index.zh.html"</span><span class="token punctuation">,</span>
-      <span class="token string">"README.md"</span><span class="token operator">:</span> <span class="token string">"index.html"</span>
+    <span class="token string-property property">"favicon"</span><span class="token operator">:</span> <span class="token string">"data:image/svg+xml,&#x3C;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22>&#x3C;text y=%22.9em%22 font-size=%2290%22>🌐&#x3C;/text>&#x3C;/svg>"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"github-corners"</span><span class="token operator">:</span> <span class="token string">"https://github.com/jaywcjlove/markdown-to-html-cli"</span><span class="token punctuation">,</span>
+    <span class="token string-property property">"reurls"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+      <span class="token string-property property">"README-zh.md"</span><span class="token operator">:</span> <span class="token string">"index.zh.html"</span><span class="token punctuation">,</span>
+      <span class="token string-property property">"README.md"</span><span class="token operator">:</span> <span class="token string">"index.html"</span>
     <span class="token punctuation">}</span>
   <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
