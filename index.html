@@ -27,9 +27,25 @@
       <pre class="language-yml"><code class="language-yml"><span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> npm i markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html<span class="token punctuation">-</span>cli <span class="token punctuation">-</span>g
 <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html <span class="token punctuation">-</span><span class="token punctuation">-</span>output coverage/index.html
 <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html <span class="token punctuation">-</span><span class="token punctuation">-</span>source src/README.md <span class="token punctuation">-</span><span class="token punctuation">-</span>output coverage/index.html
+<span class="token comment"># or</span>
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Converts Markdown to HTML
+  <span class="token key atrule">uses</span><span class="token punctuation">:</span> jaywcjlove/github<span class="token punctuation">-</span>action<span class="token punctuation">-</span>contributors@main
+  <span class="token key atrule">with</span><span class="token punctuation">:</span>
+    <span class="token key atrule">source</span><span class="token punctuation">:</span> README<span class="token punctuation">-</span>zh.md
+    <span class="token key atrule">output</span><span class="token punctuation">:</span> coverage/action.html
+    <span class="token key atrule">github-corners</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//github.com/jaywcjlove/markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html<span class="token punctuation">-</span>cli
+    <span class="token key atrule">favicon</span><span class="token punctuation">:</span> data<span class="token punctuation">:</span>image/svg+xml<span class="token punctuation">,</span>&#x3C;svg xmlns=%22http<span class="token punctuation">:</span>//www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22<span class="token punctuation">></span>&#x3C;text y=%22.9em%22 font<span class="token punctuation">-</span>size=%2290%22<span class="token punctuation">></span>🌐&#x3C;/text<span class="token punctuation">></span>&#x3C;/svg<span class="token punctuation">></span>
 </code><div onclick="copied(this)" data-code="- run: npm i markdown-to-html-cli -g
 - run: markdown-to-html --output coverage/index.html
 - run: markdown-to-html --source src/README.md --output coverage/index.html
+# or
+- name: Converts Markdown to HTML
+  uses: jaywcjlove/github-action-contributors@main
+  with:
+    source: README-zh.md
+    output: coverage/action.html
+    github-corners: https://github.com/jaywcjlove/markdown-to-html-cli
+    favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       <p>Using With Command.</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
@@ -73,6 +89,38 @@ const html = create({
       <pre class="language-shell"><code class="language-shell">$ <span class="token function">npm</span> i markdown-to-html-cli
 </code><div onclick="copied(this)" data-code="$ npm i markdown-to-html-cli
 " class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      <h2 id="github-actions"><a class="anchor" aria-hidden="true" tabindex="-1" href="#github-actions"><span class="octicon octicon-link"></span></a>Github <a href="https://github.com/actions">Actions</a></h2>
+      <pre class="language-yml"><code class="language-yml"><span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Converts Markdown to HTML
+  <span class="token key atrule">uses</span><span class="token punctuation">:</span> jaywcjlove/markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html<span class="token punctuation">-</span>cli@main
+  <span class="token key atrule">with</span><span class="token punctuation">:</span>
+    <span class="token key atrule">source</span><span class="token punctuation">:</span> README<span class="token punctuation">-</span>zh.md
+    <span class="token key atrule">output</span><span class="token punctuation">:</span> coverage/action.html
+    <span class="token key atrule">github-corners</span><span class="token punctuation">:</span> https<span class="token punctuation">:</span>//github.com/jaywcjlove/markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html<span class="token punctuation">-</span>cli
+    <span class="token key atrule">favicon</span><span class="token punctuation">:</span> data<span class="token punctuation">:</span>image/svg+xml<span class="token punctuation">,</span>&#x3C;svg xmlns=%22http<span class="token punctuation">:</span>//www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22<span class="token punctuation">></span>&#x3C;text y=%22.9em%22 font<span class="token punctuation">-</span>size=%2290%22<span class="token punctuation">></span>🌐&#x3C;/text<span class="token punctuation">></span>&#x3C;/svg<span class="token punctuation">></span>
+</code><div onclick="copied(this)" data-code="- name: Converts Markdown to HTML
+  uses: jaywcjlove/markdown-to-html-cli@main
+  with:
+    source: README-zh.md
+    output: coverage/action.html
+    github-corners: https://github.com/jaywcjlove/markdown-to-html-cli
+    favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
+" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      <h3 id="input-parameters"><a class="anchor" aria-hidden="true" tabindex="-1" href="#input-parameters"><span class="octicon octicon-link"></span></a>Input Parameters</h3>
+      <ul>
+        <li><code>output</code> - Output static pages to the specified directory. (default: <code>index.html</code>)</li>
+        <li><code>source</code> - The path of the target file "README.md". (default: <code>README.md</code>)</li>
+        <li><code>description</code> - Define a description of your web page.</li>
+        <li><code>config</code> - Specify the configuration file. (default: <code>package.json</code>)</li>
+        <li><code>markdown</code> - Markdown string</li>
+        <li><code>favicon</code> - Add a Favicon to your Site.</li>
+        <li><code>github-corners</code> - Add a Github corner to your project page.</li>
+      </ul>
+      <h3 id="output-parameters"><a class="anchor" aria-hidden="true" tabindex="-1" href="#output-parameters"><span class="octicon octicon-link"></span></a>Output Parameters</h3>
+      <ul>
+        <li><code>output</code> - Output static pages to the specified directory</li>
+        <li><code>markdown</code> - Markdown string</li>
+        <li><code>html</code> - HTML string</li>
+      </ul>
       <h2 id="configure-in-packagejson"><a class="anchor" aria-hidden="true" tabindex="-1" href="#configure-in-packagejson"><span class="octicon octicon-link"></span></a>Configure in package.json</h2>
       <p>The configuration can be specified through <code>--config="config/conf.json"</code>, It can be in <code>package.json</code> by default.</p>
       <pre class="language-js"><code class="language-js"><span class="token punctuation">{</span>
