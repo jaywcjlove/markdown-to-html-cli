@@ -26,6 +26,11 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
 
     const outputPath = path.resolve(output);
     setOutput('output', outputPath);
+
+    startGroup(`Options: \x1b[34m(Action Inputs)\x1b[0m`);
+    info(`${JSON.stringify(options, null, 2)}`);
+    endGroup();
+
     const opts = formatConfig({ ...options });
 
     let cssStr = fs.readFileSync(path.resolve(__dirname, '../../cli/github.css')).toString();
@@ -38,8 +43,8 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     setOutput('markdown', opts.markdown);
     info(`Config Path: "${opts.config}"`);
 
-    startGroup(`Options: \x1b[34m()\x1b[0m`);
-    info(`${opts}`);
+    startGroup(`Options: \x1b[34m(Format Config)\x1b[0m`);
+    info(`${JSON.stringify(opts, null, 2)}`);
     endGroup();
 
     const htmlStr = create({ ...opts });
