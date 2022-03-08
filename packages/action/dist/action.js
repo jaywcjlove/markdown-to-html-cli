@@ -98951,8 +98951,6 @@ function copyElement() {
 
 
 
-
-
  // @ts-ignore
 
 
@@ -99000,7 +98998,8 @@ function lib_create_create() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   // default github css.
   var markdown = options.markdown,
-      document = options.document,
+      _options$document = options.document,
+      document = _options$document === void 0 ? {} : _options$document,
       _rewrite = options.rewrite,
       _options$reurls = options.reurls,
       reurls = _options$reurls === void 0 ? {} : _options$reurls,
@@ -99008,20 +99007,13 @@ function lib_create_create() {
       wrap = _options$wrap === void 0 ? {
     wrapper: 'div.markdown-body'
   } : _options$wrap;
-  var cssStr = external_fs_.readFileSync(external_path_.resolve(create_dirname, 'styles', 'github.css')).toString();
-
-  if (options['github-corners-fork'] && options['github-corners']) {
-    var cssFork = external_fs_.readFileSync(external_path_.resolve(create_dirname, 'styles', 'github-fork-ribbon.css')).toString();
-    cssStr = "".concat(cssStr).concat(cssFork);
-  }
-
   return unified().use(remark_parse).use(remarkGfm).use(remarkGemoji).use(remark_rehype_lib, {
     allowDangerousHtml: true
   }).use(rehype_video_lib).use(rehypeRaw).use(document ? rehypeDocument : undefined, _objectSpread2(_objectSpread2({}, document), {}, {
     js: [].concat(_toConsumableArray(document && document.js ? Array.isArray(document.js) ? document.js : [document.js] : []), ['https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js']),
     script: [].concat(_toConsumableArray(document && document.script ? Array.isArray(document.script) ? document.script : [document.script] : []), [script]),
     link: document && document.link ? Array.isArray(document.link) ? document.link : [document.link] : [],
-    style: [cssStr.toString().replace(/\n/g, '')].concat(_toConsumableArray(document ? Array.isArray(document.style) ? document.style : [document.style] : []))
+    style: _toConsumableArray(document ? Array.isArray(document.style) ? document.style : [document.style] : [])
   })).use(rehypeSlug).use(rehypeAutolinkHeadings).use(rehype_wrap, _objectSpread2({}, wrap)).use(rehype_prism, {
     ignoreMissing: true
   }).use(rehype_attr_lib, {
@@ -99208,6 +99200,14 @@ function run() {
 
   var options = formatConfig(_objectSpread(_objectSpread({}, opts), argvs));
   var output = path.resolve(argvs.output);
+  var cssStr = fs.readFileSync(path.resolve(_dirname, '..', 'github.css')).toString();
+
+  if (options['github-corners-fork'] && options['github-corners']) {
+    var cssFork = fs.readFileSync(path.resolve(_dirname, '..', 'github-fork-ribbon.css')).toString();
+    cssStr = "".concat(cssStr).concat(cssFork);
+  }
+
+  options.document.style = cssStr;
   var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
   fs.writeFileSync(output, strMarkdown);
   console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));
@@ -99215,7 +99215,7 @@ function run() {
 var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author          Define the author of a page.\n    --config, -o      Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description     Define a description of your web page.\n    --favicon         Add a Favicon to your Site.\n    --github-corners  Add a Github corner to your project page.\n    --github-corners-fork  Github corners style.\n    --keywords        Define keywords for search engines.\n    --markdown        Markdown string.\n    --output, -o      Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s      The path of the target file \"README.md\". Default: \"README.md\"\n    --title           The `<title>` tag is required in HTML documents!\n    --version, -v     Show version number\n    --help, -h        Displays help information.\n";
 var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
-;_asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,options,outputPath,opts,htmlStr;return regenerator_default().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=16;break;}_context.next=13;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 13:options.markdown=_context.sent.toString();_context.next=17;break;case 16:options.markdown=markdown;case 17:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);opts=utils_formatConfig(_objectSpread2({},options));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m()\x1B[0m");(0,lib_core.info)("".concat(opts));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=39;break;case 35:_context.prev=35;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 39:case"end":return _context.stop();}}},_callee,null,[[0,35]]);}))();
+;_asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,options,outputPath,opts,cssStr,cssFork,htmlStr;return regenerator_default().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=16;break;}_context.next=13;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 13:options.markdown=_context.sent.toString();_context.next=17;break;case 16:options.markdown=markdown;case 17:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);opts=utils_formatConfig(_objectSpread2({},options));cssStr=external_fs_default().readFileSync(external_path_default().resolve(process.cwd(),'../cli/github.css')).toString();if(options['github-corners-fork']&&options['github-corners']){cssFork=external_fs_default().readFileSync(external_path_default().resolve(process.cwd(),'../cli/github-fork-ribbon.css')).toString();cssStr="".concat(cssStr).concat(cssFork);}options.document.style=cssStr;(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m()\x1B[0m");(0,lib_core.info)("".concat(opts));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=42;break;case 38:_context.prev=38;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 42:case"end":return _context.stop();}}},_callee,null,[[0,38]]);}))();
 })();
 
 module.exports = __webpack_exports__;

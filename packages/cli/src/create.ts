@@ -58,11 +58,6 @@ const getCodeStr = (data: ElementContent[] = [], code: string = '') => {
 export function create(options = {} as MDToHTMLOptions) {
   // default github css.
   const { markdown, document, rewrite, reurls = {}, wrap = { wrapper: 'div.markdown-body' } } = options;
-  let cssStr = fs.readFileSync(path.resolve(_dirname, 'styles', 'github.css')).toString();
-  if (options['github-corners-fork'] && options['github-corners']) {
-    let cssFork = fs.readFileSync(path.resolve(_dirname, 'styles', 'github-fork-ribbon.css')).toString();
-    cssStr = `${cssStr}${cssFork}`;
-  }
   return unified()
     .use(remarkParse)
     .use(remarkGfm)
@@ -81,7 +76,7 @@ export function create(options = {} as MDToHTMLOptions) {
         script,
       ],
       link: document && document.link ? (Array.isArray(document.link) ? document.link : [document.link]) : [],
-      style: [cssStr.toString().replace(/\n/g, ''), ...(document ? (Array.isArray(document.style) ? document.style : [document.style]) : []) ],
+      style: [...(document ? (Array.isArray(document.style) ? document.style : [document.style]) : []) ],
     })
     .use(rehypeSlug)
     .use(rehypeAutolinkHeadings)
