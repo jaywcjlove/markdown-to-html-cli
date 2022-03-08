@@ -82,8 +82,28 @@ it('keywords test case', async () => {
   })
   expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', keywords: 'html,cli', markdown: 'Hello World! [](README.md)' })).toBeUndefined();
   const htmlStr = await FS.readFile('test/demo/index.html');
-  console.log('>>>>', htmlStr.toString())
   expect(htmlStr.toString().indexOf('html,cli') > 0).toBeTruthy();
+  expect(htmlStr.toString().indexOf('https://github.com/jaywcjlove/markdown-to-html-cli.git') > 0).toBeTruthy();
+  await FS.remove('test/demo');
+});
+
+it('github-corners-fork test case', async () => {
+  await FS.mkdirs('test/demo');
+  await FS.writeJSON('test/demo/config.json', {
+    "keywords": ["html", "cli"],
+    "markdown-to-html": {
+      "favicon": "data:image/svg+xml",
+      "github-corners-fork": true,
+      'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli.git',
+      "reurls": {
+        "README.md": "index.html"
+      },
+      "wrap": { wrapper: 'div.wmde-markdown.good' },
+    }
+  })
+  expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', keywords: 'html,cli', markdown: 'Hello World! [](README.md)' })).toBeUndefined();
+  const htmlStr = await FS.readFile('test/demo/index.html');
+  expect(htmlStr.indexOf('data-ribbon="Fork me on GitHub"') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('https://github.com/jaywcjlove/markdown-to-html-cli.git') > 0).toBeTruthy();
   await FS.remove('test/demo');
 });

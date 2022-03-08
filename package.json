@@ -1,5 +1,7 @@
 {
   "private": true,
+  "name": "markdown-to-html-cli",
+  "description": "Converts markdown text to HTML.",
   "scripts": {
     "prepare": "husky install",
     "package": "lerna exec \"ncc build src/action.ts -o dist\" --scope action",
@@ -7,8 +9,8 @@
     "watch": "lerna exec \"tsbb watch --disable-babel --no-esm -f src/cli.ts\" --scope markdown-to-html-cli",
     "build": "lerna exec \"tsbb build --disable-babel --no-esm -f src/cli.ts\" --scope markdown-to-html-cli && npm run fix",
     "fix": "lerna exec \"tsc-esm-fix --target='lib' --ext='.js'\" --scope markdown-to-html-cli  ",
-    "test": "npm run build && tsbb test",
-    "coverage": "npm run build && tsbb test --coverage",
+    "test": "tsbb test",
+    "coverage": "tsbb test --coverage",
     "hoist": "lerna bootstrap --hoist",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
