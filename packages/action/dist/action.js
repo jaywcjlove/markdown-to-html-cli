@@ -98951,6 +98951,8 @@ function copyElement() {
 
 
 
+
+
  // @ts-ignore
 
 
@@ -98996,24 +98998,36 @@ var getCodeStr = function getCodeStr() {
 
 function lib_create_create() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  // default github css.
   var markdown = options.markdown,
-      _options$document = options.document,
-      document = _options$document === void 0 ? {} : _options$document,
+      document = options.document,
       _rewrite = options.rewrite,
       _options$reurls = options.reurls,
       reurls = _options$reurls === void 0 ? {} : _options$reurls,
       _options$wrap = options.wrap,
       wrap = _options$wrap === void 0 ? {
     wrapper: 'div.markdown-body'
-  } : _options$wrap;
+  } : _options$wrap; // default github css.
+
+  var cssPath = external_path_.resolve(create_dirname, '..', 'github.css');
+  var cssForkPath = external_path_.resolve(create_dirname, '..', 'github-fork-ribbon.css');
+  var cssStr = '';
+
+  if (external_fs_.existsSync(cssPath)) {
+    cssStr = external_fs_.readFileSync(cssPath).toString();
+  }
+
+  if (options['github-corners-fork'] && options['github-corners'] && external_fs_.existsSync(cssForkPath)) {
+    var cssFork = external_fs_.readFileSync(cssForkPath).toString();
+    cssStr = "".concat(cssStr).concat(cssFork);
+  }
+
   return unified().use(remark_parse).use(remarkGfm).use(remarkGemoji).use(remark_rehype_lib, {
     allowDangerousHtml: true
   }).use(rehype_video_lib).use(rehypeRaw).use(document ? rehypeDocument : undefined, _objectSpread2(_objectSpread2({}, document), {}, {
     js: [].concat(_toConsumableArray(document && document.js ? Array.isArray(document.js) ? document.js : [document.js] : []), ['https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js']),
     script: [].concat(_toConsumableArray(document && document.script ? Array.isArray(document.script) ? document.script : [document.script] : []), [script]),
     link: document && document.link ? Array.isArray(document.link) ? document.link : [document.link] : [],
-    style: _toConsumableArray(document ? Array.isArray(document.style) ? document.style : [document.style] : [])
+    style: [cssStr.toString().replace(/\n/g, '')].concat(_toConsumableArray(document ? Array.isArray(document.style) ? document.style : [document.style] : []))
   })).use(rehypeSlug).use(rehypeAutolinkHeadings).use(rehype_wrap, _objectSpread2({}, wrap)).use(rehype_prism, {
     ignoreMissing: true
   }).use(rehype_attr_lib, {
@@ -99200,14 +99214,6 @@ function run() {
 
   var options = formatConfig(_objectSpread(_objectSpread({}, opts), argvs));
   var output = path.resolve(argvs.output);
-  var cssStr = fs.readFileSync(path.resolve(_dirname, '..', 'github.css')).toString();
-
-  if (options['github-corners-fork'] && options['github-corners']) {
-    var cssFork = fs.readFileSync(path.resolve(_dirname, '..', 'github-fork-ribbon.css')).toString();
-    cssStr = "".concat(cssStr).concat(cssFork);
-  }
-
-  options.document.style = cssStr;
   var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
   fs.writeFileSync(output, strMarkdown);
   console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));

@@ -85,14 +85,6 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   const options = formatConfig({ ...opts, ...argvs });
   const output = path.resolve(argvs.output);
 
-  let cssStr = fs.readFileSync(path.resolve(_dirname, '..', 'github.css')).toString();
-  if (options['github-corners-fork'] && options['github-corners']) {
-    let cssFork = fs.readFileSync(path.resolve(_dirname, '..', 'github-fork-ribbon.css')).toString();
-    cssStr = `${cssStr}${cssFork}`;
-  }
-
-  options.document.style = cssStr;
-
   const strMarkdown = create({ ...argvs, ...options });
   fs.writeFileSync(output, strMarkdown);
   console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
