@@ -20,7 +20,7 @@ Used in Github [Actions](https://github.com/actions).
 - run: markdown-to-html --source src/README.md --output coverage/index.html
 # or
 - name: Converts Markdown to HTML
-  uses: jaywcjlove/github-action-contributors@main
+  uses: jaywcjlove/markdown-to-html-cli@main
   with:
     source: README-zh.md
     output: coverage/action.html
