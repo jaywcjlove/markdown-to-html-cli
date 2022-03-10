@@ -31,7 +31,7 @@
 <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html <span class="token punctuation">-</span><span class="token punctuation">-</span>source src/README.md <span class="token punctuation">-</span><span class="token punctuation">-</span>output coverage/index.html
 <span class="token comment"># or</span>
 <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Converts Markdown to HTML
-  <span class="token key atrule">uses</span><span class="token punctuation">:</span> jaywcjlove/github<span class="token punctuation">-</span>action<span class="token punctuation">-</span>contributors@main
+  <span class="token key atrule">uses</span><span class="token punctuation">:</span> jaywcjlove/markdown<span class="token punctuation">-</span>to<span class="token punctuation">-</span>html<span class="token punctuation">-</span>cli@main
   <span class="token key atrule">with</span><span class="token punctuation">:</span>
     <span class="token key atrule">source</span><span class="token punctuation">:</span> README<span class="token punctuation">-</span>zh.md
     <span class="token key atrule">output</span><span class="token punctuation">:</span> coverage/action.html
@@ -42,7 +42,7 @@
 - run: markdown-to-html --source src/README.md --output coverage/index.html
 # or
 - name: Converts Markdown to HTML
-  uses: jaywcjlove/github-action-contributors@main
+  uses: jaywcjlove/markdown-to-html-cli@main
   with:
     source: README-zh.md
     output: coverage/action.html
