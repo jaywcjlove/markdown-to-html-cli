@@ -98981,7 +98981,7 @@ function copyElement() {
 // const dirname = path.dirname(filename);
 
 var create_dirname = /file:\/\/(.+)\/[^/]/.exec("file:///Users/wangchujiang/git-project/github/markdown-to-html-cli/packages/cli/lib/create.js")[1];
-var script = "function copied(target, str) {\n  target.classList.add('active');\n  copyTextToClipboard(target.dataset.code, function() {\n    setTimeout(() => {\n      target.classList.remove('active');\n    }, 2000);\n  });\n}";
+var script = "/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */\n!function(e,t){\"object\"==typeof exports&&\"undefined\"!=typeof module?module.exports=t():\"function\"==typeof define&&define.amd?define(t):(e=\"undefined\"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){\"use strict\";return function(e,t){const o=document.createElement(\"textarea\");o.value=e,o.setAttribute(\"readonly\",\"\"),o.style={position:\"absolute\",left:\"-9999px\"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand(\"copy\")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));\n\nfunction copied(target, str) {\n  target.classList.add('active');\n  copyTextToClipboard(target.dataset.code, function() {\n    setTimeout(() => {\n      target.classList.remove('active');\n    }, 2000);\n  });\n}";
 
 var getCodeStr = function getCodeStr() {
   var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -99024,7 +99024,7 @@ function lib_create_create() {
   return unified().use(remark_parse).use(remarkGfm).use(remarkGemoji).use(remark_rehype_lib, {
     allowDangerousHtml: true
   }).use(rehype_video_lib).use(rehypeRaw).use(document ? rehypeDocument : undefined, _objectSpread2(_objectSpread2({}, document), {}, {
-    js: [].concat(_toConsumableArray(document && document.js ? Array.isArray(document.js) ? document.js : [document.js] : []), ['https://unpkg.com/@uiw/copy-to-clipboard/dist/copy-to-clipboard.umd.js']),
+    js: _toConsumableArray(document && document.js ? Array.isArray(document.js) ? document.js : [document.js] : []),
     script: [].concat(_toConsumableArray(document && document.script ? Array.isArray(document.script) ? document.script : [document.script] : []), [script]),
     link: document && document.link ? Array.isArray(document.link) ? document.link : [document.link] : [],
     style: [cssStr.toString().replace(/\n/g, '')].concat(_toConsumableArray(document ? Array.isArray(document.style) ? document.style : [document.style] : []))
