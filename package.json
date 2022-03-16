@@ -48,7 +48,7 @@
     "husky": "~7.0.4",
     "lerna": "~4.0.0",
     "lint-staged": "~12.3.5",
-    "prettier": "~2.5.1",
+    "prettier": "~2.6.0",
     "tsc-esm-fix": "~2.7.7",
     "tsbb": "~3.7.2"
   }
