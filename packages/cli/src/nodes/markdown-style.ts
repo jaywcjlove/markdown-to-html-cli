@@ -1,5 +1,9 @@
 import { Element, ElementContent } from 'hast';
 
+/**
+ * @wcj/markdown-to-html@2.0.1
+ * https://github.com/jaywcjlove/markdown-to-html
+ */
 const scriptString = `
 const __TEMPLATE__ = document.createElement('template');
 __TEMPLATE__.innerHTML = \`

@@ -4,6 +4,10 @@ interface GithubCorners {
   href?: string;
 }
 
+/**
+ * @uiw/github-corners@1.5.10
+ * https://github.com/uiwjs/react-github-corners
+ */
 const scriptString = `const TEMPLATE = document.createElement("template");
 TEMPLATE.innerHTML = \`
 <style>
