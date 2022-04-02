@@ -42,7 +42,7 @@
     "@types/minimist": "~1.2.2",
     "@uiw/github-corners": "~1.5.10",
     "@wcj/markdown-style": "~1.0.1",
-    "@wcj/markdown-to-html": "~1.0.12",
+    "@wcj/markdown-to-html": "~2.0.0",
     "fs-extra": "~10.0.0",
     "minimist": "~1.2.5",
     "rehype-autolink-headings": "~6.1.0",
