@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "markdown-to-html-cli",
+  "name": "markdown-to-html-cli-title-test",
   "description": "Converts markdown text to HTML.",
   "scripts": {
     "prepare": "husky install",
