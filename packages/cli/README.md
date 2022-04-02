@@ -232,15 +232,6 @@ export interface MDToHTMLOptions extends RunArgvs {
   rewrite?: RehypeRewriteOptions['rewrite'];
   /** rewrite URLs of href and src attributes. */
   reurls?: Record<string, string>;
-  /**
-   * rehype-wrap Options
-   * Wrap selected elements with a given element
-   * https://github.com/mrzmmr/rehype-wrap/tree/2402bcdb8ea25bd0948cda72e96d16e65a18c1e9#options
-   */
-  wrap?: {
-    selector?: string;
-    wrapper?: string;
-  };
 }
 export declare function run(opts?: Omit<RunArgvs, "_">): any;
 export declare const cliHelp: string;

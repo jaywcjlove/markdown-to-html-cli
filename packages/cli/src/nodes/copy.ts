@@ -1,6 +1,85 @@
 import { Element } from 'hast';
 
-export function copyElement(str: string = 'test'): Element {
+const style = `.markdown-body pre .copied {
+  display: flex;
+  position: absolute;
+  cursor: pointer;
+  color: #a5afbb;
+  top: 6px;
+  right: 6px;
+  border-radius: 5px;
+  background: #82828226;
+  padding: 6px;
+  font-size: 12px;
+  transition: all .3s;
+}
+.markdown-body pre .copied:not(.active) {
+  visibility: hidden;
+}
+.markdown-body pre:hover .copied {
+  visibility: visible;
+}
+.markdown-body pre:hover .copied:hover {
+  background: #4caf50;
+  color: #fff;
+}
+.markdown-body pre:hover .copied:active,
+.markdown-body pre .copied.active {
+  background: #2e9b33;
+  color: #fff;
+}
+.markdown-body pre .copied .octicon-copy {
+  display: block;
+}
+.markdown-body pre .copied .octicon-check {
+  display: none;
+}
+.markdown-body pre .active .octicon-copy {
+  display: none;
+}
+.markdown-body pre .active .octicon-check {
+  display: block;
+}`;
+
+export function copyStyle(): Element {
+  return {
+    type: 'element',
+    tagName: 'style',
+    children: [
+      {
+        type: 'text',
+        value: style
+      }
+    ]
+  }
+}
+
+const script = `/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+!function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
+
+function copied(target, str) {
+  target.classList.add('active');
+  copyTextToClipboard(target.dataset.code, function() {
+    setTimeout(() => {
+      target.classList.remove('active');
+    }, 2000);
+  });
+}`;
+
+export function copyScript(): Element {
+  return {
+    type: 'element',
+    tagName: 'script',
+    children: [
+      {
+        type: 'text',
+        value: script
+      }
+    ]
+  }
+}
+
+export function copyElement(str: string = ''): Element {
   return {
     type: 'element',
     tagName: 'div',

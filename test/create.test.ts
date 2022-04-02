@@ -46,8 +46,33 @@ it('options.document.style=[] test case', async () => {
   expect(html.indexOf('<style>body { background: red; }</style>') > -1).toBeTruthy();
 });
 
+it('options.document.script=[] test case', async () => {
+  const html = create({
+    markdown: 'Hello World! **Bold**\n# Title\n[doc](README.md)',
+    document: {
+      script: ['console.log("Hello")'],
+      js: "https://unpkg.com/@wcj/dark-mode"
+    }
+  });
+  expect(html.indexOf('<script>console.log("Hello")</script>') > -1).toBeTruthy();
+  expect(html.indexOf('<script src="https://unpkg.com/@wcj/dark-mode"></script>') > -1).toBeTruthy();
+});
+
+it('options.document.js=[] test case', async () => {
+  const html = create({
+    markdown: 'Hello World! **Bold**\n# Title\n[doc](README.md)',
+    document: {
+      script: 'console.log("Hello")',
+      js: ["https://unpkg.com/@wcj/dark-mode"]
+    }
+  });
+  expect(html.indexOf('<script>console.log("Hello")</script>') > -1).toBeTruthy();
+  expect(html.indexOf('<script src="https://unpkg.com/@wcj/dark-mode"></script>') > -1).toBeTruthy();
+});
+
 it('options=undefined test case', async () => {
-  expect(create()).toEqual('\n<div class="markdown-body"></div>\n');
+  expect(create().indexOf('<dark-mode permanent') > -1).toBeTruthy();
+  expect(create().indexOf('</markdown-style>') > -1).toBeTruthy();
 });
 
 it('options.document=undefined test case', async () => {
@@ -61,14 +86,16 @@ it('github-corners test case', async () => {
     'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
     document: {},
   });
-  expect(html.indexOf('<body><a aria-label="View source on GitHub"') > 0).toBeTruthy();
+  expect(html.indexOf('<dark-mode permanent style=') > 0).toBeTruthy();
+  expect(html.indexOf('<github-corners target="__blank"') > 0).toBeTruthy();
+  expect(html.indexOf('<markdown-style>') > 0).toBeTruthy();
 
   html = create({
     markdown: 'Hello World!',
     'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
     document: undefined,
   });
-  expect(html.indexOf('<a aria-label="View source on GitHub" target="__blank" class="github-corner"') === 0).toBeTruthy();
+  expect(html.indexOf('<github-corners target="__blank" position="fixed" href="https://github.com/jaywcjlove/markdown-to-html-cli"></github-corners>') > 0).toBeTruthy();
   expect(html.indexOf('https://github.com/jaywcjlove/markdown-to-html-cli') > -1).toBeTruthy();
 
   html = create({

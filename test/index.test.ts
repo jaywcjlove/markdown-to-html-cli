@@ -1,6 +1,7 @@
 import FS from 'fs-extra';
-import { githubCorners } from '../packages/cli/src/nodes/githubCorners';
-import { githubCornersFork } from '../packages/cli/src/nodes/githubCornersFork';
+import { copyElement } from '../packages/cli/src/nodes/copy';
+import { githubCorners } from '../packages/cli/src/nodes/github-corners';
+import { githubCornersFork } from '../packages/cli/src/nodes/github-corners-fork';
 import { cliHelp, exampleHelp, run } from '../packages/cli/src';
 import pkg from '../packages/cli/package.json';
 
@@ -9,7 +10,11 @@ console.log = jest.fn();
 it('githubCorners test case', async () => {
   expect(githubCorners({ })).toBeUndefined();
   expect(githubCornersFork({ })).toBeUndefined();
-  expect(Object.keys(githubCorners({ href: 'https://github.com/jaywcjlove/markdown-to-html-cli' }))).toEqual(expect.arrayContaining(['type', 'tagName', 'properties', 'children']));
+  expect(Object.keys(githubCorners({ href: 'https://github.com/jaywcjlove/markdown-to-html-cli' }))).toEqual(expect.arrayContaining(["0", "1"]));
+});
+
+it('copyElement test case', async () => {
+  expect(Object.keys(copyElement())).toEqual(expect.arrayContaining(['type', 'tagName', 'properties', 'children']));
 });
 
 it('exampleHelp test case', async () => {
@@ -53,7 +58,6 @@ it('config test case', async () => {
       "reurls": {
         "README.md": "index.html"
       },
-      "wrap": { wrapper: 'div.wmde-markdown.good' },
     }
   })
   expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', author: 'kenny', markdown: 'Hello World! [](README.md)' })).toBeUndefined();
@@ -63,7 +67,6 @@ it('config test case', async () => {
   expect(htmlStr.toString().indexOf('data:image/svg+xml') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('html,cli') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('kenny') > 0).toBeTruthy();
-  expect(htmlStr.toString().indexOf('wmde-markdown good') > 0).toBeTruthy();
   await FS.remove('test/demo');
 });
 
@@ -77,7 +80,6 @@ it('keywords test case', async () => {
       "reurls": {
         "README.md": "index.html"
       },
-      "wrap": { wrapper: 'div.wmde-markdown.good' },
     }
   })
   expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', keywords: 'html,cli', markdown: 'Hello World! [](README.md)' })).toBeUndefined();
@@ -98,7 +100,6 @@ it('github-corners-fork test case', async () => {
       "reurls": {
         "README.md": "index.html"
       },
-      "wrap": { wrapper: 'div.wmde-markdown.good' },
     }
   })
   expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', keywords: 'html,cli', markdown: 'Hello World! [](README.md)' })).toBeUndefined();

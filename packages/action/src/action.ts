@@ -33,13 +33,6 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
 
     const opts = formatConfig({ ...options });
 
-    let cssStr = fs.readFileSync(path.resolve(__dirname, '../../cli/github.css')).toString();
-    if (options['github-corners-fork'] && options['github-corners']) {
-      let cssFork = fs.readFileSync(path.resolve(__dirname, '../../cli/github-fork-ribbon.css')).toString();
-      cssStr = `${cssStr}${cssFork}`;
-    }
-    opts.document.style = cssStr;
-    
     setOutput('markdown', opts.markdown);
     info(`Config Path: "${opts.config}"`);
 
