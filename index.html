@@ -382,19 +382,21 @@ const html = create({
 </span><span class="code-line">
 </span><span class="code-line">Options:
 </span><span class="code-line">
-</span><span class="code-line">  --author          Define the author of a page.
-</span><span class="code-line">  --config, -o      Specify the configuration file. Default: <span class="token string">"&#x3C;process.cwd()>/package.json"</span><span class="token builtin class-name">.</span>
-</span><span class="code-line">  --description     Define a description of your web page.
-</span><span class="code-line">  --favicon         Add a Favicon to your Site.
-</span><span class="code-line">  --github-corners  Add a Github corner to your project page.
-</span><span class="code-line">  --github-corners-fork  Github corners style.
-</span><span class="code-line">  --keywords        Define keywords <span class="token keyword">for</span> search engines.
-</span><span class="code-line">  --markdown        Markdown string.
-</span><span class="code-line">  --output, -o      Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
-</span><span class="code-line">  --source, -s      The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
-</span><span class="code-line">  --title           The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
-</span><span class="code-line">  --version, -v     Show version number
-</span><span class="code-line">  --help, -h        Displays <span class="token builtin class-name">help</span> information.
+</span><span class="code-line">  --author                Define the author of a page.
+</span><span class="code-line">  --config, -o            Specify the configuration file. Default: <span class="token string">"&#x3C;process.cwd()>/package.json"</span><span class="token builtin class-name">.</span>
+</span><span class="code-line">  --description           Define a description of your web page.
+</span><span class="code-line">  --favicon               Add a Favicon to your Site.
+</span><span class="code-line">  --github-corners        Add a Github corner to your project page.
+</span><span class="code-line">  --github-corners-fork   Github corners style.
+</span><span class="code-line">  --keywords              Define keywords <span class="token keyword">for</span> search engines.
+</span><span class="code-line">  --no-dark-mode          Disable light and dark theme styles button.
+</span><span class="code-line">  --markdown              Markdown string.
+</span><span class="code-line">  --markdown-style-theme  Setting markdown-style light/dark theme.
+</span><span class="code-line">  --output, -o            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
+</span><span class="code-line">  --source, -s            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
+</span><span class="code-line">  --title                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
+</span><span class="code-line">  --version, -v           Show version number
+</span><span class="code-line">  --help, -h              Displays <span class="token builtin class-name">help</span> information.
 </span><span class="code-line">
 </span><span class="code-line">Example:
 </span><span class="code-line">
@@ -402,6 +404,8 @@ const html = create({
 </span><span class="code-line">  <span class="token function">npm</span> markdown-to-html     --title<span class="token operator">=</span><span class="token string">"Hello World!"</span>
 </span><span class="code-line">  <span class="token function">npm</span> markdown-to-html     --config<span class="token operator">=</span><span class="token string">"config/conf.json"</span>
 </span><span class="code-line">  <span class="token function">npm</span> markdown-to-html-cli --markdown<span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line">  <span class="token function">npm</span> markdown-to-html-cli --no-dark-mode
+</span><span class="code-line">  <span class="token function">npm</span> markdown-to-html-cli --markdown-style-theme dark
 </span><span class="code-line">  <span class="token function">npm</span> markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
 </span><span class="code-line">  <span class="token function">npm</span> markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
 </span><span class="code-line">  <span class="token function">npm</span> markdown-to-html-cli --output coverage/index.html
@@ -410,19 +414,21 @@ const html = create({
 
 Options:
 
-  --author          Define the author of a page.
-  --config, -o      Specify the configuration file. Default: &#x22;<process.cwd()>/package.json&#x22;.
-  --description     Define a description of your web page.
-  --favicon         Add a Favicon to your Site.
-  --github-corners  Add a Github corner to your project page.
-  --github-corners-fork  Github corners style.
-  --keywords        Define keywords for search engines.
-  --markdown        Markdown string.
-  --output, -o      Output static pages to the specified directory. Default: &#x22;index.html&#x22;
-  --source, -s      The path of the target file &#x22;README.md&#x22;. Default: &#x22;README.md&#x22;
-  --title           The &#x60;<title>&#x60; tag is required in HTML documents!
-  --version, -v     Show version number
-  --help, -h        Displays help information.
+  --author                Define the author of a page.
+  --config, -o            Specify the configuration file. Default: &#x22;<process.cwd()>/package.json&#x22;.
+  --description           Define a description of your web page.
+  --favicon               Add a Favicon to your Site.
+  --github-corners        Add a Github corner to your project page.
+  --github-corners-fork   Github corners style.
+  --keywords              Define keywords for search engines.
+  --no-dark-mode          Disable light and dark theme styles button.
+  --markdown              Markdown string.
+  --markdown-style-theme  Setting markdown-style light/dark theme.
+  --output, -o            Output static pages to the specified directory. Default: &#x22;index.html&#x22;
+  --source, -s            The path of the target file &#x22;README.md&#x22;. Default: &#x22;README.md&#x22;
+  --title                 The &#x60;<title>&#x60; tag is required in HTML documents!
+  --version, -v           Show version number
+  --help, -h              Displays help information.
 
 Example:
 
@@ -430,6 +436,8 @@ Example:
   npm markdown-to-html     --title=&#x22;Hello World!&#x22;
   npm markdown-to-html     --config=&#x22;config/conf.json&#x22;
   npm markdown-to-html-cli --markdown=&#x22;Hello World!&#x22;
+  npm markdown-to-html-cli --no-dark-mode
+  npm markdown-to-html-cli --markdown-style-theme dark
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
   npm markdown-to-html-cli --output coverage/index.html
