@@ -28,6 +28,9 @@
   "lint-staged": {
     "packages/action/src/*.ts?(x)": [
       "npm run package"
+    ],
+    "packages/cli/src/*.ts?(x)": [
+      "npm run package"
     ]
   },
   "jest": {
