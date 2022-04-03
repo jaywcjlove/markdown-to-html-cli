@@ -17,6 +17,7 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   'github-corners'?: string;
   /** Github corners style. */
   'github-corners-fork'?: boolean;
+  'dark-mode'?: boolean;
   /** Markdown string. */
   markdown?: string;
   /** The `<title>` tag is required in HTML documents! */
@@ -36,6 +37,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
 export interface MDToHTMLOptions extends RunArgvs {
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
+  /**  */
+  darkMode?: boolean;
   /** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */
   rewrite?: RehypeRewriteOptions['rewrite'];
   /** rewrite URLs of href and src attributes. */
@@ -91,6 +94,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --github-corners  Add a Github corner to your project page.
     --github-corners-fork  Github corners style.
     --keywords        Define keywords for search engines.
+    --no-dark-mode    Disable light and dark theme styles.
     --markdown        Markdown string.
     --output, -o      Output static pages to the specified directory. Default: "index.html"
     --source, -s      The path of the target file "README.md". Default: "README.md"
@@ -105,6 +109,7 @@ export const exampleHelp: string =`\n  Example:
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--config\x1b[0m="config/conf.json"
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--no-dark-mode\x1b[0m
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove --github-corners-fork
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html

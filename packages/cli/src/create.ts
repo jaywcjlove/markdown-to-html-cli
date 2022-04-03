@@ -24,7 +24,7 @@ export const _dirname = __dirname;
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options: MDToHTMLOptions = {}) {
-  const { markdown: string, document, rewrite, reurls = {} } = options;
+  const { markdown: string, document, rewrite, reurls = {}, 'dark-mode': darkModeTheme = true } = options;
   
   const mdOptions: Options = {
     hastNode: false,
@@ -41,9 +41,11 @@ export function create(options: MDToHTMLOptions = {}) {
       [rehypeFormat],
     ],
     rewrite: (node, index, parent) => {
-      if ((node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root')) {
-        node.children = markdownStyle(node.children as any);
-        darkMode().forEach(item => node.children.unshift(item));
+      if (node.type == 'element' && node.tagName === 'body') {
+        node.children = markdownStyle(node.children as any, darkModeTheme);
+        if (darkModeTheme) {
+          darkMode().forEach(item => node.children.unshift(item));
+        }
       }
       if (options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
         node.children = Array.isArray(node.children) ? node.children : [];
