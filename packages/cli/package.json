@@ -1,6 +1,6 @@
 {
   "name": "markdown-to-html-cli",
-  "version": "3.2.14",
+  "version": "3.3.0",
   "license": "MIT",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli",
