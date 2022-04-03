@@ -41,7 +41,7 @@ export function create(options: MDToHTMLOptions = {}) {
       [rehypeFormat],
     ],
     rewrite: (node, index, parent) => {
-      if (node.type == 'element' && node.tagName === 'body') {
+      if ((node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root')) {
         node.children = markdownStyle(node.children as any, darkModeTheme);
         if (darkModeTheme) {
           darkMode().forEach(item => node.children.unshift(item));
