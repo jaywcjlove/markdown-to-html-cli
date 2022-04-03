@@ -1,6 +1,7 @@
 import FS from 'fs-extra';
 import { copyElement } from '../packages/cli/src/nodes/copy';
 import { githubCorners } from '../packages/cli/src/nodes/github-corners';
+import { markdownStyle } from '../packages/cli/src/nodes/markdown-style';
 import { githubCornersFork } from '../packages/cli/src/nodes/github-corners-fork';
 import { cliHelp, exampleHelp, run } from '../packages/cli/src';
 import pkg from '../packages/cli/package.json';
@@ -15,6 +16,12 @@ it('githubCorners test case', async () => {
 
 it('copyElement test case', async () => {
   expect(Object.keys(copyElement())).toEqual(expect.arrayContaining(['type', 'tagName', 'properties', 'children']));
+});
+
+it('markdownStyle test case', async () => {
+  expect(markdownStyle([], false).length).toEqual(2);
+  expect(markdownStyle([], false)[1].children[0]).toEqual(expect.objectContaining({ "properties": {"theme": "light"} }));
+  expect(markdownStyle([], true)[1].children[0]).not.toEqual(expect.objectContaining({  "properties": {"theme": "light"} }));
 });
 
 it('exampleHelp test case', async () => {
