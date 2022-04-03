@@ -272,30 +272,6 @@ module.exports = _defineProperty, module.exports.__esModule = true, module.expor
 
 /***/ }),
 
-/***/ 8527:
-/***/ ((module) => {
-
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _extends.apply(this, arguments);
-}
-
-module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
 /***/ 3772:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -19207,7 +19183,7 @@ __webpack_require__.d(constructs_namespaceObject, {
   "text": () => (constructs_text)
 });
 
-// NAMESPACE OBJECT: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/types.js
+// NAMESPACE OBJECT: ../../node_modules/property-information/lib/util/types.js
 var types_namespaceObject = {};
 __webpack_require__.r(types_namespaceObject);
 __webpack_require__.d(types_namespaceObject, {
@@ -19218,84 +19194,6 @@ __webpack_require__.d(types_namespaceObject, {
   "number": () => (number),
   "overloadedBoolean": () => (overloadedBoolean),
   "spaceSeparated": () => (spaceSeparated)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/types.js
-var util_types_namespaceObject = {};
-__webpack_require__.r(util_types_namespaceObject);
-__webpack_require__.d(util_types_namespaceObject, {
-  "boolean": () => (types_boolean),
-  "booleanish": () => (types_booleanish),
-  "commaOrSpaceSeparated": () => (types_commaOrSpaceSeparated),
-  "commaSeparated": () => (types_commaSeparated),
-  "number": () => (types_number),
-  "overloadedBoolean": () => (types_overloadedBoolean),
-  "spaceSeparated": () => (types_spaceSeparated)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/types.js
-var lib_util_types_namespaceObject = {};
-__webpack_require__.r(lib_util_types_namespaceObject);
-__webpack_require__.d(lib_util_types_namespaceObject, {
-  "boolean": () => (util_types_boolean),
-  "booleanish": () => (util_types_booleanish),
-  "commaOrSpaceSeparated": () => (util_types_commaOrSpaceSeparated),
-  "commaSeparated": () => (util_types_commaSeparated),
-  "number": () => (util_types_number),
-  "overloadedBoolean": () => (util_types_overloadedBoolean),
-  "spaceSeparated": () => (util_types_spaceSeparated)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/types.js
-var property_information_lib_util_types_namespaceObject = {};
-__webpack_require__.r(property_information_lib_util_types_namespaceObject);
-__webpack_require__.d(property_information_lib_util_types_namespaceObject, {
-  "boolean": () => (lib_util_types_boolean),
-  "booleanish": () => (lib_util_types_booleanish),
-  "commaOrSpaceSeparated": () => (lib_util_types_commaOrSpaceSeparated),
-  "commaSeparated": () => (lib_util_types_commaSeparated),
-  "number": () => (lib_util_types_number),
-  "overloadedBoolean": () => (lib_util_types_overloadedBoolean),
-  "spaceSeparated": () => (lib_util_types_spaceSeparated)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/types.js
-var node_modules_property_information_lib_util_types_namespaceObject = {};
-__webpack_require__.r(node_modules_property_information_lib_util_types_namespaceObject);
-__webpack_require__.d(node_modules_property_information_lib_util_types_namespaceObject, {
-  "boolean": () => (property_information_lib_util_types_boolean),
-  "booleanish": () => (property_information_lib_util_types_booleanish),
-  "commaOrSpaceSeparated": () => (property_information_lib_util_types_commaOrSpaceSeparated),
-  "commaSeparated": () => (property_information_lib_util_types_commaSeparated),
-  "number": () => (property_information_lib_util_types_number),
-  "overloadedBoolean": () => (property_information_lib_util_types_overloadedBoolean),
-  "spaceSeparated": () => (property_information_lib_util_types_spaceSeparated)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/types.js
-var rehype_prism_plus_node_modules_property_information_lib_util_types_namespaceObject = {};
-__webpack_require__.r(rehype_prism_plus_node_modules_property_information_lib_util_types_namespaceObject);
-__webpack_require__.d(rehype_prism_plus_node_modules_property_information_lib_util_types_namespaceObject, {
-  "boolean": () => (node_modules_property_information_lib_util_types_boolean),
-  "booleanish": () => (node_modules_property_information_lib_util_types_booleanish),
-  "commaOrSpaceSeparated": () => (node_modules_property_information_lib_util_types_commaOrSpaceSeparated),
-  "commaSeparated": () => (node_modules_property_information_lib_util_types_commaSeparated),
-  "number": () => (node_modules_property_information_lib_util_types_number),
-  "overloadedBoolean": () => (node_modules_property_information_lib_util_types_overloadedBoolean),
-  "spaceSeparated": () => (node_modules_property_information_lib_util_types_spaceSeparated)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/rehype-document/node_modules/property-information/lib/util/types.js
-var rehype_document_node_modules_property_information_lib_util_types_namespaceObject = {};
-__webpack_require__.r(rehype_document_node_modules_property_information_lib_util_types_namespaceObject);
-__webpack_require__.d(rehype_document_node_modules_property_information_lib_util_types_namespaceObject, {
-  "boolean": () => (rehype_document_node_modules_property_information_lib_util_types_boolean),
-  "booleanish": () => (rehype_document_node_modules_property_information_lib_util_types_booleanish),
-  "commaOrSpaceSeparated": () => (rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated),
-  "commaSeparated": () => (rehype_document_node_modules_property_information_lib_util_types_commaSeparated),
-  "number": () => (rehype_document_node_modules_property_information_lib_util_types_number),
-  "overloadedBoolean": () => (rehype_document_node_modules_property_information_lib_util_types_overloadedBoolean),
-  "spaceSeparated": () => (rehype_document_node_modules_property_information_lib_util_types_spaceSeparated)
 });
 
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/defineProperty.js
@@ -19431,8 +19329,6 @@ function _nonIterableSpread() {
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
-// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/extends.js
-var helpers_extends = __webpack_require__(8527);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -24502,7 +24398,7 @@ function previous(match, email) {
   var code = match.input.charCodeAt(match.index - 1);
   return (match.index === 0 || unicodeWhitespace(code) || unicodePunctuation(code)) && (!email || code !== 47);
 }
-;// CONCATENATED MODULE: ../../node_modules/decode-named-character-reference/node_modules/character-entities/index.js
+;// CONCATENATED MODULE: ../../node_modules/character-entities/index.js
 /**
  * Map of named character references.
  *
@@ -28740,7 +28636,7 @@ function unist_util_visit_parents_toResult(value) {
 
   return [value];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-attr/node_modules/unist-util-visit/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-visit/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
@@ -35780,57 +35676,6 @@ function u(type, props, value) {
 
   return node;
 };
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/unist-util-position/index.js
 /**
  * @typedef {import('unist').Position} Position
@@ -36099,7 +35944,7 @@ function node_modules_unist_util_visit_parents_toResult(value) {
  */
 
 
-var node_modules_unist_util_visit_visit =
+var unist_util_visit_visit =
 /**
  * @type {(
  *   (<T extends Node>(tree: Node, test: T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>>, visitor: Visitor<T>, reverse?: boolean) => void) &
@@ -36155,7 +36000,7 @@ function definitions(node) {
     throw new Error('mdast-util-definitions expected node');
   }
 
-  node_modules_unist_util_visit_visit(node, 'definition', ondefinition);
+  unist_util_visit_visit(node, 'definition', ondefinition);
   return getDefinition;
   /** @type {DefinitionVisitor} */
 
@@ -37447,7 +37292,7 @@ function factory(tree, options) {
   h.handlers = _objectSpread2(_objectSpread2({}, handlers), settings.handlers);
   h.unknownHandler = settings.unknownHandler;
   h.passThrough = settings.passThrough;
-  unist_util_visit_visit(tree, 'footnoteDefinition', function (definition) {
+  visit(tree, 'footnoteDefinition', function (definition) {
     var id = String(definition.identifier).toUpperCase(); // Mimick CM behavior of link definitions.
     // See: <https://github.com/syntax-tree/mdast-util-definitions/blob/8290999/index.js#L26>.
 
@@ -37663,57 +37508,6 @@ function _iterableToArrayLimit(arr, i) {
 function _slicedToArray(arr, i) {
   return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-video/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var rehype_video_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/rehype-video/lib/detailsNode.js
 function detailsNode(title) {
   return {
@@ -37821,7 +37615,7 @@ var RehypeVideo = function RehypeVideo(options) {
       details = _ref3$details === void 0 ? true : _ref3$details;
 
   return function (tree) {
-    rehype_video_node_modules_unist_util_visit_visit(tree, 'element', function (node, index, parent) {
+    visit(tree, 'element', function (node, index, parent) {
       var isChecked = function isChecked(str) {
         return test.test(str.replace(/(\?|!|\#|$).+/g, '').toLocaleLowerCase());
       };
@@ -55922,108 +55716,6 @@ var katex = {
   }
 };
 
-;// CONCATENATED MODULE: ../../node_modules/rehype-katex/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var rehype_katex_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
-;// CONCATENATED MODULE: ../../node_modules/unist-util-remove-position/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var unist_util_remove_position_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/unist-util-remove-position/index.js
 /**
  * @typedef {import('unist').Node} Node
@@ -56052,7 +55744,7 @@ var removePosition =
  * @returns {Tree}
  */
 function removePosition(node, force) {
-  unist_util_remove_position_node_modules_unist_util_visit_visit(node, remove); // @ts-ignore hush TS, we know what we’re doing.
+  visit(node, remove); // @ts-ignore hush TS, we know what we’re doing.
 
   return node;
   /**
@@ -56870,7 +56562,7 @@ function closedDialog(node) {
 }
 // EXTERNAL MODULE: ../../node_modules/parse5/lib/parser/index.js
 var lib_parser = __webpack_require__(9795);
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/schema.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/schema.js
 
 
 
@@ -56905,7 +56597,7 @@ Schema.prototype.normal = {};
 /** @type {string|null} */
 
 Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/merge.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/merge.js
 /**
  * @typedef {import('./schema.js').Properties} Properties
  * @typedef {import('./schema.js').Normal} Normal
@@ -56932,7 +56624,7 @@ function merge(definitions, space) {
 
   return new Schema(property, normal, space);
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/normalize.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/normalize.js
 /**
  * @param {string} value
  * @returns {string}
@@ -56940,7 +56632,7 @@ function merge(definitions, space) {
 function normalize(value) {
   return value.toLowerCase();
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/info.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/info.js
 
 
 var Info = /*#__PURE__*/_createClass(
@@ -56970,7 +56662,7 @@ Info.prototype.spaceSeparated = false;
 Info.prototype.commaOrSpaceSeparated = false;
 Info.prototype.mustUseProperty = false;
 Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/types.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/types.js
 var powers = 0;
 
 var _boolean = increment();
@@ -56986,7 +56678,7 @@ var commaOrSpaceSeparated = increment();
 function increment() {
   return Math.pow(2, ++powers);
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/defined-info.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/defined-info.js
 
 
 
@@ -57044,7 +56736,7 @@ function mark(values, key, value) {
     values[key] = value;
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/create.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/create.js
 /**
  * @typedef {import('./schema.js').Properties} Properties
  * @typedef {import('./schema.js').Normal} Normal
@@ -57094,7 +56786,7 @@ function create_create(definition) {
 
   return new Schema(property, normal, definition.space);
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/xlink.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/xlink.js
 
 var xlink = create_create({
   space: 'xlink',
@@ -57111,7 +56803,7 @@ var xlink = create_create({
     xLinkType: null
   }
 });
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/xml.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/xml.js
 
 var xml = create_create({
   space: 'xml',
@@ -57124,7 +56816,7 @@ var xml = create_create({
     xmlSpace: null
   }
 });
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/case-sensitive-transform.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/case-sensitive-transform.js
 /**
  * @param {Record<string, string>} attributes
  * @param {string} attribute
@@ -57133,7 +56825,7 @@ var xml = create_create({
 function caseSensitiveTransform(attributes, attribute) {
   return attribute in attributes ? attributes[attribute] : attribute;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/util/case-insensitive-transform.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/case-insensitive-transform.js
 
 /**
  * @param {Record<string, string>} attributes
@@ -57144,7 +56836,7 @@ function caseSensitiveTransform(attributes, attribute) {
 function caseInsensitiveTransform(attributes, property) {
   return caseSensitiveTransform(attributes, property.toLowerCase());
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/xmlns.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/xmlns.js
 
 
 var xmlns = create_create({
@@ -57158,7 +56850,7 @@ var xmlns = create_create({
     xmlnsXLink: null
   }
 });
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/aria.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/aria.js
 
 
 var aria = create_create({
@@ -57217,7 +56909,7 @@ var aria = create_create({
     role: null
   }
 });
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/html.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/html.js
 
 
 
@@ -57570,7 +57262,7 @@ var html_html = create_create({
     unselectable: null
   }
 });
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/svg.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/svg.js
 
 
 
@@ -58132,7 +57824,7 @@ var svg = create_create({
     zoomAndPan: null
   }
 });
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/index.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/index.js
 /**
  * @typedef {import('./lib/util/info.js').Info} Info
  * @typedef {import('./lib/util/schema.js').Schema} Schema
@@ -58149,7 +57841,7 @@ var svg = create_create({
 
 var property_information_html = merge([xml, xlink, xmlns, aria, html_html], 'html');
 var property_information_svg = merge([xml, xlink, xmlns, aria, svg], 'svg');
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/property-information/lib/find.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/find.js
 /**
  * @typedef {import('./util/schema.js').Schema} Schema
  */
@@ -58217,7 +57909,7 @@ function kebab($0) {
 function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/hast-util-parse-selector/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-parse-selector/index.js
 /**
  * @typedef {import('hast').Properties} Properties
  * @typedef {import('hast').Element} Element
@@ -58294,7 +57986,7 @@ function parseSelector(selector) {
     children: []
   };
 };
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/space-separated-tokens/index.js
+;// CONCATENATED MODULE: ../../node_modules/space-separated-tokens/index.js
 /**
  * Parse space separated tokens to an array of strings.
  *
@@ -58315,7 +58007,7 @@ function space_separated_tokens_parse(value) {
 function stringify(values) {
   return values.join(' ').trim();
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/comma-separated-tokens/index.js
+;// CONCATENATED MODULE: ../../node_modules/comma-separated-tokens/index.js
 /**
  * @typedef {Object} StringifyOptions
  * @property {boolean} [padLeft=true] Whether to pad a space before a token (`boolean`, default: `true`).
@@ -58376,7 +58068,7 @@ function comma_separated_tokens_stringify(values, options) {
 
   return values.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/hastscript/lib/core.js
+;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/core.js
 /**
  * @typedef {import('hast').Root} Root
  * @typedef {import('hast').Element} Element
@@ -58669,9 +58361,9 @@ function createAdjustMap(values) {
 
   return result;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/hastscript/lib/svg-case-sensitive-tag-names.js
+;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/svg-case-sensitive-tag-names.js
 var svgCaseSensitiveTagNames = ['altGlyph', 'altGlyphDef', 'altGlyphItem', 'animateColor', 'animateMotion', 'animateTransform', 'clipPath', 'feBlend', 'feColorMatrix', 'feComponentTransfer', 'feComposite', 'feConvolveMatrix', 'feDiffuseLighting', 'feDisplacementMap', 'feDistantLight', 'feDropShadow', 'feFlood', 'feFuncA', 'feFuncB', 'feFuncG', 'feFuncR', 'feGaussianBlur', 'feImage', 'feMerge', 'feMergeNode', 'feMorphology', 'feOffset', 'fePointLight', 'feSpecularLighting', 'feSpotLight', 'feTile', 'feTurbulence', 'foreignObject', 'glyphRef', 'linearGradient', 'radialGradient', 'solidColor', 'textArea', 'textPath'];
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/hastscript/lib/svg.js
+;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/svg.js
 /**
  * @typedef {import('./core.js').HChild} Child Acceptable child value
  * @typedef {import('./core.js').HProperties} Properties Acceptable properties value.
@@ -58685,7 +58377,7 @@ var svgCaseSensitiveTagNames = ['altGlyph', 'altGlyphDef', 'altGlyphItem', 'anim
 
 
 var s = core_core(property_information_svg, 'g', svgCaseSensitiveTagNames);
-;// CONCATENATED MODULE: ../../node_modules/hast-util-from-parse5/node_modules/hastscript/lib/html.js
+;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/html.js
 /**
  * @typedef {import('./core.js').HChild} Child Acceptable child value
  * @typedef {import('./core.js').HProperties} Properties Acceptable properties value.
@@ -59573,7 +59265,7 @@ function rehypeKatex(options) {
   var settings = options || {};
   var throwOnError = settings.throwOnError || false;
   return function (tree, file) {
-    rehype_katex_node_modules_unist_util_visit_visit(tree, 'element', function (element) {
+    visit(tree, 'element', function (element) {
       var classes = element.properties && Array.isArray(element.properties.className) ? element.properties.className : [];
       var inline = classes.includes('math-inline');
       var displayMode = classes.includes('math-display');
@@ -59613,2684 +59305,7 @@ function rehypeKatex(options) {
     });
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-raw/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var hast_util_raw_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/schema.js
-
-
-
-/**
- * @typedef {import('./info.js').Info} Info
- * @typedef {Record<string, Info>} Properties
- * @typedef {Record<string, string>} Normal
- */
-var schema_Schema = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {Properties} property
- * @param {Normal} normal
- * @param {string} [space]
- */
-function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
-
-  this.property = property;
-  this.normal = normal;
-
-  if (space) {
-    this.space = space;
-  }
-});
-/** @type {Properties} */
-
-schema_Schema.prototype.property = {};
-/** @type {Normal} */
-
-schema_Schema.prototype.normal = {};
-/** @type {string|null} */
-
-schema_Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/merge.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- */
-
-/**
- * @param {Schema[]} definitions
- * @param {string} [space]
- * @returns {Schema}
- */
-
-function merge_merge(definitions, space) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  var index = -1;
-
-  while (++index < definitions.length) {
-    Object.assign(property, definitions[index].property);
-    Object.assign(normal, definitions[index].normal);
-  }
-
-  return new schema_Schema(property, normal, space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/normalize.js
-/**
- * @param {string} value
- * @returns {string}
- */
-function normalize_normalize(value) {
-  return value.toLowerCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/info.js
-
-
-var info_Info = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {string} property
- * @param {string} attribute
- */
-function Info(property, attribute) {
-  _classCallCheck(this, Info);
-
-  /** @type {string} */
-  this.property = property;
-  /** @type {string} */
-
-  this.attribute = attribute;
-});
-/** @type {string|null} */
-
-info_Info.prototype.space = null;
-info_Info.prototype["boolean"] = false;
-info_Info.prototype.booleanish = false;
-info_Info.prototype.overloadedBoolean = false;
-info_Info.prototype.number = false;
-info_Info.prototype.commaSeparated = false;
-info_Info.prototype.spaceSeparated = false;
-info_Info.prototype.commaOrSpaceSeparated = false;
-info_Info.prototype.mustUseProperty = false;
-info_Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/types.js
-var types_powers = 0;
-
-var types_boolean = types_increment();
-
-
-var types_booleanish = types_increment();
-var types_overloadedBoolean = types_increment();
-var types_number = types_increment();
-var types_spaceSeparated = types_increment();
-var types_commaSeparated = types_increment();
-var types_commaOrSpaceSeparated = types_increment();
-
-function types_increment() {
-  return Math.pow(2, ++types_powers);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/defined-info.js
-
-
-
-
-
-
-
-/** @type {Array<keyof types>} */
-// @ts-expect-error: hush.
-
-var defined_info_checks = Object.keys(util_types_namespaceObject);
-var defined_info_DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-
-  var _super = _createSuper(DefinedInfo);
-
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  function DefinedInfo(property, attribute, mask, space) {
-    var _this;
-
-    _classCallCheck(this, DefinedInfo);
-
-    var index = -1;
-    _this = _super.call(this, property, attribute);
-    defined_info_mark(_assertThisInitialized(_this), 'space', space);
-
-    if (typeof mask === 'number') {
-      while (++index < defined_info_checks.length) {
-        var check = defined_info_checks[index];
-        defined_info_mark(_assertThisInitialized(_this), defined_info_checks[index], (mask & util_types_namespaceObject[check]) === util_types_namespaceObject[check]);
-      }
-    }
-
-    return _this;
-  }
-
-  return _createClass(DefinedInfo);
-}(info_Info);
-defined_info_DefinedInfo.prototype.defined = true;
-/**
- * @param {DefinedInfo} values
- * @param {string} key
- * @param {unknown} value
- */
-
-function defined_info_mark(values, key, value) {
-  if (value) {
-    // @ts-expect-error: assume `value` matches the expected value of `key`.
-    values[key] = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/create.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- *
- * @typedef {Record<string, string>} Attributes
- *
- * @typedef {Object} Definition
- * @property {Record<string, number|null>} properties
- * @property {(attributes: Attributes, property: string) => string} transform
- * @property {string} [space]
- * @property {Attributes} [attributes]
- * @property {Array<string>} [mustUseProperty]
- */
-
-
-
-var util_create_own = {}.hasOwnProperty;
-/**
- * @param {Definition} definition
- * @returns {Schema}
- */
-
-function util_create_create(definition) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  /** @type {string} */
-
-  var prop;
-
-  for (prop in definition.properties) {
-    if (util_create_own.call(definition.properties, prop)) {
-      var value = definition.properties[prop];
-      var info = new defined_info_DefinedInfo(prop, definition.transform(definition.attributes || {}, prop), value, definition.space);
-
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-
-      property[prop] = info;
-      normal[normalize_normalize(prop)] = prop;
-      normal[normalize_normalize(info.attribute)] = prop;
-    }
-  }
-
-  return new schema_Schema(property, normal, definition.space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/xlink.js
-
-var xlink_xlink = util_create_create({
-  space: 'xlink',
-  transform: function transform(_, prop) {
-    return 'xlink:' + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/xml.js
-
-var xml_xml = util_create_create({
-  space: 'xml',
-  transform: function transform(_, prop) {
-    return 'xml:' + prop.slice(3).toLowerCase();
-  },
-  properties: {
-    xmlLang: null,
-    xmlBase: null,
-    xmlSpace: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/case-sensitive-transform.js
-/**
- * @param {Record<string, string>} attributes
- * @param {string} attribute
- * @returns {string}
- */
-function case_sensitive_transform_caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/util/case-insensitive-transform.js
-
-/**
- * @param {Record<string, string>} attributes
- * @param {string} property
- * @returns {string}
- */
-
-function case_insensitive_transform_caseInsensitiveTransform(attributes, property) {
-  return case_sensitive_transform_caseSensitiveTransform(attributes, property.toLowerCase());
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/xmlns.js
-
-
-var xmlns_xmlns = util_create_create({
-  space: 'xmlns',
-  attributes: {
-    xmlnsxlink: 'xmlns:xlink'
-  },
-  transform: case_insensitive_transform_caseInsensitiveTransform,
-  properties: {
-    xmlns: null,
-    xmlnsXLink: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/aria.js
-
-
-var aria_aria = util_create_create({
-  transform: function transform(_, prop) {
-    return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: types_booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: types_booleanish,
-    ariaChecked: types_booleanish,
-    ariaColCount: types_number,
-    ariaColIndex: types_number,
-    ariaColSpan: types_number,
-    ariaControls: types_spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: types_spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: types_booleanish,
-    ariaDropEffect: types_spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: types_booleanish,
-    ariaFlowTo: types_spaceSeparated,
-    ariaGrabbed: types_booleanish,
-    ariaHasPopup: null,
-    ariaHidden: types_booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: types_spaceSeparated,
-    ariaLevel: types_number,
-    ariaLive: null,
-    ariaModal: types_booleanish,
-    ariaMultiLine: types_booleanish,
-    ariaMultiSelectable: types_booleanish,
-    ariaOrientation: null,
-    ariaOwns: types_spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: types_number,
-    ariaPressed: types_booleanish,
-    ariaReadOnly: types_booleanish,
-    ariaRelevant: null,
-    ariaRequired: types_booleanish,
-    ariaRoleDescription: types_spaceSeparated,
-    ariaRowCount: types_number,
-    ariaRowIndex: types_number,
-    ariaRowSpan: types_number,
-    ariaSelected: types_booleanish,
-    ariaSetSize: types_number,
-    ariaSort: null,
-    ariaValueMax: types_number,
-    ariaValueMin: types_number,
-    ariaValueNow: types_number,
-    ariaValueText: null,
-    role: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/html.js
-
-
-
-var lib_html_html = util_create_create({
-  space: 'html',
-  attributes: {
-    acceptcharset: 'accept-charset',
-    classname: 'class',
-    htmlfor: 'for',
-    httpequiv: 'http-equiv'
-  },
-  transform: case_insensitive_transform_caseInsensitiveTransform,
-  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: types_commaSeparated,
-    acceptCharset: types_spaceSeparated,
-    accessKey: types_spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: types_boolean,
-    allowPaymentRequest: types_boolean,
-    allowUserMedia: types_boolean,
-    alt: null,
-    as: null,
-    async: types_boolean,
-    autoCapitalize: null,
-    autoComplete: types_spaceSeparated,
-    autoFocus: types_boolean,
-    autoPlay: types_boolean,
-    capture: types_boolean,
-    charSet: null,
-    checked: types_boolean,
-    cite: null,
-    className: types_spaceSeparated,
-    cols: types_number,
-    colSpan: null,
-    content: null,
-    contentEditable: types_booleanish,
-    controls: types_boolean,
-    controlsList: types_spaceSeparated,
-    coords: types_number | types_commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    "default": types_boolean,
-    defer: types_boolean,
-    dir: null,
-    dirName: null,
-    disabled: types_boolean,
-    download: types_overloadedBoolean,
-    draggable: types_booleanish,
-    encType: null,
-    enterKeyHint: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: types_boolean,
-    formTarget: null,
-    headers: types_spaceSeparated,
-    height: types_number,
-    hidden: types_boolean,
-    high: types_number,
-    href: null,
-    hrefLang: null,
-    htmlFor: types_spaceSeparated,
-    httpEquiv: types_spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: types_boolean,
-    itemId: null,
-    itemProp: types_spaceSeparated,
-    itemRef: types_spaceSeparated,
-    itemScope: types_boolean,
-    itemType: types_spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: types_boolean,
-    low: types_number,
-    manifest: null,
-    max: null,
-    maxLength: types_number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: types_number,
-    multiple: types_boolean,
-    muted: types_boolean,
-    name: null,
-    nonce: null,
-    noModule: types_boolean,
-    noValidate: types_boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforePrint: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: types_boolean,
-    optimum: types_number,
-    pattern: null,
-    ping: types_spaceSeparated,
-    placeholder: null,
-    playsInline: types_boolean,
-    poster: null,
-    preload: null,
-    readOnly: types_boolean,
-    referrerPolicy: null,
-    rel: types_spaceSeparated,
-    required: types_boolean,
-    reversed: types_boolean,
-    rows: types_number,
-    rowSpan: types_number,
-    sandbox: types_spaceSeparated,
-    scope: null,
-    scoped: types_boolean,
-    seamless: types_boolean,
-    selected: types_boolean,
-    shape: null,
-    size: types_number,
-    sizes: null,
-    slot: null,
-    span: types_number,
-    spellCheck: types_booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: types_number,
-    step: null,
-    style: null,
-    tabIndex: types_number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: types_boolean,
-    useMap: null,
-    value: types_booleanish,
-    width: types_number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: types_spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: types_number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: types_number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    "char": null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: types_boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: types_boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: types_number,
-    // `<img>` and `<object>`
-    leftMargin: types_number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: types_number,
-    // `<body>`
-    marginWidth: types_number,
-    // `<body>`
-    noResize: types_boolean,
-    // `<frame>`
-    noHref: types_boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: types_boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: types_boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: types_number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: types_booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: types_number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: types_number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: types_boolean,
-    disableRemotePlayback: types_boolean,
-    prefix: null,
-    property: null,
-    results: types_number,
-    security: null,
-    unselectable: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/svg.js
-
-
-
-var svg_svg = util_create_create({
-  space: 'svg',
-  attributes: {
-    accentHeight: 'accent-height',
-    alignmentBaseline: 'alignment-baseline',
-    arabicForm: 'arabic-form',
-    baselineShift: 'baseline-shift',
-    capHeight: 'cap-height',
-    className: 'class',
-    clipPath: 'clip-path',
-    clipRule: 'clip-rule',
-    colorInterpolation: 'color-interpolation',
-    colorInterpolationFilters: 'color-interpolation-filters',
-    colorProfile: 'color-profile',
-    colorRendering: 'color-rendering',
-    crossOrigin: 'crossorigin',
-    dataType: 'datatype',
-    dominantBaseline: 'dominant-baseline',
-    enableBackground: 'enable-background',
-    fillOpacity: 'fill-opacity',
-    fillRule: 'fill-rule',
-    floodColor: 'flood-color',
-    floodOpacity: 'flood-opacity',
-    fontFamily: 'font-family',
-    fontSize: 'font-size',
-    fontSizeAdjust: 'font-size-adjust',
-    fontStretch: 'font-stretch',
-    fontStyle: 'font-style',
-    fontVariant: 'font-variant',
-    fontWeight: 'font-weight',
-    glyphName: 'glyph-name',
-    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
-    glyphOrientationVertical: 'glyph-orientation-vertical',
-    hrefLang: 'hreflang',
-    horizAdvX: 'horiz-adv-x',
-    horizOriginX: 'horiz-origin-x',
-    horizOriginY: 'horiz-origin-y',
-    imageRendering: 'image-rendering',
-    letterSpacing: 'letter-spacing',
-    lightingColor: 'lighting-color',
-    markerEnd: 'marker-end',
-    markerMid: 'marker-mid',
-    markerStart: 'marker-start',
-    navDown: 'nav-down',
-    navDownLeft: 'nav-down-left',
-    navDownRight: 'nav-down-right',
-    navLeft: 'nav-left',
-    navNext: 'nav-next',
-    navPrev: 'nav-prev',
-    navRight: 'nav-right',
-    navUp: 'nav-up',
-    navUpLeft: 'nav-up-left',
-    navUpRight: 'nav-up-right',
-    onAbort: 'onabort',
-    onActivate: 'onactivate',
-    onAfterPrint: 'onafterprint',
-    onBeforePrint: 'onbeforeprint',
-    onBegin: 'onbegin',
-    onCancel: 'oncancel',
-    onCanPlay: 'oncanplay',
-    onCanPlayThrough: 'oncanplaythrough',
-    onChange: 'onchange',
-    onClick: 'onclick',
-    onClose: 'onclose',
-    onCopy: 'oncopy',
-    onCueChange: 'oncuechange',
-    onCut: 'oncut',
-    onDblClick: 'ondblclick',
-    onDrag: 'ondrag',
-    onDragEnd: 'ondragend',
-    onDragEnter: 'ondragenter',
-    onDragExit: 'ondragexit',
-    onDragLeave: 'ondragleave',
-    onDragOver: 'ondragover',
-    onDragStart: 'ondragstart',
-    onDrop: 'ondrop',
-    onDurationChange: 'ondurationchange',
-    onEmptied: 'onemptied',
-    onEnd: 'onend',
-    onEnded: 'onended',
-    onError: 'onerror',
-    onFocus: 'onfocus',
-    onFocusIn: 'onfocusin',
-    onFocusOut: 'onfocusout',
-    onHashChange: 'onhashchange',
-    onInput: 'oninput',
-    onInvalid: 'oninvalid',
-    onKeyDown: 'onkeydown',
-    onKeyPress: 'onkeypress',
-    onKeyUp: 'onkeyup',
-    onLoad: 'onload',
-    onLoadedData: 'onloadeddata',
-    onLoadedMetadata: 'onloadedmetadata',
-    onLoadStart: 'onloadstart',
-    onMessage: 'onmessage',
-    onMouseDown: 'onmousedown',
-    onMouseEnter: 'onmouseenter',
-    onMouseLeave: 'onmouseleave',
-    onMouseMove: 'onmousemove',
-    onMouseOut: 'onmouseout',
-    onMouseOver: 'onmouseover',
-    onMouseUp: 'onmouseup',
-    onMouseWheel: 'onmousewheel',
-    onOffline: 'onoffline',
-    onOnline: 'ononline',
-    onPageHide: 'onpagehide',
-    onPageShow: 'onpageshow',
-    onPaste: 'onpaste',
-    onPause: 'onpause',
-    onPlay: 'onplay',
-    onPlaying: 'onplaying',
-    onPopState: 'onpopstate',
-    onProgress: 'onprogress',
-    onRateChange: 'onratechange',
-    onRepeat: 'onrepeat',
-    onReset: 'onreset',
-    onResize: 'onresize',
-    onScroll: 'onscroll',
-    onSeeked: 'onseeked',
-    onSeeking: 'onseeking',
-    onSelect: 'onselect',
-    onShow: 'onshow',
-    onStalled: 'onstalled',
-    onStorage: 'onstorage',
-    onSubmit: 'onsubmit',
-    onSuspend: 'onsuspend',
-    onTimeUpdate: 'ontimeupdate',
-    onToggle: 'ontoggle',
-    onUnload: 'onunload',
-    onVolumeChange: 'onvolumechange',
-    onWaiting: 'onwaiting',
-    onZoom: 'onzoom',
-    overlinePosition: 'overline-position',
-    overlineThickness: 'overline-thickness',
-    paintOrder: 'paint-order',
-    panose1: 'panose-1',
-    pointerEvents: 'pointer-events',
-    referrerPolicy: 'referrerpolicy',
-    renderingIntent: 'rendering-intent',
-    shapeRendering: 'shape-rendering',
-    stopColor: 'stop-color',
-    stopOpacity: 'stop-opacity',
-    strikethroughPosition: 'strikethrough-position',
-    strikethroughThickness: 'strikethrough-thickness',
-    strokeDashArray: 'stroke-dasharray',
-    strokeDashOffset: 'stroke-dashoffset',
-    strokeLineCap: 'stroke-linecap',
-    strokeLineJoin: 'stroke-linejoin',
-    strokeMiterLimit: 'stroke-miterlimit',
-    strokeOpacity: 'stroke-opacity',
-    strokeWidth: 'stroke-width',
-    tabIndex: 'tabindex',
-    textAnchor: 'text-anchor',
-    textDecoration: 'text-decoration',
-    textRendering: 'text-rendering',
-    typeOf: 'typeof',
-    underlinePosition: 'underline-position',
-    underlineThickness: 'underline-thickness',
-    unicodeBidi: 'unicode-bidi',
-    unicodeRange: 'unicode-range',
-    unitsPerEm: 'units-per-em',
-    vAlphabetic: 'v-alphabetic',
-    vHanging: 'v-hanging',
-    vIdeographic: 'v-ideographic',
-    vMathematical: 'v-mathematical',
-    vectorEffect: 'vector-effect',
-    vertAdvY: 'vert-adv-y',
-    vertOriginX: 'vert-origin-x',
-    vertOriginY: 'vert-origin-y',
-    wordSpacing: 'word-spacing',
-    writingMode: 'writing-mode',
-    xHeight: 'x-height',
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: 'playbackorder',
-    timelineBegin: 'timelinebegin'
-  },
-  transform: case_sensitive_transform_caseSensitiveTransform,
-  properties: {
-    about: types_commaOrSpaceSeparated,
-    accentHeight: types_number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: types_number,
-    amplitude: types_number,
-    arabicForm: null,
-    ascent: types_number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: types_number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: types_number,
-    by: null,
-    calcMode: null,
-    capHeight: types_number,
-    className: types_spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: types_number,
-    diffuseConstant: types_number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: types_number,
-    dominantBaseline: null,
-    download: types_boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: types_number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: types_number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: types_number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: types_commaSeparated,
-    g2: types_commaSeparated,
-    glyphName: types_commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: types_number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: types_number,
-    horizOriginX: types_number,
-    horizOriginY: types_number,
-    id: null,
-    ideographic: types_number,
-    imageRendering: null,
-    initialVisibility: null,
-    "in": null,
-    in2: null,
-    intercept: types_number,
-    k: types_number,
-    k1: types_number,
-    k2: types_number,
-    k3: types_number,
-    k4: types_number,
-    kernelMatrix: types_commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: types_number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: types_number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: types_number,
-    overlineThickness: types_number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: types_number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: types_spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: types_number,
-    pointsAtY: types_number,
-    pointsAtZ: types_number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: types_commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: types_commaOrSpaceSeparated,
-    rev: types_commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: types_commaOrSpaceSeparated,
-    requiredFeatures: types_commaOrSpaceSeparated,
-    requiredFonts: types_commaOrSpaceSeparated,
-    requiredFormats: types_commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: types_number,
-    specularExponent: types_number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: types_number,
-    strikethroughThickness: types_number,
-    string: null,
-    stroke: null,
-    strokeDashArray: types_commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: types_number,
-    strokeOpacity: types_number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: types_number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: types_commaOrSpaceSeparated,
-    tabIndex: types_number,
-    tableValues: null,
-    target: null,
-    targetX: types_number,
-    targetY: types_number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: types_commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    u1: null,
-    u2: null,
-    underlinePosition: types_number,
-    underlineThickness: types_number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: types_number,
-    values: null,
-    vAlphabetic: types_number,
-    vMathematical: types_number,
-    vectorEffect: null,
-    vHanging: types_number,
-    vIdeographic: types_number,
-    version: null,
-    vertAdvY: types_number,
-    vertOriginX: types_number,
-    vertOriginY: types_number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: types_number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/index.js
-/**
- * @typedef {import('./lib/util/info.js').Info} Info
- * @typedef {import('./lib/util/schema.js').Schema} Schema
- */
-
-
-
-
-
-
-
-
-
-
-var node_modules_property_information_html = merge_merge([xml_xml, xlink_xlink, xmlns_xmlns, aria_aria, lib_html_html], 'html');
-var node_modules_property_information_svg = merge_merge([xml_xml, xlink_xlink, xmlns_xmlns, aria_aria, svg_svg], 'svg');
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/node_modules/property-information/lib/find.js
-/**
- * @typedef {import('./util/schema.js').Schema} Schema
- */
-
-
-
-var find_valid = /^data[-\w.:]+$/i;
-var find_dash = /-[a-z]/g;
-var find_cap = /[A-Z]/g;
-/**
- * @param {Schema} schema
- * @param {string} value
- * @returns {Info}
- */
-
-function find_find(schema, value) {
-  var normal = normalize_normalize(value);
-  var prop = value;
-  var Type = info_Info;
-
-  if (normal in schema.normal) {
-    return schema.property[schema.normal[normal]];
-  }
-
-  if (normal.length > 4 && normal.slice(0, 4) === 'data' && find_valid.test(value)) {
-    // Attribute or property.
-    if (value.charAt(4) === '-') {
-      // Turn it into a property.
-      var rest = value.slice(5).replace(find_dash, find_camelcase);
-      prop = 'data' + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      // Turn it into an attribute.
-      var _rest = value.slice(4);
-
-      if (!find_dash.test(_rest)) {
-        var dashes = _rest.replace(find_cap, find_kebab);
-
-        if (dashes.charAt(0) !== '-') {
-          dashes = '-' + dashes;
-        }
-
-        value = 'data' + dashes;
-      }
-    }
-
-    Type = defined_info_DefinedInfo;
-  }
-
-  return new Type(prop, value);
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-function find_kebab($0) {
-  return '-' + $0.toLowerCase();
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-
-function find_camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/schema.js
-
-
-
-/**
- * @typedef {import('./info.js').Info} Info
- * @typedef {Record<string, Info>} Properties
- * @typedef {Record<string, string>} Normal
- */
-var util_schema_Schema = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {Properties} property
- * @param {Normal} normal
- * @param {string} [space]
- */
-function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
-
-  this.property = property;
-  this.normal = normal;
-
-  if (space) {
-    this.space = space;
-  }
-});
-/** @type {Properties} */
-
-util_schema_Schema.prototype.property = {};
-/** @type {Normal} */
-
-util_schema_Schema.prototype.normal = {};
-/** @type {string|null} */
-
-util_schema_Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/merge.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- */
-
-/**
- * @param {Schema[]} definitions
- * @param {string} [space]
- * @returns {Schema}
- */
-
-function util_merge_merge(definitions, space) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  var index = -1;
-
-  while (++index < definitions.length) {
-    Object.assign(property, definitions[index].property);
-    Object.assign(normal, definitions[index].normal);
-  }
-
-  return new util_schema_Schema(property, normal, space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/normalize.js
-/**
- * @param {string} value
- * @returns {string}
- */
-function lib_normalize_normalize(value) {
-  return value.toLowerCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/info.js
-
-
-var util_info_Info = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {string} property
- * @param {string} attribute
- */
-function Info(property, attribute) {
-  _classCallCheck(this, Info);
-
-  /** @type {string} */
-  this.property = property;
-  /** @type {string} */
-
-  this.attribute = attribute;
-});
-/** @type {string|null} */
-
-util_info_Info.prototype.space = null;
-util_info_Info.prototype["boolean"] = false;
-util_info_Info.prototype.booleanish = false;
-util_info_Info.prototype.overloadedBoolean = false;
-util_info_Info.prototype.number = false;
-util_info_Info.prototype.commaSeparated = false;
-util_info_Info.prototype.spaceSeparated = false;
-util_info_Info.prototype.commaOrSpaceSeparated = false;
-util_info_Info.prototype.mustUseProperty = false;
-util_info_Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/types.js
-var util_types_powers = 0;
-
-var util_types_boolean = util_types_increment();
-
-
-var util_types_booleanish = util_types_increment();
-var util_types_overloadedBoolean = util_types_increment();
-var util_types_number = util_types_increment();
-var util_types_spaceSeparated = util_types_increment();
-var util_types_commaSeparated = util_types_increment();
-var util_types_commaOrSpaceSeparated = util_types_increment();
-
-function util_types_increment() {
-  return Math.pow(2, ++util_types_powers);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/defined-info.js
-
-
-
-
-
-
-
-/** @type {Array<keyof types>} */
-// @ts-expect-error: hush.
-
-var util_defined_info_checks = Object.keys(lib_util_types_namespaceObject);
-var util_defined_info_DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-
-  var _super = _createSuper(DefinedInfo);
-
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  function DefinedInfo(property, attribute, mask, space) {
-    var _this;
-
-    _classCallCheck(this, DefinedInfo);
-
-    var index = -1;
-    _this = _super.call(this, property, attribute);
-    util_defined_info_mark(_assertThisInitialized(_this), 'space', space);
-
-    if (typeof mask === 'number') {
-      while (++index < util_defined_info_checks.length) {
-        var check = util_defined_info_checks[index];
-        util_defined_info_mark(_assertThisInitialized(_this), util_defined_info_checks[index], (mask & lib_util_types_namespaceObject[check]) === lib_util_types_namespaceObject[check]);
-      }
-    }
-
-    return _this;
-  }
-
-  return _createClass(DefinedInfo);
-}(util_info_Info);
-util_defined_info_DefinedInfo.prototype.defined = true;
-/**
- * @param {DefinedInfo} values
- * @param {string} key
- * @param {unknown} value
- */
-
-function util_defined_info_mark(values, key, value) {
-  if (value) {
-    // @ts-expect-error: assume `value` matches the expected value of `key`.
-    values[key] = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/create.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- *
- * @typedef {Record<string, string>} Attributes
- *
- * @typedef {Object} Definition
- * @property {Record<string, number|null>} properties
- * @property {(attributes: Attributes, property: string) => string} transform
- * @property {string} [space]
- * @property {Attributes} [attributes]
- * @property {Array<string>} [mustUseProperty]
- */
-
-
-
-var lib_util_create_own = {}.hasOwnProperty;
-/**
- * @param {Definition} definition
- * @returns {Schema}
- */
-
-function lib_util_create_create(definition) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  /** @type {string} */
-
-  var prop;
-
-  for (prop in definition.properties) {
-    if (lib_util_create_own.call(definition.properties, prop)) {
-      var value = definition.properties[prop];
-      var info = new util_defined_info_DefinedInfo(prop, definition.transform(definition.attributes || {}, prop), value, definition.space);
-
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-
-      property[prop] = info;
-      normal[lib_normalize_normalize(prop)] = prop;
-      normal[lib_normalize_normalize(info.attribute)] = prop;
-    }
-  }
-
-  return new util_schema_Schema(property, normal, definition.space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/xlink.js
-
-var lib_xlink_xlink = lib_util_create_create({
-  space: 'xlink',
-  transform: function transform(_, prop) {
-    return 'xlink:' + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/xml.js
-
-var lib_xml_xml = lib_util_create_create({
-  space: 'xml',
-  transform: function transform(_, prop) {
-    return 'xml:' + prop.slice(3).toLowerCase();
-  },
-  properties: {
-    xmlLang: null,
-    xmlBase: null,
-    xmlSpace: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/case-sensitive-transform.js
-/**
- * @param {Record<string, string>} attributes
- * @param {string} attribute
- * @returns {string}
- */
-function util_case_sensitive_transform_caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/util/case-insensitive-transform.js
-
-/**
- * @param {Record<string, string>} attributes
- * @param {string} property
- * @returns {string}
- */
-
-function util_case_insensitive_transform_caseInsensitiveTransform(attributes, property) {
-  return util_case_sensitive_transform_caseSensitiveTransform(attributes, property.toLowerCase());
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/xmlns.js
-
-
-var lib_xmlns_xmlns = lib_util_create_create({
-  space: 'xmlns',
-  attributes: {
-    xmlnsxlink: 'xmlns:xlink'
-  },
-  transform: util_case_insensitive_transform_caseInsensitiveTransform,
-  properties: {
-    xmlns: null,
-    xmlnsXLink: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/aria.js
-
-
-var lib_aria_aria = lib_util_create_create({
-  transform: function transform(_, prop) {
-    return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: util_types_booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: util_types_booleanish,
-    ariaChecked: util_types_booleanish,
-    ariaColCount: util_types_number,
-    ariaColIndex: util_types_number,
-    ariaColSpan: util_types_number,
-    ariaControls: util_types_spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: util_types_spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: util_types_booleanish,
-    ariaDropEffect: util_types_spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: util_types_booleanish,
-    ariaFlowTo: util_types_spaceSeparated,
-    ariaGrabbed: util_types_booleanish,
-    ariaHasPopup: null,
-    ariaHidden: util_types_booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: util_types_spaceSeparated,
-    ariaLevel: util_types_number,
-    ariaLive: null,
-    ariaModal: util_types_booleanish,
-    ariaMultiLine: util_types_booleanish,
-    ariaMultiSelectable: util_types_booleanish,
-    ariaOrientation: null,
-    ariaOwns: util_types_spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: util_types_number,
-    ariaPressed: util_types_booleanish,
-    ariaReadOnly: util_types_booleanish,
-    ariaRelevant: null,
-    ariaRequired: util_types_booleanish,
-    ariaRoleDescription: util_types_spaceSeparated,
-    ariaRowCount: util_types_number,
-    ariaRowIndex: util_types_number,
-    ariaRowSpan: util_types_number,
-    ariaSelected: util_types_booleanish,
-    ariaSetSize: util_types_number,
-    ariaSort: null,
-    ariaValueMax: util_types_number,
-    ariaValueMin: util_types_number,
-    ariaValueNow: util_types_number,
-    ariaValueText: null,
-    role: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/html.js
-
-
-
-var property_information_lib_html_html = lib_util_create_create({
-  space: 'html',
-  attributes: {
-    acceptcharset: 'accept-charset',
-    classname: 'class',
-    htmlfor: 'for',
-    httpequiv: 'http-equiv'
-  },
-  transform: util_case_insensitive_transform_caseInsensitiveTransform,
-  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: util_types_commaSeparated,
-    acceptCharset: util_types_spaceSeparated,
-    accessKey: util_types_spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: util_types_boolean,
-    allowPaymentRequest: util_types_boolean,
-    allowUserMedia: util_types_boolean,
-    alt: null,
-    as: null,
-    async: util_types_boolean,
-    autoCapitalize: null,
-    autoComplete: util_types_spaceSeparated,
-    autoFocus: util_types_boolean,
-    autoPlay: util_types_boolean,
-    capture: util_types_boolean,
-    charSet: null,
-    checked: util_types_boolean,
-    cite: null,
-    className: util_types_spaceSeparated,
-    cols: util_types_number,
-    colSpan: null,
-    content: null,
-    contentEditable: util_types_booleanish,
-    controls: util_types_boolean,
-    controlsList: util_types_spaceSeparated,
-    coords: util_types_number | util_types_commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    "default": util_types_boolean,
-    defer: util_types_boolean,
-    dir: null,
-    dirName: null,
-    disabled: util_types_boolean,
-    download: util_types_overloadedBoolean,
-    draggable: util_types_booleanish,
-    encType: null,
-    enterKeyHint: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: util_types_boolean,
-    formTarget: null,
-    headers: util_types_spaceSeparated,
-    height: util_types_number,
-    hidden: util_types_boolean,
-    high: util_types_number,
-    href: null,
-    hrefLang: null,
-    htmlFor: util_types_spaceSeparated,
-    httpEquiv: util_types_spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: util_types_boolean,
-    itemId: null,
-    itemProp: util_types_spaceSeparated,
-    itemRef: util_types_spaceSeparated,
-    itemScope: util_types_boolean,
-    itemType: util_types_spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: util_types_boolean,
-    low: util_types_number,
-    manifest: null,
-    max: null,
-    maxLength: util_types_number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: util_types_number,
-    multiple: util_types_boolean,
-    muted: util_types_boolean,
-    name: null,
-    nonce: null,
-    noModule: util_types_boolean,
-    noValidate: util_types_boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforePrint: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: util_types_boolean,
-    optimum: util_types_number,
-    pattern: null,
-    ping: util_types_spaceSeparated,
-    placeholder: null,
-    playsInline: util_types_boolean,
-    poster: null,
-    preload: null,
-    readOnly: util_types_boolean,
-    referrerPolicy: null,
-    rel: util_types_spaceSeparated,
-    required: util_types_boolean,
-    reversed: util_types_boolean,
-    rows: util_types_number,
-    rowSpan: util_types_number,
-    sandbox: util_types_spaceSeparated,
-    scope: null,
-    scoped: util_types_boolean,
-    seamless: util_types_boolean,
-    selected: util_types_boolean,
-    shape: null,
-    size: util_types_number,
-    sizes: null,
-    slot: null,
-    span: util_types_number,
-    spellCheck: util_types_booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: util_types_number,
-    step: null,
-    style: null,
-    tabIndex: util_types_number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: util_types_boolean,
-    useMap: null,
-    value: util_types_booleanish,
-    width: util_types_number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: util_types_spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: util_types_number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: util_types_number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    "char": null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: util_types_boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: util_types_boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: util_types_number,
-    // `<img>` and `<object>`
-    leftMargin: util_types_number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: util_types_number,
-    // `<body>`
-    marginWidth: util_types_number,
-    // `<body>`
-    noResize: util_types_boolean,
-    // `<frame>`
-    noHref: util_types_boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: util_types_boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: util_types_boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: util_types_number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: util_types_booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: util_types_number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: util_types_number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: util_types_boolean,
-    disableRemotePlayback: util_types_boolean,
-    prefix: null,
-    property: null,
-    results: util_types_number,
-    security: null,
-    unselectable: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/svg.js
-
-
-
-var lib_svg_svg = lib_util_create_create({
-  space: 'svg',
-  attributes: {
-    accentHeight: 'accent-height',
-    alignmentBaseline: 'alignment-baseline',
-    arabicForm: 'arabic-form',
-    baselineShift: 'baseline-shift',
-    capHeight: 'cap-height',
-    className: 'class',
-    clipPath: 'clip-path',
-    clipRule: 'clip-rule',
-    colorInterpolation: 'color-interpolation',
-    colorInterpolationFilters: 'color-interpolation-filters',
-    colorProfile: 'color-profile',
-    colorRendering: 'color-rendering',
-    crossOrigin: 'crossorigin',
-    dataType: 'datatype',
-    dominantBaseline: 'dominant-baseline',
-    enableBackground: 'enable-background',
-    fillOpacity: 'fill-opacity',
-    fillRule: 'fill-rule',
-    floodColor: 'flood-color',
-    floodOpacity: 'flood-opacity',
-    fontFamily: 'font-family',
-    fontSize: 'font-size',
-    fontSizeAdjust: 'font-size-adjust',
-    fontStretch: 'font-stretch',
-    fontStyle: 'font-style',
-    fontVariant: 'font-variant',
-    fontWeight: 'font-weight',
-    glyphName: 'glyph-name',
-    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
-    glyphOrientationVertical: 'glyph-orientation-vertical',
-    hrefLang: 'hreflang',
-    horizAdvX: 'horiz-adv-x',
-    horizOriginX: 'horiz-origin-x',
-    horizOriginY: 'horiz-origin-y',
-    imageRendering: 'image-rendering',
-    letterSpacing: 'letter-spacing',
-    lightingColor: 'lighting-color',
-    markerEnd: 'marker-end',
-    markerMid: 'marker-mid',
-    markerStart: 'marker-start',
-    navDown: 'nav-down',
-    navDownLeft: 'nav-down-left',
-    navDownRight: 'nav-down-right',
-    navLeft: 'nav-left',
-    navNext: 'nav-next',
-    navPrev: 'nav-prev',
-    navRight: 'nav-right',
-    navUp: 'nav-up',
-    navUpLeft: 'nav-up-left',
-    navUpRight: 'nav-up-right',
-    onAbort: 'onabort',
-    onActivate: 'onactivate',
-    onAfterPrint: 'onafterprint',
-    onBeforePrint: 'onbeforeprint',
-    onBegin: 'onbegin',
-    onCancel: 'oncancel',
-    onCanPlay: 'oncanplay',
-    onCanPlayThrough: 'oncanplaythrough',
-    onChange: 'onchange',
-    onClick: 'onclick',
-    onClose: 'onclose',
-    onCopy: 'oncopy',
-    onCueChange: 'oncuechange',
-    onCut: 'oncut',
-    onDblClick: 'ondblclick',
-    onDrag: 'ondrag',
-    onDragEnd: 'ondragend',
-    onDragEnter: 'ondragenter',
-    onDragExit: 'ondragexit',
-    onDragLeave: 'ondragleave',
-    onDragOver: 'ondragover',
-    onDragStart: 'ondragstart',
-    onDrop: 'ondrop',
-    onDurationChange: 'ondurationchange',
-    onEmptied: 'onemptied',
-    onEnd: 'onend',
-    onEnded: 'onended',
-    onError: 'onerror',
-    onFocus: 'onfocus',
-    onFocusIn: 'onfocusin',
-    onFocusOut: 'onfocusout',
-    onHashChange: 'onhashchange',
-    onInput: 'oninput',
-    onInvalid: 'oninvalid',
-    onKeyDown: 'onkeydown',
-    onKeyPress: 'onkeypress',
-    onKeyUp: 'onkeyup',
-    onLoad: 'onload',
-    onLoadedData: 'onloadeddata',
-    onLoadedMetadata: 'onloadedmetadata',
-    onLoadStart: 'onloadstart',
-    onMessage: 'onmessage',
-    onMouseDown: 'onmousedown',
-    onMouseEnter: 'onmouseenter',
-    onMouseLeave: 'onmouseleave',
-    onMouseMove: 'onmousemove',
-    onMouseOut: 'onmouseout',
-    onMouseOver: 'onmouseover',
-    onMouseUp: 'onmouseup',
-    onMouseWheel: 'onmousewheel',
-    onOffline: 'onoffline',
-    onOnline: 'ononline',
-    onPageHide: 'onpagehide',
-    onPageShow: 'onpageshow',
-    onPaste: 'onpaste',
-    onPause: 'onpause',
-    onPlay: 'onplay',
-    onPlaying: 'onplaying',
-    onPopState: 'onpopstate',
-    onProgress: 'onprogress',
-    onRateChange: 'onratechange',
-    onRepeat: 'onrepeat',
-    onReset: 'onreset',
-    onResize: 'onresize',
-    onScroll: 'onscroll',
-    onSeeked: 'onseeked',
-    onSeeking: 'onseeking',
-    onSelect: 'onselect',
-    onShow: 'onshow',
-    onStalled: 'onstalled',
-    onStorage: 'onstorage',
-    onSubmit: 'onsubmit',
-    onSuspend: 'onsuspend',
-    onTimeUpdate: 'ontimeupdate',
-    onToggle: 'ontoggle',
-    onUnload: 'onunload',
-    onVolumeChange: 'onvolumechange',
-    onWaiting: 'onwaiting',
-    onZoom: 'onzoom',
-    overlinePosition: 'overline-position',
-    overlineThickness: 'overline-thickness',
-    paintOrder: 'paint-order',
-    panose1: 'panose-1',
-    pointerEvents: 'pointer-events',
-    referrerPolicy: 'referrerpolicy',
-    renderingIntent: 'rendering-intent',
-    shapeRendering: 'shape-rendering',
-    stopColor: 'stop-color',
-    stopOpacity: 'stop-opacity',
-    strikethroughPosition: 'strikethrough-position',
-    strikethroughThickness: 'strikethrough-thickness',
-    strokeDashArray: 'stroke-dasharray',
-    strokeDashOffset: 'stroke-dashoffset',
-    strokeLineCap: 'stroke-linecap',
-    strokeLineJoin: 'stroke-linejoin',
-    strokeMiterLimit: 'stroke-miterlimit',
-    strokeOpacity: 'stroke-opacity',
-    strokeWidth: 'stroke-width',
-    tabIndex: 'tabindex',
-    textAnchor: 'text-anchor',
-    textDecoration: 'text-decoration',
-    textRendering: 'text-rendering',
-    typeOf: 'typeof',
-    underlinePosition: 'underline-position',
-    underlineThickness: 'underline-thickness',
-    unicodeBidi: 'unicode-bidi',
-    unicodeRange: 'unicode-range',
-    unitsPerEm: 'units-per-em',
-    vAlphabetic: 'v-alphabetic',
-    vHanging: 'v-hanging',
-    vIdeographic: 'v-ideographic',
-    vMathematical: 'v-mathematical',
-    vectorEffect: 'vector-effect',
-    vertAdvY: 'vert-adv-y',
-    vertOriginX: 'vert-origin-x',
-    vertOriginY: 'vert-origin-y',
-    wordSpacing: 'word-spacing',
-    writingMode: 'writing-mode',
-    xHeight: 'x-height',
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: 'playbackorder',
-    timelineBegin: 'timelinebegin'
-  },
-  transform: util_case_sensitive_transform_caseSensitiveTransform,
-  properties: {
-    about: util_types_commaOrSpaceSeparated,
-    accentHeight: util_types_number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: util_types_number,
-    amplitude: util_types_number,
-    arabicForm: null,
-    ascent: util_types_number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: util_types_number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: util_types_number,
-    by: null,
-    calcMode: null,
-    capHeight: util_types_number,
-    className: util_types_spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: util_types_number,
-    diffuseConstant: util_types_number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: util_types_number,
-    dominantBaseline: null,
-    download: util_types_boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: util_types_number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: util_types_number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: util_types_number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: util_types_commaSeparated,
-    g2: util_types_commaSeparated,
-    glyphName: util_types_commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: util_types_number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: util_types_number,
-    horizOriginX: util_types_number,
-    horizOriginY: util_types_number,
-    id: null,
-    ideographic: util_types_number,
-    imageRendering: null,
-    initialVisibility: null,
-    "in": null,
-    in2: null,
-    intercept: util_types_number,
-    k: util_types_number,
-    k1: util_types_number,
-    k2: util_types_number,
-    k3: util_types_number,
-    k4: util_types_number,
-    kernelMatrix: util_types_commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: util_types_number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: util_types_number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: util_types_number,
-    overlineThickness: util_types_number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: util_types_number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: util_types_spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: util_types_number,
-    pointsAtY: util_types_number,
-    pointsAtZ: util_types_number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: util_types_commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: util_types_commaOrSpaceSeparated,
-    rev: util_types_commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: util_types_commaOrSpaceSeparated,
-    requiredFeatures: util_types_commaOrSpaceSeparated,
-    requiredFonts: util_types_commaOrSpaceSeparated,
-    requiredFormats: util_types_commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: util_types_number,
-    specularExponent: util_types_number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: util_types_number,
-    strikethroughThickness: util_types_number,
-    string: null,
-    stroke: null,
-    strokeDashArray: util_types_commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: util_types_number,
-    strokeOpacity: util_types_number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: util_types_number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: util_types_commaOrSpaceSeparated,
-    tabIndex: util_types_number,
-    tableValues: null,
-    target: null,
-    targetX: util_types_number,
-    targetY: util_types_number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: util_types_commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    u1: null,
-    u2: null,
-    underlinePosition: util_types_number,
-    underlineThickness: util_types_number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: util_types_number,
-    values: null,
-    vAlphabetic: util_types_number,
-    vMathematical: util_types_number,
-    vectorEffect: null,
-    vHanging: util_types_number,
-    vIdeographic: util_types_number,
-    version: null,
-    vertAdvY: util_types_number,
-    vertOriginX: util_types_number,
-    vertOriginY: util_types_number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: util_types_number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/index.js
-/**
- * @typedef {import('./lib/util/info.js').Info} Info
- * @typedef {import('./lib/util/schema.js').Schema} Schema
- */
-
-
-
-
-
-
-
-
-
-
-var hast_to_hyperscript_node_modules_property_information_html = util_merge_merge([lib_xml_xml, lib_xlink_xlink, lib_xmlns_xmlns, lib_aria_aria, property_information_lib_html_html], 'html');
-var hast_to_hyperscript_node_modules_property_information_svg = util_merge_merge([lib_xml_xml, lib_xlink_xlink, lib_xmlns_xmlns, lib_aria_aria, lib_svg_svg], 'svg');
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/hast-to-react.js
+;// CONCATENATED MODULE: ../../node_modules/property-information/lib/hast-to-react.js
 var hastToReact = {
   classId: 'classID',
   dataType: 'datatype',
@@ -62310,156 +59325,6 @@ var hastToReact = {
   xLinkType: 'xlinkType',
   xmlnsXLink: 'xmlnsXlink'
 };
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/property-information/lib/find.js
-/**
- * @typedef {import('./util/schema.js').Schema} Schema
- */
-
-
-
-var lib_find_valid = /^data[-\w.:]+$/i;
-var lib_find_dash = /-[a-z]/g;
-var lib_find_cap = /[A-Z]/g;
-/**
- * @param {Schema} schema
- * @param {string} value
- * @returns {Info}
- */
-
-function lib_find_find(schema, value) {
-  var normal = lib_normalize_normalize(value);
-  var prop = value;
-  var Type = util_info_Info;
-
-  if (normal in schema.normal) {
-    return schema.property[schema.normal[normal]];
-  }
-
-  if (normal.length > 4 && normal.slice(0, 4) === 'data' && lib_find_valid.test(value)) {
-    // Attribute or property.
-    if (value.charAt(4) === '-') {
-      // Turn it into a property.
-      var rest = value.slice(5).replace(lib_find_dash, lib_find_camelcase);
-      prop = 'data' + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      // Turn it into an attribute.
-      var _rest = value.slice(4);
-
-      if (!lib_find_dash.test(_rest)) {
-        var dashes = _rest.replace(lib_find_cap, lib_find_kebab);
-
-        if (dashes.charAt(0) !== '-') {
-          dashes = '-' + dashes;
-        }
-
-        value = 'data' + dashes;
-      }
-    }
-
-    Type = util_defined_info_DefinedInfo;
-  }
-
-  return new Type(prop, value);
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-function lib_find_kebab($0) {
-  return '-' + $0.toLowerCase();
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-
-function lib_find_camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/space-separated-tokens/index.js
-/**
- * Parse space separated tokens to an array of strings.
- *
- * @param {string} value Space separated tokens
- * @returns {Array.<string>} Tokens
- */
-function node_modules_space_separated_tokens_parse(value) {
-  var input = String(value || '').trim();
-  return input ? input.split(/[ \t\n\r\f]+/g) : [];
-}
-/**
- * Serialize an array of strings as space separated tokens.
- *
- * @param {Array.<string|number>} values Tokens
- * @returns {string} Space separated tokens
- */
-
-function space_separated_tokens_stringify(values) {
-  return values.join(' ').trim();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/node_modules/comma-separated-tokens/index.js
-/**
- * @typedef {Object} StringifyOptions
- * @property {boolean} [padLeft=true] Whether to pad a space before a token (`boolean`, default: `true`).
- * @property {boolean} [padRight=false] Whether to pad a space after a token (`boolean`, default: `false`).
- */
-
-/**
- * Parse comma separated tokens to an array.
- *
- * @param {string} value
- * @returns {Array.<string>}
- */
-function node_modules_comma_separated_tokens_parse(value) {
-  /** @type {Array.<string>} */
-  var tokens = [];
-  var input = String(value || '');
-  var index = input.indexOf(',');
-  var start = 0;
-  /** @type {boolean} */
-
-  var end;
-  /** @type {string} */
-
-  var token;
-
-  while (!end) {
-    if (index === -1) {
-      index = input.length;
-      end = true;
-    }
-
-    token = input.slice(start, index).trim();
-
-    if (token || !end) {
-      tokens.push(token);
-    }
-
-    start = index + 1;
-    index = input.indexOf(',', start);
-  }
-
-  return tokens;
-}
-/**
- * Serialize an array of strings to comma separated tokens.
- *
- * @param {Array.<string|number>} values
- * @param {StringifyOptions} [options]
- * @returns {string}
- */
-
-function node_modules_comma_separated_tokens_stringify(values, options) {
-  var settings = options || {}; // Ensure the last empty entry is seen.
-
-  if (values[values.length - 1] === '') {
-    values = values.concat('');
-  }
-
-  return values.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
-}
 // EXTERNAL MODULE: ../../node_modules/style-to-object/index.js
 var style_to_object = __webpack_require__(2707);
 ;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/index.js
@@ -62565,7 +59430,7 @@ function toH(h, tree, options) {
   }
 
   return hast_to_hyperscript_transform(h, node, {
-    schema: options.space === 'svg' ? hast_to_hyperscript_node_modules_property_information_svg : hast_to_hyperscript_node_modules_property_information_html,
+    schema: options.space === 'svg' ? property_information_svg : property_information_html,
     prefix: prefix === undefined || prefix === null ? r || v || vd ? 'h-' : null : typeof prefix === 'string' ? prefix : prefix ? 'h-' : null,
     key: 0,
     react: r,
@@ -62599,7 +59464,7 @@ function hast_to_hyperscript_transform(h, node, ctx) {
   var key;
 
   if (parentSchema.space === 'html' && name.toLowerCase() === 'svg') {
-    schema = hast_to_hyperscript_node_modules_property_information_svg;
+    schema = property_information_svg;
     ctx.schema = schema;
   }
 
@@ -62651,7 +59516,7 @@ function hast_to_hyperscript_transform(h, node, ctx) {
 
 
 function addAttribute(props, prop, value, ctx, name) {
-  var info = lib_find_find(ctx.schema, prop);
+  var info = find(ctx.schema, prop);
   /** @type {string|undefined} */
 
   var subprop; // Ignore nullish and `NaN` values.
@@ -62664,7 +59529,7 @@ function addAttribute(props, prop, value, ctx, name) {
   if (Array.isArray(value)) {
     // Accept `array`.
     // Most props are space-separated.
-    value = info.commaSeparated ? node_modules_comma_separated_tokens_stringify(value) : space_separated_tokens_stringify(value);
+    value = info.commaSeparated ? comma_separated_tokens_stringify(value) : stringify(value);
   } // Treat `true` and truthy known booleans.
 
 
@@ -62894,7 +59759,7 @@ var lib_one = zwitch('type', {
 
 function toParse5(tree, space) {
   // @ts-ignore Types are wrong.
-  return lib_one(tree, space === 'svg' ? node_modules_property_information_svg : node_modules_property_information_html);
+  return lib_one(tree, space === 'svg' ? property_information_svg : property_information_html);
 }
 /**
  * @type {Handle}
@@ -63019,7 +59884,7 @@ function hast_util_to_parse5_lib_element(node, schema) {
         continue;
       }
 
-      info = find_find(schema, key);
+      info = find(schema, key);
 
       if (info["boolean"] && !attrs[key]) {
         continue;
@@ -63046,7 +59911,7 @@ function hast_util_to_parse5_lib_element(node, schema) {
       values.push(value);
     }
 
-    if (schema.space === 'html' && node.tagName === 'svg') schema = node_modules_property_information_svg;
+    if (schema.space === 'html' && node.tagName === 'svg') schema = property_information_svg;
     p5 = patch(node, {
       nodeName: name,
       tagName: name,
@@ -63293,7 +60158,7 @@ function raw(tree, file, options) {
   var result = fromParse5(documentMode(tree) ? document() : fragment(), file);
 
   if (stitches) {
-    hast_util_raw_node_modules_unist_util_visit_visit(result, 'comment', function (node, index, parent) {
+    visit(result, 'comment', function (node, index, parent) {
       var stitch =
       /** @type {Stitch} */
 
@@ -63730,1336 +60595,6 @@ function rehypeRaw() {
     return result;
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-rewrite/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var rehype_rewrite_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/schema.js
-
-
-
-/**
- * @typedef {import('./info.js').Info} Info
- * @typedef {Record<string, Info>} Properties
- * @typedef {Record<string, string>} Normal
- */
-var lib_util_schema_Schema = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {Properties} property
- * @param {Normal} normal
- * @param {string} [space]
- */
-function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
-
-  this.property = property;
-  this.normal = normal;
-
-  if (space) {
-    this.space = space;
-  }
-});
-/** @type {Properties} */
-
-lib_util_schema_Schema.prototype.property = {};
-/** @type {Normal} */
-
-lib_util_schema_Schema.prototype.normal = {};
-/** @type {string|null} */
-
-lib_util_schema_Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/merge.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- */
-
-/**
- * @param {Schema[]} definitions
- * @param {string} [space]
- * @returns {Schema}
- */
-
-function lib_util_merge_merge(definitions, space) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  var index = -1;
-
-  while (++index < definitions.length) {
-    Object.assign(property, definitions[index].property);
-    Object.assign(normal, definitions[index].normal);
-  }
-
-  return new lib_util_schema_Schema(property, normal, space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/normalize.js
-/**
- * @param {string} value
- * @returns {string}
- */
-function property_information_lib_normalize_normalize(value) {
-  return value.toLowerCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/info.js
-
-
-var lib_util_info_Info = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {string} property
- * @param {string} attribute
- */
-function Info(property, attribute) {
-  _classCallCheck(this, Info);
-
-  /** @type {string} */
-  this.property = property;
-  /** @type {string} */
-
-  this.attribute = attribute;
-});
-/** @type {string|null} */
-
-lib_util_info_Info.prototype.space = null;
-lib_util_info_Info.prototype["boolean"] = false;
-lib_util_info_Info.prototype.booleanish = false;
-lib_util_info_Info.prototype.overloadedBoolean = false;
-lib_util_info_Info.prototype.number = false;
-lib_util_info_Info.prototype.commaSeparated = false;
-lib_util_info_Info.prototype.spaceSeparated = false;
-lib_util_info_Info.prototype.commaOrSpaceSeparated = false;
-lib_util_info_Info.prototype.mustUseProperty = false;
-lib_util_info_Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/types.js
-var lib_util_types_powers = 0;
-
-var lib_util_types_boolean = lib_util_types_increment();
-
-
-var lib_util_types_booleanish = lib_util_types_increment();
-var lib_util_types_overloadedBoolean = lib_util_types_increment();
-var lib_util_types_number = lib_util_types_increment();
-var lib_util_types_spaceSeparated = lib_util_types_increment();
-var lib_util_types_commaSeparated = lib_util_types_increment();
-var lib_util_types_commaOrSpaceSeparated = lib_util_types_increment();
-
-function lib_util_types_increment() {
-  return Math.pow(2, ++lib_util_types_powers);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/defined-info.js
-
-
-
-
-
-
-
-/** @type {Array<keyof types>} */
-// @ts-expect-error: hush.
-
-var lib_util_defined_info_checks = Object.keys(property_information_lib_util_types_namespaceObject);
-var lib_util_defined_info_DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-
-  var _super = _createSuper(DefinedInfo);
-
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  function DefinedInfo(property, attribute, mask, space) {
-    var _this;
-
-    _classCallCheck(this, DefinedInfo);
-
-    var index = -1;
-    _this = _super.call(this, property, attribute);
-    lib_util_defined_info_mark(_assertThisInitialized(_this), 'space', space);
-
-    if (typeof mask === 'number') {
-      while (++index < lib_util_defined_info_checks.length) {
-        var check = lib_util_defined_info_checks[index];
-        lib_util_defined_info_mark(_assertThisInitialized(_this), lib_util_defined_info_checks[index], (mask & property_information_lib_util_types_namespaceObject[check]) === property_information_lib_util_types_namespaceObject[check]);
-      }
-    }
-
-    return _this;
-  }
-
-  return _createClass(DefinedInfo);
-}(lib_util_info_Info);
-lib_util_defined_info_DefinedInfo.prototype.defined = true;
-/**
- * @param {DefinedInfo} values
- * @param {string} key
- * @param {unknown} value
- */
-
-function lib_util_defined_info_mark(values, key, value) {
-  if (value) {
-    // @ts-expect-error: assume `value` matches the expected value of `key`.
-    values[key] = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/create.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- *
- * @typedef {Record<string, string>} Attributes
- *
- * @typedef {Object} Definition
- * @property {Record<string, number|null>} properties
- * @property {(attributes: Attributes, property: string) => string} transform
- * @property {string} [space]
- * @property {Attributes} [attributes]
- * @property {Array<string>} [mustUseProperty]
- */
-
-
-
-var property_information_lib_util_create_own = {}.hasOwnProperty;
-/**
- * @param {Definition} definition
- * @returns {Schema}
- */
-
-function property_information_lib_util_create_create(definition) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  /** @type {string} */
-
-  var prop;
-
-  for (prop in definition.properties) {
-    if (property_information_lib_util_create_own.call(definition.properties, prop)) {
-      var value = definition.properties[prop];
-      var info = new lib_util_defined_info_DefinedInfo(prop, definition.transform(definition.attributes || {}, prop), value, definition.space);
-
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-
-      property[prop] = info;
-      normal[property_information_lib_normalize_normalize(prop)] = prop;
-      normal[property_information_lib_normalize_normalize(info.attribute)] = prop;
-    }
-  }
-
-  return new lib_util_schema_Schema(property, normal, definition.space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/xlink.js
-
-var property_information_lib_xlink_xlink = property_information_lib_util_create_create({
-  space: 'xlink',
-  transform: function transform(_, prop) {
-    return 'xlink:' + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/xml.js
-
-var property_information_lib_xml_xml = property_information_lib_util_create_create({
-  space: 'xml',
-  transform: function transform(_, prop) {
-    return 'xml:' + prop.slice(3).toLowerCase();
-  },
-  properties: {
-    xmlLang: null,
-    xmlBase: null,
-    xmlSpace: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/case-sensitive-transform.js
-/**
- * @param {Record<string, string>} attributes
- * @param {string} attribute
- * @returns {string}
- */
-function lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/util/case-insensitive-transform.js
-
-/**
- * @param {Record<string, string>} attributes
- * @param {string} property
- * @returns {string}
- */
-
-function lib_util_case_insensitive_transform_caseInsensitiveTransform(attributes, property) {
-  return lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, property.toLowerCase());
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/xmlns.js
-
-
-var property_information_lib_xmlns_xmlns = property_information_lib_util_create_create({
-  space: 'xmlns',
-  attributes: {
-    xmlnsxlink: 'xmlns:xlink'
-  },
-  transform: lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  properties: {
-    xmlns: null,
-    xmlnsXLink: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/aria.js
-
-
-var property_information_lib_aria_aria = property_information_lib_util_create_create({
-  transform: function transform(_, prop) {
-    return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: lib_util_types_booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: lib_util_types_booleanish,
-    ariaChecked: lib_util_types_booleanish,
-    ariaColCount: lib_util_types_number,
-    ariaColIndex: lib_util_types_number,
-    ariaColSpan: lib_util_types_number,
-    ariaControls: lib_util_types_spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: lib_util_types_spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: lib_util_types_booleanish,
-    ariaDropEffect: lib_util_types_spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: lib_util_types_booleanish,
-    ariaFlowTo: lib_util_types_spaceSeparated,
-    ariaGrabbed: lib_util_types_booleanish,
-    ariaHasPopup: null,
-    ariaHidden: lib_util_types_booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: lib_util_types_spaceSeparated,
-    ariaLevel: lib_util_types_number,
-    ariaLive: null,
-    ariaModal: lib_util_types_booleanish,
-    ariaMultiLine: lib_util_types_booleanish,
-    ariaMultiSelectable: lib_util_types_booleanish,
-    ariaOrientation: null,
-    ariaOwns: lib_util_types_spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: lib_util_types_number,
-    ariaPressed: lib_util_types_booleanish,
-    ariaReadOnly: lib_util_types_booleanish,
-    ariaRelevant: null,
-    ariaRequired: lib_util_types_booleanish,
-    ariaRoleDescription: lib_util_types_spaceSeparated,
-    ariaRowCount: lib_util_types_number,
-    ariaRowIndex: lib_util_types_number,
-    ariaRowSpan: lib_util_types_number,
-    ariaSelected: lib_util_types_booleanish,
-    ariaSetSize: lib_util_types_number,
-    ariaSort: null,
-    ariaValueMax: lib_util_types_number,
-    ariaValueMin: lib_util_types_number,
-    ariaValueNow: lib_util_types_number,
-    ariaValueText: null,
-    role: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/html.js
-
-
-
-var node_modules_property_information_lib_html_html = property_information_lib_util_create_create({
-  space: 'html',
-  attributes: {
-    acceptcharset: 'accept-charset',
-    classname: 'class',
-    htmlfor: 'for',
-    httpequiv: 'http-equiv'
-  },
-  transform: lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: lib_util_types_commaSeparated,
-    acceptCharset: lib_util_types_spaceSeparated,
-    accessKey: lib_util_types_spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: lib_util_types_boolean,
-    allowPaymentRequest: lib_util_types_boolean,
-    allowUserMedia: lib_util_types_boolean,
-    alt: null,
-    as: null,
-    async: lib_util_types_boolean,
-    autoCapitalize: null,
-    autoComplete: lib_util_types_spaceSeparated,
-    autoFocus: lib_util_types_boolean,
-    autoPlay: lib_util_types_boolean,
-    capture: lib_util_types_boolean,
-    charSet: null,
-    checked: lib_util_types_boolean,
-    cite: null,
-    className: lib_util_types_spaceSeparated,
-    cols: lib_util_types_number,
-    colSpan: null,
-    content: null,
-    contentEditable: lib_util_types_booleanish,
-    controls: lib_util_types_boolean,
-    controlsList: lib_util_types_spaceSeparated,
-    coords: lib_util_types_number | lib_util_types_commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    "default": lib_util_types_boolean,
-    defer: lib_util_types_boolean,
-    dir: null,
-    dirName: null,
-    disabled: lib_util_types_boolean,
-    download: lib_util_types_overloadedBoolean,
-    draggable: lib_util_types_booleanish,
-    encType: null,
-    enterKeyHint: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: lib_util_types_boolean,
-    formTarget: null,
-    headers: lib_util_types_spaceSeparated,
-    height: lib_util_types_number,
-    hidden: lib_util_types_boolean,
-    high: lib_util_types_number,
-    href: null,
-    hrefLang: null,
-    htmlFor: lib_util_types_spaceSeparated,
-    httpEquiv: lib_util_types_spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: lib_util_types_boolean,
-    itemId: null,
-    itemProp: lib_util_types_spaceSeparated,
-    itemRef: lib_util_types_spaceSeparated,
-    itemScope: lib_util_types_boolean,
-    itemType: lib_util_types_spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: lib_util_types_boolean,
-    low: lib_util_types_number,
-    manifest: null,
-    max: null,
-    maxLength: lib_util_types_number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: lib_util_types_number,
-    multiple: lib_util_types_boolean,
-    muted: lib_util_types_boolean,
-    name: null,
-    nonce: null,
-    noModule: lib_util_types_boolean,
-    noValidate: lib_util_types_boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforePrint: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: lib_util_types_boolean,
-    optimum: lib_util_types_number,
-    pattern: null,
-    ping: lib_util_types_spaceSeparated,
-    placeholder: null,
-    playsInline: lib_util_types_boolean,
-    poster: null,
-    preload: null,
-    readOnly: lib_util_types_boolean,
-    referrerPolicy: null,
-    rel: lib_util_types_spaceSeparated,
-    required: lib_util_types_boolean,
-    reversed: lib_util_types_boolean,
-    rows: lib_util_types_number,
-    rowSpan: lib_util_types_number,
-    sandbox: lib_util_types_spaceSeparated,
-    scope: null,
-    scoped: lib_util_types_boolean,
-    seamless: lib_util_types_boolean,
-    selected: lib_util_types_boolean,
-    shape: null,
-    size: lib_util_types_number,
-    sizes: null,
-    slot: null,
-    span: lib_util_types_number,
-    spellCheck: lib_util_types_booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: lib_util_types_number,
-    step: null,
-    style: null,
-    tabIndex: lib_util_types_number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: lib_util_types_boolean,
-    useMap: null,
-    value: lib_util_types_booleanish,
-    width: lib_util_types_number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: lib_util_types_spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: lib_util_types_number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: lib_util_types_number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    "char": null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: lib_util_types_boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: lib_util_types_boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: lib_util_types_number,
-    // `<img>` and `<object>`
-    leftMargin: lib_util_types_number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: lib_util_types_number,
-    // `<body>`
-    marginWidth: lib_util_types_number,
-    // `<body>`
-    noResize: lib_util_types_boolean,
-    // `<frame>`
-    noHref: lib_util_types_boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: lib_util_types_boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: lib_util_types_boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: lib_util_types_number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: lib_util_types_booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: lib_util_types_number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: lib_util_types_number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: lib_util_types_boolean,
-    disableRemotePlayback: lib_util_types_boolean,
-    prefix: null,
-    property: null,
-    results: lib_util_types_number,
-    security: null,
-    unselectable: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/svg.js
-
-
-
-var property_information_lib_svg_svg = property_information_lib_util_create_create({
-  space: 'svg',
-  attributes: {
-    accentHeight: 'accent-height',
-    alignmentBaseline: 'alignment-baseline',
-    arabicForm: 'arabic-form',
-    baselineShift: 'baseline-shift',
-    capHeight: 'cap-height',
-    className: 'class',
-    clipPath: 'clip-path',
-    clipRule: 'clip-rule',
-    colorInterpolation: 'color-interpolation',
-    colorInterpolationFilters: 'color-interpolation-filters',
-    colorProfile: 'color-profile',
-    colorRendering: 'color-rendering',
-    crossOrigin: 'crossorigin',
-    dataType: 'datatype',
-    dominantBaseline: 'dominant-baseline',
-    enableBackground: 'enable-background',
-    fillOpacity: 'fill-opacity',
-    fillRule: 'fill-rule',
-    floodColor: 'flood-color',
-    floodOpacity: 'flood-opacity',
-    fontFamily: 'font-family',
-    fontSize: 'font-size',
-    fontSizeAdjust: 'font-size-adjust',
-    fontStretch: 'font-stretch',
-    fontStyle: 'font-style',
-    fontVariant: 'font-variant',
-    fontWeight: 'font-weight',
-    glyphName: 'glyph-name',
-    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
-    glyphOrientationVertical: 'glyph-orientation-vertical',
-    hrefLang: 'hreflang',
-    horizAdvX: 'horiz-adv-x',
-    horizOriginX: 'horiz-origin-x',
-    horizOriginY: 'horiz-origin-y',
-    imageRendering: 'image-rendering',
-    letterSpacing: 'letter-spacing',
-    lightingColor: 'lighting-color',
-    markerEnd: 'marker-end',
-    markerMid: 'marker-mid',
-    markerStart: 'marker-start',
-    navDown: 'nav-down',
-    navDownLeft: 'nav-down-left',
-    navDownRight: 'nav-down-right',
-    navLeft: 'nav-left',
-    navNext: 'nav-next',
-    navPrev: 'nav-prev',
-    navRight: 'nav-right',
-    navUp: 'nav-up',
-    navUpLeft: 'nav-up-left',
-    navUpRight: 'nav-up-right',
-    onAbort: 'onabort',
-    onActivate: 'onactivate',
-    onAfterPrint: 'onafterprint',
-    onBeforePrint: 'onbeforeprint',
-    onBegin: 'onbegin',
-    onCancel: 'oncancel',
-    onCanPlay: 'oncanplay',
-    onCanPlayThrough: 'oncanplaythrough',
-    onChange: 'onchange',
-    onClick: 'onclick',
-    onClose: 'onclose',
-    onCopy: 'oncopy',
-    onCueChange: 'oncuechange',
-    onCut: 'oncut',
-    onDblClick: 'ondblclick',
-    onDrag: 'ondrag',
-    onDragEnd: 'ondragend',
-    onDragEnter: 'ondragenter',
-    onDragExit: 'ondragexit',
-    onDragLeave: 'ondragleave',
-    onDragOver: 'ondragover',
-    onDragStart: 'ondragstart',
-    onDrop: 'ondrop',
-    onDurationChange: 'ondurationchange',
-    onEmptied: 'onemptied',
-    onEnd: 'onend',
-    onEnded: 'onended',
-    onError: 'onerror',
-    onFocus: 'onfocus',
-    onFocusIn: 'onfocusin',
-    onFocusOut: 'onfocusout',
-    onHashChange: 'onhashchange',
-    onInput: 'oninput',
-    onInvalid: 'oninvalid',
-    onKeyDown: 'onkeydown',
-    onKeyPress: 'onkeypress',
-    onKeyUp: 'onkeyup',
-    onLoad: 'onload',
-    onLoadedData: 'onloadeddata',
-    onLoadedMetadata: 'onloadedmetadata',
-    onLoadStart: 'onloadstart',
-    onMessage: 'onmessage',
-    onMouseDown: 'onmousedown',
-    onMouseEnter: 'onmouseenter',
-    onMouseLeave: 'onmouseleave',
-    onMouseMove: 'onmousemove',
-    onMouseOut: 'onmouseout',
-    onMouseOver: 'onmouseover',
-    onMouseUp: 'onmouseup',
-    onMouseWheel: 'onmousewheel',
-    onOffline: 'onoffline',
-    onOnline: 'ononline',
-    onPageHide: 'onpagehide',
-    onPageShow: 'onpageshow',
-    onPaste: 'onpaste',
-    onPause: 'onpause',
-    onPlay: 'onplay',
-    onPlaying: 'onplaying',
-    onPopState: 'onpopstate',
-    onProgress: 'onprogress',
-    onRateChange: 'onratechange',
-    onRepeat: 'onrepeat',
-    onReset: 'onreset',
-    onResize: 'onresize',
-    onScroll: 'onscroll',
-    onSeeked: 'onseeked',
-    onSeeking: 'onseeking',
-    onSelect: 'onselect',
-    onShow: 'onshow',
-    onStalled: 'onstalled',
-    onStorage: 'onstorage',
-    onSubmit: 'onsubmit',
-    onSuspend: 'onsuspend',
-    onTimeUpdate: 'ontimeupdate',
-    onToggle: 'ontoggle',
-    onUnload: 'onunload',
-    onVolumeChange: 'onvolumechange',
-    onWaiting: 'onwaiting',
-    onZoom: 'onzoom',
-    overlinePosition: 'overline-position',
-    overlineThickness: 'overline-thickness',
-    paintOrder: 'paint-order',
-    panose1: 'panose-1',
-    pointerEvents: 'pointer-events',
-    referrerPolicy: 'referrerpolicy',
-    renderingIntent: 'rendering-intent',
-    shapeRendering: 'shape-rendering',
-    stopColor: 'stop-color',
-    stopOpacity: 'stop-opacity',
-    strikethroughPosition: 'strikethrough-position',
-    strikethroughThickness: 'strikethrough-thickness',
-    strokeDashArray: 'stroke-dasharray',
-    strokeDashOffset: 'stroke-dashoffset',
-    strokeLineCap: 'stroke-linecap',
-    strokeLineJoin: 'stroke-linejoin',
-    strokeMiterLimit: 'stroke-miterlimit',
-    strokeOpacity: 'stroke-opacity',
-    strokeWidth: 'stroke-width',
-    tabIndex: 'tabindex',
-    textAnchor: 'text-anchor',
-    textDecoration: 'text-decoration',
-    textRendering: 'text-rendering',
-    typeOf: 'typeof',
-    underlinePosition: 'underline-position',
-    underlineThickness: 'underline-thickness',
-    unicodeBidi: 'unicode-bidi',
-    unicodeRange: 'unicode-range',
-    unitsPerEm: 'units-per-em',
-    vAlphabetic: 'v-alphabetic',
-    vHanging: 'v-hanging',
-    vIdeographic: 'v-ideographic',
-    vMathematical: 'v-mathematical',
-    vectorEffect: 'vector-effect',
-    vertAdvY: 'vert-adv-y',
-    vertOriginX: 'vert-origin-x',
-    vertOriginY: 'vert-origin-y',
-    wordSpacing: 'word-spacing',
-    writingMode: 'writing-mode',
-    xHeight: 'x-height',
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: 'playbackorder',
-    timelineBegin: 'timelinebegin'
-  },
-  transform: lib_util_case_sensitive_transform_caseSensitiveTransform,
-  properties: {
-    about: lib_util_types_commaOrSpaceSeparated,
-    accentHeight: lib_util_types_number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: lib_util_types_number,
-    amplitude: lib_util_types_number,
-    arabicForm: null,
-    ascent: lib_util_types_number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: lib_util_types_number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: lib_util_types_number,
-    by: null,
-    calcMode: null,
-    capHeight: lib_util_types_number,
-    className: lib_util_types_spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: lib_util_types_number,
-    diffuseConstant: lib_util_types_number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: lib_util_types_number,
-    dominantBaseline: null,
-    download: lib_util_types_boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: lib_util_types_number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: lib_util_types_number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: lib_util_types_number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: lib_util_types_commaSeparated,
-    g2: lib_util_types_commaSeparated,
-    glyphName: lib_util_types_commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: lib_util_types_number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: lib_util_types_number,
-    horizOriginX: lib_util_types_number,
-    horizOriginY: lib_util_types_number,
-    id: null,
-    ideographic: lib_util_types_number,
-    imageRendering: null,
-    initialVisibility: null,
-    "in": null,
-    in2: null,
-    intercept: lib_util_types_number,
-    k: lib_util_types_number,
-    k1: lib_util_types_number,
-    k2: lib_util_types_number,
-    k3: lib_util_types_number,
-    k4: lib_util_types_number,
-    kernelMatrix: lib_util_types_commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: lib_util_types_number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: lib_util_types_number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: lib_util_types_number,
-    overlineThickness: lib_util_types_number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: lib_util_types_number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: lib_util_types_spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: lib_util_types_number,
-    pointsAtY: lib_util_types_number,
-    pointsAtZ: lib_util_types_number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: lib_util_types_commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: lib_util_types_commaOrSpaceSeparated,
-    rev: lib_util_types_commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: lib_util_types_commaOrSpaceSeparated,
-    requiredFeatures: lib_util_types_commaOrSpaceSeparated,
-    requiredFonts: lib_util_types_commaOrSpaceSeparated,
-    requiredFormats: lib_util_types_commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: lib_util_types_number,
-    specularExponent: lib_util_types_number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: lib_util_types_number,
-    strikethroughThickness: lib_util_types_number,
-    string: null,
-    stroke: null,
-    strokeDashArray: lib_util_types_commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: lib_util_types_number,
-    strokeOpacity: lib_util_types_number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: lib_util_types_number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: lib_util_types_commaOrSpaceSeparated,
-    tabIndex: lib_util_types_number,
-    tableValues: null,
-    target: null,
-    targetX: lib_util_types_number,
-    targetY: lib_util_types_number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: lib_util_types_commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    u1: null,
-    u2: null,
-    underlinePosition: lib_util_types_number,
-    underlineThickness: lib_util_types_number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: lib_util_types_number,
-    values: null,
-    vAlphabetic: lib_util_types_number,
-    vMathematical: lib_util_types_number,
-    vectorEffect: null,
-    vHanging: lib_util_types_number,
-    vIdeographic: lib_util_types_number,
-    version: null,
-    vertAdvY: lib_util_types_number,
-    vertOriginX: lib_util_types_number,
-    vertOriginY: lib_util_types_number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: lib_util_types_number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/index.js
-/**
- * @typedef {import('./lib/util/info.js').Info} Info
- * @typedef {import('./lib/util/schema.js').Schema} Schema
- */
-
-
-
-
-
-
-
-
-
-
-var hast_util_select_node_modules_property_information_html = lib_util_merge_merge([property_information_lib_xml_xml, property_information_lib_xlink_xlink, property_information_lib_xmlns_xmlns, property_information_lib_aria_aria, node_modules_property_information_lib_html_html], 'html');
-var hast_util_select_node_modules_property_information_svg = lib_util_merge_merge([property_information_lib_xml_xml, property_information_lib_xlink_xlink, property_information_lib_xmlns_xmlns, property_information_lib_aria_aria, property_information_lib_svg_svg], 'svg');
 ;// CONCATENATED MODULE: ../../node_modules/direction/index.js
 var rtlRange = "\u0591-\u07FF\uFB1D-\uFDFD\uFE70-\uFEFC";
 var ltrRange = "A-Za-z\xC0-\xD6\xD8-\xF6" + "\xF8-\u02B8\u0300-\u0590\u0800-\u1FFF\u200E\u2C00-\uFB1C" + "\uFE00-\uFE6F\uFEFD-\uFFFF";
@@ -65080,7 +60615,7 @@ function direction(value) {
   var source = String(value || '');
   return rtl.test(source) ? 'rtl' : ltr.test(source) ? 'ltr' : 'neutral';
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/hast-util-to-string/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-string/index.js
 /**
  * @fileoverview
  *   Get the plain-text value of a hast node.
@@ -65156,57 +60691,6 @@ function hast_util_to_string_all(node) {
 
   return result.join('');
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var hast_util_select_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/util.js
 /**
  * @typedef {import('./types.js').Node} Node
@@ -65278,7 +60762,7 @@ function enterState(state, node) {
       }
 
       if (isElement(node, 'svg')) {
-        state.schema = hast_util_select_node_modules_property_information_svg;
+        state.schema = property_information_svg;
         found = true;
       } // See: <https://html.spec.whatwg.org/#the-directionality>.
       // Explicit `[dir=rtl]`.
@@ -65302,7 +60786,7 @@ function enterState(state, node) {
           dirBidi(node.properties.value) : 'ltr';
         } else {
           // Check text nodes in `node`.
-          hast_util_select_node_modules_unist_util_visit_visit(node, inferDirectionality);
+          visit(node, inferDirectionality);
         }
       }
 
@@ -65764,67 +61248,6 @@ function cast(values, name) {
 
   return value;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/comma-separated-tokens/index.js
-/**
- * @typedef {Object} StringifyOptions
- * @property {boolean} [padLeft=true] Whether to pad a space before a token (`boolean`, default: `true`).
- * @property {boolean} [padRight=false] Whether to pad a space after a token (`boolean`, default: `false`).
- */
-
-/**
- * Parse comma separated tokens to an array.
- *
- * @param {string} value
- * @returns {Array.<string>}
- */
-function hast_util_select_node_modules_comma_separated_tokens_parse(value) {
-  /** @type {Array.<string>} */
-  var tokens = [];
-  var input = String(value || '');
-  var index = input.indexOf(',');
-  var start = 0;
-  /** @type {boolean} */
-
-  var end;
-  /** @type {string} */
-
-  var token;
-
-  while (!end) {
-    if (index === -1) {
-      index = input.length;
-      end = true;
-    }
-
-    token = input.slice(start, index).trim();
-
-    if (token || !end) {
-      tokens.push(token);
-    }
-
-    start = index + 1;
-    index = input.indexOf(',', start);
-  }
-
-  return tokens;
-}
-/**
- * Serialize an array of strings to comma separated tokens.
- *
- * @param {Array.<string|number>} values
- * @param {StringifyOptions} [options]
- * @returns {string}
- */
-
-function hast_util_select_node_modules_comma_separated_tokens_stringify(values, options) {
-  var settings = options || {}; // Ensure the last empty entry is seen.
-
-  if (values[values.length - 1] === '') {
-    values = values.concat('');
-  }
-
-  return values.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
-}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-has-property/index.js
 var hast_util_has_property_own = {}.hasOwnProperty;
 /**
@@ -66188,7 +61611,7 @@ function firstChild(query, _1, _2, _3, state) {
 
 function lang(query, _1, _2, _3, state) {
   return state.language !== '' && state.language !== undefined && state.language !== null && // @ts-expect-error never `selectors`.
-  extendedFilter(state.language, hast_util_select_node_modules_comma_separated_tokens_parse(query.value)).length > 0;
+  extendedFilter(state.language, comma_separated_tokens_parse(query.value)).length > 0;
 }
 /**
  * @param {RulePseudo} query
@@ -66422,95 +61845,6 @@ function appendScope(value) {
 
   return selector;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/property-information/lib/find.js
-/**
- * @typedef {import('./util/schema.js').Schema} Schema
- */
-
-
-
-var property_information_lib_find_valid = /^data[-\w.:]+$/i;
-var property_information_lib_find_dash = /-[a-z]/g;
-var property_information_lib_find_cap = /[A-Z]/g;
-/**
- * @param {Schema} schema
- * @param {string} value
- * @returns {Info}
- */
-
-function property_information_lib_find_find(schema, value) {
-  var normal = property_information_lib_normalize_normalize(value);
-  var prop = value;
-  var Type = lib_util_info_Info;
-
-  if (normal in schema.normal) {
-    return schema.property[schema.normal[normal]];
-  }
-
-  if (normal.length > 4 && normal.slice(0, 4) === 'data' && property_information_lib_find_valid.test(value)) {
-    // Attribute or property.
-    if (value.charAt(4) === '-') {
-      // Turn it into a property.
-      var rest = value.slice(5).replace(property_information_lib_find_dash, property_information_lib_find_camelcase);
-      prop = 'data' + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      // Turn it into an attribute.
-      var _rest = value.slice(4);
-
-      if (!property_information_lib_find_dash.test(_rest)) {
-        var dashes = _rest.replace(property_information_lib_find_cap, property_information_lib_find_kebab);
-
-        if (dashes.charAt(0) !== '-') {
-          dashes = '-' + dashes;
-        }
-
-        value = 'data' + dashes;
-      }
-    }
-
-    Type = lib_util_defined_info_DefinedInfo;
-  }
-
-  return new Type(prop, value);
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-function property_information_lib_find_kebab($0) {
-  return '-' + $0.toLowerCase();
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-
-function property_information_lib_find_camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/node_modules/space-separated-tokens/index.js
-/**
- * Parse space separated tokens to an array of strings.
- *
- * @param {string} value Space separated tokens
- * @returns {Array.<string>} Tokens
- */
-function hast_util_select_node_modules_space_separated_tokens_parse(value) {
-  var input = String(value || '').trim();
-  return input ? input.split(/[ \t\n\r\f]+/g) : [];
-}
-/**
- * Serialize an array of strings as space separated tokens.
- *
- * @param {Array.<string|number>} values Tokens
- * @returns {string} Space separated tokens
- */
-
-function node_modules_space_separated_tokens_stringify(values) {
-  return values.join(' ').trim();
-}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/attribute.js
 /**
  * @typedef {import('./types.js').Rule} Rule
@@ -66557,7 +61891,7 @@ function attribute(query, element, schema) {
   var index = -1;
 
   while (++index < attrs.length) {
-    if (!attribute_handle(attrs[index], element, property_information_lib_find_find(schema, attrs[index].name))) {
+    if (!attribute_handle(attrs[index], element, find(schema, attrs[index].name))) {
       return false;
     }
   }
@@ -66688,7 +62022,7 @@ function normalizeValue(value, info) {
   }
 
   if (Array.isArray(value)) {
-    return (info.commaSeparated ? hast_util_select_node_modules_comma_separated_tokens_stringify : node_modules_space_separated_tokens_stringify)(value);
+    return (info.commaSeparated ? comma_separated_tokens_stringify : stringify)(value);
   }
 
   return String(value);
@@ -66858,7 +62192,7 @@ function rule(query, tree, state) {
   }
 
   nest(query, tree, 0, null, configure(query, {
-    schema: state.space === 'svg' ? hast_util_select_node_modules_property_information_svg : hast_util_select_node_modules_property_information_html,
+    schema: state.space === 'svg' ? property_information_svg : property_information_html,
     language: undefined,
     direction: 'ltr',
     editableOrEditingHost: false,
@@ -67152,7 +62486,7 @@ var remarkRewrite = function remarkRewrite(options) {
       var selected = selectAll(selector, tree);
 
       if (selected && selected.length > 0) {
-        rehype_rewrite_node_modules_unist_util_visit_visit(tree, selected, function (node, index, parent) {
+        visit(tree, selected, function (node, index, parent) {
           rewrite(node, index, parent);
         });
       }
@@ -67160,1292 +62494,13 @@ var remarkRewrite = function remarkRewrite(options) {
       return;
     }
 
-    rehype_rewrite_node_modules_unist_util_visit_visit(tree, function (node, index, parent) {
+    visit(tree, function (node, index, parent) {
       rewrite(node, index, parent);
     });
   };
 };
 
 /* harmony default export */ const rehype_rewrite_lib = (remarkRewrite);
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/schema.js
-
-
-
-/**
- * @typedef {import('./info.js').Info} Info
- * @typedef {Record<string, Info>} Properties
- * @typedef {Record<string, string>} Normal
- */
-var property_information_lib_util_schema_Schema = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {Properties} property
- * @param {Normal} normal
- * @param {string} [space]
- */
-function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
-
-  this.property = property;
-  this.normal = normal;
-
-  if (space) {
-    this.space = space;
-  }
-});
-/** @type {Properties} */
-
-property_information_lib_util_schema_Schema.prototype.property = {};
-/** @type {Normal} */
-
-property_information_lib_util_schema_Schema.prototype.normal = {};
-/** @type {string|null} */
-
-property_information_lib_util_schema_Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/merge.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- */
-
-/**
- * @param {Schema[]} definitions
- * @param {string} [space]
- * @returns {Schema}
- */
-
-function property_information_lib_util_merge_merge(definitions, space) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  var index = -1;
-
-  while (++index < definitions.length) {
-    Object.assign(property, definitions[index].property);
-    Object.assign(normal, definitions[index].normal);
-  }
-
-  return new property_information_lib_util_schema_Schema(property, normal, space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/normalize.js
-/**
- * @param {string} value
- * @returns {string}
- */
-function node_modules_property_information_lib_normalize_normalize(value) {
-  return value.toLowerCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/info.js
-
-
-var property_information_lib_util_info_Info = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {string} property
- * @param {string} attribute
- */
-function Info(property, attribute) {
-  _classCallCheck(this, Info);
-
-  /** @type {string} */
-  this.property = property;
-  /** @type {string} */
-
-  this.attribute = attribute;
-});
-/** @type {string|null} */
-
-property_information_lib_util_info_Info.prototype.space = null;
-property_information_lib_util_info_Info.prototype["boolean"] = false;
-property_information_lib_util_info_Info.prototype.booleanish = false;
-property_information_lib_util_info_Info.prototype.overloadedBoolean = false;
-property_information_lib_util_info_Info.prototype.number = false;
-property_information_lib_util_info_Info.prototype.commaSeparated = false;
-property_information_lib_util_info_Info.prototype.spaceSeparated = false;
-property_information_lib_util_info_Info.prototype.commaOrSpaceSeparated = false;
-property_information_lib_util_info_Info.prototype.mustUseProperty = false;
-property_information_lib_util_info_Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/types.js
-var property_information_lib_util_types_powers = 0;
-
-var property_information_lib_util_types_boolean = property_information_lib_util_types_increment();
-
-
-var property_information_lib_util_types_booleanish = property_information_lib_util_types_increment();
-var property_information_lib_util_types_overloadedBoolean = property_information_lib_util_types_increment();
-var property_information_lib_util_types_number = property_information_lib_util_types_increment();
-var property_information_lib_util_types_spaceSeparated = property_information_lib_util_types_increment();
-var property_information_lib_util_types_commaSeparated = property_information_lib_util_types_increment();
-var property_information_lib_util_types_commaOrSpaceSeparated = property_information_lib_util_types_increment();
-
-function property_information_lib_util_types_increment() {
-  return Math.pow(2, ++property_information_lib_util_types_powers);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/defined-info.js
-
-
-
-
-
-
-
-/** @type {Array<keyof types>} */
-// @ts-expect-error: hush.
-
-var property_information_lib_util_defined_info_checks = Object.keys(node_modules_property_information_lib_util_types_namespaceObject);
-var property_information_lib_util_defined_info_DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-
-  var _super = _createSuper(DefinedInfo);
-
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  function DefinedInfo(property, attribute, mask, space) {
-    var _this;
-
-    _classCallCheck(this, DefinedInfo);
-
-    var index = -1;
-    _this = _super.call(this, property, attribute);
-    property_information_lib_util_defined_info_mark(_assertThisInitialized(_this), 'space', space);
-
-    if (typeof mask === 'number') {
-      while (++index < property_information_lib_util_defined_info_checks.length) {
-        var check = property_information_lib_util_defined_info_checks[index];
-        property_information_lib_util_defined_info_mark(_assertThisInitialized(_this), property_information_lib_util_defined_info_checks[index], (mask & node_modules_property_information_lib_util_types_namespaceObject[check]) === node_modules_property_information_lib_util_types_namespaceObject[check]);
-      }
-    }
-
-    return _this;
-  }
-
-  return _createClass(DefinedInfo);
-}(property_information_lib_util_info_Info);
-property_information_lib_util_defined_info_DefinedInfo.prototype.defined = true;
-/**
- * @param {DefinedInfo} values
- * @param {string} key
- * @param {unknown} value
- */
-
-function property_information_lib_util_defined_info_mark(values, key, value) {
-  if (value) {
-    // @ts-expect-error: assume `value` matches the expected value of `key`.
-    values[key] = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/create.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- *
- * @typedef {Record<string, string>} Attributes
- *
- * @typedef {Object} Definition
- * @property {Record<string, number|null>} properties
- * @property {(attributes: Attributes, property: string) => string} transform
- * @property {string} [space]
- * @property {Attributes} [attributes]
- * @property {Array<string>} [mustUseProperty]
- */
-
-
-
-var node_modules_property_information_lib_util_create_own = {}.hasOwnProperty;
-/**
- * @param {Definition} definition
- * @returns {Schema}
- */
-
-function node_modules_property_information_lib_util_create_create(definition) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  /** @type {string} */
-
-  var prop;
-
-  for (prop in definition.properties) {
-    if (node_modules_property_information_lib_util_create_own.call(definition.properties, prop)) {
-      var value = definition.properties[prop];
-      var info = new property_information_lib_util_defined_info_DefinedInfo(prop, definition.transform(definition.attributes || {}, prop), value, definition.space);
-
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-
-      property[prop] = info;
-      normal[node_modules_property_information_lib_normalize_normalize(prop)] = prop;
-      normal[node_modules_property_information_lib_normalize_normalize(info.attribute)] = prop;
-    }
-  }
-
-  return new property_information_lib_util_schema_Schema(property, normal, definition.space);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/xlink.js
-
-var node_modules_property_information_lib_xlink_xlink = node_modules_property_information_lib_util_create_create({
-  space: 'xlink',
-  transform: function transform(_, prop) {
-    return 'xlink:' + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/xml.js
-
-var node_modules_property_information_lib_xml_xml = node_modules_property_information_lib_util_create_create({
-  space: 'xml',
-  transform: function transform(_, prop) {
-    return 'xml:' + prop.slice(3).toLowerCase();
-  },
-  properties: {
-    xmlLang: null,
-    xmlBase: null,
-    xmlSpace: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/case-sensitive-transform.js
-/**
- * @param {Record<string, string>} attributes
- * @param {string} attribute
- * @returns {string}
- */
-function property_information_lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/util/case-insensitive-transform.js
-
-/**
- * @param {Record<string, string>} attributes
- * @param {string} property
- * @returns {string}
- */
-
-function property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform(attributes, property) {
-  return property_information_lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, property.toLowerCase());
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/xmlns.js
-
-
-var node_modules_property_information_lib_xmlns_xmlns = node_modules_property_information_lib_util_create_create({
-  space: 'xmlns',
-  attributes: {
-    xmlnsxlink: 'xmlns:xlink'
-  },
-  transform: property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  properties: {
-    xmlns: null,
-    xmlnsXLink: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/aria.js
-
-
-var node_modules_property_information_lib_aria_aria = node_modules_property_information_lib_util_create_create({
-  transform: function transform(_, prop) {
-    return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: property_information_lib_util_types_booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: property_information_lib_util_types_booleanish,
-    ariaChecked: property_information_lib_util_types_booleanish,
-    ariaColCount: property_information_lib_util_types_number,
-    ariaColIndex: property_information_lib_util_types_number,
-    ariaColSpan: property_information_lib_util_types_number,
-    ariaControls: property_information_lib_util_types_spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: property_information_lib_util_types_spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: property_information_lib_util_types_booleanish,
-    ariaDropEffect: property_information_lib_util_types_spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: property_information_lib_util_types_booleanish,
-    ariaFlowTo: property_information_lib_util_types_spaceSeparated,
-    ariaGrabbed: property_information_lib_util_types_booleanish,
-    ariaHasPopup: null,
-    ariaHidden: property_information_lib_util_types_booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: property_information_lib_util_types_spaceSeparated,
-    ariaLevel: property_information_lib_util_types_number,
-    ariaLive: null,
-    ariaModal: property_information_lib_util_types_booleanish,
-    ariaMultiLine: property_information_lib_util_types_booleanish,
-    ariaMultiSelectable: property_information_lib_util_types_booleanish,
-    ariaOrientation: null,
-    ariaOwns: property_information_lib_util_types_spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: property_information_lib_util_types_number,
-    ariaPressed: property_information_lib_util_types_booleanish,
-    ariaReadOnly: property_information_lib_util_types_booleanish,
-    ariaRelevant: null,
-    ariaRequired: property_information_lib_util_types_booleanish,
-    ariaRoleDescription: property_information_lib_util_types_spaceSeparated,
-    ariaRowCount: property_information_lib_util_types_number,
-    ariaRowIndex: property_information_lib_util_types_number,
-    ariaRowSpan: property_information_lib_util_types_number,
-    ariaSelected: property_information_lib_util_types_booleanish,
-    ariaSetSize: property_information_lib_util_types_number,
-    ariaSort: null,
-    ariaValueMax: property_information_lib_util_types_number,
-    ariaValueMin: property_information_lib_util_types_number,
-    ariaValueNow: property_information_lib_util_types_number,
-    ariaValueText: null,
-    role: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/html.js
-
-
-
-var hast_util_to_html_node_modules_property_information_lib_html_html = node_modules_property_information_lib_util_create_create({
-  space: 'html',
-  attributes: {
-    acceptcharset: 'accept-charset',
-    classname: 'class',
-    htmlfor: 'for',
-    httpequiv: 'http-equiv'
-  },
-  transform: property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: property_information_lib_util_types_commaSeparated,
-    acceptCharset: property_information_lib_util_types_spaceSeparated,
-    accessKey: property_information_lib_util_types_spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: property_information_lib_util_types_boolean,
-    allowPaymentRequest: property_information_lib_util_types_boolean,
-    allowUserMedia: property_information_lib_util_types_boolean,
-    alt: null,
-    as: null,
-    async: property_information_lib_util_types_boolean,
-    autoCapitalize: null,
-    autoComplete: property_information_lib_util_types_spaceSeparated,
-    autoFocus: property_information_lib_util_types_boolean,
-    autoPlay: property_information_lib_util_types_boolean,
-    capture: property_information_lib_util_types_boolean,
-    charSet: null,
-    checked: property_information_lib_util_types_boolean,
-    cite: null,
-    className: property_information_lib_util_types_spaceSeparated,
-    cols: property_information_lib_util_types_number,
-    colSpan: null,
-    content: null,
-    contentEditable: property_information_lib_util_types_booleanish,
-    controls: property_information_lib_util_types_boolean,
-    controlsList: property_information_lib_util_types_spaceSeparated,
-    coords: property_information_lib_util_types_number | property_information_lib_util_types_commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    "default": property_information_lib_util_types_boolean,
-    defer: property_information_lib_util_types_boolean,
-    dir: null,
-    dirName: null,
-    disabled: property_information_lib_util_types_boolean,
-    download: property_information_lib_util_types_overloadedBoolean,
-    draggable: property_information_lib_util_types_booleanish,
-    encType: null,
-    enterKeyHint: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: property_information_lib_util_types_boolean,
-    formTarget: null,
-    headers: property_information_lib_util_types_spaceSeparated,
-    height: property_information_lib_util_types_number,
-    hidden: property_information_lib_util_types_boolean,
-    high: property_information_lib_util_types_number,
-    href: null,
-    hrefLang: null,
-    htmlFor: property_information_lib_util_types_spaceSeparated,
-    httpEquiv: property_information_lib_util_types_spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: property_information_lib_util_types_boolean,
-    itemId: null,
-    itemProp: property_information_lib_util_types_spaceSeparated,
-    itemRef: property_information_lib_util_types_spaceSeparated,
-    itemScope: property_information_lib_util_types_boolean,
-    itemType: property_information_lib_util_types_spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: property_information_lib_util_types_boolean,
-    low: property_information_lib_util_types_number,
-    manifest: null,
-    max: null,
-    maxLength: property_information_lib_util_types_number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: property_information_lib_util_types_number,
-    multiple: property_information_lib_util_types_boolean,
-    muted: property_information_lib_util_types_boolean,
-    name: null,
-    nonce: null,
-    noModule: property_information_lib_util_types_boolean,
-    noValidate: property_information_lib_util_types_boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforePrint: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: property_information_lib_util_types_boolean,
-    optimum: property_information_lib_util_types_number,
-    pattern: null,
-    ping: property_information_lib_util_types_spaceSeparated,
-    placeholder: null,
-    playsInline: property_information_lib_util_types_boolean,
-    poster: null,
-    preload: null,
-    readOnly: property_information_lib_util_types_boolean,
-    referrerPolicy: null,
-    rel: property_information_lib_util_types_spaceSeparated,
-    required: property_information_lib_util_types_boolean,
-    reversed: property_information_lib_util_types_boolean,
-    rows: property_information_lib_util_types_number,
-    rowSpan: property_information_lib_util_types_number,
-    sandbox: property_information_lib_util_types_spaceSeparated,
-    scope: null,
-    scoped: property_information_lib_util_types_boolean,
-    seamless: property_information_lib_util_types_boolean,
-    selected: property_information_lib_util_types_boolean,
-    shape: null,
-    size: property_information_lib_util_types_number,
-    sizes: null,
-    slot: null,
-    span: property_information_lib_util_types_number,
-    spellCheck: property_information_lib_util_types_booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: property_information_lib_util_types_number,
-    step: null,
-    style: null,
-    tabIndex: property_information_lib_util_types_number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: property_information_lib_util_types_boolean,
-    useMap: null,
-    value: property_information_lib_util_types_booleanish,
-    width: property_information_lib_util_types_number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: property_information_lib_util_types_spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: property_information_lib_util_types_number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: property_information_lib_util_types_number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    "char": null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: property_information_lib_util_types_boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: property_information_lib_util_types_boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: property_information_lib_util_types_number,
-    // `<img>` and `<object>`
-    leftMargin: property_information_lib_util_types_number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: property_information_lib_util_types_number,
-    // `<body>`
-    marginWidth: property_information_lib_util_types_number,
-    // `<body>`
-    noResize: property_information_lib_util_types_boolean,
-    // `<frame>`
-    noHref: property_information_lib_util_types_boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: property_information_lib_util_types_boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: property_information_lib_util_types_boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: property_information_lib_util_types_number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: property_information_lib_util_types_booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: property_information_lib_util_types_number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: property_information_lib_util_types_number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: property_information_lib_util_types_boolean,
-    disableRemotePlayback: property_information_lib_util_types_boolean,
-    prefix: null,
-    property: null,
-    results: property_information_lib_util_types_number,
-    security: null,
-    unselectable: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/svg.js
-
-
-
-var node_modules_property_information_lib_svg_svg = node_modules_property_information_lib_util_create_create({
-  space: 'svg',
-  attributes: {
-    accentHeight: 'accent-height',
-    alignmentBaseline: 'alignment-baseline',
-    arabicForm: 'arabic-form',
-    baselineShift: 'baseline-shift',
-    capHeight: 'cap-height',
-    className: 'class',
-    clipPath: 'clip-path',
-    clipRule: 'clip-rule',
-    colorInterpolation: 'color-interpolation',
-    colorInterpolationFilters: 'color-interpolation-filters',
-    colorProfile: 'color-profile',
-    colorRendering: 'color-rendering',
-    crossOrigin: 'crossorigin',
-    dataType: 'datatype',
-    dominantBaseline: 'dominant-baseline',
-    enableBackground: 'enable-background',
-    fillOpacity: 'fill-opacity',
-    fillRule: 'fill-rule',
-    floodColor: 'flood-color',
-    floodOpacity: 'flood-opacity',
-    fontFamily: 'font-family',
-    fontSize: 'font-size',
-    fontSizeAdjust: 'font-size-adjust',
-    fontStretch: 'font-stretch',
-    fontStyle: 'font-style',
-    fontVariant: 'font-variant',
-    fontWeight: 'font-weight',
-    glyphName: 'glyph-name',
-    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
-    glyphOrientationVertical: 'glyph-orientation-vertical',
-    hrefLang: 'hreflang',
-    horizAdvX: 'horiz-adv-x',
-    horizOriginX: 'horiz-origin-x',
-    horizOriginY: 'horiz-origin-y',
-    imageRendering: 'image-rendering',
-    letterSpacing: 'letter-spacing',
-    lightingColor: 'lighting-color',
-    markerEnd: 'marker-end',
-    markerMid: 'marker-mid',
-    markerStart: 'marker-start',
-    navDown: 'nav-down',
-    navDownLeft: 'nav-down-left',
-    navDownRight: 'nav-down-right',
-    navLeft: 'nav-left',
-    navNext: 'nav-next',
-    navPrev: 'nav-prev',
-    navRight: 'nav-right',
-    navUp: 'nav-up',
-    navUpLeft: 'nav-up-left',
-    navUpRight: 'nav-up-right',
-    onAbort: 'onabort',
-    onActivate: 'onactivate',
-    onAfterPrint: 'onafterprint',
-    onBeforePrint: 'onbeforeprint',
-    onBegin: 'onbegin',
-    onCancel: 'oncancel',
-    onCanPlay: 'oncanplay',
-    onCanPlayThrough: 'oncanplaythrough',
-    onChange: 'onchange',
-    onClick: 'onclick',
-    onClose: 'onclose',
-    onCopy: 'oncopy',
-    onCueChange: 'oncuechange',
-    onCut: 'oncut',
-    onDblClick: 'ondblclick',
-    onDrag: 'ondrag',
-    onDragEnd: 'ondragend',
-    onDragEnter: 'ondragenter',
-    onDragExit: 'ondragexit',
-    onDragLeave: 'ondragleave',
-    onDragOver: 'ondragover',
-    onDragStart: 'ondragstart',
-    onDrop: 'ondrop',
-    onDurationChange: 'ondurationchange',
-    onEmptied: 'onemptied',
-    onEnd: 'onend',
-    onEnded: 'onended',
-    onError: 'onerror',
-    onFocus: 'onfocus',
-    onFocusIn: 'onfocusin',
-    onFocusOut: 'onfocusout',
-    onHashChange: 'onhashchange',
-    onInput: 'oninput',
-    onInvalid: 'oninvalid',
-    onKeyDown: 'onkeydown',
-    onKeyPress: 'onkeypress',
-    onKeyUp: 'onkeyup',
-    onLoad: 'onload',
-    onLoadedData: 'onloadeddata',
-    onLoadedMetadata: 'onloadedmetadata',
-    onLoadStart: 'onloadstart',
-    onMessage: 'onmessage',
-    onMouseDown: 'onmousedown',
-    onMouseEnter: 'onmouseenter',
-    onMouseLeave: 'onmouseleave',
-    onMouseMove: 'onmousemove',
-    onMouseOut: 'onmouseout',
-    onMouseOver: 'onmouseover',
-    onMouseUp: 'onmouseup',
-    onMouseWheel: 'onmousewheel',
-    onOffline: 'onoffline',
-    onOnline: 'ononline',
-    onPageHide: 'onpagehide',
-    onPageShow: 'onpageshow',
-    onPaste: 'onpaste',
-    onPause: 'onpause',
-    onPlay: 'onplay',
-    onPlaying: 'onplaying',
-    onPopState: 'onpopstate',
-    onProgress: 'onprogress',
-    onRateChange: 'onratechange',
-    onRepeat: 'onrepeat',
-    onReset: 'onreset',
-    onResize: 'onresize',
-    onScroll: 'onscroll',
-    onSeeked: 'onseeked',
-    onSeeking: 'onseeking',
-    onSelect: 'onselect',
-    onShow: 'onshow',
-    onStalled: 'onstalled',
-    onStorage: 'onstorage',
-    onSubmit: 'onsubmit',
-    onSuspend: 'onsuspend',
-    onTimeUpdate: 'ontimeupdate',
-    onToggle: 'ontoggle',
-    onUnload: 'onunload',
-    onVolumeChange: 'onvolumechange',
-    onWaiting: 'onwaiting',
-    onZoom: 'onzoom',
-    overlinePosition: 'overline-position',
-    overlineThickness: 'overline-thickness',
-    paintOrder: 'paint-order',
-    panose1: 'panose-1',
-    pointerEvents: 'pointer-events',
-    referrerPolicy: 'referrerpolicy',
-    renderingIntent: 'rendering-intent',
-    shapeRendering: 'shape-rendering',
-    stopColor: 'stop-color',
-    stopOpacity: 'stop-opacity',
-    strikethroughPosition: 'strikethrough-position',
-    strikethroughThickness: 'strikethrough-thickness',
-    strokeDashArray: 'stroke-dasharray',
-    strokeDashOffset: 'stroke-dashoffset',
-    strokeLineCap: 'stroke-linecap',
-    strokeLineJoin: 'stroke-linejoin',
-    strokeMiterLimit: 'stroke-miterlimit',
-    strokeOpacity: 'stroke-opacity',
-    strokeWidth: 'stroke-width',
-    tabIndex: 'tabindex',
-    textAnchor: 'text-anchor',
-    textDecoration: 'text-decoration',
-    textRendering: 'text-rendering',
-    typeOf: 'typeof',
-    underlinePosition: 'underline-position',
-    underlineThickness: 'underline-thickness',
-    unicodeBidi: 'unicode-bidi',
-    unicodeRange: 'unicode-range',
-    unitsPerEm: 'units-per-em',
-    vAlphabetic: 'v-alphabetic',
-    vHanging: 'v-hanging',
-    vIdeographic: 'v-ideographic',
-    vMathematical: 'v-mathematical',
-    vectorEffect: 'vector-effect',
-    vertAdvY: 'vert-adv-y',
-    vertOriginX: 'vert-origin-x',
-    vertOriginY: 'vert-origin-y',
-    wordSpacing: 'word-spacing',
-    writingMode: 'writing-mode',
-    xHeight: 'x-height',
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: 'playbackorder',
-    timelineBegin: 'timelinebegin'
-  },
-  transform: property_information_lib_util_case_sensitive_transform_caseSensitiveTransform,
-  properties: {
-    about: property_information_lib_util_types_commaOrSpaceSeparated,
-    accentHeight: property_information_lib_util_types_number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: property_information_lib_util_types_number,
-    amplitude: property_information_lib_util_types_number,
-    arabicForm: null,
-    ascent: property_information_lib_util_types_number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: property_information_lib_util_types_number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: property_information_lib_util_types_number,
-    by: null,
-    calcMode: null,
-    capHeight: property_information_lib_util_types_number,
-    className: property_information_lib_util_types_spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: property_information_lib_util_types_number,
-    diffuseConstant: property_information_lib_util_types_number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: property_information_lib_util_types_number,
-    dominantBaseline: null,
-    download: property_information_lib_util_types_boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: property_information_lib_util_types_number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: property_information_lib_util_types_number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: property_information_lib_util_types_number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: property_information_lib_util_types_commaSeparated,
-    g2: property_information_lib_util_types_commaSeparated,
-    glyphName: property_information_lib_util_types_commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: property_information_lib_util_types_number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: property_information_lib_util_types_number,
-    horizOriginX: property_information_lib_util_types_number,
-    horizOriginY: property_information_lib_util_types_number,
-    id: null,
-    ideographic: property_information_lib_util_types_number,
-    imageRendering: null,
-    initialVisibility: null,
-    "in": null,
-    in2: null,
-    intercept: property_information_lib_util_types_number,
-    k: property_information_lib_util_types_number,
-    k1: property_information_lib_util_types_number,
-    k2: property_information_lib_util_types_number,
-    k3: property_information_lib_util_types_number,
-    k4: property_information_lib_util_types_number,
-    kernelMatrix: property_information_lib_util_types_commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: property_information_lib_util_types_number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: property_information_lib_util_types_number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: property_information_lib_util_types_number,
-    overlineThickness: property_information_lib_util_types_number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: property_information_lib_util_types_number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: property_information_lib_util_types_spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: property_information_lib_util_types_number,
-    pointsAtY: property_information_lib_util_types_number,
-    pointsAtZ: property_information_lib_util_types_number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: property_information_lib_util_types_commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: property_information_lib_util_types_commaOrSpaceSeparated,
-    rev: property_information_lib_util_types_commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFeatures: property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFonts: property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFormats: property_information_lib_util_types_commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: property_information_lib_util_types_number,
-    specularExponent: property_information_lib_util_types_number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: property_information_lib_util_types_number,
-    strikethroughThickness: property_information_lib_util_types_number,
-    string: null,
-    stroke: null,
-    strokeDashArray: property_information_lib_util_types_commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: property_information_lib_util_types_number,
-    strokeOpacity: property_information_lib_util_types_number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: property_information_lib_util_types_number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: property_information_lib_util_types_commaOrSpaceSeparated,
-    tabIndex: property_information_lib_util_types_number,
-    tableValues: null,
-    target: null,
-    targetX: property_information_lib_util_types_number,
-    targetY: property_information_lib_util_types_number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: property_information_lib_util_types_commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    u1: null,
-    u2: null,
-    underlinePosition: property_information_lib_util_types_number,
-    underlineThickness: property_information_lib_util_types_number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: property_information_lib_util_types_number,
-    values: null,
-    vAlphabetic: property_information_lib_util_types_number,
-    vMathematical: property_information_lib_util_types_number,
-    vectorEffect: null,
-    vHanging: property_information_lib_util_types_number,
-    vIdeographic: property_information_lib_util_types_number,
-    version: null,
-    vertAdvY: property_information_lib_util_types_number,
-    vertOriginX: property_information_lib_util_types_number,
-    vertOriginY: property_information_lib_util_types_number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: property_information_lib_util_types_number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/index.js
-/**
- * @typedef {import('./lib/util/info.js').Info} Info
- * @typedef {import('./lib/util/schema.js').Schema} Schema
- */
-
-
-
-
-
-
-
-
-
-
-var hast_util_to_html_node_modules_property_information_html = property_information_lib_util_merge_merge([node_modules_property_information_lib_xml_xml, node_modules_property_information_lib_xlink_xlink, node_modules_property_information_lib_xmlns_xmlns, node_modules_property_information_lib_aria_aria, hast_util_to_html_node_modules_property_information_lib_html_html], 'html');
-var hast_util_to_html_node_modules_property_information_svg = property_information_lib_util_merge_merge([node_modules_property_information_lib_xml_xml, node_modules_property_information_lib_xlink_xlink, node_modules_property_information_lib_xmlns_xmlns, node_modules_property_information_lib_aria_aria, node_modules_property_information_lib_svg_svg], 'svg');
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/util/comment.js
 /**
  * @typedef {import('../../types.js').Comment} Comment
@@ -68862,156 +62917,6 @@ var omission_omission = {
   opening: opening,
   closing: closing
 };
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/property-information/lib/find.js
-/**
- * @typedef {import('./util/schema.js').Schema} Schema
- */
-
-
-
-var node_modules_property_information_lib_find_valid = /^data[-\w.:]+$/i;
-var node_modules_property_information_lib_find_dash = /-[a-z]/g;
-var node_modules_property_information_lib_find_cap = /[A-Z]/g;
-/**
- * @param {Schema} schema
- * @param {string} value
- * @returns {Info}
- */
-
-function node_modules_property_information_lib_find_find(schema, value) {
-  var normal = node_modules_property_information_lib_normalize_normalize(value);
-  var prop = value;
-  var Type = property_information_lib_util_info_Info;
-
-  if (normal in schema.normal) {
-    return schema.property[schema.normal[normal]];
-  }
-
-  if (normal.length > 4 && normal.slice(0, 4) === 'data' && node_modules_property_information_lib_find_valid.test(value)) {
-    // Attribute or property.
-    if (value.charAt(4) === '-') {
-      // Turn it into a property.
-      var rest = value.slice(5).replace(node_modules_property_information_lib_find_dash, node_modules_property_information_lib_find_camelcase);
-      prop = 'data' + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      // Turn it into an attribute.
-      var _rest = value.slice(4);
-
-      if (!node_modules_property_information_lib_find_dash.test(_rest)) {
-        var dashes = _rest.replace(node_modules_property_information_lib_find_cap, node_modules_property_information_lib_find_kebab);
-
-        if (dashes.charAt(0) !== '-') {
-          dashes = '-' + dashes;
-        }
-
-        value = 'data' + dashes;
-      }
-    }
-
-    Type = property_information_lib_util_defined_info_DefinedInfo;
-  }
-
-  return new Type(prop, value);
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-function node_modules_property_information_lib_find_kebab($0) {
-  return '-' + $0.toLowerCase();
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-
-function node_modules_property_information_lib_find_camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/space-separated-tokens/index.js
-/**
- * Parse space separated tokens to an array of strings.
- *
- * @param {string} value Space separated tokens
- * @returns {Array.<string>} Tokens
- */
-function hast_util_to_html_node_modules_space_separated_tokens_parse(value) {
-  var input = String(value || '').trim();
-  return input ? input.split(/[ \t\n\r\f]+/g) : [];
-}
-/**
- * Serialize an array of strings as space separated tokens.
- *
- * @param {Array.<string|number>} values Tokens
- * @returns {string} Space separated tokens
- */
-
-function hast_util_to_html_node_modules_space_separated_tokens_stringify(values) {
-  return values.join(' ').trim();
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/node_modules/comma-separated-tokens/index.js
-/**
- * @typedef {Object} StringifyOptions
- * @property {boolean} [padLeft=true] Whether to pad a space before a token (`boolean`, default: `true`).
- * @property {boolean} [padRight=false] Whether to pad a space after a token (`boolean`, default: `false`).
- */
-
-/**
- * Parse comma separated tokens to an array.
- *
- * @param {string} value
- * @returns {Array.<string>}
- */
-function hast_util_to_html_node_modules_comma_separated_tokens_parse(value) {
-  /** @type {Array.<string>} */
-  var tokens = [];
-  var input = String(value || '');
-  var index = input.indexOf(',');
-  var start = 0;
-  /** @type {boolean} */
-
-  var end;
-  /** @type {string} */
-
-  var token;
-
-  while (!end) {
-    if (index === -1) {
-      index = input.length;
-      end = true;
-    }
-
-    token = input.slice(start, index).trim();
-
-    if (token || !end) {
-      tokens.push(token);
-    }
-
-    start = index + 1;
-    index = input.indexOf(',', start);
-  }
-
-  return tokens;
-}
-/**
- * Serialize an array of strings to comma separated tokens.
- *
- * @param {Array.<string|number>} values
- * @param {StringifyOptions} [options]
- * @returns {string}
- */
-
-function hast_util_to_html_node_modules_comma_separated_tokens_stringify(values, options) {
-  var settings = options || {}; // Ensure the last empty entry is seen.
-
-  if (values[values.length - 1] === '') {
-    values = values.concat('');
-  }
-
-  return values.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
-}
 ;// CONCATENATED MODULE: ../../node_modules/stringify-entities/lib/core.js
 /**
  * @typedef {Object} CoreOptions
@@ -69109,7 +63014,7 @@ function toDecimal(code, next, omit) {
   var value = '&#' + String(code);
   return omit && next && !/\d/.test(String.fromCharCode(next)) ? value : value + ';';
 }
-;// CONCATENATED MODULE: ../../node_modules/stringify-entities/node_modules/character-entities-legacy/index.js
+;// CONCATENATED MODULE: ../../node_modules/character-entities-legacy/index.js
 /**
  * List of legacy HTML named character references that don’t need a trailing semicolon.
  *
@@ -69704,7 +63609,7 @@ function tree_element(ctx, node, index, parent) {
   var last;
 
   if (schema.space === 'html' && node.tagName === 'svg') {
-    ctx.schema = hast_util_to_html_node_modules_property_information_svg;
+    ctx.schema = property_information_svg;
   }
 
   var attrs = serializeAttributes(ctx, node.properties);
@@ -69787,7 +63692,7 @@ function serializeAttributes(ctx, props) {
 
 
 function serializeAttribute(ctx, key, value) {
-  var info = node_modules_property_information_lib_find_find(ctx.schema, key);
+  var info = find(ctx.schema, key);
   var quote = ctx.quote;
   /** @type {string} */
 
@@ -69827,7 +63732,7 @@ function serializeAttribute(ctx, key, value) {
   if (value === true) return name;
   value = typeof value === 'object' && 'length' in value ? // `spaces` doesn’t accept a second argument, but it’s given here just to
   // keep the code cleaner.
-  (info.commaSeparated ? hast_util_to_html_node_modules_comma_separated_tokens_stringify : hast_util_to_html_node_modules_space_separated_tokens_stringify)(value, {
+  (info.commaSeparated ? comma_separated_tokens_stringify : stringify)(value, {
     padLeft: !ctx.tightLists
   }) : String(value);
   if (ctx.collapseEmpty && !value) return name; // Check unquoted value.
@@ -69890,7 +63795,7 @@ function toHtml(node) {
   var context = {
     valid: options.allowParseErrors ? 0 : 1,
     safe: options.allowDangerousCharacters ? 0 : 1,
-    schema: options.space === 'svg' ? hast_util_to_html_node_modules_property_information_svg : hast_util_to_html_node_modules_property_information_html,
+    schema: options.space === 'svg' ? property_information_svg : property_information_html,
     omit: options.omitOptionalTags ? omission_omission : undefined,
     quote: quote,
     alternative: alternative,
@@ -69939,133 +63844,6 @@ function rehypeStringify(config) {
   function compiler(tree) {
     return toHtml(tree, settings);
   }
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var rehype_prism_plus_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/hast-util-to-string/index.js
-/**
- * @fileoverview
- *   Get the plain-text value of a hast node.
- * @longdescription
- *   ## Use
- *
- *   ```js
- *   import {h} from 'hastscript'
- *   import {toString} from 'hast-util-to-string'
- *
- *   toString(h('p', 'Alpha'))
- *   //=> 'Alpha'
- *   toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']))
- *   //=> 'Bold and italic.'
- *   ```
- *
- *   ## API
- *
- *   ### `toString(node)`
- *
- *   Transform a node to a string.
- */
-
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Element} Element
- * @typedef {Root|Root['children'][number]} Node
- */
-
-/**
- * Get the plain-text value of a hast node.
- *
- * @param {Node} node
- * @returns {string}
- */
-function node_modules_hast_util_to_string_toString(node) {
-  // “The concatenation of data of all the Text node descendants of the context
-  // object, in tree order.”
-  if ('children' in node) {
-    return node_modules_hast_util_to_string_all(node);
-  } // “Context object’s data.”
-
-
-  return 'value' in node ? node.value : '';
-}
-/**
- * @param {Node} node
- * @returns {string}
- */
-
-function node_modules_hast_util_to_string_one(node) {
-  if (node.type === 'text') {
-    return node.value;
-  }
-
-  return 'children' in node ? node_modules_hast_util_to_string_all(node) : '';
-}
-/**
- * @param {Root|Element} node
- * @returns {string}
- */
-
-
-function node_modules_hast_util_to_string_all(node) {
-  var index = -1;
-  /** @type {string[]} */
-
-  var result = [];
-
-  while (++index < node.children.length) {
-    result[index] = node_modules_hast_util_to_string_one(node.children[index]);
-  }
-
-  return result.join('');
 }
 ;// CONCATENATED MODULE: ../../node_modules/unist-util-filter/index.js
 /**
@@ -70166,7 +63944,7 @@ function filter(tree, options, test) {
 };
 // EXTERNAL MODULE: ../../node_modules/parse-numeric-range/index.js
 var parse_numeric_range = __webpack_require__(1871);
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/clike.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/clike.js
 // @ts-nocheck
 clike.displayName = 'clike';
 clike.aliases = [];
@@ -70202,7 +63980,7 @@ function clike(Prism) {
     punctuation: /[{}[\];(),.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/c.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/c.js
 // @ts-nocheck
 
 c.displayName = 'c';
@@ -70282,7 +64060,7 @@ function c(Prism) {
   });
   delete Prism.languages.c['boolean'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cpp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cpp.js
 // @ts-nocheck
 
 cpp.displayName = 'cpp';
@@ -70377,7 +64155,7 @@ function cpp(Prism) {
     }, Prism.languages.cpp['base-clause']);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/arduino.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/arduino.js
 // @ts-nocheck
 
 arduino.displayName = 'arduino';
@@ -70393,7 +64171,7 @@ function arduino(Prism) {
   });
   Prism.languages.ino = Prism.languages.arduino;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bash.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bash.js
 // @ts-nocheck
 bash.displayName = 'bash';
 bash.aliases = ['shell'];
@@ -70597,7 +64375,7 @@ function bash(Prism) {
     Prism.languages.shell = Prism.languages.bash;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/csharp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/csharp.js
 // @ts-nocheck
 
 csharp.displayName = 'csharp';
@@ -70949,7 +64727,7 @@ function csharp(Prism) {
     Prism.languages.dotnet = Prism.languages.cs = Prism.languages.csharp;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/markup.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/markup.js
 // @ts-nocheck
 markup.displayName = 'markup';
 markup.aliases = ['atom', 'html', 'mathml', 'rss', 'ssml', 'svg', 'xml'];
@@ -71120,7 +64898,7 @@ function markup(Prism) {
   Prism.languages.atom = Prism.languages.xml;
   Prism.languages.rss = Prism.languages.xml;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/css.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/css.js
 // @ts-nocheck
 css.displayName = 'css';
 css.aliases = [];
@@ -71190,7 +64968,7 @@ function css(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/diff.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/diff.js
 // @ts-nocheck
 diff.displayName = 'diff';
 diff.aliases = [];
@@ -71256,7 +65034,7 @@ function diff(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/go.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/go.js
 // @ts-nocheck
 
 go.displayName = 'go';
@@ -71288,7 +65066,7 @@ function go(Prism) {
   });
   delete Prism.languages.go['class-name'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ini.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ini.js
 // @ts-nocheck
 ini.displayName = 'ini';
 ini.aliases = [];
@@ -71336,7 +65114,7 @@ function ini(Prism) {
     punctuation: /=/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/java.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/java.js
 // @ts-nocheck
 
 java.displayName = 'java';
@@ -71427,7 +65205,7 @@ function java(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/regex.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/regex.js
 // @ts-nocheck
 regex.displayName = 'regex';
 regex.aliases = [];
@@ -71529,7 +65307,7 @@ function regex(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/javascript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/javascript.js
 // @ts-nocheck
 
 javascript.displayName = 'javascript';
@@ -71658,7 +65436,7 @@ function javascript(Prism) {
 
   Prism.languages.js = Prism.languages.javascript;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/json.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/json.js
 // @ts-nocheck
 json.displayName = 'json';
 json.aliases = ['webmanifest'];
@@ -71692,7 +65470,7 @@ function json(Prism) {
   };
   Prism.languages.webmanifest = Prism.languages.json;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/kotlin.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/kotlin.js
 // @ts-nocheck
 
 kotlin.displayName = 'kotlin';
@@ -71778,7 +65556,7 @@ function kotlin(Prism) {
     Prism.languages.kts = Prism.languages.kotlin;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/less.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/less.js
 // @ts-nocheck
 
 less.displayName = 'less';
@@ -71833,7 +65611,7 @@ function less(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/lua.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/lua.js
 // @ts-nocheck
 lua.displayName = 'lua';
 lua.aliases = [];
@@ -71858,7 +65636,7 @@ function lua(Prism) {
     punctuation: /[\[\](){},;]|\.+|:+/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/makefile.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/makefile.js
 // @ts-nocheck
 makefile.displayName = 'makefile';
 makefile.aliases = [];
@@ -71896,7 +65674,7 @@ function makefile(Prism) {
     punctuation: /[:;(){}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/yaml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/yaml.js
 // @ts-nocheck
 yaml.displayName = 'yaml';
 yaml.aliases = ['yml'];
@@ -71993,7 +65771,7 @@ function yaml(Prism) {
     Prism.languages.yml = Prism.languages.yaml;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/markdown.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/markdown.js
 // @ts-nocheck
 
 markdown.displayName = 'markdown';
@@ -72406,7 +66184,7 @@ function markdown(Prism) {
     Prism.languages.md = Prism.languages.markdown;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/objectivec.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/objectivec.js
 // @ts-nocheck
 
 objectivec.displayName = 'objectivec';
@@ -72426,7 +66204,7 @@ function objectivec(Prism) {
   delete Prism.languages.objectivec['class-name'];
   Prism.languages.objc = Prism.languages.objectivec;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/perl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/perl.js
 // @ts-nocheck
 perl.displayName = 'perl';
 perl.aliases = [];
@@ -72531,7 +66309,7 @@ function perl(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/markup-templating.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/markup-templating.js
 // @ts-nocheck
 
 markupTemplating.displayName = 'markup-templating';
@@ -72664,7 +66442,7 @@ function markupTemplating(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/php.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/php.js
 // @ts-nocheck
 
 php.displayName = 'php';
@@ -72968,7 +66746,7 @@ function php(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/python.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/python.js
 // @ts-nocheck
 python.displayName = 'python';
 python.aliases = ['py'];
@@ -73039,7 +66817,7 @@ function python(Prism) {
   Prism.languages.python['string-interpolation'].inside['interpolation'].inside.rest = Prism.languages.python;
   Prism.languages.py = Prism.languages.python;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/r.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/r.js
 // @ts-nocheck
 r.displayName = 'r';
 r.aliases = [];
@@ -73066,7 +66844,7 @@ function r(Prism) {
     punctuation: /[(){}\[\],;]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ruby.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ruby.js
 // @ts-nocheck
 
 ruby.displayName = 'ruby';
@@ -73237,7 +67015,7 @@ function ruby(Prism) {
     Prism.languages.rb = Prism.languages.ruby;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/rust.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rust.js
 // @ts-nocheck
 rust.displayName = 'rust';
 rust.aliases = [];
@@ -73362,7 +67140,7 @@ function rust(Prism) {
     Prism.languages.rust['attribute'].inside['string'] = Prism.languages.rust['string'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/sass.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/sass.js
 // @ts-nocheck
 
 sass.displayName = 'sass';
@@ -73438,7 +67216,7 @@ function sass(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/scss.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/scss.js
 // @ts-nocheck
 
 scss.displayName = 'scss';
@@ -73522,7 +67300,7 @@ function scss(Prism) {
   });
   Prism.languages.scss['atrule'].inside.rest = Prism.languages.scss;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/sql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/sql.js
 // @ts-nocheck
 sql.displayName = 'sql';
 sql.aliases = [];
@@ -73560,7 +67338,7 @@ function sql(Prism) {
     punctuation: /[;[\]()`,.]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/swift.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/swift.js
 // @ts-nocheck
 swift.displayName = 'swift';
 swift.aliases = [];
@@ -73679,7 +67457,7 @@ function swift(Prism) {
     rule.inside['interpolation'].inside = Prism.languages.swift;
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/typescript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/typescript.js
 // @ts-nocheck
 
 typescript.displayName = 'typescript';
@@ -73740,7 +67518,7 @@ function typescript(Prism) {
     Prism.languages.ts = Prism.languages.typescript;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/basic.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/basic.js
 // @ts-nocheck
 basic.displayName = 'basic';
 basic.aliases = [];
@@ -73765,7 +67543,7 @@ function basic(Prism) {
     punctuation: /[,;:()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/vbnet.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/vbnet.js
 // @ts-nocheck
 
 vbnet.displayName = 'vbnet';
@@ -73794,1826 +67572,7 @@ function vbnet(Prism) {
     punctuation: /[,;:(){}]/
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/schema.js
-
-
-
-/**
- * @typedef {import('./info.js').Info} Info
- * @typedef {Record<string, Info>} Properties
- * @typedef {Record<string, string>} Normal
- */
-var node_modules_property_information_lib_util_schema_Schema = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {Properties} property
- * @param {Normal} normal
- * @param {string} [space]
- */
-function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
-
-  this.property = property;
-  this.normal = normal;
-
-  if (space) {
-    this.space = space;
-  }
-});
-/** @type {Properties} */
-
-node_modules_property_information_lib_util_schema_Schema.prototype.property = {};
-/** @type {Normal} */
-
-node_modules_property_information_lib_util_schema_Schema.prototype.normal = {};
-/** @type {string|null} */
-
-node_modules_property_information_lib_util_schema_Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/merge.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- */
-
-/**
- * @param {Schema[]} definitions
- * @param {string} [space]
- * @returns {Schema}
- */
-
-function node_modules_property_information_lib_util_merge_merge(definitions, space) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  var index = -1;
-
-  while (++index < definitions.length) {
-    Object.assign(property, definitions[index].property);
-    Object.assign(normal, definitions[index].normal);
-  }
-
-  return new node_modules_property_information_lib_util_schema_Schema(property, normal, space);
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/normalize.js
-/**
- * @param {string} value
- * @returns {string}
- */
-function rehype_prism_plus_node_modules_property_information_lib_normalize_normalize(value) {
-  return value.toLowerCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/info.js
-
-
-var node_modules_property_information_lib_util_info_Info = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {string} property
- * @param {string} attribute
- */
-function Info(property, attribute) {
-  _classCallCheck(this, Info);
-
-  /** @type {string} */
-  this.property = property;
-  /** @type {string} */
-
-  this.attribute = attribute;
-});
-/** @type {string|null} */
-
-node_modules_property_information_lib_util_info_Info.prototype.space = null;
-node_modules_property_information_lib_util_info_Info.prototype["boolean"] = false;
-node_modules_property_information_lib_util_info_Info.prototype.booleanish = false;
-node_modules_property_information_lib_util_info_Info.prototype.overloadedBoolean = false;
-node_modules_property_information_lib_util_info_Info.prototype.number = false;
-node_modules_property_information_lib_util_info_Info.prototype.commaSeparated = false;
-node_modules_property_information_lib_util_info_Info.prototype.spaceSeparated = false;
-node_modules_property_information_lib_util_info_Info.prototype.commaOrSpaceSeparated = false;
-node_modules_property_information_lib_util_info_Info.prototype.mustUseProperty = false;
-node_modules_property_information_lib_util_info_Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/types.js
-var node_modules_property_information_lib_util_types_powers = 0;
-
-var node_modules_property_information_lib_util_types_boolean = node_modules_property_information_lib_util_types_increment();
-
-
-var node_modules_property_information_lib_util_types_booleanish = node_modules_property_information_lib_util_types_increment();
-var node_modules_property_information_lib_util_types_overloadedBoolean = node_modules_property_information_lib_util_types_increment();
-var node_modules_property_information_lib_util_types_number = node_modules_property_information_lib_util_types_increment();
-var node_modules_property_information_lib_util_types_spaceSeparated = node_modules_property_information_lib_util_types_increment();
-var node_modules_property_information_lib_util_types_commaSeparated = node_modules_property_information_lib_util_types_increment();
-var node_modules_property_information_lib_util_types_commaOrSpaceSeparated = node_modules_property_information_lib_util_types_increment();
-
-function node_modules_property_information_lib_util_types_increment() {
-  return Math.pow(2, ++node_modules_property_information_lib_util_types_powers);
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/defined-info.js
-
-
-
-
-
-
-
-/** @type {Array<keyof types>} */
-// @ts-expect-error: hush.
-
-var node_modules_property_information_lib_util_defined_info_checks = Object.keys(rehype_prism_plus_node_modules_property_information_lib_util_types_namespaceObject);
-var node_modules_property_information_lib_util_defined_info_DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-
-  var _super = _createSuper(DefinedInfo);
-
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  function DefinedInfo(property, attribute, mask, space) {
-    var _this;
-
-    _classCallCheck(this, DefinedInfo);
-
-    var index = -1;
-    _this = _super.call(this, property, attribute);
-    node_modules_property_information_lib_util_defined_info_mark(_assertThisInitialized(_this), 'space', space);
-
-    if (typeof mask === 'number') {
-      while (++index < node_modules_property_information_lib_util_defined_info_checks.length) {
-        var check = node_modules_property_information_lib_util_defined_info_checks[index];
-        node_modules_property_information_lib_util_defined_info_mark(_assertThisInitialized(_this), node_modules_property_information_lib_util_defined_info_checks[index], (mask & rehype_prism_plus_node_modules_property_information_lib_util_types_namespaceObject[check]) === rehype_prism_plus_node_modules_property_information_lib_util_types_namespaceObject[check]);
-      }
-    }
-
-    return _this;
-  }
-
-  return _createClass(DefinedInfo);
-}(node_modules_property_information_lib_util_info_Info);
-node_modules_property_information_lib_util_defined_info_DefinedInfo.prototype.defined = true;
-/**
- * @param {DefinedInfo} values
- * @param {string} key
- * @param {unknown} value
- */
-
-function node_modules_property_information_lib_util_defined_info_mark(values, key, value) {
-  if (value) {
-    // @ts-expect-error: assume `value` matches the expected value of `key`.
-    values[key] = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/create.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- *
- * @typedef {Record<string, string>} Attributes
- *
- * @typedef {Object} Definition
- * @property {Record<string, number|null>} properties
- * @property {(attributes: Attributes, property: string) => string} transform
- * @property {string} [space]
- * @property {Attributes} [attributes]
- * @property {Array<string>} [mustUseProperty]
- */
-
-
-
-var rehype_prism_plus_node_modules_property_information_lib_util_create_own = {}.hasOwnProperty;
-/**
- * @param {Definition} definition
- * @returns {Schema}
- */
-
-function rehype_prism_plus_node_modules_property_information_lib_util_create_create(definition) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  /** @type {string} */
-
-  var prop;
-
-  for (prop in definition.properties) {
-    if (rehype_prism_plus_node_modules_property_information_lib_util_create_own.call(definition.properties, prop)) {
-      var value = definition.properties[prop];
-      var info = new node_modules_property_information_lib_util_defined_info_DefinedInfo(prop, definition.transform(definition.attributes || {}, prop), value, definition.space);
-
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-
-      property[prop] = info;
-      normal[rehype_prism_plus_node_modules_property_information_lib_normalize_normalize(prop)] = prop;
-      normal[rehype_prism_plus_node_modules_property_information_lib_normalize_normalize(info.attribute)] = prop;
-    }
-  }
-
-  return new node_modules_property_information_lib_util_schema_Schema(property, normal, definition.space);
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/xlink.js
-
-var rehype_prism_plus_node_modules_property_information_lib_xlink_xlink = rehype_prism_plus_node_modules_property_information_lib_util_create_create({
-  space: 'xlink',
-  transform: function transform(_, prop) {
-    return 'xlink:' + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/xml.js
-
-var rehype_prism_plus_node_modules_property_information_lib_xml_xml = rehype_prism_plus_node_modules_property_information_lib_util_create_create({
-  space: 'xml',
-  transform: function transform(_, prop) {
-    return 'xml:' + prop.slice(3).toLowerCase();
-  },
-  properties: {
-    xmlLang: null,
-    xmlBase: null,
-    xmlSpace: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/case-sensitive-transform.js
-/**
- * @param {Record<string, string>} attributes
- * @param {string} attribute
- * @returns {string}
- */
-function node_modules_property_information_lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/util/case-insensitive-transform.js
-
-/**
- * @param {Record<string, string>} attributes
- * @param {string} property
- * @returns {string}
- */
-
-function node_modules_property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform(attributes, property) {
-  return node_modules_property_information_lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, property.toLowerCase());
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/xmlns.js
-
-
-var rehype_prism_plus_node_modules_property_information_lib_xmlns_xmlns = rehype_prism_plus_node_modules_property_information_lib_util_create_create({
-  space: 'xmlns',
-  attributes: {
-    xmlnsxlink: 'xmlns:xlink'
-  },
-  transform: node_modules_property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  properties: {
-    xmlns: null,
-    xmlnsXLink: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/aria.js
-
-
-var rehype_prism_plus_node_modules_property_information_lib_aria_aria = rehype_prism_plus_node_modules_property_information_lib_util_create_create({
-  transform: function transform(_, prop) {
-    return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: node_modules_property_information_lib_util_types_booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: node_modules_property_information_lib_util_types_booleanish,
-    ariaChecked: node_modules_property_information_lib_util_types_booleanish,
-    ariaColCount: node_modules_property_information_lib_util_types_number,
-    ariaColIndex: node_modules_property_information_lib_util_types_number,
-    ariaColSpan: node_modules_property_information_lib_util_types_number,
-    ariaControls: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: node_modules_property_information_lib_util_types_booleanish,
-    ariaDropEffect: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: node_modules_property_information_lib_util_types_booleanish,
-    ariaFlowTo: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaGrabbed: node_modules_property_information_lib_util_types_booleanish,
-    ariaHasPopup: null,
-    ariaHidden: node_modules_property_information_lib_util_types_booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaLevel: node_modules_property_information_lib_util_types_number,
-    ariaLive: null,
-    ariaModal: node_modules_property_information_lib_util_types_booleanish,
-    ariaMultiLine: node_modules_property_information_lib_util_types_booleanish,
-    ariaMultiSelectable: node_modules_property_information_lib_util_types_booleanish,
-    ariaOrientation: null,
-    ariaOwns: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: node_modules_property_information_lib_util_types_number,
-    ariaPressed: node_modules_property_information_lib_util_types_booleanish,
-    ariaReadOnly: node_modules_property_information_lib_util_types_booleanish,
-    ariaRelevant: null,
-    ariaRequired: node_modules_property_information_lib_util_types_booleanish,
-    ariaRoleDescription: node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaRowCount: node_modules_property_information_lib_util_types_number,
-    ariaRowIndex: node_modules_property_information_lib_util_types_number,
-    ariaRowSpan: node_modules_property_information_lib_util_types_number,
-    ariaSelected: node_modules_property_information_lib_util_types_booleanish,
-    ariaSetSize: node_modules_property_information_lib_util_types_number,
-    ariaSort: null,
-    ariaValueMax: node_modules_property_information_lib_util_types_number,
-    ariaValueMin: node_modules_property_information_lib_util_types_number,
-    ariaValueNow: node_modules_property_information_lib_util_types_number,
-    ariaValueText: null,
-    role: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/html.js
-
-
-
-var rehype_prism_plus_node_modules_property_information_lib_html_html = rehype_prism_plus_node_modules_property_information_lib_util_create_create({
-  space: 'html',
-  attributes: {
-    acceptcharset: 'accept-charset',
-    classname: 'class',
-    htmlfor: 'for',
-    httpequiv: 'http-equiv'
-  },
-  transform: node_modules_property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: node_modules_property_information_lib_util_types_commaSeparated,
-    acceptCharset: node_modules_property_information_lib_util_types_spaceSeparated,
-    accessKey: node_modules_property_information_lib_util_types_spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: node_modules_property_information_lib_util_types_boolean,
-    allowPaymentRequest: node_modules_property_information_lib_util_types_boolean,
-    allowUserMedia: node_modules_property_information_lib_util_types_boolean,
-    alt: null,
-    as: null,
-    async: node_modules_property_information_lib_util_types_boolean,
-    autoCapitalize: null,
-    autoComplete: node_modules_property_information_lib_util_types_spaceSeparated,
-    autoFocus: node_modules_property_information_lib_util_types_boolean,
-    autoPlay: node_modules_property_information_lib_util_types_boolean,
-    capture: node_modules_property_information_lib_util_types_boolean,
-    charSet: null,
-    checked: node_modules_property_information_lib_util_types_boolean,
-    cite: null,
-    className: node_modules_property_information_lib_util_types_spaceSeparated,
-    cols: node_modules_property_information_lib_util_types_number,
-    colSpan: null,
-    content: null,
-    contentEditable: node_modules_property_information_lib_util_types_booleanish,
-    controls: node_modules_property_information_lib_util_types_boolean,
-    controlsList: node_modules_property_information_lib_util_types_spaceSeparated,
-    coords: node_modules_property_information_lib_util_types_number | node_modules_property_information_lib_util_types_commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    "default": node_modules_property_information_lib_util_types_boolean,
-    defer: node_modules_property_information_lib_util_types_boolean,
-    dir: null,
-    dirName: null,
-    disabled: node_modules_property_information_lib_util_types_boolean,
-    download: node_modules_property_information_lib_util_types_overloadedBoolean,
-    draggable: node_modules_property_information_lib_util_types_booleanish,
-    encType: null,
-    enterKeyHint: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: node_modules_property_information_lib_util_types_boolean,
-    formTarget: null,
-    headers: node_modules_property_information_lib_util_types_spaceSeparated,
-    height: node_modules_property_information_lib_util_types_number,
-    hidden: node_modules_property_information_lib_util_types_boolean,
-    high: node_modules_property_information_lib_util_types_number,
-    href: null,
-    hrefLang: null,
-    htmlFor: node_modules_property_information_lib_util_types_spaceSeparated,
-    httpEquiv: node_modules_property_information_lib_util_types_spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: node_modules_property_information_lib_util_types_boolean,
-    itemId: null,
-    itemProp: node_modules_property_information_lib_util_types_spaceSeparated,
-    itemRef: node_modules_property_information_lib_util_types_spaceSeparated,
-    itemScope: node_modules_property_information_lib_util_types_boolean,
-    itemType: node_modules_property_information_lib_util_types_spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: node_modules_property_information_lib_util_types_boolean,
-    low: node_modules_property_information_lib_util_types_number,
-    manifest: null,
-    max: null,
-    maxLength: node_modules_property_information_lib_util_types_number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: node_modules_property_information_lib_util_types_number,
-    multiple: node_modules_property_information_lib_util_types_boolean,
-    muted: node_modules_property_information_lib_util_types_boolean,
-    name: null,
-    nonce: null,
-    noModule: node_modules_property_information_lib_util_types_boolean,
-    noValidate: node_modules_property_information_lib_util_types_boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforePrint: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: node_modules_property_information_lib_util_types_boolean,
-    optimum: node_modules_property_information_lib_util_types_number,
-    pattern: null,
-    ping: node_modules_property_information_lib_util_types_spaceSeparated,
-    placeholder: null,
-    playsInline: node_modules_property_information_lib_util_types_boolean,
-    poster: null,
-    preload: null,
-    readOnly: node_modules_property_information_lib_util_types_boolean,
-    referrerPolicy: null,
-    rel: node_modules_property_information_lib_util_types_spaceSeparated,
-    required: node_modules_property_information_lib_util_types_boolean,
-    reversed: node_modules_property_information_lib_util_types_boolean,
-    rows: node_modules_property_information_lib_util_types_number,
-    rowSpan: node_modules_property_information_lib_util_types_number,
-    sandbox: node_modules_property_information_lib_util_types_spaceSeparated,
-    scope: null,
-    scoped: node_modules_property_information_lib_util_types_boolean,
-    seamless: node_modules_property_information_lib_util_types_boolean,
-    selected: node_modules_property_information_lib_util_types_boolean,
-    shape: null,
-    size: node_modules_property_information_lib_util_types_number,
-    sizes: null,
-    slot: null,
-    span: node_modules_property_information_lib_util_types_number,
-    spellCheck: node_modules_property_information_lib_util_types_booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: node_modules_property_information_lib_util_types_number,
-    step: null,
-    style: null,
-    tabIndex: node_modules_property_information_lib_util_types_number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: node_modules_property_information_lib_util_types_boolean,
-    useMap: null,
-    value: node_modules_property_information_lib_util_types_booleanish,
-    width: node_modules_property_information_lib_util_types_number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: node_modules_property_information_lib_util_types_spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: node_modules_property_information_lib_util_types_number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    "char": null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: node_modules_property_information_lib_util_types_boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: node_modules_property_information_lib_util_types_boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: node_modules_property_information_lib_util_types_number,
-    // `<img>` and `<object>`
-    leftMargin: node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    marginWidth: node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    noResize: node_modules_property_information_lib_util_types_boolean,
-    // `<frame>`
-    noHref: node_modules_property_information_lib_util_types_boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: node_modules_property_information_lib_util_types_boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: node_modules_property_information_lib_util_types_boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: node_modules_property_information_lib_util_types_booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: node_modules_property_information_lib_util_types_number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: node_modules_property_information_lib_util_types_boolean,
-    disableRemotePlayback: node_modules_property_information_lib_util_types_boolean,
-    prefix: null,
-    property: null,
-    results: node_modules_property_information_lib_util_types_number,
-    security: null,
-    unselectable: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/svg.js
-
-
-
-var rehype_prism_plus_node_modules_property_information_lib_svg_svg = rehype_prism_plus_node_modules_property_information_lib_util_create_create({
-  space: 'svg',
-  attributes: {
-    accentHeight: 'accent-height',
-    alignmentBaseline: 'alignment-baseline',
-    arabicForm: 'arabic-form',
-    baselineShift: 'baseline-shift',
-    capHeight: 'cap-height',
-    className: 'class',
-    clipPath: 'clip-path',
-    clipRule: 'clip-rule',
-    colorInterpolation: 'color-interpolation',
-    colorInterpolationFilters: 'color-interpolation-filters',
-    colorProfile: 'color-profile',
-    colorRendering: 'color-rendering',
-    crossOrigin: 'crossorigin',
-    dataType: 'datatype',
-    dominantBaseline: 'dominant-baseline',
-    enableBackground: 'enable-background',
-    fillOpacity: 'fill-opacity',
-    fillRule: 'fill-rule',
-    floodColor: 'flood-color',
-    floodOpacity: 'flood-opacity',
-    fontFamily: 'font-family',
-    fontSize: 'font-size',
-    fontSizeAdjust: 'font-size-adjust',
-    fontStretch: 'font-stretch',
-    fontStyle: 'font-style',
-    fontVariant: 'font-variant',
-    fontWeight: 'font-weight',
-    glyphName: 'glyph-name',
-    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
-    glyphOrientationVertical: 'glyph-orientation-vertical',
-    hrefLang: 'hreflang',
-    horizAdvX: 'horiz-adv-x',
-    horizOriginX: 'horiz-origin-x',
-    horizOriginY: 'horiz-origin-y',
-    imageRendering: 'image-rendering',
-    letterSpacing: 'letter-spacing',
-    lightingColor: 'lighting-color',
-    markerEnd: 'marker-end',
-    markerMid: 'marker-mid',
-    markerStart: 'marker-start',
-    navDown: 'nav-down',
-    navDownLeft: 'nav-down-left',
-    navDownRight: 'nav-down-right',
-    navLeft: 'nav-left',
-    navNext: 'nav-next',
-    navPrev: 'nav-prev',
-    navRight: 'nav-right',
-    navUp: 'nav-up',
-    navUpLeft: 'nav-up-left',
-    navUpRight: 'nav-up-right',
-    onAbort: 'onabort',
-    onActivate: 'onactivate',
-    onAfterPrint: 'onafterprint',
-    onBeforePrint: 'onbeforeprint',
-    onBegin: 'onbegin',
-    onCancel: 'oncancel',
-    onCanPlay: 'oncanplay',
-    onCanPlayThrough: 'oncanplaythrough',
-    onChange: 'onchange',
-    onClick: 'onclick',
-    onClose: 'onclose',
-    onCopy: 'oncopy',
-    onCueChange: 'oncuechange',
-    onCut: 'oncut',
-    onDblClick: 'ondblclick',
-    onDrag: 'ondrag',
-    onDragEnd: 'ondragend',
-    onDragEnter: 'ondragenter',
-    onDragExit: 'ondragexit',
-    onDragLeave: 'ondragleave',
-    onDragOver: 'ondragover',
-    onDragStart: 'ondragstart',
-    onDrop: 'ondrop',
-    onDurationChange: 'ondurationchange',
-    onEmptied: 'onemptied',
-    onEnd: 'onend',
-    onEnded: 'onended',
-    onError: 'onerror',
-    onFocus: 'onfocus',
-    onFocusIn: 'onfocusin',
-    onFocusOut: 'onfocusout',
-    onHashChange: 'onhashchange',
-    onInput: 'oninput',
-    onInvalid: 'oninvalid',
-    onKeyDown: 'onkeydown',
-    onKeyPress: 'onkeypress',
-    onKeyUp: 'onkeyup',
-    onLoad: 'onload',
-    onLoadedData: 'onloadeddata',
-    onLoadedMetadata: 'onloadedmetadata',
-    onLoadStart: 'onloadstart',
-    onMessage: 'onmessage',
-    onMouseDown: 'onmousedown',
-    onMouseEnter: 'onmouseenter',
-    onMouseLeave: 'onmouseleave',
-    onMouseMove: 'onmousemove',
-    onMouseOut: 'onmouseout',
-    onMouseOver: 'onmouseover',
-    onMouseUp: 'onmouseup',
-    onMouseWheel: 'onmousewheel',
-    onOffline: 'onoffline',
-    onOnline: 'ononline',
-    onPageHide: 'onpagehide',
-    onPageShow: 'onpageshow',
-    onPaste: 'onpaste',
-    onPause: 'onpause',
-    onPlay: 'onplay',
-    onPlaying: 'onplaying',
-    onPopState: 'onpopstate',
-    onProgress: 'onprogress',
-    onRateChange: 'onratechange',
-    onRepeat: 'onrepeat',
-    onReset: 'onreset',
-    onResize: 'onresize',
-    onScroll: 'onscroll',
-    onSeeked: 'onseeked',
-    onSeeking: 'onseeking',
-    onSelect: 'onselect',
-    onShow: 'onshow',
-    onStalled: 'onstalled',
-    onStorage: 'onstorage',
-    onSubmit: 'onsubmit',
-    onSuspend: 'onsuspend',
-    onTimeUpdate: 'ontimeupdate',
-    onToggle: 'ontoggle',
-    onUnload: 'onunload',
-    onVolumeChange: 'onvolumechange',
-    onWaiting: 'onwaiting',
-    onZoom: 'onzoom',
-    overlinePosition: 'overline-position',
-    overlineThickness: 'overline-thickness',
-    paintOrder: 'paint-order',
-    panose1: 'panose-1',
-    pointerEvents: 'pointer-events',
-    referrerPolicy: 'referrerpolicy',
-    renderingIntent: 'rendering-intent',
-    shapeRendering: 'shape-rendering',
-    stopColor: 'stop-color',
-    stopOpacity: 'stop-opacity',
-    strikethroughPosition: 'strikethrough-position',
-    strikethroughThickness: 'strikethrough-thickness',
-    strokeDashArray: 'stroke-dasharray',
-    strokeDashOffset: 'stroke-dashoffset',
-    strokeLineCap: 'stroke-linecap',
-    strokeLineJoin: 'stroke-linejoin',
-    strokeMiterLimit: 'stroke-miterlimit',
-    strokeOpacity: 'stroke-opacity',
-    strokeWidth: 'stroke-width',
-    tabIndex: 'tabindex',
-    textAnchor: 'text-anchor',
-    textDecoration: 'text-decoration',
-    textRendering: 'text-rendering',
-    typeOf: 'typeof',
-    underlinePosition: 'underline-position',
-    underlineThickness: 'underline-thickness',
-    unicodeBidi: 'unicode-bidi',
-    unicodeRange: 'unicode-range',
-    unitsPerEm: 'units-per-em',
-    vAlphabetic: 'v-alphabetic',
-    vHanging: 'v-hanging',
-    vIdeographic: 'v-ideographic',
-    vMathematical: 'v-mathematical',
-    vectorEffect: 'vector-effect',
-    vertAdvY: 'vert-adv-y',
-    vertOriginX: 'vert-origin-x',
-    vertOriginY: 'vert-origin-y',
-    wordSpacing: 'word-spacing',
-    writingMode: 'writing-mode',
-    xHeight: 'x-height',
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: 'playbackorder',
-    timelineBegin: 'timelinebegin'
-  },
-  transform: node_modules_property_information_lib_util_case_sensitive_transform_caseSensitiveTransform,
-  properties: {
-    about: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    accentHeight: node_modules_property_information_lib_util_types_number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: node_modules_property_information_lib_util_types_number,
-    amplitude: node_modules_property_information_lib_util_types_number,
-    arabicForm: null,
-    ascent: node_modules_property_information_lib_util_types_number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: node_modules_property_information_lib_util_types_number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: node_modules_property_information_lib_util_types_number,
-    by: null,
-    calcMode: null,
-    capHeight: node_modules_property_information_lib_util_types_number,
-    className: node_modules_property_information_lib_util_types_spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: node_modules_property_information_lib_util_types_number,
-    diffuseConstant: node_modules_property_information_lib_util_types_number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: node_modules_property_information_lib_util_types_number,
-    dominantBaseline: null,
-    download: node_modules_property_information_lib_util_types_boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: node_modules_property_information_lib_util_types_number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: node_modules_property_information_lib_util_types_number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: node_modules_property_information_lib_util_types_number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: node_modules_property_information_lib_util_types_commaSeparated,
-    g2: node_modules_property_information_lib_util_types_commaSeparated,
-    glyphName: node_modules_property_information_lib_util_types_commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: node_modules_property_information_lib_util_types_number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: node_modules_property_information_lib_util_types_number,
-    horizOriginX: node_modules_property_information_lib_util_types_number,
-    horizOriginY: node_modules_property_information_lib_util_types_number,
-    id: null,
-    ideographic: node_modules_property_information_lib_util_types_number,
-    imageRendering: null,
-    initialVisibility: null,
-    "in": null,
-    in2: null,
-    intercept: node_modules_property_information_lib_util_types_number,
-    k: node_modules_property_information_lib_util_types_number,
-    k1: node_modules_property_information_lib_util_types_number,
-    k2: node_modules_property_information_lib_util_types_number,
-    k3: node_modules_property_information_lib_util_types_number,
-    k4: node_modules_property_information_lib_util_types_number,
-    kernelMatrix: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: node_modules_property_information_lib_util_types_number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: node_modules_property_information_lib_util_types_number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: node_modules_property_information_lib_util_types_number,
-    overlineThickness: node_modules_property_information_lib_util_types_number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: node_modules_property_information_lib_util_types_number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: node_modules_property_information_lib_util_types_spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: node_modules_property_information_lib_util_types_number,
-    pointsAtY: node_modules_property_information_lib_util_types_number,
-    pointsAtZ: node_modules_property_information_lib_util_types_number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    rev: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFeatures: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFonts: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFormats: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: node_modules_property_information_lib_util_types_number,
-    specularExponent: node_modules_property_information_lib_util_types_number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: node_modules_property_information_lib_util_types_number,
-    strikethroughThickness: node_modules_property_information_lib_util_types_number,
-    string: null,
-    stroke: null,
-    strokeDashArray: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: node_modules_property_information_lib_util_types_number,
-    strokeOpacity: node_modules_property_information_lib_util_types_number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: node_modules_property_information_lib_util_types_number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    tabIndex: node_modules_property_information_lib_util_types_number,
-    tableValues: null,
-    target: null,
-    targetX: node_modules_property_information_lib_util_types_number,
-    targetY: node_modules_property_information_lib_util_types_number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    u1: null,
-    u2: null,
-    underlinePosition: node_modules_property_information_lib_util_types_number,
-    underlineThickness: node_modules_property_information_lib_util_types_number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: node_modules_property_information_lib_util_types_number,
-    values: null,
-    vAlphabetic: node_modules_property_information_lib_util_types_number,
-    vMathematical: node_modules_property_information_lib_util_types_number,
-    vectorEffect: null,
-    vHanging: node_modules_property_information_lib_util_types_number,
-    vIdeographic: node_modules_property_information_lib_util_types_number,
-    version: null,
-    vertAdvY: node_modules_property_information_lib_util_types_number,
-    vertOriginX: node_modules_property_information_lib_util_types_number,
-    vertOriginY: node_modules_property_information_lib_util_types_number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: node_modules_property_information_lib_util_types_number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/index.js
-/**
- * @typedef {import('./lib/util/info.js').Info} Info
- * @typedef {import('./lib/util/schema.js').Schema} Schema
- */
-
-
-
-
-
-
-
-
-
-
-var rehype_prism_plus_node_modules_property_information_html = node_modules_property_information_lib_util_merge_merge([rehype_prism_plus_node_modules_property_information_lib_xml_xml, rehype_prism_plus_node_modules_property_information_lib_xlink_xlink, rehype_prism_plus_node_modules_property_information_lib_xmlns_xmlns, rehype_prism_plus_node_modules_property_information_lib_aria_aria, rehype_prism_plus_node_modules_property_information_lib_html_html], 'html');
-var rehype_prism_plus_node_modules_property_information_svg = node_modules_property_information_lib_util_merge_merge([rehype_prism_plus_node_modules_property_information_lib_xml_xml, rehype_prism_plus_node_modules_property_information_lib_xlink_xlink, rehype_prism_plus_node_modules_property_information_lib_xmlns_xmlns, rehype_prism_plus_node_modules_property_information_lib_aria_aria, rehype_prism_plus_node_modules_property_information_lib_svg_svg], 'svg');
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/property-information/lib/find.js
-/**
- * @typedef {import('./util/schema.js').Schema} Schema
- */
-
-
-
-var rehype_prism_plus_node_modules_property_information_lib_find_valid = /^data[-\w.:]+$/i;
-var rehype_prism_plus_node_modules_property_information_lib_find_dash = /-[a-z]/g;
-var rehype_prism_plus_node_modules_property_information_lib_find_cap = /[A-Z]/g;
-/**
- * @param {Schema} schema
- * @param {string} value
- * @returns {Info}
- */
-
-function rehype_prism_plus_node_modules_property_information_lib_find_find(schema, value) {
-  var normal = rehype_prism_plus_node_modules_property_information_lib_normalize_normalize(value);
-  var prop = value;
-  var Type = node_modules_property_information_lib_util_info_Info;
-
-  if (normal in schema.normal) {
-    return schema.property[schema.normal[normal]];
-  }
-
-  if (normal.length > 4 && normal.slice(0, 4) === 'data' && rehype_prism_plus_node_modules_property_information_lib_find_valid.test(value)) {
-    // Attribute or property.
-    if (value.charAt(4) === '-') {
-      // Turn it into a property.
-      var rest = value.slice(5).replace(rehype_prism_plus_node_modules_property_information_lib_find_dash, rehype_prism_plus_node_modules_property_information_lib_find_camelcase);
-      prop = 'data' + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      // Turn it into an attribute.
-      var _rest = value.slice(4);
-
-      if (!rehype_prism_plus_node_modules_property_information_lib_find_dash.test(_rest)) {
-        var dashes = _rest.replace(rehype_prism_plus_node_modules_property_information_lib_find_cap, rehype_prism_plus_node_modules_property_information_lib_find_kebab);
-
-        if (dashes.charAt(0) !== '-') {
-          dashes = '-' + dashes;
-        }
-
-        value = 'data' + dashes;
-      }
-    }
-
-    Type = node_modules_property_information_lib_util_defined_info_DefinedInfo;
-  }
-
-  return new Type(prop, value);
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-function rehype_prism_plus_node_modules_property_information_lib_find_kebab($0) {
-  return '-' + $0.toLowerCase();
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-
-function rehype_prism_plus_node_modules_property_information_lib_find_camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/hast-util-parse-selector/index.js
-/**
- * @typedef {import('hast').Properties} Properties
- * @typedef {import('hast').Element} Element
- */
-var node_modules_hast_util_parse_selector_search = /[#.]/g;
-/**
- * Create a hast element from a simple CSS selector.
- *
- * @param selector A simple CSS selector.
- *   Can contain a tag-name (`foo`), classes (`.bar`), and an ID (`#baz`).
- *   Multiple classes are allowed.
- *   Uses the last ID if multiple IDs are found.
- * @param [defaultTagName='div'] Tag name to use if `selector` does not specify one.
- */
-
-var hast_util_parse_selector_parseSelector =
-/**
- * @type {(
- *  <Selector extends string, DefaultTagName extends string = 'div'>(selector?: Selector, defaultTagName?: DefaultTagName) => Element & {tagName: import('./extract.js').ExtractTagName<Selector, DefaultTagName>}
- * )}
- */
-
-/**
- * @param {string} [selector]
- * @param {string} [defaultTagName='div']
- * @returns {Element}
- */
-function parseSelector(selector) {
-  var defaultTagName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
-  var value = selector || '';
-  /** @type {Properties} */
-
-  var props = {};
-  var start = 0;
-  /** @type {string} */
-
-  var subvalue;
-  /** @type {string} */
-
-  var previous;
-  /** @type {RegExpMatchArray} */
-
-  var match;
-
-  while (start < value.length) {
-    node_modules_hast_util_parse_selector_search.lastIndex = start;
-    match = node_modules_hast_util_parse_selector_search.exec(value);
-    subvalue = value.slice(start, match ? match.index : value.length);
-
-    if (subvalue) {
-      if (!previous) {
-        defaultTagName = subvalue;
-      } else if (previous === '#') {
-        props.id = subvalue;
-      } else if (Array.isArray(props.className)) {
-        props.className.push(subvalue);
-      } else {
-        props.className = [subvalue];
-      }
-
-      start += subvalue.length;
-    }
-
-    if (match) {
-      previous = match[0];
-      start++;
-    }
-  }
-
-  return {
-    type: 'element',
-    tagName: defaultTagName,
-    properties: props,
-    children: []
-  };
-};
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/space-separated-tokens/index.js
-/**
- * Parse space separated tokens to an array of strings.
- *
- * @param {string} value Space separated tokens
- * @returns {Array.<string>} Tokens
- */
-function rehype_prism_plus_node_modules_space_separated_tokens_parse(value) {
-  var input = String(value || '').trim();
-  return input ? input.split(/[ \t\n\r\f]+/g) : [];
-}
-/**
- * Serialize an array of strings as space separated tokens.
- *
- * @param {Array.<string|number>} values Tokens
- * @returns {string} Space separated tokens
- */
-
-function rehype_prism_plus_node_modules_space_separated_tokens_stringify(values) {
-  return values.join(' ').trim();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/comma-separated-tokens/index.js
-/**
- * @typedef {Object} StringifyOptions
- * @property {boolean} [padLeft=true] Whether to pad a space before a token (`boolean`, default: `true`).
- * @property {boolean} [padRight=false] Whether to pad a space after a token (`boolean`, default: `false`).
- */
-
-/**
- * Parse comma separated tokens to an array.
- *
- * @param {string} value
- * @returns {Array.<string>}
- */
-function rehype_prism_plus_node_modules_comma_separated_tokens_parse(value) {
-  /** @type {Array.<string>} */
-  var tokens = [];
-  var input = String(value || '');
-  var index = input.indexOf(',');
-  var start = 0;
-  /** @type {boolean} */
-
-  var end;
-  /** @type {string} */
-
-  var token;
-
-  while (!end) {
-    if (index === -1) {
-      index = input.length;
-      end = true;
-    }
-
-    token = input.slice(start, index).trim();
-
-    if (token || !end) {
-      tokens.push(token);
-    }
-
-    start = index + 1;
-    index = input.indexOf(',', start);
-  }
-
-  return tokens;
-}
-/**
- * Serialize an array of strings to comma separated tokens.
- *
- * @param {Array.<string|number>} values
- * @param {StringifyOptions} [options]
- * @returns {string}
- */
-
-function rehype_prism_plus_node_modules_comma_separated_tokens_stringify(values, options) {
-  var settings = options || {}; // Ensure the last empty entry is seen.
-
-  if (values[values.length - 1] === '') {
-    values = values.concat('');
-  }
-
-  return values.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/hastscript/lib/core.js
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Properties} Properties
- * @typedef {Root['children'][number]} Child
- * @typedef {Child|Root} Node
- * @typedef {import('property-information').Info} Info
- * @typedef {import('property-information').Schema} Schema
- *
- * @typedef {Root|Element} HResult
- * @typedef {string|number} HStyleValue
- * @typedef {Object.<string, HStyleValue>} HStyle
- * @typedef {string|number|boolean|null|undefined} HPrimitiveValue
- * @typedef {Array.<string|number>} HArrayValue
- * @typedef {HPrimitiveValue|HArrayValue} HPropertyValue
- * @typedef {{[property: string]: HPropertyValue|HStyle}} HProperties
- *
- * @typedef {string|number|null|undefined} HPrimitiveChild
- * @typedef {Array.<Node|HPrimitiveChild>} HArrayChild
- * @typedef {Node|HPrimitiveChild|HArrayChild} HChild
- */
-
-
-
-
-var core_buttonTypes = new Set(['menu', 'submit', 'reset', 'button']);
-var lib_core_own = {}.hasOwnProperty;
-/**
- * @param {Schema} schema
- * @param {string} defaultTagName
- * @param {Array.<string>} [caseSensitive]
- */
-
-function hastscript_lib_core_core(schema, defaultTagName, caseSensitive) {
-  var adjust = caseSensitive && core_createAdjustMap(caseSensitive);
-
-  var h =
-  /**
-   * @type {{
-   *   (): Root
-   *   (selector: null|undefined, ...children: HChild[]): Root
-   *   (selector: string, properties?: HProperties, ...children: HChild[]): Element
-   *   (selector: string, ...children: HChild[]): Element
-   * }}
-   */
-
-  /**
-   * Hyperscript compatible DSL for creating virtual hast trees.
-   *
-   * @param {string|null} [selector]
-   * @param {HProperties|HChild} [properties]
-   * @param {HChild[]} children
-   * @returns {HResult}
-   */
-  function h(selector, properties) {
-    var index = -1;
-    /** @type {HResult} */
-
-    var node;
-
-    for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      children[_key - 2] = arguments[_key];
-    }
-
-    if (selector === undefined || selector === null) {
-      node = {
-        type: 'root',
-        children: []
-      }; // @ts-expect-error Properties are not supported for roots.
-
-      children.unshift(properties);
-    } else {
-      node = hast_util_parse_selector_parseSelector(selector, defaultTagName); // Normalize the name.
-
-      node.tagName = node.tagName.toLowerCase();
-
-      if (adjust && lib_core_own.call(adjust, node.tagName)) {
-        node.tagName = adjust[node.tagName];
-      } // Handle props.
-
-
-      if (core_isProperties(properties, node.tagName)) {
-        /** @type {string} */
-        var key;
-
-        for (key in properties) {
-          if (lib_core_own.call(properties, key)) {
-            // @ts-expect-error `node.properties` is set.
-            core_addProperty(schema, node.properties, key, properties[key]);
-          }
-        }
-      } else {
-        children.unshift(properties);
-      }
-    } // Handle children.
-
-
-    while (++index < children.length) {
-      core_addChild(node.children, children[index]);
-    }
-
-    if (node.type === 'element' && node.tagName === 'template') {
-      node.content = {
-        type: 'root',
-        children: node.children
-      };
-      node.children = [];
-    }
-
-    return node;
-  };
-
-  return h;
-}
-/**
- * @param {HProperties|HChild} value
- * @param {string} name
- * @returns {value is HProperties}
- */
-
-function core_isProperties(value, name) {
-  if (value === null || value === undefined || typeof value !== 'object' || Array.isArray(value)) {
-    return false;
-  }
-
-  if (name === 'input' || !value.type || typeof value.type !== 'string') {
-    return true;
-  }
-
-  if ('children' in value && Array.isArray(value.children)) {
-    return false;
-  }
-
-  if (name === 'button') {
-    return core_buttonTypes.has(value.type.toLowerCase());
-  }
-
-  return !('value' in value);
-}
-/**
- * @param {Schema} schema
- * @param {Properties} properties
- * @param {string} key
- * @param {HStyle|HPropertyValue} value
- * @returns {void}
- */
-
-
-function core_addProperty(schema, properties, key, value) {
-  var info = rehype_prism_plus_node_modules_property_information_lib_find_find(schema, key);
-  var index = -1;
-  /** @type {HPropertyValue} */
-
-  var result; // Ignore nullish and NaN values.
-
-  if (value === undefined || value === null) return;
-
-  if (typeof value === 'number') {
-    // Ignore NaN.
-    if (Number.isNaN(value)) return;
-    result = value;
-  } // Booleans.
-  else if (typeof value === 'boolean') {
-    result = value;
-  } // Handle list values.
-  else if (typeof value === 'string') {
-    if (info.spaceSeparated) {
-      result = rehype_prism_plus_node_modules_space_separated_tokens_parse(value);
-    } else if (info.commaSeparated) {
-      result = rehype_prism_plus_node_modules_comma_separated_tokens_parse(value);
-    } else if (info.commaOrSpaceSeparated) {
-      result = rehype_prism_plus_node_modules_space_separated_tokens_parse(rehype_prism_plus_node_modules_comma_separated_tokens_parse(value).join(' '));
-    } else {
-      result = core_parsePrimitive(info, info.property, value);
-    }
-  } else if (Array.isArray(value)) {
-    result = value.concat();
-  } else {
-    result = info.property === 'style' ? core_style(value) : String(value);
-  }
-
-  if (Array.isArray(result)) {
-    /** @type {Array.<string|number>} */
-    var finalResult = [];
-
-    while (++index < result.length) {
-      // @ts-expect-error Assume no booleans in array.
-      finalResult[index] = core_parsePrimitive(info, info.property, result[index]);
-    }
-
-    result = finalResult;
-  } // Class names (which can be added both on the `selector` and here).
-
-
-  if (info.property === 'className' && Array.isArray(properties.className)) {
-    // @ts-expect-error Assume no booleans in `className`.
-    result = properties.className.concat(result);
-  }
-
-  properties[info.property] = result;
-}
-/**
- * @param {Array.<Child>} nodes
- * @param {HChild} value
- * @returns {void}
- */
-
-
-function core_addChild(nodes, value) {
-  var index = -1;
-
-  if (value === undefined || value === null) {// Empty.
-  } else if (typeof value === 'string' || typeof value === 'number') {
-    nodes.push({
-      type: 'text',
-      value: String(value)
-    });
-  } else if (Array.isArray(value)) {
-    while (++index < value.length) {
-      core_addChild(nodes, value[index]);
-    }
-  } else if (typeof value === 'object' && 'type' in value) {
-    if (value.type === 'root') {
-      core_addChild(nodes, value.children);
-    } else {
-      nodes.push(value);
-    }
-  } else {
-    throw new Error('Expected node, nodes, or string, got `' + value + '`');
-  }
-}
-/**
- * Parse a single primitives.
- *
- * @param {Info} info
- * @param {string} name
- * @param {HPrimitiveValue} value
- * @returns {HPrimitiveValue}
- */
-
-
-function core_parsePrimitive(info, name, value) {
-  if (typeof value === 'string') {
-    if (info.number && value && !Number.isNaN(Number(value))) {
-      return Number(value);
-    }
-
-    if ((info["boolean"] || info.overloadedBoolean) && (value === '' || rehype_prism_plus_node_modules_property_information_lib_normalize_normalize(value) === rehype_prism_plus_node_modules_property_information_lib_normalize_normalize(name))) {
-      return true;
-    }
-  }
-
-  return value;
-}
-/**
- * @param {HStyle} value
- * @returns {string}
- */
-
-
-function core_style(value) {
-  /** @type {Array.<string>} */
-  var result = [];
-  /** @type {string} */
-
-  var key;
-
-  for (key in value) {
-    if (lib_core_own.call(value, key)) {
-      result.push([key, value[key]].join(': '));
-    }
-  }
-
-  return result.join('; ');
-}
-/**
- * @param {Array.<string>} values
- * @returns {Object.<string, string>}
- */
-
-
-function core_createAdjustMap(values) {
-  /** @type {Object.<string, string>} */
-  var result = {};
-  var index = -1;
-
-  while (++index < values.length) {
-    result[values[index].toLowerCase()] = values[index];
-  }
-
-  return result;
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/hastscript/lib/html.js
-/**
- * @typedef {import('./core.js').HChild} Child Acceptable child value
- * @typedef {import('./core.js').HProperties} Properties Acceptable properties value.
- *
- * @typedef {import('./jsx-classic').Element} h.JSX.Element
- * @typedef {import('./jsx-classic').IntrinsicAttributes} h.JSX.IntrinsicAttributes
- * @typedef {import('./jsx-classic').IntrinsicElements} h.JSX.IntrinsicElements
- * @typedef {import('./jsx-classic').ElementChildrenAttribute} h.JSX.ElementChildrenAttribute
- */
-
-
-var html_h = hastscript_lib_core_core(rehype_prism_plus_node_modules_property_information_html, 'div');
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/character-entities-legacy/index.js
-/**
- * List of legacy HTML named character references that don’t need a trailing semicolon.
- *
- * @type {Array<string>}
- */
-var character_entities_legacy_characterEntitiesLegacy = ['AElig', 'AMP', 'Aacute', 'Acirc', 'Agrave', 'Aring', 'Atilde', 'Auml', 'COPY', 'Ccedil', 'ETH', 'Eacute', 'Ecirc', 'Egrave', 'Euml', 'GT', 'Iacute', 'Icirc', 'Igrave', 'Iuml', 'LT', 'Ntilde', 'Oacute', 'Ocirc', 'Ograve', 'Oslash', 'Otilde', 'Ouml', 'QUOT', 'REG', 'THORN', 'Uacute', 'Ucirc', 'Ugrave', 'Uuml', 'Yacute', 'aacute', 'acirc', 'acute', 'aelig', 'agrave', 'amp', 'aring', 'atilde', 'auml', 'brvbar', 'ccedil', 'cedil', 'cent', 'copy', 'curren', 'deg', 'divide', 'eacute', 'ecirc', 'egrave', 'eth', 'euml', 'frac12', 'frac14', 'frac34', 'gt', 'iacute', 'icirc', 'iexcl', 'igrave', 'iquest', 'iuml', 'laquo', 'lt', 'macr', 'micro', 'middot', 'nbsp', 'not', 'ntilde', 'oacute', 'ocirc', 'ograve', 'ordf', 'ordm', 'oslash', 'otilde', 'ouml', 'para', 'plusmn', 'pound', 'quot', 'raquo', 'reg', 'sect', 'shy', 'sup1', 'sup2', 'sup3', 'szlig', 'thorn', 'times', 'uacute', 'ucirc', 'ugrave', 'uml', 'uuml', 'yacute', 'yen', 'yuml'];
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/character-reference-invalid/index.js
+;// CONCATENATED MODULE: ../../node_modules/character-reference-invalid/index.js
 /**
  * Map of invalid numeric character references to their replacements, according to HTML.
  *
@@ -75649,7 +67608,7 @@ var characterReferenceInvalid = {
   158: 'ž',
   159: 'Ÿ'
 };
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/is-decimal/index.js
+;// CONCATENATED MODULE: ../../node_modules/is-decimal/index.js
 /**
  * Check if the given character code, or the character code at the first
  * character, is decimal.
@@ -75662,7 +67621,7 @@ function isDecimal(character) {
   return code >= 48 && code <= 57;
   /* 0-9 */
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/is-hexadecimal/index.js
+;// CONCATENATED MODULE: ../../node_modules/is-hexadecimal/index.js
 /**
  * Check if the given character code, or the character code at the first
  * character, is hexadecimal.
@@ -75686,7 +67645,7 @@ function isHexadecimal(character) {
   /* Z */
   ;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/is-alphabetical/index.js
+;// CONCATENATED MODULE: ../../node_modules/is-alphabetical/index.js
 /**
  * Check if the given character code, or the character code at the first
  * character, is alphabetical.
@@ -75702,7 +67661,7 @@ function isAlphabetical(character) {
   /* A-Z */
   ;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/is-alphanumerical/index.js
+;// CONCATENATED MODULE: ../../node_modules/is-alphanumerical/index.js
 
 
 /**
@@ -75716,7 +67675,7 @@ function isAlphabetical(character) {
 function isAlphanumerical(character) {
   return isAlphabetical(character) || isDecimal(character);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/parse-entities/lib/index.js
+;// CONCATENATED MODULE: ../../node_modules/parse-entities/lib/index.js
 /**
  * @typedef {import('unist').Point} Point
  * @typedef {import('unist').Position} Position
@@ -75874,7 +67833,7 @@ function parseEntities(value) {
         // If so, we cache that as the last viable named reference.
         // This ensures we do not need to walk backwards later.
 
-        if (type === 'named' && character_entities_legacy_characterEntitiesLegacy.includes(characters)) {
+        if (type === 'named' && characterEntitiesLegacy.includes(characters)) {
           characterReferenceCharacters = characters; // @ts-expect-error: always able to decode.
 
           characterReference = decodeNamedCharacterReference(characters);
@@ -76120,7 +68079,7 @@ function disallowed(code) {
 }
 // EXTERNAL MODULE: ../../node_modules/prismjs/components/prism-core.js
 var prism_core = __webpack_require__(2805);
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lib/core.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lib/core.js
 
 
 /**
@@ -76188,7 +68147,7 @@ ctx.Prism.disableWorkerMessageHandler = true;
 /* eslint-enable import/first */
 
 restore();
-var refractor_lib_core_own = {}.hasOwnProperty; // Inherit.
+var lib_core_own = {}.hasOwnProperty; // Inherit.
 
 function Refractor() {}
 
@@ -76239,7 +68198,7 @@ function highlight(value, language) {
       throw new TypeError('Expected `string` for `name`, got `' + name + '`');
     }
 
-    if (refractor_lib_core_own.call(refractor.languages, name)) {
+    if (lib_core_own.call(refractor.languages, name)) {
       grammar = refractor.languages[name];
     } else {
       throw new Error('Unknown language: `' + name + '` is not registered');
@@ -76269,7 +68228,7 @@ function register(syntax) {
   // @ts-expect-error: TypeScript is wrong.
 
 
-  if (!refractor_lib_core_own.call(refractor.languages, syntax.displayName)) {
+  if (!lib_core_own.call(refractor.languages, syntax.displayName)) {
     // @ts-expect-error: TypeScript is wrong.
     syntax(refractor);
   }
@@ -76302,7 +68261,7 @@ function alias(language, alias) {
   var key;
 
   for (key in map) {
-    if (refractor_lib_core_own.call(map, key)) {
+    if (lib_core_own.call(map, key)) {
       var value = map[key];
       var list = typeof value === 'string' ? [value] : value;
       var index = -1;
@@ -76326,7 +68285,7 @@ function registered(aliasOrLanguage) {
     throw new TypeError('Expected `string` for `aliasOrLanguage`, got `' + aliasOrLanguage + '`');
   }
 
-  return refractor_lib_core_own.call(refractor.languages, aliasOrLanguage);
+  return lib_core_own.call(refractor.languages, aliasOrLanguage);
 }
 /**
  * List all registered languages (names and aliases).
@@ -76345,7 +68304,7 @@ function listLanguages() {
   var language;
 
   for (language in languages) {
-    if (refractor_lib_core_own.call(languages, language) && typeof languages[language] === 'object') {
+    if (lib_core_own.call(languages, language) && typeof languages[language] === 'object') {
       list.push(language);
     }
   }
@@ -76402,7 +68361,7 @@ function core_stringify(value, language) {
 
   refractor.hooks.run('wrap', env); // @ts-expect-error Hush, it’s fine.
 
-  return html_h(env.tag + '.' + env.classes.join('.'), core_attributes(env.attributes), env.content);
+  return h(env.tag + '.' + env.classes.join('.'), core_attributes(env.attributes), env.content);
 }
 /**
  * @template {unknown} T
@@ -76425,7 +68384,7 @@ function core_attributes(attrs) {
   var key;
 
   for (key in attrs) {
-    if (refractor_lib_core_own.call(attrs, key)) {
+    if (lib_core_own.call(attrs, key)) {
       attrs[key] = parseEntities(attrs[key]);
     }
   }
@@ -76463,7 +68422,7 @@ function capture() {
     current = undefined;
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lib/common.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lib/common.js
 /**
  * @typedef {import('./core.js').RefractorRoot} RefractorRoot
  * @typedef {import('./core.js').RefractorElement} RefractorElement
@@ -76545,7 +68504,7 @@ refractor.register(typescript);
 refractor.register(basic);
 refractor.register(vbnet);
 
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/abap.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/abap.js
 // @ts-nocheck
 abap.displayName = 'abap';
 abap.aliases = [];
@@ -76605,7 +68564,7 @@ function abap(Prism) {
     punctuation: /[,.:()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/abnf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/abnf.js
 // @ts-nocheck
 abnf.displayName = 'abnf';
 abnf.aliases = [];
@@ -76666,7 +68625,7 @@ function abnf(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/actionscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/actionscript.js
 // @ts-nocheck
 
 actionscript.displayName = 'actionscript';
@@ -76694,7 +68653,7 @@ function actionscript(Prism) {
     });
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ada.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ada.js
 // @ts-nocheck
 ada.displayName = 'ada';
 ada.aliases = [];
@@ -76718,7 +68677,7 @@ function ada(Prism) {
     variable: /\b[a-z](?:\w)*\b/i
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/agda.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/agda.js
 // @ts-nocheck
 agda.displayName = 'agda';
 agda.aliases = [];
@@ -76751,7 +68710,7 @@ function agda(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/al.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/al.js
 // @ts-nocheck
 al.displayName = 'al';
 al.aliases = [];
@@ -76780,7 +68739,7 @@ function al(Prism) {
     punctuation: /[()\[\]{}:.;,]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/antlr4.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/antlr4.js
 // @ts-nocheck
 antlr4.displayName = 'antlr4';
 antlr4.aliases = ['g4'];
@@ -76849,7 +68808,7 @@ function antlr4(Prism) {
   };
   Prism.languages.g4 = Prism.languages.antlr4;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/apacheconf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/apacheconf.js
 // @ts-nocheck
 apacheconf.displayName = 'apacheconf';
 apacheconf.aliases = [];
@@ -76904,7 +68863,7 @@ function apacheconf(Prism) {
     regex: /\^?.*\$|\^.*\$?/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/apex.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/apex.js
 // @ts-nocheck
 
 
@@ -76975,7 +68934,7 @@ function apex(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/apl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/apl.js
 // @ts-nocheck
 apl.displayName = 'apl';
 apl.aliases = [];
@@ -77015,7 +68974,7 @@ function apl(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/applescript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/applescript.js
 // @ts-nocheck
 applescript.displayName = 'applescript';
 applescript.aliases = [];
@@ -77033,7 +68992,7 @@ function applescript(Prism) {
     punctuation: /[{}():,¬«»《》]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/aql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/aql.js
 // @ts-nocheck
 aql.displayName = 'aql';
 aql.aliases = [];
@@ -77080,7 +69039,7 @@ function aql(Prism) {
     punctuation: /::|[?.:,;()[\]{}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/arff.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/arff.js
 // @ts-nocheck
 arff.displayName = 'arff';
 arff.aliases = [];
@@ -77098,7 +69057,7 @@ function arff(Prism) {
     punctuation: /[{},]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/asciidoc.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/asciidoc.js
 // @ts-nocheck
 asciidoc.displayName = 'asciidoc';
 asciidoc.aliases = ['adoc'];
@@ -77321,7 +69280,7 @@ function asciidoc(Prism) {
     Prism.languages.adoc = Prism.languages.asciidoc;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/aspnet.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/aspnet.js
 // @ts-nocheck
 
 
@@ -77378,7 +69337,7 @@ function aspnet(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/asm6502.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/asm6502.js
 // @ts-nocheck
 asm6502.displayName = 'asm6502';
 asm6502.aliases = [];
@@ -77415,7 +69374,7 @@ function asm6502(Prism) {
     punctuation: /[(),:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/asmatmel.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/asmatmel.js
 // @ts-nocheck
 asmatmel.displayName = 'asmatmel';
 asmatmel.aliases = [];
@@ -77464,7 +69423,7 @@ function asmatmel(Prism) {
     punctuation: /[(),:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/autohotkey.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/autohotkey.js
 // @ts-nocheck
 autohotkey.displayName = 'autohotkey';
 autohotkey.aliases = [];
@@ -77501,7 +69460,7 @@ function autohotkey(Prism) {
     punctuation: /[{}[\]():,]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/autoit.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/autoit.js
 // @ts-nocheck
 autoit.displayName = 'autoit';
 autoit.aliases = [];
@@ -77540,7 +69499,7 @@ function autoit(Prism) {
     punctuation: /[\[\]().,:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/avisynth.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/avisynth.js
 // @ts-nocheck
 avisynth.displayName = 'avisynth';
 avisynth.aliases = ['avs'];
@@ -77680,7 +69639,7 @@ function avisynth(Prism) {
     Prism.languages.avs = Prism.languages.avisynth;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/avro-idl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/avro-idl.js
 // @ts-nocheck
 avroIdl.displayName = 'avro-idl';
 avroIdl.aliases = ['avdl'];
@@ -77729,7 +69688,7 @@ function avroIdl(Prism) {
   };
   Prism.languages.avdl = Prism.languages['avro-idl'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/batch.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/batch.js
 // @ts-nocheck
 batch.displayName = 'batch';
 batch.aliases = [];
@@ -77825,7 +69784,7 @@ function batch(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bbcode.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bbcode.js
 // @ts-nocheck
 bbcode.displayName = 'bbcode';
 bbcode.aliases = ['shortcode'];
@@ -77858,7 +69817,7 @@ function bbcode(Prism) {
   };
   Prism.languages.shortcode = Prism.languages.bbcode;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bicep.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bicep.js
 // @ts-nocheck
 bicep.displayName = 'bicep';
 bicep.aliases = [];
@@ -77928,7 +69887,7 @@ function bicep(Prism) {
   };
   Prism.languages.bicep['interpolated-string'].inside['interpolation'].inside['expression'].inside = Prism.languages.bicep;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/birb.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/birb.js
 // @ts-nocheck
 
 birb.displayName = 'birb';
@@ -77956,7 +69915,7 @@ function birb(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bison.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bison.js
 // @ts-nocheck
 
 bison.displayName = 'bison';
@@ -78004,7 +69963,7 @@ function bison(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bnf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bnf.js
 // @ts-nocheck
 bnf.displayName = 'bnf';
 bnf.aliases = ['rbnf'];
@@ -78032,7 +69991,7 @@ function bnf(Prism) {
   };
   Prism.languages.rbnf = Prism.languages.bnf;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/brainfuck.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/brainfuck.js
 // @ts-nocheck
 brainfuck.displayName = 'brainfuck';
 brainfuck.aliases = [];
@@ -78060,7 +70019,7 @@ function brainfuck(Prism) {
     comment: /\S+/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/brightscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/brightscript.js
 // @ts-nocheck
 brightscript.displayName = 'brightscript';
 brightscript.aliases = [];
@@ -78112,7 +70071,7 @@ function brightscript(Prism) {
   };
   Prism.languages.brightscript['directive-statement'].inside.expression.inside = Prism.languages.brightscript;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bro.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bro.js
 // @ts-nocheck
 bro.displayName = 'bro';
 bro.aliases = [];
@@ -78147,7 +70106,7 @@ function bro(Prism) {
     punctuation: /[{}[\];(),.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/bsl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bsl.js
 // @ts-nocheck
 bsl.displayName = 'bsl';
 bsl.aliases = ['oscript'];
@@ -78215,7 +70174,7 @@ function bsl(Prism) {
   };
   Prism.languages.oscript = Prism.languages['bsl'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cfscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cfscript.js
 // @ts-nocheck
 
 cfscript.displayName = 'cfscript';
@@ -78261,7 +70220,7 @@ function cfscript(Prism) {
   delete Prism.languages.cfscript['class-name'];
   Prism.languages.cfc = Prism.languages['cfscript'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/chaiscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/chaiscript.js
 // @ts-nocheck
 
 
@@ -78325,7 +70284,7 @@ function chaiscript(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cil.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cil.js
 // @ts-nocheck
 cil.displayName = 'cil';
 cil.aliases = [];
@@ -78352,7 +70311,7 @@ function cil(Prism) {
     punctuation: /[{}[\];(),:=]|IL_[0-9A-Za-z]+/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/clojure.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/clojure.js
 // @ts-nocheck
 clojure.displayName = 'clojure';
 clojure.aliases = [];
@@ -78391,7 +70350,7 @@ function clojure(Prism) {
     punctuation: /[{}\[\](),]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cmake.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cmake.js
 // @ts-nocheck
 cmake.displayName = 'cmake';
 cmake.aliases = [];
@@ -78428,7 +70387,7 @@ function cmake(Prism) {
     punctuation: /[()>}]|\$[<{]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cobol.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cobol.js
 // @ts-nocheck
 cobol.displayName = 'cobol';
 cobol.aliases = [];
@@ -78482,7 +70441,7 @@ function cobol(Prism) {
     punctuation: /[.:,()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/coffeescript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/coffeescript.js
 // @ts-nocheck
 
 coffeescript.displayName = 'coffeescript';
@@ -78571,7 +70530,7 @@ function coffeescript(Prism) {
     Prism.languages.coffee = Prism.languages.coffeescript;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/concurnas.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/concurnas.js
 // @ts-nocheck
 concurnas.displayName = 'concurnas';
 concurnas.aliases = ['conc'];
@@ -78638,7 +70597,7 @@ function concurnas(Prism) {
   });
   Prism.languages.conc = Prism.languages.concurnas;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/csp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/csp.js
 // @ts-nocheck
 csp.displayName = 'csp';
 csp.aliases = [];
@@ -78712,7 +70671,7 @@ function csp(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/coq.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/coq.js
 // @ts-nocheck
 coq.displayName = 'coq';
 coq.aliases = [];
@@ -78768,7 +70727,7 @@ function coq(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/crystal.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/crystal.js
 // @ts-nocheck
 
 crystal.displayName = 'crystal';
@@ -78828,7 +70787,7 @@ function crystal(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/css-extras.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/css-extras.js
 // @ts-nocheck
 
 cssExtras.displayName = 'css-extras';
@@ -78941,7 +70900,7 @@ function cssExtras(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/csv.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/csv.js
 // @ts-nocheck
 csv.displayName = 'csv';
 csv.aliases = [];
@@ -78954,7 +70913,7 @@ function csv(Prism) {
     punctuation: /,/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cypher.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cypher.js
 // @ts-nocheck
 cypher.displayName = 'cypher';
 cypher.aliases = [];
@@ -78994,7 +70953,7 @@ function cypher(Prism) {
     punctuation: /[()[\]{},;.]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/d.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/d.js
 // @ts-nocheck
 
 d.displayName = 'd';
@@ -79059,7 +71018,7 @@ function d(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/dart.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/dart.js
 // @ts-nocheck
 
 dart.displayName = 'dart';
@@ -79137,7 +71096,7 @@ function dart(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/dataweave.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/dataweave.js
 // @ts-nocheck
 dataweave.displayName = 'dataweave';
 dataweave.aliases = [];
@@ -79184,7 +71143,7 @@ function dataweave(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/dax.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/dax.js
 // @ts-nocheck
 dax.displayName = 'dax';
 dax.aliases = [];
@@ -79219,7 +71178,7 @@ function dax(Prism) {
     punctuation: /[;\[\](){}`,.]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/dhall.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/dhall.js
 // @ts-nocheck
 dhall.displayName = 'dhall';
 dhall.aliases = [];
@@ -79292,7 +71251,7 @@ function dhall(Prism) {
   };
   Prism.languages.dhall.string.inside.interpolation.inside.expression.inside = Prism.languages.dhall;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/django.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/django.js
 // @ts-nocheck
 
 django.displayName = 'django';
@@ -79356,7 +71315,7 @@ function django(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/dns-zone-file.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/dns-zone-file.js
 // @ts-nocheck
 dnsZoneFile.displayName = 'dns-zone-file';
 dnsZoneFile.aliases = ['dns-zone'];
@@ -79393,7 +71352,7 @@ function dnsZoneFile(Prism) {
   };
   Prism.languages['dns-zone'] = Prism.languages['dns-zone-file'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/docker.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/docker.js
 // @ts-nocheck
 docker.displayName = 'docker';
 docker.aliases = ['dockerfile'];
@@ -79491,7 +71450,7 @@ function docker(Prism) {
     Prism.languages.dockerfile = Prism.languages.docker;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/dot.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/dot.js
 // @ts-nocheck
 dot.displayName = 'dot';
 dot.aliases = ['gv'];
@@ -79569,7 +71528,7 @@ function dot(Prism) {
     Prism.languages.gv = Prism.languages.dot;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ebnf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ebnf.js
 // @ts-nocheck
 ebnf.displayName = 'ebnf';
 ebnf.aliases = [];
@@ -79597,7 +71556,7 @@ function ebnf(Prism) {
     operator: /[-=|*/!]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/editorconfig.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/editorconfig.js
 // @ts-nocheck
 editorconfig.displayName = 'editorconfig';
 editorconfig.aliases = [];
@@ -79632,7 +71591,7 @@ function editorconfig(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/eiffel.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/eiffel.js
 // @ts-nocheck
 eiffel.displayName = 'eiffel';
 eiffel.aliases = [];
@@ -79667,7 +71626,7 @@ function eiffel(Prism) {
     operator: /\\\\|\|\.\.\||\.\.|\/[~\/=]?|[><]=?|[-+*^=~]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ejs.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ejs.js
 // @ts-nocheck
 
 
@@ -79701,7 +71660,7 @@ function ejs(Prism) {
     Prism.languages.eta = Prism.languages.ejs;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/elixir.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/elixir.js
 // @ts-nocheck
 elixir.displayName = 'elixir';
 elixir.aliases = [];
@@ -79795,7 +71754,7 @@ function elixir(Prism) {
     };
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/elm.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/elm.js
 // @ts-nocheck
 elm.displayName = 'elm';
 elm.aliases = [];
@@ -79845,7 +71804,7 @@ function elm(Prism) {
     punctuation: /[{}[\]|(),.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/etlua.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/etlua.js
 // @ts-nocheck
 
 
@@ -79877,7 +71836,7 @@ function etlua(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/erb.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/erb.js
 // @ts-nocheck
 
 
@@ -79911,7 +71870,7 @@ function erb(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/erlang.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/erlang.js
 // @ts-nocheck
 erlang.displayName = 'erlang';
 erlang.aliases = [];
@@ -79954,7 +71913,7 @@ function erlang(Prism) {
     punctuation: /[()[\]{}:;,.#|]|<<|>>/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/excel-formula.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/excel-formula.js
 // @ts-nocheck
 excelFormula.displayName = 'excel-formula';
 excelFormula.aliases = ['xls', 'xlsx'];
@@ -80025,7 +71984,7 @@ function excelFormula(Prism) {
   };
   Prism.languages['xlsx'] = Prism.languages['xls'] = Prism.languages['excel-formula'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/fsharp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/fsharp.js
 // @ts-nocheck
 
 fsharp.displayName = 'fsharp';
@@ -80102,7 +72061,7 @@ function fsharp(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/factor.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/factor.js
 // @ts-nocheck
 factor.displayName = 'factor';
 factor.aliases = [];
@@ -80436,7 +72395,7 @@ function factor(Prism) {
     Prism.languages.factor = factor;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/false.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/false.js
 // @ts-nocheck
 $false.displayName = 'false';
 $false.aliases = [];
@@ -80478,7 +72437,7 @@ function $false(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/firestore-security-rules.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/firestore-security-rules.js
 // @ts-nocheck
 
 firestoreSecurityRules.displayName = 'firestore-security-rules';
@@ -80521,7 +72480,7 @@ function firestoreSecurityRules(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/flow.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/flow.js
 // @ts-nocheck
 
 flow_flow.displayName = 'flow';
@@ -80561,7 +72520,7 @@ function flow_flow(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/fortran.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/fortran.js
 // @ts-nocheck
 fortran.displayName = 'fortran';
 fortran.aliases = [];
@@ -80601,7 +72560,7 @@ function fortran(Prism) {
     punctuation: /\(\/|\/\)|[(),;:&]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ftl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ftl.js
 // @ts-nocheck
 
 ftl.displayName = 'ftl';
@@ -80709,7 +72668,7 @@ function ftl(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gml.js
 // @ts-nocheck
 
 gml.displayName = 'gml';
@@ -80726,7 +72685,7 @@ function gml(Prism) {
     variable: /\b(?:alarm|application_surface|async_load|background_(?:alpha|blend|color|colour|foreground|height|hspeed|htiled|index|showcolor|showcolour|visible|vspeed|vtiled|width|x|xscale|y|yscale)|bbox_(?:bottom|left|right|top)|browser_(?:height|width)|caption_(?:health|lives|score)|current_(?:day|hour|minute|month|second|time|weekday|year)|cursor_sprite|debug_mode|delta_time|direction|display_aa|error_(?:last|occurred)|event_(?:action|number|object|type)|fps|fps_real|friction|game_(?:display|project|save)_(?:id|name)|gamemaker_(?:pro|registered|version)|gravity|gravity_direction|(?:h|v)speed|health|iap_data|id|image_(?:alpha|angle|blend|depth|index|number|speed|xscale|yscale)|instance_(?:count|id)|keyboard_(?:key|lastchar|lastkey|string)|layer|lives|mask_index|mouse_(?:button|lastbutton|x|y)|object_index|os_(?:browser|device|type|version)|path_(?:endaction|index|orientation|position|positionprevious|scale|speed)|persistent|phy_(?:rotation|(?:col_normal|collision|com|linear_velocity|position|speed)_(?:x|y)|angular_(?:damping|velocity)|position_(?:x|y)previous|speed|linear_damping|bullet|fixed_rotation|active|mass|inertia|dynamic|kinematic|sleeping|collision_points)|pointer_(?:invalid|null)|room|room_(?:caption|first|height|last|persistent|speed|width)|score|secure_mode|show_(?:health|lives|score)|solid|speed|sprite_(?:height|index|width|xoffset|yoffset)|temp_directory|timeline_(?:index|loop|position|running|speed)|transition_(?:color|kind|steps)|undefined|view_(?:angle|current|enabled|(?:h|v)(?:border|speed)|(?:h|w|x|y)port|(?:h|w|x|y)view|object|surface_id|visible)|visible|webgl_enabled|working_directory|(?:x|y)(?:previous|start)|x|y|argument(?:_relitive|_count|\d)|argument|global|local|other|self)\b/
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gap.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gap.js
 // @ts-nocheck
 gap.displayName = 'gap';
 gap.aliases = [];
@@ -80782,7 +72741,7 @@ function gap(Prism) {
   };
   Prism.languages.gap.shell.inside.gap.inside = Prism.languages.gap;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gcode.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gcode.js
 // @ts-nocheck
 gcode.displayName = 'gcode';
 gcode.aliases = [];
@@ -80806,7 +72765,7 @@ function gcode(Prism) {
     punctuation: /[:*]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gdscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gdscript.js
 // @ts-nocheck
 gdscript.displayName = 'gdscript';
 gdscript.aliases = [];
@@ -80838,7 +72797,7 @@ function gdscript(Prism) {
     punctuation: /[.:,;()[\]{}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gedcom.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gedcom.js
 // @ts-nocheck
 gedcom.displayName = 'gedcom';
 gedcom.aliases = [];
@@ -80874,7 +72833,7 @@ function gedcom(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gherkin.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gherkin.js
 // @ts-nocheck
 gherkin.displayName = 'gherkin';
 gherkin.aliases = [];
@@ -80966,7 +72925,7 @@ function gherkin(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/git.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/git.js
 // @ts-nocheck
 git.displayName = 'git';
 git.aliases = [];
@@ -81042,7 +73001,7 @@ function git(Prism) {
     'commit-sha1': /^commit \w{40}$/m
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/glsl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/glsl.js
 // @ts-nocheck
 
 glsl.displayName = 'glsl';
@@ -81055,7 +73014,7 @@ function glsl(Prism) {
     keyword: /\b(?:active|asm|atomic_uint|attribute|[ibdu]?vec[234]|bool|break|buffer|case|cast|centroid|class|coherent|common|const|continue|d?mat[234](?:x[234])?|default|discard|do|double|else|enum|extern|external|false|filter|fixed|flat|float|for|fvec[234]|goto|half|highp|hvec[234]|[iu]?sampler2DMS(?:Array)?|[iu]?sampler2DRect|[iu]?samplerBuffer|[iu]?samplerCube|[iu]?samplerCubeArray|[iu]?sampler[123]D|[iu]?sampler[12]DArray|[iu]?image2DMS(?:Array)?|[iu]?image2DRect|[iu]?imageBuffer|[iu]?imageCube|[iu]?imageCubeArray|[iu]?image[123]D|[iu]?image[12]DArray|if|in|inline|inout|input|int|interface|invariant|layout|long|lowp|mediump|namespace|noinline|noperspective|out|output|partition|patch|precise|precision|public|readonly|resource|restrict|return|sample|sampler[12]DArrayShadow|sampler[12]DShadow|sampler2DRectShadow|sampler3DRect|samplerCubeArrayShadow|samplerCubeShadow|shared|short|sizeof|smooth|static|struct|subroutine|superp|switch|template|this|true|typedef|uint|uniform|union|unsigned|using|varying|void|volatile|while|writeonly)\b/
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/gn.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gn.js
 // @ts-nocheck
 gn.displayName = 'gn';
 gn.aliases = ['gni'];
@@ -81109,7 +73068,7 @@ function gn(Prism) {
   Prism.languages.gn['string-literal'].inside['interpolation'].inside['expression'].inside = Prism.languages.gn;
   Prism.languages.gni = Prism.languages.gn;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/go-module.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/go-module.js
 // @ts-nocheck
 goModule.displayName = 'go-module';
 goModule.aliases = ['go-mod'];
@@ -81140,7 +73099,7 @@ function goModule(Prism) {
     punctuation: /[()[\],]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/graphql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/graphql.js
 // @ts-nocheck
 graphql.displayName = 'graphql';
 graphql.aliases = [];
@@ -81368,7 +73327,7 @@ function graphql(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/groovy.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/groovy.js
 // @ts-nocheck
 
 groovy.displayName = 'groovy';
@@ -81438,7 +73397,7 @@ function groovy(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/textile.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/textile.js
 // @ts-nocheck
 
 textile.displayName = 'textile';
@@ -81711,7 +73670,7 @@ function textile(Prism) {
     phraseTableInside['mark'] = nestedPatterns['mark'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/haml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/haml.js
 // @ts-nocheck
 
 haml.displayName = 'haml';
@@ -81856,7 +73815,7 @@ function haml(Prism) {
     Prism.languages.insertBefore('haml', 'filter', all_filters);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/handlebars.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/handlebars.js
 // @ts-nocheck
 
 handlebars.displayName = 'handlebars';
@@ -81901,7 +73860,7 @@ function handlebars(Prism) {
     Prism.languages.hbs = Prism.languages.handlebars;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/haskell.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/haskell.js
 // @ts-nocheck
 haskell.displayName = 'haskell';
 haskell.aliases = ['hs'];
@@ -81970,7 +73929,7 @@ function haskell(Prism) {
   };
   Prism.languages.hs = Prism.languages.haskell;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/haxe.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/haxe.js
 // @ts-nocheck
 
 haxe.displayName = 'haxe';
@@ -82052,7 +74011,7 @@ function haxe(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/hcl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/hcl.js
 // @ts-nocheck
 hcl.displayName = 'hcl';
 hcl.aliases = [];
@@ -82116,7 +74075,7 @@ function hcl(Prism) {
     punctuation: /[=\[\]{}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/hlsl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/hlsl.js
 // @ts-nocheck
 
 hlsl.displayName = 'hlsl';
@@ -82139,7 +74098,7 @@ function hlsl(Prism) {
     "boolean": /\b(?:false|true)\b/
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/hoon.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/hoon.js
 // @ts-nocheck
 hoon.displayName = 'hoon';
 hoon.aliases = [];
@@ -82161,7 +74120,7 @@ function hoon(Prism) {
     keyword: /\.[\^\+\*=\?]|![><:\.=\?!]|=[>|:,\.\-\^<+;/~\*\?]|\?[>|:\.\-\^<\+&~=@!]|\|[\$_%:\.\-\^~\*=@\?]|\+[|\$\+\*]|:[_\-\^\+~\*]|%[_:\.\-\^\+~\*=]|\^[|:\.\-\+&~\*=\?]|\$[|_%:<>\-\^&~@=\?]|;[:<\+;\/~\*=]|~[>|\$_%<\+\/&=\?!]|--|==/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/hpkp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/hpkp.js
 // @ts-nocheck
 hpkp.displayName = 'hpkp';
 hpkp.aliases = [];
@@ -82182,7 +74141,7 @@ function hpkp(Prism) {
     punctuation: /;/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/hsts.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/hsts.js
 // @ts-nocheck
 hsts.displayName = 'hsts';
 hsts.aliases = [];
@@ -82203,7 +74162,7 @@ function hsts(Prism) {
     punctuation: /;/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/uri.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/uri.js
 // @ts-nocheck
 uri.displayName = 'uri';
 uri.aliases = ['url'];
@@ -82293,7 +74252,7 @@ function uri(Prism) {
   };
   Prism.languages.url = Prism.languages.uri;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/http.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/http.js
 // @ts-nocheck
 http.displayName = 'http';
 http.aliases = [];
@@ -82442,7 +74401,7 @@ function http(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ichigojam.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ichigojam.js
 // @ts-nocheck
 ichigojam.displayName = 'ichigojam';
 ichigojam.aliases = [];
@@ -82465,7 +74424,7 @@ function ichigojam(Prism) {
     punctuation: /[\[,;:()\]]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/icon.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/icon.js
 // @ts-nocheck
 icon.displayName = 'icon';
 icon.aliases = [];
@@ -82493,7 +74452,7 @@ function icon(Prism) {
     punctuation: /[\[\](){},;]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/icu-message-format.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/icu-message-format.js
 // @ts-nocheck
 icuMessageFormat.displayName = 'icu-message-format';
 icuMessageFormat.aliases = [];
@@ -82645,7 +74604,7 @@ function icuMessageFormat(Prism) {
     Prism.languages['icu-message-format'].argument.inside.content.inside['choice-style'].inside.rest = Prism.languages['icu-message-format'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/idris.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/idris.js
 // @ts-nocheck
 
 idris.displayName = 'idris';
@@ -82672,7 +74631,7 @@ function idris(Prism) {
   });
   Prism.languages.idr = Prism.languages.idris;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ignore.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ignore.js
 // @ts-nocheck
 ignore_ignore.displayName = 'ignore';
 ignore_ignore.aliases = ['gitignore', 'hgignore', 'npmignore'];
@@ -82703,7 +74662,7 @@ function ignore_ignore(Prism) {
     Prism.languages.npmignore = Prism.languages.ignore;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/inform7.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/inform7.js
 // @ts-nocheck
 inform7.displayName = 'inform7';
 inform7.aliases = [];
@@ -82771,7 +74730,7 @@ function inform7(Prism) {
     alias: 'comment'
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/io.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/io.js
 // @ts-nocheck
 io.displayName = 'io';
 io.aliases = [];
@@ -82801,7 +74760,7 @@ function io(Prism) {
     punctuation: /[{}[\];(),.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/j.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/j.js
 // @ts-nocheck
 j.displayName = 'j';
 j.aliases = [];
@@ -82837,7 +74796,7 @@ function j(Prism) {
     punctuation: /[()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/javadoclike.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/javadoclike.js
 // @ts-nocheck
 javadoclike.displayName = 'javadoclike';
 javadoclike.aliases = [];
@@ -82940,7 +74899,7 @@ function javadoclike(Prism) {
     javaDocLike.addSupport(['java', 'javascript', 'php'], javaDocLike);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/scala.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/scala.js
 // @ts-nocheck
 
 scala.displayName = 'scala';
@@ -82997,7 +74956,7 @@ function scala(Prism) {
   delete Prism.languages.scala['class-name'];
   delete Prism.languages.scala['function'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/javadoc.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/javadoc.js
 // @ts-nocheck
 
 
@@ -83089,7 +75048,7 @@ function javadoc(Prism) {
     Prism.languages.javadoclike.addSupport('java', Prism.languages.javadoc);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/javastacktrace.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/javastacktrace.js
 // @ts-nocheck
 javastacktrace.displayName = 'javastacktrace';
 javastacktrace.aliases = [];
@@ -83230,7 +75189,7 @@ function javastacktrace(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jexl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jexl.js
 // @ts-nocheck
 jexl.displayName = 'jexl';
 jexl.aliases = [];
@@ -83252,7 +75211,7 @@ function jexl(Prism) {
     punctuation: /[{}[\](),.]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jolie.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jolie.js
 // @ts-nocheck
 
 jolie.displayName = 'jolie';
@@ -83302,7 +75261,7 @@ function jolie(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jq.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jq.js
 // @ts-nocheck
 jq.displayName = 'jq';
 jq.aliases = [];
@@ -83374,7 +75333,7 @@ function jq(Prism) {
     stringInterpolation.interpolation.inside.content.inside = jq;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/js-templates.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/js-templates.js
 // @ts-nocheck
 
 jsTemplates.displayName = 'js-templates';
@@ -83722,7 +75681,7 @@ function jsTemplates(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jsdoc.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jsdoc.js
 // @ts-nocheck
 
 
@@ -83808,7 +75767,7 @@ function jsdoc(Prism) {
     Prism.languages.javadoclike.addSupport('javascript', Prism.languages.jsdoc);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/n4js.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/n4js.js
 // @ts-nocheck
 
 n4js.displayName = 'n4js';
@@ -83830,7 +75789,7 @@ function n4js(Prism) {
   });
   Prism.languages.n4jsd = Prism.languages.n4js;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/js-extras.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/js-extras.js
 // @ts-nocheck
 
 jsExtras.displayName = 'js-extras';
@@ -83957,7 +75916,7 @@ function jsExtras(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/json5.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/json5.js
 // @ts-nocheck
 
 json5.displayName = 'json5';
@@ -83985,7 +75944,7 @@ function json5(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jsonp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jsonp.js
 // @ts-nocheck
 
 jsonp.displayName = 'jsonp';
@@ -84001,7 +75960,7 @@ function jsonp(Prism) {
     "function": /(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*\()/
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jsstacktrace.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jsstacktrace.js
 // @ts-nocheck
 jsstacktrace.displayName = 'jsstacktrace';
 jsstacktrace.aliases = [];
@@ -84050,7 +76009,7 @@ function jsstacktrace(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/julia.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/julia.js
 // @ts-nocheck
 julia.displayName = 'julia';
 julia.aliases = [];
@@ -84093,7 +76052,7 @@ function julia(Prism) {
     constant: /\b(?:(?:Inf|NaN)(?:16|32|64)?|im|pi)\b|[πℯ]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/keepalived.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/keepalived.js
 // @ts-nocheck
 keepalived.displayName = 'keepalived';
 keepalived.aliases = [];
@@ -84143,7 +76102,7 @@ function keepalived(Prism) {
     punctuation: /[\{\}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/keyman.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/keyman.js
 // @ts-nocheck
 keyman.displayName = 'keyman';
 keyman.aliases = [];
@@ -84194,7 +76153,7 @@ function keyman(Prism) {
     punctuation: /[()=,]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/kumir.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/kumir.js
 // @ts-nocheck
 kumir.displayName = 'kumir';
 kumir.aliases = ['kum'];
@@ -84298,7 +76257,7 @@ function kumir(Prism) {
     Prism.languages.kum = Prism.languages.kumir;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/kusto.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/kusto.js
 // @ts-nocheck
 kusto.displayName = 'kusto';
 kusto.aliases = [];
@@ -84341,7 +76300,7 @@ function kusto(Prism) {
     punctuation: /[()\[\]{},;.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/latex.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/latex.js
 // @ts-nocheck
 latex.displayName = 'latex';
 latex.aliases = ['context', 'tex'];
@@ -84413,7 +76372,7 @@ function latex(Prism) {
     Prism.languages.context = Prism.languages.latex;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/latte.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/latte.js
 // @ts-nocheck
 
 
@@ -84485,7 +76444,7 @@ function latte(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/scheme.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/scheme.js
 // @ts-nocheck
 scheme.displayName = 'scheme';
 scheme.aliases = [];
@@ -84610,7 +76569,7 @@ function scheme(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/lilypond.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/lilypond.js
 // @ts-nocheck
 
 lilypond.displayName = 'lilypond';
@@ -84691,7 +76650,7 @@ function lilypond(Prism) {
     Prism.languages.ly = lilypond;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/liquid.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/liquid.js
 // @ts-nocheck
 
 liquid.displayName = 'liquid';
@@ -84763,7 +76722,7 @@ function liquid(Prism) {
     Prism.languages['markup-templating'].tokenizePlaceholders(env, 'liquid');
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/lisp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/lisp.js
 // @ts-nocheck
 lisp.displayName = 'lisp';
 lisp.aliases = ['elisp', 'emacs', 'emacs-lisp'];
@@ -84953,7 +76912,7 @@ function lisp(Prism) {
     Prism.languages['emacs-lisp'] = language;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/livescript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/livescript.js
 // @ts-nocheck
 livescript.displayName = 'livescript';
 livescript.aliases = [];
@@ -85066,7 +77025,7 @@ function livescript(Prism) {
   };
   Prism.languages.livescript['interpolated-string'].inside['interpolation'].inside.rest = Prism.languages.livescript;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/llvm.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/llvm.js
 // @ts-nocheck
 llvm.displayName = 'llvm';
 llvm.aliases = [];
@@ -85095,7 +77054,7 @@ function llvm(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/log.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/log.js
 // @ts-nocheck
 log.displayName = 'log';
 log.aliases = [];
@@ -85198,7 +77157,7 @@ function log(Prism) {
     punctuation: /[\[\].,]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/lolcode.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/lolcode.js
 // @ts-nocheck
 lolcode.displayName = 'lolcode';
 lolcode.aliases = [];
@@ -85251,7 +77210,7 @@ function lolcode(Prism) {
     punctuation: /\.{3}|…|,|!/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/magma.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/magma.js
 // @ts-nocheck
 magma.displayName = 'magma';
 magma.aliases = [];
@@ -85289,7 +77248,7 @@ function magma(Prism) {
     punctuation: /[()[\]{}<>,;.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/matlab.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/matlab.js
 // @ts-nocheck
 matlab.displayName = 'matlab';
 matlab.aliases = [];
@@ -85310,7 +77269,7 @@ function matlab(Prism) {
     punctuation: /\.{3}|[.,;\[\](){}!]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/maxscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/maxscript.js
 // @ts-nocheck
 maxscript.displayName = 'maxscript';
 maxscript.aliases = [];
@@ -85378,7 +77337,7 @@ function maxscript(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/mel.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mel.js
 // @ts-nocheck
 mel.displayName = 'mel';
 mel.aliases = [];
@@ -85424,7 +77383,7 @@ function mel(Prism) {
   };
   Prism.languages.mel['code'].inside.rest = Prism.languages.mel;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/mermaid.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mermaid.js
 // @ts-nocheck
 mermaid.displayName = 'mermaid';
 mermaid.aliases = [];
@@ -85528,7 +77487,7 @@ function mermaid(Prism) {
     punctuation: /[(){};]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/mizar.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mizar.js
 // @ts-nocheck
 mizar.displayName = 'mizar';
 mizar.aliases = [];
@@ -85548,7 +77507,7 @@ function mizar(Prism) {
     punctuation: /\(#|#\)|[,:;\[\](){}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/mongodb.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mongodb.js
 // @ts-nocheck
 
 mongodb.displayName = 'mongodb';
@@ -85600,7 +77559,7 @@ function mongodb(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/monkey.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/monkey.js
 // @ts-nocheck
 monkey.displayName = 'monkey';
 monkey.aliases = [];
@@ -85636,7 +77595,7 @@ function monkey(Prism) {
     punctuation: /[.,:;()\[\]]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/moonscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/moonscript.js
 // @ts-nocheck
 moonscript.displayName = 'moonscript';
 moonscript.aliases = ['moon'];
@@ -85694,7 +77653,7 @@ function moonscript(Prism) {
   Prism.languages.moonscript.string[1].inside.interpolation.inside.moonscript.inside = Prism.languages.moonscript;
   Prism.languages.moon = Prism.languages.moonscript;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/n1ql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/n1ql.js
 // @ts-nocheck
 n1ql.displayName = 'n1ql';
 n1ql.aliases = [];
@@ -85725,7 +77684,7 @@ function n1ql(Prism) {
     punctuation: /[;[\](),.{}:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nand2tetris-hdl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nand2tetris-hdl.js
 // @ts-nocheck
 nand2tetrisHdl.displayName = 'nand2tetris-hdl';
 nand2tetrisHdl.aliases = [];
@@ -85742,7 +77701,7 @@ function nand2tetrisHdl(Prism) {
     punctuation: /[{}[\];(),:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/naniscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/naniscript.js
 // @ts-nocheck
 naniscript.displayName = 'naniscript';
 naniscript.aliases = ['nani'];
@@ -85919,7 +77878,7 @@ function naniscript(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nasm.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nasm.js
 // @ts-nocheck
 nasm.displayName = 'nasm';
 nasm.aliases = [];
@@ -85946,7 +77905,7 @@ function nasm(Prism) {
     operator: /[\[\]*+\-\/%<>=&|$!]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/neon.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/neon.js
 // @ts-nocheck
 neon.displayName = 'neon';
 neon.aliases = [];
@@ -85994,7 +77953,7 @@ function neon(Prism) {
     punctuation: /[,:=[\]{}()-]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nevod.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nevod.js
 // @ts-nocheck
 nevod.displayName = 'nevod';
 nevod.aliases = [];
@@ -86115,7 +78074,7 @@ function nevod(Prism) {
     name: /[a-zA-Z0-9\-.]+/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nginx.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nginx.js
 // @ts-nocheck
 nginx.displayName = 'nginx';
 nginx.aliases = [];
@@ -86174,7 +78133,7 @@ function nginx(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nim.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nim.js
 // @ts-nocheck
 nim.displayName = 'nim';
 nim.aliases = [];
@@ -86224,7 +78183,7 @@ function nim(Prism) {
     punctuation: /[({\[]\.|\.[)}\]]|[`(){}\[\],:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nix.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nix.js
 // @ts-nocheck
 nix.displayName = 'nix';
 nix.aliases = [];
@@ -86266,7 +78225,7 @@ function nix(Prism) {
   };
   Prism.languages.nix.string.inside.interpolation.inside = Prism.languages.nix;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/nsis.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/nsis.js
 // @ts-nocheck
 nsis.displayName = 'nsis';
 nsis.aliases = [];
@@ -86304,7 +78263,7 @@ function nsis(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/ocaml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/ocaml.js
 // @ts-nocheck
 ocaml.displayName = 'ocaml';
 ocaml.aliases = [];
@@ -86361,7 +78320,7 @@ function ocaml(Prism) {
     punctuation: /;;|::|[(){}\[\].,:;#]|\b_\b/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/opencl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/opencl.js
 // @ts-nocheck
 
 opencl.displayName = 'opencl';
@@ -86429,7 +78388,7 @@ function opencl(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/openqasm.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/openqasm.js
 // @ts-nocheck
 openqasm.displayName = 'openqasm';
 openqasm.aliases = ['qasm'];
@@ -86456,7 +78415,7 @@ function openqasm(Prism) {
   };
   Prism.languages.qasm = Prism.languages.openqasm;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/oz.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/oz.js
 // @ts-nocheck
 oz.displayName = 'oz';
 oz.aliases = [];
@@ -86489,7 +78448,7 @@ function oz(Prism) {
     punctuation: /[\[\](){}.:;?]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/parigp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/parigp.js
 // @ts-nocheck
 parigp.displayName = 'parigp';
 parigp.aliases = [];
@@ -86522,7 +78481,7 @@ function parigp(Prism) {
     punctuation: /[\[\]{}().,:;|]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/parser.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/parser.js
 // @ts-nocheck
 
 parser_parser.displayName = 'parser';
@@ -86602,7 +78561,7 @@ function parser_parser(Prism) {
     }, parser['tag'].inside['attr-value']);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/pascal.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/pascal.js
 // @ts-nocheck
 pascal.displayName = 'pascal';
 pascal.aliases = ['objectpascal'];
@@ -86668,7 +78627,7 @@ function pascal(Prism) {
   });
   Prism.languages.objectpascal = Prism.languages.pascal;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/pascaligo.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/pascaligo.js
 // @ts-nocheck
 pascaligo.displayName = 'pascaligo';
 pascaligo.aliases = [];
@@ -86738,7 +78697,7 @@ function pascaligo(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/psl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/psl.js
 // @ts-nocheck
 psl.displayName = 'psl';
 psl.aliases = [];
@@ -86781,7 +78740,7 @@ function psl(Prism) {
     punctuation: /[(){}\[\];,]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/pcaxis.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/pcaxis.js
 // @ts-nocheck
 pcaxis.displayName = 'pcaxis';
 pcaxis.aliases = ['px'];
@@ -86841,7 +78800,7 @@ function pcaxis(Prism) {
   };
   Prism.languages.px = Prism.languages.pcaxis;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/peoplecode.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/peoplecode.js
 // @ts-nocheck
 peoplecode.displayName = 'peoplecode';
 peoplecode.aliases = ['pcode'];
@@ -86884,7 +78843,7 @@ function peoplecode(Prism) {
   };
   Prism.languages.pcode = Prism.languages.peoplecode;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/phpdoc.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/phpdoc.js
 // @ts-nocheck
 
 
@@ -86917,7 +78876,7 @@ function phpdoc(Prism) {
     Prism.languages.javadoclike.addSupport('php', Prism.languages.phpdoc);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/php-extras.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/php-extras.js
 // @ts-nocheck
 
 phpExtras.displayName = 'php-extras';
@@ -86941,7 +78900,7 @@ function phpExtras(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/plsql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/plsql.js
 // @ts-nocheck
 
 plsql.displayName = 'plsql';
@@ -86967,7 +78926,7 @@ function plsql(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/powerquery.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/powerquery.js
 // @ts-nocheck
 powerquery.displayName = 'powerquery';
 powerquery.aliases = ['mscript', 'pq'];
@@ -87010,7 +78969,7 @@ function powerquery(Prism) {
   Prism.languages.pq = Prism.languages['powerquery'];
   Prism.languages.mscript = Prism.languages['powerquery'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/powershell.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/powershell.js
 // @ts-nocheck
 powershell.displayName = 'powershell';
 powershell.aliases = [];
@@ -87067,7 +79026,7 @@ function powershell(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/processing.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/processing.js
 // @ts-nocheck
 
 processing.displayName = 'processing';
@@ -87091,7 +79050,7 @@ function processing(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/prolog.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/prolog.js
 // @ts-nocheck
 prolog.displayName = 'prolog';
 prolog.aliases = [];
@@ -87118,7 +79077,7 @@ function prolog(Prism) {
     punctuation: /[(){}\[\],]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/promql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/promql.js
 // @ts-nocheck
 promql.displayName = 'promql';
 promql.aliases = [];
@@ -87201,7 +79160,7 @@ function promql(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/properties.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/properties.js
 // @ts-nocheck
 properties_properties.displayName = 'properties';
 properties_properties.aliases = [];
@@ -87218,7 +79177,7 @@ function properties_properties(Prism) {
     punctuation: /[=:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/protobuf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/protobuf.js
 // @ts-nocheck
 
 protobuf.displayName = 'protobuf';
@@ -87265,7 +79224,7 @@ function protobuf(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/stylus.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/stylus.js
 // @ts-nocheck
 stylus.displayName = 'stylus';
 stylus.aliases = [];
@@ -87407,7 +79366,7 @@ function stylus(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/twig.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/twig.js
 // @ts-nocheck
 
 twig.displayName = 'twig';
@@ -87454,7 +79413,7 @@ function twig(Prism) {
     Prism.languages['markup-templating'].tokenizePlaceholders(env, 'twig');
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/pug.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/pug.js
 // @ts-nocheck
 
 
@@ -87642,7 +79601,7 @@ function pug(Prism) {
     Prism.languages.insertBefore('pug', 'filter', all_filters);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/puppet.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/puppet.js
 // @ts-nocheck
 puppet.displayName = 'puppet';
 puppet.aliases = [];
@@ -87776,7 +79735,7 @@ function puppet(Prism) {
     Prism.languages.puppet['string'].inside['double-quoted'].inside.interpolation = interpolation;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/pure.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/pure.js
 // @ts-nocheck
 pure.displayName = 'pure';
 pure.aliases = [];
@@ -87860,7 +79819,7 @@ function pure(Prism) {
     }
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/purebasic.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/purebasic.js
 // @ts-nocheck
 
 purebasic.displayName = 'purebasic';
@@ -87933,7 +79892,7 @@ function purebasic(Prism) {
   delete Prism.languages.purebasic['boolean'];
   Prism.languages.pbfasm = Prism.languages['purebasic'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/purescript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/purescript.js
 // @ts-nocheck
 
 purescript.displayName = 'purescript';
@@ -87966,7 +79925,7 @@ function purescript(Prism) {
   });
   Prism.languages.purs = Prism.languages.purescript;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/qsharp.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/qsharp.js
 // @ts-nocheck
 
 qsharp.displayName = 'qsharp';
@@ -88102,7 +80061,7 @@ function qsharp(Prism) {
 
   Prism.languages.qs = Prism.languages.qsharp;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/q.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/q.js
 // @ts-nocheck
 q.displayName = 'q';
 q.aliases = [];
@@ -88155,7 +80114,7 @@ function q(Prism) {
     punctuation: /[(){}\[\];.]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/qml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/qml.js
 // @ts-nocheck
 
 qml.displayName = 'qml';
@@ -88228,7 +80187,7 @@ function qml(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/qore.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/qore.js
 // @ts-nocheck
 
 qore.displayName = 'qore';
@@ -88258,7 +80217,7 @@ function qore(Prism) {
     variable: /\$(?!\d)\w+\b/
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/racket.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/racket.js
 // @ts-nocheck
 
 racket.displayName = 'racket';
@@ -88284,7 +80243,7 @@ function racket(Prism) {
   });
   Prism.languages.rkt = Prism.languages.racket;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/cshtml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cshtml.js
 // @ts-nocheck
 
 
@@ -88418,7 +80377,7 @@ function cshtml(Prism) {
     Prism.languages.razor = Prism.languages.cshtml;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/jsx.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/jsx.js
 // @ts-nocheck
 
 
@@ -88568,7 +80527,7 @@ function jsx(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/tsx.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/tsx.js
 // @ts-nocheck
 
 
@@ -88594,7 +80553,7 @@ function tsx(Prism) {
     tag.lookbehind = true;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/reason.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/reason.js
 // @ts-nocheck
 
 reason.displayName = 'reason';
@@ -88628,7 +80587,7 @@ function reason(Prism) {
 
   delete Prism.languages.reason["function"];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/rego.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rego.js
 // @ts-nocheck
 rego.displayName = 'rego';
 rego.aliases = [];
@@ -88662,7 +80621,7 @@ function rego(Prism) {
     punctuation: /[,;.\[\]{}()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/renpy.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/renpy.js
 // @ts-nocheck
 renpy.displayName = 'renpy';
 renpy.aliases = ['rpy'];
@@ -88689,7 +80648,7 @@ function renpy(Prism) {
   };
   Prism.languages.rpy = Prism.languages.renpy;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/rest.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rest.js
 // @ts-nocheck
 rest.displayName = 'rest';
 rest.aliases = [];
@@ -88881,7 +80840,7 @@ function rest(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/rip.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rip.js
 // @ts-nocheck
 rip.displayName = 'rip';
 rip.aliases = [];
@@ -88918,7 +80877,7 @@ function rip(Prism) {
     reference: /[^\d\s`'",.:;#\/\\()<>\[\]{}][^\s`'",.:;#\/\\()<>\[\]{}]*/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/roboconf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/roboconf.js
 // @ts-nocheck
 roboconf.displayName = 'roboconf';
 roboconf.aliases = [];
@@ -88953,7 +80912,7 @@ function roboconf(Prism) {
     punctuation: /[{},.;:=]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/robotframework.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/robotframework.js
 // @ts-nocheck
 robotframework.displayName = 'robotframework';
 robotframework.aliases = ['robot'];
@@ -89058,7 +81017,7 @@ function robotframework(Prism) {
     Prism.languages.robot = Prism.languages['robotframework'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/sas.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/sas.js
 // @ts-nocheck
 sas.displayName = 'sas';
 sas.aliases = [];
@@ -89380,7 +81339,7 @@ function sas(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/shell-session.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/shell-session.js
 // @ts-nocheck
 
 shellSession.displayName = 'shell-session';
@@ -89440,7 +81399,7 @@ function shellSession(Prism) {
     Prism.languages['sh-session'] = Prism.languages['shellsession'] = Prism.languages['shell-session'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/smali.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/smali.js
 // @ts-nocheck
 smali.displayName = 'smali';
 smali.aliases = [];
@@ -89522,7 +81481,7 @@ function smali(Prism) {
     punctuation: /[{}(),;:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/smalltalk.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/smalltalk.js
 // @ts-nocheck
 smalltalk.displayName = 'smalltalk';
 smalltalk.aliases = [];
@@ -89565,7 +81524,7 @@ function smalltalk(Prism) {
     punctuation: /[.;:?\[\](){}]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/smarty.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/smarty.js
 // @ts-nocheck
 
 smarty.displayName = 'smarty';
@@ -89685,7 +81644,7 @@ function smarty(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/sml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/sml.js
 // @ts-nocheck
 sml.displayName = 'sml';
 sml.aliases = ['smlnj'];
@@ -89751,7 +81710,7 @@ function sml(Prism) {
     Prism.languages.smlnj = Prism.languages.sml;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/solidity.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/solidity.js
 // @ts-nocheck
 
 solidity.displayName = 'solidity';
@@ -89780,7 +81739,7 @@ function solidity(Prism) {
   });
   Prism.languages.sol = Prism.languages.solidity;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/solution-file.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/solution-file.js
 // @ts-nocheck
 solutionFile.displayName = 'solution-file';
 solutionFile.aliases = ['sln'];
@@ -89837,7 +81796,7 @@ function solutionFile(Prism) {
     Prism.languages['sln'] = Prism.languages['solution-file'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/soy.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/soy.js
 // @ts-nocheck
 
 soy.displayName = 'soy';
@@ -89931,7 +81890,7 @@ function soy(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/turtle.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/turtle.js
 // @ts-nocheck
 turtle.displayName = 'turtle';
 turtle.aliases = ['trig'];
@@ -89990,7 +81949,7 @@ function turtle(Prism) {
   };
   Prism.languages.trig = Prism.languages['turtle'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/sparql.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/sparql.js
 // @ts-nocheck
 
 sparql.displayName = 'sparql';
@@ -90011,7 +81970,7 @@ function sparql(Prism) {
   });
   Prism.languages.rq = Prism.languages.sparql;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/splunk-spl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/splunk-spl.js
 // @ts-nocheck
 splunkSpl.displayName = 'splunk-spl';
 splunkSpl.aliases = [];
@@ -90043,7 +82002,7 @@ function splunkSpl(Prism) {
     punctuation: /[()[\],]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/sqf.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/sqf.js
 // @ts-nocheck
 
 sqf.displayName = 'sqf';
@@ -90085,7 +82044,7 @@ function sqf(Prism) {
   });
   delete Prism.languages.sqf['class-name'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/squirrel.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/squirrel.js
 // @ts-nocheck
 
 squirrel.displayName = 'squirrel';
@@ -90135,7 +82094,7 @@ function squirrel(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/stan.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/stan.js
 // @ts-nocheck
 stan.displayName = 'stan';
 stan.aliases = [];
@@ -90194,7 +82153,7 @@ function stan(Prism) {
     Prism.languages.stan.constraint.inside.expression.inside = Prism.languages.stan;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/iecst.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/iecst.js
 // @ts-nocheck
 iecst.displayName = 'iecst';
 iecst.aliases = [];
@@ -90228,7 +82187,7 @@ function iecst(Prism) {
     punctuation: /[()[\].,;]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/systemd.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/systemd.js
 // @ts-nocheck
 systemd.displayName = 'systemd';
 systemd.aliases = [];
@@ -90294,7 +82253,7 @@ function systemd(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/t4-templating.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/t4-templating.js
 // @ts-nocheck
 t4Templating.displayName = 't4-templating';
 t4Templating.aliases = [];
@@ -90352,7 +82311,7 @@ function t4Templating(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/t4-cs.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/t4-cs.js
 // @ts-nocheck
 
 
@@ -90365,7 +82324,7 @@ function t4Cs(Prism) {
   Prism.register(t4Templating);
   Prism.languages.t4 = Prism.languages['t4-cs'] = Prism.languages['t4-templating'].createT4('csharp');
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/t4-vb.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/t4-vb.js
 // @ts-nocheck
 
 
@@ -90378,7 +82337,7 @@ function t4Vb(Prism) {
   Prism.register(vbnet);
   Prism.languages['t4-vb'] = Prism.languages['t4-templating'].createT4('vbnet');
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/tap.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/tap.js
 // @ts-nocheck
 
 tap.displayName = 'tap';
@@ -90409,7 +82368,7 @@ function tap(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/tcl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/tcl.js
 // @ts-nocheck
 tcl.displayName = 'tcl';
 tcl.aliases = [];
@@ -90456,7 +82415,7 @@ function tcl(Prism) {
     punctuation: /[{}()\[\]]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/tt2.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/tt2.js
 // @ts-nocheck
 
 
@@ -90514,7 +82473,7 @@ function tt2(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/toml.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/toml.js
 // @ts-nocheck
 toml.displayName = 'toml';
 toml.aliases = [];
@@ -90571,7 +82530,7 @@ function toml(Prism) {
     };
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/tremor.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/tremor.js
 // @ts-nocheck
 tremor.displayName = 'tremor';
 tremor.aliases = ['trickle', 'troy'];
@@ -90638,7 +82597,7 @@ function tremor(Prism) {
     Prism.languages.trickle = Prism.languages['tremor'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/typoscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/typoscript.js
 // @ts-nocheck
 typoscript.displayName = 'typoscript';
 typoscript.aliases = ['tsconfig'];
@@ -90718,7 +82677,7 @@ function typoscript(Prism) {
     Prism.languages.tsconfig = Prism.languages.typoscript;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/unrealscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/unrealscript.js
 // @ts-nocheck
 unrealscript.displayName = 'unrealscript';
 unrealscript.aliases = ['uc', 'uscript'];
@@ -90765,7 +82724,7 @@ function unrealscript(Prism) {
   };
   Prism.languages.uc = Prism.languages.uscript = Prism.languages.unrealscript;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/uorazor.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/uorazor.js
 // @ts-nocheck
 uorazor.displayName = 'uorazor';
 uorazor.aliases = [];
@@ -90818,7 +82777,7 @@ function uorazor(Prism) {
     punctuation: /[()\[\]{}:.,]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/v.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/v.js
 // @ts-nocheck
 
 v.displayName = 'v';
@@ -90906,7 +82865,7 @@ function v(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/vala.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/vala.js
 // @ts-nocheck
 
 vala.displayName = 'vala';
@@ -90993,7 +82952,7 @@ function vala(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/velocity.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/velocity.js
 // @ts-nocheck
 
 velocity.displayName = 'velocity';
@@ -91069,7 +83028,7 @@ function velocity(Prism) {
     Prism.languages.velocity['tag'].inside['attr-value'].inside.rest = Prism.languages.velocity;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/verilog.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/verilog.js
 // @ts-nocheck
 verilog.displayName = 'verilog';
 verilog.aliases = [];
@@ -91103,7 +83062,7 @@ function verilog(Prism) {
     punctuation: /[[\];(),.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/vhdl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/vhdl.js
 // @ts-nocheck
 vhdl.displayName = 'vhdl';
 vhdl.aliases = [];
@@ -91134,7 +83093,7 @@ function vhdl(Prism) {
     punctuation: /[{}[\];(),.:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/vim.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/vim.js
 // @ts-nocheck
 vim.displayName = 'vim';
 vim.aliases = [];
@@ -91152,7 +83111,7 @@ function vim(Prism) {
     punctuation: /[{}[\](),;:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/visual-basic.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/visual-basic.js
 // @ts-nocheck
 visualBasic.displayName = 'visual-basic';
 visualBasic.aliases = ['vb', 'vba'];
@@ -91188,7 +83147,7 @@ function visualBasic(Prism) {
   Prism.languages.vb = Prism.languages['visual-basic'];
   Prism.languages.vba = Prism.languages['visual-basic'];
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/warpscript.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/warpscript.js
 // @ts-nocheck
 warpscript.displayName = 'warpscript';
 warpscript.aliases = [];
@@ -91217,7 +83176,7 @@ function warpscript(Prism) {
     operator: /==|&&?|\|\|?|\*\*?|>>>?|<<|[<>!~]=?|[-/%^]|\+!?|\b(?:AND|NOT|OR)\b/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/wasm.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/wasm.js
 // @ts-nocheck
 wasm.displayName = 'wasm';
 wasm.aliases = [];
@@ -91249,7 +83208,7 @@ function wasm(Prism) {
     punctuation: /[()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/web-idl.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/web-idl.js
 // @ts-nocheck
 webIdl.displayName = 'web-idl';
 webIdl.aliases = ['webidl'];
@@ -91330,7 +83289,7 @@ function webIdl(Prism) {
     Prism.languages['webidl'] = Prism.languages['web-idl'];
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/wiki.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/wiki.js
 // @ts-nocheck
 
 wiki.displayName = 'wiki';
@@ -91411,7 +83370,7 @@ function wiki(Prism) {
     }
   });
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/wolfram.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/wolfram.js
 // @ts-nocheck
 wolfram.displayName = 'wolfram';
 wolfram.aliases = ['mathematica', 'nb', 'wl'];
@@ -91447,7 +83406,7 @@ function wolfram(Prism) {
   Prism.languages.wl = Prism.languages.wolfram;
   Prism.languages.nb = Prism.languages.wolfram;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/wren.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/wren.js
 // @ts-nocheck
 wren.displayName = 'wren';
 wren.aliases = [];
@@ -91539,7 +83498,7 @@ function wren(Prism) {
     }
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/xeora.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/xeora.js
 // @ts-nocheck
 
 xeora.displayName = 'xeora';
@@ -91661,7 +83620,7 @@ function xeora(Prism) {
     Prism.languages.xeoracube = Prism.languages.xeora;
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/xml-doc.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/xml-doc.js
 // @ts-nocheck
 
 xmlDoc.displayName = 'xml-doc';
@@ -91708,7 +83667,7 @@ function xmlDoc(Prism) {
     insertDocComment('vbnet', tickDocComment);
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/xojo.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/xojo.js
 // @ts-nocheck
 xojo.displayName = 'xojo';
 xojo.aliases = [];
@@ -91734,7 +83693,7 @@ function xojo(Prism) {
     punctuation: /[.,;:()]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/xquery.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/xquery.js
 // @ts-nocheck
 
 xquery.displayName = 'xquery';
@@ -91896,7 +83855,7 @@ function xquery(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/yang.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/yang.js
 // @ts-nocheck
 yang.displayName = 'yang';
 yang.aliases = [];
@@ -91924,7 +83883,7 @@ function yang(Prism) {
     punctuation: /[{};:]/
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lang/zig.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/zig.js
 // @ts-nocheck
 zig.displayName = 'zig';
 zig.aliases = [];
@@ -92024,7 +83983,7 @@ function zig(Prism) {
     });
   })(Prism);
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/node_modules/refractor/lib/all.js
+;// CONCATENATED MODULE: ../../node_modules/refractor/lib/all.js
 /**
  * @typedef {import('./core.js').RefractorRoot} RefractorRoot
  * @typedef {import('./core.js').RefractorElement} RefractorElement
@@ -92726,7 +84685,7 @@ var rehype_prism_plus_es_p = function e(t) {
     f = function f(i) {
   return function (o) {
     return void 0 === o && (o = {}), function (t) {
-      rehype_prism_plus_node_modules_unist_util_visit_visit(t, "element", s);
+      visit(t, "element", s);
     };
 
     function s(e, s, l) {
@@ -92745,7 +84704,7 @@ var rehype_prism_plus_es_p = function e(t) {
         }(e);
 
         if (h) try {
-          f = i.highlight(node_modules_hast_util_to_string_toString(e), h), l.properties.className = (l.properties.className || []).concat("language-" + h);
+          f = i.highlight(hast_util_to_string_toString(e), h), l.properties.className = (l.properties.className || []).concat("language-" + h);
         } catch (t) {
           if (!o.ignoreMissing || !/Unknown language/.test(t.message)) throw t;
           f = e;
@@ -92823,7 +84782,7 @@ var rehype_prism_plus_es_p = function e(t) {
           }
 
           return 1;
-        }(u), N = ("" === (g = node_modules_hast_util_to_string_toString(e).split(/\n/))[g.length - 1].trim() && g.pop(), g.map(function (e) {
+        }(u), N = ("" === (g = hast_util_to_string_toString(e).split(/\n/))[g.length - 1].trim() && g.pop(), g.map(function (e) {
           return {
             type: "element",
             tagName: "span",
@@ -92839,7 +84798,7 @@ var rehype_prism_plus_es_p = function e(t) {
           var e = y.value,
               n = e[0],
               i = e[1];
-          (u.toLowerCase().includes("showLineNumbers".toLowerCase()) || o.showLineNumbers) && (i.properties.line = [(n + b).toString()], i.properties.className.push("line-number")), v(n) && i.properties.className.push("highlight-line"), "diff" === h && "-" === node_modules_hast_util_to_string_toString(i).substring(0, 1) ? i.properties.className.push("deleted") : "diff" === h && "+" === node_modules_hast_util_to_string_toString(i).substring(0, 1) && i.properties.className.push("inserted");
+          (u.toLowerCase().includes("showLineNumbers".toLowerCase()) || o.showLineNumbers) && (i.properties.line = [(n + b).toString()], i.properties.className.push("line-number")), v(n) && i.properties.className.push("highlight-line"), "diff" === h && "-" === hast_util_to_string_toString(i).substring(0, 1) ? i.properties.className.push("deleted") : "diff" === h && "+" === hast_util_to_string_toString(i).substring(0, 1) && i.properties.className.push("inserted");
           var a = filter(f, function (e) {
             return e.position.start.line <= n + 1 && e.position.end.line >= n + 1;
           });
@@ -92857,7 +84816,7 @@ var rehype_prism_plus_es_p = function e(t) {
     m = f(refractor);
 
 
-;// CONCATENATED MODULE: ../../node_modules/@wcj/markdown-to-html/esm/index.js
+;// CONCATENATED MODULE: ../../node_modules/@wcj/markdown-to-html/lib/index.js
 
 
 
@@ -92872,17 +84831,10 @@ var rehype_prism_plus_es_p = function e(t) {
 
 
 
-
-function esm_markdown(markdownStr, options) {
-  if (markdownStr === void 0) {
-    markdownStr = '';
-  }
-
-  if (options === void 0) {
-    options = {};
-  }
-
-  var processor = unified().use(remark_parse).use(remarkGfm).use(options.remarkPlugins || []).use(remark_rehype_lib, helpers_extends({}, options.remarkRehypeOptions, {
+function lib_markdown() {
+  var markdownStr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var processor = unified().use(remark_parse).use(remarkGfm).use(options.remarkPlugins || []).use(remark_rehype_lib, Object.assign(Object.assign({}, options.remarkRehypeOptions), {
     allowDangerousHtml: true
   })).use(rehype_video_lib).use(rehypeRaw).use(m, {
     ignoreMissing: true
@@ -92940,1819 +84892,7 @@ function esm_markdown(markdownStr, options) {
   return processor.stringify(hastNode, file);
 }
 
-/* harmony default export */ const esm = (esm_markdown);
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/schema.js
-
-
-
-/**
- * @typedef {import('./info.js').Info} Info
- * @typedef {Record<string, Info>} Properties
- * @typedef {Record<string, string>} Normal
- */
-var rehype_document_node_modules_property_information_lib_util_schema_Schema = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {Properties} property
- * @param {Normal} normal
- * @param {string} [space]
- */
-function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
-
-  this.property = property;
-  this.normal = normal;
-
-  if (space) {
-    this.space = space;
-  }
-});
-/** @type {Properties} */
-
-rehype_document_node_modules_property_information_lib_util_schema_Schema.prototype.property = {};
-/** @type {Normal} */
-
-rehype_document_node_modules_property_information_lib_util_schema_Schema.prototype.normal = {};
-/** @type {string|null} */
-
-rehype_document_node_modules_property_information_lib_util_schema_Schema.prototype.space = null;
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/merge.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- */
-
-/**
- * @param {Schema[]} definitions
- * @param {string} [space]
- * @returns {Schema}
- */
-
-function rehype_document_node_modules_property_information_lib_util_merge_merge(definitions, space) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  var index = -1;
-
-  while (++index < definitions.length) {
-    Object.assign(property, definitions[index].property);
-    Object.assign(normal, definitions[index].normal);
-  }
-
-  return new rehype_document_node_modules_property_information_lib_util_schema_Schema(property, normal, space);
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/normalize.js
-/**
- * @param {string} value
- * @returns {string}
- */
-function rehype_document_node_modules_property_information_lib_normalize_normalize(value) {
-  return value.toLowerCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/info.js
-
-
-var rehype_document_node_modules_property_information_lib_util_info_Info = /*#__PURE__*/_createClass(
-/**
- * @constructor
- * @param {string} property
- * @param {string} attribute
- */
-function Info(property, attribute) {
-  _classCallCheck(this, Info);
-
-  /** @type {string} */
-  this.property = property;
-  /** @type {string} */
-
-  this.attribute = attribute;
-});
-/** @type {string|null} */
-
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.space = null;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype["boolean"] = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.booleanish = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.overloadedBoolean = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.number = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.commaSeparated = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.spaceSeparated = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.commaOrSpaceSeparated = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.mustUseProperty = false;
-rehype_document_node_modules_property_information_lib_util_info_Info.prototype.defined = false;
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/types.js
-var rehype_document_node_modules_property_information_lib_util_types_powers = 0;
-
-var rehype_document_node_modules_property_information_lib_util_types_boolean = rehype_document_node_modules_property_information_lib_util_types_increment();
-
-
-var rehype_document_node_modules_property_information_lib_util_types_booleanish = rehype_document_node_modules_property_information_lib_util_types_increment();
-var rehype_document_node_modules_property_information_lib_util_types_overloadedBoolean = rehype_document_node_modules_property_information_lib_util_types_increment();
-var rehype_document_node_modules_property_information_lib_util_types_number = rehype_document_node_modules_property_information_lib_util_types_increment();
-var rehype_document_node_modules_property_information_lib_util_types_spaceSeparated = rehype_document_node_modules_property_information_lib_util_types_increment();
-var rehype_document_node_modules_property_information_lib_util_types_commaSeparated = rehype_document_node_modules_property_information_lib_util_types_increment();
-var rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated = rehype_document_node_modules_property_information_lib_util_types_increment();
-
-function rehype_document_node_modules_property_information_lib_util_types_increment() {
-  return Math.pow(2, ++rehype_document_node_modules_property_information_lib_util_types_powers);
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/defined-info.js
-
-
-
-
-
-
-
-/** @type {Array<keyof types>} */
-// @ts-expect-error: hush.
-
-var rehype_document_node_modules_property_information_lib_util_defined_info_checks = Object.keys(rehype_document_node_modules_property_information_lib_util_types_namespaceObject);
-var rehype_document_node_modules_property_information_lib_util_defined_info_DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-
-  var _super = _createSuper(DefinedInfo);
-
-  /**
-   * @constructor
-   * @param {string} property
-   * @param {string} attribute
-   * @param {number|null} [mask]
-   * @param {string} [space]
-   */
-  function DefinedInfo(property, attribute, mask, space) {
-    var _this;
-
-    _classCallCheck(this, DefinedInfo);
-
-    var index = -1;
-    _this = _super.call(this, property, attribute);
-    rehype_document_node_modules_property_information_lib_util_defined_info_mark(_assertThisInitialized(_this), 'space', space);
-
-    if (typeof mask === 'number') {
-      while (++index < rehype_document_node_modules_property_information_lib_util_defined_info_checks.length) {
-        var check = rehype_document_node_modules_property_information_lib_util_defined_info_checks[index];
-        rehype_document_node_modules_property_information_lib_util_defined_info_mark(_assertThisInitialized(_this), rehype_document_node_modules_property_information_lib_util_defined_info_checks[index], (mask & rehype_document_node_modules_property_information_lib_util_types_namespaceObject[check]) === rehype_document_node_modules_property_information_lib_util_types_namespaceObject[check]);
-      }
-    }
-
-    return _this;
-  }
-
-  return _createClass(DefinedInfo);
-}(rehype_document_node_modules_property_information_lib_util_info_Info);
-rehype_document_node_modules_property_information_lib_util_defined_info_DefinedInfo.prototype.defined = true;
-/**
- * @param {DefinedInfo} values
- * @param {string} key
- * @param {unknown} value
- */
-
-function rehype_document_node_modules_property_information_lib_util_defined_info_mark(values, key, value) {
-  if (value) {
-    // @ts-expect-error: assume `value` matches the expected value of `key`.
-    values[key] = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/create.js
-/**
- * @typedef {import('./schema.js').Properties} Properties
- * @typedef {import('./schema.js').Normal} Normal
- *
- * @typedef {Record<string, string>} Attributes
- *
- * @typedef {Object} Definition
- * @property {Record<string, number|null>} properties
- * @property {(attributes: Attributes, property: string) => string} transform
- * @property {string} [space]
- * @property {Attributes} [attributes]
- * @property {Array<string>} [mustUseProperty]
- */
-
-
-
-var rehype_document_node_modules_property_information_lib_util_create_own = {}.hasOwnProperty;
-/**
- * @param {Definition} definition
- * @returns {Schema}
- */
-
-function rehype_document_node_modules_property_information_lib_util_create_create(definition) {
-  /** @type {Properties} */
-  var property = {};
-  /** @type {Normal} */
-
-  var normal = {};
-  /** @type {string} */
-
-  var prop;
-
-  for (prop in definition.properties) {
-    if (rehype_document_node_modules_property_information_lib_util_create_own.call(definition.properties, prop)) {
-      var value = definition.properties[prop];
-      var info = new rehype_document_node_modules_property_information_lib_util_defined_info_DefinedInfo(prop, definition.transform(definition.attributes || {}, prop), value, definition.space);
-
-      if (definition.mustUseProperty && definition.mustUseProperty.includes(prop)) {
-        info.mustUseProperty = true;
-      }
-
-      property[prop] = info;
-      normal[rehype_document_node_modules_property_information_lib_normalize_normalize(prop)] = prop;
-      normal[rehype_document_node_modules_property_information_lib_normalize_normalize(info.attribute)] = prop;
-    }
-  }
-
-  return new rehype_document_node_modules_property_information_lib_util_schema_Schema(property, normal, definition.space);
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/xlink.js
-
-var rehype_document_node_modules_property_information_lib_xlink_xlink = rehype_document_node_modules_property_information_lib_util_create_create({
-  space: 'xlink',
-  transform: function transform(_, prop) {
-    return 'xlink:' + prop.slice(5).toLowerCase();
-  },
-  properties: {
-    xLinkActuate: null,
-    xLinkArcRole: null,
-    xLinkHref: null,
-    xLinkRole: null,
-    xLinkShow: null,
-    xLinkTitle: null,
-    xLinkType: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/xml.js
-
-var rehype_document_node_modules_property_information_lib_xml_xml = rehype_document_node_modules_property_information_lib_util_create_create({
-  space: 'xml',
-  transform: function transform(_, prop) {
-    return 'xml:' + prop.slice(3).toLowerCase();
-  },
-  properties: {
-    xmlLang: null,
-    xmlBase: null,
-    xmlSpace: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/case-sensitive-transform.js
-/**
- * @param {Record<string, string>} attributes
- * @param {string} attribute
- * @returns {string}
- */
-function rehype_document_node_modules_property_information_lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, attribute) {
-  return attribute in attributes ? attributes[attribute] : attribute;
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/util/case-insensitive-transform.js
-
-/**
- * @param {Record<string, string>} attributes
- * @param {string} property
- * @returns {string}
- */
-
-function rehype_document_node_modules_property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform(attributes, property) {
-  return rehype_document_node_modules_property_information_lib_util_case_sensitive_transform_caseSensitiveTransform(attributes, property.toLowerCase());
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/xmlns.js
-
-
-var rehype_document_node_modules_property_information_lib_xmlns_xmlns = rehype_document_node_modules_property_information_lib_util_create_create({
-  space: 'xmlns',
-  attributes: {
-    xmlnsxlink: 'xmlns:xlink'
-  },
-  transform: rehype_document_node_modules_property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  properties: {
-    xmlns: null,
-    xmlnsXLink: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/aria.js
-
-
-var rehype_document_node_modules_property_information_lib_aria_aria = rehype_document_node_modules_property_information_lib_util_create_create({
-  transform: function transform(_, prop) {
-    return prop === 'role' ? prop : 'aria-' + prop.slice(4).toLowerCase();
-  },
-  properties: {
-    ariaActiveDescendant: null,
-    ariaAtomic: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaAutoComplete: null,
-    ariaBusy: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaChecked: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaColCount: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaColIndex: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaColSpan: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaControls: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaCurrent: null,
-    ariaDescribedBy: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaDetails: null,
-    ariaDisabled: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaDropEffect: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaErrorMessage: null,
-    ariaExpanded: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaFlowTo: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaGrabbed: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaHasPopup: null,
-    ariaHidden: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaInvalid: null,
-    ariaKeyShortcuts: null,
-    ariaLabel: null,
-    ariaLabelledBy: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaLevel: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaLive: null,
-    ariaModal: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaMultiLine: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaMultiSelectable: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaOrientation: null,
-    ariaOwns: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaPlaceholder: null,
-    ariaPosInSet: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaPressed: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaReadOnly: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaRelevant: null,
-    ariaRequired: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaRoleDescription: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    ariaRowCount: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaRowIndex: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaRowSpan: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaSelected: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    ariaSetSize: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaSort: null,
-    ariaValueMax: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaValueMin: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaValueNow: rehype_document_node_modules_property_information_lib_util_types_number,
-    ariaValueText: null,
-    role: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/html.js
-
-
-
-var rehype_document_node_modules_property_information_lib_html_html = rehype_document_node_modules_property_information_lib_util_create_create({
-  space: 'html',
-  attributes: {
-    acceptcharset: 'accept-charset',
-    classname: 'class',
-    htmlfor: 'for',
-    httpequiv: 'http-equiv'
-  },
-  transform: rehype_document_node_modules_property_information_lib_util_case_insensitive_transform_caseInsensitiveTransform,
-  mustUseProperty: ['checked', 'multiple', 'muted', 'selected'],
-  properties: {
-    // Standard Properties.
-    abbr: null,
-    accept: rehype_document_node_modules_property_information_lib_util_types_commaSeparated,
-    acceptCharset: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    accessKey: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    action: null,
-    allow: null,
-    allowFullScreen: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    allowPaymentRequest: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    allowUserMedia: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    alt: null,
-    as: null,
-    async: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    autoCapitalize: null,
-    autoComplete: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    autoFocus: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    autoPlay: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    capture: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    charSet: null,
-    checked: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    cite: null,
-    className: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    cols: rehype_document_node_modules_property_information_lib_util_types_number,
-    colSpan: null,
-    content: null,
-    contentEditable: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    controls: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    controlsList: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    coords: rehype_document_node_modules_property_information_lib_util_types_number | rehype_document_node_modules_property_information_lib_util_types_commaSeparated,
-    crossOrigin: null,
-    data: null,
-    dateTime: null,
-    decoding: null,
-    "default": rehype_document_node_modules_property_information_lib_util_types_boolean,
-    defer: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    dir: null,
-    dirName: null,
-    disabled: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    download: rehype_document_node_modules_property_information_lib_util_types_overloadedBoolean,
-    draggable: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    encType: null,
-    enterKeyHint: null,
-    form: null,
-    formAction: null,
-    formEncType: null,
-    formMethod: null,
-    formNoValidate: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    formTarget: null,
-    headers: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    height: rehype_document_node_modules_property_information_lib_util_types_number,
-    hidden: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    high: rehype_document_node_modules_property_information_lib_util_types_number,
-    href: null,
-    hrefLang: null,
-    htmlFor: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    httpEquiv: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    id: null,
-    imageSizes: null,
-    imageSrcSet: null,
-    inputMode: null,
-    integrity: null,
-    is: null,
-    isMap: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    itemId: null,
-    itemProp: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    itemRef: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    itemScope: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    itemType: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    kind: null,
-    label: null,
-    lang: null,
-    language: null,
-    list: null,
-    loading: null,
-    loop: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    low: rehype_document_node_modules_property_information_lib_util_types_number,
-    manifest: null,
-    max: null,
-    maxLength: rehype_document_node_modules_property_information_lib_util_types_number,
-    media: null,
-    method: null,
-    min: null,
-    minLength: rehype_document_node_modules_property_information_lib_util_types_number,
-    multiple: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    muted: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    name: null,
-    nonce: null,
-    noModule: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    noValidate: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    onAbort: null,
-    onAfterPrint: null,
-    onAuxClick: null,
-    onBeforePrint: null,
-    onBeforeUnload: null,
-    onBlur: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onContextLost: null,
-    onContextMenu: null,
-    onContextRestored: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFormData: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLanguageChange: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadEnd: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMessageError: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRejectionHandled: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSecurityPolicyViolation: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onSlotChange: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnhandledRejection: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onWheel: null,
-    open: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    optimum: rehype_document_node_modules_property_information_lib_util_types_number,
-    pattern: null,
-    ping: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    placeholder: null,
-    playsInline: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    poster: null,
-    preload: null,
-    readOnly: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    referrerPolicy: null,
-    rel: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    required: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    reversed: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    rows: rehype_document_node_modules_property_information_lib_util_types_number,
-    rowSpan: rehype_document_node_modules_property_information_lib_util_types_number,
-    sandbox: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    scope: null,
-    scoped: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    seamless: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    selected: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    shape: null,
-    size: rehype_document_node_modules_property_information_lib_util_types_number,
-    sizes: null,
-    slot: null,
-    span: rehype_document_node_modules_property_information_lib_util_types_number,
-    spellCheck: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    src: null,
-    srcDoc: null,
-    srcLang: null,
-    srcSet: null,
-    start: rehype_document_node_modules_property_information_lib_util_types_number,
-    step: null,
-    style: null,
-    tabIndex: rehype_document_node_modules_property_information_lib_util_types_number,
-    target: null,
-    title: null,
-    translate: null,
-    type: null,
-    typeMustMatch: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    useMap: null,
-    value: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    width: rehype_document_node_modules_property_information_lib_util_types_number,
-    wrap: null,
-    // Legacy.
-    // See: https://html.spec.whatwg.org/#other-elements,-attributes-and-apis
-    align: null,
-    // Several. Use CSS `text-align` instead,
-    aLink: null,
-    // `<body>`. Use CSS `a:active {color}` instead
-    archive: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    // `<object>`. List of URIs to archives
-    axis: null,
-    // `<td>` and `<th>`. Use `scope` on `<th>`
-    background: null,
-    // `<body>`. Use CSS `background-image` instead
-    bgColor: null,
-    // `<body>` and table elements. Use CSS `background-color` instead
-    border: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<table>`. Use CSS `border-width` instead,
-    borderColor: null,
-    // `<table>`. Use CSS `border-color` instead,
-    bottomMargin: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    cellPadding: null,
-    // `<table>`
-    cellSpacing: null,
-    // `<table>`
-    "char": null,
-    // Several table elements. When `align=char`, sets the character to align on
-    charOff: null,
-    // Several table elements. When `char`, offsets the alignment
-    classId: null,
-    // `<object>`
-    clear: null,
-    // `<br>`. Use CSS `clear` instead
-    code: null,
-    // `<object>`
-    codeBase: null,
-    // `<object>`
-    codeType: null,
-    // `<object>`
-    color: null,
-    // `<font>` and `<hr>`. Use CSS instead
-    compact: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    // Lists. Use CSS to reduce space between items instead
-    declare: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    // `<object>`
-    event: null,
-    // `<script>`
-    face: null,
-    // `<font>`. Use CSS instead
-    frame: null,
-    // `<table>`
-    frameBorder: null,
-    // `<iframe>`. Use CSS `border` instead
-    hSpace: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<img>` and `<object>`
-    leftMargin: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    link: null,
-    // `<body>`. Use CSS `a:link {color: *}` instead
-    longDesc: null,
-    // `<frame>`, `<iframe>`, and `<img>`. Use an `<a>`
-    lowSrc: null,
-    // `<img>`. Use a `<picture>`
-    marginHeight: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    marginWidth: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    noResize: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    // `<frame>`
-    noHref: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    // `<area>`. Use no href instead of an explicit `nohref`
-    noShade: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    // `<hr>`. Use background-color and height instead of borders
-    noWrap: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    // `<td>` and `<th>`
-    object: null,
-    // `<applet>`
-    profile: null,
-    // `<head>`
-    prompt: null,
-    // `<isindex>`
-    rev: null,
-    // `<link>`
-    rightMargin: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    rules: null,
-    // `<table>`
-    scheme: null,
-    // `<meta>`
-    scrolling: rehype_document_node_modules_property_information_lib_util_types_booleanish,
-    // `<frame>`. Use overflow in the child context
-    standby: null,
-    // `<object>`
-    summary: null,
-    // `<table>`
-    text: null,
-    // `<body>`. Use CSS `color` instead
-    topMargin: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<body>`
-    valueType: null,
-    // `<param>`
-    version: null,
-    // `<html>`. Use a doctype.
-    vAlign: null,
-    // Several. Use CSS `vertical-align` instead
-    vLink: null,
-    // `<body>`. Use CSS `a:visited {color}` instead
-    vSpace: rehype_document_node_modules_property_information_lib_util_types_number,
-    // `<img>` and `<object>`
-    // Non-standard Properties.
-    allowTransparency: null,
-    autoCorrect: null,
-    autoSave: null,
-    disablePictureInPicture: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    disableRemotePlayback: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    prefix: null,
-    property: null,
-    results: rehype_document_node_modules_property_information_lib_util_types_number,
-    security: null,
-    unselectable: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/svg.js
-
-
-
-var rehype_document_node_modules_property_information_lib_svg_svg = rehype_document_node_modules_property_information_lib_util_create_create({
-  space: 'svg',
-  attributes: {
-    accentHeight: 'accent-height',
-    alignmentBaseline: 'alignment-baseline',
-    arabicForm: 'arabic-form',
-    baselineShift: 'baseline-shift',
-    capHeight: 'cap-height',
-    className: 'class',
-    clipPath: 'clip-path',
-    clipRule: 'clip-rule',
-    colorInterpolation: 'color-interpolation',
-    colorInterpolationFilters: 'color-interpolation-filters',
-    colorProfile: 'color-profile',
-    colorRendering: 'color-rendering',
-    crossOrigin: 'crossorigin',
-    dataType: 'datatype',
-    dominantBaseline: 'dominant-baseline',
-    enableBackground: 'enable-background',
-    fillOpacity: 'fill-opacity',
-    fillRule: 'fill-rule',
-    floodColor: 'flood-color',
-    floodOpacity: 'flood-opacity',
-    fontFamily: 'font-family',
-    fontSize: 'font-size',
-    fontSizeAdjust: 'font-size-adjust',
-    fontStretch: 'font-stretch',
-    fontStyle: 'font-style',
-    fontVariant: 'font-variant',
-    fontWeight: 'font-weight',
-    glyphName: 'glyph-name',
-    glyphOrientationHorizontal: 'glyph-orientation-horizontal',
-    glyphOrientationVertical: 'glyph-orientation-vertical',
-    hrefLang: 'hreflang',
-    horizAdvX: 'horiz-adv-x',
-    horizOriginX: 'horiz-origin-x',
-    horizOriginY: 'horiz-origin-y',
-    imageRendering: 'image-rendering',
-    letterSpacing: 'letter-spacing',
-    lightingColor: 'lighting-color',
-    markerEnd: 'marker-end',
-    markerMid: 'marker-mid',
-    markerStart: 'marker-start',
-    navDown: 'nav-down',
-    navDownLeft: 'nav-down-left',
-    navDownRight: 'nav-down-right',
-    navLeft: 'nav-left',
-    navNext: 'nav-next',
-    navPrev: 'nav-prev',
-    navRight: 'nav-right',
-    navUp: 'nav-up',
-    navUpLeft: 'nav-up-left',
-    navUpRight: 'nav-up-right',
-    onAbort: 'onabort',
-    onActivate: 'onactivate',
-    onAfterPrint: 'onafterprint',
-    onBeforePrint: 'onbeforeprint',
-    onBegin: 'onbegin',
-    onCancel: 'oncancel',
-    onCanPlay: 'oncanplay',
-    onCanPlayThrough: 'oncanplaythrough',
-    onChange: 'onchange',
-    onClick: 'onclick',
-    onClose: 'onclose',
-    onCopy: 'oncopy',
-    onCueChange: 'oncuechange',
-    onCut: 'oncut',
-    onDblClick: 'ondblclick',
-    onDrag: 'ondrag',
-    onDragEnd: 'ondragend',
-    onDragEnter: 'ondragenter',
-    onDragExit: 'ondragexit',
-    onDragLeave: 'ondragleave',
-    onDragOver: 'ondragover',
-    onDragStart: 'ondragstart',
-    onDrop: 'ondrop',
-    onDurationChange: 'ondurationchange',
-    onEmptied: 'onemptied',
-    onEnd: 'onend',
-    onEnded: 'onended',
-    onError: 'onerror',
-    onFocus: 'onfocus',
-    onFocusIn: 'onfocusin',
-    onFocusOut: 'onfocusout',
-    onHashChange: 'onhashchange',
-    onInput: 'oninput',
-    onInvalid: 'oninvalid',
-    onKeyDown: 'onkeydown',
-    onKeyPress: 'onkeypress',
-    onKeyUp: 'onkeyup',
-    onLoad: 'onload',
-    onLoadedData: 'onloadeddata',
-    onLoadedMetadata: 'onloadedmetadata',
-    onLoadStart: 'onloadstart',
-    onMessage: 'onmessage',
-    onMouseDown: 'onmousedown',
-    onMouseEnter: 'onmouseenter',
-    onMouseLeave: 'onmouseleave',
-    onMouseMove: 'onmousemove',
-    onMouseOut: 'onmouseout',
-    onMouseOver: 'onmouseover',
-    onMouseUp: 'onmouseup',
-    onMouseWheel: 'onmousewheel',
-    onOffline: 'onoffline',
-    onOnline: 'ononline',
-    onPageHide: 'onpagehide',
-    onPageShow: 'onpageshow',
-    onPaste: 'onpaste',
-    onPause: 'onpause',
-    onPlay: 'onplay',
-    onPlaying: 'onplaying',
-    onPopState: 'onpopstate',
-    onProgress: 'onprogress',
-    onRateChange: 'onratechange',
-    onRepeat: 'onrepeat',
-    onReset: 'onreset',
-    onResize: 'onresize',
-    onScroll: 'onscroll',
-    onSeeked: 'onseeked',
-    onSeeking: 'onseeking',
-    onSelect: 'onselect',
-    onShow: 'onshow',
-    onStalled: 'onstalled',
-    onStorage: 'onstorage',
-    onSubmit: 'onsubmit',
-    onSuspend: 'onsuspend',
-    onTimeUpdate: 'ontimeupdate',
-    onToggle: 'ontoggle',
-    onUnload: 'onunload',
-    onVolumeChange: 'onvolumechange',
-    onWaiting: 'onwaiting',
-    onZoom: 'onzoom',
-    overlinePosition: 'overline-position',
-    overlineThickness: 'overline-thickness',
-    paintOrder: 'paint-order',
-    panose1: 'panose-1',
-    pointerEvents: 'pointer-events',
-    referrerPolicy: 'referrerpolicy',
-    renderingIntent: 'rendering-intent',
-    shapeRendering: 'shape-rendering',
-    stopColor: 'stop-color',
-    stopOpacity: 'stop-opacity',
-    strikethroughPosition: 'strikethrough-position',
-    strikethroughThickness: 'strikethrough-thickness',
-    strokeDashArray: 'stroke-dasharray',
-    strokeDashOffset: 'stroke-dashoffset',
-    strokeLineCap: 'stroke-linecap',
-    strokeLineJoin: 'stroke-linejoin',
-    strokeMiterLimit: 'stroke-miterlimit',
-    strokeOpacity: 'stroke-opacity',
-    strokeWidth: 'stroke-width',
-    tabIndex: 'tabindex',
-    textAnchor: 'text-anchor',
-    textDecoration: 'text-decoration',
-    textRendering: 'text-rendering',
-    typeOf: 'typeof',
-    underlinePosition: 'underline-position',
-    underlineThickness: 'underline-thickness',
-    unicodeBidi: 'unicode-bidi',
-    unicodeRange: 'unicode-range',
-    unitsPerEm: 'units-per-em',
-    vAlphabetic: 'v-alphabetic',
-    vHanging: 'v-hanging',
-    vIdeographic: 'v-ideographic',
-    vMathematical: 'v-mathematical',
-    vectorEffect: 'vector-effect',
-    vertAdvY: 'vert-adv-y',
-    vertOriginX: 'vert-origin-x',
-    vertOriginY: 'vert-origin-y',
-    wordSpacing: 'word-spacing',
-    writingMode: 'writing-mode',
-    xHeight: 'x-height',
-    // These were camelcased in Tiny. Now lowercased in SVG 2
-    playbackOrder: 'playbackorder',
-    timelineBegin: 'timelinebegin'
-  },
-  transform: rehype_document_node_modules_property_information_lib_util_case_sensitive_transform_caseSensitiveTransform,
-  properties: {
-    about: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    accentHeight: rehype_document_node_modules_property_information_lib_util_types_number,
-    accumulate: null,
-    additive: null,
-    alignmentBaseline: null,
-    alphabetic: rehype_document_node_modules_property_information_lib_util_types_number,
-    amplitude: rehype_document_node_modules_property_information_lib_util_types_number,
-    arabicForm: null,
-    ascent: rehype_document_node_modules_property_information_lib_util_types_number,
-    attributeName: null,
-    attributeType: null,
-    azimuth: rehype_document_node_modules_property_information_lib_util_types_number,
-    bandwidth: null,
-    baselineShift: null,
-    baseFrequency: null,
-    baseProfile: null,
-    bbox: null,
-    begin: null,
-    bias: rehype_document_node_modules_property_information_lib_util_types_number,
-    by: null,
-    calcMode: null,
-    capHeight: rehype_document_node_modules_property_information_lib_util_types_number,
-    className: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    clip: null,
-    clipPath: null,
-    clipPathUnits: null,
-    clipRule: null,
-    color: null,
-    colorInterpolation: null,
-    colorInterpolationFilters: null,
-    colorProfile: null,
-    colorRendering: null,
-    content: null,
-    contentScriptType: null,
-    contentStyleType: null,
-    crossOrigin: null,
-    cursor: null,
-    cx: null,
-    cy: null,
-    d: null,
-    dataType: null,
-    defaultAction: null,
-    descent: rehype_document_node_modules_property_information_lib_util_types_number,
-    diffuseConstant: rehype_document_node_modules_property_information_lib_util_types_number,
-    direction: null,
-    display: null,
-    dur: null,
-    divisor: rehype_document_node_modules_property_information_lib_util_types_number,
-    dominantBaseline: null,
-    download: rehype_document_node_modules_property_information_lib_util_types_boolean,
-    dx: null,
-    dy: null,
-    edgeMode: null,
-    editable: null,
-    elevation: rehype_document_node_modules_property_information_lib_util_types_number,
-    enableBackground: null,
-    end: null,
-    event: null,
-    exponent: rehype_document_node_modules_property_information_lib_util_types_number,
-    externalResourcesRequired: null,
-    fill: null,
-    fillOpacity: rehype_document_node_modules_property_information_lib_util_types_number,
-    fillRule: null,
-    filter: null,
-    filterRes: null,
-    filterUnits: null,
-    floodColor: null,
-    floodOpacity: null,
-    focusable: null,
-    focusHighlight: null,
-    fontFamily: null,
-    fontSize: null,
-    fontSizeAdjust: null,
-    fontStretch: null,
-    fontStyle: null,
-    fontVariant: null,
-    fontWeight: null,
-    format: null,
-    fr: null,
-    from: null,
-    fx: null,
-    fy: null,
-    g1: rehype_document_node_modules_property_information_lib_util_types_commaSeparated,
-    g2: rehype_document_node_modules_property_information_lib_util_types_commaSeparated,
-    glyphName: rehype_document_node_modules_property_information_lib_util_types_commaSeparated,
-    glyphOrientationHorizontal: null,
-    glyphOrientationVertical: null,
-    glyphRef: null,
-    gradientTransform: null,
-    gradientUnits: null,
-    handler: null,
-    hanging: rehype_document_node_modules_property_information_lib_util_types_number,
-    hatchContentUnits: null,
-    hatchUnits: null,
-    height: null,
-    href: null,
-    hrefLang: null,
-    horizAdvX: rehype_document_node_modules_property_information_lib_util_types_number,
-    horizOriginX: rehype_document_node_modules_property_information_lib_util_types_number,
-    horizOriginY: rehype_document_node_modules_property_information_lib_util_types_number,
-    id: null,
-    ideographic: rehype_document_node_modules_property_information_lib_util_types_number,
-    imageRendering: null,
-    initialVisibility: null,
-    "in": null,
-    in2: null,
-    intercept: rehype_document_node_modules_property_information_lib_util_types_number,
-    k: rehype_document_node_modules_property_information_lib_util_types_number,
-    k1: rehype_document_node_modules_property_information_lib_util_types_number,
-    k2: rehype_document_node_modules_property_information_lib_util_types_number,
-    k3: rehype_document_node_modules_property_information_lib_util_types_number,
-    k4: rehype_document_node_modules_property_information_lib_util_types_number,
-    kernelMatrix: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    kernelUnitLength: null,
-    keyPoints: null,
-    // SEMI_COLON_SEPARATED
-    keySplines: null,
-    // SEMI_COLON_SEPARATED
-    keyTimes: null,
-    // SEMI_COLON_SEPARATED
-    kerning: null,
-    lang: null,
-    lengthAdjust: null,
-    letterSpacing: null,
-    lightingColor: null,
-    limitingConeAngle: rehype_document_node_modules_property_information_lib_util_types_number,
-    local: null,
-    markerEnd: null,
-    markerMid: null,
-    markerStart: null,
-    markerHeight: null,
-    markerUnits: null,
-    markerWidth: null,
-    mask: null,
-    maskContentUnits: null,
-    maskUnits: null,
-    mathematical: null,
-    max: null,
-    media: null,
-    mediaCharacterEncoding: null,
-    mediaContentEncodings: null,
-    mediaSize: rehype_document_node_modules_property_information_lib_util_types_number,
-    mediaTime: null,
-    method: null,
-    min: null,
-    mode: null,
-    name: null,
-    navDown: null,
-    navDownLeft: null,
-    navDownRight: null,
-    navLeft: null,
-    navNext: null,
-    navPrev: null,
-    navRight: null,
-    navUp: null,
-    navUpLeft: null,
-    navUpRight: null,
-    numOctaves: null,
-    observer: null,
-    offset: null,
-    onAbort: null,
-    onActivate: null,
-    onAfterPrint: null,
-    onBeforePrint: null,
-    onBegin: null,
-    onCancel: null,
-    onCanPlay: null,
-    onCanPlayThrough: null,
-    onChange: null,
-    onClick: null,
-    onClose: null,
-    onCopy: null,
-    onCueChange: null,
-    onCut: null,
-    onDblClick: null,
-    onDrag: null,
-    onDragEnd: null,
-    onDragEnter: null,
-    onDragExit: null,
-    onDragLeave: null,
-    onDragOver: null,
-    onDragStart: null,
-    onDrop: null,
-    onDurationChange: null,
-    onEmptied: null,
-    onEnd: null,
-    onEnded: null,
-    onError: null,
-    onFocus: null,
-    onFocusIn: null,
-    onFocusOut: null,
-    onHashChange: null,
-    onInput: null,
-    onInvalid: null,
-    onKeyDown: null,
-    onKeyPress: null,
-    onKeyUp: null,
-    onLoad: null,
-    onLoadedData: null,
-    onLoadedMetadata: null,
-    onLoadStart: null,
-    onMessage: null,
-    onMouseDown: null,
-    onMouseEnter: null,
-    onMouseLeave: null,
-    onMouseMove: null,
-    onMouseOut: null,
-    onMouseOver: null,
-    onMouseUp: null,
-    onMouseWheel: null,
-    onOffline: null,
-    onOnline: null,
-    onPageHide: null,
-    onPageShow: null,
-    onPaste: null,
-    onPause: null,
-    onPlay: null,
-    onPlaying: null,
-    onPopState: null,
-    onProgress: null,
-    onRateChange: null,
-    onRepeat: null,
-    onReset: null,
-    onResize: null,
-    onScroll: null,
-    onSeeked: null,
-    onSeeking: null,
-    onSelect: null,
-    onShow: null,
-    onStalled: null,
-    onStorage: null,
-    onSubmit: null,
-    onSuspend: null,
-    onTimeUpdate: null,
-    onToggle: null,
-    onUnload: null,
-    onVolumeChange: null,
-    onWaiting: null,
-    onZoom: null,
-    opacity: null,
-    operator: null,
-    order: null,
-    orient: null,
-    orientation: null,
-    origin: null,
-    overflow: null,
-    overlay: null,
-    overlinePosition: rehype_document_node_modules_property_information_lib_util_types_number,
-    overlineThickness: rehype_document_node_modules_property_information_lib_util_types_number,
-    paintOrder: null,
-    panose1: null,
-    path: null,
-    pathLength: rehype_document_node_modules_property_information_lib_util_types_number,
-    patternContentUnits: null,
-    patternTransform: null,
-    patternUnits: null,
-    phase: null,
-    ping: rehype_document_node_modules_property_information_lib_util_types_spaceSeparated,
-    pitch: null,
-    playbackOrder: null,
-    pointerEvents: null,
-    points: null,
-    pointsAtX: rehype_document_node_modules_property_information_lib_util_types_number,
-    pointsAtY: rehype_document_node_modules_property_information_lib_util_types_number,
-    pointsAtZ: rehype_document_node_modules_property_information_lib_util_types_number,
-    preserveAlpha: null,
-    preserveAspectRatio: null,
-    primitiveUnits: null,
-    propagate: null,
-    property: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    r: null,
-    radius: null,
-    referrerPolicy: null,
-    refX: null,
-    refY: null,
-    rel: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    rev: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    renderingIntent: null,
-    repeatCount: null,
-    repeatDur: null,
-    requiredExtensions: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFeatures: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFonts: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    requiredFormats: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    resource: null,
-    restart: null,
-    result: null,
-    rotate: null,
-    rx: null,
-    ry: null,
-    scale: null,
-    seed: null,
-    shapeRendering: null,
-    side: null,
-    slope: null,
-    snapshotTime: null,
-    specularConstant: rehype_document_node_modules_property_information_lib_util_types_number,
-    specularExponent: rehype_document_node_modules_property_information_lib_util_types_number,
-    spreadMethod: null,
-    spacing: null,
-    startOffset: null,
-    stdDeviation: null,
-    stemh: null,
-    stemv: null,
-    stitchTiles: null,
-    stopColor: null,
-    stopOpacity: null,
-    strikethroughPosition: rehype_document_node_modules_property_information_lib_util_types_number,
-    strikethroughThickness: rehype_document_node_modules_property_information_lib_util_types_number,
-    string: null,
-    stroke: null,
-    strokeDashArray: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    strokeDashOffset: null,
-    strokeLineCap: null,
-    strokeLineJoin: null,
-    strokeMiterLimit: rehype_document_node_modules_property_information_lib_util_types_number,
-    strokeOpacity: rehype_document_node_modules_property_information_lib_util_types_number,
-    strokeWidth: null,
-    style: null,
-    surfaceScale: rehype_document_node_modules_property_information_lib_util_types_number,
-    syncBehavior: null,
-    syncBehaviorDefault: null,
-    syncMaster: null,
-    syncTolerance: null,
-    syncToleranceDefault: null,
-    systemLanguage: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    tabIndex: rehype_document_node_modules_property_information_lib_util_types_number,
-    tableValues: null,
-    target: null,
-    targetX: rehype_document_node_modules_property_information_lib_util_types_number,
-    targetY: rehype_document_node_modules_property_information_lib_util_types_number,
-    textAnchor: null,
-    textDecoration: null,
-    textRendering: null,
-    textLength: null,
-    timelineBegin: null,
-    title: null,
-    transformBehavior: null,
-    type: null,
-    typeOf: rehype_document_node_modules_property_information_lib_util_types_commaOrSpaceSeparated,
-    to: null,
-    transform: null,
-    u1: null,
-    u2: null,
-    underlinePosition: rehype_document_node_modules_property_information_lib_util_types_number,
-    underlineThickness: rehype_document_node_modules_property_information_lib_util_types_number,
-    unicode: null,
-    unicodeBidi: null,
-    unicodeRange: null,
-    unitsPerEm: rehype_document_node_modules_property_information_lib_util_types_number,
-    values: null,
-    vAlphabetic: rehype_document_node_modules_property_information_lib_util_types_number,
-    vMathematical: rehype_document_node_modules_property_information_lib_util_types_number,
-    vectorEffect: null,
-    vHanging: rehype_document_node_modules_property_information_lib_util_types_number,
-    vIdeographic: rehype_document_node_modules_property_information_lib_util_types_number,
-    version: null,
-    vertAdvY: rehype_document_node_modules_property_information_lib_util_types_number,
-    vertOriginX: rehype_document_node_modules_property_information_lib_util_types_number,
-    vertOriginY: rehype_document_node_modules_property_information_lib_util_types_number,
-    viewBox: null,
-    viewTarget: null,
-    visibility: null,
-    width: null,
-    widths: null,
-    wordSpacing: null,
-    writingMode: null,
-    x: null,
-    x1: null,
-    x2: null,
-    xChannelSelector: null,
-    xHeight: rehype_document_node_modules_property_information_lib_util_types_number,
-    y: null,
-    y1: null,
-    y2: null,
-    yChannelSelector: null,
-    z: null,
-    zoomAndPan: null
-  }
-});
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/index.js
-/**
- * @typedef {import('./lib/util/info.js').Info} Info
- * @typedef {import('./lib/util/schema.js').Schema} Schema
- */
-
-
-
-
-
-
-
-
-
-
-var rehype_document_node_modules_property_information_html = rehype_document_node_modules_property_information_lib_util_merge_merge([rehype_document_node_modules_property_information_lib_xml_xml, rehype_document_node_modules_property_information_lib_xlink_xlink, rehype_document_node_modules_property_information_lib_xmlns_xmlns, rehype_document_node_modules_property_information_lib_aria_aria, rehype_document_node_modules_property_information_lib_html_html], 'html');
-var rehype_document_node_modules_property_information_svg = rehype_document_node_modules_property_information_lib_util_merge_merge([rehype_document_node_modules_property_information_lib_xml_xml, rehype_document_node_modules_property_information_lib_xlink_xlink, rehype_document_node_modules_property_information_lib_xmlns_xmlns, rehype_document_node_modules_property_information_lib_aria_aria, rehype_document_node_modules_property_information_lib_svg_svg], 'svg');
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/property-information/lib/find.js
-/**
- * @typedef {import('./util/schema.js').Schema} Schema
- */
-
-
-
-var rehype_document_node_modules_property_information_lib_find_valid = /^data[-\w.:]+$/i;
-var rehype_document_node_modules_property_information_lib_find_dash = /-[a-z]/g;
-var rehype_document_node_modules_property_information_lib_find_cap = /[A-Z]/g;
-/**
- * @param {Schema} schema
- * @param {string} value
- * @returns {Info}
- */
-
-function rehype_document_node_modules_property_information_lib_find_find(schema, value) {
-  var normal = rehype_document_node_modules_property_information_lib_normalize_normalize(value);
-  var prop = value;
-  var Type = rehype_document_node_modules_property_information_lib_util_info_Info;
-
-  if (normal in schema.normal) {
-    return schema.property[schema.normal[normal]];
-  }
-
-  if (normal.length > 4 && normal.slice(0, 4) === 'data' && rehype_document_node_modules_property_information_lib_find_valid.test(value)) {
-    // Attribute or property.
-    if (value.charAt(4) === '-') {
-      // Turn it into a property.
-      var rest = value.slice(5).replace(rehype_document_node_modules_property_information_lib_find_dash, rehype_document_node_modules_property_information_lib_find_camelcase);
-      prop = 'data' + rest.charAt(0).toUpperCase() + rest.slice(1);
-    } else {
-      // Turn it into an attribute.
-      var _rest = value.slice(4);
-
-      if (!rehype_document_node_modules_property_information_lib_find_dash.test(_rest)) {
-        var dashes = _rest.replace(rehype_document_node_modules_property_information_lib_find_cap, rehype_document_node_modules_property_information_lib_find_kebab);
-
-        if (dashes.charAt(0) !== '-') {
-          dashes = '-' + dashes;
-        }
-
-        value = 'data' + dashes;
-      }
-    }
-
-    Type = rehype_document_node_modules_property_information_lib_util_defined_info_DefinedInfo;
-  }
-
-  return new Type(prop, value);
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-function rehype_document_node_modules_property_information_lib_find_kebab($0) {
-  return '-' + $0.toLowerCase();
-}
-/**
- * @param {string} $0
- * @returns {string}
- */
-
-
-function rehype_document_node_modules_property_information_lib_find_camelcase($0) {
-  return $0.charAt(1).toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/hast-util-parse-selector/index.js
-/**
- * @typedef {import('hast').Properties} Properties
- * @typedef {import('hast').Element} Element
- */
-var rehype_document_node_modules_hast_util_parse_selector_search = /[#.]/g;
-/**
- * Create a hast element from a simple CSS selector.
- *
- * @param selector A simple CSS selector.
- *   Can contain a tag-name (`foo`), classes (`.bar`), and an ID (`#baz`).
- *   Multiple classes are allowed.
- *   Uses the last ID if multiple IDs are found.
- * @param [defaultTagName='div'] Tag name to use if `selector` does not specify one.
- */
-
-var node_modules_hast_util_parse_selector_parseSelector =
-/**
- * @type {(
- *  <Selector extends string, DefaultTagName extends string = 'div'>(selector?: Selector, defaultTagName?: DefaultTagName) => Element & {tagName: import('./extract.js').ExtractTagName<Selector, DefaultTagName>}
- * )}
- */
-
-/**
- * @param {string} [selector]
- * @param {string} [defaultTagName='div']
- * @returns {Element}
- */
-function parseSelector(selector) {
-  var defaultTagName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
-  var value = selector || '';
-  /** @type {Properties} */
-
-  var props = {};
-  var start = 0;
-  /** @type {string} */
-
-  var subvalue;
-  /** @type {string} */
-
-  var previous;
-  /** @type {RegExpMatchArray} */
-
-  var match;
-
-  while (start < value.length) {
-    rehype_document_node_modules_hast_util_parse_selector_search.lastIndex = start;
-    match = rehype_document_node_modules_hast_util_parse_selector_search.exec(value);
-    subvalue = value.slice(start, match ? match.index : value.length);
-
-    if (subvalue) {
-      if (!previous) {
-        defaultTagName = subvalue;
-      } else if (previous === '#') {
-        props.id = subvalue;
-      } else if (Array.isArray(props.className)) {
-        props.className.push(subvalue);
-      } else {
-        props.className = [subvalue];
-      }
-
-      start += subvalue.length;
-    }
-
-    if (match) {
-      previous = match[0];
-      start++;
-    }
-  }
-
-  return {
-    type: 'element',
-    tagName: defaultTagName,
-    properties: props,
-    children: []
-  };
-};
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/space-separated-tokens/index.js
-/**
- * Parse space separated tokens to an array of strings.
- *
- * @param {string} value Space separated tokens
- * @returns {Array.<string>} Tokens
- */
-function rehype_document_node_modules_space_separated_tokens_parse(value) {
-  var input = String(value || '').trim();
-  return input ? input.split(/[ \t\n\r\f]+/g) : [];
-}
-/**
- * Serialize an array of strings as space separated tokens.
- *
- * @param {Array.<string|number>} values Tokens
- * @returns {string} Space separated tokens
- */
-
-function rehype_document_node_modules_space_separated_tokens_stringify(values) {
-  return values.join(' ').trim();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/comma-separated-tokens/index.js
-/**
- * @typedef {Object} StringifyOptions
- * @property {boolean} [padLeft=true] Whether to pad a space before a token (`boolean`, default: `true`).
- * @property {boolean} [padRight=false] Whether to pad a space after a token (`boolean`, default: `false`).
- */
-
-/**
- * Parse comma separated tokens to an array.
- *
- * @param {string} value
- * @returns {Array.<string>}
- */
-function rehype_document_node_modules_comma_separated_tokens_parse(value) {
-  /** @type {Array.<string>} */
-  var tokens = [];
-  var input = String(value || '');
-  var index = input.indexOf(',');
-  var start = 0;
-  /** @type {boolean} */
-
-  var end;
-  /** @type {string} */
-
-  var token;
-
-  while (!end) {
-    if (index === -1) {
-      index = input.length;
-      end = true;
-    }
-
-    token = input.slice(start, index).trim();
-
-    if (token || !end) {
-      tokens.push(token);
-    }
-
-    start = index + 1;
-    index = input.indexOf(',', start);
-  }
-
-  return tokens;
-}
-/**
- * Serialize an array of strings to comma separated tokens.
- *
- * @param {Array.<string|number>} values
- * @param {StringifyOptions} [options]
- * @returns {string}
- */
-
-function rehype_document_node_modules_comma_separated_tokens_stringify(values, options) {
-  var settings = options || {}; // Ensure the last empty entry is seen.
-
-  if (values[values.length - 1] === '') {
-    values = values.concat('');
-  }
-
-  return values.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/hastscript/lib/core.js
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Properties} Properties
- * @typedef {Root['children'][number]} Child
- * @typedef {Child|Root} Node
- * @typedef {import('property-information').Info} Info
- * @typedef {import('property-information').Schema} Schema
- *
- * @typedef {Root|Element} HResult
- * @typedef {string|number} HStyleValue
- * @typedef {Object.<string, HStyleValue>} HStyle
- * @typedef {string|number|boolean|null|undefined} HPrimitiveValue
- * @typedef {Array.<string|number>} HArrayValue
- * @typedef {HPrimitiveValue|HArrayValue} HPropertyValue
- * @typedef {{[property: string]: HPropertyValue|HStyle}} HProperties
- *
- * @typedef {string|number|null|undefined} HPrimitiveChild
- * @typedef {Array.<Node|HPrimitiveChild>} HArrayChild
- * @typedef {Node|HPrimitiveChild|HArrayChild} HChild
- */
-
-
-
-
-var lib_core_buttonTypes = new Set(['menu', 'submit', 'reset', 'button']);
-var hastscript_lib_core_own = {}.hasOwnProperty;
-/**
- * @param {Schema} schema
- * @param {string} defaultTagName
- * @param {Array.<string>} [caseSensitive]
- */
-
-function node_modules_hastscript_lib_core_core(schema, defaultTagName, caseSensitive) {
-  var adjust = caseSensitive && lib_core_createAdjustMap(caseSensitive);
-
-  var h =
-  /**
-   * @type {{
-   *   (): Root
-   *   (selector: null|undefined, ...children: HChild[]): Root
-   *   (selector: string, properties?: HProperties, ...children: HChild[]): Element
-   *   (selector: string, ...children: HChild[]): Element
-   * }}
-   */
-
-  /**
-   * Hyperscript compatible DSL for creating virtual hast trees.
-   *
-   * @param {string|null} [selector]
-   * @param {HProperties|HChild} [properties]
-   * @param {HChild[]} children
-   * @returns {HResult}
-   */
-  function h(selector, properties) {
-    var index = -1;
-    /** @type {HResult} */
-
-    var node;
-
-    for (var _len = arguments.length, children = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-      children[_key - 2] = arguments[_key];
-    }
-
-    if (selector === undefined || selector === null) {
-      node = {
-        type: 'root',
-        children: []
-      }; // @ts-expect-error Properties are not supported for roots.
-
-      children.unshift(properties);
-    } else {
-      node = node_modules_hast_util_parse_selector_parseSelector(selector, defaultTagName); // Normalize the name.
-
-      node.tagName = node.tagName.toLowerCase();
-
-      if (adjust && hastscript_lib_core_own.call(adjust, node.tagName)) {
-        node.tagName = adjust[node.tagName];
-      } // Handle props.
-
-
-      if (lib_core_isProperties(properties, node.tagName)) {
-        /** @type {string} */
-        var key;
-
-        for (key in properties) {
-          if (hastscript_lib_core_own.call(properties, key)) {
-            // @ts-expect-error `node.properties` is set.
-            lib_core_addProperty(schema, node.properties, key, properties[key]);
-          }
-        }
-      } else {
-        children.unshift(properties);
-      }
-    } // Handle children.
-
-
-    while (++index < children.length) {
-      lib_core_addChild(node.children, children[index]);
-    }
-
-    if (node.type === 'element' && node.tagName === 'template') {
-      node.content = {
-        type: 'root',
-        children: node.children
-      };
-      node.children = [];
-    }
-
-    return node;
-  };
-
-  return h;
-}
-/**
- * @param {HProperties|HChild} value
- * @param {string} name
- * @returns {value is HProperties}
- */
-
-function lib_core_isProperties(value, name) {
-  if (value === null || value === undefined || typeof value !== 'object' || Array.isArray(value)) {
-    return false;
-  }
-
-  if (name === 'input' || !value.type || typeof value.type !== 'string') {
-    return true;
-  }
-
-  if ('children' in value && Array.isArray(value.children)) {
-    return false;
-  }
-
-  if (name === 'button') {
-    return lib_core_buttonTypes.has(value.type.toLowerCase());
-  }
-
-  return !('value' in value);
-}
-/**
- * @param {Schema} schema
- * @param {Properties} properties
- * @param {string} key
- * @param {HStyle|HPropertyValue} value
- * @returns {void}
- */
-
-
-function lib_core_addProperty(schema, properties, key, value) {
-  var info = rehype_document_node_modules_property_information_lib_find_find(schema, key);
-  var index = -1;
-  /** @type {HPropertyValue} */
-
-  var result; // Ignore nullish and NaN values.
-
-  if (value === undefined || value === null) return;
-
-  if (typeof value === 'number') {
-    // Ignore NaN.
-    if (Number.isNaN(value)) return;
-    result = value;
-  } // Booleans.
-  else if (typeof value === 'boolean') {
-    result = value;
-  } // Handle list values.
-  else if (typeof value === 'string') {
-    if (info.spaceSeparated) {
-      result = rehype_document_node_modules_space_separated_tokens_parse(value);
-    } else if (info.commaSeparated) {
-      result = rehype_document_node_modules_comma_separated_tokens_parse(value);
-    } else if (info.commaOrSpaceSeparated) {
-      result = rehype_document_node_modules_space_separated_tokens_parse(rehype_document_node_modules_comma_separated_tokens_parse(value).join(' '));
-    } else {
-      result = lib_core_parsePrimitive(info, info.property, value);
-    }
-  } else if (Array.isArray(value)) {
-    result = value.concat();
-  } else {
-    result = info.property === 'style' ? lib_core_style(value) : String(value);
-  }
-
-  if (Array.isArray(result)) {
-    /** @type {Array.<string|number>} */
-    var finalResult = [];
-
-    while (++index < result.length) {
-      // @ts-expect-error Assume no booleans in array.
-      finalResult[index] = lib_core_parsePrimitive(info, info.property, result[index]);
-    }
-
-    result = finalResult;
-  } // Class names (which can be added both on the `selector` and here).
-
-
-  if (info.property === 'className' && Array.isArray(properties.className)) {
-    // @ts-expect-error Assume no booleans in `className`.
-    result = properties.className.concat(result);
-  }
-
-  properties[info.property] = result;
-}
-/**
- * @param {Array.<Child>} nodes
- * @param {HChild} value
- * @returns {void}
- */
-
-
-function lib_core_addChild(nodes, value) {
-  var index = -1;
-
-  if (value === undefined || value === null) {// Empty.
-  } else if (typeof value === 'string' || typeof value === 'number') {
-    nodes.push({
-      type: 'text',
-      value: String(value)
-    });
-  } else if (Array.isArray(value)) {
-    while (++index < value.length) {
-      lib_core_addChild(nodes, value[index]);
-    }
-  } else if (typeof value === 'object' && 'type' in value) {
-    if (value.type === 'root') {
-      lib_core_addChild(nodes, value.children);
-    } else {
-      nodes.push(value);
-    }
-  } else {
-    throw new Error('Expected node, nodes, or string, got `' + value + '`');
-  }
-}
-/**
- * Parse a single primitives.
- *
- * @param {Info} info
- * @param {string} name
- * @param {HPrimitiveValue} value
- * @returns {HPrimitiveValue}
- */
-
-
-function lib_core_parsePrimitive(info, name, value) {
-  if (typeof value === 'string') {
-    if (info.number && value && !Number.isNaN(Number(value))) {
-      return Number(value);
-    }
-
-    if ((info["boolean"] || info.overloadedBoolean) && (value === '' || rehype_document_node_modules_property_information_lib_normalize_normalize(value) === rehype_document_node_modules_property_information_lib_normalize_normalize(name))) {
-      return true;
-    }
-  }
-
-  return value;
-}
-/**
- * @param {HStyle} value
- * @returns {string}
- */
-
-
-function lib_core_style(value) {
-  /** @type {Array.<string>} */
-  var result = [];
-  /** @type {string} */
-
-  var key;
-
-  for (key in value) {
-    if (hastscript_lib_core_own.call(value, key)) {
-      result.push([key, value[key]].join(': '));
-    }
-  }
-
-  return result.join('; ');
-}
-/**
- * @param {Array.<string>} values
- * @returns {Object.<string, string>}
- */
-
-
-function lib_core_createAdjustMap(values) {
-  /** @type {Object.<string, string>} */
-  var result = {};
-  var index = -1;
-
-  while (++index < values.length) {
-    result[values[index].toLowerCase()] = values[index];
-  }
-
-  return result;
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-document/node_modules/hastscript/lib/html.js
-/**
- * @typedef {import('./core.js').HChild} Child Acceptable child value
- * @typedef {import('./core.js').HProperties} Properties Acceptable properties value.
- *
- * @typedef {import('./jsx-classic').Element} h.JSX.Element
- * @typedef {import('./jsx-classic').IntrinsicAttributes} h.JSX.IntrinsicAttributes
- * @typedef {import('./jsx-classic').IntrinsicElements} h.JSX.IntrinsicElements
- * @typedef {import('./jsx-classic').ElementChildrenAttribute} h.JSX.ElementChildrenAttribute
- */
-
-
-var lib_html_h = node_modules_hastscript_lib_core_core(rehype_document_node_modules_property_information_html, 'div');
+/* harmony default export */ const markdown_to_html_lib = (lib_markdown);
 ;// CONCATENATED MODULE: ../../node_modules/rehype-document/index.js
 /**
  * @typedef {import('hast').Root} Root
@@ -94825,7 +84965,7 @@ function rehypeDocument() {
     var head = [{
       type: 'text',
       value: '\n'
-    }, lib_html_h('meta', {
+    }, h('meta', {
       charset: 'utf-8'
     })];
     var index = -1;
@@ -94841,14 +84981,14 @@ function rehypeDocument() {
       head.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('title', [title]));
+      }, h('title', [title]));
     }
 
     while (++index < meta.length) {
       head.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('meta', meta[index]));
+      }, h('meta', meta[index]));
     }
 
     index = -1;
@@ -94857,7 +84997,7 @@ function rehypeDocument() {
       head.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('link', link[index]));
+      }, h('link', link[index]));
     } // Inject style tags before linked CSS
 
 
@@ -94867,7 +85007,7 @@ function rehypeDocument() {
       head.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('style', styles[index]));
+      }, h('style', styles[index]));
     }
 
     index = -1;
@@ -94876,7 +85016,7 @@ function rehypeDocument() {
       head.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('link', {
+      }, h('link', {
         rel: 'stylesheet',
         href: css[index]
       }));
@@ -94893,7 +85033,7 @@ function rehypeDocument() {
       contents.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('script', scripts[index]));
+      }, h('script', scripts[index]));
     }
 
     index = -1;
@@ -94902,7 +85042,7 @@ function rehypeDocument() {
       contents.push({
         type: 'text',
         value: '\n'
-      }, lib_html_h('script', {
+      }, h('script', {
         src: js[index]
       }));
     }
@@ -94922,15 +85062,15 @@ function rehypeDocument() {
       children: [doctype, {
         type: 'text',
         value: '\n'
-      }, lib_html_h('html', {
+      }, h('html', {
         lang: options.language || 'en'
       }, [{
         type: 'text',
         value: '\n'
-      }, lib_html_h('head', head), {
+      }, h('head', head), {
         type: 'text',
         value: '\n'
-      }, lib_html_h('body', contents), {
+      }, h('body', contents), {
         type: 'text',
         value: '\n'
       }]), {
@@ -94975,57 +85115,6 @@ function headingRank(node) {
   /* `0` */
   : null;
 }
-;// CONCATENATED MODULE: ../../node_modules/rehype-autolink-headings/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var rehype_autolink_headings_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/rehype-autolink-headings/lib/index.js
 
 
@@ -95113,7 +85202,7 @@ function rehypeAutolinkHeadings() {
   }
 
   return function (tree) {
-    rehype_autolink_headings_node_modules_unist_util_visit_visit(tree, 'element', function (node, index, parent) {
+    visit(tree, 'element', function (node, index, parent) {
       if (headingRank(node) && hasProperty(node, 'id') && is(node, index, parent)) {
         return method(node, index, parent);
       }
@@ -95204,133 +85293,6 @@ function rehypeAutolinkHeadings() {
 }
 // EXTERNAL MODULE: ../../node_modules/github-slugger/index.js
 var github_slugger = __webpack_require__(5499);
-;// CONCATENATED MODULE: ../../node_modules/rehype-slug/node_modules/hast-util-to-string/index.js
-/**
- * @fileoverview
- *   Get the plain-text value of a hast node.
- * @longdescription
- *   ## Use
- *
- *   ```js
- *   import {h} from 'hastscript'
- *   import {toString} from 'hast-util-to-string'
- *
- *   toString(h('p', 'Alpha'))
- *   //=> 'Alpha'
- *   toString(h('div', [h('b', 'Bold'), ' and ', h('i', 'italic'), '.']))
- *   //=> 'Bold and italic.'
- *   ```
- *
- *   ## API
- *
- *   ### `toString(node)`
- *
- *   Transform a node to a string.
- */
-
-/**
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Element} Element
- * @typedef {Root|Root['children'][number]} Node
- */
-
-/**
- * Get the plain-text value of a hast node.
- *
- * @param {Node} node
- * @returns {string}
- */
-function rehype_slug_node_modules_hast_util_to_string_toString(node) {
-  // “The concatenation of data of all the Text node descendants of the context
-  // object, in tree order.”
-  if ('children' in node) {
-    return rehype_slug_node_modules_hast_util_to_string_all(node);
-  } // “Context object’s data.”
-
-
-  return 'value' in node ? node.value : '';
-}
-/**
- * @param {Node} node
- * @returns {string}
- */
-
-function rehype_slug_node_modules_hast_util_to_string_one(node) {
-  if (node.type === 'text') {
-    return node.value;
-  }
-
-  return 'children' in node ? rehype_slug_node_modules_hast_util_to_string_all(node) : '';
-}
-/**
- * @param {Root|Element} node
- * @returns {string}
- */
-
-
-function rehype_slug_node_modules_hast_util_to_string_all(node) {
-  var index = -1;
-  /** @type {string[]} */
-
-  var result = [];
-
-  while (++index < node.children.length) {
-    result[index] = rehype_slug_node_modules_hast_util_to_string_one(node.children[index]);
-  }
-
-  return result.join('');
-}
-;// CONCATENATED MODULE: ../../node_modules/rehype-slug/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var rehype_slug_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/rehype-slug/index.js
 /**
  * @typedef {import('hast').Root} Root
@@ -95350,9 +85312,9 @@ var slugs = new github_slugger();
 function rehypeSlug() {
   return function (tree) {
     slugs.reset();
-    rehype_slug_node_modules_unist_util_visit_visit(tree, 'element', function (node) {
+    visit(tree, 'element', function (node) {
       if (headingRank(node) && node.properties && !hasProperty(node, 'id')) {
-        node.properties.id = slugs.slug(rehype_slug_node_modules_hast_util_to_string_toString(node));
+        node.properties.id = slugs.slug(hast_util_to_string_toString(node));
       }
     });
   };
@@ -109933,57 +99895,6 @@ var emojiToName = {
   '🏴󠁧󠁢󠁳󠁣󠁴󠁿': 'scotland',
   '🏴󠁧󠁢󠁷󠁬󠁳󠁿': 'wales'
 };
-;// CONCATENATED MODULE: ../../node_modules/remark-gemoji/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
- */
-
-var remark_gemoji_node_modules_unist_util_visit_visit =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
- * @param {boolean} [reverse]
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/remark-gemoji/index.js
 /**
  * @typedef {import('mdast').Root} Root
@@ -110000,7 +99911,7 @@ var remark_gemoji_own = {}.hasOwnProperty;
 
 function remarkGemoji() {
   return function (tree) {
-    remark_gemoji_node_modules_unist_util_visit_visit(tree, 'text', function (node) {
+    visit(tree, 'text', function (node) {
       var value = node.value;
       /** @type {string[]} */
 
@@ -111025,7 +100936,7 @@ function lib_create_create() {
     mdOptions.rehypePlugins.unshift([rehypeDocument, documentOptions]);
   }
 
-  return esm(string || '', mdOptions);
+  return markdown_to_html_lib(string || '', mdOptions);
 }
 // EXTERNAL MODULE: ../../node_modules/fs-extra/lib/index.js
 var fs_extra_lib = __webpack_require__(7215);
