@@ -17,6 +17,7 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   'github-corners'?: string;
   /** Github corners style. */
   'github-corners-fork'?: boolean;
+  /** Disable light and dark theme styles button. */
   'dark-mode'?: boolean;
   /** Markdown string. */
   markdown?: string;
@@ -37,8 +38,6 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
 export interface MDToHTMLOptions extends RunArgvs {
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
   document?: Options;
-  /**  */
-  darkMode?: boolean;
   /** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */
   rewrite?: RehypeRewriteOptions['rewrite'];
   /** rewrite URLs of href and src attributes. */
