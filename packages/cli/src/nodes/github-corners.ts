@@ -45,41 +45,44 @@ TEMPLATE.innerHTML = \`
 </svg>
 \`;
 export class GithubCorners extends HTMLElement {
-  constructor() {
-    super();
-    this.right = '0';
-    this.shadow = this.attachShadow({ mode: 'open' });
-    this.shadow.appendChild(this.ownerDocument.importNode(TEMPLATE.content, true));
-    this.update();
-  }
-  static get observedAttributes() {
-    return ['z-index', 'target', 'height', 'width', 'href', 'color', 'fill', 'position', 'top', 'left', 'right', 'bottom', 'transform'];
-  }
-  setAttr(name, value) {
-    const svg = this.shadow.querySelector('svg');
-    if (/(color|fill)/.test(name.toLocaleLowerCase())) {
-      svg.firstElementChild.style[name] = value;
-    } else
-    if (/(z-index|height|width|position|top|left|right|bottom|transform)/.test(name.toLocaleLowerCase())) {
-      svg.style[name] = value;
-    } else
-    {
-      svg.setAttribute(name, value);
+    constructor() {
+        super();
+        this.right = '0';
+        this.shadow = this.attachShadow({ mode: 'open' });
+        this.shadow.appendChild(this.ownerDocument.importNode(TEMPLATE.content, true));
+        this.update();
     }
-  }
-  update() {
-    ;
-    [...this.getAttributeNames(), 'right'].forEach(name => {
-      const value = this.getAttribute(name) || this[name] || '';
-      this.setAttr(name, value);
-    });
-  }
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (oldValue !== newValue) {
-      this.setAttr(name, newValue);
+    static get observedAttributes() {
+        return ['z-index', 'target', 'height', 'width', 'href', 'color', 'fill', 'position', 'top', 'left', 'right', 'bottom', 'transform'];
     }
-  }}
-
+    setAttr(name, value) {
+        const svg = this.shadow.querySelector('svg');
+        if (/(href)/.test(name.toLocaleLowerCase())) {
+            svg.lastElementChild.setAttribute('xlink:href', value);
+        }
+        else if (/(color|fill)/.test(name.toLocaleLowerCase())) {
+            svg.firstElementChild.style[name] = value;
+        }
+        else if (/(z-index|height|width|position|top|left|right|bottom|transform)/.test(name.toLocaleLowerCase())) {
+            svg.style[name] = value;
+        }
+        else {
+            svg.setAttribute(name, value);
+        }
+    }
+    update() {
+        ;
+        [...this.getAttributeNames(), 'right'].forEach((name) => {
+            const value = this.getAttribute(name) || this[name] || '';
+            this.setAttr(name, value);
+        });
+    }
+    attributeChangedCallback(name, oldValue, newValue) {
+        if (oldValue !== newValue) {
+            this.setAttr(name, newValue);
+        }
+    }
+}
 customElements.define('github-corners', GithubCorners);`;
 
 export function githubCorners(opts: GithubCorners): Element[] {
