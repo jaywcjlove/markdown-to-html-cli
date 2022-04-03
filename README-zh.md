@@ -129,19 +129,21 @@ Usage: markdown-to-html [options] [--help|h]
 
 Options:
 
-  --author          Define the author of a page.
-  --config, -o      Specify the configuration file. Default: "<process.cwd()>/package.json".
-  --description     Define a description of your web page.
-  --favicon         Add a Favicon to your Site.
-  --github-corners  Add a Github corner to your project page.
-  --github-corners-fork  Github corners style.
-  --keywords        Define keywords for search engines.
-  --markdown        Markdown string.
-  --output, -o      Output static pages to the specified directory. Default: "index.html"
-  --source, -s      The path of the target file "README.md". Default: "README.md"
-  --title           The `<title>` tag is required in HTML documents!
-  --version, -v     Show version number
-  --help, -h        Displays help information.
+  --author                Define the author of a page.
+  --config, -o            Specify the configuration file. Default: "<process.cwd()>/package.json".
+  --description           Define a description of your web page.
+  --favicon               Add a Favicon to your Site.
+  --github-corners        Add a Github corner to your project page.
+  --github-corners-fork   Github corners style.
+  --keywords              Define keywords for search engines.
+  --no-dark-mode          Disable light and dark theme styles button.
+  --markdown              Markdown string.
+  --markdown-style-theme  Setting markdown-style light/dark theme.
+  --output, -o            Output static pages to the specified directory. Default: "index.html"
+  --source, -s            The path of the target file "README.md". Default: "README.md"
+  --title                 The `<title>` tag is required in HTML documents!
+  --version, -v           Show version number
+  --help, -h              Displays help information.
 
 Example:
 
@@ -149,6 +151,8 @@ Example:
   npm markdown-to-html     --title="Hello World!"
   npm markdown-to-html     --config="config/conf.json"
   npm markdown-to-html-cli --markdown="Hello World!"
+  npm markdown-to-html-cli --no-dark-mode
+  npm markdown-to-html-cli --markdown-style-theme dark
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
   npm markdown-to-html-cli --output coverage/index.html

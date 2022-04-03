@@ -19,6 +19,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   'github-corners-fork'?: boolean;
   /** Disable light and dark theme styles button. */
   'dark-mode'?: boolean;
+  /** Setting markdown-style light/dark theme. */
+  'markdown-style-theme'?: 'dark' | 'light';
   /** Markdown string. */
   markdown?: string;
   /** The `<title>` tag is required in HTML documents! */
@@ -86,20 +88,21 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
 export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
 
   Options:\n
-    --author          Define the author of a page.
-    --config, -o      Specify the configuration file. Default: "<process.cwd()>/package.json".
-    --description     Define a description of your web page.
-    --favicon         Add a Favicon to your Site.
-    --github-corners  Add a Github corner to your project page.
-    --github-corners-fork  Github corners style.
-    --keywords        Define keywords for search engines.
-    --no-dark-mode    Disable light and dark theme styles button.
-    --markdown        Markdown string.
-    --output, -o      Output static pages to the specified directory. Default: "index.html"
-    --source, -s      The path of the target file "README.md". Default: "README.md"
-    --title           The \`<title>\` tag is required in HTML documents!
-    --version, -v     Show version number
-    --help, -h        Displays help information.
+    --author                Define the author of a page.
+    --config, -o            Specify the configuration file. Default: "<process.cwd()>/package.json".
+    --description           Define a description of your web page.
+    --favicon               Add a Favicon to your Site.
+    --github-corners        Add a Github corner to your project page.
+    --github-corners-fork   Github corners style.
+    --keywords              Define keywords for search engines.
+    --no-dark-mode          Disable light and dark theme styles button.
+    --markdown              Markdown string.
+    --markdown-style-theme  Setting markdown-style light/dark theme.
+    --output, -o            Output static pages to the specified directory. Default: "index.html"
+    --source, -s            The path of the target file "README.md". Default: "README.md"
+    --title                 The \`<title>\` tag is required in HTML documents!
+    --version, -v           Show version number
+    --help, -h              Displays help information.
 `;
 
 export const exampleHelp: string =`\n  Example:
@@ -109,6 +112,7 @@ export const exampleHelp: string =`\n  Example:
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--config\x1b[0m="config/conf.json"
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--no-dark-mode\x1b[0m
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown-style-theme\x1b[0m dark
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove --github-corners-fork
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html

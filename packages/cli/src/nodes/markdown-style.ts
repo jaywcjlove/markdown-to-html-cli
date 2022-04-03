@@ -77,10 +77,10 @@ export class MarkdownStyle extends HTMLElement {
 customElements.define('markdown-style', MarkdownStyle);
 `
 
-export function markdownStyle(child: ElementContent[], darkMode: boolean): Element[] {
+export function markdownStyle(child: ElementContent[], markdownStyleTheme: 'dark' | 'light'): Element[] {
   const properties: Record<string, string> = {}
-  if (!darkMode) {
-    properties.theme = "light";
+  if (markdownStyleTheme) {
+    properties.theme = markdownStyleTheme;
   }
   return [{
     type: 'element',

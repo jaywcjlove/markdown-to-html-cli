@@ -24,7 +24,7 @@ export const _dirname = __dirname;
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options: MDToHTMLOptions = {}) {
-  const { markdown: string, document, rewrite, reurls = {}, 'dark-mode': darkModeTheme = true } = options;
+  const { markdown: string, document, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true } = options;
   
   const mdOptions: Options = {
     hastNode: false,
@@ -42,7 +42,7 @@ export function create(options: MDToHTMLOptions = {}) {
     ],
     rewrite: (node, index, parent) => {
       if ((node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root')) {
-        node.children = markdownStyle(node.children as any, darkModeTheme);
+        node.children = markdownStyle(node.children as any, markdownStyleTheme);
         if (darkModeTheme) {
           darkMode().forEach(item => node.children.unshift(item));
         }

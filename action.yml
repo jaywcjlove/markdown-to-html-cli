@@ -36,9 +36,15 @@ inputs:
     description: Add a Github corner to your project page.
     default: ''
     required: false
+
   dark-mode:
     description: Disable light and dark theme styles button.
     default: true
+    required: false
+
+  markdown-style-theme:
+    description: Setting markdown-style light/dark theme.
+    default: ''
     required: false
 
 outputs:
