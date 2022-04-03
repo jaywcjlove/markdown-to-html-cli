@@ -73,7 +73,23 @@ $ npm i markdown-to-html-cli
     favicon: data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>
 ```
 
-Input Parameters
+### Input Parameters
+
+- `output` - 将静态页面输出到指定目录. (default: `index.html`)
+- `source` - 目标文件 `README.md` 的路径。 (default: `README.md`)
+- `description` - 定义你的网页的描述。
+- `config` - 指定配置文件。 (default: `package.json`)
+- `markdown` - Markdown 字符串。
+- `favicon` - 将 Favicon 添加到您的站点。
+- `github-corners` - 将 Github 角添加到您的项目页面。
+- `dark-mode` - 禁用浅色和深色主题样式按钮。 (default: `true`)
+
+### Output Parameters
+
+- `output` - 将静态页面输出到指定目录路径
+- `markdown` - Markdown 字符串
+- `html` - HTML 字符串
+
 
 ## 在 package.json 中配置
 

@@ -94,7 +94,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --github-corners  Add a Github corner to your project page.
     --github-corners-fork  Github corners style.
     --keywords        Define keywords for search engines.
-    --no-dark-mode    Disable light and dark theme styles.
+    --no-dark-mode    Disable light and dark theme styles button.
     --markdown        Markdown string.
     --output, -o      Output static pages to the specified directory. Default: "index.html"
     --source, -s      The path of the target file "README.md". Default: "README.md"

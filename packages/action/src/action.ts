@@ -12,6 +12,7 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     const config = getInput('config');
     const markdown = getInput('markdown');
     const corners = getInput('github-corners');
+    const darkMode = getInput('dark-mode');
     const options: RunArgvs = {}
     info(`source: ${path.resolve(source)}`);
     if (source && !markdown) {
@@ -31,7 +32,7 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     info(`${JSON.stringify(options, null, 2)}`);
     endGroup();
 
-    const opts = formatConfig({ ...options });
+    const opts = formatConfig({ ...options, 'dark-mode': darkMode });
 
     setOutput('markdown', opts.markdown);
     info(`Config Path: "${opts.config}"`);

@@ -38,6 +38,7 @@ Used in Github [Actions](https://github.com/actions).
 - `markdown` - Markdown string 
 - `favicon` - Add a Favicon to your Site. 
 - `github-corners` - Add a Github corner to your project page. 
+- `dark-mode` - Disable light and dark theme styles. (default: `true`)
 
 ### Output Parameters
 
