@@ -1,6 +1,6 @@
 {
   "name": "markdown-to-html-cli",
-  "version": "3.4.1",
+  "version": "3.4.2",
   "license": "MIT",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli",
@@ -40,8 +40,8 @@
     "@types/fs-extra": "~9.0.13",
     "@types/minimist": "~1.2.2",
     "@uiw/github-corners": "~1.5.10",
-    "@wcj/markdown-style": "~1.0.1",
-    "@wcj/markdown-to-html": "~2.0.2",
+    "@wcj/markdown-style": "~1.0.6",
+    "@wcj/markdown-to-html": "~2.0.3",
     "fs-extra": "~10.0.0",
     "minimist": "~1.2.5",
     "rehype-autolink-headings": "~6.1.0",
