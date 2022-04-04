@@ -97,7 +97,7 @@ it('github-corners test case', async () => {
     'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
     document: undefined,
   });
-  expect(html.indexOf('<github-corners target="__blank" position="fixed" href="https://github.com/jaywcjlove/markdown-to-html-cli"></github-corners>') > 0).toBeTruthy();
+  expect(html.indexOf('<github-corners target="__blank" position="fixed" z-index="999" href="https://github.com/jaywcjlove/markdown-to-html-cli"></github-corners>') > 0).toBeTruthy();
   expect(html.indexOf('https://github.com/jaywcjlove/markdown-to-html-cli') > -1).toBeTruthy();
 
   html = create({
