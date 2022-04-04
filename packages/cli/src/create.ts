@@ -65,8 +65,8 @@ export function create(options: MDToHTMLOptions = {}) {
         }
       }
       if (node.type == 'element' && node.tagName === 'markdown-style') {
-        node.children.unshift(copyStyle())
-        node.children.unshift(copyScript())
+        node.children.push(copyStyle());
+        node.children.push(copyScript());
       }
       if (node.type == 'element' && node.tagName === 'pre') {
         const code = getCodeString(node.children);
