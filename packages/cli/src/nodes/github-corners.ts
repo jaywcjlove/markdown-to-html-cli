@@ -5,33 +5,21 @@ interface GithubCorners {
 }
 
 /**
- * @uiw/github-corners@1.5.10
+ * @uiw/github-corners@1.5.12
  * https://github.com/uiwjs/react-github-corners
  */
-const scriptString = `const TEMPLATE = document.createElement("template");
-TEMPLATE.innerHTML = \`
+const scriptString = `const GITHUB_CORNERS_TEMPLATE = document.createElement("template");
+GITHUB_CORNERS_TEMPLATE.innerHTML = \`
 <style>
-:host a:hover .octo-arm {
-  animation: octocat-wave 560ms ease-in-out;
-}
+:host a:hover .octo-arm { animation: octocat-wave 560ms ease-in-out; }
 @keyframes octocat-wave {
-  0%, 100% {
-    transform: rotate(0);
-  }
-  20%, 60% {
-    transform: rotate(-25deg);
-  }
-  40%, 80% {
-    transform: rotate(10deg);
-  }
+  0%, 100% { transform: rotate(0); }
+  20%, 60% { transform: rotate(-25deg); }
+  40%, 80% { transform: rotate(10deg); }
 }
 @media (max-width:500px) {
-  :host a:hover .octo-arm {
-    animation: none;
-  }
-  :host .octo-arm {
-    animation: octocat-wave 560ms ease-in-out;
-  }
+  :host a:hover .octo-arm { animation: none; }
+  :host .octo-arm { animation: octocat-wave 560ms ease-in-out; }
 }
 </style>
 <svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true" style="position: absolute; border: 0px; top: 0px;">
@@ -49,7 +37,7 @@ export class GithubCorners extends HTMLElement {
         super();
         this.right = '0';
         this.shadow = this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(this.ownerDocument.importNode(TEMPLATE.content, true));
+        this.shadow.appendChild(this.ownerDocument.importNode(GITHUB_CORNERS_TEMPLATE.content, true));
         this.update();
     }
     static get observedAttributes() {
@@ -97,6 +85,7 @@ export function githubCorners(opts: GithubCorners): Element[] {
       properties: {
         target: '__blank',
         position: 'fixed',
+        'z-index': 999,
         href,
       },
       children: []
