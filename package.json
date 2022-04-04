@@ -10,7 +10,7 @@
     "build": "lerna exec \"tsbb build --disable-babel --no-esm -f src/cli.ts\" --scope markdown-to-html-cli && npm run fix",
     "fix": "lerna exec \"tsc-esm-fix --target='lib' --ext='.js'\" --scope markdown-to-html-cli  ",
     "test": "tsbb test",
-    "coverage": "tsbb test --coverage",
+    "coverage": "tsbb test --coverage --bail",
     "hoist": "lerna bootstrap --hoist",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
