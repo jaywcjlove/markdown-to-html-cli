@@ -84,7 +84,7 @@ class MarkdownStyle extends HTMLElement {
 customElements.define('markdown-style', MarkdownStyle);
 `
 
-export function markdownStyle(child: ElementContent[], markdownStyleTheme: 'dark' | 'light'): Element[] {
+export function markdownStyle(child: ElementContent[], markdownStyleTheme?: 'dark' | 'light'): Element[] {
   const properties: Record<string, string> = {
     style: 'max-width: 960px; margin: 0 auto 60px auto; padding: 8px',
     className: 'markdown-body',

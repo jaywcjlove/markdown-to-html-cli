@@ -19,9 +19,9 @@ it('copyElement test case', async () => {
 });
 
 it('markdownStyle test case', async () => {
-  expect(markdownStyle([], false).length).toEqual(2);
-  expect(markdownStyle([], false)[1].children[0]).toEqual(expect.objectContaining({ "properties": {"theme": "light"} }));
-  expect(markdownStyle([], true)[1].children[0]).not.toEqual(expect.objectContaining({  "properties": {"theme": "light"} }));
+  expect(markdownStyle([], undefined).length).toEqual(2);
+  expect(markdownStyle([], 'light')[1].properties).toEqual(expect.objectContaining({ "theme": "light" }));
+  expect(markdownStyle([], 'dark')[1].properties).toEqual(expect.objectContaining({ "theme": "dark" }));
 });
 
 it('exampleHelp test case', async () => {
