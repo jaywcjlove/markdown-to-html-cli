@@ -5,7 +5,7 @@ interface GithubCorners {
 }
 
 /**
- * @uiw/github-corners@1.5.12
+ * @uiw/github-corners@1.5.14
  * https://github.com/uiwjs/react-github-corners
  */
 const scriptString = `const GITHUB_CORNERS_TEMPLATE = document.createElement("template");
@@ -21,8 +21,9 @@ GITHUB_CORNERS_TEMPLATE.innerHTML = \`
   :host a:hover .octo-arm { animation: none; }
   :host .octo-arm { animation: octocat-wave 560ms ease-in-out; }
 }
+:host svg { z-index: 99; position: fixed; border: 0px; top: 0px; }
 </style>
-<svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true" style="position: absolute; border: 0px; top: 0px;">
+<svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true">
   <a xlink:href="https://github.com/uiwjs/react-github-corners" target="_blank" rel="nofollow sponsored" style="fill: rgb(21, 21, 19); color: rgb(255, 255, 255);">
     <g>
       <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
@@ -41,7 +42,7 @@ export class GithubCorners extends HTMLElement {
         this.update();
     }
     static get observedAttributes() {
-        return ['z-index', 'target', 'height', 'width', 'href', 'color', 'fill', 'position', 'top', 'left', 'right', 'bottom', 'transform'];
+        return ['style', 'z-index', 'target', 'height', 'width', 'href', 'color', 'fill', 'position', 'top', 'left', 'right', 'bottom', 'transform'];
     }
     setAttr(name, value) {
         const svg = this.shadow.querySelector('svg');
@@ -51,7 +52,7 @@ export class GithubCorners extends HTMLElement {
         else if (/(color|fill)/.test(name.toLocaleLowerCase())) {
             svg.firstElementChild.style[name] = value;
         }
-        else if (/(z-index|height|width|position|top|left|right|bottom|transform)/.test(name.toLocaleLowerCase())) {
+        else if (/(z-index|position|top|left|right|bottom|transform)/.test(name.toLocaleLowerCase())) {
             svg.style[name] = value;
         }
         else {
