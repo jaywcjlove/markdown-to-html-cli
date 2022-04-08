@@ -26,6 +26,20 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     options.description = description;
     options['github-corners'] = corners;
 
+    if (!corners) {
+      const projectPkg = path.resolve(process.cwd(), config || 'package.json');
+      if (fs.existsSync(projectPkg)) {
+        const pkgStr = await fs.promises.readFile(projectPkg);
+        let pkg = {} as any;
+        try {
+          pkg = JSON.parse(pkgStr.toString());
+        } catch (error) {}
+        if (pkg.repository && !corners) {
+          options['github-corners'] = typeof pkg.repository === 'string' ? pkg.repository : pkg.repository.url;
+        }
+      }
+    }
+
     const outputPath = path.resolve(output);
     setOutput('output', outputPath);
 
