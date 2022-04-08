@@ -45,6 +45,12 @@
       "<rootDir>/node_modules/?!(.*)"
     ]
   },
+  "markdown-to-html": {
+    "reurls": {
+      "README-zh.md": "index.zh.html",
+      "README.md": "index.html"
+    }
+  },
   "devDependencies": {
     "@kkt/ncc": "~1.0.12",
     "ajv": "^8.8.0",
