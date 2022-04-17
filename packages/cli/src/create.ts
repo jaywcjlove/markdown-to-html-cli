@@ -7,20 +7,19 @@ import remarkGemoji from 'remark-gemoji';
 // @ts-ignore
 import rehypeUrls from 'rehype-urls';
 import rehypeFormat from 'rehype-format';
-import { githubCorners } from './nodes/github-corners';
-import { githubCornersFork } from './nodes/github-corners-fork';
-import { octiconLink } from './nodes/octiconLink';
-import { markdownStyle } from './nodes/markdown-style';
-import { copyElement, copyStyle, copyScript } from './nodes/copy';
-import { darkMode } from './nodes/dark-mode';
-import { MDToHTMLOptions } from './';
+import { githubCorners } from './nodes/github-corners.js';
+import { githubCornersFork } from './nodes/github-corners-fork.js';
+import { octiconLink } from './nodes/octiconLink.js';
+import { markdownStyle } from './nodes/markdown-style.js';
+import { copyElement, copyStyle, copyScript } from './nodes/copy.js';
+import { darkMode } from './nodes/dark-mode.js';
+import { MDToHTMLOptions } from './index.js';
 
 // https://stackoverflow.com/questions/46745014/alternative-for-dirname-in-node-when-using-the-experimental-modules-flag
 // export const _dirname = dirname(fileURLToPath(import.meta.url));
 // const filename = fileURLToPath(import.meta.url);
 // const dirname = path.dirname(filename);
 
-export const _dirname = __dirname;
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options: MDToHTMLOptions = {}) {

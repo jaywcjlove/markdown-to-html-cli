@@ -3,11 +3,11 @@ import path from 'path';
 import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
-import { create, _dirname } from './create';
-import { formatConfig } from './utils';
+import { create } from './create.js';
+import { formatConfig } from './utils.js';
 
-export * from './create';
-export * from './utils';
+export * from './create.js';
+export * from './utils.js';
 
 export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   version?: string;
@@ -68,7 +68,8 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     console.log(`${cliHelp}${exampleHelp}`);
     return;
   }
-  const pkgPath = path.resolve(_dirname, '..', 'package.json')
+
+  const pkgPath = path.resolve(new URL('../package.json', import.meta.url).pathname);
   if ((argvs.v || argvs.version) && fs.existsSync(pkgPath)) {
     const pkg = fs.readJSONSync(pkgPath);
     console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);
