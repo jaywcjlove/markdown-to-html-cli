@@ -251,6 +251,10 @@ $ npm run build
 $ npm run watch
 ```
 
+## Related
+
+- [html-to-markdown-cli](https://github.com/jaywcjlove/html-to-markdown-cli) Converts HTML to markdown.
+
 ## Contributors
 
 As always, thanks to our amazing contributors!
