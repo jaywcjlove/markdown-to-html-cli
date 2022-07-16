@@ -1,634 +1,15 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 5270:
-/***/ ((module) => {
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
-
-module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 4180:
-/***/ ((module) => {
-
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-
-module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 8111:
-/***/ ((module) => {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 2954:
-/***/ ((module) => {
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-        args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-
-      _next(undefined);
-    });
-  };
-}
-
-module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 85:
-/***/ ((module) => {
-
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-
-module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 3061:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var setPrototypeOf = __webpack_require__(742);
-
-var isNativeReflectConstruct = __webpack_require__(1549);
-
-function _construct(Parent, args, Class) {
-  if (isNativeReflectConstruct()) {
-    module.exports = _construct = Reflect.construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  } else {
-    module.exports = _construct = function _construct(Parent, args, Class) {
-      var a = [null];
-      a.push.apply(a, args);
-      var Constructor = Function.bind.apply(Parent, a);
-      var instance = new Constructor();
-      if (Class) setPrototypeOf(instance, Class.prototype);
-      return instance;
-    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  }
-
-  return _construct.apply(null, arguments);
-}
-
-module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 5198:
-/***/ ((module) => {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", {
-    writable: false
-  });
-  return Constructor;
-}
-
-module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 3041:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var unsupportedIterableToArray = __webpack_require__(6487);
-
-function _createForOfIteratorHelper(o, allowArrayLike) {
-  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-
-  if (!it) {
-    if (Array.isArray(o) || (it = unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-      if (it) o = it;
-      var i = 0;
-
-      var F = function F() {};
-
-      return {
-        s: F,
-        n: function n() {
-          if (i >= o.length) return {
-            done: true
-          };
-          return {
-            done: false,
-            value: o[i++]
-          };
-        },
-        e: function e(_e) {
-          throw _e;
-        },
-        f: F
-      };
-    }
-
-    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  var normalCompletion = true,
-      didErr = false,
-      err;
-  return {
-    s: function s() {
-      it = it.call(o);
-    },
-    n: function n() {
-      var step = it.next();
-      normalCompletion = step.done;
-      return step;
-    },
-    e: function e(_e2) {
-      didErr = true;
-      err = _e2;
-    },
-    f: function f() {
-      try {
-        if (!normalCompletion && it["return"] != null) it["return"]();
-      } finally {
-        if (didErr) throw err;
-      }
-    }
-  };
-}
-
-module.exports = _createForOfIteratorHelper, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 4564:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var getPrototypeOf = __webpack_require__(2588);
-
-var isNativeReflectConstruct = __webpack_require__(1549);
-
-var possibleConstructorReturn = __webpack_require__(6983);
-
-function _createSuper(Derived) {
-  var hasNativeReflectConstruct = isNativeReflectConstruct();
-  return function _createSuperInternal() {
-    var Super = getPrototypeOf(Derived),
-        result;
-
-    if (hasNativeReflectConstruct) {
-      var NewTarget = getPrototypeOf(this).constructor;
-      result = Reflect.construct(Super, arguments, NewTarget);
-    } else {
-      result = Super.apply(this, arguments);
-    }
-
-    return possibleConstructorReturn(this, result);
-  };
-}
-
-module.exports = _createSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 1260:
-/***/ ((module) => {
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 3772:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var superPropBase = __webpack_require__(6458);
-
-function _get() {
-  if (typeof Reflect !== "undefined" && Reflect.get) {
-    module.exports = _get = Reflect.get, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  } else {
-    module.exports = _get = function _get(target, property, receiver) {
-      var base = superPropBase(target, property);
-      if (!base) return;
-      var desc = Object.getOwnPropertyDescriptor(base, property);
-
-      if (desc.get) {
-        return desc.get.call(arguments.length < 3 ? target : receiver);
-      }
-
-      return desc.value;
-    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  }
-
-  return _get.apply(this, arguments);
-}
-
-module.exports = _get, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 2588:
-/***/ ((module) => {
-
-function _getPrototypeOf(o) {
-  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _getPrototypeOf(o);
-}
-
-module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 270:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var setPrototypeOf = __webpack_require__(742);
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  Object.defineProperty(subClass, "prototype", {
-    writable: false
-  });
-  if (superClass) setPrototypeOf(subClass, superClass);
-}
-
-module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 1477:
-/***/ ((module) => {
-
-function _isNativeFunction(fn) {
-  return Function.toString.call(fn).indexOf("[native code]") !== -1;
-}
-
-module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 1549:
-/***/ ((module) => {
-
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-  if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
-
-  try {
-    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 981:
-/***/ ((module) => {
-
-function _iterableToArrayLimit(arr, i) {
-  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
-
-  if (_i == null) return;
-  var _arr = [];
-  var _n = true;
-  var _d = false;
-
-  var _s, _e;
-
-  try {
-    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
-      _arr.push(_s.value);
-
-      if (i && _arr.length === i) break;
-    }
-  } catch (err) {
-    _d = true;
-    _e = err;
-  } finally {
-    try {
-      if (!_n && _i["return"] != null) _i["return"]();
-    } finally {
-      if (_d) throw _e;
-    }
-  }
-
-  return _arr;
-}
-
-module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 7365:
-/***/ ((module) => {
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 417:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var defineProperty = __webpack_require__(1260);
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-
-  return target;
-}
-
-module.exports = _objectSpread2, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 6983:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var _typeof = (__webpack_require__(8921)["default"]);
-
-var assertThisInitialized = __webpack_require__(8111);
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  } else if (call !== void 0) {
-    throw new TypeError("Derived constructors may only return object or undefined");
-  }
-
-  return assertThisInitialized(self);
-}
-
-module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 742:
-/***/ ((module) => {
-
-function _setPrototypeOf(o, p) {
-  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _setPrototypeOf(o, p);
-}
-
-module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 1068:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var arrayWithHoles = __webpack_require__(4180);
-
-var iterableToArrayLimit = __webpack_require__(981);
-
-var unsupportedIterableToArray = __webpack_require__(6487);
-
-var nonIterableRest = __webpack_require__(7365);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 6458:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var getPrototypeOf = __webpack_require__(2588);
-
-function _superPropBase(object, property) {
-  while (!Object.prototype.hasOwnProperty.call(object, property)) {
-    object = getPrototypeOf(object);
-    if (object === null) break;
-  }
-
-  return object;
-}
-
-module.exports = _superPropBase, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 8921:
-/***/ ((module) => {
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
-}
-
-module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 6487:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var arrayLikeToArray = __webpack_require__(5270);
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
-}
-
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 8240:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var getPrototypeOf = __webpack_require__(2588);
-
-var setPrototypeOf = __webpack_require__(742);
-
-var isNativeFunction = __webpack_require__(1477);
-
-var construct = __webpack_require__(3061);
-
-function _wrapNativeSuper(Class) {
-  var _cache = typeof Map === "function" ? new Map() : undefined;
-
-  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
-    if (Class === null || !isNativeFunction(Class)) return Class;
-
-    if (typeof Class !== "function") {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    if (typeof _cache !== "undefined") {
-      if (_cache.has(Class)) return _cache.get(Class);
-
-      _cache.set(Class, Wrapper);
-    }
-
-    function Wrapper() {
-      return construct(Class, arguments, getPrototypeOf(this).constructor);
-    }
-
-    Wrapper.prototype = Object.create(Class.prototype, {
-      constructor: {
-        value: Wrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    return setPrototypeOf(Wrapper, Class);
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _wrapNativeSuper(Class);
-}
-
-module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 7162:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-module.exports = __webpack_require__(4798);
-
-
-/***/ }),
-
 /***/ 5329:
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
@@ -762,7 +143,7 @@ function escapeProperty(s) {
 "use strict";
 
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
 var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
   if (k2 === undefined) k2 = k;
@@ -1125,9 +506,9 @@ exports.endGroup = endGroup;
  */
 
 function group(name, fn) {
-  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
+  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var result;
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -1189,8 +570,8 @@ function getState(name) {
 exports.getState = getState;
 
 function getIDToken(aud) {
-  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
-    return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+  return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -1210,6 +591,54 @@ function getIDToken(aud) {
 }
 
 exports.getIDToken = getIDToken;
+/**
+ * Summary exports
+ */
+
+var summary_1 = __webpack_require__(3590);
+
+Object.defineProperty(exports, "summary", ({
+  enumerable: true,
+  get: function get() {
+    return summary_1.summary;
+  }
+}));
+/**
+ * @deprecated use core.summary
+ */
+
+var summary_2 = __webpack_require__(3590);
+
+Object.defineProperty(exports, "markdownSummary", ({
+  enumerable: true,
+  get: function get() {
+    return summary_2.markdownSummary;
+  }
+}));
+/**
+ * Path exports
+ */
+
+var path_utils_1 = __webpack_require__(5053);
+
+Object.defineProperty(exports, "toPosixPath", ({
+  enumerable: true,
+  get: function get() {
+    return path_utils_1.toPosixPath;
+  }
+}));
+Object.defineProperty(exports, "toWin32Path", ({
+  enumerable: true,
+  get: function get() {
+    return path_utils_1.toWin32Path;
+  }
+}));
+Object.defineProperty(exports, "toPlatformPath", ({
+  enumerable: true,
+  get: function get() {
+    return path_utils_1.toPlatformPath;
+  }
+}));
 
 /***/ }),
 
@@ -1292,11 +721,11 @@ exports.issueCommand = issueCommand;
 "use strict";
 
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
   function adopt(value) {
@@ -1335,9 +764,9 @@ Object.defineProperty(exports, "__esModule", ({
 }));
 exports.OidcClient = void 0;
 
-var http_client_1 = __webpack_require__(7939);
+var http_client_1 = __webpack_require__(4882);
 
-var auth_1 = __webpack_require__(6852);
+var auth_1 = __webpack_require__(2867);
 
 var core_1 = __webpack_require__(2898);
 
@@ -1384,9 +813,9 @@ var OidcClient = /*#__PURE__*/function () {
     value: function getCall(id_token_url) {
       var _a;
 
-      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var httpclient, res, id_token;
-        return _regeneratorRuntime.wrap(function _callee$(_context) {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
@@ -1421,9 +850,9 @@ var OidcClient = /*#__PURE__*/function () {
   }, {
     key: "getIDToken",
     value: function getIDToken(audience) {
-      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime.mark(function _callee2() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var id_token_url, encodedAudience, id_token;
-        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
@@ -1464,6 +893,590 @@ var OidcClient = /*#__PURE__*/function () {
 }();
 
 exports.OidcClient = OidcClient;
+
+/***/ }),
+
+/***/ 5053:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.toPlatformPath = exports.toWin32Path = exports.toPosixPath = void 0;
+
+var path = __importStar(__webpack_require__(1017));
+/**
+ * toPosixPath converts the given path to the posix form. On Windows, \\ will be
+ * replaced with /.
+ *
+ * @param pth. Path to transform.
+ * @return string Posix path.
+ */
+
+
+function toPosixPath(pth) {
+  return pth.replace(/[\\]/g, '/');
+}
+
+exports.toPosixPath = toPosixPath;
+/**
+ * toWin32Path converts the given path to the win32 form. On Linux, / will be
+ * replaced with \\.
+ *
+ * @param pth. Path to transform.
+ * @return string Win32 path.
+ */
+
+function toWin32Path(pth) {
+  return pth.replace(/[/]/g, '\\');
+}
+
+exports.toWin32Path = toWin32Path;
+/**
+ * toPlatformPath converts the given path to a platform-specific path. It does
+ * this by replacing instances of / and \ with the platform-specific path
+ * separator.
+ *
+ * @param pth The path to platformize.
+ * @return string The platform-specific path.
+ */
+
+function toPlatformPath(pth) {
+  return pth.replace(/[/\\]/g, path.sep);
+}
+
+exports.toPlatformPath = toPlatformPath;
+
+/***/ }),
+
+/***/ 3590:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _slicedToArray = (__webpack_require__(3681)["default"]);
+
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
+
+var _classCallCheck = (__webpack_require__(3100)["default"]);
+
+var _createClass = (__webpack_require__(8870)["default"]);
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.summary = exports.markdownSummary = exports.SUMMARY_DOCS_URL = exports.SUMMARY_ENV_VAR = void 0;
+
+var os_1 = __webpack_require__(2037);
+
+var fs_1 = __webpack_require__(7147);
+
+var _fs_1$promises = fs_1.promises,
+    access = _fs_1$promises.access,
+    appendFile = _fs_1$promises.appendFile,
+    writeFile = _fs_1$promises.writeFile;
+exports.SUMMARY_ENV_VAR = 'GITHUB_STEP_SUMMARY';
+exports.SUMMARY_DOCS_URL = 'https://docs.github.com/actions/using-workflows/workflow-commands-for-github-actions#adding-a-job-summary';
+
+var Summary = /*#__PURE__*/function () {
+  function Summary() {
+    _classCallCheck(this, Summary);
+
+    this._buffer = '';
+  }
+  /**
+   * Finds the summary file path from the environment, rejects if env var is not found or file does not exist
+   * Also checks r/w permissions.
+   *
+   * @returns step summary file path
+   */
+
+
+  _createClass(Summary, [{
+    key: "filePath",
+    value: function filePath() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var pathFromEnv;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (!this._filePath) {
+                  _context.next = 2;
+                  break;
+                }
+
+                return _context.abrupt("return", this._filePath);
+
+              case 2:
+                pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+
+                if (pathFromEnv) {
+                  _context.next = 5;
+                  break;
+                }
+
+                throw new Error("Unable to find environment variable for $".concat(exports.SUMMARY_ENV_VAR, ". Check if your runtime environment supports job summaries."));
+
+              case 5:
+                _context.prev = 5;
+                _context.next = 8;
+                return access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
+
+              case 8:
+                _context.next = 13;
+                break;
+
+              case 10:
+                _context.prev = 10;
+                _context.t0 = _context["catch"](5);
+                throw new Error("Unable to access summary file: '".concat(pathFromEnv, "'. Check if the file has correct read/write permissions."));
+
+              case 13:
+                this._filePath = pathFromEnv;
+                return _context.abrupt("return", this._filePath);
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this, [[5, 10]]);
+      }));
+    }
+    /**
+     * Wraps content in an HTML tag, adding any HTML attributes
+     *
+     * @param {string} tag HTML tag to wrap
+     * @param {string | null} content content within the tag
+     * @param {[attribute: string]: string} attrs key-value list of HTML attributes to add
+     *
+     * @returns {string} content wrapped in HTML element
+     */
+
+  }, {
+    key: "wrap",
+    value: function wrap(tag, content) {
+      var attrs = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      var htmlAttrs = Object.entries(attrs).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            key = _ref2[0],
+            value = _ref2[1];
+
+        return " ".concat(key, "=\"").concat(value, "\"");
+      }).join('');
+
+      if (!content) {
+        return "<".concat(tag).concat(htmlAttrs, ">");
+      }
+
+      return "<".concat(tag).concat(htmlAttrs, ">").concat(content, "</").concat(tag, ">");
+    }
+    /**
+     * Writes text in the buffer to the summary buffer file and empties buffer. Will append by default.
+     *
+     * @param {SummaryWriteOptions} [options] (optional) options for write operation
+     *
+     * @returns {Promise<Summary>} summary instance
+     */
+
+  }, {
+    key: "write",
+    value: function write(options) {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var overwrite, filePath, writeFunc;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
+                _context2.next = 3;
+                return this.filePath();
+
+              case 3:
+                filePath = _context2.sent;
+                writeFunc = overwrite ? writeFile : appendFile;
+                _context2.next = 7;
+                return writeFunc(filePath, this._buffer, {
+                  encoding: 'utf8'
+                });
+
+              case 7:
+                return _context2.abrupt("return", this.emptyBuffer());
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+    }
+    /**
+     * Clears the summary buffer and wipes the summary file
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "clear",
+    value: function clear() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                return _context3.abrupt("return", this.emptyBuffer().write({
+                  overwrite: true
+                }));
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+    }
+    /**
+     * Returns the current summary buffer as a string
+     *
+     * @returns {string} string of summary buffer
+     */
+
+  }, {
+    key: "stringify",
+    value: function stringify() {
+      return this._buffer;
+    }
+    /**
+     * If the summary buffer is empty
+     *
+     * @returns {boolen} true if the buffer is empty
+     */
+
+  }, {
+    key: "isEmptyBuffer",
+    value: function isEmptyBuffer() {
+      return this._buffer.length === 0;
+    }
+    /**
+     * Resets the summary buffer without writing to summary file
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "emptyBuffer",
+    value: function emptyBuffer() {
+      this._buffer = '';
+      return this;
+    }
+    /**
+     * Adds raw text to the summary buffer
+     *
+     * @param {string} text content to add
+     * @param {boolean} [addEOL=false] (optional) append an EOL to the raw text (default: false)
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addRaw",
+    value: function addRaw(text) {
+      var addEOL = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      this._buffer += text;
+      return addEOL ? this.addEOL() : this;
+    }
+    /**
+     * Adds the operating system-specific end-of-line marker to the buffer
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addEOL",
+    value: function addEOL() {
+      return this.addRaw(os_1.EOL);
+    }
+    /**
+     * Adds an HTML codeblock to the summary buffer
+     *
+     * @param {string} code content to render within fenced code block
+     * @param {string} lang (optional) language to syntax highlight code
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addCodeBlock",
+    value: function addCodeBlock(code, lang) {
+      var attrs = Object.assign({}, lang && {
+        lang: lang
+      });
+      var element = this.wrap('pre', this.wrap('code', code), attrs);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML list to the summary buffer
+     *
+     * @param {string[]} items list of items to render
+     * @param {boolean} [ordered=false] (optional) if the rendered list should be ordered or not (default: false)
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addList",
+    value: function addList(items) {
+      var _this = this;
+
+      var ordered = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      var tag = ordered ? 'ol' : 'ul';
+      var listItems = items.map(function (item) {
+        return _this.wrap('li', item);
+      }).join('');
+      var element = this.wrap(tag, listItems);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML table to the summary buffer
+     *
+     * @param {SummaryTableCell[]} rows table rows
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addTable",
+    value: function addTable(rows) {
+      var _this2 = this;
+
+      var tableBody = rows.map(function (row) {
+        var cells = row.map(function (cell) {
+          if (typeof cell === 'string') {
+            return _this2.wrap('td', cell);
+          }
+
+          var header = cell.header,
+              data = cell.data,
+              colspan = cell.colspan,
+              rowspan = cell.rowspan;
+          var tag = header ? 'th' : 'td';
+          var attrs = Object.assign(Object.assign({}, colspan && {
+            colspan: colspan
+          }), rowspan && {
+            rowspan: rowspan
+          });
+          return _this2.wrap(tag, data, attrs);
+        }).join('');
+        return _this2.wrap('tr', cells);
+      }).join('');
+      var element = this.wrap('table', tableBody);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds a collapsable HTML details element to the summary buffer
+     *
+     * @param {string} label text for the closed state
+     * @param {string} content collapsable content
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addDetails",
+    value: function addDetails(label, content) {
+      var element = this.wrap('details', this.wrap('summary', label) + content);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML image tag to the summary buffer
+     *
+     * @param {string} src path to the image you to embed
+     * @param {string} alt text description of the image
+     * @param {SummaryImageOptions} options (optional) addition image attributes
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addImage",
+    value: function addImage(src, alt, options) {
+      var _ref3 = options || {},
+          width = _ref3.width,
+          height = _ref3.height;
+
+      var attrs = Object.assign(Object.assign({}, width && {
+        width: width
+      }), height && {
+        height: height
+      });
+      var element = this.wrap('img', null, Object.assign({
+        src: src,
+        alt: alt
+      }, attrs));
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML section heading element
+     *
+     * @param {string} text heading text
+     * @param {number | string} [level=1] (optional) the heading level, default: 1
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addHeading",
+    value: function addHeading(text, level) {
+      var tag = "h".concat(level);
+      var allowedTag = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag) ? tag : 'h1';
+      var element = this.wrap(allowedTag, text);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML thematic break (<hr>) to the summary buffer
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addSeparator",
+    value: function addSeparator() {
+      var element = this.wrap('hr', null);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML line break (<br>) to the summary buffer
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addBreak",
+    value: function addBreak() {
+      var element = this.wrap('br', null);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML blockquote to the summary buffer
+     *
+     * @param {string} text quote text
+     * @param {string} cite (optional) citation url
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addQuote",
+    value: function addQuote(text, cite) {
+      var attrs = Object.assign({}, cite && {
+        cite: cite
+      });
+      var element = this.wrap('blockquote', text, attrs);
+      return this.addRaw(element).addEOL();
+    }
+    /**
+     * Adds an HTML anchor tag to the summary buffer
+     *
+     * @param {string} text link text/content
+     * @param {string} href hyperlink
+     *
+     * @returns {Summary} summary instance
+     */
+
+  }, {
+    key: "addLink",
+    value: function addLink(text, href) {
+      var element = this.wrap('a', text, {
+        href: href
+      });
+      return this.addRaw(element).addEOL();
+    }
+  }]);
+
+  return Summary;
+}();
+
+var _summary = new Summary();
+/**
+ * @deprecated use `core.summary`
+ */
+
+
+exports.markdownSummary = _summary;
+exports.summary = _summary;
 
 /***/ }),
 
@@ -1521,19 +1534,54 @@ exports.toCommandProperties = toCommandProperties;
 
 /***/ }),
 
-/***/ 6852:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ 2867:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
+
+var _createClass = (__webpack_require__(8870)["default"]);
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
+exports.PersonalAccessTokenCredentialHandler = exports.BearerCredentialHandler = exports.BasicCredentialHandler = void 0;
 
 var BasicCredentialHandler = /*#__PURE__*/function () {
   function BasicCredentialHandler(username, password) {
@@ -1546,18 +1594,35 @@ var BasicCredentialHandler = /*#__PURE__*/function () {
   _createClass(BasicCredentialHandler, [{
     key: "prepareRequest",
     value: function prepareRequest(options) {
-      options.headers['Authorization'] = 'Basic ' + Buffer.from(this.username + ':' + this.password).toString('base64');
+      if (!options.headers) {
+        throw Error('The request has no headers');
+      }
+
+      options.headers['Authorization'] = "Basic ".concat(Buffer.from("".concat(this.username, ":").concat(this.password)).toString('base64'));
     } // This handler cannot handle 401
 
   }, {
     key: "canHandleAuthentication",
-    value: function canHandleAuthentication(response) {
+    value: function canHandleAuthentication() {
       return false;
     }
   }, {
     key: "handleAuthentication",
-    value: function handleAuthentication(httpClient, requestInfo, objs) {
-      return null;
+    value: function handleAuthentication() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                throw new Error('not implemented');
+
+              case 1:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
     }
   }]);
 
@@ -1578,18 +1643,35 @@ var BearerCredentialHandler = /*#__PURE__*/function () {
   _createClass(BearerCredentialHandler, [{
     key: "prepareRequest",
     value: function prepareRequest(options) {
-      options.headers['Authorization'] = 'Bearer ' + this.token;
+      if (!options.headers) {
+        throw Error('The request has no headers');
+      }
+
+      options.headers['Authorization'] = "Bearer ".concat(this.token);
     } // This handler cannot handle 401
 
   }, {
     key: "canHandleAuthentication",
-    value: function canHandleAuthentication(response) {
+    value: function canHandleAuthentication() {
       return false;
     }
   }, {
     key: "handleAuthentication",
-    value: function handleAuthentication(httpClient, requestInfo, objs) {
-      return null;
+    value: function handleAuthentication() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                throw new Error('not implemented');
+
+              case 1:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
     }
   }]);
 
@@ -1610,18 +1692,35 @@ var PersonalAccessTokenCredentialHandler = /*#__PURE__*/function () {
   _createClass(PersonalAccessTokenCredentialHandler, [{
     key: "prepareRequest",
     value: function prepareRequest(options) {
-      options.headers['Authorization'] = 'Basic ' + Buffer.from('PAT:' + this.token).toString('base64');
+      if (!options.headers) {
+        throw Error('The request has no headers');
+      }
+
+      options.headers['Authorization'] = "Basic ".concat(Buffer.from("PAT:".concat(this.token)).toString('base64'));
     } // This handler cannot handle 401
 
   }, {
     key: "canHandleAuthentication",
-    value: function canHandleAuthentication(response) {
+    value: function canHandleAuthentication() {
       return false;
     }
   }, {
     key: "handleAuthentication",
-    value: function handleAuthentication(httpClient, requestInfo, objs) {
-      return null;
+    value: function handleAuthentication() {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                throw new Error('not implemented');
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
     }
   }]);
 
@@ -1632,41 +1731,108 @@ exports.PersonalAccessTokenCredentialHandler = PersonalAccessTokenCredentialHand
 
 /***/ }),
 
-/***/ 7939:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ 4882:
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-var _objectSpread = (__webpack_require__(417)["default"]);
+var _createForOfIteratorHelper = (__webpack_require__(8636)["default"]);
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _asyncToGenerator = (__webpack_require__(2954)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _assertThisInitialized = (__webpack_require__(5297)["default"]);
 
-var _assertThisInitialized = (__webpack_require__(8111)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _wrapNativeSuper = (__webpack_require__(8365)["default"]);
 
-var _wrapNativeSuper = (__webpack_require__(8240)["default"]);
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
+exports.HttpClient = exports.isHttps = exports.HttpClientResponse = exports.HttpClientError = exports.getProxyUrl = exports.MediaTypes = exports.Headers = exports.HttpCodes = void 0;
 
-var http = __webpack_require__(3685);
+var http = __importStar(__webpack_require__(3685));
 
-var https = __webpack_require__(5687);
+var https = __importStar(__webpack_require__(5687));
 
-var pm = __webpack_require__(5352);
+var pm = __importStar(__webpack_require__(5615));
 
-var tunnel;
+var tunnel = __importStar(__webpack_require__(367));
+
 var HttpCodes;
 
 (function (HttpCodes) {
@@ -1761,37 +1927,44 @@ var HttpClientResponse = /*#__PURE__*/function () {
   _createClass(HttpClientResponse, [{
     key: "readBody",
     value: function readBody() {
-      var _this2 = this;
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var _this2 = this;
 
-      return new Promise( /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(resolve, reject) {
-          var output;
-          return _regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  output = Buffer.alloc(0);
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                return _context2.abrupt("return", new Promise(function (resolve) {
+                  return __awaiter(_this2, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+                    var output;
+                    return _regeneratorRuntime().wrap(function _callee$(_context) {
+                      while (1) {
+                        switch (_context.prev = _context.next) {
+                          case 0:
+                            output = Buffer.alloc(0);
+                            this.message.on('data', function (chunk) {
+                              output = Buffer.concat([output, chunk]);
+                            });
+                            this.message.on('end', function () {
+                              resolve(output.toString());
+                            });
 
-                  _this2.message.on('data', function (chunk) {
-                    output = Buffer.concat([output, chunk]);
-                  });
+                          case 3:
+                          case "end":
+                            return _context.stop();
+                        }
+                      }
+                    }, _callee, this);
+                  }));
+                }));
 
-                  _this2.message.on('end', function () {
-                    resolve(output.toString());
-                  });
-
-                case 3:
-                case "end":
-                  return _context.stop();
-              }
+              case 1:
+              case "end":
+                return _context2.stop();
             }
-          }, _callee);
-        }));
-
-        return function (_x, _x2) {
-          return _ref.apply(this, arguments);
-        };
-      }());
+          }
+        }, _callee2);
+      }));
     }
   }]);
 
@@ -1859,42 +2032,146 @@ var HttpClient = /*#__PURE__*/function () {
   _createClass(HttpClient, [{
     key: "options",
     value: function options(requestUrl, additionalHeaders) {
-      return this.request('OPTIONS', requestUrl, null, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                return _context3.abrupt("return", this.request('OPTIONS', requestUrl, null, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
     }
   }, {
     key: "get",
     value: function get(requestUrl, additionalHeaders) {
-      return this.request('GET', requestUrl, null, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                return _context4.abrupt("return", this.request('GET', requestUrl, null, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
     }
   }, {
     key: "del",
     value: function del(requestUrl, additionalHeaders) {
-      return this.request('DELETE', requestUrl, null, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                return _context5.abrupt("return", this.request('DELETE', requestUrl, null, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
     }
   }, {
     key: "post",
     value: function post(requestUrl, data, additionalHeaders) {
-      return this.request('POST', requestUrl, data, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                return _context6.abrupt("return", this.request('POST', requestUrl, data, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
     }
   }, {
     key: "patch",
     value: function patch(requestUrl, data, additionalHeaders) {
-      return this.request('PATCH', requestUrl, data, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                return _context7.abrupt("return", this.request('PATCH', requestUrl, data, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
     }
   }, {
     key: "put",
     value: function put(requestUrl, data, additionalHeaders) {
-      return this.request('PUT', requestUrl, data, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                return _context8.abrupt("return", this.request('PUT', requestUrl, data, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, this);
+      }));
     }
   }, {
     key: "head",
     value: function head(requestUrl, additionalHeaders) {
-      return this.request('HEAD', requestUrl, null, additionalHeaders || {});
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                return _context9.abrupt("return", this.request('HEAD', requestUrl, null, additionalHeaders || {}));
+
+              case 1:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, this);
+      }));
     }
   }, {
     key: "sendStream",
     value: function sendStream(verb, requestUrl, stream, additionalHeaders) {
-      return this.request(verb, requestUrl, stream, additionalHeaders);
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+        return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                return _context10.abrupt("return", this.request(verb, requestUrl, stream, additionalHeaders));
+
+              case 1:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, this);
+      }));
     }
     /**
      * Gets a typed object from an endpoint
@@ -1903,149 +2180,114 @@ var HttpClient = /*#__PURE__*/function () {
 
   }, {
     key: "getJson",
-    value: function () {
-      var _getJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2(requestUrl) {
-        var additionalHeaders,
-            res,
-            _args2 = arguments;
-        return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+    value: function getJson(requestUrl) {
+      var additionalHeaders = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
+        var res;
+        return _regeneratorRuntime().wrap(function _callee11$(_context11) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context11.prev = _context11.next) {
               case 0:
-                additionalHeaders = _args2.length > 1 && _args2[1] !== undefined ? _args2[1] : {};
                 additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                _context2.next = 4;
+                _context11.next = 3;
                 return this.get(requestUrl, additionalHeaders);
 
-              case 4:
-                res = _context2.sent;
-                return _context2.abrupt("return", this._processResponse(res, this.requestOptions));
+              case 3:
+                res = _context11.sent;
+                return _context11.abrupt("return", this._processResponse(res, this.requestOptions));
 
-              case 6:
+              case 5:
               case "end":
-                return _context2.stop();
+                return _context11.stop();
             }
           }
-        }, _callee2, this);
+        }, _callee11, this);
       }));
-
-      function getJson(_x3) {
-        return _getJson.apply(this, arguments);
-      }
-
-      return getJson;
-    }()
+    }
   }, {
     key: "postJson",
-    value: function () {
-      var _postJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee3(requestUrl, obj) {
-        var additionalHeaders,
-            data,
-            res,
-            _args3 = arguments;
-        return _regeneratorRuntime.wrap(function _callee3$(_context3) {
+    value: function postJson(requestUrl, obj) {
+      var additionalHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
+        var data, res;
+        return _regeneratorRuntime().wrap(function _callee12$(_context12) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context12.prev = _context12.next) {
               case 0:
-                additionalHeaders = _args3.length > 2 && _args3[2] !== undefined ? _args3[2] : {};
                 data = JSON.stringify(obj, null, 2);
                 additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
                 additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context3.next = 6;
+                _context12.next = 5;
                 return this.post(requestUrl, data, additionalHeaders);
 
-              case 6:
-                res = _context3.sent;
-                return _context3.abrupt("return", this._processResponse(res, this.requestOptions));
+              case 5:
+                res = _context12.sent;
+                return _context12.abrupt("return", this._processResponse(res, this.requestOptions));
 
-              case 8:
+              case 7:
               case "end":
-                return _context3.stop();
+                return _context12.stop();
             }
           }
-        }, _callee3, this);
+        }, _callee12, this);
       }));
-
-      function postJson(_x4, _x5) {
-        return _postJson.apply(this, arguments);
-      }
-
-      return postJson;
-    }()
+    }
   }, {
     key: "putJson",
-    value: function () {
-      var _putJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee4(requestUrl, obj) {
-        var additionalHeaders,
-            data,
-            res,
-            _args4 = arguments;
-        return _regeneratorRuntime.wrap(function _callee4$(_context4) {
+    value: function putJson(requestUrl, obj) {
+      var additionalHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
+        var data, res;
+        return _regeneratorRuntime().wrap(function _callee13$(_context13) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context13.prev = _context13.next) {
               case 0:
-                additionalHeaders = _args4.length > 2 && _args4[2] !== undefined ? _args4[2] : {};
                 data = JSON.stringify(obj, null, 2);
                 additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
                 additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context4.next = 6;
+                _context13.next = 5;
                 return this.put(requestUrl, data, additionalHeaders);
 
-              case 6:
-                res = _context4.sent;
-                return _context4.abrupt("return", this._processResponse(res, this.requestOptions));
+              case 5:
+                res = _context13.sent;
+                return _context13.abrupt("return", this._processResponse(res, this.requestOptions));
 
-              case 8:
+              case 7:
               case "end":
-                return _context4.stop();
+                return _context13.stop();
             }
           }
-        }, _callee4, this);
+        }, _callee13, this);
       }));
-
-      function putJson(_x6, _x7) {
-        return _putJson.apply(this, arguments);
-      }
-
-      return putJson;
-    }()
+    }
   }, {
     key: "patchJson",
-    value: function () {
-      var _patchJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee5(requestUrl, obj) {
-        var additionalHeaders,
-            data,
-            res,
-            _args5 = arguments;
-        return _regeneratorRuntime.wrap(function _callee5$(_context5) {
+    value: function patchJson(requestUrl, obj) {
+      var additionalHeaders = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
+        var data, res;
+        return _regeneratorRuntime().wrap(function _callee14$(_context14) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context14.prev = _context14.next) {
               case 0:
-                additionalHeaders = _args5.length > 2 && _args5[2] !== undefined ? _args5[2] : {};
                 data = JSON.stringify(obj, null, 2);
                 additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
                 additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context5.next = 6;
+                _context14.next = 5;
                 return this.patch(requestUrl, data, additionalHeaders);
 
-              case 6:
-                res = _context5.sent;
-                return _context5.abrupt("return", this._processResponse(res, this.requestOptions));
+              case 5:
+                res = _context14.sent;
+                return _context14.abrupt("return", this._processResponse(res, this.requestOptions));
 
-              case 8:
+              case 7:
               case "end":
-                return _context5.stop();
+                return _context14.stop();
             }
           }
-        }, _callee5, this);
+        }, _callee14, this);
       }));
-
-      function patchJson(_x8, _x9) {
-        return _patchJson.apply(this, arguments);
-      }
-
-      return patchJson;
-    }()
+    }
     /**
      * Makes a raw http request.
      * All other methods such as get, post, patch, and request ultimately call this.
@@ -2054,15 +2296,16 @@ var HttpClient = /*#__PURE__*/function () {
 
   }, {
     key: "request",
-    value: function () {
-      var _request = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee6(verb, requestUrl, data, headers) {
-        var parsedUrl, info, maxTries, numTries, response, authenticationHandler, i, redirectsRemaining, redirectUrl, parsedRedirectUrl, header;
-        return _regeneratorRuntime.wrap(function _callee6$(_context6) {
+    value: function request(verb, requestUrl, data, headers) {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
+        var parsedUrl, info, maxTries, numTries, response, authenticationHandler, _iterator, _step, handler, redirectsRemaining, redirectUrl, parsedRedirectUrl, header;
+
+        return _regeneratorRuntime().wrap(function _callee15$(_context15) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context15.prev = _context15.next) {
               case 0:
                 if (!this._disposed) {
-                  _context6.next = 2;
+                  _context15.next = 2;
                   break;
                 }
 
@@ -2072,92 +2315,108 @@ var HttpClient = /*#__PURE__*/function () {
                 parsedUrl = new URL(requestUrl);
                 info = this._prepareRequest(verb, parsedUrl, headers); // Only perform retries on reads since writes may not be idempotent.
 
-                maxTries = this._allowRetries && RetryableHttpVerbs.indexOf(verb) != -1 ? this._maxRetries + 1 : 1;
+                maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb) ? this._maxRetries + 1 : 1;
                 numTries = 0;
 
               case 6:
-                if (!(numTries < maxTries)) {
-                  _context6.next = 53;
-                  break;
-                }
-
-                _context6.next = 9;
+                _context15.next = 8;
                 return this.requestRaw(info, data);
 
-              case 9:
-                response = _context6.sent;
+              case 8:
+                response = _context15.sent;
 
                 if (!(response && response.message && response.message.statusCode === HttpCodes.Unauthorized)) {
-                  _context6.next = 25;
+                  _context15.next = 34;
                   break;
                 }
 
                 authenticationHandler = void 0;
-                i = 0;
+                _iterator = _createForOfIteratorHelper(this.handlers);
+                _context15.prev = 12;
 
-              case 13:
-                if (!(i < this.handlers.length)) {
-                  _context6.next = 20;
+                _iterator.s();
+
+              case 14:
+                if ((_step = _iterator.n()).done) {
+                  _context15.next = 21;
                   break;
                 }
 
-                if (!this.handlers[i].canHandleAuthentication(response)) {
-                  _context6.next = 17;
+                handler = _step.value;
+
+                if (!handler.canHandleAuthentication(response)) {
+                  _context15.next = 19;
                   break;
                 }
 
-                authenticationHandler = this.handlers[i];
-                return _context6.abrupt("break", 20);
+                authenticationHandler = handler;
+                return _context15.abrupt("break", 21);
 
-              case 17:
-                i++;
-                _context6.next = 13;
+              case 19:
+                _context15.next = 14;
                 break;
 
-              case 20:
+              case 21:
+                _context15.next = 26;
+                break;
+
+              case 23:
+                _context15.prev = 23;
+                _context15.t0 = _context15["catch"](12);
+
+                _iterator.e(_context15.t0);
+
+              case 26:
+                _context15.prev = 26;
+
+                _iterator.f();
+
+                return _context15.finish(26);
+
+              case 29:
                 if (!authenticationHandler) {
-                  _context6.next = 24;
+                  _context15.next = 33;
                   break;
                 }
 
-                return _context6.abrupt("return", authenticationHandler.handleAuthentication(this, info, data));
+                return _context15.abrupt("return", authenticationHandler.handleAuthentication(this, info, data));
 
-              case 24:
-                return _context6.abrupt("return", response);
+              case 33:
+                return _context15.abrupt("return", response);
 
-              case 25:
+              case 34:
                 redirectsRemaining = this._maxRedirects;
 
-              case 26:
-                if (!(HttpRedirectCodes.indexOf(response.message.statusCode) != -1 && this._allowRedirects && redirectsRemaining > 0)) {
-                  _context6.next = 43;
+              case 35:
+                if (!(response.message.statusCode && HttpRedirectCodes.includes(response.message.statusCode) && this._allowRedirects && redirectsRemaining > 0)) {
+                  _context15.next = 52;
                   break;
                 }
 
                 redirectUrl = response.message.headers['location'];
 
                 if (redirectUrl) {
-                  _context6.next = 30;
+                  _context15.next = 39;
                   break;
                 }
 
-                return _context6.abrupt("break", 43);
+                return _context15.abrupt("break", 52);
 
-              case 30:
+              case 39:
                 parsedRedirectUrl = new URL(redirectUrl);
 
-                if (!(parsedUrl.protocol == 'https:' && parsedUrl.protocol != parsedRedirectUrl.protocol && !this._allowRedirectDowngrade)) {
-                  _context6.next = 33;
+                if (!(parsedUrl.protocol === 'https:' && parsedUrl.protocol !== parsedRedirectUrl.protocol && !this._allowRedirectDowngrade)) {
+                  _context15.next = 42;
                   break;
                 }
 
                 throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
 
-              case 33:
-                _context6.next = 35;
+              case 42:
+                _context15.next = 44;
                 return response.readBody();
 
-              case 35:
+              case 44:
                 // strip authorization header if redirected to a different hostname
                 if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
                   for (header in headers) {
@@ -2170,59 +2429,55 @@ var HttpClient = /*#__PURE__*/function () {
 
 
                 info = this._prepareRequest(verb, parsedRedirectUrl, headers);
-                _context6.next = 39;
+                _context15.next = 48;
                 return this.requestRaw(info, data);
 
-              case 39:
-                response = _context6.sent;
+              case 48:
+                response = _context15.sent;
                 redirectsRemaining--;
-                _context6.next = 26;
+                _context15.next = 35;
                 break;
 
-              case 43:
-                if (!(HttpResponseRetryCodes.indexOf(response.message.statusCode) == -1)) {
-                  _context6.next = 45;
+              case 52:
+                if (!(!response.message.statusCode || !HttpResponseRetryCodes.includes(response.message.statusCode))) {
+                  _context15.next = 54;
                   break;
                 }
 
-                return _context6.abrupt("return", response);
+                return _context15.abrupt("return", response);
 
-              case 45:
+              case 54:
                 numTries += 1;
 
                 if (!(numTries < maxTries)) {
-                  _context6.next = 51;
+                  _context15.next = 60;
                   break;
                 }
 
-                _context6.next = 49;
+                _context15.next = 58;
                 return response.readBody();
 
-              case 49:
-                _context6.next = 51;
+              case 58:
+                _context15.next = 60;
                 return this._performExponentialBackoff(numTries);
 
-              case 51:
-                _context6.next = 6;
-                break;
+              case 60:
+                if (numTries < maxTries) {
+                  _context15.next = 6;
+                  break;
+                }
 
-              case 53:
-                return _context6.abrupt("return", response);
+              case 61:
+                return _context15.abrupt("return", response);
 
-              case 54:
+              case 62:
               case "end":
-                return _context6.stop();
+                return _context15.stop();
             }
           }
-        }, _callee6, this);
+        }, _callee15, this, [[12, 23, 26, 29]]);
       }));
-
-      function request(_x10, _x11, _x12, _x13) {
-        return _request.apply(this, arguments);
-      }
-
-      return request;
-    }()
+    }
     /**
      * Needs to be called if keepAlive is set to true in request options.
      */
@@ -2245,19 +2500,35 @@ var HttpClient = /*#__PURE__*/function () {
   }, {
     key: "requestRaw",
     value: function requestRaw(info, data) {
-      var _this3 = this;
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
+        var _this3 = this;
 
-      return new Promise(function (resolve, reject) {
-        var callbackForResult = function callbackForResult(err, res) {
-          if (err) {
-            reject(err);
+        return _regeneratorRuntime().wrap(function _callee16$(_context16) {
+          while (1) {
+            switch (_context16.prev = _context16.next) {
+              case 0:
+                return _context16.abrupt("return", new Promise(function (resolve, reject) {
+                  function callbackForResult(err, res) {
+                    if (err) {
+                      reject(err);
+                    } else if (!res) {
+                      // If `err` is not passed, then `res` must be passed.
+                      reject(new Error('Unknown error'));
+                    } else {
+                      resolve(res);
+                    }
+                  }
+
+                  _this3.requestRawWithCallback(info, data, callbackForResult);
+                }));
+
+              case 1:
+              case "end":
+                return _context16.stop();
+            }
           }
-
-          resolve(res);
-        };
-
-        _this3.requestRawWithCallback(info, data, callbackForResult);
-      });
+        }, _callee16);
+      }));
     }
     /**
      * Raw request with callback.
@@ -2269,25 +2540,28 @@ var HttpClient = /*#__PURE__*/function () {
   }, {
     key: "requestRawWithCallback",
     value: function requestRawWithCallback(info, data, onResult) {
-      var socket;
-
       if (typeof data === 'string') {
+        if (!info.options.headers) {
+          info.options.headers = {};
+        }
+
         info.options.headers['Content-Length'] = Buffer.byteLength(data, 'utf8');
       }
 
       var callbackCalled = false;
 
-      var handleResult = function handleResult(err, res) {
+      function handleResult(err, res) {
         if (!callbackCalled) {
           callbackCalled = true;
           onResult(err, res);
         }
-      };
+      }
 
       var req = info.httpModule.request(info.options, function (msg) {
         var res = new HttpClientResponse(msg);
-        handleResult(null, res);
+        handleResult(undefined, res);
       });
+      var socket;
       req.on('socket', function (sock) {
         socket = sock;
       }); // If we ever get disconnected, we want the socket to timeout eventually
@@ -2297,12 +2571,12 @@ var HttpClient = /*#__PURE__*/function () {
           socket.end();
         }
 
-        handleResult(new Error('Request timeout: ' + info.options.path), null);
+        handleResult(new Error("Request timeout: ".concat(info.options.path)));
       });
       req.on('error', function (err) {
         // err has statusCode property
         // res should have headers
-        handleResult(err, null);
+        handleResult(err);
       });
 
       if (data && typeof data === 'string') {
@@ -2352,9 +2626,19 @@ var HttpClient = /*#__PURE__*/function () {
       info.options.agent = this._getAgent(info.parsedUrl); // gives handlers an opportunity to participate
 
       if (this.handlers) {
-        this.handlers.forEach(function (handler) {
-          handler.prepareRequest(info.options);
-        });
+        var _iterator2 = _createForOfIteratorHelper(this.handlers),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var handler = _step2.value;
+            handler.prepareRequest(info.options);
+          }
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
+        }
       }
 
       return info;
@@ -2362,14 +2646,8 @@ var HttpClient = /*#__PURE__*/function () {
   }, {
     key: "_mergeHeaders",
     value: function _mergeHeaders(headers) {
-      var lowercaseKeys = function lowercaseKeys(obj) {
-        return Object.keys(obj).reduce(function (c, k) {
-          return c[k.toLowerCase()] = obj[k], c;
-        }, {});
-      };
-
       if (this.requestOptions && this.requestOptions.headers) {
-        return Object.assign({}, lowercaseKeys(this.requestOptions.headers), lowercaseKeys(headers));
+        return Object.assign({}, lowercaseKeys(this.requestOptions.headers), lowercaseKeys(headers || {}));
       }
 
       return lowercaseKeys(headers || {});
@@ -2377,12 +2655,6 @@ var HttpClient = /*#__PURE__*/function () {
   }, {
     key: "_getExistingOrDefaultHeader",
     value: function _getExistingOrDefaultHeader(additionalHeaders, header, _default) {
-      var lowercaseKeys = function lowercaseKeys(obj) {
-        return Object.keys(obj).reduce(function (c, k) {
-          return c[k.toLowerCase()] = obj[k], c;
-        }, {});
-      };
-
       var clientHeader;
 
       if (this.requestOptions && this.requestOptions.headers) {
@@ -2407,29 +2679,25 @@ var HttpClient = /*#__PURE__*/function () {
       } // if agent is already assigned use that agent.
 
 
-      if (!!agent) {
+      if (agent) {
         return agent;
       }
 
       var usingSsl = parsedUrl.protocol === 'https:';
       var maxSockets = 100;
 
-      if (!!this.requestOptions) {
+      if (this.requestOptions) {
         maxSockets = this.requestOptions.maxSockets || http.globalAgent.maxSockets;
-      }
+      } // This is `useProxy` again, but we need to check `proxyURl` directly for TypeScripts's flow analysis.
 
-      if (useProxy) {
-        // If using proxy, need tunnel
-        if (!tunnel) {
-          tunnel = __webpack_require__(367);
-        }
 
+      if (proxyUrl && proxyUrl.hostname) {
         var agentOptions = {
           maxSockets: maxSockets,
           keepAlive: this._keepAlive,
-          proxy: _objectSpread(_objectSpread({}, (proxyUrl.username || proxyUrl.password) && {
+          proxy: Object.assign(Object.assign({}, (proxyUrl.username || proxyUrl.password) && {
             proxyAuth: "".concat(proxyUrl.username, ":").concat(proxyUrl.password)
-          }), {}, {
+          }), {
             host: proxyUrl.hostname,
             port: proxyUrl.port
           })
@@ -2476,51 +2744,79 @@ var HttpClient = /*#__PURE__*/function () {
   }, {
     key: "_performExponentialBackoff",
     value: function _performExponentialBackoff(retryNumber) {
-      retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
-      var ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
-      return new Promise(function (resolve) {
-        return setTimeout(function () {
-          return resolve();
-        }, ms);
-      });
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee17() {
+        var ms;
+        return _regeneratorRuntime().wrap(function _callee17$(_context17) {
+          while (1) {
+            switch (_context17.prev = _context17.next) {
+              case 0:
+                retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
+                ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
+                return _context17.abrupt("return", new Promise(function (resolve) {
+                  return setTimeout(function () {
+                    return resolve();
+                  }, ms);
+                }));
+
+              case 3:
+              case "end":
+                return _context17.stop();
+            }
+          }
+        }, _callee17);
+      }));
     }
   }, {
     key: "_processResponse",
-    value: function () {
-      var _processResponse2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee8(res, options) {
-        return _regeneratorRuntime.wrap(function _callee8$(_context8) {
+    value: function _processResponse(res, options) {
+      return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee19() {
+        var _this4 = this;
+
+        return _regeneratorRuntime().wrap(function _callee19$(_context19) {
           while (1) {
-            switch (_context8.prev = _context8.next) {
+            switch (_context19.prev = _context19.next) {
               case 0:
-                return _context8.abrupt("return", new Promise( /*#__PURE__*/function () {
-                  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee7(resolve, reject) {
-                    var statusCode, response, obj, contents, msg, err;
-                    return _regeneratorRuntime.wrap(function _callee7$(_context7) {
+                return _context19.abrupt("return", new Promise(function (resolve, reject) {
+                  return __awaiter(_this4, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
+                    var statusCode, response, dateTimeDeserializer, obj, contents, msg, err;
+                    return _regeneratorRuntime().wrap(function _callee18$(_context18) {
                       while (1) {
-                        switch (_context7.prev = _context7.next) {
+                        switch (_context18.prev = _context18.next) {
                           case 0:
-                            statusCode = res.message.statusCode;
+                            dateTimeDeserializer = function _dateTimeDeserializer(key, value) {
+                              if (typeof value === 'string') {
+                                var a = new Date(value);
+
+                                if (!isNaN(a.valueOf())) {
+                                  return a;
+                                }
+                              }
+
+                              return value;
+                            };
+
+                            statusCode = res.message.statusCode || 0;
                             response = {
                               statusCode: statusCode,
                               result: null,
                               headers: {}
                             }; // not found leads to null obj returned
 
-                            // not found leads to null obj returned
-                            if (statusCode == HttpCodes.NotFound) {
+                            if (statusCode === HttpCodes.NotFound) {
                               resolve(response);
-                            }
+                            } // get the result from the body
 
-                            _context7.prev = 3;
-                            _context7.next = 6;
+
+                            _context18.prev = 4;
+                            _context18.next = 7;
                             return res.readBody();
 
-                          case 6:
-                            contents = _context7.sent;
+                          case 7:
+                            contents = _context18.sent;
 
                             if (contents && contents.length > 0) {
                               if (options && options.deserializeDates) {
-                                obj = JSON.parse(contents, HttpClient.dateTimeDeserializer);
+                                obj = JSON.parse(contents, dateTimeDeserializer);
                               } else {
                                 obj = JSON.parse(contents);
                               }
@@ -2529,14 +2825,14 @@ var HttpClient = /*#__PURE__*/function () {
                             }
 
                             response.headers = res.message.headers;
-                            _context7.next = 13;
+                            _context18.next = 14;
                             break;
 
-                          case 11:
-                            _context7.prev = 11;
-                            _context7.t0 = _context7["catch"](3);
+                          case 12:
+                            _context18.prev = 12;
+                            _context18.t0 = _context18["catch"](4);
 
-                          case 13:
+                          case 14:
                             // note that 3xx redirects are handled by the http layer.
                             if (statusCode > 299) {
                               // if exception/error in body, attempt to get better error
@@ -2546,7 +2842,7 @@ var HttpClient = /*#__PURE__*/function () {
                                 // it may be the case that the exception is in the body message as string
                                 msg = contents;
                               } else {
-                                msg = 'Failed request: (' + statusCode + ')';
+                                msg = "Failed request: (".concat(statusCode, ")");
                               }
 
                               err = new HttpClientError(msg, statusCode);
@@ -2556,45 +2852,22 @@ var HttpClient = /*#__PURE__*/function () {
                               resolve(response);
                             }
 
-                          case 14:
+                          case 15:
                           case "end":
-                            return _context7.stop();
+                            return _context18.stop();
                         }
                       }
-                    }, _callee7, null, [[3, 11]]);
+                    }, _callee18, null, [[4, 12]]);
                   }));
-
-                  return function (_x16, _x17) {
-                    return _ref2.apply(this, arguments);
-                  };
-                }()));
+                }));
 
               case 1:
               case "end":
-                return _context8.stop();
+                return _context19.stop();
             }
           }
-        }, _callee8);
+        }, _callee19);
       }));
-
-      function _processResponse(_x14, _x15) {
-        return _processResponse2.apply(this, arguments);
-      }
-
-      return _processResponse;
-    }()
-  }], [{
-    key: "dateTimeDeserializer",
-    value: function dateTimeDeserializer(key, value) {
-      if (typeof value === 'string') {
-        var a = new Date(value);
-
-        if (!isNaN(a.valueOf())) {
-          return a;
-        }
-      }
-
-      return value;
     }
   }]);
 
@@ -2603,41 +2876,47 @@ var HttpClient = /*#__PURE__*/function () {
 
 exports.HttpClient = HttpClient;
 
+var lowercaseKeys = function lowercaseKeys(obj) {
+  return Object.keys(obj).reduce(function (c, k) {
+    return c[k.toLowerCase()] = obj[k], c;
+  }, {});
+};
+
 /***/ }),
 
-/***/ 5352:
+/***/ 5615:
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
 
 
-var _createForOfIteratorHelper = (__webpack_require__(3041)["default"]);
+var _createForOfIteratorHelper = (__webpack_require__(8636)["default"]);
 
 Object.defineProperty(exports, "__esModule", ({
   value: true
 }));
+exports.checkBypass = exports.getProxyUrl = void 0;
 
 function getProxyUrl(reqUrl) {
   var usingSsl = reqUrl.protocol === 'https:';
-  var proxyUrl;
 
   if (checkBypass(reqUrl)) {
-    return proxyUrl;
+    return undefined;
   }
 
-  var proxyVar;
-
-  if (usingSsl) {
-    proxyVar = process.env['https_proxy'] || process.env['HTTPS_PROXY'];
-  } else {
-    proxyVar = process.env['http_proxy'] || process.env['HTTP_PROXY'];
-  }
+  var proxyVar = function () {
+    if (usingSsl) {
+      return process.env['https_proxy'] || process.env['HTTPS_PROXY'];
+    } else {
+      return process.env['http_proxy'] || process.env['HTTP_PROXY'];
+    }
+  }();
 
   if (proxyVar) {
-    proxyUrl = new URL(proxyVar);
+    return new URL(proxyVar);
+  } else {
+    return undefined;
   }
-
-  return proxyUrl;
 }
 
 exports.getProxyUrl = getProxyUrl;
@@ -4106,9 +4385,9 @@ module.exports = {
 "use strict";
 
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _asyncToGenerator = (__webpack_require__(2954)["default"]);
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
 
 var u = (__webpack_require__(9689).fromPromise);
 
@@ -4121,9 +4400,9 @@ var mkdir = __webpack_require__(9524);
 var remove = __webpack_require__(9547);
 
 var emptyDir = u( /*#__PURE__*/function () {
-  var _emptyDir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(dir) {
+  var _emptyDir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir) {
     var items;
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -4539,7 +4818,7 @@ module.exports = {
 "use strict";
 
 
-var _slicedToArray = (__webpack_require__(1068)["default"]);
+var _slicedToArray = (__webpack_require__(3681)["default"]);
 
 var u = (__webpack_require__(9689).fromCallback);
 
@@ -4747,7 +5026,7 @@ if (typeof fs.writev === 'function') {
 "use strict";
 
 
-var _objectSpread = (__webpack_require__(417)["default"]);
+var _objectSpread = (__webpack_require__(814)["default"]);
 
 module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(3817)), __webpack_require__(3008)), __webpack_require__(9855)), __webpack_require__(6213)), __webpack_require__(8179)), __webpack_require__(9524)), __webpack_require__(347)), __webpack_require__(6716)), __webpack_require__(3233)), __webpack_require__(9547));
 
@@ -4821,9 +5100,9 @@ module.exports = outputJsonSync;
 "use strict";
 
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _asyncToGenerator = (__webpack_require__(2954)["default"]);
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
 
 var _require = __webpack_require__(3178),
     stringify = _require.stringify;
@@ -4836,11 +5115,11 @@ function outputJson(_x, _x2) {
 }
 
 function _outputJson() {
-  _outputJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(file, data) {
+  _outputJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(file, data) {
     var options,
         str,
         _args = arguments;
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -4894,11 +5173,11 @@ module.exports = {
 "use strict";
 
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _asyncToGenerator = (__webpack_require__(2954)["default"]);
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
 
-var _objectSpread = (__webpack_require__(417)["default"]);
+var _objectSpread = (__webpack_require__(814)["default"]);
 
 var fs = __webpack_require__(3817);
 
@@ -4914,8 +5193,8 @@ var getMode = function getMode(options) {
 };
 
 module.exports.makeDir = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(dir, options) {
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir, options) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -5577,7 +5856,7 @@ rimraf.sync = rimrafSync;
 "use strict";
 
 
-var _slicedToArray = (__webpack_require__(1068)["default"]);
+var _slicedToArray = (__webpack_require__(3681)["default"]);
 
 var fs = __webpack_require__(3817);
 
@@ -6102,18 +6381,24 @@ function patch(fs) {
 
   var fs$readdir = fs.readdir;
   fs.readdir = readdir;
+  var noReaddirOptionVersions = /^v[0-5]\./;
 
   function readdir(path, options, cb) {
     if (typeof options === 'function') cb = options, options = null;
+    var go$readdir = noReaddirOptionVersions.test(process.version) ? function go$readdir(path, options, cb, startTime) {
+      return fs$readdir(path, fs$readdirCallback(path, options, cb, startTime));
+    } : function go$readdir(path, options, cb, startTime) {
+      return fs$readdir(path, options, fs$readdirCallback(path, options, cb, startTime));
+    };
     return go$readdir(path, options, cb);
 
-    function go$readdir(path, options, cb, startTime) {
-      return fs$readdir(path, options, function (err, files) {
+    function fs$readdirCallback(path, options, cb, startTime) {
+      return function (err, files) {
         if (err && (err.code === 'EMFILE' || err.code === 'ENFILE')) enqueue([go$readdir, [path, options, cb], err, startTime || Date.now(), Date.now()]);else {
           if (files && files.sort) files.sort();
           if (typeof cb === 'function') cb.call(this, err, files);
         }
-      });
+      };
     }
   }
 
@@ -6513,7 +6798,7 @@ function patch(fs) {
   fs.fstatSync = statFixSync(fs.fstatSync);
   fs.lstatSync = statFixSync(fs.lstatSync); // if lchmod/lchown do not exist, then make them no-ops
 
-  if (!fs.lchmod) {
+  if (fs.chmod && !fs.lchmod) {
     fs.lchmod = function (path, mode, cb) {
       if (cb) process.nextTick(cb);
     };
@@ -6521,7 +6806,7 @@ function patch(fs) {
     fs.lchmodSync = function () {};
   }
 
-  if (!fs.lchown) {
+  if (fs.chown && !fs.lchown) {
     fs.lchown = function (path, uid, gid, cb) {
       if (cb) process.nextTick(cb);
     };
@@ -6538,8 +6823,8 @@ function patch(fs) {
 
 
   if (platform === "win32") {
-    fs.rename = function (fs$rename) {
-      return function (from, to, cb) {
+    fs.rename = typeof fs.rename !== 'function' ? fs.rename : function (fs$rename) {
+      function rename(from, to, cb) {
         var start = Date.now();
         var backoff = 0;
         fs$rename(from, to, function CB(er) {
@@ -6555,12 +6840,15 @@ function patch(fs) {
 
           if (cb) cb(er);
         });
-      };
+      }
+
+      if (Object.setPrototypeOf) Object.setPrototypeOf(rename, fs$rename);
+      return rename;
     }(fs.rename);
   } // if read() returns EAGAIN, then just try it again.
 
 
-  fs.read = function (fs$read) {
+  fs.read = typeof fs.read !== 'function' ? fs.read : function (fs$read) {
     function read(fd, buffer, offset, length, position, callback_) {
       var _callback;
 
@@ -6584,8 +6872,7 @@ function patch(fs) {
     if (Object.setPrototypeOf) Object.setPrototypeOf(read, fs$read);
     return read;
   }(fs.read);
-
-  fs.readSync = function (fs$readSync) {
+  fs.readSync = typeof fs.readSync !== 'function' ? fs.readSync : function (fs$readSync) {
     return function (fd, buffer, offset, length, position) {
       var eagCounter = 0;
 
@@ -6647,7 +6934,7 @@ function patch(fs) {
   }
 
   function patchLutimes(fs) {
-    if (constants.hasOwnProperty("O_SYMLINK")) {
+    if (constants.hasOwnProperty("O_SYMLINK") && fs.futimes) {
       fs.lutimes = function (path, at, mt, cb) {
         fs.open(path, constants.O_SYMLINK, function (er, fd) {
           if (er) {
@@ -6683,7 +6970,7 @@ function patch(fs) {
 
         return ret;
       };
-    } else {
+    } else if (fs.futimes) {
       fs.lutimes = function (_a, _b, _c, cb) {
         if (cb) process.nextTick(cb);
       };
@@ -6800,219 +7087,7 @@ function patch(fs) {
 
 /***/ }),
 
-/***/ 9147:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-/**
- * @fileoverview
- *   Check if a `link` element is “Body OK”.
- * @longdescription
- *   ## Use
- *
- *   ```js
- *   var h = require('hastscript')
- *   var ok = require('hast-util-is-body-ok-link')
- *
- *   ok(h('link', {itemProp: 'foo'})) //=> true
- *   ok(h('link', {rel: ['stylesheet'], href: 'index.css'})) //=> true
- *   ok(h('link', {rel: ['author'], href: 'index.css'})) //=> false
- *   ```
- *
- *   ## API
- *
- *   ### `isBodyOkLink(node)`
- *
- *   * Return `true` for `link` elements with an `itemProp`
- *   * Return `true` for `link` elements with a `rel` list where one or more
- *     entries are `pingback`, `prefetch`, or `stylesheet`.
- */
-
-
-var is = __webpack_require__(4942);
-
-var has = __webpack_require__(6970);
-
-module.exports = ok;
-var list = ['pingback', 'prefetch', 'stylesheet'];
-
-function ok(node) {
-  var length;
-  var index;
-  var rel;
-
-  if (!is(node, 'link')) {
-    return false;
-  }
-
-  if (has(node, 'itemProp')) {
-    return true;
-  }
-
-  rel = (node.properties || {}).rel || [];
-  length = rel.length;
-  index = -1;
-
-  if (rel.length === 0) {
-    return false;
-  }
-
-  while (++index < length) {
-    if (list.indexOf(rel[index]) === -1) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-/***/ }),
-
-/***/ 6970:
-/***/ ((module) => {
-
-"use strict";
-
-
-var own = {}.hasOwnProperty;
-module.exports = hasProperty; // Check if `node` has a set `name` property.
-
-function hasProperty(node, name) {
-  var props;
-  var value;
-
-  if (!node || !name || typeof node !== 'object' || node.type !== 'element') {
-    return false;
-  }
-
-  props = node.properties;
-  value = props && own.call(props, name) && props[name];
-  return value !== null && value !== undefined && value !== false;
-}
-
-/***/ }),
-
-/***/ 5856:
-/***/ ((module) => {
-
-"use strict";
-
-
-module.exports = convert;
-
-function convert(test) {
-  if (typeof test === 'string') {
-    return tagNameFactory(test);
-  }
-
-  if (test === null || test === undefined) {
-    return element;
-  }
-
-  if (typeof test === 'object') {
-    return any(test);
-  }
-
-  if (typeof test === 'function') {
-    return callFactory(test);
-  }
-
-  throw new Error('Expected function, string, or array as test');
-}
-
-function convertAll(tests) {
-  var length = tests.length;
-  var index = -1;
-  var results = [];
-
-  while (++index < length) {
-    results[index] = convert(tests[index]);
-  }
-
-  return results;
-}
-
-function any(tests) {
-  var checks = convertAll(tests);
-  var length = checks.length;
-  return matches;
-
-  function matches() {
-    var index = -1;
-
-    while (++index < length) {
-      if (checks[index].apply(this, arguments)) {
-        return true;
-      }
-    }
-
-    return false;
-  }
-} // Utility to convert a string a tag name check.
-
-
-function tagNameFactory(test) {
-  return tagName;
-
-  function tagName(node) {
-    return element(node) && node.tagName === test;
-  }
-} // Utility to convert a function check.
-
-
-function callFactory(test) {
-  return call;
-
-  function call(node) {
-    return element(node) && Boolean(test.apply(this, arguments));
-  }
-} // Utility to return true if this is an element.
-
-
-function element(node) {
-  return node && typeof node === 'object' && node.type === 'element' && typeof node.tagName === 'string';
-}
-
-/***/ }),
-
-/***/ 4942:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var convert = __webpack_require__(5856);
-
-module.exports = isElement;
-isElement.convert = convert; // Check if if `node` is an `element` and whether it passes the given test.
-
-function isElement(node, test, index, parent, context) {
-  var hasParent = parent !== null && parent !== undefined;
-  var hasIndex = index !== null && index !== undefined;
-  var check = convert(test);
-
-  if (hasIndex && (typeof index !== 'number' || index < 0 || index === Infinity)) {
-    throw new Error('Expected positive finite index for child node');
-  }
-
-  if (hasParent && (!parent.type || !parent.children)) {
-    throw new Error('Expected parent node');
-  }
-
-  if (!node || !node.type || typeof node.type !== 'string') {
-    return false;
-  }
-
-  if (hasParent !== hasIndex) {
-    throw new Error('Expected both parent and index');
-  }
-
-  return check.call(context, node, index, parent);
-}
-
-/***/ }),
-
-/***/ 1401:
+/***/ 7365:
 /***/ ((module) => {
 
 // http://www.w3.org/TR/CSS21/grammar.html
@@ -7276,7 +7351,7 @@ function trim(str) {
 
 /***/ }),
 
-/***/ 2655:
+/***/ 5352:
 /***/ ((module) => {
 
 /*!
@@ -7294,9 +7369,9 @@ module.exports = function isBuffer(obj) {
 /***/ 4394:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var _regeneratorRuntime = __webpack_require__(7162);
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
 
-var _asyncToGenerator = (__webpack_require__(2954)["default"]);
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
 
 var _fs;
 
@@ -7317,14 +7392,14 @@ function _readFile(_x) {
 }
 
 function _readFile2() {
-  _readFile2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(file) {
+  _readFile2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(file) {
     var options,
         fs,
         shouldThrow,
         data,
         obj,
         _args = arguments;
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
@@ -7410,12 +7485,12 @@ function _writeFile(_x2, _x3) {
 }
 
 function _writeFile2() {
-  _writeFile2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee2(file, obj) {
+  _writeFile2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(file, obj) {
     var options,
         fs,
         str,
         _args2 = arguments;
-    return _regeneratorRuntime.wrap(function _callee2$(_context2) {
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
@@ -7833,243 +7908,12 @@ function isConstructorOrProto(obj, key) {
 
 /***/ }),
 
-/***/ 5806:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.compile = void 0;
-
-var boolbase_1 = __webpack_require__(1552);
-/**
- * Returns a function that checks if an elements index matches the given rule
- * highly optimized to return the fastest solution.
- *
- * @param parsed A tuple [a, b], as returned by `parse`.
- * @returns A highly optimized function that returns whether an index matches the nth-check.
- * @example
- * const check = nthCheck.compile([2, 3]);
- *
- * check(0); // `false`
- * check(1); // `false`
- * check(2); // `true`
- * check(3); // `false`
- * check(4); // `true`
- * check(5); // `false`
- * check(6); // `true`
- */
-
-
-function compile(parsed) {
-  var a = parsed[0]; // Subtract 1 from `b`, to convert from one- to zero-indexed.
-
-  var b = parsed[1] - 1;
-  /*
-   * When `b <= 0`, `a * n` won't be lead to any matches for `a < 0`.
-   * Besides, the specification states that no elements are
-   * matched when `a` and `b` are 0.
-   *
-   * `b < 0` here as we subtracted 1 from `b` above.
-   */
-
-  if (b < 0 && a <= 0) return boolbase_1.falseFunc; // When `a` is in the range -1..1, it matches any element (so only `b` is checked).
-
-  if (a === -1) return function (index) {
-    return index <= b;
-  };
-  if (a === 0) return function (index) {
-    return index === b;
-  }; // When `b <= 0` and `a === 1`, they match any element.
-
-  if (a === 1) return b < 0 ? boolbase_1.trueFunc : function (index) {
-    return index >= b;
-  };
-  /*
-   * Otherwise, modulo can be used to check if there is a match.
-   *
-   * Modulo doesn't care about the sign, so let's use `a`s absolute value.
-   */
-
-  var absA = Math.abs(a); // Get `b mod a`, + a if this is negative.
-
-  var bMod = (b % absA + absA) % absA;
-  return a > 1 ? function (index) {
-    return index >= b && index % absA === bMod;
-  } : function (index) {
-    return index <= b && index % absA === bMod;
-  };
-}
-
-exports.compile = compile;
-
-/***/ }),
-
-/***/ 2990:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
-var __webpack_unused_export__;
-
-
-__webpack_unused_export__ = ({
-  value: true
-});
-__webpack_unused_export__ = __webpack_unused_export__ = void 0;
-
-var parse_1 = __webpack_require__(3444);
-
-__webpack_unused_export__ = ({
-  enumerable: true,
-  get: function get() {
-    return parse_1.parse;
-  }
-});
-
-var compile_1 = __webpack_require__(5806);
-
-__webpack_unused_export__ = ({
-  enumerable: true,
-  get: function get() {
-    return compile_1.compile;
-  }
-});
-/**
- * Parses and compiles a formula to a highly optimized function.
- * Combination of `parse` and `compile`.
- *
- * If the formula doesn't match any elements,
- * it returns [`boolbase`](https://github.com/fb55/boolbase)'s `falseFunc`.
- * Otherwise, a function accepting an _index_ is returned, which returns
- * whether or not the passed _index_ matches the formula.
- *
- * Note: The nth-rule starts counting at `1`, the returned function at `0`.
- *
- * @param formula The formula to compile.
- * @example
- * const check = nthCheck("2n+3");
- *
- * check(0); // `false`
- * check(1); // `false`
- * check(2); // `true`
- * check(3); // `false`
- * check(4); // `true`
- * check(5); // `false`
- * check(6); // `true`
- */
-
-function nthCheck(formula) {
-  return (0, compile_1.compile)((0, parse_1.parse)(formula));
-}
-
-exports.ZP = nthCheck;
-
-/***/ }),
-
-/***/ 3444:
-/***/ ((__unused_webpack_module, exports) => {
-
-"use strict";
- // Following http://www.w3.org/TR/css3-selectors/#nth-child-pseudo
-
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-exports.parse = void 0; // Whitespace as per https://www.w3.org/TR/selectors-3/#lex is " \t\r\n\f"
-
-var whitespace = new Set([9, 10, 12, 13, 32]);
-var ZERO = "0".charCodeAt(0);
-var NINE = "9".charCodeAt(0);
-/**
- * Parses an expression.
- *
- * @throws An `Error` if parsing fails.
- * @returns An array containing the integer step size and the integer offset of the nth rule.
- * @example nthCheck.parse("2n+3"); // returns [2, 3]
- */
-
-function parse(formula) {
-  formula = formula.trim().toLowerCase();
-
-  if (formula === "even") {
-    return [2, 0];
-  } else if (formula === "odd") {
-    return [2, 1];
-  } // Parse [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]?
-
-
-  var idx = 0;
-  var a = 0;
-  var sign = readSign();
-  var number = readNumber();
-
-  if (idx < formula.length && formula.charAt(idx) === "n") {
-    idx++;
-    a = sign * (number !== null && number !== void 0 ? number : 1);
-    skipWhitespace();
-
-    if (idx < formula.length) {
-      sign = readSign();
-      skipWhitespace();
-      number = readNumber();
-    } else {
-      sign = number = 0;
-    }
-  } // Throw if there is anything else
-
-
-  if (number === null || idx < formula.length) {
-    throw new Error("n-th rule couldn't be parsed ('" + formula + "')");
-  }
-
-  return [a, sign * number];
-
-  function readSign() {
-    if (formula.charAt(idx) === "-") {
-      idx++;
-      return -1;
-    }
-
-    if (formula.charAt(idx) === "+") {
-      idx++;
-    }
-
-    return 1;
-  }
-
-  function readNumber() {
-    var start = idx;
-    var value = 0;
-
-    while (idx < formula.length && formula.charCodeAt(idx) >= ZERO && formula.charCodeAt(idx) <= NINE) {
-      value = value * 10 + (formula.charCodeAt(idx) - ZERO);
-      idx++;
-    } // Return `null` if we didn't read anything.
-
-
-    return idx === start ? null : value;
-  }
-
-  function skipWhitespace() {
-    while (idx < formula.length && whitespace.has(formula.charCodeAt(idx))) {
-      idx++;
-    }
-  }
-}
-
-exports.parse = parse;
-
-/***/ }),
-
 /***/ 1871:
 /***/ ((module, exports, __webpack_require__) => {
 
-var _slicedToArray = (__webpack_require__(1068)["default"]);
+var _slicedToArray = (__webpack_require__(3681)["default"]);
 
-var _createForOfIteratorHelper = (__webpack_require__(3041)["default"]);
+var _createForOfIteratorHelper = (__webpack_require__(8636)["default"]);
 
 /**
  * @param {string} string    The string to parse
@@ -8301,7 +8145,7 @@ module.exports = {
 "use strict";
 
 
-var _defineProperty = (__webpack_require__(1260)["default"]);
+var _defineProperty = (__webpack_require__(6290)["default"]);
 
 var _EXITS_FOREIGN_CONTEN;
 
@@ -8569,7 +8413,7 @@ exports.isIntegrationPoint = function (tn, ns, attrs, foreignNS) {
 "use strict";
 
 
-var _defineProperty = (__webpack_require__(1260)["default"]);
+var _defineProperty = (__webpack_require__(6290)["default"]);
 
 var _NS$HTML, _NS$MATHML, _NS$SVG, _exports$SPECIAL_ELEM;
 
@@ -8810,13 +8654,13 @@ exports.isUndefinedCodePoint = function (cp) {
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var Mixin = __webpack_require__(5737);
 
@@ -8884,13 +8728,13 @@ module.exports = ErrorReportingMixinBase;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var ErrorReportingMixinBase = __webpack_require__(7484);
 
@@ -8966,17 +8810,17 @@ module.exports = ErrorReportingParserMixin;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _get = (__webpack_require__(3772)["default"]);
+var _get = (__webpack_require__(611)["default"]);
 
-var _getPrototypeOf = (__webpack_require__(2588)["default"]);
+var _getPrototypeOf = (__webpack_require__(1147)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var ErrorReportingMixinBase = __webpack_require__(7484);
 
@@ -9025,13 +8869,13 @@ module.exports = ErrorReportingPreprocessorMixin;
 "use strict";
 
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var ErrorReportingMixinBase = __webpack_require__(7484);
 
@@ -9068,13 +8912,13 @@ module.exports = ErrorReportingTokenizerMixin;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var Mixin = __webpack_require__(5737);
 
@@ -9129,13 +8973,13 @@ module.exports = LocationInfoOpenElementStackMixin;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var Mixin = __webpack_require__(5737);
 
@@ -9372,13 +9216,13 @@ module.exports = LocationInfoParserMixin;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var Mixin = __webpack_require__(5737);
 
@@ -9544,13 +9388,13 @@ module.exports = LocationInfoTokenizerMixin;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _inherits = (__webpack_require__(270)["default"]);
+var _inherits = (__webpack_require__(8230)["default"]);
 
-var _createSuper = (__webpack_require__(4564)["default"]);
+var _createSuper = (__webpack_require__(669)["default"]);
 
 var Mixin = __webpack_require__(5737);
 
@@ -9627,9 +9471,9 @@ module.exports = PositionTrackingPreprocessorMixin;
 "use strict";
  //Const
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var NOAH_ARK_CAPACITY = 3; //List of formatting elements
 
@@ -9828,11 +9672,11 @@ module.exports = FormattingElementList;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
-var _defineProperty = (__webpack_require__(1260)["default"]);
+var _defineProperty = (__webpack_require__(6290)["default"]);
 
 var _INSERTION_MODE_RESET, _TEMPLATE_INSERTION_M, _INITIAL_MODE, _BEFORE_HTML_MODE, _BEFORE_HEAD_MODE, _IN_HEAD_MODE, _IN_HEAD_NO_SCRIPT_MO, _AFTER_HEAD_MODE, _IN_BODY_MODE, _TEXT_MODE, _IN_TABLE_MODE, _IN_TABLE_TEXT_MODE, _IN_CAPTION_MODE, _IN_COLUMN_GROUP_MODE, _IN_TABLE_BODY_MODE, _IN_ROW_MODE, _IN_CELL_MODE, _IN_SELECT_MODE, _IN_SELECT_IN_TABLE_M, _IN_TEMPLATE_MODE, _AFTER_BODY_MODE, _IN_FRAMESET_MODE, _AFTER_FRAMESET_MODE, _AFTER_AFTER_BODY_MOD, _AFTER_AFTER_FRAMESET, _TOKEN_HANDLERS;
 
@@ -12520,9 +12364,9 @@ function endTagInForeignContent(p, token) {
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var HTML = __webpack_require__(8815); //Aliases
 
@@ -13012,9 +12856,9 @@ module.exports = OpenElementStack;
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var Preprocessor = __webpack_require__(3507);
 
@@ -15588,9 +15432,9 @@ module.exports = new Uint16Array([4, 52, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74,
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var unicode = __webpack_require__(6302);
 
@@ -16008,9 +15852,9 @@ module.exports = function mergeOptions(defaults, options) {
 "use strict";
 
 
-var _classCallCheck = (__webpack_require__(85)["default"]);
+var _classCallCheck = (__webpack_require__(3100)["default"]);
 
-var _createClass = (__webpack_require__(5198)["default"]);
+var _createClass = (__webpack_require__(8870)["default"]);
 
 var Mixin = /*#__PURE__*/function () {
   function Mixin(host) {
@@ -16059,2053 +15903,6 @@ Mixin.install = function (host, Ctor, opts) {
 };
 
 module.exports = Mixin;
-
-/***/ }),
-
-/***/ 2805:
-/***/ ((module) => {
-
-/// <reference lib="WebWorker"/>
-var _self = typeof window !== 'undefined' ? window // if in browser
-: typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope ? self // if in worker
-: {} // if in node js
-;
-/**
- * Prism: Lightweight, robust, elegant syntax highlighting
- *
- * @license MIT <https://opensource.org/licenses/MIT>
- * @author Lea Verou <https://lea.verou.me>
- * @namespace
- * @public
- */
-
-
-var Prism = function (_self) {
-  // Private helper vars
-  var lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i;
-  var uniqueId = 0; // The grammar object for plaintext
-
-  var plainTextGrammar = {};
-  var _ = {
-    /**
-     * By default, Prism will attempt to highlight all code elements (by calling {@link Prism.highlightAll}) on the
-     * current page after the page finished loading. This might be a problem if e.g. you wanted to asynchronously load
-     * additional languages or plugins yourself.
-     *
-     * By setting this value to `true`, Prism will not automatically highlight all code elements on the page.
-     *
-     * You obviously have to change this value before the automatic highlighting started. To do this, you can add an
-     * empty Prism object into the global scope before loading the Prism script like this:
-     *
-     * ```js
-     * window.Prism = window.Prism || {};
-     * Prism.manual = true;
-     * // add a new <script> to load Prism's script
-     * ```
-     *
-     * @default false
-     * @type {boolean}
-     * @memberof Prism
-     * @public
-     */
-    manual: _self.Prism && _self.Prism.manual,
-
-    /**
-     * By default, if Prism is in a web worker, it assumes that it is in a worker it created itself, so it uses
-     * `addEventListener` to communicate with its parent instance. However, if you're using Prism manually in your
-     * own worker, you don't want it to do this.
-     *
-     * By setting this value to `true`, Prism will not add its own listeners to the worker.
-     *
-     * You obviously have to change this value before Prism executes. To do this, you can add an
-     * empty Prism object into the global scope before loading the Prism script like this:
-     *
-     * ```js
-     * window.Prism = window.Prism || {};
-     * Prism.disableWorkerMessageHandler = true;
-     * // Load Prism's script
-     * ```
-     *
-     * @default false
-     * @type {boolean}
-     * @memberof Prism
-     * @public
-     */
-    disableWorkerMessageHandler: _self.Prism && _self.Prism.disableWorkerMessageHandler,
-
-    /**
-     * A namespace for utility methods.
-     *
-     * All function in this namespace that are not explicitly marked as _public_ are for __internal use only__ and may
-     * change or disappear at any time.
-     *
-     * @namespace
-     * @memberof Prism
-     */
-    util: {
-      encode: function encode(tokens) {
-        if (tokens instanceof Token) {
-          return new Token(tokens.type, encode(tokens.content), tokens.alias);
-        } else if (Array.isArray(tokens)) {
-          return tokens.map(encode);
-        } else {
-          return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-        }
-      },
-
-      /**
-       * Returns the name of the type of the given value.
-       *
-       * @param {any} o
-       * @returns {string}
-       * @example
-       * type(null)      === 'Null'
-       * type(undefined) === 'Undefined'
-       * type(123)       === 'Number'
-       * type('foo')     === 'String'
-       * type(true)      === 'Boolean'
-       * type([1, 2])    === 'Array'
-       * type({})        === 'Object'
-       * type(String)    === 'Function'
-       * type(/abc+/)    === 'RegExp'
-       */
-      type: function type(o) {
-        return Object.prototype.toString.call(o).slice(8, -1);
-      },
-
-      /**
-       * Returns a unique number for the given object. Later calls will still return the same number.
-       *
-       * @param {Object} obj
-       * @returns {number}
-       */
-      objId: function objId(obj) {
-        if (!obj['__id']) {
-          Object.defineProperty(obj, '__id', {
-            value: ++uniqueId
-          });
-        }
-
-        return obj['__id'];
-      },
-
-      /**
-       * Creates a deep clone of the given object.
-       *
-       * The main intended use of this function is to clone language definitions.
-       *
-       * @param {T} o
-       * @param {Record<number, any>} [visited]
-       * @returns {T}
-       * @template T
-       */
-      clone: function deepClone(o, visited) {
-        visited = visited || {};
-        var clone;
-        var id;
-
-        switch (_.util.type(o)) {
-          case 'Object':
-            id = _.util.objId(o);
-
-            if (visited[id]) {
-              return visited[id];
-            }
-
-            clone =
-            /** @type {Record<string, any>} */
-            {};
-            visited[id] = clone;
-
-            for (var key in o) {
-              if (o.hasOwnProperty(key)) {
-                clone[key] = deepClone(o[key], visited);
-              }
-            }
-
-            return (
-              /** @type {any} */
-              clone
-            );
-
-          case 'Array':
-            id = _.util.objId(o);
-
-            if (visited[id]) {
-              return visited[id];
-            }
-
-            clone = [];
-            visited[id] = clone;
-
-            /** @type {Array} */
-
-            /** @type {any} */
-            o.forEach(function (v, i) {
-              clone[i] = deepClone(v, visited);
-            });
-            return (
-              /** @type {any} */
-              clone
-            );
-
-          default:
-            return o;
-        }
-      },
-
-      /**
-       * Returns the Prism language of the given element set by a `language-xxxx` or `lang-xxxx` class.
-       *
-       * If no language is set for the element or the element is `null` or `undefined`, `none` will be returned.
-       *
-       * @param {Element} element
-       * @returns {string}
-       */
-      getLanguage: function getLanguage(element) {
-        while (element) {
-          var m = lang.exec(element.className);
-
-          if (m) {
-            return m[1].toLowerCase();
-          }
-
-          element = element.parentElement;
-        }
-
-        return 'none';
-      },
-
-      /**
-       * Sets the Prism `language-xxxx` class of the given element.
-       *
-       * @param {Element} element
-       * @param {string} language
-       * @returns {void}
-       */
-      setLanguage: function setLanguage(element, language) {
-        // remove all `language-xxxx` classes
-        // (this might leave behind a leading space)
-        element.className = element.className.replace(RegExp(lang, 'gi'), ''); // add the new `language-xxxx` class
-        // (using `classList` will automatically clean up spaces for us)
-
-        element.classList.add('language-' + language);
-      },
-
-      /**
-       * Returns the script element that is currently executing.
-       *
-       * This does __not__ work for line script element.
-       *
-       * @returns {HTMLScriptElement | null}
-       */
-      currentScript: function currentScript() {
-        if (typeof document === 'undefined') {
-          return null;
-        }
-
-        if ('currentScript' in document && 1 < 2
-        /* hack to trip TS' flow analysis */
-        ) {
-          return (
-            /** @type {any} */
-            document.currentScript
-          );
-        } // IE11 workaround
-        // we'll get the src of the current script by parsing IE11's error stack trace
-        // this will not work for inline scripts
-
-
-        try {
-          throw new Error();
-        } catch (err) {
-          // Get file src url from stack. Specifically works with the format of stack traces in IE.
-          // A stack will look like this:
-          //
-          // Error
-          //    at _.util.currentScript (http://localhost/components/prism-core.js:119:5)
-          //    at Global code (http://localhost/components/prism-core.js:606:1)
-          var src = (/at [^(\r\n]*\((.*):[^:]+:[^:]+\)$/i.exec(err.stack) || [])[1];
-
-          if (src) {
-            var scripts = document.getElementsByTagName('script');
-
-            for (var i in scripts) {
-              if (scripts[i].src == src) {
-                return scripts[i];
-              }
-            }
-          }
-
-          return null;
-        }
-      },
-
-      /**
-       * Returns whether a given class is active for `element`.
-       *
-       * The class can be activated if `element` or one of its ancestors has the given class and it can be deactivated
-       * if `element` or one of its ancestors has the negated version of the given class. The _negated version_ of the
-       * given class is just the given class with a `no-` prefix.
-       *
-       * Whether the class is active is determined by the closest ancestor of `element` (where `element` itself is
-       * closest ancestor) that has the given class or the negated version of it. If neither `element` nor any of its
-       * ancestors have the given class or the negated version of it, then the default activation will be returned.
-       *
-       * In the paradoxical situation where the closest ancestor contains __both__ the given class and the negated
-       * version of it, the class is considered active.
-       *
-       * @param {Element} element
-       * @param {string} className
-       * @param {boolean} [defaultActivation=false]
-       * @returns {boolean}
-       */
-      isActive: function isActive(element, className, defaultActivation) {
-        var no = 'no-' + className;
-
-        while (element) {
-          var classList = element.classList;
-
-          if (classList.contains(className)) {
-            return true;
-          }
-
-          if (classList.contains(no)) {
-            return false;
-          }
-
-          element = element.parentElement;
-        }
-
-        return !!defaultActivation;
-      }
-    },
-
-    /**
-     * This namespace contains all currently loaded languages and the some helper functions to create and modify languages.
-     *
-     * @namespace
-     * @memberof Prism
-     * @public
-     */
-    languages: {
-      /**
-       * The grammar for plain, unformatted text.
-       */
-      plain: plainTextGrammar,
-      plaintext: plainTextGrammar,
-      text: plainTextGrammar,
-      txt: plainTextGrammar,
-
-      /**
-       * Creates a deep copy of the language with the given id and appends the given tokens.
-       *
-       * If a token in `redef` also appears in the copied language, then the existing token in the copied language
-       * will be overwritten at its original position.
-       *
-       * ## Best practices
-       *
-       * Since the position of overwriting tokens (token in `redef` that overwrite tokens in the copied language)
-       * doesn't matter, they can technically be in any order. However, this can be confusing to others that trying to
-       * understand the language definition because, normally, the order of tokens matters in Prism grammars.
-       *
-       * Therefore, it is encouraged to order overwriting tokens according to the positions of the overwritten tokens.
-       * Furthermore, all non-overwriting tokens should be placed after the overwriting ones.
-       *
-       * @param {string} id The id of the language to extend. This has to be a key in `Prism.languages`.
-       * @param {Grammar} redef The new tokens to append.
-       * @returns {Grammar} The new language created.
-       * @public
-       * @example
-       * Prism.languages['css-with-colors'] = Prism.languages.extend('css', {
-       *     // Prism.languages.css already has a 'comment' token, so this token will overwrite CSS' 'comment' token
-       *     // at its original position
-       *     'comment': { ... },
-       *     // CSS doesn't have a 'color' token, so this token will be appended
-       *     'color': /\b(?:red|green|blue)\b/
-       * });
-       */
-      extend: function extend(id, redef) {
-        var lang = _.util.clone(_.languages[id]);
-
-        for (var key in redef) {
-          lang[key] = redef[key];
-        }
-
-        return lang;
-      },
-
-      /**
-       * Inserts tokens _before_ another token in a language definition or any other grammar.
-       *
-       * ## Usage
-       *
-       * This helper method makes it easy to modify existing languages. For example, the CSS language definition
-       * not only defines CSS highlighting for CSS documents, but also needs to define highlighting for CSS embedded
-       * in HTML through `<style>` elements. To do this, it needs to modify `Prism.languages.markup` and add the
-       * appropriate tokens. However, `Prism.languages.markup` is a regular JavaScript object literal, so if you do
-       * this:
-       *
-       * ```js
-       * Prism.languages.markup.style = {
-       *     // token
-       * };
-       * ```
-       *
-       * then the `style` token will be added (and processed) at the end. `insertBefore` allows you to insert tokens
-       * before existing tokens. For the CSS example above, you would use it like this:
-       *
-       * ```js
-       * Prism.languages.insertBefore('markup', 'cdata', {
-       *     'style': {
-       *         // token
-       *     }
-       * });
-       * ```
-       *
-       * ## Special cases
-       *
-       * If the grammars of `inside` and `insert` have tokens with the same name, the tokens in `inside`'s grammar
-       * will be ignored.
-       *
-       * This behavior can be used to insert tokens after `before`:
-       *
-       * ```js
-       * Prism.languages.insertBefore('markup', 'comment', {
-       *     'comment': Prism.languages.markup.comment,
-       *     // tokens after 'comment'
-       * });
-       * ```
-       *
-       * ## Limitations
-       *
-       * The main problem `insertBefore` has to solve is iteration order. Since ES2015, the iteration order for object
-       * properties is guaranteed to be the insertion order (except for integer keys) but some browsers behave
-       * differently when keys are deleted and re-inserted. So `insertBefore` can't be implemented by temporarily
-       * deleting properties which is necessary to insert at arbitrary positions.
-       *
-       * To solve this problem, `insertBefore` doesn't actually insert the given tokens into the target object.
-       * Instead, it will create a new object and replace all references to the target object with the new one. This
-       * can be done without temporarily deleting properties, so the iteration order is well-defined.
-       *
-       * However, only references that can be reached from `Prism.languages` or `insert` will be replaced. I.e. if
-       * you hold the target object in a variable, then the value of the variable will not change.
-       *
-       * ```js
-       * var oldMarkup = Prism.languages.markup;
-       * var newMarkup = Prism.languages.insertBefore('markup', 'comment', { ... });
-       *
-       * assert(oldMarkup !== Prism.languages.markup);
-       * assert(newMarkup === Prism.languages.markup);
-       * ```
-       *
-       * @param {string} inside The property of `root` (e.g. a language id in `Prism.languages`) that contains the
-       * object to be modified.
-       * @param {string} before The key to insert before.
-       * @param {Grammar} insert An object containing the key-value pairs to be inserted.
-       * @param {Object<string, any>} [root] The object containing `inside`, i.e. the object that contains the
-       * object to be modified.
-       *
-       * Defaults to `Prism.languages`.
-       * @returns {Grammar} The new grammar object.
-       * @public
-       */
-      insertBefore: function insertBefore(inside, before, insert, root) {
-        root = root ||
-        /** @type {any} */
-        _.languages;
-        var grammar = root[inside];
-        /** @type {Grammar} */
-
-        var ret = {};
-
-        for (var token in grammar) {
-          if (grammar.hasOwnProperty(token)) {
-            if (token == before) {
-              for (var newToken in insert) {
-                if (insert.hasOwnProperty(newToken)) {
-                  ret[newToken] = insert[newToken];
-                }
-              }
-            } // Do not insert token which also occur in insert. See #1525
-
-
-            if (!insert.hasOwnProperty(token)) {
-              ret[token] = grammar[token];
-            }
-          }
-        }
-
-        var old = root[inside];
-        root[inside] = ret; // Update references in other language definitions
-
-        _.languages.DFS(_.languages, function (key, value) {
-          if (value === old && key != inside) {
-            this[key] = ret;
-          }
-        });
-
-        return ret;
-      },
-      // Traverse a language definition with Depth First Search
-      DFS: function DFS(o, callback, type, visited) {
-        visited = visited || {};
-        var objId = _.util.objId;
-
-        for (var i in o) {
-          if (o.hasOwnProperty(i)) {
-            callback.call(o, i, o[i], type || i);
-            var property = o[i];
-
-            var propertyType = _.util.type(property);
-
-            if (propertyType === 'Object' && !visited[objId(property)]) {
-              visited[objId(property)] = true;
-              DFS(property, callback, null, visited);
-            } else if (propertyType === 'Array' && !visited[objId(property)]) {
-              visited[objId(property)] = true;
-              DFS(property, callback, i, visited);
-            }
-          }
-        }
-      }
-    },
-    plugins: {},
-
-    /**
-     * This is the most high-level function in Prism’s API.
-     * It fetches all the elements that have a `.language-xxxx` class and then calls {@link Prism.highlightElement} on
-     * each one of them.
-     *
-     * This is equivalent to `Prism.highlightAllUnder(document, async, callback)`.
-     *
-     * @param {boolean} [async=false] Same as in {@link Prism.highlightAllUnder}.
-     * @param {HighlightCallback} [callback] Same as in {@link Prism.highlightAllUnder}.
-     * @memberof Prism
-     * @public
-     */
-    highlightAll: function highlightAll(async, callback) {
-      _.highlightAllUnder(document, async, callback);
-    },
-
-    /**
-     * Fetches all the descendants of `container` that have a `.language-xxxx` class and then calls
-     * {@link Prism.highlightElement} on each one of them.
-     *
-     * The following hooks will be run:
-     * 1. `before-highlightall`
-     * 2. `before-all-elements-highlight`
-     * 3. All hooks of {@link Prism.highlightElement} for each element.
-     *
-     * @param {ParentNode} container The root element, whose descendants that have a `.language-xxxx` class will be highlighted.
-     * @param {boolean} [async=false] Whether each element is to be highlighted asynchronously using Web Workers.
-     * @param {HighlightCallback} [callback] An optional callback to be invoked on each element after its highlighting is done.
-     * @memberof Prism
-     * @public
-     */
-    highlightAllUnder: function highlightAllUnder(container, async, callback) {
-      var env = {
-        callback: callback,
-        container: container,
-        selector: 'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'
-      };
-
-      _.hooks.run('before-highlightall', env);
-
-      env.elements = Array.prototype.slice.apply(env.container.querySelectorAll(env.selector));
-
-      _.hooks.run('before-all-elements-highlight', env);
-
-      for (var i = 0, element; element = env.elements[i++];) {
-        _.highlightElement(element, async === true, env.callback);
-      }
-    },
-
-    /**
-     * Highlights the code inside a single element.
-     *
-     * The following hooks will be run:
-     * 1. `before-sanity-check`
-     * 2. `before-highlight`
-     * 3. All hooks of {@link Prism.highlight}. These hooks will be run by an asynchronous worker if `async` is `true`.
-     * 4. `before-insert`
-     * 5. `after-highlight`
-     * 6. `complete`
-     *
-     * Some the above hooks will be skipped if the element doesn't contain any text or there is no grammar loaded for
-     * the element's language.
-     *
-     * @param {Element} element The element containing the code.
-     * It must have a class of `language-xxxx` to be processed, where `xxxx` is a valid language identifier.
-     * @param {boolean} [async=false] Whether the element is to be highlighted asynchronously using Web Workers
-     * to improve performance and avoid blocking the UI when highlighting very large chunks of code. This option is
-     * [disabled by default](https://prismjs.com/faq.html#why-is-asynchronous-highlighting-disabled-by-default).
-     *
-     * Note: All language definitions required to highlight the code must be included in the main `prism.js` file for
-     * asynchronous highlighting to work. You can build your own bundle on the
-     * [Download page](https://prismjs.com/download.html).
-     * @param {HighlightCallback} [callback] An optional callback to be invoked after the highlighting is done.
-     * Mostly useful when `async` is `true`, since in that case, the highlighting is done asynchronously.
-     * @memberof Prism
-     * @public
-     */
-    highlightElement: function highlightElement(element, async, callback) {
-      // Find language
-      var language = _.util.getLanguage(element);
-
-      var grammar = _.languages[language]; // Set language on the element, if not present
-
-      _.util.setLanguage(element, language); // Set language on the parent, for styling
-
-
-      var parent = element.parentElement;
-
-      if (parent && parent.nodeName.toLowerCase() === 'pre') {
-        _.util.setLanguage(parent, language);
-      }
-
-      var code = element.textContent;
-      var env = {
-        element: element,
-        language: language,
-        grammar: grammar,
-        code: code
-      };
-
-      function insertHighlightedCode(highlightedCode) {
-        env.highlightedCode = highlightedCode;
-
-        _.hooks.run('before-insert', env);
-
-        env.element.innerHTML = env.highlightedCode;
-
-        _.hooks.run('after-highlight', env);
-
-        _.hooks.run('complete', env);
-
-        callback && callback.call(env.element);
-      }
-
-      _.hooks.run('before-sanity-check', env); // plugins may change/add the parent/element
-
-
-      parent = env.element.parentElement;
-
-      if (parent && parent.nodeName.toLowerCase() === 'pre' && !parent.hasAttribute('tabindex')) {
-        parent.setAttribute('tabindex', '0');
-      }
-
-      if (!env.code) {
-        _.hooks.run('complete', env);
-
-        callback && callback.call(env.element);
-        return;
-      }
-
-      _.hooks.run('before-highlight', env);
-
-      if (!env.grammar) {
-        insertHighlightedCode(_.util.encode(env.code));
-        return;
-      }
-
-      if (async && _self.Worker) {
-        var worker = new Worker(_.filename);
-
-        worker.onmessage = function (evt) {
-          insertHighlightedCode(evt.data);
-        };
-
-        worker.postMessage(JSON.stringify({
-          language: env.language,
-          code: env.code,
-          immediateClose: true
-        }));
-      } else {
-        insertHighlightedCode(_.highlight(env.code, env.grammar, env.language));
-      }
-    },
-
-    /**
-     * Low-level function, only use if you know what you’re doing. It accepts a string of text as input
-     * and the language definitions to use, and returns a string with the HTML produced.
-     *
-     * The following hooks will be run:
-     * 1. `before-tokenize`
-     * 2. `after-tokenize`
-     * 3. `wrap`: On each {@link Token}.
-     *
-     * @param {string} text A string with the code to be highlighted.
-     * @param {Grammar} grammar An object containing the tokens to use.
-     *
-     * Usually a language definition like `Prism.languages.markup`.
-     * @param {string} language The name of the language definition passed to `grammar`.
-     * @returns {string} The highlighted HTML.
-     * @memberof Prism
-     * @public
-     * @example
-     * Prism.highlight('var foo = true;', Prism.languages.javascript, 'javascript');
-     */
-    highlight: function highlight(text, grammar, language) {
-      var env = {
-        code: text,
-        grammar: grammar,
-        language: language
-      };
-
-      _.hooks.run('before-tokenize', env);
-
-      if (!env.grammar) {
-        throw new Error('The language "' + env.language + '" has no grammar.');
-      }
-
-      env.tokens = _.tokenize(env.code, env.grammar);
-
-      _.hooks.run('after-tokenize', env);
-
-      return Token.stringify(_.util.encode(env.tokens), env.language);
-    },
-
-    /**
-     * This is the heart of Prism, and the most low-level function you can use. It accepts a string of text as input
-     * and the language definitions to use, and returns an array with the tokenized code.
-     *
-     * When the language definition includes nested tokens, the function is called recursively on each of these tokens.
-     *
-     * This method could be useful in other contexts as well, as a very crude parser.
-     *
-     * @param {string} text A string with the code to be highlighted.
-     * @param {Grammar} grammar An object containing the tokens to use.
-     *
-     * Usually a language definition like `Prism.languages.markup`.
-     * @returns {TokenStream} An array of strings and tokens, a token stream.
-     * @memberof Prism
-     * @public
-     * @example
-     * let code = `var foo = 0;`;
-     * let tokens = Prism.tokenize(code, Prism.languages.javascript);
-     * tokens.forEach(token => {
-     *     if (token instanceof Prism.Token && token.type === 'number') {
-     *         console.log(`Found numeric literal: ${token.content}`);
-     *     }
-     * });
-     */
-    tokenize: function tokenize(text, grammar) {
-      var rest = grammar.rest;
-
-      if (rest) {
-        for (var token in rest) {
-          grammar[token] = rest[token];
-        }
-
-        delete grammar.rest;
-      }
-
-      var tokenList = new LinkedList();
-      addAfter(tokenList, tokenList.head, text);
-      matchGrammar(text, tokenList, grammar, tokenList.head, 0);
-      return toArray(tokenList);
-    },
-
-    /**
-     * @namespace
-     * @memberof Prism
-     * @public
-     */
-    hooks: {
-      all: {},
-
-      /**
-       * Adds the given callback to the list of callbacks for the given hook.
-       *
-       * The callback will be invoked when the hook it is registered for is run.
-       * Hooks are usually directly run by a highlight function but you can also run hooks yourself.
-       *
-       * One callback function can be registered to multiple hooks and the same hook multiple times.
-       *
-       * @param {string} name The name of the hook.
-       * @param {HookCallback} callback The callback function which is given environment variables.
-       * @public
-       */
-      add: function add(name, callback) {
-        var hooks = _.hooks.all;
-        hooks[name] = hooks[name] || [];
-        hooks[name].push(callback);
-      },
-
-      /**
-       * Runs a hook invoking all registered callbacks with the given environment variables.
-       *
-       * Callbacks will be invoked synchronously and in the order in which they were registered.
-       *
-       * @param {string} name The name of the hook.
-       * @param {Object<string, any>} env The environment variables of the hook passed to all callbacks registered.
-       * @public
-       */
-      run: function run(name, env) {
-        var callbacks = _.hooks.all[name];
-
-        if (!callbacks || !callbacks.length) {
-          return;
-        }
-
-        for (var i = 0, callback; callback = callbacks[i++];) {
-          callback(env);
-        }
-      }
-    },
-    Token: Token
-  };
-  _self.Prism = _; // Typescript note:
-  // The following can be used to import the Token type in JSDoc:
-  //
-  //   @typedef {InstanceType<import("./prism-core")["Token"]>} Token
-
-  /**
-   * Creates a new token.
-   *
-   * @param {string} type See {@link Token#type type}
-   * @param {string | TokenStream} content See {@link Token#content content}
-   * @param {string|string[]} [alias] The alias(es) of the token.
-   * @param {string} [matchedStr=""] A copy of the full string this token was created from.
-   * @class
-   * @global
-   * @public
-   */
-
-  function Token(type, content, alias, matchedStr) {
-    /**
-     * The type of the token.
-     *
-     * This is usually the key of a pattern in a {@link Grammar}.
-     *
-     * @type {string}
-     * @see GrammarToken
-     * @public
-     */
-    this.type = type;
-    /**
-     * The strings or tokens contained by this token.
-     *
-     * This will be a token stream if the pattern matched also defined an `inside` grammar.
-     *
-     * @type {string | TokenStream}
-     * @public
-     */
-
-    this.content = content;
-    /**
-     * The alias(es) of the token.
-     *
-     * @type {string|string[]}
-     * @see GrammarToken
-     * @public
-     */
-
-    this.alias = alias; // Copy of the full string this token was created from
-
-    this.length = (matchedStr || '').length | 0;
-  }
-  /**
-   * A token stream is an array of strings and {@link Token Token} objects.
-   *
-   * Token streams have to fulfill a few properties that are assumed by most functions (mostly internal ones) that process
-   * them.
-   *
-   * 1. No adjacent strings.
-   * 2. No empty strings.
-   *
-   *    The only exception here is the token stream that only contains the empty string and nothing else.
-   *
-   * @typedef {Array<string | Token>} TokenStream
-   * @global
-   * @public
-   */
-
-  /**
-   * Converts the given token or token stream to an HTML representation.
-   *
-   * The following hooks will be run:
-   * 1. `wrap`: On each {@link Token}.
-   *
-   * @param {string | Token | TokenStream} o The token or token stream to be converted.
-   * @param {string} language The name of current language.
-   * @returns {string} The HTML representation of the token or token stream.
-   * @memberof Token
-   * @static
-   */
-
-
-  Token.stringify = function stringify(o, language) {
-    if (typeof o == 'string') {
-      return o;
-    }
-
-    if (Array.isArray(o)) {
-      var s = '';
-      o.forEach(function (e) {
-        s += stringify(e, language);
-      });
-      return s;
-    }
-
-    var env = {
-      type: o.type,
-      content: stringify(o.content, language),
-      tag: 'span',
-      classes: ['token', o.type],
-      attributes: {},
-      language: language
-    };
-    var aliases = o.alias;
-
-    if (aliases) {
-      if (Array.isArray(aliases)) {
-        Array.prototype.push.apply(env.classes, aliases);
-      } else {
-        env.classes.push(aliases);
-      }
-    }
-
-    _.hooks.run('wrap', env);
-
-    var attributes = '';
-
-    for (var name in env.attributes) {
-      attributes += ' ' + name + '="' + (env.attributes[name] || '').replace(/"/g, '&quot;') + '"';
-    }
-
-    return '<' + env.tag + ' class="' + env.classes.join(' ') + '"' + attributes + '>' + env.content + '</' + env.tag + '>';
-  };
-  /**
-   * @param {RegExp} pattern
-   * @param {number} pos
-   * @param {string} text
-   * @param {boolean} lookbehind
-   * @returns {RegExpExecArray | null}
-   */
-
-
-  function matchPattern(pattern, pos, text, lookbehind) {
-    pattern.lastIndex = pos;
-    var match = pattern.exec(text);
-
-    if (match && lookbehind && match[1]) {
-      // change the match to remove the text matched by the Prism lookbehind group
-      var lookbehindLength = match[1].length;
-      match.index += lookbehindLength;
-      match[0] = match[0].slice(lookbehindLength);
-    }
-
-    return match;
-  }
-  /**
-   * @param {string} text
-   * @param {LinkedList<string | Token>} tokenList
-   * @param {any} grammar
-   * @param {LinkedListNode<string | Token>} startNode
-   * @param {number} startPos
-   * @param {RematchOptions} [rematch]
-   * @returns {void}
-   * @private
-   *
-   * @typedef RematchOptions
-   * @property {string} cause
-   * @property {number} reach
-   */
-
-
-  function matchGrammar(text, tokenList, grammar, startNode, startPos, rematch) {
-    for (var token in grammar) {
-      if (!grammar.hasOwnProperty(token) || !grammar[token]) {
-        continue;
-      }
-
-      var patterns = grammar[token];
-      patterns = Array.isArray(patterns) ? patterns : [patterns];
-
-      for (var j = 0; j < patterns.length; ++j) {
-        if (rematch && rematch.cause == token + ',' + j) {
-          return;
-        }
-
-        var patternObj = patterns[j];
-        var inside = patternObj.inside;
-        var lookbehind = !!patternObj.lookbehind;
-        var greedy = !!patternObj.greedy;
-        var alias = patternObj.alias;
-
-        if (greedy && !patternObj.pattern.global) {
-          // Without the global flag, lastIndex won't work
-          var flags = patternObj.pattern.toString().match(/[imsuy]*$/)[0];
-          patternObj.pattern = RegExp(patternObj.pattern.source, flags + 'g');
-        }
-        /** @type {RegExp} */
-
-
-        var pattern = patternObj.pattern || patternObj;
-
-        for ( // iterate the token list and keep track of the current token/string position
-        var currentNode = startNode.next, pos = startPos; currentNode !== tokenList.tail; pos += currentNode.value.length, currentNode = currentNode.next) {
-          if (rematch && pos >= rematch.reach) {
-            break;
-          }
-
-          var str = currentNode.value;
-
-          if (tokenList.length > text.length) {
-            // Something went terribly wrong, ABORT, ABORT!
-            return;
-          }
-
-          if (str instanceof Token) {
-            continue;
-          }
-
-          var removeCount = 1; // this is the to parameter of removeBetween
-
-          var match;
-
-          if (greedy) {
-            match = matchPattern(pattern, pos, text, lookbehind);
-
-            if (!match || match.index >= text.length) {
-              break;
-            }
-
-            var from = match.index;
-            var to = match.index + match[0].length;
-            var p = pos; // find the node that contains the match
-
-            p += currentNode.value.length;
-
-            while (from >= p) {
-              currentNode = currentNode.next;
-              p += currentNode.value.length;
-            } // adjust pos (and p)
-
-
-            p -= currentNode.value.length;
-            pos = p; // the current node is a Token, then the match starts inside another Token, which is invalid
-
-            if (currentNode.value instanceof Token) {
-              continue;
-            } // find the last node which is affected by this match
-
-
-            for (var k = currentNode; k !== tokenList.tail && (p < to || typeof k.value === 'string'); k = k.next) {
-              removeCount++;
-              p += k.value.length;
-            }
-
-            removeCount--; // replace with the new match
-
-            str = text.slice(pos, p);
-            match.index -= pos;
-          } else {
-            match = matchPattern(pattern, 0, str, lookbehind);
-
-            if (!match) {
-              continue;
-            }
-          } // eslint-disable-next-line no-redeclare
-
-
-          var from = match.index;
-          var matchStr = match[0];
-          var before = str.slice(0, from);
-          var after = str.slice(from + matchStr.length);
-          var reach = pos + str.length;
-
-          if (rematch && reach > rematch.reach) {
-            rematch.reach = reach;
-          }
-
-          var removeFrom = currentNode.prev;
-
-          if (before) {
-            removeFrom = addAfter(tokenList, removeFrom, before);
-            pos += before.length;
-          }
-
-          removeRange(tokenList, removeFrom, removeCount);
-          var wrapped = new Token(token, inside ? _.tokenize(matchStr, inside) : matchStr, alias, matchStr);
-          currentNode = addAfter(tokenList, removeFrom, wrapped);
-
-          if (after) {
-            addAfter(tokenList, currentNode, after);
-          }
-
-          if (removeCount > 1) {
-            // at least one Token object was removed, so we have to do some rematching
-            // this can only happen if the current pattern is greedy
-
-            /** @type {RematchOptions} */
-            var nestedRematch = {
-              cause: token + ',' + j,
-              reach: reach
-            };
-            matchGrammar(text, tokenList, grammar, currentNode.prev, pos, nestedRematch); // the reach might have been extended because of the rematching
-
-            if (rematch && nestedRematch.reach > rematch.reach) {
-              rematch.reach = nestedRematch.reach;
-            }
-          }
-        }
-      }
-    }
-  }
-  /**
-   * @typedef LinkedListNode
-   * @property {T} value
-   * @property {LinkedListNode<T> | null} prev The previous node.
-   * @property {LinkedListNode<T> | null} next The next node.
-   * @template T
-   * @private
-   */
-
-  /**
-   * @template T
-   * @private
-   */
-
-
-  function LinkedList() {
-    /** @type {LinkedListNode<T>} */
-    var head = {
-      value: null,
-      prev: null,
-      next: null
-    };
-    /** @type {LinkedListNode<T>} */
-
-    var tail = {
-      value: null,
-      prev: head,
-      next: null
-    };
-    head.next = tail;
-    /** @type {LinkedListNode<T>} */
-
-    this.head = head;
-    /** @type {LinkedListNode<T>} */
-
-    this.tail = tail;
-    this.length = 0;
-  }
-  /**
-   * Adds a new node with the given value to the list.
-   *
-   * @param {LinkedList<T>} list
-   * @param {LinkedListNode<T>} node
-   * @param {T} value
-   * @returns {LinkedListNode<T>} The added node.
-   * @template T
-   */
-
-
-  function addAfter(list, node, value) {
-    // assumes that node != list.tail && values.length >= 0
-    var next = node.next;
-    var newNode = {
-      value: value,
-      prev: node,
-      next: next
-    };
-    node.next = newNode;
-    next.prev = newNode;
-    list.length++;
-    return newNode;
-  }
-  /**
-   * Removes `count` nodes after the given node. The given node will not be removed.
-   *
-   * @param {LinkedList<T>} list
-   * @param {LinkedListNode<T>} node
-   * @param {number} count
-   * @template T
-   */
-
-
-  function removeRange(list, node, count) {
-    var next = node.next;
-
-    for (var i = 0; i < count && next !== list.tail; i++) {
-      next = next.next;
-    }
-
-    node.next = next;
-    next.prev = node;
-    list.length -= i;
-  }
-  /**
-   * @param {LinkedList<T>} list
-   * @returns {T[]}
-   * @template T
-   */
-
-
-  function toArray(list) {
-    var array = [];
-    var node = list.head.next;
-
-    while (node !== list.tail) {
-      array.push(node.value);
-      node = node.next;
-    }
-
-    return array;
-  }
-
-  if (!_self.document) {
-    if (!_self.addEventListener) {
-      // in Node.js
-      return _;
-    }
-
-    if (!_.disableWorkerMessageHandler) {
-      // In worker
-      _self.addEventListener('message', function (evt) {
-        var message = JSON.parse(evt.data);
-        var lang = message.language;
-        var code = message.code;
-        var immediateClose = message.immediateClose;
-
-        _self.postMessage(_.highlight(code, _.languages[lang], lang));
-
-        if (immediateClose) {
-          _self.close();
-        }
-      }, false);
-    }
-
-    return _;
-  } // Get current script and highlight
-
-
-  var script = _.util.currentScript();
-
-  if (script) {
-    _.filename = script.src;
-
-    if (script.hasAttribute('data-manual')) {
-      _.manual = true;
-    }
-  }
-
-  function highlightAutomaticallyCallback() {
-    if (!_.manual) {
-      _.highlightAll();
-    }
-  }
-
-  if (!_.manual) {
-    // If the document state is "loading", then we'll use DOMContentLoaded.
-    // If the document state is "interactive" and the prism.js script is deferred, then we'll also use the
-    // DOMContentLoaded event because there might be some plugins or languages which have also been deferred and they
-    // might take longer one animation frame to execute which can create a race condition where only some plugins have
-    // been loaded when Prism.highlightAll() is executed, depending on how fast resources are loaded.
-    // See https://github.com/PrismJS/prism/issues/2102
-    var readyState = document.readyState;
-
-    if (readyState === 'loading' || readyState === 'interactive' && script && script.defer) {
-      document.addEventListener('DOMContentLoaded', highlightAutomaticallyCallback);
-    } else {
-      if (window.requestAnimationFrame) {
-        window.requestAnimationFrame(highlightAutomaticallyCallback);
-      } else {
-        window.setTimeout(highlightAutomaticallyCallback, 16);
-      }
-    }
-  }
-
-  return _;
-}(_self);
-
-if ( true && module.exports) {
-  module.exports = Prism;
-} // hack for components to work correctly in node.js
-
-
-if (typeof global !== 'undefined') {
-  global.Prism = Prism;
-} // some additional documentation/types
-
-/**
- * The expansion of a simple `RegExp` literal to support additional properties.
- *
- * @typedef GrammarToken
- * @property {RegExp} pattern The regular expression of the token.
- * @property {boolean} [lookbehind=false] If `true`, then the first capturing group of `pattern` will (effectively)
- * behave as a lookbehind group meaning that the captured text will not be part of the matched text of the new token.
- * @property {boolean} [greedy=false] Whether the token is greedy.
- * @property {string|string[]} [alias] An optional alias or list of aliases.
- * @property {Grammar} [inside] The nested grammar of this token.
- *
- * The `inside` grammar will be used to tokenize the text value of each token of this kind.
- *
- * This can be used to make nested and even recursive language definitions.
- *
- * Note: This can cause infinite recursion. Be careful when you embed different languages or even the same language into
- * each another.
- * @global
- * @public
- */
-
-/**
- * @typedef Grammar
- * @type {Object<string, RegExp | GrammarToken | Array<RegExp | GrammarToken>>}
- * @property {Grammar} [rest] An optional grammar object that will be appended to this grammar.
- * @global
- * @public
- */
-
-/**
- * A function which will invoked after an element was successfully highlighted.
- *
- * @callback HighlightCallback
- * @param {Element} element The element successfully highlighted.
- * @returns {void}
- * @global
- * @public
- */
-
-/**
- * @callback HookCallback
- * @param {Object<string, any>} env The environment variables of the hook.
- * @returns {void}
- * @global
- * @public
- */
-
-/***/ }),
-
-/***/ 4798:
-/***/ ((module) => {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-var runtime = function (exports) {
-  "use strict";
-
-  var Op = Object.prototype;
-  var hasOwn = Op.hasOwnProperty;
-  var undefined; // More compressible than void 0.
-
-  var $Symbol = typeof Symbol === "function" ? Symbol : {};
-  var iteratorSymbol = $Symbol.iterator || "@@iterator";
-  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
-  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
-
-  function define(obj, key, value) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-    return obj[key];
-  }
-
-  try {
-    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
-    define({}, "");
-  } catch (err) {
-    define = function define(obj, key, value) {
-      return obj[key] = value;
-    };
-  }
-
-  function wrap(innerFn, outerFn, self, tryLocsList) {
-    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
-    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
-    var generator = Object.create(protoGenerator.prototype);
-    var context = new Context(tryLocsList || []); // The ._invoke method unifies the implementations of the .next,
-    // .throw, and .return methods.
-
-    generator._invoke = makeInvokeMethod(innerFn, self, context);
-    return generator;
-  }
-
-  exports.wrap = wrap; // Try/catch helper to minimize deoptimizations. Returns a completion
-  // record like context.tryEntries[i].completion. This interface could
-  // have been (and was previously) designed to take a closure to be
-  // invoked without arguments, but in all the cases we care about we
-  // already have an existing method we want to call, so there's no need
-  // to create a new function object. We can even get away with assuming
-  // the method takes exactly one argument, since that happens to be true
-  // in every case, so we don't have to touch the arguments object. The
-  // only additional allocation required is the completion record, which
-  // has a stable shape and so hopefully should be cheap to allocate.
-
-  function tryCatch(fn, obj, arg) {
-    try {
-      return {
-        type: "normal",
-        arg: fn.call(obj, arg)
-      };
-    } catch (err) {
-      return {
-        type: "throw",
-        arg: err
-      };
-    }
-  }
-
-  var GenStateSuspendedStart = "suspendedStart";
-  var GenStateSuspendedYield = "suspendedYield";
-  var GenStateExecuting = "executing";
-  var GenStateCompleted = "completed"; // Returning this object from the innerFn has the same effect as
-  // breaking out of the dispatch switch statement.
-
-  var ContinueSentinel = {}; // Dummy constructor functions that we use as the .constructor and
-  // .constructor.prototype properties for functions that return Generator
-  // objects. For full spec compliance, you may wish to configure your
-  // minifier not to mangle the names of these two functions.
-
-  function Generator() {}
-
-  function GeneratorFunction() {}
-
-  function GeneratorFunctionPrototype() {} // This is a polyfill for %IteratorPrototype% for environments that
-  // don't natively support it.
-
-
-  var IteratorPrototype = {};
-  define(IteratorPrototype, iteratorSymbol, function () {
-    return this;
-  });
-  var getProto = Object.getPrototypeOf;
-  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
-
-  if (NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
-    // This environment has a native %IteratorPrototype%; use it instead
-    // of the polyfill.
-    IteratorPrototype = NativeIteratorPrototype;
-  }
-
-  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
-  GeneratorFunction.prototype = GeneratorFunctionPrototype;
-  define(Gp, "constructor", GeneratorFunctionPrototype);
-  define(GeneratorFunctionPrototype, "constructor", GeneratorFunction);
-  GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"); // Helper for defining the .next, .throw, and .return methods of the
-  // Iterator interface in terms of a single ._invoke method.
-
-  function defineIteratorMethods(prototype) {
-    ["next", "throw", "return"].forEach(function (method) {
-      define(prototype, method, function (arg) {
-        return this._invoke(method, arg);
-      });
-    });
-  }
-
-  exports.isGeneratorFunction = function (genFun) {
-    var ctor = typeof genFun === "function" && genFun.constructor;
-    return ctor ? ctor === GeneratorFunction || // For the native GeneratorFunction constructor, the best we can
-    // do is to check its .name property.
-    (ctor.displayName || ctor.name) === "GeneratorFunction" : false;
-  };
-
-  exports.mark = function (genFun) {
-    if (Object.setPrototypeOf) {
-      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
-    } else {
-      genFun.__proto__ = GeneratorFunctionPrototype;
-      define(genFun, toStringTagSymbol, "GeneratorFunction");
-    }
-
-    genFun.prototype = Object.create(Gp);
-    return genFun;
-  }; // Within the body of any async function, `await x` is transformed to
-  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
-  // `hasOwn.call(value, "__await")` to determine if the yielded value is
-  // meant to be awaited.
-
-
-  exports.awrap = function (arg) {
-    return {
-      __await: arg
-    };
-  };
-
-  function AsyncIterator(generator, PromiseImpl) {
-    function invoke(method, arg, resolve, reject) {
-      var record = tryCatch(generator[method], generator, arg);
-
-      if (record.type === "throw") {
-        reject(record.arg);
-      } else {
-        var result = record.arg;
-        var value = result.value;
-
-        if (value && typeof value === "object" && hasOwn.call(value, "__await")) {
-          return PromiseImpl.resolve(value.__await).then(function (value) {
-            invoke("next", value, resolve, reject);
-          }, function (err) {
-            invoke("throw", err, resolve, reject);
-          });
-        }
-
-        return PromiseImpl.resolve(value).then(function (unwrapped) {
-          // When a yielded Promise is resolved, its final value becomes
-          // the .value of the Promise<{value,done}> result for the
-          // current iteration.
-          result.value = unwrapped;
-          resolve(result);
-        }, function (error) {
-          // If a rejected Promise was yielded, throw the rejection back
-          // into the async generator function so it can be handled there.
-          return invoke("throw", error, resolve, reject);
-        });
-      }
-    }
-
-    var previousPromise;
-
-    function enqueue(method, arg) {
-      function callInvokeWithMethodAndArg() {
-        return new PromiseImpl(function (resolve, reject) {
-          invoke(method, arg, resolve, reject);
-        });
-      }
-
-      return previousPromise = // If enqueue has been called before, then we want to wait until
-      // all previous Promises have been resolved before calling invoke,
-      // so that results are always delivered in the correct order. If
-      // enqueue has not been called before, then it is important to
-      // call invoke immediately, without waiting on a callback to fire,
-      // so that the async generator function has the opportunity to do
-      // any necessary setup in a predictable way. This predictability
-      // is why the Promise constructor synchronously invokes its
-      // executor callback, and why async functions synchronously
-      // execute code before the first await. Since we implement simple
-      // async functions in terms of async generators, it is especially
-      // important to get this right, even though it requires care.
-      previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, // Avoid propagating failures to Promises returned by later
-      // invocations of the iterator.
-      callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
-    } // Define the unified helper method that is used to implement .next,
-    // .throw, and .return (see defineIteratorMethods).
-
-
-    this._invoke = enqueue;
-  }
-
-  defineIteratorMethods(AsyncIterator.prototype);
-  define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
-    return this;
-  });
-  exports.AsyncIterator = AsyncIterator; // Note that simple async functions are implemented on top of
-  // AsyncIterator objects; they just return a Promise for the value of
-  // the final result produced by the iterator.
-
-  exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
-    if (PromiseImpl === void 0) PromiseImpl = Promise;
-    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
-    return exports.isGeneratorFunction(outerFn) ? iter // If outerFn is a generator, return the full iterator.
-    : iter.next().then(function (result) {
-      return result.done ? result.value : iter.next();
-    });
-  };
-
-  function makeInvokeMethod(innerFn, self, context) {
-    var state = GenStateSuspendedStart;
-    return function invoke(method, arg) {
-      if (state === GenStateExecuting) {
-        throw new Error("Generator is already running");
-      }
-
-      if (state === GenStateCompleted) {
-        if (method === "throw") {
-          throw arg;
-        } // Be forgiving, per 25.3.3.3.3 of the spec:
-        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
-
-
-        return doneResult();
-      }
-
-      context.method = method;
-      context.arg = arg;
-
-      while (true) {
-        var delegate = context.delegate;
-
-        if (delegate) {
-          var delegateResult = maybeInvokeDelegate(delegate, context);
-
-          if (delegateResult) {
-            if (delegateResult === ContinueSentinel) continue;
-            return delegateResult;
-          }
-        }
-
-        if (context.method === "next") {
-          // Setting context._sent for legacy support of Babel's
-          // function.sent implementation.
-          context.sent = context._sent = context.arg;
-        } else if (context.method === "throw") {
-          if (state === GenStateSuspendedStart) {
-            state = GenStateCompleted;
-            throw context.arg;
-          }
-
-          context.dispatchException(context.arg);
-        } else if (context.method === "return") {
-          context.abrupt("return", context.arg);
-        }
-
-        state = GenStateExecuting;
-        var record = tryCatch(innerFn, self, context);
-
-        if (record.type === "normal") {
-          // If an exception is thrown from innerFn, we leave state ===
-          // GenStateExecuting and loop back for another invocation.
-          state = context.done ? GenStateCompleted : GenStateSuspendedYield;
-
-          if (record.arg === ContinueSentinel) {
-            continue;
-          }
-
-          return {
-            value: record.arg,
-            done: context.done
-          };
-        } else if (record.type === "throw") {
-          state = GenStateCompleted; // Dispatch the exception by looping back around to the
-          // context.dispatchException(context.arg) call above.
-
-          context.method = "throw";
-          context.arg = record.arg;
-        }
-      }
-    };
-  } // Call delegate.iterator[context.method](context.arg) and handle the
-  // result, either by returning a { value, done } result from the
-  // delegate iterator, or by modifying context.method and context.arg,
-  // setting context.delegate to null, and returning the ContinueSentinel.
-
-
-  function maybeInvokeDelegate(delegate, context) {
-    var method = delegate.iterator[context.method];
-
-    if (method === undefined) {
-      // A .throw or .return when the delegate iterator has no .throw
-      // method always terminates the yield* loop.
-      context.delegate = null;
-
-      if (context.method === "throw") {
-        // Note: ["return"] must be used for ES3 parsing compatibility.
-        if (delegate.iterator["return"]) {
-          // If the delegate iterator has a return method, give it a
-          // chance to clean up.
-          context.method = "return";
-          context.arg = undefined;
-          maybeInvokeDelegate(delegate, context);
-
-          if (context.method === "throw") {
-            // If maybeInvokeDelegate(context) changed context.method from
-            // "return" to "throw", let that override the TypeError below.
-            return ContinueSentinel;
-          }
-        }
-
-        context.method = "throw";
-        context.arg = new TypeError("The iterator does not provide a 'throw' method");
-      }
-
-      return ContinueSentinel;
-    }
-
-    var record = tryCatch(method, delegate.iterator, context.arg);
-
-    if (record.type === "throw") {
-      context.method = "throw";
-      context.arg = record.arg;
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    var info = record.arg;
-
-    if (!info) {
-      context.method = "throw";
-      context.arg = new TypeError("iterator result is not an object");
-      context.delegate = null;
-      return ContinueSentinel;
-    }
-
-    if (info.done) {
-      // Assign the result of the finished delegate to the temporary
-      // variable specified by delegate.resultName (see delegateYield).
-      context[delegate.resultName] = info.value; // Resume execution at the desired location (see delegateYield).
-
-      context.next = delegate.nextLoc; // If context.method was "throw" but the delegate handled the
-      // exception, let the outer generator proceed normally. If
-      // context.method was "next", forget context.arg since it has been
-      // "consumed" by the delegate iterator. If context.method was
-      // "return", allow the original .return call to continue in the
-      // outer generator.
-
-      if (context.method !== "return") {
-        context.method = "next";
-        context.arg = undefined;
-      }
-    } else {
-      // Re-yield the result returned by the delegate method.
-      return info;
-    } // The delegate iterator is finished, so forget it and continue with
-    // the outer generator.
-
-
-    context.delegate = null;
-    return ContinueSentinel;
-  } // Define Generator.prototype.{next,throw,return} in terms of the
-  // unified ._invoke helper method.
-
-
-  defineIteratorMethods(Gp);
-  define(Gp, toStringTagSymbol, "Generator"); // A Generator should always return itself as the iterator object when the
-  // @@iterator function is called on it. Some browsers' implementations of the
-  // iterator prototype chain incorrectly implement this, causing the Generator
-  // object to not be returned from this call. This ensures that doesn't happen.
-  // See https://github.com/facebook/regenerator/issues/274 for more details.
-
-  define(Gp, iteratorSymbol, function () {
-    return this;
-  });
-  define(Gp, "toString", function () {
-    return "[object Generator]";
-  });
-
-  function pushTryEntry(locs) {
-    var entry = {
-      tryLoc: locs[0]
-    };
-
-    if (1 in locs) {
-      entry.catchLoc = locs[1];
-    }
-
-    if (2 in locs) {
-      entry.finallyLoc = locs[2];
-      entry.afterLoc = locs[3];
-    }
-
-    this.tryEntries.push(entry);
-  }
-
-  function resetTryEntry(entry) {
-    var record = entry.completion || {};
-    record.type = "normal";
-    delete record.arg;
-    entry.completion = record;
-  }
-
-  function Context(tryLocsList) {
-    // The root entry object (effectively a try statement without a catch
-    // or a finally block) gives us a place to store values thrown from
-    // locations where there is no enclosing try statement.
-    this.tryEntries = [{
-      tryLoc: "root"
-    }];
-    tryLocsList.forEach(pushTryEntry, this);
-    this.reset(true);
-  }
-
-  exports.keys = function (object) {
-    var keys = [];
-
-    for (var key in object) {
-      keys.push(key);
-    }
-
-    keys.reverse(); // Rather than returning an object with a next method, we keep
-    // things simple and return the next function itself.
-
-    return function next() {
-      while (keys.length) {
-        var key = keys.pop();
-
-        if (key in object) {
-          next.value = key;
-          next.done = false;
-          return next;
-        }
-      } // To avoid creating an additional object, we just hang the .value
-      // and .done properties off the next function object itself. This
-      // also ensures that the minifier will not anonymize the function.
-
-
-      next.done = true;
-      return next;
-    };
-  };
-
-  function values(iterable) {
-    if (iterable) {
-      var iteratorMethod = iterable[iteratorSymbol];
-
-      if (iteratorMethod) {
-        return iteratorMethod.call(iterable);
-      }
-
-      if (typeof iterable.next === "function") {
-        return iterable;
-      }
-
-      if (!isNaN(iterable.length)) {
-        var i = -1,
-            next = function next() {
-          while (++i < iterable.length) {
-            if (hasOwn.call(iterable, i)) {
-              next.value = iterable[i];
-              next.done = false;
-              return next;
-            }
-          }
-
-          next.value = undefined;
-          next.done = true;
-          return next;
-        };
-
-        return next.next = next;
-      }
-    } // Return an iterator with no values.
-
-
-    return {
-      next: doneResult
-    };
-  }
-
-  exports.values = values;
-
-  function doneResult() {
-    return {
-      value: undefined,
-      done: true
-    };
-  }
-
-  Context.prototype = {
-    constructor: Context,
-    reset: function reset(skipTempReset) {
-      this.prev = 0;
-      this.next = 0; // Resetting context._sent for legacy support of Babel's
-      // function.sent implementation.
-
-      this.sent = this._sent = undefined;
-      this.done = false;
-      this.delegate = null;
-      this.method = "next";
-      this.arg = undefined;
-      this.tryEntries.forEach(resetTryEntry);
-
-      if (!skipTempReset) {
-        for (var name in this) {
-          // Not sure about the optimal order of these conditions:
-          if (name.charAt(0) === "t" && hasOwn.call(this, name) && !isNaN(+name.slice(1))) {
-            this[name] = undefined;
-          }
-        }
-      }
-    },
-    stop: function stop() {
-      this.done = true;
-      var rootEntry = this.tryEntries[0];
-      var rootRecord = rootEntry.completion;
-
-      if (rootRecord.type === "throw") {
-        throw rootRecord.arg;
-      }
-
-      return this.rval;
-    },
-    dispatchException: function dispatchException(exception) {
-      if (this.done) {
-        throw exception;
-      }
-
-      var context = this;
-
-      function handle(loc, caught) {
-        record.type = "throw";
-        record.arg = exception;
-        context.next = loc;
-
-        if (caught) {
-          // If the dispatched exception was caught by a catch block,
-          // then let that catch block handle the exception normally.
-          context.method = "next";
-          context.arg = undefined;
-        }
-
-        return !!caught;
-      }
-
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-        var record = entry.completion;
-
-        if (entry.tryLoc === "root") {
-          // Exception thrown outside of any try block that could handle
-          // it, so set the completion value of the entire function to
-          // throw the exception.
-          return handle("end");
-        }
-
-        if (entry.tryLoc <= this.prev) {
-          var hasCatch = hasOwn.call(entry, "catchLoc");
-          var hasFinally = hasOwn.call(entry, "finallyLoc");
-
-          if (hasCatch && hasFinally) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            } else if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-          } else if (hasCatch) {
-            if (this.prev < entry.catchLoc) {
-              return handle(entry.catchLoc, true);
-            }
-          } else if (hasFinally) {
-            if (this.prev < entry.finallyLoc) {
-              return handle(entry.finallyLoc);
-            }
-          } else {
-            throw new Error("try statement without catch or finally");
-          }
-        }
-      }
-    },
-    abrupt: function abrupt(type, arg) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-
-        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
-          var finallyEntry = entry;
-          break;
-        }
-      }
-
-      if (finallyEntry && (type === "break" || type === "continue") && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc) {
-        // Ignore the finally entry if control is not jumping to a
-        // location outside the try/catch block.
-        finallyEntry = null;
-      }
-
-      var record = finallyEntry ? finallyEntry.completion : {};
-      record.type = type;
-      record.arg = arg;
-
-      if (finallyEntry) {
-        this.method = "next";
-        this.next = finallyEntry.finallyLoc;
-        return ContinueSentinel;
-      }
-
-      return this.complete(record);
-    },
-    complete: function complete(record, afterLoc) {
-      if (record.type === "throw") {
-        throw record.arg;
-      }
-
-      if (record.type === "break" || record.type === "continue") {
-        this.next = record.arg;
-      } else if (record.type === "return") {
-        this.rval = this.arg = record.arg;
-        this.method = "return";
-        this.next = "end";
-      } else if (record.type === "normal" && afterLoc) {
-        this.next = afterLoc;
-      }
-
-      return ContinueSentinel;
-    },
-    finish: function finish(finallyLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-
-        if (entry.finallyLoc === finallyLoc) {
-          this.complete(entry.completion, entry.afterLoc);
-          resetTryEntry(entry);
-          return ContinueSentinel;
-        }
-      }
-    },
-    "catch": function _catch(tryLoc) {
-      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
-        var entry = this.tryEntries[i];
-
-        if (entry.tryLoc === tryLoc) {
-          var record = entry.completion;
-
-          if (record.type === "throw") {
-            var thrown = record.arg;
-            resetTryEntry(entry);
-          }
-
-          return thrown;
-        }
-      } // The context.catch method must only be called with a location
-      // argument that corresponds to a known catch block.
-
-
-      throw new Error("illegal catch attempt");
-    },
-    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
-      this.delegate = {
-        iterator: values(iterable),
-        resultName: resultName,
-        nextLoc: nextLoc
-      };
-
-      if (this.method === "next") {
-        // Deliberately forget the last sent value so that we don't
-        // accidentally pass it on to the delegate.
-        this.arg = undefined;
-      }
-
-      return ContinueSentinel;
-    }
-  }; // Regardless of whether this script is executing as a CommonJS module
-  // or not, return the runtime object so that we can declare the variable
-  // regeneratorRuntime in the outer scope, which allows this module to be
-  // injected easily by `bin/regenerator --include-runtime script.js`.
-
-  return exports;
-}( // If this script is executing as a CommonJS module, use module.exports
-// as the regeneratorRuntime namespace. Otherwise create a new empty
-// object. Either way, the resulting object will be used to initialize
-// the regeneratorRuntime variable at the top of this file.
- true ? module.exports : 0);
-
-try {
-  regeneratorRuntime = runtime;
-} catch (accidentalStrictMode) {
-  // This module should not be running in strict mode, so the above
-  // assignment should always work unless something is misconfigured. Just
-  // in case runtime.js accidentally runs in strict mode, in modern engines
-  // we can explicitly access globalThis. In older engines we can escape
-  // strict mode using a global Function call. This could conceivably fail
-  // if a Content Security Policy forbids using Function, but in that case
-  // the proper solution is to fix the accidental strict mode problem. If
-  // you've misconfigured your bundler to force strict mode and applied a
-  // CSP to forbid Function, and you're not willing to fix either of those
-  // problems, please detail your unique predicament in a GitHub issue.
-  if (typeof globalThis === "object") {
-    globalThis.regeneratorRuntime = runtime;
-  } else {
-    Function("r", "regeneratorRuntime = r")(runtime);
-  }
-}
 
 /***/ }),
 
@@ -18600,10 +16397,10 @@ module.exports = Str;
 
 /***/ }),
 
-/***/ 2707:
+/***/ 3061:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-var parse = __webpack_require__(1401);
+var parse = __webpack_require__(7365);
 /**
  * Parses inline style to object.
  *
@@ -19091,6 +16888,977 @@ module.exports = require("url");
 "use strict";
 module.exports = require("util");
 
+/***/ }),
+
+/***/ 5748:
+/***/ ((module) => {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 6314:
+/***/ ((module) => {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 5297:
+/***/ ((module) => {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 1461:
+/***/ ((module) => {
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 3100:
+/***/ ((module) => {
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 3419:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var setPrototypeOf = __webpack_require__(8560);
+
+var isNativeReflectConstruct = __webpack_require__(7028);
+
+function _construct(Parent, args, Class) {
+  if (isNativeReflectConstruct()) {
+    module.exports = _construct = Reflect.construct.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
+  } else {
+    module.exports = _construct = function _construct(Parent, args, Class) {
+      var a = [null];
+      a.push.apply(a, args);
+      var Constructor = Function.bind.apply(Parent, a);
+      var instance = new Constructor();
+      if (Class) setPrototypeOf(instance, Class.prototype);
+      return instance;
+    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  }
+
+  return _construct.apply(null, arguments);
+}
+
+module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 8870:
+/***/ ((module) => {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
+
+module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 8636:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var unsupportedIterableToArray = __webpack_require__(121);
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+
+  if (!it) {
+    if (Array.isArray(o) || (it = unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function F() {};
+
+      return {
+        s: F,
+        n: function n() {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function e(_e) {
+          throw _e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function s() {
+      it = it.call(o);
+    },
+    n: function n() {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function e(_e2) {
+      didErr = true;
+      err = _e2;
+    },
+    f: function f() {
+      try {
+        if (!normalCompletion && it["return"] != null) it["return"]();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
+
+module.exports = _createForOfIteratorHelper, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 669:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getPrototypeOf = __webpack_require__(1147);
+
+var isNativeReflectConstruct = __webpack_require__(7028);
+
+var possibleConstructorReturn = __webpack_require__(421);
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = isNativeReflectConstruct();
+  return function _createSuperInternal() {
+    var Super = getPrototypeOf(Derived),
+        result;
+
+    if (hasNativeReflectConstruct) {
+      var NewTarget = getPrototypeOf(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+
+    return possibleConstructorReturn(this, result);
+  };
+}
+
+module.exports = _createSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 6290:
+/***/ ((module) => {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 611:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var superPropBase = __webpack_require__(209);
+
+function _get() {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    module.exports = _get = Reflect.get.bind(), module.exports.__esModule = true, module.exports["default"] = module.exports;
+  } else {
+    module.exports = _get = function _get(target, property, receiver) {
+      var base = superPropBase(target, property);
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+
+      if (desc.get) {
+        return desc.get.call(arguments.length < 3 ? target : receiver);
+      }
+
+      return desc.value;
+    }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  }
+
+  return _get.apply(this, arguments);
+}
+
+module.exports = _get, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 1147:
+/***/ ((module) => {
+
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 8230:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var setPrototypeOf = __webpack_require__(8560);
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 9549:
+/***/ ((module) => {
+
+function _isNativeFunction(fn) {
+  return Function.toString.call(fn).indexOf("[native code]") !== -1;
+}
+
+module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 7028:
+/***/ ((module) => {
+
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 6193:
+/***/ ((module) => {
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 6147:
+/***/ ((module) => {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 814:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var defineProperty = __webpack_require__(6290);
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    enumerableOnly && (symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    })), keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = null != arguments[i] ? arguments[i] : {};
+    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
+      defineProperty(target, key, source[key]);
+    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
+      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+    });
+  }
+
+  return target;
+}
+
+module.exports = _objectSpread2, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 421:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(7425)["default"]);
+
+var assertThisInitialized = __webpack_require__(5297);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 7609:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var _typeof = (__webpack_require__(7425)["default"]);
+
+function _regeneratorRuntime() {
+  "use strict";
+  /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+  module.exports = _regeneratorRuntime = function _regeneratorRuntime() {
+    return exports;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  var exports = {},
+      Op = Object.prototype,
+      hasOwn = Op.hasOwnProperty,
+      $Symbol = "function" == typeof Symbol ? Symbol : {},
+      iteratorSymbol = $Symbol.iterator || "@@iterator",
+      asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
+      toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    return Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }), obj[key];
+  }
+
+  try {
+    define({}, "");
+  } catch (err) {
+    define = function define(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+        generator = Object.create(protoGenerator.prototype),
+        context = new Context(tryLocsList || []);
+    return generator._invoke = function (innerFn, self, context) {
+      var state = "suspendedStart";
+      return function (method, arg) {
+        if ("executing" === state) throw new Error("Generator is already running");
+
+        if ("completed" === state) {
+          if ("throw" === method) throw arg;
+          return doneResult();
+        }
+
+        for (context.method = method, context.arg = arg;;) {
+          var delegate = context.delegate;
+
+          if (delegate) {
+            var delegateResult = maybeInvokeDelegate(delegate, context);
+
+            if (delegateResult) {
+              if (delegateResult === ContinueSentinel) continue;
+              return delegateResult;
+            }
+          }
+
+          if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
+            if ("suspendedStart" === state) throw state = "completed", context.arg;
+            context.dispatchException(context.arg);
+          } else "return" === context.method && context.abrupt("return", context.arg);
+          state = "executing";
+          var record = tryCatch(innerFn, self, context);
+
+          if ("normal" === record.type) {
+            if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
+            return {
+              value: record.arg,
+              done: context.done
+            };
+          }
+
+          "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
+        }
+      };
+    }(innerFn, self, context), generator;
+  }
+
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+
+  exports.wrap = wrap;
+  var ContinueSentinel = {};
+
+  function Generator() {}
+
+  function GeneratorFunction() {}
+
+  function GeneratorFunctionPrototype() {}
+
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf,
+      NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+
+      if ("throw" !== record.type) {
+        var result = record.arg,
+            value = result.value;
+        return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+          invoke("next", value, resolve, reject);
+        }, function (err) {
+          invoke("throw", err, resolve, reject);
+        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
+          result.value = unwrapped, resolve(result);
+        }, function (error) {
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+
+      reject(record.arg);
+    }
+
+    var previousPromise;
+
+    this._invoke = function (method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function (resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+    };
+  }
+
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+
+    if (undefined === method) {
+      if (context.delegate = null, "throw" === context.method) {
+        if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
+        context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+    var info = record.arg;
+    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+  }
+
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal", delete record.arg, entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    this.tryEntries = [{
+      tryLoc: "root"
+    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+  }
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) return iteratorMethod.call(iterable);
+      if ("function" == typeof iterable.next) return iterable;
+
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+            next = function next() {
+          for (; ++i < iterable.length;) {
+            if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
+          }
+
+          return next.value = undefined, next.done = !0, next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    return {
+      next: doneResult
+    };
+  }
+
+  function doneResult() {
+    return {
+      value: undefined,
+      done: !0
+    };
+  }
+
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
+    var ctor = "function" == typeof genFun && genFun.constructor;
+    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+  }, exports.mark = function (genFun) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+  }, exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    void 0 === PromiseImpl && (PromiseImpl = Promise);
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
+    return this;
+  }), define(Gp, "toString", function () {
+    return "[object Generator]";
+  }), exports.keys = function (object) {
+    var keys = [];
+
+    for (var key in object) {
+      keys.push(key);
+    }
+
+    return keys.reverse(), function next() {
+      for (; keys.length;) {
+        var key = keys.pop();
+        if (key in object) return next.value = key, next.done = !1, next;
+      }
+
+      return next.done = !0, next;
+    };
+  }, exports.values = values, Context.prototype = {
+    constructor: Context,
+    reset: function reset(skipTempReset) {
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
+        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
+      }
+    },
+    stop: function stop() {
+      this.done = !0;
+      var rootRecord = this.tryEntries[0].completion;
+      if ("throw" === rootRecord.type) throw rootRecord.arg;
+      return this.rval;
+    },
+    dispatchException: function dispatchException(exception) {
+      if (this.done) throw exception;
+      var context = this;
+
+      function handle(loc, caught) {
+        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i],
+            record = entry.completion;
+        if ("root" === entry.tryLoc) return handle("end");
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc"),
+              hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+          } else {
+            if (!hasFinally) throw new Error("try statement without catch or finally");
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          }
+        }
+      }
+    },
+    abrupt: function abrupt(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+      var record = finallyEntry ? finallyEntry.completion : {};
+      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+    },
+    complete: function complete(record, afterLoc) {
+      if ("throw" === record.type) throw record.arg;
+      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+    },
+    finish: function finish(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+      }
+    },
+    "catch": function _catch(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+
+          if ("throw" === record.type) {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+
+          return thrown;
+        }
+      }
+
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+      return this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
+    }
+  }, exports;
+}
+
+module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 8560:
+/***/ ((module) => {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 3681:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayWithHoles = __webpack_require__(6314);
+
+var iterableToArrayLimit = __webpack_require__(6193);
+
+var unsupportedIterableToArray = __webpack_require__(121);
+
+var nonIterableRest = __webpack_require__(6147);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 209:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getPrototypeOf = __webpack_require__(1147);
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = getPrototypeOf(object);
+    if (object === null) break;
+  }
+
+  return object;
+}
+
+module.exports = _superPropBase, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 7425:
+/***/ ((module) => {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(obj);
+}
+
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 121:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var arrayLikeToArray = __webpack_require__(5748);
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+
+/***/ 8365:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var getPrototypeOf = __webpack_require__(1147);
+
+var setPrototypeOf = __webpack_require__(8560);
+
+var isNativeFunction = __webpack_require__(9549);
+
+var construct = __webpack_require__(3419);
+
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? new Map() : undefined;
+
+  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return construct(Class, arguments, getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = Object.create(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return setPrototypeOf(Wrapper, Class);
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _wrapNativeSuper(Class);
+}
+
+module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
 /***/ })
 
 /******/ 	});
@@ -19196,6 +17964,369 @@ __webpack_require__.d(types_namespaceObject, {
   "spaceSeparated": () => (spaceSeparated)
 });
 
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/typeof.js
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js
+
+function _regeneratorRuntime() {
+  "use strict";
+  /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+  _regeneratorRuntime = function _regeneratorRuntime() {
+    return exports;
+  };
+
+  var exports = {},
+      Op = Object.prototype,
+      hasOwn = Op.hasOwnProperty,
+      $Symbol = "function" == typeof Symbol ? Symbol : {},
+      iteratorSymbol = $Symbol.iterator || "@@iterator",
+      asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator",
+      toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    return Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: !0,
+      configurable: !0,
+      writable: !0
+    }), obj[key];
+  }
+
+  try {
+    define({}, "");
+  } catch (err) {
+    define = function define(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator,
+        generator = Object.create(protoGenerator.prototype),
+        context = new Context(tryLocsList || []);
+    return generator._invoke = function (innerFn, self, context) {
+      var state = "suspendedStart";
+      return function (method, arg) {
+        if ("executing" === state) throw new Error("Generator is already running");
+
+        if ("completed" === state) {
+          if ("throw" === method) throw arg;
+          return doneResult();
+        }
+
+        for (context.method = method, context.arg = arg;;) {
+          var delegate = context.delegate;
+
+          if (delegate) {
+            var delegateResult = maybeInvokeDelegate(delegate, context);
+
+            if (delegateResult) {
+              if (delegateResult === ContinueSentinel) continue;
+              return delegateResult;
+            }
+          }
+
+          if ("next" === context.method) context.sent = context._sent = context.arg;else if ("throw" === context.method) {
+            if ("suspendedStart" === state) throw state = "completed", context.arg;
+            context.dispatchException(context.arg);
+          } else "return" === context.method && context.abrupt("return", context.arg);
+          state = "executing";
+          var record = tryCatch(innerFn, self, context);
+
+          if ("normal" === record.type) {
+            if (state = context.done ? "completed" : "suspendedYield", record.arg === ContinueSentinel) continue;
+            return {
+              value: record.arg,
+              done: context.done
+            };
+          }
+
+          "throw" === record.type && (state = "completed", context.method = "throw", context.arg = record.arg);
+        }
+      };
+    }(innerFn, self, context), generator;
+  }
+
+  function tryCatch(fn, obj, arg) {
+    try {
+      return {
+        type: "normal",
+        arg: fn.call(obj, arg)
+      };
+    } catch (err) {
+      return {
+        type: "throw",
+        arg: err
+      };
+    }
+  }
+
+  exports.wrap = wrap;
+  var ContinueSentinel = {};
+
+  function Generator() {}
+
+  function GeneratorFunction() {}
+
+  function GeneratorFunctionPrototype() {}
+
+  var IteratorPrototype = {};
+  define(IteratorPrototype, iteratorSymbol, function () {
+    return this;
+  });
+  var getProto = Object.getPrototypeOf,
+      NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  NativeIteratorPrototype && NativeIteratorPrototype !== Op && hasOwn.call(NativeIteratorPrototype, iteratorSymbol) && (IteratorPrototype = NativeIteratorPrototype);
+  var Gp = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(IteratorPrototype);
+
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function (method) {
+      define(prototype, method, function (arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+
+      if ("throw" !== record.type) {
+        var result = record.arg,
+            value = result.value;
+        return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+          invoke("next", value, resolve, reject);
+        }, function (err) {
+          invoke("throw", err, resolve, reject);
+        }) : PromiseImpl.resolve(value).then(function (unwrapped) {
+          result.value = unwrapped, resolve(result);
+        }, function (error) {
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+
+      reject(record.arg);
+    }
+
+    var previousPromise;
+
+    this._invoke = function (method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function (resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise = previousPromise ? previousPromise.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg();
+    };
+  }
+
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+
+    if (undefined === method) {
+      if (context.delegate = null, "throw" === context.method) {
+        if (delegate.iterator["return"] && (context.method = "return", context.arg = undefined, maybeInvokeDelegate(delegate, context), "throw" === context.method)) return ContinueSentinel;
+        context.method = "throw", context.arg = new TypeError("The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+    if ("throw" === record.type) return context.method = "throw", context.arg = record.arg, context.delegate = null, ContinueSentinel;
+    var info = record.arg;
+    return info ? info.done ? (context[delegate.resultName] = info.value, context.next = delegate.nextLoc, "return" !== context.method && (context.method = "next", context.arg = undefined), context.delegate = null, ContinueSentinel) : info : (context.method = "throw", context.arg = new TypeError("iterator result is not an object"), context.delegate = null, ContinueSentinel);
+  }
+
+  function pushTryEntry(locs) {
+    var entry = {
+      tryLoc: locs[0]
+    };
+    1 in locs && (entry.catchLoc = locs[1]), 2 in locs && (entry.finallyLoc = locs[2], entry.afterLoc = locs[3]), this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal", delete record.arg, entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    this.tryEntries = [{
+      tryLoc: "root"
+    }], tryLocsList.forEach(pushTryEntry, this), this.reset(!0);
+  }
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) return iteratorMethod.call(iterable);
+      if ("function" == typeof iterable.next) return iterable;
+
+      if (!isNaN(iterable.length)) {
+        var i = -1,
+            next = function next() {
+          for (; ++i < iterable.length;) {
+            if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
+          }
+
+          return next.value = undefined, next.done = !0, next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    return {
+      next: doneResult
+    };
+  }
+
+  function doneResult() {
+    return {
+      value: undefined,
+      done: !0
+    };
+  }
+
+  return GeneratorFunction.prototype = GeneratorFunctionPrototype, define(Gp, "constructor", GeneratorFunctionPrototype), define(GeneratorFunctionPrototype, "constructor", GeneratorFunction), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, toStringTagSymbol, "GeneratorFunction"), exports.isGeneratorFunction = function (genFun) {
+    var ctor = "function" == typeof genFun && genFun.constructor;
+    return !!ctor && (ctor === GeneratorFunction || "GeneratorFunction" === (ctor.displayName || ctor.name));
+  }, exports.mark = function (genFun) {
+    return Object.setPrototypeOf ? Object.setPrototypeOf(genFun, GeneratorFunctionPrototype) : (genFun.__proto__ = GeneratorFunctionPrototype, define(genFun, toStringTagSymbol, "GeneratorFunction")), genFun.prototype = Object.create(Gp), genFun;
+  }, exports.awrap = function (arg) {
+    return {
+      __await: arg
+    };
+  }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, asyncIteratorSymbol, function () {
+    return this;
+  }), exports.AsyncIterator = AsyncIterator, exports.async = function (innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    void 0 === PromiseImpl && (PromiseImpl = Promise);
+    var iter = new AsyncIterator(wrap(innerFn, outerFn, self, tryLocsList), PromiseImpl);
+    return exports.isGeneratorFunction(outerFn) ? iter : iter.next().then(function (result) {
+      return result.done ? result.value : iter.next();
+    });
+  }, defineIteratorMethods(Gp), define(Gp, toStringTagSymbol, "Generator"), define(Gp, iteratorSymbol, function () {
+    return this;
+  }), define(Gp, "toString", function () {
+    return "[object Generator]";
+  }), exports.keys = function (object) {
+    var keys = [];
+
+    for (var key in object) {
+      keys.push(key);
+    }
+
+    return keys.reverse(), function next() {
+      for (; keys.length;) {
+        var key = keys.pop();
+        if (key in object) return next.value = key, next.done = !1, next;
+      }
+
+      return next.done = !0, next;
+    };
+  }, exports.values = values, Context.prototype = {
+    constructor: Context,
+    reset: function reset(skipTempReset) {
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
+        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
+      }
+    },
+    stop: function stop() {
+      this.done = !0;
+      var rootRecord = this.tryEntries[0].completion;
+      if ("throw" === rootRecord.type) throw rootRecord.arg;
+      return this.rval;
+    },
+    dispatchException: function dispatchException(exception) {
+      if (this.done) throw exception;
+      var context = this;
+
+      function handle(loc, caught) {
+        return record.type = "throw", record.arg = exception, context.next = loc, caught && (context.method = "next", context.arg = undefined), !!caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i],
+            record = entry.completion;
+        if ("root" === entry.tryLoc) return handle("end");
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc"),
+              hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) return handle(entry.catchLoc, !0);
+          } else {
+            if (!hasFinally) throw new Error("try statement without catch or finally");
+            if (this.prev < entry.finallyLoc) return handle(entry.finallyLoc);
+          }
+        }
+      }
+    },
+    abrupt: function abrupt(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc <= this.prev && hasOwn.call(entry, "finallyLoc") && this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      finallyEntry && ("break" === type || "continue" === type) && finallyEntry.tryLoc <= arg && arg <= finallyEntry.finallyLoc && (finallyEntry = null);
+      var record = finallyEntry ? finallyEntry.completion : {};
+      return record.type = type, record.arg = arg, finallyEntry ? (this.method = "next", this.next = finallyEntry.finallyLoc, ContinueSentinel) : this.complete(record);
+    },
+    complete: function complete(record, afterLoc) {
+      if ("throw" === record.type) throw record.arg;
+      return "break" === record.type || "continue" === record.type ? this.next = record.arg : "return" === record.type ? (this.rval = this.arg = record.arg, this.method = "return", this.next = "end") : "normal" === record.type && afterLoc && (this.next = afterLoc), ContinueSentinel;
+    },
+    finish: function finish(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) return this.complete(entry.completion, entry.afterLoc), resetTryEntry(entry), ContinueSentinel;
+      }
+    },
+    "catch": function _catch(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+
+          if ("throw" === record.type) {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+
+          return thrown;
+        }
+      }
+
+      throw new Error("illegal catch attempt");
+    },
+    delegateYield: function delegateYield(iterable, resultName, nextLoc) {
+      return this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      }, "next" === this.method && (this.arg = undefined), ContinueSentinel;
+    }
+  }, exports;
+}
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/defineProperty.js
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -19275,9 +18406,6 @@ function _asyncToGenerator(fn) {
     });
   };
 }
-// EXTERNAL MODULE: ../../node_modules/@babel/runtime/regenerator/index.js
-var regenerator = __webpack_require__(7162);
-var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __webpack_require__(7147);
 var external_fs_default = /*#__PURE__*/__webpack_require__.n(external_fs_);
@@ -19355,14 +18483,13 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 // EXTERNAL MODULE: ../../node_modules/is-buffer/index.js
-var is_buffer = __webpack_require__(2655);
+var is_buffer = __webpack_require__(5352);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
 function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
     o.__proto__ = p;
     return o;
   };
-
   return _setPrototypeOf(o, p);
 }
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/inherits.js
@@ -19386,7 +18513,7 @@ function _inherits(subClass, superClass) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js
 function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
     return o.__proto__ || Object.getPrototypeOf(o);
   };
   return _getPrototypeOf(o);
@@ -19403,16 +18530,6 @@ function _isNativeReflectConstruct() {
   } catch (e) {
     return false;
   }
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/typeof.js
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
 }
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
 function _assertThisInitialized(self) {
@@ -19463,7 +18580,7 @@ function _isNativeFunction(fn) {
 
 function _construct(Parent, args, Class) {
   if (_isNativeReflectConstruct()) {
-    _construct = Reflect.construct;
+    _construct = Reflect.construct.bind();
   } else {
     _construct = function _construct(Parent, args, Class) {
       var a = [null];
@@ -19808,8 +18925,8 @@ var external_url_ = __webpack_require__(7310);
  * @typedef {import('unist').Point} Point
  * @typedef {Record<string, unknown> & {type: string, position?: Position|undefined}} NodeLike
  * @typedef {import('./minurl.shared.js').URL} URL
- * @typedef {import('..').VFileData} VFileData
- * @typedef {import('..').VFileValue} VFileValue
+ * @typedef {import('../index.js').Data} Data
+ * @typedef {import('../index.js').Value} Value
  *
  * @typedef {'ascii'|'utf8'|'utf-8'|'utf16le'|'ucs2'|'ucs-2'|'base64'|'base64url'|'latin1'|'binary'|'hex'} BufferEncoding
  *   Encodings supported by the buffer class.
@@ -19817,11 +18934,11 @@ var external_url_ = __webpack_require__(7310);
  *   being needed.
  *   Copied from: <https://github.com/DefinitelyTyped/DefinitelyTyped/blob/90a4ec8/types/node/buffer.d.ts#L170>
  *
- * @typedef {VFileValue|VFileOptions|VFile|URL} VFileCompatible
+ * @typedef {Value|Options|VFile|URL} Compatible
  *   Things that can be passed to the constructor.
  *
  * @typedef VFileCoreOptions
- * @property {VFileValue} [value]
+ * @property {Value} [value]
  * @property {string} [cwd]
  * @property {Array<string>} [history]
  * @property {string|URL} [path]
@@ -19829,7 +18946,7 @@ var external_url_ = __webpack_require__(7310);
  * @property {string} [stem]
  * @property {string} [extname]
  * @property {string} [dirname]
- * @property {VFileData} [data]
+ * @property {Data} [data]
  *
  * @typedef Map
  *   Raw source map, see:
@@ -19842,12 +18959,12 @@ var external_url_ = __webpack_require__(7310);
  * @property {string} mappings
  * @property {string} file
  *
- * @typedef {{[key: string]: unknown} & VFileCoreOptions} VFileOptions
+ * @typedef {{[key: string]: unknown} & VFileCoreOptions} Options
  *   Configuration: a bunch of keys that will be shallow copied over to the new
  *   file.
  *
- * @typedef {Record<string, unknown>} VFileReporterSettings
- * @typedef {<T = VFileReporterSettings>(files: Array<VFile>, options: T) => string} VFileReporter
+ * @typedef {Record<string, unknown>} ReporterSettings
+ * @typedef {<T = ReporterSettings>(files: Array<VFile>, options: T) => string} Reporter
  */
 
 
@@ -19862,23 +18979,24 @@ var VFile = /*#__PURE__*/function () {
   /**
    * Create a new virtual file.
    *
-   * If `options` is `string` or `Buffer`, treats it as `{value: options}`.
+   * If `options` is `string` or `Buffer`, it’s treated as `{value: options}`.
+   * If `options` is a `URL`, it’s treated as `{path: options}`.
    * If `options` is a `VFile`, shallow copies its data over to the new file.
-   * All other given fields are set on the newly created `VFile`.
+   * All fields in `options` are set on the newly created `VFile`.
    *
-   * Path related properties are set in the following order (least specific to
+   * Path related fields are set in the following order (least specific to
    * most specific): `history`, `path`, `basename`, `stem`, `extname`,
    * `dirname`.
    *
    * It’s not possible to set either `dirname` or `extname` without setting
    * either `history`, `path`, `basename`, or `stem` as well.
    *
-   * @param {VFileCompatible} [value]
+   * @param {Compatible} [value]
    */
   function VFile(value) {
     _classCallCheck(this, VFile);
 
-    /** @type {VFileOptions} */
+    /** @type {Options} */
     var options;
 
     if (!value) {
@@ -19897,10 +19015,10 @@ var VFile = /*#__PURE__*/function () {
       options = value;
     }
     /**
-     * Place to store custom information.
-     * It’s OK to store custom data directly on the file, moving it to `data`
-     * gives a little more privacy.
-     * @type {VFileData}
+     * Place to store custom information (default: `{}`).
+     * It’s OK to store custom data directly on the file but moving it to
+     * `data` is recommended.
+     * @type {Data}
      */
 
 
@@ -19912,14 +19030,14 @@ var VFile = /*#__PURE__*/function () {
 
     this.messages = [];
     /**
-     * List of file paths the file moved between.
+     * List of filepaths the file moved between.
+     * The first is the original path and the last is the current path.
      * @type {Array<string>}
      */
 
     this.history = [];
     /**
-     * Base of `path`.
-     * Defaults to `process.cwd()` (`/` in browsers).
+     * Base of `path` (default: `process.cwd()` or `'/'` in browsers).
      * @type {string}
      */
 
@@ -19928,7 +19046,7 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Raw value.
-     * @type {VFileValue}
+     * @type {Value}
      */
 
     this.value; // The below are non-standard, they are “well-known”.
@@ -19942,7 +19060,7 @@ var VFile = /*#__PURE__*/function () {
 
     this.stored;
     /**
-     * Sometimes files have a non-string representation.
+     * Sometimes files have a non-string, compiled, representation.
      * This can be stored in the `result` field.
      * One example is when turning markdown into React nodes.
      * This is used by unified to store non-string results.
@@ -19953,7 +19071,8 @@ var VFile = /*#__PURE__*/function () {
     /**
      * Sometimes files have a source map associated with them.
      * This can be stored in the `map` field.
-     * This should be a `RawSourceMap` type from the `source-map` module.
+     * This should be a `Map` type, which is equivalent to the `RawSourceMap`
+     * type from the `source-map` module.
      * @type {Map|undefined}
      */
 
@@ -19983,8 +19102,7 @@ var VFile = /*#__PURE__*/function () {
     }
   }
   /**
-   * Access full path (`~/index.min.js`).
-   *
+   * Get the full path (example: `'~/index.min.js'`).
    * @returns {string}
    */
 
@@ -19995,9 +19113,10 @@ var VFile = /*#__PURE__*/function () {
       return this.history[this.history.length - 1];
     }
     /**
-     * Set full path (`~/index.min.js`).
+     * Set the full path (example: `'~/index.min.js'`).
      * Cannot be nullified.
-     *
+     * You can set a file URL (a `URL` object with a `file:` protocol) which will
+     * be turned into a path with `url.fileURLToPath`.
      * @param {string|URL} path
      */
     ,
@@ -20013,7 +19132,7 @@ var VFile = /*#__PURE__*/function () {
       }
     }
     /**
-     * Access parent path (`~`).
+     * Get the parent path (example: `'~'`).
      */
 
   }, {
@@ -20022,8 +19141,8 @@ var VFile = /*#__PURE__*/function () {
       return typeof this.path === 'string' ? external_path_.dirname(this.path) : undefined;
     }
     /**
-     * Set parent path (`~`).
-     * Cannot be set if there's no `path` yet.
+     * Set the parent path (example: `'~'`).
+     * Cannot be set if there’s no `path` yet.
      */
     ,
     set: function set(dirname) {
@@ -20031,7 +19150,7 @@ var VFile = /*#__PURE__*/function () {
       this.path = external_path_.join(dirname || '', this.basename);
     }
     /**
-     * Access basename (including extname) (`index.min.js`).
+     * Get the basename (including extname) (example: `'index.min.js'`).
      */
 
   }, {
@@ -20040,9 +19159,10 @@ var VFile = /*#__PURE__*/function () {
       return typeof this.path === 'string' ? external_path_.basename(this.path) : undefined;
     }
     /**
-     * Set basename (`index.min.js`).
-     * Cannot contain path separators.
-     * Cannot be nullified either (use `file.path = file.dirname` instead).
+     * Set basename (including extname) (`'index.min.js'`).
+     * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+     * on windows).
+     * Cannot be nullified (use `file.path = file.dirname` instead).
      */
     ,
     set: function set(basename) {
@@ -20051,7 +19171,7 @@ var VFile = /*#__PURE__*/function () {
       this.path = external_path_.join(this.dirname || '', basename);
     }
     /**
-     * Access extname (including dot) (`.js`).
+     * Get the extname (including dot) (example: `'.js'`).
      */
 
   }, {
@@ -20060,8 +19180,10 @@ var VFile = /*#__PURE__*/function () {
       return typeof this.path === 'string' ? external_path_.extname(this.path) : undefined;
     }
     /**
-     * Set extname (including dot) (`.js`).
-     * Cannot be set if there's no `path` yet and cannot contain path separators.
+     * Set the extname (including dot) (example: `'.js'`).
+     * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+     * on windows).
+     * Cannot be set if there’s no `path` yet.
      */
     ,
     set: function set(extname) {
@@ -20083,7 +19205,7 @@ var VFile = /*#__PURE__*/function () {
       this.path = external_path_.join(this.dirname, this.stem + (extname || ''));
     }
     /**
-     * Access stem (w/o extname) (`index.min`).
+     * Get the stem (basename w/o extname) (example: `'index.min'`).
      */
 
   }, {
@@ -20092,8 +19214,10 @@ var VFile = /*#__PURE__*/function () {
       return typeof this.path === 'string' ? external_path_.basename(this.path, this.extname) : undefined;
     }
     /**
-     * Set stem (w/o extname) (`index.min`).
-     * Cannot be nullified, and cannot contain path separators.
+     * Set the stem (basename w/o extname) (example: `'index.min'`).
+     * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
+     * on windows).
+     * Cannot be nullified (use `file.path = file.dirname` instead).
      */
     ,
     set: function set(stem) {
@@ -20104,8 +19228,11 @@ var VFile = /*#__PURE__*/function () {
     /**
      * Serialize the file.
      *
-     * @param {BufferEncoding} [encoding='utf8'] If `file.value` is a buffer, `encoding` is used to serialize buffers.
+     * @param {BufferEncoding} [encoding='utf8']
+     *   When `value` is a `Buffer`, `encoding` is a character encoding to
+     *   understand it as (default: `'utf8'`).
      * @returns {string}
+     *   Serialized file.
      */
 
   }, {
@@ -20114,12 +19241,18 @@ var VFile = /*#__PURE__*/function () {
       return (this.value || '').toString(encoding);
     }
     /**
-     * Create a message and associates it w/ the file.
+     * Constructs a new `VFileMessage`, where `fatal` is set to `false`, and
+     * associates it with the file by adding it to `vfile.messages` and setting
+     * `message.file` to the current filepath.
      *
-     * @param {string|Error} reason Reason for message (`string` or `Error`). Uses the stack and message of the error if given.
-     * @param {Node|NodeLike|Position|Point} [place] Place at which the message occurred in a file (`Node`, `Position`, or `Point`, optional).
-     * @param {string} [origin] Place in code the message originates from (`string`, optional).
+     * @param {string|Error} reason
+     *   Human readable reason for the message, uses the stack and message of the error if given.
+     * @param {Node|NodeLike|Position|Point} [place]
+     *   Place where the message occurred in the file.
+     * @param {string} [origin]
+     *   Computer readable reason for the message
      * @returns {VFileMessage}
+     *   Message.
      */
 
   }, {
@@ -20137,14 +19270,17 @@ var VFile = /*#__PURE__*/function () {
       return message;
     }
     /**
-     * Info: create a message, associate it with the file, and mark the fatality
-     * as `null`.
-     * Calls `message()` internally.
+     * Like `VFile#message()`, but associates an informational message where
+     * `fatal` is set to `null`.
      *
-     * @param {string|Error} reason Reason for message (`string` or `Error`). Uses the stack and message of the error if given.
-     * @param {Node|NodeLike|Position|Point} [place] Place at which the message occurred in a file (`Node`, `Position`, or `Point`, optional).
-     * @param {string} [origin] Place in code the message originates from (`string`, optional).
+     * @param {string|Error} reason
+     *   Human readable reason for the message, uses the stack and message of the error if given.
+     * @param {Node|NodeLike|Position|Point} [place]
+     *   Place where the message occurred in the file.
+     * @param {string} [origin]
+     *   Computer readable reason for the message
      * @returns {VFileMessage}
+     *   Message.
      */
 
   }, {
@@ -20155,15 +19291,19 @@ var VFile = /*#__PURE__*/function () {
       return message;
     }
     /**
-     * Fail: create a message, associate it with the file, mark the fatality as
-     * `true`.
-     * Note: fatal errors mean a file is no longer processable.
-     * Calls `message()` internally.
+     * Like `VFile#message()`, but associates a fatal message where `fatal` is
+     * set to `true`, and then immediately throws it.
      *
-     * @param {string|Error} reason Reason for message (`string` or `Error`). Uses the stack and message of the error if given.
-     * @param {Node|NodeLike|Position|Point} [place] Place at which the message occurred in a file (`Node`, `Position`, or `Point`, optional).
-     * @param {string} [origin] Place in code the message originates from (`string`, optional).
+     * > 👉 **Note**: a fatal error means that a file is no longer processable.
+     *
+     * @param {string|Error} reason
+     *   Human readable reason for the message, uses the stack and message of the error if given.
+     * @param {Node|NodeLike|Position|Point} [place]
+     *   Place where the message occurred in the file.
+     * @param {string} [origin]
+     *   Computer readable reason for the message
      * @returns {never}
+     *   Message.
      */
 
   }, {
@@ -20251,12 +19391,12 @@ function bail(error) {
 var extend = __webpack_require__(8579);
 ;// CONCATENATED MODULE: ../../node_modules/unified/node_modules/is-plain-obj/index.js
 function isPlainObject(value) {
-  if (Object.prototype.toString.call(value) !== '[object Object]') {
+  if (typeof value !== 'object' || value === null) {
     return false;
   }
 
   var prototype = Object.getPrototypeOf(value);
-  return prototype === null || prototype === Object.prototype;
+  return (prototype === null || prototype === Object.prototype || Object.getPrototypeOf(prototype) === null) && !(Symbol.toStringTag in value) && !(Symbol.iterator in value);
 }
 ;// CONCATENATED MODULE: ../../node_modules/trough/index.js
 
@@ -23729,7 +22869,7 @@ function castFactory(check) {
 function ok() {
   return true;
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-find-and-replace/node_modules/unist-util-visit-parents/color.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/color.js
 /**
  * @param {string} d
  * @returns {string}
@@ -23737,36 +22877,16 @@ function ok() {
 function color(d) {
   return "\x1B[33m" + d + "\x1B[39m";
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-find-and-replace/node_modules/unist-util-visit-parents/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
- */
-
-/**
- * @typedef {CONTINUE|SKIP|EXIT} Action Union of the action types
- * @typedef {number} Index Move to the sibling at index next (after node itself is completely traversed). Useful if mutating the tree, such as removing the node the visitor is currently on, or any of its previous siblings (or next siblings, in case of reverse) Results less than 0 or greater than or equal to children.length stop traversing the parent
- * @typedef {[(Action|null|undefined|void)?, (Index|null|undefined)?]} ActionTuple List with one or two values, the first an action, the second an index.
- * @typedef {null|undefined|Action|Index|ActionTuple|void} VisitorResult Any value that can be returned from a visitor
- */
-
-/**
- * Invoked when a node (matching test, if given) is found.
- * Visitors are free to transform node.
- * They can also transform the parent of node (the last of ancestors).
- * Replacing node itself, if `SKIP` is not returned, still causes its descendants to be visited.
- * If adding or removing previous siblings (or next siblings, in case of reverse) of node,
- * visitor should return a new index (number) to specify the sibling to traverse after node is traversed.
- * Adding or removing next siblings of node (or previous siblings, in case of reverse)
- * is handled as expected without needing to return a new index.
- * Removing the children property of an ancestor still results in them being traversed.
- *
- * @template {Node} V
- * @callback Visitor
- * @param {V} node Found node
- * @param {Array.<Parent>} ancestors Ancestors of node
- * @returns {VisitorResult}
+ * @typedef {import('./complex-types').Action} Action
+ * @typedef {import('./complex-types').Index} Index
+ * @typedef {import('./complex-types').ActionTuple} ActionTuple
+ * @typedef {import('./complex-types').VisitorResult} VisitorResult
+ * @typedef {import('./complex-types').Visitor} Visitor
  */
 
 
@@ -23785,26 +22905,32 @@ var SKIP = 'skip';
  */
 
 var EXIT = false;
+/**
+ * Visit children of tree which pass a test
+ *
+ * @param tree Abstract syntax tree to walk
+ * @param test Test node, optional
+ * @param visitor Function to run for each node
+ * @param reverse Visit the tree in reverse order, defaults to false
+ */
+
 var visitParents =
 /**
  * @type {(
- *   (<T extends Node>(tree: Node, test: T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>>, visitor: Visitor<T>, reverse?: boolean) => void) &
- *   ((tree: Node, test: Test, visitor: Visitor<Node>, reverse?: boolean) => void) &
- *   ((tree: Node, visitor: Visitor<Node>, reverse?: boolean) => void)
+ *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
+ *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
  * )}
  */
 
 /**
- * Visit children of tree which pass a test
- *
- * @param {Node} tree Abstract syntax tree to walk
- * @param {Test} test test Test node
- * @param {Visitor<Node>} visitor Function to run for each node
- * @param {boolean} [reverse] Fisit the tree in reverse, defaults to false
+ * @param {Node} tree
+ * @param {Test} test
+ * @param {import('./complex-types').Visitor<Node>} visitor
+ * @param {boolean} [reverse]
  */
 function visitParents(tree, test, visitor, reverse) {
   if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor; // @ts-ignore no visitor given, so `visitor` is test.
+    reverse = visitor; // @ts-expect-error no visitor given, so `visitor` is test.
 
     visitor = test;
     test = null;
@@ -23821,8 +22947,9 @@ function visitParents(tree, test, visitor, reverse) {
 
   function factory(node, index, parents) {
     /** @type {Object.<string, unknown>} */
+    // @ts-expect-error: hush
     var value = typeof node === 'object' && node !== null ? node : {};
-    /** @type {string} */
+    /** @type {string|undefined} */
 
     var name;
 
@@ -23854,15 +22981,17 @@ function visitParents(tree, test, visitor, reverse) {
         if (result[0] === EXIT) {
           return result;
         }
-      }
+      } // @ts-expect-error looks like a parent.
+
 
       if (node.children && result[0] !== SKIP) {
-        // @ts-ignore looks like a parent.
-        offset = (reverse ? node.children.length : -1) + step; // @ts-ignore looks like a parent.
+        // @ts-expect-error looks like a parent.
+        offset = (reverse ? node.children.length : -1) + step; // @ts-expect-error looks like a parent.
 
-        grandparents = parents.concat(node); // @ts-ignore looks like a parent.
+        grandparents = parents.concat(node); // @ts-expect-error looks like a parent.
 
         while (offset > -1 && offset < node.children.length) {
+          // @ts-expect-error looks like a parent.
           subresult = factory(node.children[offset], offset, grandparents)();
 
           if (subresult[0] === EXIT) {
@@ -23893,19 +23022,21 @@ function toResult(value) {
 
   return [value];
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-find-and-replace/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-find-and-replace/lib/index.js
 
 
 /**
- * @typedef Options Configuration.
- * @property {Test} [ignore] `unist-util-is` test used to assert parents
+ * @typedef Options
+ *   Configuration (optional).
+ * @property {Test} [ignore]
+ *   `unist-util-is` test used to assert parents
  *
  * @typedef {import('mdast').Root} Root
  * @typedef {import('mdast').Content} Content
  * @typedef {import('mdast').PhrasingContent} PhrasingContent
  * @typedef {import('mdast').Text} Text
  * @typedef {Content|Root} Node
- * @typedef {Extract<Node, import('mdast').Parent>} Parent
+ * @typedef {Exclude<Extract<Node, import('mdast').Parent>, Root>} Parent
  *
  * @typedef {import('unist-util-visit-parents').Test} Test
  * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
@@ -23913,27 +23044,28 @@ function toResult(value) {
  * @typedef RegExpMatchObject
  * @property {number} index
  * @property {string} input
+ * @property {[Root, ...Array<Parent>, Text]} stack
  *
  * @typedef {string|RegExp} Find
  * @typedef {string|ReplaceFunction} Replace
  *
  * @typedef {[Find, Replace]} FindAndReplaceTuple
- * @typedef {Object.<string, Replace>} FindAndReplaceSchema
- * @typedef {Array.<FindAndReplaceTuple>} FindAndReplaceList
+ * @typedef {Record<string, Replace>} FindAndReplaceSchema
+ * @typedef {Array<FindAndReplaceTuple>} FindAndReplaceList
  *
  * @typedef {[RegExp, ReplaceFunction]} Pair
- * @typedef {Array.<Pair>} Pairs
+ * @typedef {Array<Pair>} Pairs
  */
 
 /**
  * @callback ReplaceFunction
  * @param {...any} parameters
- * @returns {Array.<PhrasingContent>|PhrasingContent|string|false|undefined|null}
+ * @returns {Array<PhrasingContent>|PhrasingContent|string|false|undefined|null}
  */
 
 
 
-var mdast_util_find_and_replace_own = {}.hasOwnProperty;
+var lib_own = {}.hasOwnProperty;
 /**
  * @param tree mdast tree
  * @param find Value to find and remove. When `string`, escaped and made into a global `RegExp`
@@ -23989,7 +23121,7 @@ function findAndReplace(tree, find, replace, options) {
   }
 
   return tree;
-  /** @type {import('unist-util-visit-parents').Visitor<Text>} */
+  /** @type {import('unist-util-visit-parents/complex-types').BuildVisitor<Root, 'text'>} */
 
   function visitor(node, parents) {
     var index = -1;
@@ -24011,23 +23143,25 @@ function findAndReplace(tree, find, replace, options) {
     }
 
     if (grandparent) {
-      return handler(node, grandparent);
+      // @ts-expect-error: stack is fine.
+      return handler(node, parents);
     }
   }
   /**
    * @param {Text} node
-   * @param {Parent} parent
+   * @param {[Root, ...Array<Parent>]} parents
    * @returns {VisitorResult}
    */
 
 
-  function handler(node, parent) {
+  function handler(node, parents) {
+    var parent = parents[parents.length - 1];
     var find = pairs[pairIndex][0];
     var replace = pairs[pairIndex][1];
     var start = 0; // @ts-expect-error: TS is wrong, some of these children can be text.
 
     var index = parent.children.indexOf(node);
-    /** @type {Array.<PhrasingContent>} */
+    /** @type {Array<PhrasingContent>} */
 
     var nodes = [];
     /** @type {number|undefined} */
@@ -24037,12 +23171,15 @@ function findAndReplace(tree, find, replace, options) {
     var match = find.exec(node.value);
 
     while (match) {
-      position = match.index; // @ts-expect-error this is perfectly fine, typescript.
+      position = match.index;
+      /** @type {RegExpMatchObject} */
 
-      var value = replace.apply(void 0, _toConsumableArray(match).concat([{
+      var matchObject = {
         index: match.index,
-        input: match.input
-      }]));
+        input: match.input,
+        stack: [].concat(_toConsumableArray(parents), [node])
+      };
+      var value = replace.apply(void 0, _toConsumableArray(match).concat([matchObject]));
 
       if (typeof value === 'string') {
         value = value.length > 0 ? {
@@ -24051,7 +23188,9 @@ function findAndReplace(tree, find, replace, options) {
         } : undefined;
       }
 
-      if (value !== false) {
+      if (value === false) {
+        position = undefined;
+      } else {
         if (start !== position) {
           nodes.push({
             type: 'text',
@@ -24079,7 +23218,6 @@ function findAndReplace(tree, find, replace, options) {
 
     if (position === undefined) {
       nodes = [node];
-      index--;
     } else {
       var _parent$children;
 
@@ -24093,7 +23231,7 @@ function findAndReplace(tree, find, replace, options) {
       (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(_toConsumableArray(nodes)));
     }
 
-    return index + nodes.length + 1;
+    return index + nodes.length;
   }
 };
 /**
@@ -24120,7 +23258,7 @@ function toPairs(schema) {
     var key;
 
     for (key in schema) {
-      if (mdast_util_find_and_replace_own.call(schema, key)) {
+      if (lib_own.call(schema, key)) {
         result.push([toExpression(key), toFunction(schema[key])]);
       }
     }
@@ -24405,18 +23543,13 @@ function previous(match, email) {
  * @type {Record<string, string>}
  */
 var characterEntities = {
-  AEli: 'Æ',
   AElig: 'Æ',
-  AM: '&',
   AMP: '&',
-  Aacut: 'Á',
   Aacute: 'Á',
   Abreve: 'Ă',
-  Acir: 'Â',
   Acirc: 'Â',
   Acy: 'А',
   Afr: '𝔄',
-  Agrav: 'À',
   Agrave: 'À',
   Alpha: 'Α',
   Amacr: 'Ā',
@@ -24424,13 +23557,10 @@ var characterEntities = {
   Aogon: 'Ą',
   Aopf: '𝔸',
   ApplyFunction: '⁡',
-  Arin: 'Å',
   Aring: 'Å',
   Ascr: '𝒜',
   Assign: '≔',
-  Atild: 'Ã',
   Atilde: 'Ã',
-  Aum: 'Ä',
   Auml: 'Ä',
   Backslash: '∖',
   Barv: '⫧',
@@ -24445,14 +23575,12 @@ var characterEntities = {
   Bscr: 'ℬ',
   Bumpeq: '≎',
   CHcy: 'Ч',
-  COP: '©',
   COPY: '©',
   Cacute: 'Ć',
   Cap: '⋒',
   CapitalDifferentialD: 'ⅅ',
   Cayleys: 'ℭ',
   Ccaron: 'Č',
-  Ccedi: 'Ç',
   Ccedil: 'Ç',
   Ccirc: 'Ĉ',
   Cconint: '∰',
@@ -24535,17 +23663,13 @@ var characterEntities = {
   Dscr: '𝒟',
   Dstrok: 'Đ',
   ENG: 'Ŋ',
-  ET: 'Ð',
   ETH: 'Ð',
-  Eacut: 'É',
   Eacute: 'É',
   Ecaron: 'Ě',
-  Ecir: 'Ê',
   Ecirc: 'Ê',
   Ecy: 'Э',
   Edot: 'Ė',
   Efr: '𝔈',
-  Egrav: 'È',
   Egrave: 'È',
   Element: '∈',
   Emacr: 'Ē',
@@ -24560,7 +23684,6 @@ var characterEntities = {
   Escr: 'ℰ',
   Esim: '⩳',
   Eta: 'Η',
-  Eum: 'Ë',
   Euml: 'Ë',
   Exists: '∃',
   ExponentialE: 'ⅇ',
@@ -24573,7 +23696,6 @@ var characterEntities = {
   Fouriertrf: 'ℱ',
   Fscr: 'ℱ',
   GJcy: 'Ѓ',
-  G: '>',
   GT: '>',
   Gamma: 'Γ',
   Gammad: 'Ϝ',
@@ -24609,14 +23731,11 @@ var characterEntities = {
   IEcy: 'Е',
   IJlig: 'Ĳ',
   IOcy: 'Ё',
-  Iacut: 'Í',
   Iacute: 'Í',
-  Icir: 'Î',
   Icirc: 'Î',
   Icy: 'И',
   Idot: 'İ',
   Ifr: 'ℑ',
-  Igrav: 'Ì',
   Igrave: 'Ì',
   Im: 'ℑ',
   Imacr: 'Ī',
@@ -24633,7 +23752,6 @@ var characterEntities = {
   Iscr: 'ℐ',
   Itilde: 'Ĩ',
   Iukcy: 'І',
-  Ium: 'Ï',
   Iuml: 'Ï',
   Jcirc: 'Ĵ',
   Jcy: 'Й',
@@ -24651,7 +23769,6 @@ var characterEntities = {
   Kopf: '𝕂',
   Kscr: '𝒦',
   LJcy: 'Љ',
-  L: '<',
   LT: '<',
   Lacute: 'Ĺ',
   Lambda: 'Λ',
@@ -24788,18 +23905,14 @@ var characterEntities = {
   NotTildeTilde: '≉',
   NotVerticalBar: '∤',
   Nscr: '𝒩',
-  Ntild: 'Ñ',
   Ntilde: 'Ñ',
   Nu: 'Ν',
   OElig: 'Œ',
-  Oacut: 'Ó',
   Oacute: 'Ó',
-  Ocir: 'Ô',
   Ocirc: 'Ô',
   Ocy: 'О',
   Odblac: 'Ő',
   Ofr: '𝔒',
-  Ograv: 'Ò',
   Ograve: 'Ò',
   Omacr: 'Ō',
   Omega: 'Ω',
@@ -24809,12 +23922,9 @@ var characterEntities = {
   OpenCurlyQuote: '‘',
   Or: '⩔',
   Oscr: '𝒪',
-  Oslas: 'Ø',
   Oslash: 'Ø',
-  Otild: 'Õ',
   Otilde: 'Õ',
   Otimes: '⨷',
-  Oum: 'Ö',
   Ouml: 'Ö',
   OverBar: '‾',
   OverBrace: '⏞',
@@ -24839,13 +23949,11 @@ var characterEntities = {
   Proportional: '∝',
   Pscr: '𝒫',
   Psi: 'Ψ',
-  QUO: '"',
   QUOT: '"',
   Qfr: '𝔔',
   Qopf: 'ℚ',
   Qscr: '𝒬',
   RBarr: '⤐',
-  RE: '®',
   REG: '®',
   Racute: 'Ŕ',
   Rang: '⟫',
@@ -24929,7 +24037,6 @@ var characterEntities = {
   Superset: '⊃',
   SupersetEqual: '⊇',
   Supset: '⋑',
-  THOR: 'Þ',
   THORN: 'Þ',
   TRADE: '™',
   TSHcy: 'Ћ',
@@ -24952,18 +24059,15 @@ var characterEntities = {
   TripleDot: '⃛',
   Tscr: '𝒯',
   Tstrok: 'Ŧ',
-  Uacut: 'Ú',
   Uacute: 'Ú',
   Uarr: '↟',
   Uarrocir: '⥉',
   Ubrcy: 'Ў',
   Ubreve: 'Ŭ',
-  Ucir: 'Û',
   Ucirc: 'Û',
   Ucy: 'У',
   Udblac: 'Ű',
   Ufr: '𝔘',
-  Ugrav: 'Ù',
   Ugrave: 'Ù',
   Umacr: 'Ū',
   UnderBar: '_',
@@ -24990,7 +24094,6 @@ var characterEntities = {
   Uring: 'Ů',
   Uscr: '𝒰',
   Utilde: 'Ũ',
-  Uum: 'Ü',
   Uuml: 'Ü',
   VDash: '⊫',
   Vbar: '⫫',
@@ -25021,7 +24124,6 @@ var characterEntities = {
   YAcy: 'Я',
   YIcy: 'Ї',
   YUcy: 'Ю',
-  Yacut: 'Ý',
   Yacute: 'Ý',
   Ycirc: 'Ŷ',
   Ycy: 'Ы',
@@ -25039,29 +24141,23 @@ var characterEntities = {
   Zfr: 'ℨ',
   Zopf: 'ℤ',
   Zscr: '𝒵',
-  aacut: 'á',
   aacute: 'á',
   abreve: 'ă',
   ac: '∾',
   acE: '∾̳',
   acd: '∿',
-  acir: 'â',
   acirc: 'â',
-  acut: '´',
   acute: '´',
   acy: 'а',
-  aeli: 'æ',
   aelig: 'æ',
   af: '⁡',
   afr: '𝔞',
-  agrav: 'à',
   agrave: 'à',
   alefsym: 'ℵ',
   aleph: 'ℵ',
   alpha: 'α',
   amacr: 'ā',
   amalg: '⨿',
-  am: '&',
   amp: '&',
   and: '∧',
   andand: '⩕',
@@ -25096,15 +24192,12 @@ var characterEntities = {
   apos: "'",
   approx: '≈',
   approxeq: '≊',
-  arin: 'å',
   aring: 'å',
   ascr: '𝒶',
   ast: '*',
   asymp: '≈',
   asympeq: '≍',
-  atild: 'ã',
   atilde: 'ã',
-  aum: 'ä',
   auml: 'ä',
   awconint: '∳',
   awint: '⨑',
@@ -25209,7 +24302,6 @@ var characterEntities = {
   boxvr: '├',
   bprime: '‵',
   breve: '˘',
-  brvba: '¦',
   brvbar: '¦',
   bscr: '𝒷',
   bsemi: '⁏',
@@ -25236,16 +24328,13 @@ var characterEntities = {
   caron: 'ˇ',
   ccaps: '⩍',
   ccaron: 'č',
-  ccedi: 'ç',
   ccedil: 'ç',
   ccirc: 'ĉ',
   ccups: '⩌',
   ccupssm: '⩐',
   cdot: 'ċ',
-  cedi: '¸',
   cedil: '¸',
   cemptyv: '⦲',
-  cen: '¢',
   cent: '¢',
   centerdot: '·',
   cfr: '𝔠',
@@ -25284,7 +24373,6 @@ var characterEntities = {
   conint: '∮',
   copf: '𝕔',
   coprod: '∐',
-  cop: '©',
   copy: '©',
   copysr: '℗',
   crarr: '↵',
@@ -25314,7 +24402,6 @@ var characterEntities = {
   curlyeqsucc: '⋟',
   curlyvee: '⋎',
   curlywedge: '⋏',
-  curre: '¤',
   curren: '¤',
   curvearrowleft: '↶',
   curvearrowright: '↷',
@@ -25338,7 +24425,6 @@ var characterEntities = {
   ddagger: '‡',
   ddarr: '⇊',
   ddotseq: '⩷',
-  de: '°',
   deg: '°',
   delta: 'δ',
   demptyv: '⦱',
@@ -25354,7 +24440,6 @@ var characterEntities = {
   digamma: 'ϝ',
   disin: '⋲',
   div: '÷',
-  divid: '÷',
   divide: '÷',
   divideontimes: '⋇',
   divonx: '⋇',
@@ -25391,11 +24476,10 @@ var characterEntities = {
   dzigrarr: '⟿',
   eDDot: '⩷',
   eDot: '≑',
-  eacut: 'é',
   eacute: 'é',
   easter: '⩮',
   ecaron: 'ě',
-  ecir: 'ê',
+  ecir: '≖',
   ecirc: 'ê',
   ecolon: '≕',
   ecy: 'э',
@@ -25404,7 +24488,6 @@ var characterEntities = {
   efDot: '≒',
   efr: '𝔢',
   eg: '⪚',
-  egrav: 'è',
   egrave: 'è',
   egs: '⪖',
   egsdot: '⪘',
@@ -25446,9 +24529,7 @@ var characterEntities = {
   esdot: '≐',
   esim: '≂',
   eta: 'η',
-  et: 'ð',
   eth: 'ð',
-  eum: 'ë',
   euml: 'ë',
   euro: '€',
   excl: '!',
@@ -25473,7 +24554,6 @@ var characterEntities = {
   fork: '⋔',
   forkv: '⫙',
   fpartint: '⨍',
-  frac1: '¼',
   frac12: '½',
   frac13: '⅓',
   frac14: '¼',
@@ -25482,7 +24562,6 @@ var characterEntities = {
   frac18: '⅛',
   frac23: '⅔',
   frac25: '⅖',
-  frac3: '¾',
   frac34: '¾',
   frac35: '⅗',
   frac38: '⅜',
@@ -25537,7 +24616,6 @@ var characterEntities = {
   gsim: '≳',
   gsime: '⪎',
   gsiml: '⪐',
-  g: '>',
   gt: '>',
   gtcc: '⪧',
   gtcir: '⩺',
@@ -25581,18 +24659,14 @@ var characterEntities = {
   hstrok: 'ħ',
   hybull: '⁃',
   hyphen: '‐',
-  iacut: 'í',
   iacute: 'í',
   ic: '⁣',
-  icir: 'î',
   icirc: 'î',
   icy: 'и',
   iecy: 'е',
-  iexc: '¡',
   iexcl: '¡',
   iff: '⇔',
   ifr: '𝔦',
-  igrav: 'ì',
   igrave: 'ì',
   ii: 'ⅈ',
   iiiint: '⨌',
@@ -25623,7 +24697,6 @@ var characterEntities = {
   iopf: '𝕚',
   iota: 'ι',
   iprod: '⨼',
-  iques: '¿',
   iquest: '¿',
   iscr: '𝒾',
   isin: '∈',
@@ -25635,7 +24708,6 @@ var characterEntities = {
   it: '⁢',
   itilde: 'ĩ',
   iukcy: 'і',
-  ium: 'ï',
   iuml: 'ï',
   jcirc: 'ĵ',
   jcy: 'й',
@@ -25670,7 +24742,6 @@ var characterEntities = {
   langd: '⦑',
   langle: '⟨',
   lap: '⪅',
-  laqu: '«',
   laquo: '«',
   larr: '←',
   larrb: '⇤',
@@ -25792,7 +24863,6 @@ var characterEntities = {
   lsquo: '‘',
   lsquor: '‚',
   lstrok: 'ł',
-  l: '<',
   lt: '<',
   ltcc: '⪦',
   ltcir: '⩹',
@@ -25810,7 +24880,6 @@ var characterEntities = {
   lvertneqq: '≨︀',
   lvnE: '≨︀',
   mDDot: '∺',
-  mac: '¯',
   macr: '¯',
   male: '♂',
   malt: '✠',
@@ -25827,12 +24896,10 @@ var characterEntities = {
   measuredangle: '∡',
   mfr: '𝔪',
   mho: '℧',
-  micr: 'µ',
   micro: 'µ',
   mid: '∣',
   midast: '*',
   midcir: '⫰',
-  middo: '·',
   middot: '·',
   minus: '−',
   minusb: '⊟',
@@ -25871,7 +24938,6 @@ var characterEntities = {
   natur: '♮',
   natural: '♮',
   naturals: 'ℕ',
-  nbs: ' ',
   nbsp: ' ',
   nbump: '≎̸',
   nbumpe: '≏̸',
@@ -25930,7 +24996,6 @@ var characterEntities = {
   nltrie: '⋬',
   nmid: '∤',
   nopf: '𝕟',
-  no: '¬',
   not: '¬',
   notin: '∉',
   notinE: '⋹̸',
@@ -25987,7 +25052,6 @@ var characterEntities = {
   nsupseteq: '⊉',
   nsupseteqq: '⫆̸',
   ntgl: '≹',
-  ntild: 'ñ',
   ntilde: 'ñ',
   ntlg: '≸',
   ntriangleleft: '⋪',
@@ -26018,10 +25082,9 @@ var characterEntities = {
   nwarrow: '↖',
   nwnear: '⤧',
   oS: 'Ⓢ',
-  oacut: 'ó',
   oacute: 'ó',
   oast: '⊛',
-  ocir: 'ô',
+  ocir: '⊚',
   ocirc: 'ô',
   ocy: 'о',
   odash: '⊝',
@@ -26033,7 +25096,6 @@ var characterEntities = {
   ofcir: '⦿',
   ofr: '𝔬',
   ogon: '˛',
-  ograv: 'ò',
   ograve: 'ò',
   ogt: '⧁',
   ohbar: '⦵',
@@ -26055,7 +25117,7 @@ var characterEntities = {
   oplus: '⊕',
   or: '∨',
   orarr: '↻',
-  ord: 'º',
+  ord: '⩝',
   order: 'ℴ',
   orderof: 'ℴ',
   ordf: 'ª',
@@ -26065,17 +25127,14 @@ var characterEntities = {
   orslope: '⩗',
   orv: '⩛',
   oscr: 'ℴ',
-  oslas: 'ø',
   oslash: 'ø',
   osol: '⊘',
-  otild: 'õ',
   otilde: 'õ',
   otimes: '⊗',
   otimesas: '⨶',
-  oum: 'ö',
   ouml: 'ö',
   ovbar: '⌽',
-  par: '¶',
+  par: '∥',
   para: '¶',
   parallel: '∥',
   parsim: '⫳',
@@ -26105,14 +25164,12 @@ var characterEntities = {
   plusdo: '∔',
   plusdu: '⨥',
   pluse: '⩲',
-  plusm: '±',
   plusmn: '±',
   plussim: '⨦',
   plustwo: '⨧',
   pm: '±',
   pointint: '⨕',
   popf: '𝕡',
-  poun: '£',
   pound: '£',
   pr: '≺',
   prE: '⪳',
@@ -26152,7 +25209,6 @@ var characterEntities = {
   quatint: '⨖',
   quest: '?',
   questeq: '≟',
-  quo: '"',
   quot: '"',
   rAarr: '⇛',
   rArr: '⇒',
@@ -26167,7 +25223,6 @@ var characterEntities = {
   rangd: '⦒',
   range: '⦥',
   rangle: '⟩',
-  raqu: '»',
   raquo: '»',
   rarr: '→',
   rarrap: '⥵',
@@ -26206,7 +25261,6 @@ var characterEntities = {
   realpart: 'ℜ',
   reals: 'ℝ',
   rect: '▭',
-  re: '®',
   reg: '®',
   rfisht: '⥽',
   rfloor: '⌋',
@@ -26281,7 +25335,6 @@ var characterEntities = {
   searhk: '⤥',
   searr: '↘',
   searrow: '↘',
-  sec: '§',
   sect: '§',
   semi: ';',
   seswar: '⤩',
@@ -26295,7 +25348,6 @@ var characterEntities = {
   shcy: 'ш',
   shortmid: '∣',
   shortparallel: '∥',
-  sh: '­',
   shy: '­',
   sigma: 'σ',
   sigmaf: 'ς',
@@ -26382,10 +25434,10 @@ var characterEntities = {
   succsim: '≿',
   sum: '∑',
   sung: '♪',
-  sup: '⊃',
   sup1: '¹',
   sup2: '²',
   sup3: '³',
+  sup: '⊃',
   supE: '⫆',
   supdot: '⪾',
   supdsub: '⫘',
@@ -26411,7 +25463,6 @@ var characterEntities = {
   swarr: '↙',
   swarrow: '↙',
   swnwar: '⤪',
-  szli: 'ß',
   szlig: 'ß',
   target: '⌖',
   tau: 'τ',
@@ -26432,10 +25483,8 @@ var characterEntities = {
   thinsp: ' ',
   thkap: '≈',
   thksim: '∼',
-  thor: 'þ',
   thorn: 'þ',
   tilde: '˜',
-  time: '×',
   times: '×',
   timesb: '⊠',
   timesbar: '⨱',
@@ -26473,12 +25522,10 @@ var characterEntities = {
   twoheadrightarrow: '↠',
   uArr: '⇑',
   uHar: '⥣',
-  uacut: 'ú',
   uacute: 'ú',
   uarr: '↑',
   ubrcy: 'ў',
   ubreve: 'ŭ',
-  ucir: 'û',
   ucirc: 'û',
   ucy: 'у',
   udarr: '⇅',
@@ -26486,7 +25533,6 @@ var characterEntities = {
   udhar: '⥮',
   ufisht: '⥾',
   ufr: '𝔲',
-  ugrav: 'ù',
   ugrave: 'ù',
   uharl: '↿',
   uharr: '↾',
@@ -26496,7 +25542,6 @@ var characterEntities = {
   ulcrop: '⌏',
   ultri: '◸',
   umacr: 'ū',
-  um: '¨',
   uml: '¨',
   uogon: 'ų',
   uopf: '𝕦',
@@ -26520,7 +25565,6 @@ var characterEntities = {
   utri: '▵',
   utrif: '▴',
   uuarr: '⇈',
-  uum: 'ü',
   uuml: 'ü',
   uwangle: '⦧',
   vArr: '⇕',
@@ -26600,19 +25644,16 @@ var characterEntities = {
   xutri: '△',
   xvee: '⋁',
   xwedge: '⋀',
-  yacut: 'ý',
   yacute: 'ý',
   yacy: 'я',
   ycirc: 'ŷ',
   ycy: 'ы',
-  ye: '¥',
   yen: '¥',
   yfr: '𝔶',
   yicy: 'ї',
   yopf: '𝕪',
   yscr: '𝓎',
   yucy: 'ю',
-  yum: 'ÿ',
   yuml: 'ÿ',
   zacute: 'ź',
   zcaron: 'ž',
@@ -28483,159 +27524,6 @@ function remarkGfm() {
     list.push(value);
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/color.js
-/**
- * @param {string} d
- * @returns {string}
- */
-function color_color(d) {
-  return "\x1B[33m" + d + "\x1B[39m";
-}
-;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('./complex-types').Action} Action
- * @typedef {import('./complex-types').Index} Index
- * @typedef {import('./complex-types').ActionTuple} ActionTuple
- * @typedef {import('./complex-types').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
- */
-
-
-/**
- * Continue traversing as normal
- */
-
-var unist_util_visit_parents_CONTINUE = true;
-/**
- * Do not traverse this node’s children
- */
-
-var unist_util_visit_parents_SKIP = 'skip';
-/**
- * Stop traversing immediately
- */
-
-var unist_util_visit_parents_EXIT = false;
-/**
- * Visit children of tree which pass a test
- *
- * @param tree Abstract syntax tree to walk
- * @param test Test node, optional
- * @param visitor Function to run for each node
- * @param reverse Visit the tree in reverse order, defaults to false
- */
-
-var unist_util_visit_parents_visitParents =
-/**
- * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * @param {Node} tree
- * @param {Test} test
- * @param {import('./complex-types').Visitor<Node>} visitor
- * @param {boolean} [reverse]
- */
-function visitParents(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor; // @ts-expect-error no visitor given, so `visitor` is test.
-
-    visitor = test;
-    test = null;
-  }
-
-  var is = convert(test);
-  var step = reverse ? -1 : 1;
-  factory(tree, null, [])();
-  /**
-   * @param {Node} node
-   * @param {number?} index
-   * @param {Array.<Parent>} parents
-   */
-
-  function factory(node, index, parents) {
-    /** @type {Object.<string, unknown>} */
-    // @ts-expect-error: hush
-    var value = typeof node === 'object' && node !== null ? node : {};
-    /** @type {string|undefined} */
-
-    var name;
-
-    if (typeof value.type === 'string') {
-      name = typeof value.tagName === 'string' ? value.tagName : typeof value.name === 'string' ? value.name : undefined;
-      Object.defineProperty(visit, 'name', {
-        value: 'node (' + color_color(value.type + (name ? '<' + name + '>' : '')) + ')'
-      });
-    }
-
-    return visit;
-
-    function visit() {
-      /** @type {ActionTuple} */
-      var result = [];
-      /** @type {ActionTuple} */
-
-      var subresult;
-      /** @type {number} */
-
-      var offset;
-      /** @type {Array.<Parent>} */
-
-      var grandparents;
-
-      if (!test || is(node, index, parents[parents.length - 1] || null)) {
-        result = unist_util_visit_parents_toResult(visitor(node, parents));
-
-        if (result[0] === unist_util_visit_parents_EXIT) {
-          return result;
-        }
-      } // @ts-expect-error looks like a parent.
-
-
-      if (node.children && result[0] !== unist_util_visit_parents_SKIP) {
-        // @ts-expect-error looks like a parent.
-        offset = (reverse ? node.children.length : -1) + step; // @ts-expect-error looks like a parent.
-
-        grandparents = parents.concat(node); // @ts-expect-error looks like a parent.
-
-        while (offset > -1 && offset < node.children.length) {
-          // @ts-expect-error looks like a parent.
-          subresult = factory(node.children[offset], offset, grandparents)();
-
-          if (subresult[0] === unist_util_visit_parents_EXIT) {
-            return subresult;
-          }
-
-          offset = typeof subresult[1] === 'number' ? subresult[1] : offset + step;
-        }
-      }
-
-      return result;
-    }
-  }
-};
-/**
- * @param {VisitorResult} value
- * @returns {ActionTuple}
- */
-
-function unist_util_visit_parents_toResult(value) {
-  if (Array.isArray(value)) {
-    return value;
-  }
-
-  if (typeof value === 'number') {
-    return [unist_util_visit_parents_CONTINUE, value];
-  }
-
-  return [value];
-}
 ;// CONCATENATED MODULE: ../../node_modules/unist-util-visit/index.js
 /**
  * @typedef {import('unist').Node} Node
@@ -28676,7 +27564,7 @@ function visit(tree, test, visitor, reverse) {
     test = null;
   }
 
-  unist_util_visit_parents_visitParents(tree, test, overload, reverse);
+  visitParents(tree, test, overload, reverse);
   /**
    * @param {Node} node
    * @param {Array.<Parent>} parents
@@ -31752,20 +30640,18 @@ function tokenizeSetextUnderline(effects, ok, nok) {
  * to detect whether the HTML-like syntax is seen as HTML (flow) or not.
  *
  * This is copied from:
- * <https://spec.commonmark.org/0.29/#html-blocks>.
+ * <https://spec.commonmark.org/0.30/#html-blocks>.
  */
-var htmlBlockNames = ['address', 'article', 'aside', 'base', 'basefont', 'blockquote', 'body', 'caption', 'center', 'col', 'colgroup', 'dd', 'details', 'dialog', 'dir', 'div', 'dl', 'dt', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hr', 'html', 'iframe', 'legend', 'li', 'link', 'main', 'menu', 'menuitem', 'nav', 'noframes', 'ol', 'optgroup', 'option', 'p', 'param', 'section', 'source', 'summary', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'title', 'tr', 'track', 'ul'];
+var htmlBlockNames = ['address', 'article', 'aside', 'base', 'basefont', 'blockquote', 'body', 'caption', 'center', 'col', 'colgroup', 'dd', 'details', 'dialog', 'dir', 'div', 'dl', 'dt', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'frame', 'frameset', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'head', 'header', 'hr', 'html', 'iframe', 'legend', 'li', 'link', 'main', 'menu', 'menuitem', 'nav', 'noframes', 'ol', 'optgroup', 'option', 'p', 'param', 'section', 'summary', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'title', 'tr', 'track', 'ul'];
 /**
  * List of lowercase HTML tag names which when parsing HTML (flow), result in
  * HTML that can include lines w/o exiting, until a closing tag also in this
  * list is found (condition 1).
  *
  * This module is copied from:
- * <https://spec.commonmark.org/0.29/#html-blocks>.
+ * <https://spec.commonmark.org/0.30/#html-blocks>.
  *
- * Note that `textarea` is not available in `CommonMark@0.29` but has been
- * merged to the primary branch and is slated to be released in the next release
- * of CommonMark.
+ * Note that `textarea` was added in `CommonMark@0.30`.
  */
 
 var htmlRawNames = ['pre', 'script', 'style', 'textarea'];
@@ -34477,7 +33363,7 @@ function postprocess(events) {
 
 
 
-var lib_own = {}.hasOwnProperty;
+var mdast_util_from_markdown_lib_own = {}.hasOwnProperty;
 /**
  * @param value Markdown to parse (`string` or `Buffer`).
  * @param [encoding] Character encoding to understand `value` as when it’s a `Buffer` (`string`, default: `'utf8'`).
@@ -34671,7 +33557,7 @@ function compiler() {
     while (++index < events.length) {
       var handler = config[events[index][0]];
 
-      if (lib_own.call(handler, events[index][1].type)) {
+      if (mdast_util_from_markdown_lib_own.call(handler, events[index][1].type)) {
         handler[events[index][1].type].call(Object.assign({
           sliceSerialize: events[index][2].sliceSerialize
         }, context), events[index][1]);
@@ -35558,9 +34444,9 @@ function extension(combined, extension) {
   var key;
 
   for (key in extension) {
-    if (lib_own.call(extension, key)) {
+    if (mdast_util_from_markdown_lib_own.call(extension, key)) {
       var list = key === 'canContainEols' || key === 'transforms';
-      var maybe = lib_own.call(combined, key) ? combined[key] : undefined;
+      var maybe = mdast_util_from_markdown_lib_own.call(combined, key) ? combined[key] : undefined;
       /* c8 ignore next */
 
       var left = maybe || (combined[key] = list ? [] : {});
@@ -35752,274 +34638,45 @@ function unist_util_position_point(type) {
 function generated(node) {
   return !node || !node.position || !node.position.start || !node.position.start.line || !node.position.start.column || !node.position.end || !node.position.end.line || !node.position.end.column;
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-definitions/node_modules/unist-util-visit-parents/color.js
-/**
- * @param {string} d
- * @returns {string}
- */
-function unist_util_visit_parents_color_color(d) {
-  return "\x1B[33m" + d + "\x1B[39m";
-}
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-definitions/node_modules/unist-util-visit-parents/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- */
-
-/**
- * @typedef {CONTINUE|SKIP|EXIT} Action Union of the action types
- * @typedef {number} Index Move to the sibling at index next (after node itself is completely traversed). Useful if mutating the tree, such as removing the node the visitor is currently on, or any of its previous siblings (or next siblings, in case of reverse) Results less than 0 or greater than or equal to children.length stop traversing the parent
- * @typedef {[(Action|null|undefined|void)?, (Index|null|undefined)?]} ActionTuple List with one or two values, the first an action, the second an index.
- * @typedef {null|undefined|Action|Index|ActionTuple|void} VisitorResult Any value that can be returned from a visitor
- */
-
-/**
- * Invoked when a node (matching test, if given) is found.
- * Visitors are free to transform node.
- * They can also transform the parent of node (the last of ancestors).
- * Replacing node itself, if `SKIP` is not returned, still causes its descendants to be visited.
- * If adding or removing previous siblings (or next siblings, in case of reverse) of node,
- * visitor should return a new index (number) to specify the sibling to traverse after node is traversed.
- * Adding or removing next siblings of node (or previous siblings, in case of reverse)
- * is handled as expected without needing to return a new index.
- * Removing the children property of an ancestor still results in them being traversed.
- *
- * @template {Node} V
- * @callback Visitor
- * @param {V} node Found node
- * @param {Array.<Parent>} ancestors Ancestors of node
- * @returns {VisitorResult}
- */
-
-
-/**
- * Continue traversing as normal
- */
-
-var node_modules_unist_util_visit_parents_CONTINUE = true;
-/**
- * Do not traverse this node’s children
- */
-
-var node_modules_unist_util_visit_parents_SKIP = 'skip';
-/**
- * Stop traversing immediately
- */
-
-var node_modules_unist_util_visit_parents_EXIT = false;
-var node_modules_unist_util_visit_parents_visitParents =
-/**
- * @type {(
- *   (<T extends Node>(tree: Node, test: T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>>, visitor: Visitor<T>, reverse?: boolean) => void) &
- *   ((tree: Node, test: Test, visitor: Visitor<Node>, reverse?: boolean) => void) &
- *   ((tree: Node, visitor: Visitor<Node>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * Visit children of tree which pass a test
- *
- * @param {Node} tree Abstract syntax tree to walk
- * @param {Test} test test Test node
- * @param {Visitor<Node>} visitor Function to run for each node
- * @param {boolean} [reverse] Fisit the tree in reverse, defaults to false
- */
-function visitParents(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor; // @ts-ignore no visitor given, so `visitor` is test.
-
-    visitor = test;
-    test = null;
-  }
-
-  var is = convert(test);
-  var step = reverse ? -1 : 1;
-  factory(tree, null, [])();
-  /**
-   * @param {Node} node
-   * @param {number?} index
-   * @param {Array.<Parent>} parents
-   */
-
-  function factory(node, index, parents) {
-    /** @type {Object.<string, unknown>} */
-    var value = typeof node === 'object' && node !== null ? node : {};
-    /** @type {string} */
-
-    var name;
-
-    if (typeof value.type === 'string') {
-      name = typeof value.tagName === 'string' ? value.tagName : typeof value.name === 'string' ? value.name : undefined;
-      Object.defineProperty(visit, 'name', {
-        value: 'node (' + unist_util_visit_parents_color_color(value.type + (name ? '<' + name + '>' : '')) + ')'
-      });
-    }
-
-    return visit;
-
-    function visit() {
-      /** @type {ActionTuple} */
-      var result = [];
-      /** @type {ActionTuple} */
-
-      var subresult;
-      /** @type {number} */
-
-      var offset;
-      /** @type {Array.<Parent>} */
-
-      var grandparents;
-
-      if (!test || is(node, index, parents[parents.length - 1] || null)) {
-        result = node_modules_unist_util_visit_parents_toResult(visitor(node, parents));
-
-        if (result[0] === node_modules_unist_util_visit_parents_EXIT) {
-          return result;
-        }
-      }
-
-      if (node.children && result[0] !== node_modules_unist_util_visit_parents_SKIP) {
-        // @ts-ignore looks like a parent.
-        offset = (reverse ? node.children.length : -1) + step; // @ts-ignore looks like a parent.
-
-        grandparents = parents.concat(node); // @ts-ignore looks like a parent.
-
-        while (offset > -1 && offset < node.children.length) {
-          subresult = factory(node.children[offset], offset, grandparents)();
-
-          if (subresult[0] === node_modules_unist_util_visit_parents_EXIT) {
-            return subresult;
-          }
-
-          offset = typeof subresult[1] === 'number' ? subresult[1] : offset + step;
-        }
-      }
-
-      return result;
-    }
-  }
-};
-/**
- * @param {VisitorResult} value
- * @returns {ActionTuple}
- */
-
-function node_modules_unist_util_visit_parents_toResult(value) {
-  if (Array.isArray(value)) {
-    return value;
-  }
-
-  if (typeof value === 'number') {
-    return [node_modules_unist_util_visit_parents_CONTINUE, value];
-  }
-
-  return [value];
-}
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-definitions/node_modules/unist-util-visit/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- */
-
-/**
- * Invoked when a node (matching test, if given) is found.
- * Visitors are free to transform node.
- * They can also transform the parent of node (the last of ancestors).
- * Replacing node itself, if `SKIP` is not returned, still causes its descendants to be visited.
- * If adding or removing previous siblings (or next siblings, in case of reverse) of node,
- * visitor should return a new index (number) to specify the sibling to traverse after node is traversed.
- * Adding or removing next siblings of node (or previous siblings, in case of reverse)
- * is handled as expected without needing to return a new index.
- * Removing the children property of an ancestor still results in them being traversed.
- *
- * @template {Node} V
- * @callback Visitor
- * @param {V} node Found node
- * @param {number|null} index Position of `node` in `parent`
- * @param {Parent|null} parent Parent of `node`
- * @returns {VisitorResult}
- */
-
-
-var unist_util_visit_visit =
-/**
- * @type {(
- *   (<T extends Node>(tree: Node, test: T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>>, visitor: Visitor<T>, reverse?: boolean) => void) &
- *   ((tree: Node, test: Test, visitor: Visitor<Node>, reverse?: boolean) => void) &
- *   ((tree: Node, visitor: Visitor<Node>, reverse?: boolean) => void)
- * )}
- */
-
-/**
- * Visit children of tree which pass a test
- *
- * @param {Node} tree Abstract syntax tree to walk
- * @param {Test} test test Test node
- * @param {Visitor<Node>} visitor Function to run for each node
- * @param {boolean} [reverse] Fisit the tree in reverse, defaults to false
- */
-function visit(tree, test, visitor, reverse) {
-  if (typeof test === 'function' && typeof visitor !== 'function') {
-    reverse = visitor;
-    visitor = test;
-    test = null;
-  }
-
-  node_modules_unist_util_visit_parents_visitParents(tree, test, overload, reverse);
-  /**
-   * @param {Node} node
-   * @param {Array.<Parent>} parents
-   */
-
-  function overload(node, parents) {
-    var parent = parents[parents.length - 1];
-    return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
-  }
-};
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-definitions/index.js
 /**
  * @typedef {import('mdast').Root|import('mdast').Content} Node
  * @typedef {import('mdast').Definition} Definition
- * @typedef {import('unist-util-visit').Visitor<Definition>} DefinitionVisitor
  */
 
 var mdast_util_definitions_own = {}.hasOwnProperty;
 /**
+ * Find definitions in `node`.
+ * Uses CommonMark precedence, which means that earlier definitions are
+ * preferred over duplicate later definitions.
  *
  * @param {Node} node
  */
 
 function definitions(node) {
-  /** @type {Object.<string, Definition>} */
+  /** @type {Record<string, Definition>} */
   var cache = Object.create(null);
 
   if (!node || !node.type) {
     throw new Error('mdast-util-definitions expected node');
   }
 
-  unist_util_visit_visit(node, 'definition', ondefinition);
-  return getDefinition;
-  /** @type {DefinitionVisitor} */
-
-  function ondefinition(definition) {
+  visit(node, 'definition', function (definition) {
     var id = clean(definition.identifier);
 
     if (id && !mdast_util_definitions_own.call(cache, id)) {
       cache[id] = definition;
     }
-  }
+  });
+  return definition;
   /**
-   * Get a node from the bound definition-cache.
+   * Get a node from the bound definition cache.
    *
    * @param {string} identifier
    * @returns {Definition|null}
    */
 
-
-  function getDefinition(identifier) {
+  function definition(identifier) {
     var id = clean(identifier);
     return id && mdast_util_definitions_own.call(cache, id) ? cache[id] : null;
   }
@@ -37076,11 +35733,82 @@ function table(h, node) {
     end: pointEnd(result[result.length - 1])
   }, 'tbody', wrap_wrap(result.slice(1), true)) : []), true));
 }
+;// CONCATENATED MODULE: ../../node_modules/trim-lines/index.js
+var tab = 9;
+/* `\t` */
+
+var space = 32;
+/* ` ` */
+
+/**
+ * Remove initial and final spaces and tabs at the line breaks in `value`.
+ * Does not trim initial and final spaces and tabs of the value itself.
+ *
+ * @param {string} value
+ *   Value to trim.
+ * @returns {string}
+ *   Trimmed value.
+ */
+
+function trimLines(value) {
+  var source = String(value);
+  var search = /\r?\n|\r/g;
+  var match = search.exec(source);
+  var last = 0;
+  /** @type {Array<string>} */
+
+  var lines = [];
+
+  while (match) {
+    lines.push(trimLine(source.slice(last, match.index), last > 0, true), match[0]);
+    last = match.index + match[0].length;
+    match = search.exec(source);
+  }
+
+  lines.push(trimLine(source.slice(last), last > 0, false));
+  return lines.join('');
+}
+/**
+ * @param {string} value
+ *   Line to trim.
+ * @param {boolean} start
+ *   Whether to trim the start of the line.
+ * @param {boolean} end
+ *   Whether to trim the end of the line.
+ * @returns {string}
+ *   Trimmed line.
+ */
+
+function trimLine(value, start, end) {
+  var startIndex = 0;
+  var endIndex = value.length;
+
+  if (start) {
+    var code = value.codePointAt(startIndex);
+
+    while (code === tab || code === space) {
+      startIndex++;
+      code = value.codePointAt(startIndex);
+    }
+  }
+
+  if (end) {
+    var _code = value.codePointAt(endIndex - 1);
+
+    while (_code === tab || _code === space) {
+      endIndex--;
+      _code = value.codePointAt(endIndex - 1);
+    }
+  }
+
+  return endIndex > startIndex ? value.slice(startIndex, endIndex) : '';
+}
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/text.js
 /**
  * @typedef {import('mdast').Text} Text
  * @typedef {import('../index.js').Handler} Handler
  */
+
 
 /**
  * @type {Handler}
@@ -37088,7 +35816,7 @@ function table(h, node) {
  */
 
 function handlers_text_text(h, node) {
-  return h.augment(node, u('text', String(node.value).replace(/[ \t]*(\r?\n|\r)[ \t]*/g, '$1')));
+  return h.augment(node, u('text', trimLines(String(node.value))));
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
 /**
@@ -37343,6 +36071,7 @@ function factory(tree, options) {
       };
 
       if (!generated(ctx)) {
+        // @ts-expect-error: fine.
         right.position = {
           start: pointStart(ctx),
           end: pointEnd(ctx)
@@ -53392,7 +52121,70 @@ defineMacro("\\bra", "\\mathinner{\\langle{#1}|}");
 defineMacro("\\ket", "\\mathinner{|{#1}\\rangle}");
 defineMacro("\\braket", "\\mathinner{\\langle{#1}\\rangle}");
 defineMacro("\\Bra", "\\left\\langle#1\\right|");
-defineMacro("\\Ket", "\\left|#1\\right\\rangle"); //////////////////////////////////////////////////////////////////////
+defineMacro("\\Ket", "\\left|#1\\right\\rangle");
+
+var braketHelper = function braketHelper(one) {
+  return function (context) {
+    var left = context.consumeArg().tokens;
+    var middle = context.consumeArg().tokens;
+    var middleDouble = context.consumeArg().tokens;
+    var right = context.consumeArg().tokens;
+    var oldMiddle = context.macros.get("|");
+    var oldMiddleDouble = context.macros.get("\\|");
+    context.macros.beginGroup();
+
+    var midMacro = function midMacro(_double) {
+      return function (context) {
+        if (one) {
+          // Only modify the first instance of | or \|
+          context.macros.set("|", oldMiddle);
+
+          if (middleDouble.length) {
+            context.macros.set("\\|", oldMiddleDouble);
+          }
+        }
+
+        var doubled = _double;
+
+        if (!_double && middleDouble.length) {
+          // Mimic \@ifnextchar
+          var nextToken = context.future();
+
+          if (nextToken.text === "|") {
+            context.popToken();
+            doubled = true;
+          }
+        }
+
+        return {
+          tokens: doubled ? middleDouble : middle,
+          numArgs: 0
+        };
+      };
+    };
+
+    context.macros.set("|", midMacro(false));
+
+    if (middleDouble.length) {
+      context.macros.set("\\|", midMacro(true));
+    }
+
+    var arg = context.consumeArg().tokens;
+    var expanded = context.expandTokens([].concat(_toConsumableArray(right), _toConsumableArray(arg), _toConsumableArray(left)));
+    context.macros.endGroup();
+    return {
+      tokens: expanded.reverse(),
+      numArgs: 0
+    };
+  };
+};
+
+defineMacro("\\bra@ket", braketHelper(false));
+defineMacro("\\bra@set", braketHelper(true));
+defineMacro("\\Braket", "\\bra@ket{\\left\\langle}" + "{\\,\\middle\\vert\\,}{\\,\\middle\\vert\\,}{\\right\\rangle}");
+defineMacro("\\Set", "\\bra@set{\\left\\{\\:}" + "{\\;\\middle\\vert\\;}{\\;\\middle\\Vert\\;}{\\:\\right\\}}");
+defineMacro("\\set", "\\bra@set{\\{\\,}{\\mid}{}{\\,\\}}"); // has no support for special || or \|
+//////////////////////////////////////////////////////////////////////
 // actuarialangle.dtx
 
 defineMacro("\\angln", "{\\angl n}"); // Custom Khan Academy colors, should be moved to an optional package
@@ -53873,7 +52665,9 @@ var MacroExpander = /*#__PURE__*/function () {
       return this.macros.has(name) ? this.expandTokens([new Token(name)]) : undefined;
     }
     /**
-     * Fully expand the given token stream and return the resulting list of tokens
+     * Fully expand the given token stream and return the resulting list of
+     * tokens.  Note that the input tokens are in reverse order, but the
+     * output tokens are in forward order.
      */
 
   }, {
@@ -54001,9 +52795,115 @@ var MacroExpander = /*#__PURE__*/function () {
   }]);
 
   return MacroExpander;
-}();
-/* eslint no-constant-condition:0 */
+}(); // Helpers for Parser.js handling of Unicode (sub|super)script characters.
 
+
+var unicodeSubRegEx = /^[₊₋₌₍₎₀₁₂₃₄₅₆₇₈₉ₐₑₕᵢⱼₖₗₘₙₒₚᵣₛₜᵤᵥₓᵦᵧᵨᵩᵪ]/;
+var uSubsAndSups = Object.freeze({
+  '₊': '+',
+  '₋': '-',
+  '₌': '=',
+  '₍': '(',
+  '₎': ')',
+  '₀': '0',
+  '₁': '1',
+  '₂': '2',
+  '₃': '3',
+  '₄': '4',
+  '₅': '5',
+  '₆': '6',
+  '₇': '7',
+  '₈': '8',
+  '₉': '9',
+  "\u2090": 'a',
+  "\u2091": 'e',
+  "\u2095": 'h',
+  "\u1D62": 'i',
+  "\u2C7C": 'j',
+  "\u2096": 'k',
+  "\u2097": 'l',
+  "\u2098": 'm',
+  "\u2099": 'n',
+  "\u2092": 'o',
+  "\u209A": 'p',
+  "\u1D63": 'r',
+  "\u209B": 's',
+  "\u209C": 't',
+  "\u1D64": 'u',
+  "\u1D65": 'v',
+  "\u2093": 'x',
+  "\u1D66": 'β',
+  "\u1D67": 'γ',
+  "\u1D68": 'ρ',
+  "\u1D69": "\u03D5",
+  "\u1D6A": 'χ',
+  '⁺': '+',
+  '⁻': '-',
+  '⁼': '=',
+  '⁽': '(',
+  '⁾': ')',
+  '⁰': '0',
+  '¹': '1',
+  '²': '2',
+  '³': '3',
+  '⁴': '4',
+  '⁵': '5',
+  '⁶': '6',
+  '⁷': '7',
+  '⁸': '8',
+  '⁹': '9',
+  "\u1D2C": 'A',
+  "\u1D2E": 'B',
+  "\u1D30": 'D',
+  "\u1D31": 'E',
+  "\u1D33": 'G',
+  "\u1D34": 'H',
+  "\u1D35": 'I',
+  "\u1D36": 'J',
+  "\u1D37": 'K',
+  "\u1D38": 'L',
+  "\u1D39": 'M',
+  "\u1D3A": 'N',
+  "\u1D3C": 'O',
+  "\u1D3E": 'P',
+  "\u1D3F": 'R',
+  "\u1D40": 'T',
+  "\u1D41": 'U',
+  "\u2C7D": 'V',
+  "\u1D42": 'W',
+  "\u1D43": 'a',
+  "\u1D47": 'b',
+  "\u1D9C": 'c',
+  "\u1D48": 'd',
+  "\u1D49": 'e',
+  "\u1DA0": 'f',
+  "\u1D4D": 'g',
+  "\u02B0": 'h',
+  "\u2071": 'i',
+  "\u02B2": 'j',
+  "\u1D4F": 'k',
+  "\u02E1": 'l',
+  "\u1D50": 'm',
+  "\u207F": 'n',
+  "\u1D52": 'o',
+  "\u1D56": 'p',
+  "\u02B3": 'r',
+  "\u02E2": 's',
+  "\u1D57": 't',
+  "\u1D58": 'u',
+  "\u1D5B": 'v',
+  "\u02B7": 'w',
+  "\u02E3": 'x',
+  "\u02B8": 'y',
+  "\u1DBB": 'z',
+  "\u1D5D": 'β',
+  "\u1D5E": 'γ',
+  "\u1D5F": 'δ',
+  "\u1D60": "\u03D5",
+  "\u1D61": 'χ',
+  "\u1DBF": 'θ'
+});
+/* eslint no-constant-condition:0 */
 
 var unicodeAccents = {
   "́": {
@@ -54816,6 +53716,46 @@ var Parser = /*#__PURE__*/function () {
             mode: this.mode,
             body: primes
           };
+        } else if (uSubsAndSups[lex.text]) {
+          // A Unicode subscript or superscript character.
+          // We treat these similarly to the unicode-math package.
+          // So we render a string of Unicode (sub|super)scripts the
+          // same as a (sub|super)script of regular characters.
+          var str = uSubsAndSups[lex.text];
+          var isSub = unicodeSubRegEx.test(lex.text);
+          this.consume(); // Continue fetching tokens to fill out the string.
+
+          while (true) {
+            var token = this.fetch().text;
+
+            if (!uSubsAndSups[token]) {
+              break;
+            }
+
+            if (unicodeSubRegEx.test(token) !== isSub) {
+              break;
+            }
+
+            this.consume();
+            str += uSubsAndSups[token];
+          } // Now create a (sub|super)script.
+
+
+          var body = new Parser(str, this.settings).parse();
+
+          if (isSub) {
+            subscript = {
+              type: "ordgroup",
+              mode: "math",
+              body: body
+            };
+          } else {
+            superscript = {
+              type: "ordgroup",
+              mode: "math",
+              body: body
+            };
+          }
         } else {
           // If it wasn't ^, _, or ', stop parsing super/subscripts
           break;
@@ -55629,7 +54569,7 @@ var katex = {
   /**
    * Current KaTeX version
    */
-  version: "0.15.3",
+  version: "0.15.6",
 
   /**
    * Renders the given LaTeX into an HTML+MathML combination, and adds
@@ -59305,6 +58245,43 @@ function rehypeKatex(options) {
     });
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/rehype-ignore/lib/index.js
+
+
+var rehypeIgnore = function rehypeIgnore() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var _options$openDelimite = options.openDelimiter,
+      openDelimiter = _options$openDelimite === void 0 ? 'rehype:ignore:start' : _options$openDelimite,
+      _options$closeDelimit = options.closeDelimiter,
+      closeDelimiter = _options$closeDelimit === void 0 ? 'rehype:ignore:end' : _options$closeDelimit;
+  return function (tree) {
+    visit(tree, function (node, index, parent) {
+      if (node.type === 'element' || node.type === 'root') {
+        // const start = node.children.findIndex((item) => item.type === 'comment' && item.value === openDelimiter);
+        // const end = node.children.findIndex((item) => item.type === 'comment' && item.value === closeDelimiter);
+        // if (start > -1 && end > -1) {
+        //   node.children = node.children.filter((_, idx) => idx < start || idx > end);
+        // }
+        var start = false;
+        node.children = node.children.filter(function (item) {
+          if (item.type === 'comment' && item.value.trim() === openDelimiter) {
+            start = true;
+            return false;
+          }
+
+          if (item.type === 'comment' && item.value.trim() === closeDelimiter) {
+            start = false;
+            return false;
+          }
+
+          return !start;
+        });
+      }
+    });
+  };
+};
+
+/* harmony default export */ const rehype_ignore_lib = (rehypeIgnore);
 ;// CONCATENATED MODULE: ../../node_modules/property-information/lib/hast-to-react.js
 var hastToReact = {
   classId: 'classID',
@@ -59326,7 +58303,7 @@ var hastToReact = {
   xmlnsXLink: 'xmlnsXlink'
 };
 // EXTERNAL MODULE: ../../node_modules/style-to-object/index.js
-var style_to_object = __webpack_require__(2707);
+var style_to_object = __webpack_require__(3061);
 ;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/index.js
 
 
@@ -60718,7 +59695,7 @@ var util_element = convertElement();
  * @typedef {import('./types.js').HastNode} HastNode
  * @typedef {import('./types.js').ElementChild} ElementChild
  * @typedef {import('./types.js').Direction} Direction
- * @typedef {import('unist-util-visit').Visitor<ElementChild>} Visitor
+ * @typedef {import('unist-util-visit/complex-types').Visitor<ElementChild>} Visitor
  */
 
 
@@ -60815,11 +59792,11 @@ function enterState(state, node) {
   function inferDirectionality(child) {
     if (child.type === 'text') {
       dirInferred = dirBidi(child.value);
-      return dirInferred ? unist_util_visit_parents_EXIT : null;
+      return dirInferred ? EXIT : null;
     }
 
     if (child !== node && (isElement(child, ['bdi', 'script', 'style', 'textare']) || dirProperty(child))) {
-      return unist_util_visit_parents_SKIP;
+      return SKIP;
     }
   }
 }
@@ -60980,10 +59957,10 @@ function indexedSearch(query, parent, state, from, firstElementOnly) {
   var children = parent.children;
   var elements = 0;
   var index = -1;
-  /** @type {Object.<string, number>} */
+  /** @type {Record<string, number>} */
 
   var types = {};
-  /** @type {Array.<Function>} */
+  /** @type {Array<Function>} */
 
   var delayed = []; // Start looking at `from`
 
@@ -62039,7 +61016,7 @@ function normalizeValue(value, info) {
  * @returns {boolean}
  */
 function className(query, element) {
-  /** @type {Array.<string>} */
+  /** @type {Array<string>} */
   // @ts-expect-error Assume array.
   var value = element.properties.className || [];
   var index = -1;
@@ -62141,7 +61118,7 @@ var type = zwitch('type', {
  * @param {Selectors|RuleSet|Rule} query
  * @param {HastNode|undefined} node
  * @param {SelectState} state
- * @returns {Array.<Element>}
+ * @returns {Array<Element>}
  */
 
 function any_any(query, node, state) {
@@ -62152,7 +61129,7 @@ function any_any(query, node, state) {
  * @param {Selectors} query
  * @param {HastNode} node
  * @param {SelectState} state
- * @returns {Array.<Element>}
+ * @returns {Array<Element>}
  */
 
 function selectors(query, node, state) {
@@ -62169,7 +61146,7 @@ function selectors(query, node, state) {
  * @param {RuleSet} query
  * @param {HastNode} node
  * @param {SelectState} state
- * @returns {Array.<Element>}
+ * @returns {Array<Element>}
  */
 
 
@@ -62180,7 +61157,7 @@ function ruleSet(query, node, state) {
  * @param {Rule} query
  * @param {HastNode} tree
  * @param {SelectState} state
- * @returns {Array.<Element>}
+ * @returns {Array<Element>}
  */
 
 
@@ -62268,7 +61245,7 @@ var Collector = /*#__PURE__*/function () {
   function Collector(one) {
     _classCallCheck(this, Collector);
 
-    /** @type {Array.<Element>} */
+    /** @type {Array<Element>} */
     this.result = [];
     /** @type {boolean|undefined} */
 
@@ -62280,7 +61257,7 @@ var Collector = /*#__PURE__*/function () {
   /**
    * Append nodes to array, filtering out duplicates.
    *
-   * @param {Array.<Element>} elements
+   * @param {Array<Element>} elements
    */
 
 
@@ -62318,8 +61295,282 @@ var Collector = /*#__PURE__*/function () {
 }();
 // EXTERNAL MODULE: ../../node_modules/css-selector-parser/lib/index.js
 var css_selector_parser_lib = __webpack_require__(9510);
-// EXTERNAL MODULE: ../../node_modules/nth-check/lib/index.js
-var nth_check_lib = __webpack_require__(2990);
+;// CONCATENATED MODULE: ../../node_modules/nth-check/lib/esm/parse.js
+// Following http://www.w3.org/TR/css3-selectors/#nth-child-pseudo
+// Whitespace as per https://www.w3.org/TR/selectors-3/#lex is " \t\r\n\f"
+var parse_whitespace = new Set([9, 10, 12, 13, 32]);
+var ZERO = "0".charCodeAt(0);
+var NINE = "9".charCodeAt(0);
+/**
+ * Parses an expression.
+ *
+ * @throws An `Error` if parsing fails.
+ * @returns An array containing the integer step size and the integer offset of the nth rule.
+ * @example nthCheck.parse("2n+3"); // returns [2, 3]
+ */
+
+function esm_parse_parse(formula) {
+  formula = formula.trim().toLowerCase();
+
+  if (formula === "even") {
+    return [2, 0];
+  } else if (formula === "odd") {
+    return [2, 1];
+  } // Parse [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]?
+
+
+  var idx = 0;
+  var a = 0;
+  var sign = readSign();
+  var number = readNumber();
+
+  if (idx < formula.length && formula.charAt(idx) === "n") {
+    idx++;
+    a = sign * (number !== null && number !== void 0 ? number : 1);
+    skipWhitespace();
+
+    if (idx < formula.length) {
+      sign = readSign();
+      skipWhitespace();
+      number = readNumber();
+    } else {
+      sign = number = 0;
+    }
+  } // Throw if there is anything else
+
+
+  if (number === null || idx < formula.length) {
+    throw new Error("n-th rule couldn't be parsed ('".concat(formula, "')"));
+  }
+
+  return [a, sign * number];
+
+  function readSign() {
+    if (formula.charAt(idx) === "-") {
+      idx++;
+      return -1;
+    }
+
+    if (formula.charAt(idx) === "+") {
+      idx++;
+    }
+
+    return 1;
+  }
+
+  function readNumber() {
+    var start = idx;
+    var value = 0;
+
+    while (idx < formula.length && formula.charCodeAt(idx) >= ZERO && formula.charCodeAt(idx) <= NINE) {
+      value = value * 10 + (formula.charCodeAt(idx) - ZERO);
+      idx++;
+    } // Return `null` if we didn't read anything.
+
+
+    return idx === start ? null : value;
+  }
+
+  function skipWhitespace() {
+    while (idx < formula.length && parse_whitespace.has(formula.charCodeAt(idx))) {
+      idx++;
+    }
+  }
+}
+// EXTERNAL MODULE: ../../node_modules/boolbase/index.js
+var boolbase = __webpack_require__(1552);
+;// CONCATENATED MODULE: ../../node_modules/nth-check/lib/esm/compile.js
+
+/**
+ * Returns a function that checks if an elements index matches the given rule
+ * highly optimized to return the fastest solution.
+ *
+ * @param parsed A tuple [a, b], as returned by `parse`.
+ * @returns A highly optimized function that returns whether an index matches the nth-check.
+ * @example
+ *
+ * ```js
+ * const check = nthCheck.compile([2, 3]);
+ *
+ * check(0); // `false`
+ * check(1); // `false`
+ * check(2); // `true`
+ * check(3); // `false`
+ * check(4); // `true`
+ * check(5); // `false`
+ * check(6); // `true`
+ * ```
+ */
+
+function compile(parsed) {
+  var a = parsed[0]; // Subtract 1 from `b`, to convert from one- to zero-indexed.
+
+  var b = parsed[1] - 1;
+  /*
+   * When `b <= 0`, `a * n` won't be lead to any matches for `a < 0`.
+   * Besides, the specification states that no elements are
+   * matched when `a` and `b` are 0.
+   *
+   * `b < 0` here as we subtracted 1 from `b` above.
+   */
+
+  if (b < 0 && a <= 0) return boolbase.falseFunc; // When `a` is in the range -1..1, it matches any element (so only `b` is checked).
+
+  if (a === -1) return function (index) {
+    return index <= b;
+  };
+  if (a === 0) return function (index) {
+    return index === b;
+  }; // When `b <= 0` and `a === 1`, they match any element.
+
+  if (a === 1) return b < 0 ? boolbase.trueFunc : function (index) {
+    return index >= b;
+  };
+  /*
+   * Otherwise, modulo can be used to check if there is a match.
+   *
+   * Modulo doesn't care about the sign, so let's use `a`s absolute value.
+   */
+
+  var absA = Math.abs(a); // Get `b mod a`, + a if this is negative.
+
+  var bMod = (b % absA + absA) % absA;
+  return a > 1 ? function (index) {
+    return index >= b && index % absA === bMod;
+  } : function (index) {
+    return index <= b && index % absA === bMod;
+  };
+}
+/**
+ * Returns a function that produces a monotonously increasing sequence of indices.
+ *
+ * If the sequence has an end, the returned function will return `null` after
+ * the last index in the sequence.
+ *
+ * @param parsed A tuple [a, b], as returned by `parse`.
+ * @returns A function that produces a sequence of indices.
+ * @example <caption>Always increasing (2n+3)</caption>
+ *
+ * ```js
+ * const gen = nthCheck.generate([2, 3])
+ *
+ * gen() // `1`
+ * gen() // `3`
+ * gen() // `5`
+ * gen() // `8`
+ * gen() // `11`
+ * ```
+ *
+ * @example <caption>With end value (-2n+10)</caption>
+ *
+ * ```js
+ *
+ * const gen = nthCheck.generate([-2, 5]);
+ *
+ * gen() // 0
+ * gen() // 2
+ * gen() // 4
+ * gen() // null
+ * ```
+ */
+
+function compile_generate(parsed) {
+  var a = parsed[0]; // Subtract 1 from `b`, to convert from one- to zero-indexed.
+
+  var b = parsed[1] - 1;
+  var n = 0; // Make sure to always return an increasing sequence
+
+  if (a < 0) {
+    var aPos = -a; // Get `b mod a`
+
+    var minValue = (b % aPos + aPos) % aPos;
+    return function () {
+      var val = minValue + aPos * n++;
+      return val > b ? null : val;
+    };
+  }
+
+  if (a === 0) return b < 0 ? // There are no result — always return `null`
+  function () {
+    return null;
+  } : // Return `b` exactly once
+  function () {
+    return n++ === 0 ? b : null;
+  };
+
+  if (b < 0) {
+    b += a * Math.ceil(-b / a);
+  }
+
+  return function () {
+    return a * n++ + b;
+  };
+}
+;// CONCATENATED MODULE: ../../node_modules/nth-check/lib/esm/index.js
+
+
+
+/**
+ * Parses and compiles a formula to a highly optimized function.
+ * Combination of {@link parse} and {@link compile}.
+ *
+ * If the formula doesn't match any elements,
+ * it returns [`boolbase`](https://github.com/fb55/boolbase)'s `falseFunc`.
+ * Otherwise, a function accepting an _index_ is returned, which returns
+ * whether or not the passed _index_ matches the formula.
+ *
+ * Note: The nth-rule starts counting at `1`, the returned function at `0`.
+ *
+ * @param formula The formula to compile.
+ * @example
+ * const check = nthCheck("2n+3");
+ *
+ * check(0); // `false`
+ * check(1); // `false`
+ * check(2); // `true`
+ * check(3); // `false`
+ * check(4); // `true`
+ * check(5); // `false`
+ * check(6); // `true`
+ */
+
+function nthCheck(formula) {
+  return compile(esm_parse_parse(formula));
+}
+/**
+ * Parses and compiles a formula to a generator that produces a sequence of indices.
+ * Combination of {@link parse} and {@link generate}.
+ *
+ * @param formula The formula to compile.
+ * @returns A function that produces a sequence of indices.
+ * @example <caption>Always increasing</caption>
+ *
+ * ```js
+ * const gen = nthCheck.sequence('2n+3')
+ *
+ * gen() // `1`
+ * gen() // `3`
+ * gen() // `5`
+ * gen() // `8`
+ * gen() // `11`
+ * ```
+ *
+ * @example <caption>With end value</caption>
+ *
+ * ```js
+ *
+ * const gen = nthCheck.sequence('-2n+5');
+ *
+ * gen() // 0
+ * gen() // 2
+ * gen() // 4
+ * gen() // null
+ * ```
+ */
+
+function sequence(formula) {
+  return generate(parse(formula));
+}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/parse.js
 /**
  * @typedef {import('./types.js').Selector} Selector
@@ -62335,11 +61586,11 @@ var nth_check_lib = __webpack_require__(2990);
 /** @type {import('nth-check').default} */
 // @ts-expect-error
 
-var nthCheck = nth_check_lib/* default */.ZP;
+var parse_nthCheck = nthCheck["default"] || nthCheck;
 var nth = new Set(['nth-child', 'nth-last-child', 'nth-of-type', 'nth-last-of-type']);
 var parser = new css_selector_parser_lib/* CssSelectorParser */.N(); // @ts-expect-error: hush.
 
-var compile = zwitch('type', {
+var parse_compile = zwitch('type', {
   handlers: {
     selectors: parse_selectors,
     ruleSet: parse_ruleSet,
@@ -62360,7 +61611,7 @@ function lib_parse_parse(selector) {
   } // @ts-expect-error types are wrong.
 
 
-  return compile(parser.parse(selector));
+  return parse_compile(parser.parse(selector));
 }
 /**
  * @param {Selectors} query
@@ -62371,7 +61622,7 @@ function parse_selectors(query) {
   var index = -1;
 
   while (++index < query.selectors.length) {
-    compile(query.selectors[index]);
+    parse_compile(query.selectors[index]);
   }
 
   return query;
@@ -62400,13 +61651,13 @@ function parse_rule(query) {
 
     if (nth.has(pseudo.name)) {
       // @ts-expect-error Patch a non-primitive type.
-      pseudo.value = nthCheck(pseudo.value); // @ts-expect-error Patch a non-primitive type.
+      pseudo.value = parse_nthCheck(pseudo.value); // @ts-expect-error Patch a non-primitive type.
 
       pseudo.valueType = 'function';
     }
   }
 
-  compile(query.rule);
+  parse_compile(query.rule);
   return query;
 }
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-select/index.js
@@ -62448,7 +61699,7 @@ function hast_util_select_select(selector, node, space) {
  * @param {string} selector
  * @param {HastNode} [node]
  * @param {Space} [space]
- * @returns {Array.<Element>}
+ * @returns {Array<Element>}
  */
 
 function selectAll(selector, node, space) {
@@ -62919,14 +62170,14 @@ var omission_omission = {
 };
 ;// CONCATENATED MODULE: ../../node_modules/stringify-entities/lib/core.js
 /**
- * @typedef {Object} CoreOptions
- * @property {string[]} [subset=[]]
+ * @typedef CoreOptions
+ * @property {Array<string>} [subset=[]]
  *   Whether to only escape the given subset of characters.
  * @property {boolean} [escapeOnly=false]
  *   Whether to only escape possibly dangerous characters.
  *   Those characters are `"`, `&`, `'`, `<`, `>`, and `` ` ``.
  *
- * @typedef {Object} FormatOptions
+ * @typedef FormatOptions
  * @property {(code: number, next: number, options: CoreWithFormatOptions) => string} format
  *   Format strategy.
  *
@@ -62973,12 +62224,12 @@ function lib_core_core(value, options) {
   }
 }
 /**
- * @param {string[]} subset
+ * @param {Array<string>} subset
  * @returns {RegExp}
  */
 
 function charactersToExpression(subset) {
-  /** @type {string[]} */
+  /** @type {Array<string>} */
   var groups = [];
   var index = -1;
 
@@ -63286,7 +62537,7 @@ var characterEntitiesHtml4 = {
  * List of legacy (that don’t need a trailing `;`) named references which could,
  * depending on what follows them, turn into a different meaning
  *
- * @type {Array.<string>}
+ * @type {Array<string>}
  */
 var dangerous = ['cent', 'copy', 'divide', 'gt', 'lt', 'not', 'para', 'times'];
 ;// CONCATENATED MODULE: ../../node_modules/stringify-entities/lib/util/to-named.js
@@ -63297,7 +62548,7 @@ var to_named_own = {}.hasOwnProperty;
 /**
  * `characterEntitiesHtml4` but inverted.
  *
- * @type {Object.<string, string>}
+ * @type {Record<string, string>}
  */
 
 var characters = {};
@@ -63341,7 +62592,7 @@ function toNamed(code, next, omit, attribute) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/stringify-entities/lib/util/format-smart.js
 /**
- * @typedef {Object} FormatSmartOptions
+ * @typedef FormatSmartOptions
  * @property {boolean} [useNamedReferences=false]
  *   Prefer named character references (`&amp;`) where possible.
  * @property {boolean} [useShortestReferences=false]
@@ -65125,12 +64376,12 @@ function java(Prism) {
   Prism.register(clike);
 
   (function (Prism) {
-    var keywords = /\b(?:abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|exports|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|module|native|new|non-sealed|null|open|opens|package|permits|private|protected|provides|public|record|requires|return|sealed|short|static|strictfp|super|switch|synchronized|this|throw|throws|to|transient|transitive|try|uses|var|void|volatile|while|with|yield)\b/; // full package (optional) + parent classes (optional)
+    var keywords = /\b(?:abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|exports|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|module|native|new|non-sealed|null|open|opens|package|permits|private|protected|provides|public|record(?!\s*[(){}[\]<>=%~.:,;?+\-*/&|^])|requires|return|sealed|short|static|strictfp|super|switch|synchronized|this|throw|throws|to|transient|transitive|try|uses|var|void|volatile|while|with|yield)\b/; // full package (optional) + parent classes (optional)
 
-    var classNamePrefix = /(^|[^\w.])(?:[a-z]\w*\s*\.\s*)*(?:[A-Z]\w*\s*\.\s*)*/.source; // based on the java naming conventions
+    var classNamePrefix = /(?:[a-z]\w*\s*\.\s*)*(?:[A-Z]\w*\s*\.\s*)*/.source; // based on the java naming conventions
 
     var className = {
-      pattern: RegExp(classNamePrefix + /[A-Z](?:[\d_A-Z]*[a-z]\w*)?\b/.source),
+      pattern: RegExp(/(^|[^\w.])/.source + classNamePrefix + /[A-Z](?:[\d_A-Z]*[a-z]\w*)?\b/.source),
       lookbehind: true,
       inside: {
         namespace: {
@@ -65149,9 +64400,15 @@ function java(Prism) {
         greedy: true
       },
       'class-name': [className, {
-        // variables and parameters
+        // variables, parameters, and constructor references
         // this to support class names (or generic parameters) which do not contain a lower case letter (also works for methods)
-        pattern: RegExp(classNamePrefix + /[A-Z]\w*(?=\s+\w+\s*[;,=()])/.source),
+        pattern: RegExp(/(^|[^\w.])/.source + classNamePrefix + /[A-Z]\w*(?=\s+\w+\s*[;,=()]|\s*(?:\[[\s,]*\]\s*)?::\s*new\b)/.source),
+        lookbehind: true,
+        inside: className.inside
+      }, {
+        // class names based on keyword
+        // this to support class names (or generic parameters) which do not contain a lower case letter (also works for methods)
+        pattern: RegExp(/(\b(?:class|enum|extends|implements|instanceof|interface|new|record|throws)\s+)/.source + classNamePrefix + /[A-Z]\w*\b/.source),
         lookbehind: true,
         inside: className.inside
       }],
@@ -65193,6 +64450,27 @@ function java(Prism) {
           operator: /[?&|]/
         }
       },
+      "import": [{
+        pattern: RegExp(/(\bimport\s+)/.source + classNamePrefix + /(?:[A-Z]\w*|\*)(?=\s*;)/.source),
+        lookbehind: true,
+        inside: {
+          namespace: className.inside.namespace,
+          punctuation: /\./,
+          operator: /\*/,
+          'class-name': /\w+/
+        }
+      }, {
+        pattern: RegExp(/(\bimport\s+static\s+)/.source + classNamePrefix + /(?:\w+|\*)(?=\s*;)/.source),
+        lookbehind: true,
+        alias: 'static',
+        inside: {
+          namespace: className.inside.namespace,
+          "static": /\b\w+$/,
+          punctuation: /\./,
+          operator: /\*/,
+          'class-name': /\w+/
+        }
+      }],
       namespace: {
         pattern: RegExp(/(\b(?:exports|import(?:\s+static)?|module|open|opens|package|provides|requires|to|transitive|uses|with)\s+)(?!<keyword>)[a-z]\w*(?:\.[a-z]\w*)*\.?/.source.replace(/<keyword>/g, function () {
           return keywords.source;
@@ -65345,8 +64623,15 @@ function javascript(Prism) {
   Prism.languages.javascript['class-name'][0].pattern = /(\b(?:class|extends|implements|instanceof|interface|new)\s+)[\w.\\]+/;
   Prism.languages.insertBefore('javascript', 'keyword', {
     regex: {
+      pattern: RegExp( // lookbehind
       // eslint-disable-next-line regexp/no-dupe-characters-character-class
-      pattern: /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)\/(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/,
+      /((?:^|[^$\w\xA0-\uFFFF."'\])\s]|\b(?:return|yield))\s*)/.source + // Regex pattern:
+      // There are 2 regex patterns here. The RegExp set notation proposal added support for nested character
+      // classes if the `v` flag is present. Unfortunately, nested CCs are both context-free and incompatible
+      // with the only syntax, so we have to define 2 different regex patterns.
+      /\//.source + '(?:' + /(?:\[(?:[^\]\\\r\n]|\\.)*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}/.source + '|' + // `v` flag syntax. This supports 3 levels of nested character classes.
+      /(?:\[(?:[^[\]\\\r\n]|\\.|\[(?:[^[\]\\\r\n]|\\.|\[(?:[^[\]\\\r\n]|\\.)*\])*\])*\]|\\.|[^/\\\[\r\n])+\/[dgimyus]{0,7}v[dgimyus]{0,7}/.source + ')' + // lookahead
+      /(?=(?:\s|\/\*(?:[^*]|\*(?!\/))*\*\/)*(?:$|[\r\n,.;:})\]]|\/\/))/.source),
       lookbehind: true,
       greedy: true,
       inside: {
@@ -66512,7 +65797,7 @@ function php(Prism) {
         greedy: true,
         lookbehind: true
       }, {
-        pattern: /(\)\s*:\s*(?:\?\s*)?)\b(?:array(?!\s*\()|bool|callable|(?:false|null)(?=\s*\|)|float|int|iterable|mixed|object|self|static|string|void)\b/i,
+        pattern: /(\)\s*:\s*(?:\?\s*)?)\b(?:array(?!\s*\()|bool|callable|(?:false|null)(?=\s*\|)|float|int|iterable|mixed|never|object|self|static|string|void)\b/i,
         alias: 'return-type',
         greedy: true,
         lookbehind: true
@@ -66539,11 +65824,11 @@ function php(Prism) {
         //
         // keywords cannot be preceded by "->"
         // the complex lookbehind means `(?<!(?:->|::)\s*)`
-        pattern: /((?:^|[^\s>:]|(?:^|[^-])>|(?:^|[^:]):)\s*)\b(?:abstract|and|array|as|break|callable|case|catch|clone|const|continue|declare|default|die|do|echo|else|elseif|empty|enddeclare|endfor|endforeach|endif|endswitch|endwhile|enum|eval|exit|extends|final|finally|fn|for|foreach|function|global|goto|if|implements|include|include_once|instanceof|insteadof|interface|isset|list|match|namespace|new|or|parent|print|private|protected|public|require|require_once|return|self|static|switch|throw|trait|try|unset|use|var|while|xor|yield|__halt_compiler)\b/i,
+        pattern: /((?:^|[^\s>:]|(?:^|[^-])>|(?:^|[^:]):)\s*)\b(?:abstract|and|array|as|break|callable|case|catch|clone|const|continue|declare|default|die|do|echo|else|elseif|empty|enddeclare|endfor|endforeach|endif|endswitch|endwhile|enum|eval|exit|extends|final|finally|fn|for|foreach|function|global|goto|if|implements|include|include_once|instanceof|insteadof|interface|isset|list|match|namespace|never|new|or|parent|print|private|protected|public|readonly|require|require_once|return|self|static|switch|throw|trait|try|unset|use|var|while|xor|yield|__halt_compiler)\b/i,
         lookbehind: true
       }],
       'argument-name': {
-        pattern: /([(,]\s+)\b[a-z_]\w*(?=\s*:(?!:))/i,
+        pattern: /([(,]\s*)\b[a-z_]\w*(?=\s*:(?!:))/i,
         lookbehind: true
       },
       'class-name': [{
@@ -68077,8 +67362,838 @@ function prohibited(code) {
 function disallowed(code) {
   return code >= 0x0001 && code <= 0x0008 || code === 0x000b || code >= 0x000d && code <= 0x001f || code >= 0x007f && code <= 0x009f || code >= 0xfdd0 && code <= 0xfdef || (code & 0xffff) === 0xffff || (code & 0xffff) === 0xfffe;
 }
-// EXTERNAL MODULE: ../../node_modules/prismjs/components/prism-core.js
-var prism_core = __webpack_require__(2805);
+;// CONCATENATED MODULE: ../../node_modules/refractor/lib/prism-core.js
+// @ts-nocheck
+// This is a slimmed down version of `prism-core.js`, to remove globals,
+// document, workers, `util.encode`, `Token.stringify`
+// Private helper vars
+var prism_core_lang = /(?:^|\s)lang(?:uage)?-([\w-]+)(?=\s|$)/i;
+var uniqueId = 0; // The grammar object for plaintext
+
+var plainTextGrammar = {};
+var _ = {
+  /**
+   * A namespace for utility methods.
+   *
+   * All function in this namespace that are not explicitly marked as _public_ are for __internal use only__ and may
+   * change or disappear at any time.
+   *
+   * @namespace
+   * @memberof Prism
+   */
+  util: {
+    /**
+     * Returns the name of the type of the given value.
+     *
+     * @param {any} o
+     * @returns {string}
+     * @example
+     * type(null)      === 'Null'
+     * type(undefined) === 'Undefined'
+     * type(123)       === 'Number'
+     * type('foo')     === 'String'
+     * type(true)      === 'Boolean'
+     * type([1, 2])    === 'Array'
+     * type({})        === 'Object'
+     * type(String)    === 'Function'
+     * type(/abc+/)    === 'RegExp'
+     */
+    type: function type(o) {
+      return Object.prototype.toString.call(o).slice(8, -1);
+    },
+
+    /**
+     * Returns a unique number for the given object. Later calls will still return the same number.
+     *
+     * @param {Object} obj
+     * @returns {number}
+     */
+    objId: function objId(obj) {
+      if (!obj['__id']) {
+        Object.defineProperty(obj, '__id', {
+          value: ++uniqueId
+        });
+      }
+
+      return obj['__id'];
+    },
+
+    /**
+     * Creates a deep clone of the given object.
+     *
+     * The main intended use of this function is to clone language definitions.
+     *
+     * @param {T} o
+     * @param {Record<number, any>} [visited]
+     * @returns {T}
+     * @template T
+     */
+    clone: function deepClone(o, visited) {
+      visited = visited || {};
+      var clone;
+      var id;
+
+      switch (_.util.type(o)) {
+        case 'Object':
+          id = _.util.objId(o);
+
+          if (visited[id]) {
+            return visited[id];
+          }
+
+          clone =
+          /** @type {Record<string, any>} */
+          {};
+          visited[id] = clone;
+
+          for (var key in o) {
+            if (o.hasOwnProperty(key)) {
+              clone[key] = deepClone(o[key], visited);
+            }
+          }
+
+          return (
+            /** @type {any} */
+            clone
+          );
+
+        case 'Array':
+          id = _.util.objId(o);
+
+          if (visited[id]) {
+            return visited[id];
+          }
+
+          clone = [];
+          visited[id] = clone;
+          o.forEach(function (v, i) {
+            clone[i] = deepClone(v, visited);
+          });
+          return (
+            /** @type {any} */
+            clone
+          );
+
+        default:
+          return o;
+      }
+    }
+  },
+
+  /**
+   * This namespace contains all currently loaded languages and the some helper functions to create and modify languages.
+   *
+   * @namespace
+   * @memberof Prism
+   * @public
+   */
+  languages: {
+    /**
+     * The grammar for plain, unformatted text.
+     */
+    plain: plainTextGrammar,
+    plaintext: plainTextGrammar,
+    text: plainTextGrammar,
+    txt: plainTextGrammar,
+
+    /**
+     * Creates a deep copy of the language with the given id and appends the given tokens.
+     *
+     * If a token in `redef` also appears in the copied language, then the existing token in the copied language
+     * will be overwritten at its original position.
+     *
+     * ## Best practices
+     *
+     * Since the position of overwriting tokens (token in `redef` that overwrite tokens in the copied language)
+     * doesn't matter, they can technically be in any order. However, this can be confusing to others that trying to
+     * understand the language definition because, normally, the order of tokens matters in Prism grammars.
+     *
+     * Therefore, it is encouraged to order overwriting tokens according to the positions of the overwritten tokens.
+     * Furthermore, all non-overwriting tokens should be placed after the overwriting ones.
+     *
+     * @param {string} id The id of the language to extend. This has to be a key in `Prism.languages`.
+     * @param {Grammar} redef The new tokens to append.
+     * @returns {Grammar} The new language created.
+     * @public
+     * @example
+     * Prism.languages['css-with-colors'] = Prism.languages.extend('css', {
+     *     // Prism.languages.css already has a 'comment' token, so this token will overwrite CSS' 'comment' token
+     *     // at its original position
+     *     'comment': { ... },
+     *     // CSS doesn't have a 'color' token, so this token will be appended
+     *     'color': /\b(?:red|green|blue)\b/
+     * });
+     */
+    extend: function extend(id, redef) {
+      var lang = _.util.clone(_.languages[id]);
+
+      for (var key in redef) {
+        lang[key] = redef[key];
+      }
+
+      return lang;
+    },
+
+    /**
+     * Inserts tokens _before_ another token in a language definition or any other grammar.
+     *
+     * ## Usage
+     *
+     * This helper method makes it easy to modify existing languages. For example, the CSS language definition
+     * not only defines CSS highlighting for CSS documents, but also needs to define highlighting for CSS embedded
+     * in HTML through `<style>` elements. To do this, it needs to modify `Prism.languages.markup` and add the
+     * appropriate tokens. However, `Prism.languages.markup` is a regular JavaScript object literal, so if you do
+     * this:
+     *
+     * ```js
+     * Prism.languages.markup.style = {
+     *     // token
+     * };
+     * ```
+     *
+     * then the `style` token will be added (and processed) at the end. `insertBefore` allows you to insert tokens
+     * before existing tokens. For the CSS example above, you would use it like this:
+     *
+     * ```js
+     * Prism.languages.insertBefore('markup', 'cdata', {
+     *     'style': {
+     *         // token
+     *     }
+     * });
+     * ```
+     *
+     * ## Special cases
+     *
+     * If the grammars of `inside` and `insert` have tokens with the same name, the tokens in `inside`'s grammar
+     * will be ignored.
+     *
+     * This behavior can be used to insert tokens after `before`:
+     *
+     * ```js
+     * Prism.languages.insertBefore('markup', 'comment', {
+     *     'comment': Prism.languages.markup.comment,
+     *     // tokens after 'comment'
+     * });
+     * ```
+     *
+     * ## Limitations
+     *
+     * The main problem `insertBefore` has to solve is iteration order. Since ES2015, the iteration order for object
+     * properties is guaranteed to be the insertion order (except for integer keys) but some browsers behave
+     * differently when keys are deleted and re-inserted. So `insertBefore` can't be implemented by temporarily
+     * deleting properties which is necessary to insert at arbitrary positions.
+     *
+     * To solve this problem, `insertBefore` doesn't actually insert the given tokens into the target object.
+     * Instead, it will create a new object and replace all references to the target object with the new one. This
+     * can be done without temporarily deleting properties, so the iteration order is well-defined.
+     *
+     * However, only references that can be reached from `Prism.languages` or `insert` will be replaced. I.e. if
+     * you hold the target object in a variable, then the value of the variable will not change.
+     *
+     * ```js
+     * var oldMarkup = Prism.languages.markup;
+     * var newMarkup = Prism.languages.insertBefore('markup', 'comment', { ... });
+     *
+     * assert(oldMarkup !== Prism.languages.markup);
+     * assert(newMarkup === Prism.languages.markup);
+     * ```
+     *
+     * @param {string} inside The property of `root` (e.g. a language id in `Prism.languages`) that contains the
+     * object to be modified.
+     * @param {string} before The key to insert before.
+     * @param {Grammar} insert An object containing the key-value pairs to be inserted.
+     * @param {Object<string, any>} [root] The object containing `inside`, i.e. the object that contains the
+     * object to be modified.
+     *
+     * Defaults to `Prism.languages`.
+     * @returns {Grammar} The new grammar object.
+     * @public
+     */
+    insertBefore: function insertBefore(inside, before, insert, root) {
+      root = root ||
+      /** @type {any} */
+      _.languages;
+      var grammar = root[inside];
+      /** @type {Grammar} */
+
+      var ret = {};
+
+      for (var token in grammar) {
+        if (grammar.hasOwnProperty(token)) {
+          if (token == before) {
+            for (var newToken in insert) {
+              if (insert.hasOwnProperty(newToken)) {
+                ret[newToken] = insert[newToken];
+              }
+            }
+          } // Do not insert token which also occur in insert. See #1525
+
+
+          if (!insert.hasOwnProperty(token)) {
+            ret[token] = grammar[token];
+          }
+        }
+      }
+
+      var old = root[inside];
+      root[inside] = ret; // Update references in other language definitions
+
+      _.languages.DFS(_.languages, function (key, value) {
+        if (value === old && key != inside) {
+          this[key] = ret;
+        }
+      });
+
+      return ret;
+    },
+    // Traverse a language definition with Depth First Search
+    DFS: function DFS(o, callback, type, visited) {
+      visited = visited || {};
+      var objId = _.util.objId;
+
+      for (var i in o) {
+        if (o.hasOwnProperty(i)) {
+          callback.call(o, i, o[i], type || i);
+          var property = o[i];
+
+          var propertyType = _.util.type(property);
+
+          if (propertyType === 'Object' && !visited[objId(property)]) {
+            visited[objId(property)] = true;
+            DFS(property, callback, null, visited);
+          } else if (propertyType === 'Array' && !visited[objId(property)]) {
+            visited[objId(property)] = true;
+            DFS(property, callback, i, visited);
+          }
+        }
+      }
+    }
+  },
+  plugins: {},
+
+  /**
+   * Low-level function, only use if you know what you’re doing. It accepts a string of text as input
+   * and the language definitions to use, and returns a string with the HTML produced.
+   *
+   * The following hooks will be run:
+   * 1. `before-tokenize`
+   * 2. `after-tokenize`
+   * 3. `wrap`: On each {@link Token}.
+   *
+   * @param {string} text A string with the code to be highlighted.
+   * @param {Grammar} grammar An object containing the tokens to use.
+   *
+   * Usually a language definition like `Prism.languages.markup`.
+   * @param {string} language The name of the language definition passed to `grammar`.
+   * @returns {string} The highlighted HTML.
+   * @memberof Prism
+   * @public
+   * @example
+   * Prism.highlight('var foo = true;', Prism.languages.javascript, 'javascript');
+   */
+  highlight: function highlight(text, grammar, language) {
+    var env = {
+      code: text,
+      grammar: grammar,
+      language: language
+    };
+
+    _.hooks.run('before-tokenize', env);
+
+    if (!env.grammar) {
+      throw new Error('The language "' + env.language + '" has no grammar.');
+    }
+
+    env.tokens = _.tokenize(env.code, env.grammar);
+
+    _.hooks.run('after-tokenize', env);
+
+    return prism_core_Token.stringify(_.util.encode(env.tokens), env.language);
+  },
+
+  /**
+   * This is the heart of Prism, and the most low-level function you can use. It accepts a string of text as input
+   * and the language definitions to use, and returns an array with the tokenized code.
+   *
+   * When the language definition includes nested tokens, the function is called recursively on each of these tokens.
+   *
+   * This method could be useful in other contexts as well, as a very crude parser.
+   *
+   * @param {string} text A string with the code to be highlighted.
+   * @param {Grammar} grammar An object containing the tokens to use.
+   *
+   * Usually a language definition like `Prism.languages.markup`.
+   * @returns {TokenStream} An array of strings and tokens, a token stream.
+   * @memberof Prism
+   * @public
+   * @example
+   * let code = `var foo = 0;`;
+   * let tokens = Prism.tokenize(code, Prism.languages.javascript);
+   * tokens.forEach(token => {
+   *     if (token instanceof Prism.Token && token.type === 'number') {
+   *         console.log(`Found numeric literal: ${token.content}`);
+   *     }
+   * });
+   */
+  tokenize: function tokenize(text, grammar) {
+    var rest = grammar.rest;
+
+    if (rest) {
+      for (var token in rest) {
+        grammar[token] = rest[token];
+      }
+
+      delete grammar.rest;
+    }
+
+    var tokenList = new LinkedList();
+    addAfter(tokenList, tokenList.head, text);
+    matchGrammar(text, tokenList, grammar, tokenList.head, 0);
+    return toArray(tokenList);
+  },
+
+  /**
+   * @namespace
+   * @memberof Prism
+   * @public
+   */
+  hooks: {
+    all: {},
+
+    /**
+     * Adds the given callback to the list of callbacks for the given hook.
+     *
+     * The callback will be invoked when the hook it is registered for is run.
+     * Hooks are usually directly run by a highlight function but you can also run hooks yourself.
+     *
+     * One callback function can be registered to multiple hooks and the same hook multiple times.
+     *
+     * @param {string} name The name of the hook.
+     * @param {HookCallback} callback The callback function which is given environment variables.
+     * @public
+     */
+    add: function add(name, callback) {
+      var hooks = _.hooks.all;
+      hooks[name] = hooks[name] || [];
+      hooks[name].push(callback);
+    },
+
+    /**
+     * Runs a hook invoking all registered callbacks with the given environment variables.
+     *
+     * Callbacks will be invoked synchronously and in the order in which they were registered.
+     *
+     * @param {string} name The name of the hook.
+     * @param {Object<string, any>} env The environment variables of the hook passed to all callbacks registered.
+     * @public
+     */
+    run: function run(name, env) {
+      var callbacks = _.hooks.all[name];
+
+      if (!callbacks || !callbacks.length) {
+        return;
+      }
+
+      for (var i = 0, callback; callback = callbacks[i++];) {
+        callback(env);
+      }
+    }
+  },
+  Token: prism_core_Token
+}; // Typescript note:
+// The following can be used to import the Token type in JSDoc:
+//
+//   @typedef {InstanceType<import("./prism-core")["Token"]>} Token
+
+/**
+ * Creates a new token.
+ *
+ * @param {string} type See {@link Token#type type}
+ * @param {string | TokenStream} content See {@link Token#content content}
+ * @param {string|string[]} [alias] The alias(es) of the token.
+ * @param {string} [matchedStr=""] A copy of the full string this token was created from.
+ * @class
+ * @global
+ * @public
+ */
+
+function prism_core_Token(type, content, alias, matchedStr) {
+  /**
+   * The type of the token.
+   *
+   * This is usually the key of a pattern in a {@link Grammar}.
+   *
+   * @type {string}
+   * @see GrammarToken
+   * @public
+   */
+  this.type = type;
+  /**
+   * The strings or tokens contained by this token.
+   *
+   * This will be a token stream if the pattern matched also defined an `inside` grammar.
+   *
+   * @type {string | TokenStream}
+   * @public
+   */
+
+  this.content = content;
+  /**
+   * The alias(es) of the token.
+   *
+   * @type {string|string[]}
+   * @see GrammarToken
+   * @public
+   */
+
+  this.alias = alias; // Copy of the full string this token was created from
+
+  this.length = (matchedStr || '').length | 0;
+}
+/**
+ * A token stream is an array of strings and {@link Token Token} objects.
+ *
+ * Token streams have to fulfill a few properties that are assumed by most functions (mostly internal ones) that process
+ * them.
+ *
+ * 1. No adjacent strings.
+ * 2. No empty strings.
+ *
+ *    The only exception here is the token stream that only contains the empty string and nothing else.
+ *
+ * @typedef {Array<string | Token>} TokenStream
+ * @global
+ * @public
+ */
+
+/**
+ * @param {RegExp} pattern
+ * @param {number} pos
+ * @param {string} text
+ * @param {boolean} lookbehind
+ * @returns {RegExpExecArray | null}
+ */
+
+
+function matchPattern(pattern, pos, text, lookbehind) {
+  pattern.lastIndex = pos;
+  var match = pattern.exec(text);
+
+  if (match && lookbehind && match[1]) {
+    // change the match to remove the text matched by the Prism lookbehind group
+    var lookbehindLength = match[1].length;
+    match.index += lookbehindLength;
+    match[0] = match[0].slice(lookbehindLength);
+  }
+
+  return match;
+}
+/**
+ * @param {string} text
+ * @param {LinkedList<string | Token>} tokenList
+ * @param {any} grammar
+ * @param {LinkedListNode<string | Token>} startNode
+ * @param {number} startPos
+ * @param {RematchOptions} [rematch]
+ * @returns {void}
+ * @private
+ *
+ * @typedef RematchOptions
+ * @property {string} cause
+ * @property {number} reach
+ */
+
+
+function matchGrammar(text, tokenList, grammar, startNode, startPos, rematch) {
+  for (var token in grammar) {
+    if (!grammar.hasOwnProperty(token) || !grammar[token]) {
+      continue;
+    }
+
+    var patterns = grammar[token];
+    patterns = Array.isArray(patterns) ? patterns : [patterns];
+
+    for (var j = 0; j < patterns.length; ++j) {
+      if (rematch && rematch.cause == token + ',' + j) {
+        return;
+      }
+
+      var patternObj = patterns[j];
+      var inside = patternObj.inside;
+      var lookbehind = !!patternObj.lookbehind;
+      var greedy = !!patternObj.greedy;
+      var alias = patternObj.alias;
+
+      if (greedy && !patternObj.pattern.global) {
+        // Without the global flag, lastIndex won't work
+        var flags = patternObj.pattern.toString().match(/[imsuy]*$/)[0];
+        patternObj.pattern = RegExp(patternObj.pattern.source, flags + 'g');
+      }
+      /** @type {RegExp} */
+
+
+      var pattern = patternObj.pattern || patternObj;
+
+      for ( // iterate the token list and keep track of the current token/string position
+      var currentNode = startNode.next, pos = startPos; currentNode !== tokenList.tail; pos += currentNode.value.length, currentNode = currentNode.next) {
+        if (rematch && pos >= rematch.reach) {
+          break;
+        }
+
+        var str = currentNode.value;
+
+        if (tokenList.length > text.length) {
+          // Something went terribly wrong, ABORT, ABORT!
+          return;
+        }
+
+        if (str instanceof prism_core_Token) {
+          continue;
+        }
+
+        var removeCount = 1; // this is the to parameter of removeBetween
+
+        var match;
+
+        if (greedy) {
+          match = matchPattern(pattern, pos, text, lookbehind);
+
+          if (!match || match.index >= text.length) {
+            break;
+          }
+
+          var from = match.index;
+          var to = match.index + match[0].length;
+          var p = pos; // find the node that contains the match
+
+          p += currentNode.value.length;
+
+          while (from >= p) {
+            currentNode = currentNode.next;
+            p += currentNode.value.length;
+          } // adjust pos (and p)
+
+
+          p -= currentNode.value.length;
+          pos = p; // the current node is a Token, then the match starts inside another Token, which is invalid
+
+          if (currentNode.value instanceof prism_core_Token) {
+            continue;
+          } // find the last node which is affected by this match
+
+
+          for (var k = currentNode; k !== tokenList.tail && (p < to || typeof k.value === 'string'); k = k.next) {
+            removeCount++;
+            p += k.value.length;
+          }
+
+          removeCount--; // replace with the new match
+
+          str = text.slice(pos, p);
+          match.index -= pos;
+        } else {
+          match = matchPattern(pattern, 0, str, lookbehind);
+
+          if (!match) {
+            continue;
+          }
+        } // eslint-disable-next-line no-redeclare
+
+
+        var from = match.index;
+        var matchStr = match[0];
+        var before = str.slice(0, from);
+        var after = str.slice(from + matchStr.length);
+        var reach = pos + str.length;
+
+        if (rematch && reach > rematch.reach) {
+          rematch.reach = reach;
+        }
+
+        var removeFrom = currentNode.prev;
+
+        if (before) {
+          removeFrom = addAfter(tokenList, removeFrom, before);
+          pos += before.length;
+        }
+
+        removeRange(tokenList, removeFrom, removeCount);
+        var wrapped = new prism_core_Token(token, inside ? _.tokenize(matchStr, inside) : matchStr, alias, matchStr);
+        currentNode = addAfter(tokenList, removeFrom, wrapped);
+
+        if (after) {
+          addAfter(tokenList, currentNode, after);
+        }
+
+        if (removeCount > 1) {
+          // at least one Token object was removed, so we have to do some rematching
+          // this can only happen if the current pattern is greedy
+
+          /** @type {RematchOptions} */
+          var nestedRematch = {
+            cause: token + ',' + j,
+            reach: reach
+          };
+          matchGrammar(text, tokenList, grammar, currentNode.prev, pos, nestedRematch); // the reach might have been extended because of the rematching
+
+          if (rematch && nestedRematch.reach > rematch.reach) {
+            rematch.reach = nestedRematch.reach;
+          }
+        }
+      }
+    }
+  }
+}
+/**
+ * @typedef LinkedListNode
+ * @property {T} value
+ * @property {LinkedListNode<T> | null} prev The previous node.
+ * @property {LinkedListNode<T> | null} next The next node.
+ * @template T
+ * @private
+ */
+
+/**
+ * @template T
+ * @private
+ */
+
+
+function LinkedList() {
+  /** @type {LinkedListNode<T>} */
+  var head = {
+    value: null,
+    prev: null,
+    next: null
+  };
+  /** @type {LinkedListNode<T>} */
+
+  var tail = {
+    value: null,
+    prev: head,
+    next: null
+  };
+  head.next = tail;
+  /** @type {LinkedListNode<T>} */
+
+  this.head = head;
+  /** @type {LinkedListNode<T>} */
+
+  this.tail = tail;
+  this.length = 0;
+}
+/**
+ * Adds a new node with the given value to the list.
+ *
+ * @param {LinkedList<T>} list
+ * @param {LinkedListNode<T>} node
+ * @param {T} value
+ * @returns {LinkedListNode<T>} The added node.
+ * @template T
+ */
+
+
+function addAfter(list, node, value) {
+  // assumes that node != list.tail && values.length >= 0
+  var next = node.next;
+  var newNode = {
+    value: value,
+    prev: node,
+    next: next
+  };
+  node.next = newNode;
+  next.prev = newNode;
+  list.length++;
+  return newNode;
+}
+/**
+ * Removes `count` nodes after the given node. The given node will not be removed.
+ *
+ * @param {LinkedList<T>} list
+ * @param {LinkedListNode<T>} node
+ * @param {number} count
+ * @template T
+ */
+
+
+function removeRange(list, node, count) {
+  var next = node.next;
+
+  for (var i = 0; i < count && next !== list.tail; i++) {
+    next = next.next;
+  }
+
+  node.next = next;
+  next.prev = node;
+  list.length -= i;
+}
+/**
+ * @param {LinkedList<T>} list
+ * @returns {T[]}
+ * @template T
+ */
+
+
+function toArray(list) {
+  var array = [];
+  var node = list.head.next;
+
+  while (node !== list.tail) {
+    array.push(node.value);
+    node = node.next;
+  }
+
+  return array;
+}
+
+var Prism = _; // some additional documentation/types
+
+/**
+ * The expansion of a simple `RegExp` literal to support additional properties.
+ *
+ * @typedef GrammarToken
+ * @property {RegExp} pattern The regular expression of the token.
+ * @property {boolean} [lookbehind=false] If `true`, then the first capturing group of `pattern` will (effectively)
+ * behave as a lookbehind group meaning that the captured text will not be part of the matched text of the new token.
+ * @property {boolean} [greedy=false] Whether the token is greedy.
+ * @property {string|string[]} [alias] An optional alias or list of aliases.
+ * @property {Grammar} [inside] The nested grammar of this token.
+ *
+ * The `inside` grammar will be used to tokenize the text value of each token of this kind.
+ *
+ * This can be used to make nested and even recursive language definitions.
+ *
+ * Note: This can cause infinite recursion. Be careful when you embed different languages or even the same language into
+ * each another.
+ * @global
+ * @public
+ */
+
+/**
+ * @typedef Grammar
+ * @type {Object<string, RegExp | GrammarToken | Array<RegExp | GrammarToken>>}
+ * @property {Grammar} [rest] An optional grammar object that will be appended to this grammar.
+ * @global
+ * @public
+ */
+
+/**
+ * A function which will invoked after an element was successfully highlighted.
+ *
+ * @callback HighlightCallback
+ * @param {Element} element The element successfully highlighted.
+ * @returns {void}
+ * @global
+ * @public
+ */
+
+/**
+ * @callback HookCallback
+ * @param {Object<string, any>} env The environment variables of the hook.
+ * @returns {void}
+ * @global
+ * @public
+ */
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lib/core.js
 
 
@@ -68115,43 +68230,16 @@ var prism_core = __webpack_require__(2805);
  * @property {listLanguages} listLanguages
  * @property {Languages} languages
  */
-
-/* eslint-disable no-undef */
-// Don’t allow Prism to run on page load in browser or to start messaging from
-// workers.
-
-/* c8 ignore next 15 */
-
-/** @type {typeof globalThis} */
-var ctx = typeof globalThis === 'object' ? globalThis : // @ts-expect-error
-typeof self === 'object' ? // @ts-expect-error
-self : // @ts-expect-error
-typeof window === 'object' ? // @ts-expect-error
-window : typeof global === 'object' ? global : {};
-/* eslint-enable no-undef */
-
-var restore = capture();
-/* c8 ignore next 5 */
-
-ctx.Prism = ctx.Prism || {};
-ctx.Prism.manual = true;
-ctx.Prism.disableWorkerMessageHandler = true;
-/* eslint-disable import/first */
 // Load all stuff in `prism.js` itself, except for `prism-file-highlight.js`.
 // The wrapped non-leaky grammars are loaded instead of Prism’s originals.
 
 
- // @ts-expect-error: untyped.
 
-
-/* eslint-enable import/first */
-
-restore();
 var lib_core_own = {}.hasOwnProperty; // Inherit.
 
 function Refractor() {}
 
-Refractor.prototype = prism_core;
+Refractor.prototype = Prism;
 /** @type {Refractor} */
 // @ts-expect-error: TS is wrong.
 
@@ -68188,6 +68276,9 @@ function highlight(value, language) {
   /** @type {string|undefined} */
 
   var name; // `name` is a grammar object.
+  // This was called internally by Prism.js before 1.28.0.
+
+  /* c8 ignore next 2 */
 
   if (language && typeof language === 'object') {
     grammar = language;
@@ -68207,7 +68298,8 @@ function highlight(value, language) {
 
   return {
     type: 'root',
-    children: prism_core.highlight.call(refractor, value, grammar, name)
+    // @ts-expect-error: we hacked Prism to accept and return the things we want.
+    children: Prism.highlight.call(refractor, value, grammar, name)
   };
 }
 /**
@@ -68221,15 +68313,12 @@ function highlight(value, language) {
 
 
 function register(syntax) {
-  // @ts-expect-error: runtime.
   if (typeof syntax !== 'function' || !syntax.displayName) {
     throw new Error('Expected `function` for `syntax`, got `' + syntax + '`');
   } // Do not duplicate registrations.
-  // @ts-expect-error: TypeScript is wrong.
 
 
   if (!lib_core_own.call(refractor.languages, syntax.displayName)) {
-    // @ts-expect-error: TypeScript is wrong.
     syntax(refractor);
   }
 }
@@ -68391,37 +68480,6 @@ function core_attributes(attrs) {
 
   return attrs;
 }
-/**
- * @returns {() => void}
- */
-
-
-function capture() {
-  /** @type {boolean|undefined} */
-  var defined = ('Prism' in ctx);
-  /* c8 ignore next */
-
-  var current = defined ? ctx.Prism : undefined;
-  return restore;
-  /**
-   * @returns {void}
-   */
-
-  function restore() {
-    /* istanbul ignore else - Clean leaks after Prism. */
-    if (defined) {
-      // @ts-expect-error: hush.
-      ctx.Prism = current;
-      /* c8 ignore next 4 */
-    } else {
-      // @ts-expect-error: hush.
-      delete ctx.Prism;
-    }
-
-    defined = undefined;
-    current = undefined;
-  }
-}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lib/common.js
 /**
  * @typedef {import('./core.js').RefractorRoot} RefractorRoot
@@ -68530,7 +68588,7 @@ function abap(Prism) {
       alias: 'comment'
     },
     keyword: {
-      pattern: /(\s|\.|^)(?:SCIENTIFIC_WITH_LEADING_ZERO|SCALE_PRESERVING_SCIENTIFIC|RMC_COMMUNICATION_FAILURE|END-ENHANCEMENT-SECTION|MULTIPLY-CORRESPONDING|SUBTRACT-CORRESPONDING|VERIFICATION-MESSAGE|DIVIDE-CORRESPONDING|ENHANCEMENT-SECTION|CURRENCY_CONVERSION|RMC_SYSTEM_FAILURE|START-OF-SELECTION|MOVE-CORRESPONDING|RMC_INVALID_STATUS|CUSTOMER-FUNCTION|END-OF-DEFINITION|ENHANCEMENT-POINT|SYSTEM-EXCEPTIONS|ADD-CORRESPONDING|SCALE_PRESERVING|SELECTION-SCREEN|CURSOR-SELECTION|END-OF-SELECTION|LOAD-OF-PROGRAM|SCROLL-BOUNDARY|SELECTION-TABLE|EXCEPTION-TABLE|IMPLEMENTATIONS|PARAMETER-TABLE|RIGHT-JUSTIFIED|UNIT_CONVERSION|AUTHORITY-CHECK|LIST-PROCESSING|SIGN_AS_POSTFIX|COL_BACKGROUND|IMPLEMENTATION|INTERFACE-POOL|TRANSFORMATION|IDENTIFICATION|ENDENHANCEMENT|LINE-SELECTION|INITIALIZATION|LEFT-JUSTIFIED|SELECT-OPTIONS|SELECTION-SETS|COMMUNICATION|CORRESPONDING|DECIMAL_SHIFT|PRINT-CONTROL|VALUE-REQUEST|CHAIN-REQUEST|FUNCTION-POOL|FIELD-SYMBOLS|FUNCTIONALITY|INVERTED-DATE|SELECTION-SET|CLASS-METHODS|OUTPUT-LENGTH|CLASS-CODING|COL_NEGATIVE|ERRORMESSAGE|FIELD-GROUPS|HELP-REQUEST|NO-EXTENSION|NO-TOPOFPAGE|REDEFINITION|DISPLAY-MODE|ENDINTERFACE|EXIT-COMMAND|FIELD-SYMBOL|NO-SCROLLING|SHORTDUMP-ID|ACCESSPOLICY|CLASS-EVENTS|COL_POSITIVE|DECLARATIONS|ENHANCEMENTS|FILTER-TABLE|SWITCHSTATES|SYNTAX-CHECK|TRANSPORTING|ASYNCHRONOUS|SYNTAX-TRACE|TOKENIZATION|USER-COMMAND|WITH-HEADING|ABAP-SOURCE|BREAK-POINT|CHAIN-INPUT|COMPRESSION|FIXED-POINT|NEW-SECTION|NON-UNICODE|OCCURRENCES|RESPONSIBLE|SYSTEM-CALL|TRACE-TABLE|ABBREVIATED|CHAR-TO-HEX|END-OF-FILE|ENDFUNCTION|ENVIRONMENT|ASSOCIATION|COL_HEADING|EDITOR-CALL|END-OF-PAGE|ENGINEERING|IMPLEMENTED|INTENSIFIED|RADIOBUTTON|SYSTEM-EXIT|TOP-OF-PAGE|TRANSACTION|APPLICATION|CONCATENATE|DESTINATION|ENHANCEMENT|IMMEDIATELY|NO-GROUPING|PRECOMPILED|REPLACEMENT|TITLE-LINES|ACTIVATION|BYTE-ORDER|CLASS-POOL|CONNECTION|CONVERSION|DEFINITION|DEPARTMENT|EXPIRATION|INHERITING|MESSAGE-ID|NO-HEADING|PERFORMING|QUEUE-ONLY|RIGHTSPACE|SCIENTIFIC|STATUSINFO|STRUCTURES|SYNCPOINTS|WITH-TITLE|ATTRIBUTES|BOUNDARIES|CLASS-DATA|COL_NORMAL|DD\/MM\/YYYY|DESCENDING|INTERFACES|LINE-COUNT|MM\/DD\/YYYY|NON-UNIQUE|PRESERVING|SELECTIONS|STATEMENTS|SUBROUTINE|TRUNCATION|TYPE-POOLS|ARITHMETIC|BACKGROUND|ENDPROVIDE|EXCEPTIONS|IDENTIFIER|INDEX-LINE|OBLIGATORY|PARAMETERS|PERCENTAGE|PUSHBUTTON|RESOLUTION|COMPONENTS|DEALLOCATE|DISCONNECT|DUPLICATES|FIRST-LINE|HEAD-LINES|NO-DISPLAY|OCCURRENCE|RESPECTING|RETURNCODE|SUBMATCHES|TRACE-FILE|ASCENDING|BYPASSING|ENDMODULE|EXCEPTION|EXCLUDING|EXPORTING|INCREMENT|MATCHCODE|PARAMETER|PARTIALLY|PREFERRED|REFERENCE|REPLACING|RETURNING|SELECTION|SEPARATED|SPECIFIED|STATEMENT|TIMESTAMP|TYPE-POOL|ACCEPTING|APPENDAGE|ASSIGNING|COL_GROUP|COMPARING|CONSTANTS|DANGEROUS|IMPORTING|INSTANCES|LEFTSPACE|LOG-POINT|QUICKINFO|READ-ONLY|SCROLLING|SQLSCRIPT|STEP-LOOP|TOP-LINES|TRANSLATE|APPENDING|AUTHORITY|CHARACTER|COMPONENT|CONDITION|DIRECTORY|DUPLICATE|MESSAGING|RECEIVING|SUBSCREEN|ACCORDING|COL_TOTAL|END-LINES|ENDMETHOD|ENDSELECT|EXPANDING|EXTENSION|INCLUDING|INFOTYPES|INTERFACE|INTERVALS|LINE-SIZE|PF-STATUS|PROCEDURE|PROTECTED|REQUESTED|RESUMABLE|RIGHTPLUS|SAP-SPOOL|SECONDARY|STRUCTURE|SUBSTRING|TABLEVIEW|NUMOFCHAR|ADJACENT|ANALYSIS|ASSIGNED|BACKWARD|CHANNELS|CHECKBOX|CONTINUE|CRITICAL|DATAINFO|DD\/MM\/YY|DURATION|ENCODING|ENDCLASS|FUNCTION|LEFTPLUS|LINEFEED|MM\/DD\/YY|OVERFLOW|RECEIVED|SKIPPING|SORTABLE|STANDARD|SUBTRACT|SUPPRESS|TABSTRIP|TITLEBAR|TRUNCATE|UNASSIGN|WHENEVER|ANALYZER|COALESCE|COMMENTS|CONDENSE|DECIMALS|DEFERRED|ENDWHILE|EXPLICIT|KEYWORDS|MESSAGES|POSITION|PRIORITY|RECEIVER|RENAMING|TIMEZONE|TRAILING|ALLOCATE|CENTERED|CIRCULAR|CONTROLS|CURRENCY|DELETING|DESCRIBE|DISTANCE|ENDCATCH|EXPONENT|EXTENDED|GENERATE|IGNORING|INCLUDES|INTERNAL|MAJOR-ID|MODIFIER|NEW-LINE|OPTIONAL|PROPERTY|ROLLBACK|STARTING|SUPPLIED|ABSTRACT|CHANGING|CONTEXTS|CREATING|CUSTOMER|DATABASE|DAYLIGHT|DEFINING|DISTINCT|DIVISION|ENABLING|ENDCHAIN|ESCAPING|HARMLESS|IMPLICIT|INACTIVE|LANGUAGE|MINOR-ID|MULTIPLY|NEW-PAGE|NO-TITLE|POS_HIGH|SEPARATE|TEXTPOOL|TRANSFER|SELECTOR|DBMAXLEN|ITERATOR|ARCHIVE|BIT-XOR|BYTE-CO|COLLECT|COMMENT|CURRENT|DEFAULT|DISPLAY|ENDFORM|EXTRACT|LEADING|LISTBOX|LOCATOR|MEMBERS|METHODS|NESTING|POS_LOW|PROCESS|PROVIDE|RAISING|RESERVE|SECONDS|SUMMARY|VISIBLE|BETWEEN|BIT-AND|BYTE-CS|CLEANUP|COMPUTE|CONTROL|CONVERT|DATASET|ENDCASE|FORWARD|HEADERS|HOTSPOT|INCLUDE|INVERSE|KEEPING|NO-ZERO|OBJECTS|OVERLAY|PADDING|PATTERN|PROGRAM|REFRESH|SECTION|SUMMING|TESTING|VERSION|WINDOWS|WITHOUT|BIT-NOT|BYTE-CA|BYTE-NA|CASTING|CONTEXT|COUNTRY|DYNAMIC|ENABLED|ENDLOOP|EXECUTE|FRIENDS|HANDLER|HEADING|INITIAL|\*-INPUT|LOGFILE|MAXIMUM|MINIMUM|NO-GAPS|NO-SIGN|PRAGMAS|PRIMARY|PRIVATE|REDUCED|REPLACE|REQUEST|RESULTS|UNICODE|WARNING|ALIASES|BYTE-CN|BYTE-NS|CALLING|COL_KEY|COLUMNS|CONNECT|ENDEXEC|ENTRIES|EXCLUDE|FILTERS|FURTHER|HELP-ID|LOGICAL|MAPPING|MESSAGE|NAMETAB|OPTIONS|PACKAGE|PERFORM|RECEIVE|STATICS|VARYING|BINDING|CHARLEN|GREATER|XSTRLEN|ACCEPT|APPEND|DETAIL|ELSEIF|ENDING|ENDTRY|FORMAT|FRAMES|GIVING|HASHED|HEADER|IMPORT|INSERT|MARGIN|MODULE|NATIVE|OBJECT|OFFSET|REMOTE|RESUME|SAVING|SIMPLE|SUBMIT|TABBED|TOKENS|UNIQUE|UNPACK|UPDATE|WINDOW|YELLOW|ACTUAL|ASPECT|CENTER|CURSOR|DELETE|DIALOG|DIVIDE|DURING|ERRORS|EVENTS|EXTEND|FILTER|HANDLE|HAVING|IGNORE|LITTLE|MEMORY|NO-GAP|OCCURS|OPTION|PERSON|PLACES|PUBLIC|REDUCE|REPORT|RESULT|SINGLE|SORTED|SWITCH|SYNTAX|TARGET|VALUES|WRITER|ASSERT|BLOCKS|BOUNDS|BUFFER|CHANGE|COLUMN|COMMIT|CONCAT|COPIES|CREATE|DDMMYY|DEFINE|ENDIAN|ESCAPE|EXPAND|KERNEL|LAYOUT|LEGACY|LEVELS|MMDDYY|NUMBER|OUTPUT|RANGES|READER|RETURN|SCREEN|SEARCH|SELECT|SHARED|SOURCE|STABLE|STATIC|SUBKEY|SUFFIX|TABLES|UNWIND|YYMMDD|ASSIGN|BACKUP|BEFORE|BINARY|BIT-OR|BLANKS|CLIENT|CODING|COMMON|DEMAND|DYNPRO|EXCEPT|EXISTS|EXPORT|FIELDS|GLOBAL|GROUPS|LENGTH|LOCALE|MEDIUM|METHOD|MODIFY|NESTED|OTHERS|REJECT|SCROLL|SUPPLY|SYMBOL|ENDFOR|STRLEN|ALIGN|BEGIN|BOUND|ENDAT|ENTRY|EVENT|FINAL|FLUSH|GRANT|INNER|SHORT|USING|WRITE|AFTER|BLACK|BLOCK|CLOCK|COLOR|COUNT|DUMMY|EMPTY|ENDDO|ENDON|GREEN|INDEX|INOUT|LEAVE|LEVEL|LINES|MODIF|ORDER|OUTER|RANGE|RESET|RETRY|RIGHT|SMART|SPLIT|STYLE|TABLE|THROW|UNDER|UNTIL|UPPER|UTF-8|WHERE|ALIAS|BLANK|CLEAR|CLOSE|EXACT|FETCH|FIRST|FOUND|GROUP|LLANG|LOCAL|OTHER|REGEX|SPOOL|TITLE|TYPES|VALID|WHILE|ALPHA|BOXED|CATCH|CHAIN|CHECK|CLASS|COVER|ENDIF|EQUIV|FIELD|FLOOR|FRAME|INPUT|LOWER|MATCH|NODES|PAGES|PRINT|RAISE|ROUND|SHIFT|SPACE|SPOTS|STAMP|STATE|TASKS|TIMES|TRMAC|ULINE|UNION|VALUE|WIDTH|EQUAL|LOG10|TRUNC|BLOB|CASE|CEIL|CLOB|COND|EXIT|FILE|GAPS|HOLD|INCL|INTO|KEEP|KEYS|LAST|LINE|LONG|LPAD|MAIL|MODE|OPEN|PINK|READ|ROWS|TEST|THEN|ZERO|AREA|BACK|BADI|BYTE|CAST|EDIT|EXEC|FAIL|FIND|FKEQ|FONT|FREE|GKEQ|HIDE|INIT|ITNO|LATE|LOOP|MAIN|MARK|MOVE|NEXT|NULL|RISK|ROLE|UNIT|WAIT|ZONE|BASE|CALL|CODE|DATA|DATE|FKGE|GKGE|HIGH|KIND|LEFT|LIST|MASK|MESH|NAME|NODE|PACK|PAGE|POOL|SEND|SIGN|SIZE|SOME|STOP|TASK|TEXT|TIME|USER|VARY|WITH|WORD|BLUE|CONV|COPY|DEEP|ELSE|FORM|FROM|HINT|ICON|JOIN|LIKE|LOAD|ONLY|PART|SCAN|SKIP|SORT|TYPE|UNIX|VIEW|WHEN|WORK|ACOS|ASIN|ATAN|COSH|EACH|FRAC|LESS|RTTI|SINH|SQRT|TANH|AVG|BIT|DIV|ISO|LET|OUT|PAD|SQL|ALL|CI_|CPI|END|LOB|LPI|MAX|MIN|NEW|OLE|RUN|SET|\?TO|YES|ABS|ADD|AND|BIG|FOR|HDB|JOB|LOW|NOT|SAP|TRY|VIA|XML|ANY|GET|IDS|KEY|MOD|OFF|PUT|RAW|RED|REF|SUM|TAB|XSD|CNT|COS|EXP|LOG|SIN|TAN|XOR|AT|CO|CP|DO|GT|ID|IF|NS|OR|BT|CA|CS|GE|NA|NB|EQ|IN|LT|NE|NO|OF|ON|PF|TO|AS|BY|CN|IS|LE|NP|UP|E|I|M|O|Z|C|X)\b/i,
+      pattern: /(\s|\.|^)(?:\*-INPUT|\?TO|ABAP-SOURCE|ABBREVIATED|ABS|ABSTRACT|ACCEPT|ACCEPTING|ACCESSPOLICY|ACCORDING|ACOS|ACTIVATION|ACTUAL|ADD|ADD-CORRESPONDING|ADJACENT|AFTER|ALIAS|ALIASES|ALIGN|ALL|ALLOCATE|ALPHA|ANALYSIS|ANALYZER|AND|ANY|APPEND|APPENDAGE|APPENDING|APPLICATION|ARCHIVE|AREA|ARITHMETIC|AS|ASCENDING|ASIN|ASPECT|ASSERT|ASSIGN|ASSIGNED|ASSIGNING|ASSOCIATION|ASYNCHRONOUS|AT|ATAN|ATTRIBUTES|AUTHORITY|AUTHORITY-CHECK|AVG|BACK|BACKGROUND|BACKUP|BACKWARD|BADI|BASE|BEFORE|BEGIN|BETWEEN|BIG|BINARY|BINDING|BIT|BIT-AND|BIT-NOT|BIT-OR|BIT-XOR|BLACK|BLANK|BLANKS|BLOB|BLOCK|BLOCKS|BLUE|BOUND|BOUNDARIES|BOUNDS|BOXED|BREAK-POINT|BT|BUFFER|BY|BYPASSING|BYTE|BYTE-CA|BYTE-CN|BYTE-CO|BYTE-CS|BYTE-NA|BYTE-NS|BYTE-ORDER|C|CA|CALL|CALLING|CASE|CAST|CASTING|CATCH|CEIL|CENTER|CENTERED|CHAIN|CHAIN-INPUT|CHAIN-REQUEST|CHANGE|CHANGING|CHANNELS|CHAR-TO-HEX|CHARACTER|CHARLEN|CHECK|CHECKBOX|CIRCULAR|CI_|CLASS|CLASS-CODING|CLASS-DATA|CLASS-EVENTS|CLASS-METHODS|CLASS-POOL|CLEANUP|CLEAR|CLIENT|CLOB|CLOCK|CLOSE|CN|CNT|CO|COALESCE|CODE|CODING|COLLECT|COLOR|COLUMN|COLUMNS|COL_BACKGROUND|COL_GROUP|COL_HEADING|COL_KEY|COL_NEGATIVE|COL_NORMAL|COL_POSITIVE|COL_TOTAL|COMMENT|COMMENTS|COMMIT|COMMON|COMMUNICATION|COMPARING|COMPONENT|COMPONENTS|COMPRESSION|COMPUTE|CONCAT|CONCATENATE|COND|CONDENSE|CONDITION|CONNECT|CONNECTION|CONSTANTS|CONTEXT|CONTEXTS|CONTINUE|CONTROL|CONTROLS|CONV|CONVERSION|CONVERT|COPIES|COPY|CORRESPONDING|COS|COSH|COUNT|COUNTRY|COVER|CP|CPI|CREATE|CREATING|CRITICAL|CS|CURRENCY|CURRENCY_CONVERSION|CURRENT|CURSOR|CURSOR-SELECTION|CUSTOMER|CUSTOMER-FUNCTION|DANGEROUS|DATA|DATABASE|DATAINFO|DATASET|DATE|DAYLIGHT|DBMAXLEN|DD\/MM\/YY|DD\/MM\/YYYY|DDMMYY|DEALLOCATE|DECIMALS|DECIMAL_SHIFT|DECLARATIONS|DEEP|DEFAULT|DEFERRED|DEFINE|DEFINING|DEFINITION|DELETE|DELETING|DEMAND|DEPARTMENT|DESCENDING|DESCRIBE|DESTINATION|DETAIL|DIALOG|DIRECTORY|DISCONNECT|DISPLAY|DISPLAY-MODE|DISTANCE|DISTINCT|DIV|DIVIDE|DIVIDE-CORRESPONDING|DIVISION|DO|DUMMY|DUPLICATE|DUPLICATES|DURATION|DURING|DYNAMIC|DYNPRO|E|EACH|EDIT|EDITOR-CALL|ELSE|ELSEIF|EMPTY|ENABLED|ENABLING|ENCODING|END|END-ENHANCEMENT-SECTION|END-LINES|END-OF-DEFINITION|END-OF-FILE|END-OF-PAGE|END-OF-SELECTION|ENDAT|ENDCASE|ENDCATCH|ENDCHAIN|ENDCLASS|ENDDO|ENDENHANCEMENT|ENDEXEC|ENDFOR|ENDFORM|ENDFUNCTION|ENDIAN|ENDIF|ENDING|ENDINTERFACE|ENDLOOP|ENDMETHOD|ENDMODULE|ENDON|ENDPROVIDE|ENDSELECT|ENDTRY|ENDWHILE|ENGINEERING|ENHANCEMENT|ENHANCEMENT-POINT|ENHANCEMENT-SECTION|ENHANCEMENTS|ENTRIES|ENTRY|ENVIRONMENT|EQ|EQUAL|EQUIV|ERRORMESSAGE|ERRORS|ESCAPE|ESCAPING|EVENT|EVENTS|EXACT|EXCEPT|EXCEPTION|EXCEPTION-TABLE|EXCEPTIONS|EXCLUDE|EXCLUDING|EXEC|EXECUTE|EXISTS|EXIT|EXIT-COMMAND|EXP|EXPAND|EXPANDING|EXPIRATION|EXPLICIT|EXPONENT|EXPORT|EXPORTING|EXTEND|EXTENDED|EXTENSION|EXTRACT|FAIL|FETCH|FIELD|FIELD-GROUPS|FIELD-SYMBOL|FIELD-SYMBOLS|FIELDS|FILE|FILTER|FILTER-TABLE|FILTERS|FINAL|FIND|FIRST|FIRST-LINE|FIXED-POINT|FKEQ|FKGE|FLOOR|FLUSH|FONT|FOR|FORM|FORMAT|FORWARD|FOUND|FRAC|FRAME|FRAMES|FREE|FRIENDS|FROM|FUNCTION|FUNCTION-POOL|FUNCTIONALITY|FURTHER|GAPS|GE|GENERATE|GET|GIVING|GKEQ|GKGE|GLOBAL|GRANT|GREATER|GREEN|GROUP|GROUPS|GT|HANDLE|HANDLER|HARMLESS|HASHED|HAVING|HDB|HEAD-LINES|HEADER|HEADERS|HEADING|HELP-ID|HELP-REQUEST|HIDE|HIGH|HINT|HOLD|HOTSPOT|I|ICON|ID|IDENTIFICATION|IDENTIFIER|IDS|IF|IGNORE|IGNORING|IMMEDIATELY|IMPLEMENTATION|IMPLEMENTATIONS|IMPLEMENTED|IMPLICIT|IMPORT|IMPORTING|IN|INACTIVE|INCL|INCLUDE|INCLUDES|INCLUDING|INCREMENT|INDEX|INDEX-LINE|INFOTYPES|INHERITING|INIT|INITIAL|INITIALIZATION|INNER|INOUT|INPUT|INSERT|INSTANCES|INTENSIFIED|INTERFACE|INTERFACE-POOL|INTERFACES|INTERNAL|INTERVALS|INTO|INVERSE|INVERTED-DATE|IS|ISO|ITERATOR|ITNO|JOB|JOIN|KEEP|KEEPING|KERNEL|KEY|KEYS|KEYWORDS|KIND|LANGUAGE|LAST|LATE|LAYOUT|LE|LEADING|LEAVE|LEFT|LEFT-JUSTIFIED|LEFTPLUS|LEFTSPACE|LEGACY|LENGTH|LESS|LET|LEVEL|LEVELS|LIKE|LINE|LINE-COUNT|LINE-SELECTION|LINE-SIZE|LINEFEED|LINES|LIST|LIST-PROCESSING|LISTBOX|LITTLE|LLANG|LOAD|LOAD-OF-PROGRAM|LOB|LOCAL|LOCALE|LOCATOR|LOG|LOG-POINT|LOG10|LOGFILE|LOGICAL|LONG|LOOP|LOW|LOWER|LPAD|LPI|LT|M|MAIL|MAIN|MAJOR-ID|MAPPING|MARGIN|MARK|MASK|MATCH|MATCHCODE|MAX|MAXIMUM|MEDIUM|MEMBERS|MEMORY|MESH|MESSAGE|MESSAGE-ID|MESSAGES|MESSAGING|METHOD|METHODS|MIN|MINIMUM|MINOR-ID|MM\/DD\/YY|MM\/DD\/YYYY|MMDDYY|MOD|MODE|MODIF|MODIFIER|MODIFY|MODULE|MOVE|MOVE-CORRESPONDING|MULTIPLY|MULTIPLY-CORRESPONDING|NA|NAME|NAMETAB|NATIVE|NB|NE|NESTED|NESTING|NEW|NEW-LINE|NEW-PAGE|NEW-SECTION|NEXT|NO|NO-DISPLAY|NO-EXTENSION|NO-GAP|NO-GAPS|NO-GROUPING|NO-HEADING|NO-SCROLLING|NO-SIGN|NO-TITLE|NO-TOPOFPAGE|NO-ZERO|NODE|NODES|NON-UNICODE|NON-UNIQUE|NOT|NP|NS|NULL|NUMBER|NUMOFCHAR|O|OBJECT|OBJECTS|OBLIGATORY|OCCURRENCE|OCCURRENCES|OCCURS|OF|OFF|OFFSET|OLE|ON|ONLY|OPEN|OPTION|OPTIONAL|OPTIONS|OR|ORDER|OTHER|OTHERS|OUT|OUTER|OUTPUT|OUTPUT-LENGTH|OVERFLOW|OVERLAY|PACK|PACKAGE|PAD|PADDING|PAGE|PAGES|PARAMETER|PARAMETER-TABLE|PARAMETERS|PART|PARTIALLY|PATTERN|PERCENTAGE|PERFORM|PERFORMING|PERSON|PF|PF-STATUS|PINK|PLACES|POOL|POSITION|POS_HIGH|POS_LOW|PRAGMAS|PRECOMPILED|PREFERRED|PRESERVING|PRIMARY|PRINT|PRINT-CONTROL|PRIORITY|PRIVATE|PROCEDURE|PROCESS|PROGRAM|PROPERTY|PROTECTED|PROVIDE|PUBLIC|PUSHBUTTON|PUT|QUEUE-ONLY|QUICKINFO|RADIOBUTTON|RAISE|RAISING|RANGE|RANGES|RAW|READ|READ-ONLY|READER|RECEIVE|RECEIVED|RECEIVER|RECEIVING|RED|REDEFINITION|REDUCE|REDUCED|REF|REFERENCE|REFRESH|REGEX|REJECT|REMOTE|RENAMING|REPLACE|REPLACEMENT|REPLACING|REPORT|REQUEST|REQUESTED|RESERVE|RESET|RESOLUTION|RESPECTING|RESPONSIBLE|RESULT|RESULTS|RESUMABLE|RESUME|RETRY|RETURN|RETURNCODE|RETURNING|RIGHT|RIGHT-JUSTIFIED|RIGHTPLUS|RIGHTSPACE|RISK|RMC_COMMUNICATION_FAILURE|RMC_INVALID_STATUS|RMC_SYSTEM_FAILURE|ROLE|ROLLBACK|ROUND|ROWS|RTTI|RUN|SAP|SAP-SPOOL|SAVING|SCALE_PRESERVING|SCALE_PRESERVING_SCIENTIFIC|SCAN|SCIENTIFIC|SCIENTIFIC_WITH_LEADING_ZERO|SCREEN|SCROLL|SCROLL-BOUNDARY|SCROLLING|SEARCH|SECONDARY|SECONDS|SECTION|SELECT|SELECT-OPTIONS|SELECTION|SELECTION-SCREEN|SELECTION-SET|SELECTION-SETS|SELECTION-TABLE|SELECTIONS|SELECTOR|SEND|SEPARATE|SEPARATED|SET|SHARED|SHIFT|SHORT|SHORTDUMP-ID|SIGN|SIGN_AS_POSTFIX|SIMPLE|SIN|SINGLE|SINH|SIZE|SKIP|SKIPPING|SMART|SOME|SORT|SORTABLE|SORTED|SOURCE|SPACE|SPECIFIED|SPLIT|SPOOL|SPOTS|SQL|SQLSCRIPT|SQRT|STABLE|STAMP|STANDARD|START-OF-SELECTION|STARTING|STATE|STATEMENT|STATEMENTS|STATIC|STATICS|STATUSINFO|STEP-LOOP|STOP|STRLEN|STRUCTURE|STRUCTURES|STYLE|SUBKEY|SUBMATCHES|SUBMIT|SUBROUTINE|SUBSCREEN|SUBSTRING|SUBTRACT|SUBTRACT-CORRESPONDING|SUFFIX|SUM|SUMMARY|SUMMING|SUPPLIED|SUPPLY|SUPPRESS|SWITCH|SWITCHSTATES|SYMBOL|SYNCPOINTS|SYNTAX|SYNTAX-CHECK|SYNTAX-TRACE|SYSTEM-CALL|SYSTEM-EXCEPTIONS|SYSTEM-EXIT|TAB|TABBED|TABLE|TABLES|TABLEVIEW|TABSTRIP|TAN|TANH|TARGET|TASK|TASKS|TEST|TESTING|TEXT|TEXTPOOL|THEN|THROW|TIME|TIMES|TIMESTAMP|TIMEZONE|TITLE|TITLE-LINES|TITLEBAR|TO|TOKENIZATION|TOKENS|TOP-LINES|TOP-OF-PAGE|TRACE-FILE|TRACE-TABLE|TRAILING|TRANSACTION|TRANSFER|TRANSFORMATION|TRANSLATE|TRANSPORTING|TRMAC|TRUNC|TRUNCATE|TRUNCATION|TRY|TYPE|TYPE-POOL|TYPE-POOLS|TYPES|ULINE|UNASSIGN|UNDER|UNICODE|UNION|UNIQUE|UNIT|UNIT_CONVERSION|UNIX|UNPACK|UNTIL|UNWIND|UP|UPDATE|UPPER|USER|USER-COMMAND|USING|UTF-8|VALID|VALUE|VALUE-REQUEST|VALUES|VARY|VARYING|VERIFICATION-MESSAGE|VERSION|VIA|VIEW|VISIBLE|WAIT|WARNING|WHEN|WHENEVER|WHERE|WHILE|WIDTH|WINDOW|WINDOWS|WITH|WITH-HEADING|WITH-TITLE|WITHOUT|WORD|WORK|WRITE|WRITER|X|XML|XOR|XSD|XSTRLEN|YELLOW|YES|YYMMDD|Z|ZERO|ZONE)(?![\w-])/i,
       lookbehind: true
     },
 
@@ -68668,8 +68726,11 @@ function ada(Prism) {
     }, {
       pattern: /\b\d(?:_?\d)*(?:\.\d(?:_?\d)*)?(?:E[+-]?\d(?:_?\d)*)?\b/i
     }],
-    'attr-name': /\b'\w+/,
-    keyword: /\b(?:abort|abs|abstract|accept|access|aliased|all|and|array|at|begin|body|case|constant|declare|delay|delta|digits|do|else|elsif|end|entry|exception|exit|for|function|generic|goto|if|in|interface|is|limited|loop|mod|new|not|null|of|others|out|overriding|package|pragma|private|procedure|protected|raise|range|record|rem|renames|requeue|return|reverse|select|separate|some|subtype|synchronized|tagged|task|terminate|then|type|until|use|when|while|with|xor)\b/i,
+    attribute: {
+      pattern: /\b'\w+/,
+      alias: 'attr-name'
+    },
+    keyword: /\b(?:abort|abs|abstract|accept|access|aliased|all|and|array|at|begin|body|case|constant|declare|delay|delta|digits|do|else|elsif|end|entry|exception|exit|for|function|generic|goto|if|in|interface|is|limited|loop|mod|new|not|null|of|or|others|out|overriding|package|pragma|private|procedure|protected|raise|range|record|rem|renames|requeue|return|reverse|select|separate|some|subtype|synchronized|tagged|task|terminate|then|type|until|use|when|while|with|xor)\b/i,
     "boolean": /\b(?:false|true)\b/i,
     operator: /<[=>]?|>=?|=>?|:=|\/=?|\*\*?|[&+-]/,
     punctuation: /\.\.?|[,;():]/,
@@ -69057,6 +69118,156 @@ function arff(Prism) {
     punctuation: /[{},]/
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/armasm.js
+// @ts-nocheck
+armasm.displayName = 'armasm';
+armasm.aliases = ['arm-asm'];
+/** @type {import('../core.js').Syntax} */
+
+function armasm(Prism) {
+  Prism.languages.armasm = {
+    comment: {
+      pattern: /;.*/,
+      greedy: true
+    },
+    string: {
+      pattern: /"(?:[^"\r\n]|"")*"/,
+      greedy: true,
+      inside: {
+        variable: {
+          pattern: /((?:^|[^$])(?:\${2})*)\$\w+/,
+          lookbehind: true
+        }
+      }
+    },
+    "char": {
+      pattern: /'(?:[^'\r\n]{0,4}|'')'/,
+      greedy: true
+    },
+    'version-symbol': {
+      pattern: /\|[\w@]+\|/,
+      greedy: true,
+      alias: 'property'
+    },
+    "boolean": /\b(?:FALSE|TRUE)\b/,
+    directive: {
+      pattern: /\b(?:ALIAS|ALIGN|AREA|ARM|ASSERT|ATTR|CN|CODE|CODE16|CODE32|COMMON|CP|DATA|DCB|DCD|DCDO|DCDU|DCFD|DCFDU|DCI|DCQ|DCQU|DCW|DCWU|DN|ELIF|ELSE|END|ENDFUNC|ENDIF|ENDP|ENTRY|EQU|EXPORT|EXPORTAS|EXTERN|FIELD|FILL|FN|FUNCTION|GBLA|GBLL|GBLS|GET|GLOBAL|IF|IMPORT|INCBIN|INCLUDE|INFO|KEEP|LCLA|LCLL|LCLS|LTORG|MACRO|MAP|MEND|MEXIT|NOFP|OPT|PRESERVE8|PROC|QN|READONLY|RELOC|REQUIRE|REQUIRE8|RLIST|ROUT|SETA|SETL|SETS|SN|SPACE|SUBT|THUMB|THUMBX|TTL|WEND|WHILE)\b/,
+      alias: 'property'
+    },
+    instruction: {
+      pattern: /((?:^|(?:^|[^\\])(?:\r\n?|\n))[ \t]*(?:(?:[A-Z][A-Z0-9_]*[a-z]\w*|[a-z]\w*|\d+)[ \t]+)?)\b[A-Z.]+\b/,
+      lookbehind: true,
+      alias: 'keyword'
+    },
+    variable: /\$\w+/,
+    number: /(?:\b[2-9]_\d+|(?:\b\d+(?:\.\d+)?|\B\.\d+)(?:e-?\d+)?|\b0(?:[fd]_|x)[0-9a-f]+|&[0-9a-f]+)\b/i,
+    register: {
+      pattern: /\b(?:r\d|lr)\b/,
+      alias: 'symbol'
+    },
+    operator: /<>|<<|>>|&&|\|\||[=!<>/]=?|[+\-*%#?&|^]|:[A-Z]+:/,
+    punctuation: /[()[\],]/
+  };
+  Prism.languages['arm-asm'] = Prism.languages.armasm;
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/arturo.js
+// @ts-nocheck
+arturo.displayName = 'arturo';
+arturo.aliases = ['art'];
+/** @type {import('../core.js').Syntax} */
+
+function arturo(Prism) {
+  ;
+
+  (function (Prism) {
+    /**
+     * @param {string} lang
+     * @param {string} pattern
+     */
+    var createLanguageString = function createLanguageString(lang, pattern) {
+      return {
+        pattern: RegExp(/\{!/.source + '(?:' + (pattern || lang) + ')' + /$[\s\S]*\}/.source, 'm'),
+        greedy: true,
+        inside: {
+          embedded: {
+            pattern: /(^\{!\w+\b)[\s\S]+(?=\}$)/,
+            lookbehind: true,
+            alias: 'language-' + lang,
+            inside: Prism.languages[lang]
+          },
+          string: /[\s\S]+/
+        }
+      };
+    };
+
+    Prism.languages.arturo = {
+      comment: {
+        pattern: /;.*/,
+        greedy: true
+      },
+      character: {
+        pattern: /`.`/,
+        alias: 'char',
+        greedy: true
+      },
+      number: {
+        pattern: /\b\d+(?:\.\d+(?:\.\d+(?:-[\w+-]+)?)?)?\b/
+      },
+      string: {
+        pattern: /"(?:[^"\\\r\n]|\\.)*"/,
+        greedy: true
+      },
+      regex: {
+        pattern: /\{\/.*?\/\}/,
+        greedy: true
+      },
+      'html-string': createLanguageString('html'),
+      'css-string': createLanguageString('css'),
+      'js-string': createLanguageString('js'),
+      'md-string': createLanguageString('md'),
+      'sql-string': createLanguageString('sql'),
+      'sh-string': createLanguageString('shell', 'sh'),
+      multistring: {
+        pattern: /».*|\{:[\s\S]*?:\}|\{[\s\S]*?\}|^-{6}$[\s\S]*/m,
+        alias: 'string',
+        greedy: true
+      },
+      label: {
+        pattern: /\w+\b\??:/,
+        alias: 'property'
+      },
+      literal: {
+        pattern: /'(?:\w+\b\??:?)/,
+        alias: 'constant'
+      },
+      type: {
+        pattern: /:(?:\w+\b\??:?)/,
+        alias: 'class-name'
+      },
+      color: /#\w+/,
+      predicate: {
+        pattern: /\b(?:all|and|any|ascii|attr|attribute|attributeLabel|binary|block|char|contains|database|date|dictionary|empty|equal|even|every|exists|false|floating|function|greater|greaterOrEqual|if|in|inline|integer|is|key|label|leap|less|lessOrEqual|literal|logical|lower|nand|negative|nor|not|notEqual|null|numeric|odd|or|path|pathLabel|positive|prefix|prime|regex|same|set|some|sorted|standalone|string|subset|suffix|superset|symbol|symbolLiteral|true|try|type|unless|upper|when|whitespace|word|xnor|xor|zero)\?/,
+        alias: 'keyword'
+      },
+      'builtin-function': {
+        pattern: /\b(?:abs|acos|acosh|acsec|acsech|actan|actanh|add|after|alert|alias|and|angle|append|arg|args|arity|array|as|asec|asech|asin|asinh|atan|atan2|atanh|attr|attrs|average|before|benchmark|blend|break|call|capitalize|case|ceil|chop|clear|clip|close|color|combine|conj|continue|copy|cos|cosh|crc|csec|csech|ctan|ctanh|cursor|darken|dec|decode|define|delete|desaturate|deviation|dialog|dictionary|difference|digest|digits|div|do|download|drop|dup|e|else|empty|encode|ensure|env|escape|execute|exit|exp|extend|extract|factors|fdiv|filter|first|flatten|floor|fold|from|function|gamma|gcd|get|goto|hash|hypot|if|inc|indent|index|infinity|info|input|insert|inspect|intersection|invert|jaro|join|keys|kurtosis|last|let|levenshtein|lighten|list|ln|log|loop|lower|mail|map|match|max|median|min|mod|module|mul|nand|neg|new|nor|normalize|not|now|null|open|or|outdent|pad|palette|panic|path|pause|permissions|permutate|pi|pop|popup|pow|powerset|powmod|prefix|print|prints|process|product|query|random|range|read|relative|remove|rename|render|repeat|replace|request|return|reverse|round|sample|saturate|script|sec|sech|select|serve|set|shl|shr|shuffle|sin|sinh|size|skewness|slice|sort|spin|split|sqrt|squeeze|stack|strip|sub|suffix|sum|switch|symbols|symlink|sys|take|tan|tanh|terminal|terminate|to|truncate|try|type|unclip|union|unique|unless|until|unzip|upper|values|var|variance|volume|webview|while|with|wordwrap|write|xnor|xor|zip)\b/,
+        alias: 'keyword'
+      },
+      sugar: {
+        pattern: /->|=>|\||::/,
+        alias: 'operator'
+      },
+      punctuation: /[()[\],]/,
+      symbol: {
+        pattern: /<:|-:|ø|@|#|\+|\||\*|\$|---|-|%|\/|\.\.|\^|~|=|<|>|\\/
+      },
+      "boolean": {
+        pattern: /\b(?:false|maybe|true)\b/
+      }
+    };
+    Prism.languages.art = Prism.languages['arturo'];
+  })(Prism);
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/asciidoc.js
 // @ts-nocheck
 asciidoc.displayName = 'asciidoc';
@@ -69419,7 +69630,7 @@ function asmatmel(Prism) {
       pattern: /\b[acznvshtixy]\b/i,
       alias: 'variable'
     },
-    operator: />>=?|<<=?|&&?|\|\|?|[-+*/%&|^!=<>?]=?/,
+    operator: />>=?|<<=?|&[&=]?|\|[\|=]?|[-+*/%^!=<>?]=?/,
     punctuation: /[(),:]/
   };
 }
@@ -69450,11 +69661,17 @@ function autohotkey(Prism) {
     number: /\b0x[\dA-Fa-f]+\b|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:[Ee]-?\d+)?/,
     operator: /\?|\/\/?=?|:=|\|[=|]?|&[=&]?|\+[=+]?|-[=-]?|\*[=*]?|<(?:<=?|>|=)?|>>?=?|[.^!=~]=?|\b(?:AND|NOT|OR)\b/,
     "boolean": /\b(?:false|true)\b/,
-    selector: /\b(?:AutoTrim|BlockInput|Break|Click|ClipWait|Continue|Control|ControlClick|ControlFocus|ControlGet|ControlGetFocus|ControlGetPos|ControlGetText|ControlMove|ControlSend|ControlSendRaw|ControlSetText|CoordMode|Critical|DetectHiddenText|DetectHiddenWindows|Drive|DriveGet|DriveSpaceFree|EnvAdd|EnvDiv|EnvGet|EnvMult|EnvSet|EnvSub|EnvUpdate|Exit|ExitApp|FileAppend|FileCopy|FileCopyDir|FileCreateDir|FileCreateShortcut|FileDelete|FileEncoding|FileGetAttrib|FileGetShortcut|FileGetSize|FileGetTime|FileGetVersion|FileInstall|FileMove|FileMoveDir|FileRead|FileReadLine|FileRecycle|FileRecycleEmpty|FileRemoveDir|FileSelectFile|FileSelectFolder|FileSetAttrib|FileSetTime|FormatTime|GetKeyState|Gosub|Goto|GroupActivate|GroupAdd|GroupClose|GroupDeactivate|Gui|GuiControl|GuiControlGet|Hotkey|ImageSearch|IniDelete|IniRead|IniWrite|Input|InputBox|KeyWait|ListHotkeys|ListLines|ListVars|Loop|Menu|MouseClick|MouseClickDrag|MouseGetPos|MouseMove|MsgBox|OnExit|OutputDebug|Pause|PixelGetColor|PixelSearch|PostMessage|Process|Progress|Random|RegDelete|RegRead|RegWrite|Reload|Repeat|Return|Run|RunAs|RunWait|Send|SendEvent|SendInput|SendMessage|SendMode|SendPlay|SendRaw|SetBatchLines|SetCapslockState|SetControlDelay|SetDefaultMouseSpeed|SetEnv|SetFormat|SetKeyDelay|SetMouseDelay|SetNumlockState|SetRegView|SetScrollLockState|SetStoreCapslockMode|SetTimer|SetTitleMatchMode|SetWinDelay|SetWorkingDir|Shutdown|Sleep|Sort|SoundBeep|SoundGet|SoundGetWaveVolume|SoundPlay|SoundSet|SoundSetWaveVolume|SplashImage|SplashTextOff|SplashTextOn|SplitPath|StatusBarGetText|StatusBarWait|StringCaseSense|StringGetPos|StringLeft|StringLen|StringLower|StringMid|StringReplace|StringRight|StringSplit|StringTrimLeft|StringTrimRight|StringUpper|Suspend|SysGet|Thread|ToolTip|Transform|TrayTip|URLDownloadToFile|WinActivate|WinActivateBottom|WinClose|WinGet|WinGetActiveStats|WinGetActiveTitle|WinGetClass|WinGetPos|WinGetText|WinGetTitle|WinHide|WinKill|WinMaximize|WinMenuSelectItem|WinMinimize|WinMinimizeAll|WinMinimizeAllUndo|WinMove|WinRestore|WinSet|WinSetTitle|WinShow|WinWait|WinWaitActive|WinWaitClose|WinWaitNotActive)\b/i,
+    command: {
+      pattern: /\b(?:AutoTrim|BlockInput|Break|Click|ClipWait|Continue|Control|ControlClick|ControlFocus|ControlGet|ControlGetFocus|ControlGetPos|ControlGetText|ControlMove|ControlSend|ControlSendRaw|ControlSetText|CoordMode|Critical|DetectHiddenText|DetectHiddenWindows|Drive|DriveGet|DriveSpaceFree|EnvAdd|EnvDiv|EnvGet|EnvMult|EnvSet|EnvSub|EnvUpdate|Exit|ExitApp|FileAppend|FileCopy|FileCopyDir|FileCreateDir|FileCreateShortcut|FileDelete|FileEncoding|FileGetAttrib|FileGetShortcut|FileGetSize|FileGetTime|FileGetVersion|FileInstall|FileMove|FileMoveDir|FileRead|FileReadLine|FileRecycle|FileRecycleEmpty|FileRemoveDir|FileSelectFile|FileSelectFolder|FileSetAttrib|FileSetTime|FormatTime|GetKeyState|Gosub|Goto|GroupActivate|GroupAdd|GroupClose|GroupDeactivate|Gui|GuiControl|GuiControlGet|Hotkey|ImageSearch|IniDelete|IniRead|IniWrite|Input|InputBox|KeyWait|ListHotkeys|ListLines|ListVars|Loop|Menu|MouseClick|MouseClickDrag|MouseGetPos|MouseMove|MsgBox|OnExit|OutputDebug|Pause|PixelGetColor|PixelSearch|PostMessage|Process|Progress|Random|RegDelete|RegRead|RegWrite|Reload|Repeat|Return|Run|RunAs|RunWait|Send|SendEvent|SendInput|SendMessage|SendMode|SendPlay|SendRaw|SetBatchLines|SetCapslockState|SetControlDelay|SetDefaultMouseSpeed|SetEnv|SetFormat|SetKeyDelay|SetMouseDelay|SetNumlockState|SetRegView|SetScrollLockState|SetStoreCapslockMode|SetTimer|SetTitleMatchMode|SetWinDelay|SetWorkingDir|Shutdown|Sleep|Sort|SoundBeep|SoundGet|SoundGetWaveVolume|SoundPlay|SoundSet|SoundSetWaveVolume|SplashImage|SplashTextOff|SplashTextOn|SplitPath|StatusBarGetText|StatusBarWait|StringCaseSense|StringGetPos|StringLeft|StringLen|StringLower|StringMid|StringReplace|StringRight|StringSplit|StringTrimLeft|StringTrimRight|StringUpper|Suspend|SysGet|Thread|ToolTip|Transform|TrayTip|URLDownloadToFile|WinActivate|WinActivateBottom|WinClose|WinGet|WinGetActiveStats|WinGetActiveTitle|WinGetClass|WinGetPos|WinGetText|WinGetTitle|WinHide|WinKill|WinMaximize|WinMenuSelectItem|WinMinimize|WinMinimizeAll|WinMinimizeAllUndo|WinMove|WinRestore|WinSet|WinSetTitle|WinShow|WinWait|WinWaitActive|WinWaitClose|WinWaitNotActive)\b/i,
+      alias: 'selector'
+    },
     constant: /\b(?:a_ahkpath|a_ahkversion|a_appdata|a_appdatacommon|a_autotrim|a_batchlines|a_caretx|a_carety|a_computername|a_controldelay|a_cursor|a_dd|a_ddd|a_dddd|a_defaultmousespeed|a_desktop|a_desktopcommon|a_detecthiddentext|a_detecthiddenwindows|a_endchar|a_eventinfo|a_exitreason|a_fileencoding|a_formatfloat|a_formatinteger|a_gui|a_guicontrol|a_guicontrolevent|a_guievent|a_guiheight|a_guiwidth|a_guix|a_guiy|a_hour|a_iconfile|a_iconhidden|a_iconnumber|a_icontip|a_index|a_ipaddress1|a_ipaddress2|a_ipaddress3|a_ipaddress4|a_is64bitos|a_isadmin|a_iscompiled|a_iscritical|a_ispaused|a_issuspended|a_isunicode|a_keydelay|a_language|a_lasterror|a_linefile|a_linenumber|a_loopfield|a_loopfileattrib|a_loopfiledir|a_loopfileext|a_loopfilefullpath|a_loopfilelongpath|a_loopfilename|a_loopfileshortname|a_loopfileshortpath|a_loopfilesize|a_loopfilesizekb|a_loopfilesizemb|a_loopfiletimeaccessed|a_loopfiletimecreated|a_loopfiletimemodified|a_loopreadline|a_loopregkey|a_loopregname|a_loopregsubkey|a_loopregtimemodified|a_loopregtype|a_mday|a_min|a_mm|a_mmm|a_mmmm|a_mon|a_mousedelay|a_msec|a_mydocuments|a_now|a_nowutc|a_numbatchlines|a_ostype|a_osversion|a_priorhotkey|a_priorkey|a_programfiles|a_programs|a_programscommon|a_ptrsize|a_regview|a_screendpi|a_screenheight|a_screenwidth|a_scriptdir|a_scriptfullpath|a_scripthwnd|a_scriptname|a_sec|a_space|a_startmenu|a_startmenucommon|a_startup|a_startupcommon|a_stringcasesense|a_tab|a_temp|a_thisfunc|a_thishotkey|a_thislabel|a_thismenu|a_thismenuitem|a_thismenuitempos|a_tickcount|a_timeidle|a_timeidlephysical|a_timesincepriorhotkey|a_timesincethishotkey|a_titlematchmode|a_titlematchmodespeed|a_username|a_wday|a_windelay|a_windir|a_workingdir|a_yday|a_year|a_yweek|a_yyyy|clipboard|clipboardall|comspec|errorlevel|programfiles)\b/i,
     builtin: /\b(?:abs|acos|asc|asin|atan|ceil|chr|class|comobjactive|comobjarray|comobjconnect|comobjcreate|comobjerror|comobjflags|comobjget|comobjquery|comobjtype|comobjvalue|cos|dllcall|exp|fileexist|Fileopen|floor|format|il_add|il_create|il_destroy|instr|isfunc|islabel|IsObject|ln|log|ltrim|lv_add|lv_delete|lv_deletecol|lv_getcount|lv_getnext|lv_gettext|lv_insert|lv_insertcol|lv_modify|lv_modifycol|lv_setimagelist|mod|numget|numput|onmessage|regexmatch|regexreplace|registercallback|round|rtrim|sb_seticon|sb_setparts|sb_settext|sin|sqrt|strlen|strreplace|strsplit|substr|tan|tv_add|tv_delete|tv_get|tv_getchild|tv_getcount|tv_getnext|tv_getparent|tv_getprev|tv_getselection|tv_gettext|tv_modify|varsetcapacity|winactive|winexist|__Call|__Get|__New|__Set)\b/i,
     symbol: /\b(?:alt|altdown|altup|appskey|backspace|browser_back|browser_favorites|browser_forward|browser_home|browser_refresh|browser_search|browser_stop|bs|capslock|ctrl|ctrlbreak|ctrldown|ctrlup|del|delete|down|end|enter|esc|escape|f1|f10|f11|f12|f13|f14|f15|f16|f17|f18|f19|f2|f20|f21|f22|f23|f24|f3|f4|f5|f6|f7|f8|f9|home|ins|insert|joy1|joy10|joy11|joy12|joy13|joy14|joy15|joy16|joy17|joy18|joy19|joy2|joy20|joy21|joy22|joy23|joy24|joy25|joy26|joy27|joy28|joy29|joy3|joy30|joy31|joy32|joy4|joy5|joy6|joy7|joy8|joy9|joyaxes|joybuttons|joyinfo|joyname|joypov|joyr|joyu|joyv|joyx|joyy|joyz|lalt|launch_app1|launch_app2|launch_mail|launch_media|lbutton|lcontrol|lctrl|left|lshift|lwin|lwindown|lwinup|mbutton|media_next|media_play_pause|media_prev|media_stop|numlock|numpad0|numpad1|numpad2|numpad3|numpad4|numpad5|numpad6|numpad7|numpad8|numpad9|numpadadd|numpadclear|numpaddel|numpaddiv|numpaddot|numpaddown|numpadend|numpadenter|numpadhome|numpadins|numpadleft|numpadmult|numpadpgdn|numpadpgup|numpadright|numpadsub|numpadup|pgdn|pgup|printscreen|ralt|rbutton|rcontrol|rctrl|right|rshift|rwin|rwindown|rwinup|scrolllock|shift|shiftdown|shiftup|space|tab|up|volume_down|volume_mute|volume_up|wheeldown|wheelleft|wheelright|wheelup|xbutton1|xbutton2)\b/i,
-    important: /#\b(?:AllowSameLineComments|ClipboardTimeout|CommentFlag|DerefChar|ErrorStdOut|EscapeChar|HotkeyInterval|HotkeyModifierTimeout|Hotstring|If|IfTimeout|IfWinActive|IfWinExist|IfWinNotActive|IfWinNotExist|Include|IncludeAgain|InputLevel|InstallKeybdHook|InstallMouseHook|KeyHistory|MaxHotkeysPerInterval|MaxMem|MaxThreads|MaxThreadsBuffer|MaxThreadsPerHotkey|MenuMaskKey|NoEnv|NoTrayIcon|Persistent|SingleInstance|UseHook|Warn|WinActivateForce)\b/i,
+    directive: {
+      pattern: /#[a-z]+\b/i,
+      alias: 'important'
+    },
     keyword: /\b(?:Abort|AboveNormal|Add|ahk_class|ahk_exe|ahk_group|ahk_id|ahk_pid|All|Alnum|Alpha|AltSubmit|AltTab|AltTabAndMenu|AltTabMenu|AltTabMenuDismiss|AlwaysOnTop|AutoSize|Background|BackgroundTrans|BelowNormal|between|BitAnd|BitNot|BitOr|BitShiftLeft|BitShiftRight|BitXOr|Bold|Border|Button|ByRef|Catch|Checkbox|Checked|CheckedGray|Choose|ChooseString|Close|Color|ComboBox|Contains|ControlList|Count|Date|DateTime|Days|DDL|Default|DeleteAll|Delimiter|Deref|Destroy|Digit|Disable|Disabled|DropDownList|Edit|Eject|Else|Enable|Enabled|Error|Exist|Expand|ExStyle|FileSystem|Finally|First|Flash|Float|FloatFast|Focus|Font|for|global|Grid|Group|GroupBox|GuiClose|GuiContextMenu|GuiDropFiles|GuiEscape|GuiSize|Hdr|Hidden|Hide|High|HKCC|HKCR|HKCU|HKEY_CLASSES_ROOT|HKEY_CURRENT_CONFIG|HKEY_CURRENT_USER|HKEY_LOCAL_MACHINE|HKEY_USERS|HKLM|HKU|Hours|HScroll|Icon|IconSmall|ID|IDLast|If|IfEqual|IfExist|IfGreater|IfGreaterOrEqual|IfInString|IfLess|IfLessOrEqual|IfMsgBox|IfNotEqual|IfNotExist|IfNotInString|IfWinActive|IfWinExist|IfWinNotActive|IfWinNotExist|Ignore|ImageList|in|Integer|IntegerFast|Interrupt|is|italic|Join|Label|LastFound|LastFoundExist|Limit|Lines|List|ListBox|ListView|local|Lock|Logoff|Low|Lower|Lowercase|MainWindow|Margin|Maximize|MaximizeBox|MaxSize|Minimize|MinimizeBox|MinMax|MinSize|Minutes|MonthCal|Mouse|Move|Multi|NA|No|NoActivate|NoDefault|NoHide|NoIcon|NoMainWindow|norm|Normal|NoSort|NoSortHdr|NoStandard|Not|NoTab|NoTimers|Number|Off|Ok|On|OwnDialogs|Owner|Parse|Password|Picture|Pixel|Pos|Pow|Priority|ProcessName|Radio|Range|Read|ReadOnly|Realtime|Redraw|Region|REG_BINARY|REG_DWORD|REG_EXPAND_SZ|REG_MULTI_SZ|REG_SZ|Relative|Rename|Report|Resize|Restore|Retry|RGB|Screen|Seconds|Section|Serial|SetLabel|ShiftAltTab|Show|Single|Slider|SortDesc|Standard|static|Status|StatusBar|StatusCD|strike|Style|Submit|SysMenu|Tab2|TabStop|Text|Theme|Throw|Tile|ToggleCheck|ToggleEnable|ToolWindow|Top|Topmost|TransColor|Transparent|Tray|TreeView|Try|TryAgain|Type|UnCheck|underline|Unicode|Unlock|Until|UpDown|Upper|Uppercase|UseErrorLevel|Vis|VisFirst|Visible|VScroll|Wait|WaitClose|WantCtrlA|WantF2|WantReturn|While|Wrap|Xdigit|xm|xp|xs|Yes|ym|yp|ys)\b/i,
     "function": /[^(); \t,\n+*\-=?>:\\\/<&%\[\]]+(?=\()/,
     punctuation: /[{}[\]():,]/
@@ -69687,6 +69904,42 @@ function avroIdl(Prism) {
     punctuation: /[()\[\]{}<>.:,;-]/
   };
   Prism.languages.avdl = Prism.languages['avro-idl'];
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/awk.js
+// @ts-nocheck
+awk.displayName = 'awk';
+awk.aliases = ['gawk'];
+/** @type {import('../core.js').Syntax} */
+
+function awk(Prism) {
+  Prism.languages.awk = {
+    hashbang: {
+      pattern: /^#!.*/,
+      greedy: true,
+      alias: 'comment'
+    },
+    comment: {
+      pattern: /#.*/,
+      greedy: true
+    },
+    string: {
+      pattern: /(^|[^\\])"(?:[^\\"\r\n]|\\.)*"/,
+      lookbehind: true,
+      greedy: true
+    },
+    regex: {
+      pattern: /((?:^|[^\w\s)])\s*)\/(?:[^\/\\\r\n]|\\.)*\//,
+      lookbehind: true,
+      greedy: true
+    },
+    variable: /\$\w+/,
+    keyword: /\b(?:BEGIN|BEGINFILE|END|ENDFILE|break|case|continue|default|delete|do|else|exit|for|function|getline|if|in|next|nextfile|printf?|return|switch|while)\b|@(?:include|load)\b/,
+    "function": /\b[a-z_]\w*(?=\s*\()/i,
+    number: /\b(?:\d+(?:\.\d+)?(?:e[+-]?\d+)?|0x[a-fA-F0-9]+)\b/,
+    operator: /--|\+\+|!?~|>&|>>|<<|(?:\*\*|[<>!=+\-*/%^])=?|&&|\|[|&]|[?:]/,
+    punctuation: /[()[\]{},;]/
+  };
+  Prism.languages.gawk = Prism.languages.awk;
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/batch.js
 // @ts-nocheck
@@ -70200,7 +70453,7 @@ function cfscript(Prism) {
       greedy: true
     }],
     keyword: /\b(?:abstract|break|catch|component|continue|default|do|else|extends|final|finally|for|function|if|in|include|package|private|property|public|remote|required|rethrow|return|static|switch|throw|try|var|while|xml)\b(?!\s*=)/,
-    operator: [/\+\+|--|&&|\|\||::|=>|[!=]==|<=?|>=?|[-+*/%&|^!=<>]=?|\?(?:\.|:)?|[?:]/, /\b(?:and|contains|eq|equal|eqv|gt|gte|imp|is|lt|lte|mod|not|or|xor)\b/],
+    operator: [/\+\+|--|&&|\|\||::|=>|[!=]==|[-+*/%&|^!=<>]=?|\?(?:\.|:)?|:/, /\b(?:and|contains|eq|equal|eqv|gt|gte|imp|is|lt|lte|mod|not|or|xor)\b/],
     scope: {
       pattern: /\b(?:application|arguments|cgi|client|cookie|local|session|super|this|variables)\b/,
       alias: 'global'
@@ -70372,8 +70625,8 @@ function cmake(Prism) {
         }
       }
     },
-    variable: /\b(?:CMAKE_\w+|\w+_(?:(?:BINARY|SOURCE)_DIR|DESCRIPTION|HOMEPAGE_URL|ROOT|VERSION(?:_MAJOR|_MINOR|_PATCH|_TWEAK)?)|(?:ANDROID|APPLE|BORLAND|BUILD_SHARED_LIBS|CACHE|CPACK_(?:ABSOLUTE_DESTINATION_FILES|COMPONENT_INCLUDE_TOPLEVEL_DIRECTORY|ERROR_ON_ABSOLUTE_INSTALL_DESTINATION|INCLUDE_TOPLEVEL_DIRECTORY|INSTALL_DEFAULT_DIRECTORY_PERMISSIONS|INSTALL_SCRIPT|PACKAGING_INSTALL_PREFIX|SET_DESTDIR|WARN_ON_ABSOLUTE_INSTALL_DESTINATION)|CTEST_(?:BINARY_DIRECTORY|BUILD_COMMAND|BUILD_NAME|BZR_COMMAND|BZR_UPDATE_OPTIONS|CHANGE_ID|CHECKOUT_COMMAND|CONFIGURATION_TYPE|CONFIGURE_COMMAND|COVERAGE_COMMAND|COVERAGE_EXTRA_FLAGS|CURL_OPTIONS|CUSTOM_(?:COVERAGE_EXCLUDE|ERROR_EXCEPTION|ERROR_MATCH|ERROR_POST_CONTEXT|ERROR_PRE_CONTEXT|MAXIMUM_FAILED_TEST_OUTPUT_SIZE|MAXIMUM_NUMBER_OF_(?:ERRORS|WARNINGS)|MAXIMUM_PASSED_TEST_OUTPUT_SIZE|MEMCHECK_IGNORE|POST_MEMCHECK|POST_TEST|PRE_MEMCHECK|PRE_TEST|TESTS_IGNORE|WARNING_EXCEPTION|WARNING_MATCH)|CVS_CHECKOUT|CVS_COMMAND|CVS_UPDATE_OPTIONS|DROP_LOCATION|DROP_METHOD|DROP_SITE|DROP_SITE_CDASH|DROP_SITE_PASSWORD|DROP_SITE_USER|EXTRA_COVERAGE_GLOB|GIT_COMMAND|GIT_INIT_SUBMODULES|GIT_UPDATE_CUSTOM|GIT_UPDATE_OPTIONS|HG_COMMAND|HG_UPDATE_OPTIONS|LABELS_FOR_SUBPROJECTS|MEMORYCHECK_(?:COMMAND|COMMAND_OPTIONS|SANITIZER_OPTIONS|SUPPRESSIONS_FILE|TYPE)|NIGHTLY_START_TIME|P4_CLIENT|P4_COMMAND|P4_OPTIONS|P4_UPDATE_OPTIONS|RUN_CURRENT_SCRIPT|SCP_COMMAND|SITE|SOURCE_DIRECTORY|SUBMIT_URL|SVN_COMMAND|SVN_OPTIONS|SVN_UPDATE_OPTIONS|TEST_LOAD|TEST_TIMEOUT|TRIGGER_SITE|UPDATE_COMMAND|UPDATE_OPTIONS|UPDATE_VERSION_ONLY|USE_LAUNCHERS)|CYGWIN|ENV|EXECUTABLE_OUTPUT_PATH|GHS-MULTI|IOS|LIBRARY_OUTPUT_PATH|MINGW|MSVC(?:10|11|12|14|60|70|71|80|90|_IDE|_TOOLSET_VERSION|_VERSION)?|MSYS|PROJECT_(?:BINARY_DIR|DESCRIPTION|HOMEPAGE_URL|NAME|SOURCE_DIR|VERSION|VERSION_(?:MAJOR|MINOR|PATCH|TWEAK))|UNIX|WIN32|WINCE|WINDOWS_PHONE|WINDOWS_STORE|XCODE|XCODE_VERSION))\b/,
-    property: /\b(?:cxx_\w+|(?:ARCHIVE_OUTPUT_(?:DIRECTORY|NAME)|COMPILE_DEFINITIONS|COMPILE_PDB_NAME|COMPILE_PDB_OUTPUT_DIRECTORY|EXCLUDE_FROM_DEFAULT_BUILD|IMPORTED_(?:IMPLIB|LIBNAME|LINK_DEPENDENT_LIBRARIES|LINK_INTERFACE_LANGUAGES|LINK_INTERFACE_LIBRARIES|LINK_INTERFACE_MULTIPLICITY|LOCATION|NO_SONAME|OBJECTS|SONAME)|INTERPROCEDURAL_OPTIMIZATION|LIBRARY_OUTPUT_DIRECTORY|LIBRARY_OUTPUT_NAME|LINK_FLAGS|LINK_INTERFACE_LIBRARIES|LINK_INTERFACE_MULTIPLICITY|LOCATION|MAP_IMPORTED_CONFIG|OSX_ARCHITECTURES|OUTPUT_NAME|PDB_NAME|PDB_OUTPUT_DIRECTORY|RUNTIME_OUTPUT_DIRECTORY|RUNTIME_OUTPUT_NAME|STATIC_LIBRARY_FLAGS|VS_CSHARP|VS_DOTNET_REFERENCEPROP|VS_DOTNET_REFERENCE|VS_GLOBAL_SECTION_POST|VS_GLOBAL_SECTION_PRE|VS_GLOBAL|XCODE_ATTRIBUTE)_\w+|\w+_(?:CLANG_TIDY|COMPILER_LAUNCHER|CPPCHECK|CPPLINT|INCLUDE_WHAT_YOU_USE|OUTPUT_NAME|POSTFIX|VISIBILITY_PRESET)|ABSTRACT|ADDITIONAL_MAKE_CLEAN_FILES|ADVANCED|ALIASED_TARGET|ALLOW_DUPLICATE_CUSTOM_TARGETS|ANDROID_(?:ANT_ADDITIONAL_OPTIONS|API|API_MIN|ARCH|ASSETS_DIRECTORIES|GUI|JAR_DEPENDENCIES|NATIVE_LIB_DEPENDENCIES|NATIVE_LIB_DIRECTORIES|PROCESS_MAX|PROGUARD|PROGUARD_CONFIG_PATH|SECURE_PROPS_PATH|SKIP_ANT_STEP|STL_TYPE)|ARCHIVE_OUTPUT_DIRECTORY|ATTACHED_FILES|ATTACHED_FILES_ON_FAIL|AUTOGEN_(?:BUILD_DIR|ORIGIN_DEPENDS|PARALLEL|SOURCE_GROUP|TARGETS_FOLDER|TARGET_DEPENDS)|AUTOMOC|AUTOMOC_(?:COMPILER_PREDEFINES|DEPEND_FILTERS|EXECUTABLE|MACRO_NAMES|MOC_OPTIONS|SOURCE_GROUP|TARGETS_FOLDER)|AUTORCC|AUTORCC_EXECUTABLE|AUTORCC_OPTIONS|AUTORCC_SOURCE_GROUP|AUTOUIC|AUTOUIC_EXECUTABLE|AUTOUIC_OPTIONS|AUTOUIC_SEARCH_PATHS|BINARY_DIR|BUILDSYSTEM_TARGETS|BUILD_RPATH|BUILD_RPATH_USE_ORIGIN|BUILD_WITH_INSTALL_NAME_DIR|BUILD_WITH_INSTALL_RPATH|BUNDLE|BUNDLE_EXTENSION|CACHE_VARIABLES|CLEAN_NO_CUSTOM|COMMON_LANGUAGE_RUNTIME|COMPATIBLE_INTERFACE_(?:BOOL|NUMBER_MAX|NUMBER_MIN|STRING)|COMPILE_(?:DEFINITIONS|FEATURES|FLAGS|OPTIONS|PDB_NAME|PDB_OUTPUT_DIRECTORY)|COST|CPACK_DESKTOP_SHORTCUTS|CPACK_NEVER_OVERWRITE|CPACK_PERMANENT|CPACK_STARTUP_SHORTCUTS|CPACK_START_MENU_SHORTCUTS|CPACK_WIX_ACL|CROSSCOMPILING_EMULATOR|CUDA_EXTENSIONS|CUDA_PTX_COMPILATION|CUDA_RESOLVE_DEVICE_SYMBOLS|CUDA_SEPARABLE_COMPILATION|CUDA_STANDARD|CUDA_STANDARD_REQUIRED|CXX_EXTENSIONS|CXX_STANDARD|CXX_STANDARD_REQUIRED|C_EXTENSIONS|C_STANDARD|C_STANDARD_REQUIRED|DEBUG_CONFIGURATIONS|DEFINE_SYMBOL|DEFINITIONS|DEPENDS|DEPLOYMENT_ADDITIONAL_FILES|DEPLOYMENT_REMOTE_DIRECTORY|DISABLED|DISABLED_FEATURES|ECLIPSE_EXTRA_CPROJECT_CONTENTS|ECLIPSE_EXTRA_NATURES|ENABLED_FEATURES|ENABLED_LANGUAGES|ENABLE_EXPORTS|ENVIRONMENT|EXCLUDE_FROM_ALL|EXCLUDE_FROM_DEFAULT_BUILD|EXPORT_NAME|EXPORT_PROPERTIES|EXTERNAL_OBJECT|EchoString|FAIL_REGULAR_EXPRESSION|FIND_LIBRARY_USE_LIB32_PATHS|FIND_LIBRARY_USE_LIB64_PATHS|FIND_LIBRARY_USE_LIBX32_PATHS|FIND_LIBRARY_USE_OPENBSD_VERSIONING|FIXTURES_CLEANUP|FIXTURES_REQUIRED|FIXTURES_SETUP|FOLDER|FRAMEWORK|Fortran_FORMAT|Fortran_MODULE_DIRECTORY|GENERATED|GENERATOR_FILE_NAME|GENERATOR_IS_MULTI_CONFIG|GHS_INTEGRITY_APP|GHS_NO_SOURCE_GROUP_FILE|GLOBAL_DEPENDS_DEBUG_MODE|GLOBAL_DEPENDS_NO_CYCLES|GNUtoMS|HAS_CXX|HEADER_FILE_ONLY|HELPSTRING|IMPLICIT_DEPENDS_INCLUDE_TRANSFORM|IMPORTED|IMPORTED_(?:COMMON_LANGUAGE_RUNTIME|CONFIGURATIONS|GLOBAL|IMPLIB|LIBNAME|LINK_DEPENDENT_LIBRARIES|LINK_INTERFACE_(?:LANGUAGES|LIBRARIES|MULTIPLICITY)|LOCATION|NO_SONAME|OBJECTS|SONAME)|IMPORT_PREFIX|IMPORT_SUFFIX|INCLUDE_DIRECTORIES|INCLUDE_REGULAR_EXPRESSION|INSTALL_NAME_DIR|INSTALL_RPATH|INSTALL_RPATH_USE_LINK_PATH|INTERFACE_(?:AUTOUIC_OPTIONS|COMPILE_DEFINITIONS|COMPILE_FEATURES|COMPILE_OPTIONS|INCLUDE_DIRECTORIES|LINK_DEPENDS|LINK_DIRECTORIES|LINK_LIBRARIES|LINK_OPTIONS|POSITION_INDEPENDENT_CODE|SOURCES|SYSTEM_INCLUDE_DIRECTORIES)|INTERPROCEDURAL_OPTIMIZATION|IN_TRY_COMPILE|IOS_INSTALL_COMBINED|JOB_POOLS|JOB_POOL_COMPILE|JOB_POOL_LINK|KEEP_EXTENSION|LABELS|LANGUAGE|LIBRARY_OUTPUT_DIRECTORY|LINKER_LANGUAGE|LINK_(?:DEPENDS|DEPENDS_NO_SHARED|DIRECTORIES|FLAGS|INTERFACE_LIBRARIES|INTERFACE_MULTIPLICITY|LIBRARIES|OPTIONS|SEARCH_END_STATIC|SEARCH_START_STATIC|WHAT_YOU_USE)|LISTFILE_STACK|LOCATION|MACOSX_BUNDLE|MACOSX_BUNDLE_INFO_PLIST|MACOSX_FRAMEWORK_INFO_PLIST|MACOSX_PACKAGE_LOCATION|MACOSX_RPATH|MACROS|MANUALLY_ADDED_DEPENDENCIES|MEASUREMENT|MODIFIED|NAME|NO_SONAME|NO_SYSTEM_FROM_IMPORTED|OBJECT_DEPENDS|OBJECT_OUTPUTS|OSX_ARCHITECTURES|OUTPUT_NAME|PACKAGES_FOUND|PACKAGES_NOT_FOUND|PARENT_DIRECTORY|PASS_REGULAR_EXPRESSION|PDB_NAME|PDB_OUTPUT_DIRECTORY|POSITION_INDEPENDENT_CODE|POST_INSTALL_SCRIPT|PREDEFINED_TARGETS_FOLDER|PREFIX|PRE_INSTALL_SCRIPT|PRIVATE_HEADER|PROCESSORS|PROCESSOR_AFFINITY|PROJECT_LABEL|PUBLIC_HEADER|REPORT_UNDEFINED_PROPERTIES|REQUIRED_FILES|RESOURCE|RESOURCE_LOCK|RULE_LAUNCH_COMPILE|RULE_LAUNCH_CUSTOM|RULE_LAUNCH_LINK|RULE_MESSAGES|RUNTIME_OUTPUT_DIRECTORY|RUN_SERIAL|SKIP_AUTOGEN|SKIP_AUTOMOC|SKIP_AUTORCC|SKIP_AUTOUIC|SKIP_BUILD_RPATH|SKIP_RETURN_CODE|SOURCES|SOURCE_DIR|SOVERSION|STATIC_LIBRARY_FLAGS|STATIC_LIBRARY_OPTIONS|STRINGS|SUBDIRECTORIES|SUFFIX|SYMBOLIC|TARGET_ARCHIVES_MAY_BE_SHARED_LIBS|TARGET_MESSAGES|TARGET_SUPPORTS_SHARED_LIBS|TESTS|TEST_INCLUDE_FILE|TEST_INCLUDE_FILES|TIMEOUT|TIMEOUT_AFTER_MATCH|TYPE|USE_FOLDERS|VALUE|VARIABLES|VERSION|VISIBILITY_INLINES_HIDDEN|VS_(?:CONFIGURATION_TYPE|COPY_TO_OUT_DIR|DEBUGGER_(?:COMMAND|COMMAND_ARGUMENTS|ENVIRONMENT|WORKING_DIRECTORY)|DEPLOYMENT_CONTENT|DEPLOYMENT_LOCATION|DOTNET_REFERENCES|DOTNET_REFERENCES_COPY_LOCAL|GLOBAL_KEYWORD|GLOBAL_PROJECT_TYPES|GLOBAL_ROOTNAMESPACE|INCLUDE_IN_VSIX|IOT_STARTUP_TASK|KEYWORD|RESOURCE_GENERATOR|SCC_AUXPATH|SCC_LOCALPATH|SCC_PROJECTNAME|SCC_PROVIDER|SDK_REFERENCES|SHADER_(?:DISABLE_OPTIMIZATIONS|ENABLE_DEBUG|ENTRYPOINT|FLAGS|MODEL|OBJECT_FILE_NAME|OUTPUT_HEADER_FILE|TYPE|VARIABLE_NAME)|STARTUP_PROJECT|TOOL_OVERRIDE|USER_PROPS|WINRT_COMPONENT|WINRT_EXTENSIONS|WINRT_REFERENCES|XAML_TYPE)|WILL_FAIL|WIN32_EXECUTABLE|WINDOWS_EXPORT_ALL_SYMBOLS|WORKING_DIRECTORY|WRAP_EXCLUDE|XCODE_(?:EMIT_EFFECTIVE_PLATFORM_NAME|EXPLICIT_FILE_TYPE|FILE_ATTRIBUTES|LAST_KNOWN_FILE_TYPE|PRODUCT_TYPE|SCHEME_(?:ADDRESS_SANITIZER|ADDRESS_SANITIZER_USE_AFTER_RETURN|ARGUMENTS|DISABLE_MAIN_THREAD_CHECKER|DYNAMIC_LIBRARY_LOADS|DYNAMIC_LINKER_API_USAGE|ENVIRONMENT|EXECUTABLE|GUARD_MALLOC|MAIN_THREAD_CHECKER_STOP|MALLOC_GUARD_EDGES|MALLOC_SCRIBBLE|MALLOC_STACK|THREAD_SANITIZER(?:_STOP)?|UNDEFINED_BEHAVIOUR_SANITIZER(?:_STOP)?|ZOMBIE_OBJECTS))|XCTEST)\b/,
+    variable: /\b(?:CMAKE_\w+|\w+_(?:(?:BINARY|SOURCE)_DIR|DESCRIPTION|HOMEPAGE_URL|ROOT|VERSION(?:_MAJOR|_MINOR|_PATCH|_TWEAK)?)|(?:ANDROID|APPLE|BORLAND|BUILD_SHARED_LIBS|CACHE|CPACK_(?:ABSOLUTE_DESTINATION_FILES|COMPONENT_INCLUDE_TOPLEVEL_DIRECTORY|ERROR_ON_ABSOLUTE_INSTALL_DESTINATION|INCLUDE_TOPLEVEL_DIRECTORY|INSTALL_DEFAULT_DIRECTORY_PERMISSIONS|INSTALL_SCRIPT|PACKAGING_INSTALL_PREFIX|SET_DESTDIR|WARN_ON_ABSOLUTE_INSTALL_DESTINATION)|CTEST_(?:BINARY_DIRECTORY|BUILD_COMMAND|BUILD_NAME|BZR_COMMAND|BZR_UPDATE_OPTIONS|CHANGE_ID|CHECKOUT_COMMAND|CONFIGURATION_TYPE|CONFIGURE_COMMAND|COVERAGE_COMMAND|COVERAGE_EXTRA_FLAGS|CURL_OPTIONS|CUSTOM_(?:COVERAGE_EXCLUDE|ERROR_EXCEPTION|ERROR_MATCH|ERROR_POST_CONTEXT|ERROR_PRE_CONTEXT|MAXIMUM_FAILED_TEST_OUTPUT_SIZE|MAXIMUM_NUMBER_OF_(?:ERRORS|WARNINGS)|MAXIMUM_PASSED_TEST_OUTPUT_SIZE|MEMCHECK_IGNORE|POST_MEMCHECK|POST_TEST|PRE_MEMCHECK|PRE_TEST|TESTS_IGNORE|WARNING_EXCEPTION|WARNING_MATCH)|CVS_CHECKOUT|CVS_COMMAND|CVS_UPDATE_OPTIONS|DROP_LOCATION|DROP_METHOD|DROP_SITE|DROP_SITE_CDASH|DROP_SITE_PASSWORD|DROP_SITE_USER|EXTRA_COVERAGE_GLOB|GIT_COMMAND|GIT_INIT_SUBMODULES|GIT_UPDATE_CUSTOM|GIT_UPDATE_OPTIONS|HG_COMMAND|HG_UPDATE_OPTIONS|LABELS_FOR_SUBPROJECTS|MEMORYCHECK_(?:COMMAND|COMMAND_OPTIONS|SANITIZER_OPTIONS|SUPPRESSIONS_FILE|TYPE)|NIGHTLY_START_TIME|P4_CLIENT|P4_COMMAND|P4_OPTIONS|P4_UPDATE_OPTIONS|RUN_CURRENT_SCRIPT|SCP_COMMAND|SITE|SOURCE_DIRECTORY|SUBMIT_URL|SVN_COMMAND|SVN_OPTIONS|SVN_UPDATE_OPTIONS|TEST_LOAD|TEST_TIMEOUT|TRIGGER_SITE|UPDATE_COMMAND|UPDATE_OPTIONS|UPDATE_VERSION_ONLY|USE_LAUNCHERS)|CYGWIN|ENV|EXECUTABLE_OUTPUT_PATH|GHS-MULTI|IOS|LIBRARY_OUTPUT_PATH|MINGW|MSVC(?:10|11|12|14|60|70|71|80|90|_IDE|_TOOLSET_VERSION|_VERSION)?|MSYS|PROJECT_NAME|UNIX|WIN32|WINCE|WINDOWS_PHONE|WINDOWS_STORE|XCODE))\b/,
+    property: /\b(?:cxx_\w+|(?:ARCHIVE_OUTPUT_(?:DIRECTORY|NAME)|COMPILE_DEFINITIONS|COMPILE_PDB_NAME|COMPILE_PDB_OUTPUT_DIRECTORY|EXCLUDE_FROM_DEFAULT_BUILD|IMPORTED_(?:IMPLIB|LIBNAME|LINK_DEPENDENT_LIBRARIES|LINK_INTERFACE_LANGUAGES|LINK_INTERFACE_LIBRARIES|LINK_INTERFACE_MULTIPLICITY|LOCATION|NO_SONAME|OBJECTS|SONAME)|INTERPROCEDURAL_OPTIMIZATION|LIBRARY_OUTPUT_DIRECTORY|LIBRARY_OUTPUT_NAME|LINK_FLAGS|LINK_INTERFACE_LIBRARIES|LINK_INTERFACE_MULTIPLICITY|LOCATION|MAP_IMPORTED_CONFIG|OSX_ARCHITECTURES|OUTPUT_NAME|PDB_NAME|PDB_OUTPUT_DIRECTORY|RUNTIME_OUTPUT_DIRECTORY|RUNTIME_OUTPUT_NAME|STATIC_LIBRARY_FLAGS|VS_CSHARP|VS_DOTNET_REFERENCEPROP|VS_DOTNET_REFERENCE|VS_GLOBAL_SECTION_POST|VS_GLOBAL_SECTION_PRE|VS_GLOBAL|XCODE_ATTRIBUTE)_\w+|\w+_(?:CLANG_TIDY|COMPILER_LAUNCHER|CPPCHECK|CPPLINT|INCLUDE_WHAT_YOU_USE|OUTPUT_NAME|POSTFIX|VISIBILITY_PRESET)|ABSTRACT|ADDITIONAL_MAKE_CLEAN_FILES|ADVANCED|ALIASED_TARGET|ALLOW_DUPLICATE_CUSTOM_TARGETS|ANDROID_(?:ANT_ADDITIONAL_OPTIONS|API|API_MIN|ARCH|ASSETS_DIRECTORIES|GUI|JAR_DEPENDENCIES|NATIVE_LIB_DEPENDENCIES|NATIVE_LIB_DIRECTORIES|PROCESS_MAX|PROGUARD|PROGUARD_CONFIG_PATH|SECURE_PROPS_PATH|SKIP_ANT_STEP|STL_TYPE)|ARCHIVE_OUTPUT_DIRECTORY|ATTACHED_FILES|ATTACHED_FILES_ON_FAIL|AUTOGEN_(?:BUILD_DIR|ORIGIN_DEPENDS|PARALLEL|SOURCE_GROUP|TARGETS_FOLDER|TARGET_DEPENDS)|AUTOMOC|AUTOMOC_(?:COMPILER_PREDEFINES|DEPEND_FILTERS|EXECUTABLE|MACRO_NAMES|MOC_OPTIONS|SOURCE_GROUP|TARGETS_FOLDER)|AUTORCC|AUTORCC_EXECUTABLE|AUTORCC_OPTIONS|AUTORCC_SOURCE_GROUP|AUTOUIC|AUTOUIC_EXECUTABLE|AUTOUIC_OPTIONS|AUTOUIC_SEARCH_PATHS|BINARY_DIR|BUILDSYSTEM_TARGETS|BUILD_RPATH|BUILD_RPATH_USE_ORIGIN|BUILD_WITH_INSTALL_NAME_DIR|BUILD_WITH_INSTALL_RPATH|BUNDLE|BUNDLE_EXTENSION|CACHE_VARIABLES|CLEAN_NO_CUSTOM|COMMON_LANGUAGE_RUNTIME|COMPATIBLE_INTERFACE_(?:BOOL|NUMBER_MAX|NUMBER_MIN|STRING)|COMPILE_(?:DEFINITIONS|FEATURES|FLAGS|OPTIONS|PDB_NAME|PDB_OUTPUT_DIRECTORY)|COST|CPACK_DESKTOP_SHORTCUTS|CPACK_NEVER_OVERWRITE|CPACK_PERMANENT|CPACK_STARTUP_SHORTCUTS|CPACK_START_MENU_SHORTCUTS|CPACK_WIX_ACL|CROSSCOMPILING_EMULATOR|CUDA_EXTENSIONS|CUDA_PTX_COMPILATION|CUDA_RESOLVE_DEVICE_SYMBOLS|CUDA_SEPARABLE_COMPILATION|CUDA_STANDARD|CUDA_STANDARD_REQUIRED|CXX_EXTENSIONS|CXX_STANDARD|CXX_STANDARD_REQUIRED|C_EXTENSIONS|C_STANDARD|C_STANDARD_REQUIRED|DEBUG_CONFIGURATIONS|DEFINE_SYMBOL|DEFINITIONS|DEPENDS|DEPLOYMENT_ADDITIONAL_FILES|DEPLOYMENT_REMOTE_DIRECTORY|DISABLED|DISABLED_FEATURES|ECLIPSE_EXTRA_CPROJECT_CONTENTS|ECLIPSE_EXTRA_NATURES|ENABLED_FEATURES|ENABLED_LANGUAGES|ENABLE_EXPORTS|ENVIRONMENT|EXCLUDE_FROM_ALL|EXCLUDE_FROM_DEFAULT_BUILD|EXPORT_NAME|EXPORT_PROPERTIES|EXTERNAL_OBJECT|EchoString|FAIL_REGULAR_EXPRESSION|FIND_LIBRARY_USE_LIB32_PATHS|FIND_LIBRARY_USE_LIB64_PATHS|FIND_LIBRARY_USE_LIBX32_PATHS|FIND_LIBRARY_USE_OPENBSD_VERSIONING|FIXTURES_CLEANUP|FIXTURES_REQUIRED|FIXTURES_SETUP|FOLDER|FRAMEWORK|Fortran_FORMAT|Fortran_MODULE_DIRECTORY|GENERATED|GENERATOR_FILE_NAME|GENERATOR_IS_MULTI_CONFIG|GHS_INTEGRITY_APP|GHS_NO_SOURCE_GROUP_FILE|GLOBAL_DEPENDS_DEBUG_MODE|GLOBAL_DEPENDS_NO_CYCLES|GNUtoMS|HAS_CXX|HEADER_FILE_ONLY|HELPSTRING|IMPLICIT_DEPENDS_INCLUDE_TRANSFORM|IMPORTED|IMPORTED_(?:COMMON_LANGUAGE_RUNTIME|CONFIGURATIONS|GLOBAL|IMPLIB|LIBNAME|LINK_DEPENDENT_LIBRARIES|LINK_INTERFACE_(?:LANGUAGES|LIBRARIES|MULTIPLICITY)|LOCATION|NO_SONAME|OBJECTS|SONAME)|IMPORT_PREFIX|IMPORT_SUFFIX|INCLUDE_DIRECTORIES|INCLUDE_REGULAR_EXPRESSION|INSTALL_NAME_DIR|INSTALL_RPATH|INSTALL_RPATH_USE_LINK_PATH|INTERFACE_(?:AUTOUIC_OPTIONS|COMPILE_DEFINITIONS|COMPILE_FEATURES|COMPILE_OPTIONS|INCLUDE_DIRECTORIES|LINK_DEPENDS|LINK_DIRECTORIES|LINK_LIBRARIES|LINK_OPTIONS|POSITION_INDEPENDENT_CODE|SOURCES|SYSTEM_INCLUDE_DIRECTORIES)|INTERPROCEDURAL_OPTIMIZATION|IN_TRY_COMPILE|IOS_INSTALL_COMBINED|JOB_POOLS|JOB_POOL_COMPILE|JOB_POOL_LINK|KEEP_EXTENSION|LABELS|LANGUAGE|LIBRARY_OUTPUT_DIRECTORY|LINKER_LANGUAGE|LINK_(?:DEPENDS|DEPENDS_NO_SHARED|DIRECTORIES|FLAGS|INTERFACE_LIBRARIES|INTERFACE_MULTIPLICITY|LIBRARIES|OPTIONS|SEARCH_END_STATIC|SEARCH_START_STATIC|WHAT_YOU_USE)|LISTFILE_STACK|LOCATION|MACOSX_BUNDLE|MACOSX_BUNDLE_INFO_PLIST|MACOSX_FRAMEWORK_INFO_PLIST|MACOSX_PACKAGE_LOCATION|MACOSX_RPATH|MACROS|MANUALLY_ADDED_DEPENDENCIES|MEASUREMENT|MODIFIED|NAME|NO_SONAME|NO_SYSTEM_FROM_IMPORTED|OBJECT_DEPENDS|OBJECT_OUTPUTS|OSX_ARCHITECTURES|OUTPUT_NAME|PACKAGES_FOUND|PACKAGES_NOT_FOUND|PARENT_DIRECTORY|PASS_REGULAR_EXPRESSION|PDB_NAME|PDB_OUTPUT_DIRECTORY|POSITION_INDEPENDENT_CODE|POST_INSTALL_SCRIPT|PREDEFINED_TARGETS_FOLDER|PREFIX|PRE_INSTALL_SCRIPT|PRIVATE_HEADER|PROCESSORS|PROCESSOR_AFFINITY|PROJECT_LABEL|PUBLIC_HEADER|REPORT_UNDEFINED_PROPERTIES|REQUIRED_FILES|RESOURCE|RESOURCE_LOCK|RULE_LAUNCH_COMPILE|RULE_LAUNCH_CUSTOM|RULE_LAUNCH_LINK|RULE_MESSAGES|RUNTIME_OUTPUT_DIRECTORY|RUN_SERIAL|SKIP_AUTOGEN|SKIP_AUTOMOC|SKIP_AUTORCC|SKIP_AUTOUIC|SKIP_BUILD_RPATH|SKIP_RETURN_CODE|SOURCES|SOURCE_DIR|SOVERSION|STATIC_LIBRARY_FLAGS|STATIC_LIBRARY_OPTIONS|STRINGS|SUBDIRECTORIES|SUFFIX|SYMBOLIC|TARGET_ARCHIVES_MAY_BE_SHARED_LIBS|TARGET_MESSAGES|TARGET_SUPPORTS_SHARED_LIBS|TESTS|TEST_INCLUDE_FILE|TEST_INCLUDE_FILES|TIMEOUT|TIMEOUT_AFTER_MATCH|TYPE|USE_FOLDERS|VALUE|VARIABLES|VERSION|VISIBILITY_INLINES_HIDDEN|VS_(?:CONFIGURATION_TYPE|COPY_TO_OUT_DIR|DEBUGGER_(?:COMMAND|COMMAND_ARGUMENTS|ENVIRONMENT|WORKING_DIRECTORY)|DEPLOYMENT_CONTENT|DEPLOYMENT_LOCATION|DOTNET_REFERENCES|DOTNET_REFERENCES_COPY_LOCAL|INCLUDE_IN_VSIX|IOT_STARTUP_TASK|KEYWORD|RESOURCE_GENERATOR|SCC_AUXPATH|SCC_LOCALPATH|SCC_PROJECTNAME|SCC_PROVIDER|SDK_REFERENCES|SHADER_(?:DISABLE_OPTIMIZATIONS|ENABLE_DEBUG|ENTRYPOINT|FLAGS|MODEL|OBJECT_FILE_NAME|OUTPUT_HEADER_FILE|TYPE|VARIABLE_NAME)|STARTUP_PROJECT|TOOL_OVERRIDE|USER_PROPS|WINRT_COMPONENT|WINRT_EXTENSIONS|WINRT_REFERENCES|XAML_TYPE)|WILL_FAIL|WIN32_EXECUTABLE|WINDOWS_EXPORT_ALL_SYMBOLS|WORKING_DIRECTORY|WRAP_EXCLUDE|XCODE_(?:EMIT_EFFECTIVE_PLATFORM_NAME|EXPLICIT_FILE_TYPE|FILE_ATTRIBUTES|LAST_KNOWN_FILE_TYPE|PRODUCT_TYPE|SCHEME_(?:ADDRESS_SANITIZER|ADDRESS_SANITIZER_USE_AFTER_RETURN|ARGUMENTS|DISABLE_MAIN_THREAD_CHECKER|DYNAMIC_LIBRARY_LOADS|DYNAMIC_LINKER_API_USAGE|ENVIRONMENT|EXECUTABLE|GUARD_MALLOC|MAIN_THREAD_CHECKER_STOP|MALLOC_GUARD_EDGES|MALLOC_SCRIBBLE|MALLOC_STACK|THREAD_SANITIZER(?:_STOP)?|UNDEFINED_BEHAVIOUR_SANITIZER(?:_STOP)?|ZOMBIE_OBJECTS))|XCTEST)\b/,
     keyword: /\b(?:add_compile_definitions|add_compile_options|add_custom_command|add_custom_target|add_definitions|add_dependencies|add_executable|add_library|add_link_options|add_subdirectory|add_test|aux_source_directory|break|build_command|build_name|cmake_host_system_information|cmake_minimum_required|cmake_parse_arguments|cmake_policy|configure_file|continue|create_test_sourcelist|ctest_build|ctest_configure|ctest_coverage|ctest_empty_binary_directory|ctest_memcheck|ctest_read_custom_files|ctest_run_script|ctest_sleep|ctest_start|ctest_submit|ctest_test|ctest_update|ctest_upload|define_property|else|elseif|enable_language|enable_testing|endforeach|endfunction|endif|endmacro|endwhile|exec_program|execute_process|export|export_library_dependencies|file|find_file|find_library|find_package|find_path|find_program|fltk_wrap_ui|foreach|function|get_cmake_property|get_directory_property|get_filename_component|get_property|get_source_file_property|get_target_property|get_test_property|if|include|include_directories|include_external_msproject|include_guard|include_regular_expression|install|install_files|install_programs|install_targets|link_directories|link_libraries|list|load_cache|load_command|macro|make_directory|mark_as_advanced|math|message|option|output_required_files|project|qt_wrap_cpp|qt_wrap_ui|remove|remove_definitions|return|separate_arguments|set|set_directory_properties|set_property|set_source_files_properties|set_target_properties|set_tests_properties|site_name|source_group|string|subdir_depends|subdirs|target_compile_definitions|target_compile_features|target_compile_options|target_include_directories|target_link_directories|target_link_libraries|target_link_options|target_sources|try_compile|try_run|unset|use_mangled_mesa|utility_source|variable_requires|variable_watch|while|write_file)(?=\s*\()\b/,
     "boolean": /\b(?:FALSE|OFF|ON|TRUE)\b/,
     namespace: /\b(?:INTERFACE|PRIVATE|PROPERTIES|PUBLIC|SHARED|STATIC|TARGET_OBJECTS)\b/,
@@ -70671,6 +70924,147 @@ function csp(Prism) {
     };
   })(Prism);
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cooklang.js
+// @ts-nocheck
+cooklang.displayName = 'cooklang';
+cooklang.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function cooklang(Prism) {
+  ;
+
+  (function (Prism) {
+    // see https://github.com/cooklang/spec/blob/main/EBNF.md
+    var single_token_suffix = /(?:(?!\s)[\d$+<=a-zA-Z\x80-\uFFFF])+/.source;
+    var multi_token_infix = /[^{}@#]+/.source;
+    var multi_token_suffix = /\{[^}#@]*\}/.source;
+    var multi_token = multi_token_infix + multi_token_suffix;
+    var timer_units = /(?:h|hours|hrs|m|min|minutes)/.source;
+    var amount_group_impl = {
+      pattern: /\{[^{}]*\}/,
+      inside: {
+        amount: {
+          pattern: /([\{|])[^{}|*%]+/,
+          lookbehind: true,
+          alias: 'number'
+        },
+        unit: {
+          pattern: /(%)[^}]+/,
+          lookbehind: true,
+          alias: 'symbol'
+        },
+        'servings-scaler': {
+          pattern: /\*/,
+          alias: 'operator'
+        },
+        'servings-alternative-separator': {
+          pattern: /\|/,
+          alias: 'operator'
+        },
+        'unit-separator': {
+          pattern: /(?:%|(\*)%)/,
+          lookbehind: true,
+          alias: 'operator'
+        },
+        punctuation: /[{}]/
+      }
+    };
+    Prism.languages.cooklang = {
+      comment: {
+        // [- comment -]
+        // -- comment
+        pattern: /\[-[\s\S]*?-\]|--.*/,
+        greedy: true
+      },
+      meta: {
+        // >> key: value
+        pattern: />>.*:.*/,
+        inside: {
+          property: {
+            // key:
+            pattern: /(>>\s*)[^\s:](?:[^:]*[^\s:])?/,
+            lookbehind: true
+          }
+        }
+      },
+      'cookware-group': {
+        // #...{...}, #...
+        pattern: new RegExp('#(?:' + multi_token + '|' + single_token_suffix + ')'),
+        inside: {
+          cookware: {
+            pattern: new RegExp('(^#)(?:' + multi_token_infix + ')'),
+            lookbehind: true,
+            alias: 'variable'
+          },
+          'cookware-keyword': {
+            pattern: /^#/,
+            alias: 'keyword'
+          },
+          'quantity-group': {
+            pattern: new RegExp(/\{[^{}@#]*\}/),
+            inside: {
+              quantity: {
+                pattern: new RegExp(/(^\{)/.source + multi_token_infix),
+                lookbehind: true,
+                alias: 'number'
+              },
+              punctuation: /[{}]/
+            }
+          }
+        }
+      },
+      'ingredient-group': {
+        // @...{...}, @...
+        pattern: new RegExp('@(?:' + multi_token + '|' + single_token_suffix + ')'),
+        inside: {
+          ingredient: {
+            pattern: new RegExp('(^@)(?:' + multi_token_infix + ')'),
+            lookbehind: true,
+            alias: 'variable'
+          },
+          'ingredient-keyword': {
+            pattern: /^@/,
+            alias: 'keyword'
+          },
+          'amount-group': amount_group_impl
+        }
+      },
+      'timer-group': {
+        // ~timer{...}
+        // eslint-disable-next-line regexp/sort-alternatives
+        pattern: /~(?!\s)[^@#~{}]*\{[^{}]*\}/,
+        inside: {
+          timer: {
+            pattern: /(^~)[^{]+/,
+            lookbehind: true,
+            alias: 'variable'
+          },
+          'duration-group': {
+            // {...}
+            pattern: /\{[^{}]*\}/,
+            inside: {
+              punctuation: /[{}]/,
+              unit: {
+                pattern: new RegExp(/(%\s*)/.source + timer_units + /\b/.source),
+                lookbehind: true,
+                alias: 'symbol'
+              },
+              operator: /%/,
+              duration: {
+                pattern: /\d+/,
+                alias: 'number'
+              }
+            }
+          },
+          'timer-keyword': {
+            pattern: /^~/,
+            alias: 'keyword'
+          }
+        }
+      }
+    };
+  })(Prism);
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/coq.js
 // @ts-nocheck
 coq.displayName = 'coq';
@@ -70912,6 +71306,88 @@ function csv(Prism) {
     value: /[^\r\n,"]+|"(?:[^"]|"")*"(?!")/,
     punctuation: /,/
   };
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cue.js
+// @ts-nocheck
+cue.displayName = 'cue';
+cue.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function cue(Prism) {
+  ;
+
+  (function (Prism) {
+    // https://cuelang.org/docs/references/spec/
+    // eslint-disable-next-line regexp/strict
+    var stringEscape = /\\(?:(?!\2)|\2(?:[^()\r\n]|\([^()]*\)))/.source; // eslint-disable-next-line regexp/strict
+
+    var stringTypes = /"""(?:[^\\"]|"(?!""\2)|<esc>)*"""/.source + // eslint-disable-next-line regexp/strict
+    '|' + /'''(?:[^\\']|'(?!''\2)|<esc>)*'''/.source + // eslint-disable-next-line regexp/strict
+    '|' + /"(?:[^\\\r\n"]|"(?!\2)|<esc>)*"/.source + // eslint-disable-next-line regexp/strict
+    '|' + /'(?:[^\\\r\n']|'(?!\2)|<esc>)*'/.source;
+    var stringLiteral = '(?:' + stringTypes.replace(/<esc>/g, stringEscape) + ')';
+    Prism.languages.cue = {
+      comment: {
+        pattern: /\/\/.*/,
+        greedy: true
+      },
+      'string-literal': {
+        // eslint-disable-next-line regexp/strict
+        pattern: RegExp(/(^|[^#"'\\])(#*)/.source + stringLiteral + /(?!["'])\2/.source),
+        lookbehind: true,
+        greedy: true,
+        inside: {
+          // I'm using dirty hack here. We have to know the number hashes at the start of the string somehow,
+          // but we can't look back. So instead, we will use a lookahead, go to the end of the string, and
+          // capture the hashes at the end of the string.
+          escape: {
+            pattern: /(?=[\s\S]*["'](#*)$)\\\1(?:U[a-fA-F0-9]{1,8}|u[a-fA-F0-9]{1,4}|x[a-fA-F0-9]{1,2}|\d{2,3}|[^(])/,
+            greedy: true,
+            alias: 'string'
+          },
+          interpolation: {
+            pattern: /(?=[\s\S]*["'](#*)$)\\\1\([^()]*\)/,
+            greedy: true,
+            inside: {
+              punctuation: /^\\#*\(|\)$/,
+              expression: {
+                pattern: /[\s\S]+/,
+                inside: null
+              }
+            }
+          },
+          string: /[\s\S]+/
+        }
+      },
+      keyword: {
+        pattern: /(^|[^\w$])(?:for|if|import|in|let|null|package)(?![\w$])/,
+        lookbehind: true
+      },
+      "boolean": {
+        pattern: /(^|[^\w$])(?:false|true)(?![\w$])/,
+        lookbehind: true
+      },
+      builtin: {
+        pattern: /(^|[^\w$])(?:bool|bytes|float|float(?:32|64)|u?int(?:8|16|32|64|128)?|number|rune|string)(?![\w$])/,
+        lookbehind: true
+      },
+      attribute: {
+        pattern: /@[\w$]+(?=\s*\()/,
+        alias: 'function'
+      },
+      "function": {
+        pattern: /(^|[^\w$])[a-z_$][\w$]*(?=\s*\()/i,
+        lookbehind: true
+      },
+      number: {
+        pattern: /(^|[^\w$.])(?:0b[01]+(?:_[01]+)*|0o[0-7]+(?:_[0-7]+)*|0[xX][0-9A-Fa-f]+(?:_[0-9A-Fa-f]+)*|(?:\d+(?:_\d+)*(?:\.(?:\d+(?:_\d+)*)?)?|\.\d+(?:_\d+)*)(?:[eE][+-]?\d+(?:_\d+)*)?(?:[KMGTP]i?)?)(?![\w$])/,
+        lookbehind: true
+      },
+      operator: /\.{3}|_\|_|&&?|\|\|?|[=!]~|[<>=!]=?|[+\-*/?]/,
+      punctuation: /[()[\]{},.:]/
+    };
+    Prism.languages.cue['string-literal'].inside.interpolation.inside.expression.inside = Prism.languages.cue;
+  })(Prism);
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cypher.js
 // @ts-nocheck
@@ -71892,7 +72368,7 @@ function erlang(Prism) {
       alias: 'atom'
     },
     "boolean": /\b(?:false|true)\b/,
-    keyword: /\b(?:after|case|catch|end|fun|if|of|receive|try|when)\b/,
+    keyword: /\b(?:after|begin|case|catch|end|fun|if|of|receive|try|when)\b/,
     number: [/\$\\?./, /\b\d+#[a-z0-9]+/i, /(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?/i],
     "function": /\b[a-z][\w@]*(?=\()/,
     variable: {
@@ -71959,11 +72435,11 @@ function excelFormula(Prism) {
     },
     'function-name': {
       pattern: /\b[A-Z]\w*(?=\()/i,
-      alias: 'keyword'
+      alias: 'builtin'
     },
     range: {
       pattern: /\$?\b(?:[A-Z]+\$?\d+:\$?[A-Z]+\$?\d+|[A-Z]+:\$?[A-Z]+|\d+:\$?\d+)\b/i,
-      alias: 'property',
+      alias: 'selector',
       inside: {
         operator: /:/,
         cell: /\$?[A-Z]+\$?\d+/i,
@@ -71975,7 +72451,7 @@ function excelFormula(Prism) {
       // Excel is case insensitive, so the string "foo1" could be either a variable or a cell.
       // To combat this, we match cells case insensitive, if the contain at least one "$", and case sensitive otherwise.
       pattern: /\b[A-Z]+\d+\b|\$[A-Za-z]+\$?\d+\b|\b[A-Za-z]+\$\d+\b/,
-      alias: 'property'
+      alias: 'selector'
     },
     number: /(?:\b\d+(?:\.\d+)?|\B\.\d+)(?:e[+-]?\d+)?\b/i,
     "boolean": /\b(?:FALSE|TRUE)\b/i,
@@ -72494,8 +72970,8 @@ function flow_flow(Prism) {
     Prism.languages.flow = Prism.languages.extend('javascript', {});
     Prism.languages.insertBefore('flow', 'keyword', {
       type: [{
-        pattern: /\b(?:[Bb]oolean|Function|[Nn]umber|[Ss]tring|any|mixed|null|void)\b/,
-        alias: 'tag'
+        pattern: /\b(?:[Bb]oolean|Function|[Nn]umber|[Ss]tring|[Ss]ymbol|any|mixed|null|void)\b/,
+        alias: 'class-name'
       }]
     });
     Prism.languages.flow['function-variable'].pattern = /(?!\s)[_$a-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*(?=\s*=\s*(?:function\b|(?:\([^()]*\)(?:\s*:\s*\w+)?|(?!\s)[_$a-z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*)\s*=>))/i;
@@ -72816,11 +73292,11 @@ function gedcom(Prism) {
         }
       }
     },
-    tag: {
+    record: {
       // Preceded by level and optional pointer
       pattern: /(^[\t ]*\d+ +(?:@\w[\w!"$%&'()*+,\-./:;<=>?[\\\]^`{|}~\x80-\xfe #]*@ +)?)\w+/m,
       lookbehind: true,
-      alias: 'string'
+      alias: 'tag'
     },
     level: {
       pattern: /(^[\t ]*)\d+/m,
@@ -72832,6 +73308,49 @@ function gedcom(Prism) {
       alias: 'variable'
     }
   };
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gettext.js
+// @ts-nocheck
+gettext.displayName = 'gettext';
+gettext.aliases = ['po'];
+/** @type {import('../core.js').Syntax} */
+
+function gettext(Prism) {
+  Prism.languages.gettext = {
+    comment: [{
+      pattern: /# .*/,
+      greedy: true,
+      alias: 'translator-comment'
+    }, {
+      pattern: /#\..*/,
+      greedy: true,
+      alias: 'extracted-comment'
+    }, {
+      pattern: /#:.*/,
+      greedy: true,
+      alias: 'reference-comment'
+    }, {
+      pattern: /#,.*/,
+      greedy: true,
+      alias: 'flag-comment'
+    }, {
+      pattern: /#\|.*/,
+      greedy: true,
+      alias: 'previously-untranslated-comment'
+    }, {
+      pattern: /#.*/,
+      greedy: true
+    }],
+    string: {
+      pattern: /(^|[^\\])"(?:[^"\\]|\\.)*"/,
+      lookbehind: true,
+      greedy: true
+    },
+    keyword: /^msg(?:ctxt|id|id_plural|str)\b/m,
+    number: /\b\d+\b/,
+    punctuation: /[\[\]]/
+  };
+  Prism.languages.po = Prism.languages.gettext;
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gherkin.js
 // @ts-nocheck
@@ -73067,6 +73586,39 @@ function gn(Prism) {
   };
   Prism.languages.gn['string-literal'].inside['interpolation'].inside['expression'].inside = Prism.languages.gn;
   Prism.languages.gni = Prism.languages.gn;
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/linker-script.js
+// @ts-nocheck
+linkerScript.displayName = 'linker-script';
+linkerScript.aliases = ['ld'];
+/** @type {import('../core.js').Syntax} */
+
+function linkerScript(Prism) {
+  Prism.languages['linker-script'] = {
+    comment: {
+      pattern: /(^|\s)\/\*[\s\S]*?(?:$|\*\/)/,
+      lookbehind: true,
+      greedy: true
+    },
+    identifier: {
+      pattern: /"[^"\r\n]*"/,
+      greedy: true
+    },
+    'location-counter': {
+      pattern: /\B\.\B/,
+      alias: 'important'
+    },
+    section: {
+      pattern: /(^|[^\w*])\.\w+\b/,
+      lookbehind: true,
+      alias: 'keyword'
+    },
+    "function": /\b[A-Z][A-Z_]*(?=\s*\()/,
+    number: /\b(?:0[xX][a-fA-F0-9]+|\d+)[KM]?\b/,
+    operator: />>=?|<<=?|->|\+\+|--|&&|\|\||::|[?:~]|[-+*/%&|^!=<>]=?/,
+    punctuation: /[(){},;]/
+  };
+  Prism.languages['ld'] = Prism.languages['linker-script'];
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/go-module.js
 // @ts-nocheck
@@ -73336,66 +73888,66 @@ groovy.aliases = [];
 
 function groovy(Prism) {
   Prism.register(clike);
-  Prism.languages.groovy = Prism.languages.extend('clike', {
-    string: [{
-      // https://groovy-lang.org/syntax.html#_dollar_slashy_string
-      pattern: /("""|''')(?:[^\\]|\\[\s\S])*?\1|\$\/(?:[^/$]|\$(?:[/$]|(?![/$]))|\/(?!\$))*\/\$/,
-      greedy: true
-    }, {
-      // TODO: Slash strings (e.g. /foo/) can contain line breaks but this will cause a lot of trouble with
-      // simple division (see JS regex), so find a fix maybe?
-      pattern: /(["'/])(?:\\.|(?!\1)[^\\\r\n])*\1/,
-      greedy: true
-    }],
-    keyword: /\b(?:abstract|as|assert|boolean|break|byte|case|catch|char|class|const|continue|def|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|in|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|trait|transient|try|void|volatile|while)\b/,
-    number: /\b(?:0b[01_]+|0x[\da-f_]+(?:\.[\da-f_p\-]+)?|[\d_]+(?:\.[\d_]+)?(?:e[+-]?\d+)?)[glidf]?\b/i,
-    operator: {
-      pattern: /(^|[^.])(?:~|==?~?|\?[.:]?|\*(?:[.=]|\*=?)?|\.[@&]|\.\.<|\.\.(?!\.)|-[-=>]?|\+[+=]?|!=?|<(?:<=?|=>?)?|>(?:>>?=?|=)?|&[&=]?|\|[|=]?|\/=?|\^=?|%=?)/,
-      lookbehind: true
-    },
-    punctuation: /\.+|[{}[\];(),:$]/
-  });
-  Prism.languages.insertBefore('groovy', 'string', {
-    shebang: {
-      pattern: /#!.+/,
-      alias: 'comment'
-    }
-  });
-  Prism.languages.insertBefore('groovy', 'punctuation', {
-    'spock-block': /\b(?:and|cleanup|expect|given|setup|then|when|where):/
-  });
-  Prism.languages.insertBefore('groovy', 'function', {
-    annotation: {
-      pattern: /(^|[^.])@\w+/,
+
+  (function (Prism) {
+    var interpolation = {
+      pattern: /((?:^|[^\\$])(?:\\{2})*)\$(?:\w+|\{[^{}]*\})/,
       lookbehind: true,
-      alias: 'punctuation'
-    }
-  }); // Handle string interpolation
+      inside: {
+        'interpolation-punctuation': {
+          pattern: /^\$\{?|\}$/,
+          alias: 'punctuation'
+        },
+        expression: {
+          pattern: /[\s\S]+/,
+          inside: null // see below
 
-  Prism.hooks.add('wrap', function (env) {
-    if (env.language === 'groovy' && env.type === 'string') {
-      var delimiter = env.content.value[0];
-
-      if (delimiter != "'") {
-        var pattern = /([^\\])(?:\$(?:\{.*?\}|[\w.]+))/;
-
-        if (delimiter === '$') {
-          pattern = /([^\$])(?:\$(?:\{.*?\}|[\w.]+))/;
-        } // To prevent double HTML-encoding we have to decode env.content first
-
-
-        env.content.value = env.content.value.replace(/&lt;/g, '<').replace(/&amp;/g, '&');
-        env.content = Prism.highlight(env.content.value, {
-          expression: {
-            pattern: pattern,
-            lookbehind: true,
-            inside: Prism.languages.groovy
-          }
-        });
-        env.classes.push(delimiter === '/' ? 'regex' : 'gstring');
+        }
       }
-    }
-  });
+    };
+    Prism.languages.groovy = Prism.languages.extend('clike', {
+      string: {
+        // https://groovy-lang.org/syntax.html#_dollar_slashy_string
+        pattern: /'''(?:[^\\]|\\[\s\S])*?'''|'(?:\\.|[^\\'\r\n])*'/,
+        greedy: true
+      },
+      keyword: /\b(?:abstract|as|assert|boolean|break|byte|case|catch|char|class|const|continue|def|default|do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|in|instanceof|int|interface|long|native|new|package|private|protected|public|return|short|static|strictfp|super|switch|synchronized|this|throw|throws|trait|transient|try|void|volatile|while)\b/,
+      number: /\b(?:0b[01_]+|0x[\da-f_]+(?:\.[\da-f_p\-]+)?|[\d_]+(?:\.[\d_]+)?(?:e[+-]?\d+)?)[glidf]?\b/i,
+      operator: {
+        pattern: /(^|[^.])(?:~|==?~?|\?[.:]?|\*(?:[.=]|\*=?)?|\.[@&]|\.\.<|\.\.(?!\.)|-[-=>]?|\+[+=]?|!=?|<(?:<=?|=>?)?|>(?:>>?=?|=)?|&[&=]?|\|[|=]?|\/=?|\^=?|%=?)/,
+        lookbehind: true
+      },
+      punctuation: /\.+|[{}[\];(),:$]/
+    });
+    Prism.languages.insertBefore('groovy', 'string', {
+      shebang: {
+        pattern: /#!.+/,
+        alias: 'comment',
+        greedy: true
+      },
+      'interpolation-string': {
+        // TODO: Slash strings (e.g. /foo/) can contain line breaks but this will cause a lot of trouble with
+        // simple division (see JS regex), so find a fix maybe?
+        pattern: /"""(?:[^\\]|\\[\s\S])*?"""|(["/])(?:\\.|(?!\1)[^\\\r\n])*\1|\$\/(?:[^/$]|\$(?:[/$]|(?![/$]))|\/(?!\$))*\/\$/,
+        greedy: true,
+        inside: {
+          interpolation: interpolation,
+          string: /[\s\S]+/
+        }
+      }
+    });
+    Prism.languages.insertBefore('groovy', 'punctuation', {
+      'spock-block': /\b(?:and|cleanup|expect|given|setup|then|when|where):/
+    });
+    Prism.languages.insertBefore('groovy', 'function', {
+      annotation: {
+        pattern: /(^|[^.])@\w+/,
+        lookbehind: true,
+        alias: 'punctuation'
+      }
+    });
+    interpolation.inside.expression.inside = Prism.languages.groovy;
+  })(Prism);
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/textile.js
 // @ts-nocheck
@@ -73819,7 +74371,7 @@ function haml(Prism) {
 // @ts-nocheck
 
 handlebars.displayName = 'handlebars';
-handlebars.aliases = ['hbs'];
+handlebars.aliases = ['hbs', 'mustache'];
 /** @type {import('../core.js').Syntax} */
 
 function handlebars(Prism) {
@@ -73858,6 +74410,7 @@ function handlebars(Prism) {
       Prism.languages['markup-templating'].tokenizePlaceholders(env, 'handlebars');
     });
     Prism.languages.hbs = Prism.languages.handlebars;
+    Prism.languages.mustache = Prism.languages.handlebars;
   })(Prism);
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/haskell.js
@@ -76140,7 +76693,7 @@ function keyman(Prism) {
       alias: 'keyword'
     },
     'structural-keyword': {
-      pattern: /\b(?:ansi|begin|group|match|nomatch|unicode|using keys)\b/i,
+      pattern: /\b(?:ansi|begin|group|match|newcontext|nomatch|postkeystroke|readonly|unicode|using keys)\b/i,
       alias: 'keyword'
     },
     'compile-target': {
@@ -77248,6 +77801,57 @@ function magma(Prism) {
     punctuation: /[()[\]{}<>,;.:]/
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mata.js
+// @ts-nocheck
+mata.displayName = 'mata';
+mata.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function mata(Prism) {
+  // https://www.stata.com/manuals/m.pdf
+  ;
+
+  (function (Prism) {
+    var orgType = /\b(?:(?:col|row)?vector|matrix|scalar)\b/.source;
+    var type = /\bvoid\b|<org>|\b(?:complex|numeric|pointer(?:\s*\([^()]*\))?|real|string|(?:class|struct)\s+\w+|transmorphic)(?:\s*<org>)?/.source.replace(/<org>/g, orgType);
+    Prism.languages.mata = {
+      comment: {
+        pattern: /\/\/.*|\/\*(?:[^*/]|\*(?!\/)|\/(?!\*)|\/\*(?:[^*]|\*(?!\/))*\*\/)*\*\//,
+        greedy: true
+      },
+      string: {
+        pattern: /"[^"\r\n]*"|[‘`']".*?"[’`']/,
+        greedy: true
+      },
+      'class-name': {
+        pattern: /(\b(?:class|extends|struct)\s+)\w+(?=\s*(?:\{|\bextends\b))/,
+        lookbehind: true
+      },
+      type: {
+        pattern: RegExp(type),
+        alias: 'class-name',
+        inside: {
+          punctuation: /[()]/,
+          keyword: /\b(?:class|function|struct|void)\b/
+        }
+      },
+      keyword: /\b(?:break|class|continue|do|else|end|extends|external|final|for|function|goto|if|pragma|private|protected|public|return|static|struct|unset|unused|version|virtual|while)\b/,
+      constant: /\bNULL\b/,
+      number: {
+        pattern: /(^|[^\w.])(?:\d+(?:\.\d+)?(?:e[+-]?\d+)?|\d[a-f0-9]*(?:\.[a-f0-9]+)?x[+-]?\d+)i?(?![\w.])/i,
+        lookbehind: true
+      },
+      missing: {
+        pattern: /(^|[^\w.])(?:\.[a-z]?)(?![\w.])/,
+        lookbehind: true,
+        alias: 'symbol'
+      },
+      "function": /\b[a-z_]\w*(?=\s*\()/i,
+      operator: /\.\.|\+\+|--|&&|\|\||:?(?:[!=<>]=|[+\-*/^<>&|:])|[!?=\\#’`']/,
+      punctuation: /[()[\]{},;.]/
+    };
+  })(Prism);
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/matlab.js
 // @ts-nocheck
 matlab.displayName = 'matlab';
@@ -77345,17 +77949,24 @@ mel.aliases = [];
 
 function mel(Prism) {
   Prism.languages.mel = {
-    comment: /\/\/.*/,
+    comment: {
+      pattern: /\/\/.*|\/\*[\s\S]*?\*\//,
+      greedy: true
+    },
     code: {
-      pattern: /`(?:\\.|[^\\`\r\n])*`/,
+      pattern: /`(?:\\.|[^\\`])*`/,
       greedy: true,
       alias: 'italic',
       inside: {
         delimiter: {
           pattern: /^`|`$/,
           alias: 'punctuation'
-        } // See rest below
+        },
+        statement: {
+          pattern: /[\s\S]+/,
+          inside: null // see below
 
+        }
       }
     },
     string: {
@@ -77369,19 +77980,19 @@ function mel(Prism) {
       alias: 'operator'
     },
     keyword: /\b(?:break|case|continue|default|do|else|float|for|global|if|in|int|matrix|proc|return|string|switch|vector|while)\b/,
-    "function": /\b\w+(?=\()|\b(?:CBG|HfAddAttractorToAS|HfAssignAS|HfBuildEqualMap|HfBuildFurFiles|HfBuildFurImages|HfCancelAFR|HfConnectASToHF|HfCreateAttractor|HfDeleteAS|HfEditAS|HfPerformCreateAS|HfRemoveAttractorFromAS|HfSelectAttached|HfSelectAttractors|HfUnAssignAS|Mayatomr|about|abs|addAttr|addAttributeEditorNodeHelp|addDynamic|addNewShelfTab|addPP|addPanelCategory|addPrefixToName|advanceToNextDrivenKey|affectedNet|affects|aimConstraint|air|alias|aliasAttr|align|alignCtx|alignCurve|alignSurface|allViewFit|ambientLight|angle|angleBetween|animCone|animCurveEditor|animDisplay|animView|annotate|appendStringArray|applicationName|applyAttrPreset|applyTake|arcLenDimContext|arcLengthDimension|arclen|arrayMapper|art3dPaintCtx|artAttrCtx|artAttrPaintVertexCtx|artAttrSkinPaintCtx|artAttrTool|artBuildPaintMenu|artFluidAttrCtx|artPuttyCtx|artSelectCtx|artSetPaintCtx|artUserPaintCtx|assignCommand|assignInputDevice|assignViewportFactories|attachCurve|attachDeviceAttr|attachSurface|attrColorSliderGrp|attrCompatibility|attrControlGrp|attrEnumOptionMenu|attrEnumOptionMenuGrp|attrFieldGrp|attrFieldSliderGrp|attrNavigationControlGrp|attrPresetEditWin|attributeExists|attributeInfo|attributeMenu|attributeQuery|autoKeyframe|autoPlace|bakeClip|bakeFluidShading|bakePartialHistory|bakeResults|bakeSimulation|basename|basenameEx|batchRender|bessel|bevel|bevelPlus|binMembership|bindSkin|blend2|blendShape|blendShapeEditor|blendShapePanel|blendTwoAttr|blindDataType|boneLattice|boundary|boxDollyCtx|boxZoomCtx|bufferCurve|buildBookmarkMenu|buildKeyframeMenu|button|buttonManip|cacheFile|cacheFileCombine|cacheFileMerge|cacheFileTrack|camera|cameraView|canCreateManip|canvas|capitalizeString|catch|catchQuiet|ceil|changeSubdivComponentDisplayLevel|changeSubdivRegion|channelBox|character|characterMap|characterOutlineEditor|characterize|chdir|checkBox|checkBoxGrp|checkDefaultRenderGlobals|choice|circle|circularFillet|clamp|clear|clearCache|clip|clipEditor|clipEditorCurrentTimeCtx|clipSchedule|clipSchedulerOutliner|clipTrimBefore|closeCurve|closeSurface|cluster|cmdFileOutput|cmdScrollFieldExecuter|cmdScrollFieldReporter|cmdShell|coarsenSubdivSelectionList|collision|color|colorAtPoint|colorEditor|colorIndex|colorIndexSliderGrp|colorSliderButtonGrp|colorSliderGrp|columnLayout|commandEcho|commandLine|commandPort|compactHairSystem|componentEditor|compositingInterop|computePolysetVolume|condition|cone|confirmDialog|connectAttr|connectControl|connectDynamic|connectJoint|connectionInfo|constrain|constrainValue|constructionHistory|container|containsMultibyte|contextInfo|control|convertFromOldLayers|convertIffToPsd|convertLightmap|convertSolidTx|convertTessellation|convertUnit|copyArray|copyFlexor|copyKey|copySkinWeights|cos|cpButton|cpCache|cpClothSet|cpCollision|cpConstraint|cpConvClothToMesh|cpForces|cpGetSolverAttr|cpPanel|cpProperty|cpRigidCollisionFilter|cpSeam|cpSetEdit|cpSetSolverAttr|cpSolver|cpSolverTypes|cpTool|cpUpdateClothUVs|createDisplayLayer|createDrawCtx|createEditor|createLayeredPsdFile|createMotionField|createNewShelf|createNode|createRenderLayer|createSubdivRegion|cross|crossProduct|ctxAbort|ctxCompletion|ctxEditMode|ctxTraverse|currentCtx|currentTime|currentTimeCtx|currentUnit|curve|curveAddPtCtx|curveCVCtx|curveEPCtx|curveEditorCtx|curveIntersect|curveMoveEPCtx|curveOnSurface|curveSketchCtx|cutKey|cycleCheck|cylinder|dagPose|date|defaultLightListCheckBox|defaultNavigation|defineDataServer|defineVirtualDevice|deformer|deg_to_rad|delete|deleteAttr|deleteShadingGroupsAndMaterials|deleteShelfTab|deleteUI|deleteUnusedBrushes|delrandstr|detachCurve|detachDeviceAttr|detachSurface|deviceEditor|devicePanel|dgInfo|dgdirty|dgeval|dgtimer|dimWhen|directKeyCtx|directionalLight|dirmap|dirname|disable|disconnectAttr|disconnectJoint|diskCache|displacementToPoly|displayAffected|displayColor|displayCull|displayLevelOfDetail|displayPref|displayRGBColor|displaySmoothness|displayStats|displayString|displaySurface|distanceDimContext|distanceDimension|doBlur|dolly|dollyCtx|dopeSheetEditor|dot|dotProduct|doubleProfileBirailSurface|drag|dragAttrContext|draggerContext|dropoffLocator|duplicate|duplicateCurve|duplicateSurface|dynCache|dynControl|dynExport|dynExpression|dynGlobals|dynPaintEditor|dynParticleCtx|dynPref|dynRelEdPanel|dynRelEditor|dynamicLoad|editAttrLimits|editDisplayLayerGlobals|editDisplayLayerMembers|editRenderLayerAdjustment|editRenderLayerGlobals|editRenderLayerMembers|editor|editorTemplate|effector|emit|emitter|enableDevice|encodeString|endString|endsWith|env|equivalent|equivalentTol|erf|error|eval|evalDeferred|evalEcho|event|exactWorldBoundingBox|exclusiveLightCheckBox|exec|executeForEachObject|exists|exp|expression|expressionEditorListen|extendCurve|extendSurface|extrude|fcheck|fclose|feof|fflush|fgetline|fgetword|file|fileBrowserDialog|fileDialog|fileExtension|fileInfo|filetest|filletCurve|filter|filterCurve|filterExpand|filterStudioImport|findAllIntersections|findAnimCurves|findKeyframe|findMenuItem|findRelatedSkinCluster|finder|firstParentOf|fitBspline|flexor|floatEq|floatField|floatFieldGrp|floatScrollBar|floatSlider|floatSlider2|floatSliderButtonGrp|floatSliderGrp|floor|flow|fluidCacheInfo|fluidEmitter|fluidVoxelInfo|flushUndo|fmod|fontDialog|fopen|formLayout|format|fprint|frameLayout|fread|freeFormFillet|frewind|fromNativePath|fwrite|gamma|gauss|geometryConstraint|getApplicationVersionAsFloat|getAttr|getClassification|getDefaultBrush|getFileList|getFluidAttr|getInputDeviceRange|getMayaPanelTypes|getModifiers|getPanel|getParticleAttr|getPluginResource|getenv|getpid|glRender|glRenderEditor|globalStitch|gmatch|goal|gotoBindPose|grabColor|gradientControl|gradientControlNoAttr|graphDollyCtx|graphSelectContext|graphTrackCtx|gravity|grid|gridLayout|group|groupObjectsByName|hardenPointCurve|hardware|hardwareRenderPanel|headsUpDisplay|headsUpMessage|help|helpLine|hermite|hide|hilite|hitTest|hotBox|hotkey|hotkeyCheck|hsv_to_rgb|hudButton|hudSlider|hudSliderButton|hwReflectionMap|hwRender|hwRenderLoad|hyperGraph|hyperPanel|hyperShade|hypot|iconTextButton|iconTextCheckBox|iconTextRadioButton|iconTextRadioCollection|iconTextScrollList|iconTextStaticLabel|ikHandle|ikHandleCtx|ikHandleDisplayScale|ikSolver|ikSplineHandleCtx|ikSystem|ikSystemInfo|ikfkDisplayMethod|illustratorCurves|image|imfPlugins|inheritTransform|insertJoint|insertJointCtx|insertKeyCtx|insertKnotCurve|insertKnotSurface|instance|instanceable|instancer|intField|intFieldGrp|intScrollBar|intSlider|intSliderGrp|interToUI|internalVar|intersect|iprEngine|isAnimCurve|isConnected|isDirty|isParentOf|isSameObject|isTrue|isValidObjectName|isValidString|isValidUiName|isolateSelect|itemFilter|itemFilterAttr|itemFilterRender|itemFilterType|joint|jointCluster|jointCtx|jointDisplayScale|jointLattice|keyTangent|keyframe|keyframeOutliner|keyframeRegionCurrentTimeCtx|keyframeRegionDirectKeyCtx|keyframeRegionDollyCtx|keyframeRegionInsertKeyCtx|keyframeRegionMoveKeyCtx|keyframeRegionScaleKeyCtx|keyframeRegionSelectKeyCtx|keyframeRegionSetKeyCtx|keyframeRegionTrackCtx|keyframeStats|lassoContext|lattice|latticeDeformKeyCtx|launch|launchImageEditor|layerButton|layeredShaderPort|layeredTexturePort|layout|layoutDialog|lightList|lightListEditor|lightListPanel|lightlink|lineIntersection|linearPrecision|linstep|listAnimatable|listAttr|listCameras|listConnections|listDeviceAttachments|listHistory|listInputDeviceAxes|listInputDeviceButtons|listInputDevices|listMenuAnnotation|listNodeTypes|listPanelCategories|listRelatives|listSets|listTransforms|listUnselected|listerEditor|loadFluid|loadNewShelf|loadPlugin|loadPluginLanguageResources|loadPrefObjects|localizedPanelLabel|lockNode|loft|log|longNameOf|lookThru|ls|lsThroughFilter|lsType|lsUI|mag|makeIdentity|makeLive|makePaintable|makeRoll|makeSingleSurface|makeTubeOn|makebot|manipMoveContext|manipMoveLimitsCtx|manipOptions|manipRotateContext|manipRotateLimitsCtx|manipScaleContext|manipScaleLimitsCtx|marker|match|max|memory|menu|menuBarLayout|menuEditor|menuItem|menuItemToShelf|menuSet|menuSetPref|messageLine|min|minimizeApp|mirrorJoint|modelCurrentTimeCtx|modelEditor|modelPanel|mouse|movIn|movOut|move|moveIKtoFK|moveKeyCtx|moveVertexAlongDirection|multiProfileBirailSurface|mute|nParticle|nameCommand|nameField|namespace|namespaceInfo|newPanelItems|newton|nodeCast|nodeIconButton|nodeOutliner|nodePreset|nodeType|noise|nonLinear|normalConstraint|normalize|nurbsBoolean|nurbsCopyUVSet|nurbsCube|nurbsEditUV|nurbsPlane|nurbsSelect|nurbsSquare|nurbsToPoly|nurbsToPolygonsPref|nurbsToSubdiv|nurbsToSubdivPref|nurbsUVSet|nurbsViewDirectionVector|objExists|objectCenter|objectLayer|objectType|objectTypeUI|obsoleteProc|oceanNurbsPreviewPlane|offsetCurve|offsetCurveOnSurface|offsetSurface|openGLExtension|openMayaPref|optionMenu|optionMenuGrp|optionVar|orbit|orbitCtx|orientConstraint|outlinerEditor|outlinerPanel|overrideModifier|paintEffectsDisplay|pairBlend|palettePort|paneLayout|panel|panelConfiguration|panelHistory|paramDimContext|paramDimension|paramLocator|parent|parentConstraint|particle|particleExists|particleInstancer|particleRenderInfo|partition|pasteKey|pathAnimation|pause|pclose|percent|performanceOptions|pfxstrokes|pickWalk|picture|pixelMove|planarSrf|plane|play|playbackOptions|playblast|plugAttr|plugNode|pluginInfo|pluginResourceUtil|pointConstraint|pointCurveConstraint|pointLight|pointMatrixMult|pointOnCurve|pointOnSurface|pointPosition|poleVectorConstraint|polyAppend|polyAppendFacetCtx|polyAppendVertex|polyAutoProjection|polyAverageNormal|polyAverageVertex|polyBevel|polyBlendColor|polyBlindData|polyBoolOp|polyBridgeEdge|polyCacheMonitor|polyCheck|polyChipOff|polyClipboard|polyCloseBorder|polyCollapseEdge|polyCollapseFacet|polyColorBlindData|polyColorDel|polyColorPerVertex|polyColorSet|polyCompare|polyCone|polyCopyUV|polyCrease|polyCreaseCtx|polyCreateFacet|polyCreateFacetCtx|polyCube|polyCut|polyCutCtx|polyCylinder|polyCylindricalProjection|polyDelEdge|polyDelFacet|polyDelVertex|polyDuplicateAndConnect|polyDuplicateEdge|polyEditUV|polyEditUVShell|polyEvaluate|polyExtrudeEdge|polyExtrudeFacet|polyExtrudeVertex|polyFlipEdge|polyFlipUV|polyForceUV|polyGeoSampler|polyHelix|polyInfo|polyInstallAction|polyLayoutUV|polyListComponentConversion|polyMapCut|polyMapDel|polyMapSew|polyMapSewMove|polyMergeEdge|polyMergeEdgeCtx|polyMergeFacet|polyMergeFacetCtx|polyMergeUV|polyMergeVertex|polyMirrorFace|polyMoveEdge|polyMoveFacet|polyMoveFacetUV|polyMoveUV|polyMoveVertex|polyNormal|polyNormalPerVertex|polyNormalizeUV|polyOptUvs|polyOptions|polyOutput|polyPipe|polyPlanarProjection|polyPlane|polyPlatonicSolid|polyPoke|polyPrimitive|polyPrism|polyProjection|polyPyramid|polyQuad|polyQueryBlindData|polyReduce|polySelect|polySelectConstraint|polySelectConstraintMonitor|polySelectCtx|polySelectEditCtx|polySeparate|polySetToFaceNormal|polySewEdge|polyShortestPathCtx|polySmooth|polySoftEdge|polySphere|polySphericalProjection|polySplit|polySplitCtx|polySplitEdge|polySplitRing|polySplitVertex|polyStraightenUVBorder|polySubdivideEdge|polySubdivideFacet|polyToSubdiv|polyTorus|polyTransfer|polyTriangulate|polyUVSet|polyUnite|polyWedgeFace|popen|popupMenu|pose|pow|preloadRefEd|print|progressBar|progressWindow|projFileViewer|projectCurve|projectTangent|projectionContext|projectionManip|promptDialog|propModCtx|propMove|psdChannelOutliner|psdEditTextureFile|psdExport|psdTextureFile|putenv|pwd|python|querySubdiv|quit|rad_to_deg|radial|radioButton|radioButtonGrp|radioCollection|radioMenuItemCollection|rampColorPort|rand|randomizeFollicles|randstate|rangeControl|readTake|rebuildCurve|rebuildSurface|recordAttr|recordDevice|redo|reference|referenceEdit|referenceQuery|refineSubdivSelectionList|refresh|refreshAE|registerPluginResource|rehash|reloadImage|removeJoint|removeMultiInstance|removePanelCategory|rename|renameAttr|renameSelectionList|renameUI|render|renderGlobalsNode|renderInfo|renderLayerButton|renderLayerParent|renderLayerPostProcess|renderLayerUnparent|renderManip|renderPartition|renderQualityNode|renderSettings|renderThumbnailUpdate|renderWindowEditor|renderWindowSelectContext|renderer|reorder|reorderDeformers|requires|reroot|resampleFluid|resetAE|resetPfxToPolyCamera|resetTool|resolutionNode|retarget|reverseCurve|reverseSurface|revolve|rgb_to_hsv|rigidBody|rigidSolver|roll|rollCtx|rootOf|rot|rotate|rotationInterpolation|roundConstantRadius|rowColumnLayout|rowLayout|runTimeCommand|runup|sampleImage|saveAllShelves|saveAttrPreset|saveFluid|saveImage|saveInitialState|saveMenu|savePrefObjects|savePrefs|saveShelf|saveToolSettings|scale|scaleBrushBrightness|scaleComponents|scaleConstraint|scaleKey|scaleKeyCtx|sceneEditor|sceneUIReplacement|scmh|scriptCtx|scriptEditorInfo|scriptJob|scriptNode|scriptTable|scriptToShelf|scriptedPanel|scriptedPanelType|scrollField|scrollLayout|sculpt|searchPathArray|seed|selLoadSettings|select|selectContext|selectCurveCV|selectKey|selectKeyCtx|selectKeyframeRegionCtx|selectMode|selectPref|selectPriority|selectType|selectedNodes|selectionConnection|separator|setAttr|setAttrEnumResource|setAttrMapping|setAttrNiceNameResource|setConstraintRestPosition|setDefaultShadingGroup|setDrivenKeyframe|setDynamic|setEditCtx|setEditor|setFluidAttr|setFocus|setInfinity|setInputDeviceMapping|setKeyCtx|setKeyPath|setKeyframe|setKeyframeBlendshapeTargetWts|setMenuMode|setNodeNiceNameResource|setNodeTypeFlag|setParent|setParticleAttr|setPfxToPolyCamera|setPluginResource|setProject|setStampDensity|setStartupMessage|setState|setToolTo|setUITemplate|setXformManip|sets|shadingConnection|shadingGeometryRelCtx|shadingLightRelCtx|shadingNetworkCompare|shadingNode|shapeCompare|shelfButton|shelfLayout|shelfTabLayout|shellField|shortNameOf|showHelp|showHidden|showManipCtx|showSelectionInTitle|showShadingGroupAttrEditor|showWindow|sign|simplify|sin|singleProfileBirailSurface|size|sizeBytes|skinCluster|skinPercent|smoothCurve|smoothTangentSurface|smoothstep|snap2to2|snapKey|snapMode|snapTogetherCtx|snapshot|soft|softMod|softModCtx|sort|sound|soundControl|source|spaceLocator|sphere|sphrand|spotLight|spotLightPreviewPort|spreadSheetEditor|spring|sqrt|squareSurface|srtContext|stackTrace|startString|startsWith|stitchAndExplodeShell|stitchSurface|stitchSurfacePoints|strcmp|stringArrayCatenate|stringArrayContains|stringArrayCount|stringArrayInsertAtIndex|stringArrayIntersector|stringArrayRemove|stringArrayRemoveAtIndex|stringArrayRemoveDuplicates|stringArrayRemoveExact|stringArrayToString|stringToStringArray|strip|stripPrefixFromName|stroke|subdAutoProjection|subdCleanTopology|subdCollapse|subdDuplicateAndConnect|subdEditUV|subdListComponentConversion|subdMapCut|subdMapSewMove|subdMatchTopology|subdMirror|subdToBlind|subdToPoly|subdTransferUVsToCache|subdiv|subdivCrease|subdivDisplaySmoothness|substitute|substituteAllString|substituteGeometry|substring|surface|surfaceSampler|surfaceShaderList|swatchDisplayPort|switchTable|symbolButton|symbolCheckBox|sysFile|system|tabLayout|tan|tangentConstraint|texLatticeDeformContext|texManipContext|texMoveContext|texMoveUVShellContext|texRotateContext|texScaleContext|texSelectContext|texSelectShortestPathCtx|texSmudgeUVContext|texWinToolCtx|text|textCurves|textField|textFieldButtonGrp|textFieldGrp|textManip|textScrollList|textToShelf|textureDisplacePlane|textureHairColor|texturePlacementContext|textureWindow|threadCount|threePointArcCtx|timeControl|timePort|timerX|toNativePath|toggle|toggleAxis|toggleWindowVisibility|tokenize|tokenizeList|tolerance|tolower|toolButton|toolCollection|toolDropped|toolHasOptions|toolPropertyWindow|torus|toupper|trace|track|trackCtx|transferAttributes|transformCompare|transformLimits|translator|trim|trunc|truncateFluidCache|truncateHairCache|tumble|tumbleCtx|turbulence|twoPointArcCtx|uiRes|uiTemplate|unassignInputDevice|undo|undoInfo|ungroup|uniform|unit|unloadPlugin|untangleUV|untitledFileName|untrim|upAxis|updateAE|userCtx|uvLink|uvSnapshot|validateShelfName|vectorize|view2dToolCtx|viewCamera|viewClipPlane|viewFit|viewHeadOn|viewLookAt|viewManip|viewPlace|viewSet|visor|volumeAxis|vortex|waitCursor|warning|webBrowser|webBrowserPrefs|whatIs|window|windowPref|wire|wireContext|workspace|wrinkle|wrinkleContext|writeTake|xbmLangPathList|xform)\b/,
-    operator: [/\+[+=]?|-[-=]?|&&|\|\||[<>]=|[*\/!=]=?|[%^]/, {
-      // We don't want to match <<
-      pattern: /(^|[^<])<(?!<)/,
-      lookbehind: true
-    }, {
-      // We don't want to match >>
-      pattern: /(^|[^>])>(?!>)/,
-      lookbehind: true
-    }],
-    punctuation: /<<|>>|[.,:;?\[\](){}]/
+    "function": {
+      pattern: /((?:^|[{;])[ \t]*)[a-z_]\w*\b(?!\s*(?:\.(?!\.)|[[{=]))|\b[a-z_]\w*(?=[ \t]*\()/im,
+      lookbehind: true,
+      greedy: true
+    },
+    'tensor-punctuation': {
+      pattern: /<<|>>/,
+      alias: 'punctuation'
+    },
+    operator: /\+[+=]?|-[-=]?|&&|\|\||[<>]=?|[*\/!=]=?|[%^]/,
+    punctuation: /[.,:;?\[\](){}]/
   };
-  Prism.languages.mel['code'].inside.rest = Prism.languages.mel;
+  Prism.languages.mel['code'].inside['statement'].inside = Prism.languages.mel;
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mermaid.js
 // @ts-nocheck
@@ -77925,7 +78536,7 @@ function neon(Prism) {
     key: {
       pattern: /(^|[[{(,\s])[^,:=[\]{}()'"\s]+(?=\s*:(?:$|[\]}),\s])|\s*=)/,
       lookbehind: true,
-      alias: 'atrule'
+      alias: 'property'
     },
     number: {
       pattern: /(^|[[{(=:,\s])[+-]?(?:0x[\da-fA-F]+|0o[0-7]+|0b[01]+|(?:\d+(?:\.\d*)?|\.?\d+)(?:[eE][+-]?\d+)?)(?=$|[\]}),:=\s])/,
@@ -78319,6 +78930,95 @@ function ocaml(Prism) {
     operator: /\.[.~]|:[=>]|[=<>@^|&+\-*\/$%!?~][!$%&*+\-.\/:<=>?@^|~]*|\b(?:and|asr|land|lor|lsl|lsr|lxor|mod|or)\b/,
     punctuation: /;;|::|[(){}\[\].,:;#]|\b_\b/
   };
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/odin.js
+// @ts-nocheck
+odin.displayName = 'odin';
+odin.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function odin(Prism) {
+  ;
+
+  (function (Prism) {
+    var escapes = /\\(?:["'\\abefnrtv]|0[0-7]{2}|U[\dA-Fa-f]{6}|u[\dA-Fa-f]{4}|x[\dA-Fa-f]{2})/;
+    Prism.languages.odin = {
+      /**
+       * The current implementation supports only 1 level of nesting.
+       *
+       * @author Michael Schmidt
+       * @author edukisto
+       */
+      comment: [{
+        pattern: /\/\*(?:[^/*]|\/(?!\*)|\*(?!\/)|\/\*(?:\*(?!\/)|[^*])*(?:\*\/|$))*(?:\*\/|$)/,
+        greedy: true
+      }, {
+        pattern: /#![^\n\r]*/,
+        greedy: true
+      }, {
+        pattern: /\/\/[^\n\r]*/,
+        greedy: true
+      }],
+
+      /**
+       * Should be found before strings because of '"'"- and '`'`-like sequences.
+       */
+      "char": {
+        pattern: /'(?:\\(?:.|[0Uux][0-9A-Fa-f]{1,6})|[^\n\r'\\])'/,
+        greedy: true,
+        inside: {
+          symbol: escapes
+        }
+      },
+      string: [{
+        pattern: /`[^`]*`/,
+        greedy: true
+      }, {
+        pattern: /"(?:\\.|[^\n\r"\\])*"/,
+        greedy: true,
+        inside: {
+          symbol: escapes
+        }
+      }],
+      directive: {
+        pattern: /#\w+/,
+        alias: 'property'
+      },
+      number: /\b0(?:b[01_]+|d[\d_]+|h_*(?:(?:(?:[\dA-Fa-f]_*){8}){1,2}|(?:[\dA-Fa-f]_*){4})|o[0-7_]+|x[\dA-F_a-f]+|z[\dAB_ab]+)\b|(?:\b\d+(?:\.(?!\.)\d*)?|\B\.\d+)(?:[Ee][+-]?\d*)?[ijk]?(?!\w)/,
+      discard: {
+        pattern: /\b_\b/,
+        alias: 'keyword'
+      },
+      'procedure-definition': {
+        pattern: /\b\w+(?=[ \t]*(?::\s*){2}proc\b)/,
+        alias: 'function'
+      },
+      keyword: /\b(?:asm|auto_cast|bit_set|break|case|cast|context|continue|defer|distinct|do|dynamic|else|enum|fallthrough|for|foreign|if|import|in|map|matrix|not_in|or_else|or_return|package|proc|return|struct|switch|transmute|typeid|union|using|when|where)\b/,
+
+      /**
+       * false, nil, true can be used as procedure names. "_" and keywords can't.
+       */
+      'procedure-name': {
+        pattern: /\b\w+(?=[ \t]*\()/,
+        alias: 'function'
+      },
+      "boolean": /\b(?:false|nil|true)\b/,
+      'constant-parameter-sign': {
+        pattern: /\$/,
+        alias: 'important'
+      },
+      undefined: {
+        pattern: /---/,
+        alias: 'operator'
+      },
+      arrow: {
+        pattern: /->/,
+        alias: 'punctuation'
+      },
+      operator: /\+\+|--|\.\.[<=]?|(?:&~|[-!*+/=~]|[%&<>|]{1,2})=?|[?^]/,
+      punctuation: /[(),.:;@\[\]{}]/
+    };
+  })(Prism);
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/opencl.js
 // @ts-nocheck
@@ -78900,6 +79600,97 @@ function phpExtras(Prism) {
     }
   });
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/plant-uml.js
+// @ts-nocheck
+plantUml.displayName = 'plant-uml';
+plantUml.aliases = ['plantuml'];
+/** @type {import('../core.js').Syntax} */
+
+function plantUml(Prism) {
+  ;
+
+  (function (Prism) {
+    var variable = /\$\w+|%[a-z]+%/;
+    var arrowAttr = /\[[^[\]]*\]/.source;
+    var arrowDirection = /(?:[drlu]|do|down|le|left|ri|right|up)/.source;
+    var arrowBody = '(?:-+' + arrowDirection + '-+|\\.+' + arrowDirection + '\\.+|-+(?:' + arrowAttr + '-*)?|' + arrowAttr + '-+|\\.+(?:' + arrowAttr + '\\.*)?|' + arrowAttr + '\\.+)';
+    var arrowLeft = /(?:<{1,2}|\/{1,2}|\\{1,2}|<\||[#*^+}xo])/.source;
+    var arrowRight = /(?:>{1,2}|\/{1,2}|\\{1,2}|\|>|[#*^+{xo])/.source;
+    var arrowPrefix = /[[?]?[ox]?/.source;
+    var arrowSuffix = /[ox]?[\]?]?/.source;
+    var arrow = arrowPrefix + '(?:' + arrowBody + arrowRight + '|' + arrowLeft + arrowBody + '(?:' + arrowRight + ')?' + ')' + arrowSuffix;
+    Prism.languages['plant-uml'] = {
+      comment: {
+        pattern: /(^[ \t]*)(?:'.*|\/'[\s\S]*?'\/)/m,
+        lookbehind: true,
+        greedy: true
+      },
+      preprocessor: {
+        pattern: /(^[ \t]*)!.*/m,
+        lookbehind: true,
+        greedy: true,
+        alias: 'property',
+        inside: {
+          variable: variable
+        }
+      },
+      delimiter: {
+        pattern: /(^[ \t]*)@(?:end|start)uml\b/m,
+        lookbehind: true,
+        greedy: true,
+        alias: 'punctuation'
+      },
+      arrow: {
+        pattern: RegExp(/(^|[^-.<>?|\\[\]ox])/.source + arrow + /(?![-.<>?|\\\]ox])/.source),
+        lookbehind: true,
+        greedy: true,
+        alias: 'operator',
+        inside: {
+          expression: {
+            pattern: /(\[)[^[\]]+(?=\])/,
+            lookbehind: true,
+            inside: null // see below
+
+          },
+          punctuation: /\[(?=$|\])|^\]/
+        }
+      },
+      string: {
+        pattern: /"[^"]*"/,
+        greedy: true
+      },
+      text: {
+        pattern: /(\[[ \t]*[\r\n]+(?![\r\n]))[^\]]*(?=\])/,
+        lookbehind: true,
+        greedy: true,
+        alias: 'string'
+      },
+      keyword: [{
+        pattern: /^([ \t]*)(?:abstract\s+class|end\s+(?:box|fork|group|merge|note|ref|split|title)|(?:fork|split)(?:\s+again)?|activate|actor|agent|alt|annotation|artifact|autoactivate|autonumber|backward|binary|boundary|box|break|caption|card|case|circle|class|clock|cloud|collections|component|concise|control|create|critical|database|deactivate|destroy|detach|diamond|else|elseif|end|end[hr]note|endif|endswitch|endwhile|entity|enum|file|folder|footer|frame|group|[hr]?note|header|hexagon|hide|if|interface|label|legend|loop|map|namespace|network|newpage|node|nwdiag|object|opt|package|page|par|participant|person|queue|rectangle|ref|remove|repeat|restore|return|robust|scale|set|show|skinparam|stack|start|state|stop|storage|switch|title|together|usecase|usecase\/|while)(?=\s|$)/m,
+        lookbehind: true,
+        greedy: true
+      }, /\b(?:elseif|equals|not|while)(?=\s*\()/, /\b(?:as|is|then)\b/],
+      divider: {
+        pattern: /^==.+==$/m,
+        greedy: true,
+        alias: 'important'
+      },
+      time: {
+        pattern: /@(?:\d+(?:[:/]\d+){2}|[+-]?\d+|:[a-z]\w*(?:[+-]\d+)?)\b/i,
+        greedy: true,
+        alias: 'number'
+      },
+      color: {
+        pattern: /#(?:[a-z_]+|[a-fA-F0-9]+)\b/,
+        alias: 'symbol'
+      },
+      variable: variable,
+      punctuation: /[:,;()[\]{}]|\.{3}/
+    };
+    Prism.languages['plant-uml'].arrow.inside.expression.inside = Prism.languages['plant-uml'];
+    Prism.languages['plantuml'] = Prism.languages['plant-uml'];
+  })(Prism);
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/plsql.js
 // @ts-nocheck
 
@@ -79169,11 +79960,15 @@ properties_properties.aliases = [];
 function properties_properties(Prism) {
   Prism.languages.properties = {
     comment: /^[ \t]*[#!].*$/m,
-    'attr-value': {
+    value: {
       pattern: /(^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+(?: *[=:] *(?! )| ))(?:\\(?:\r\n|[\s\S])|[^\\\r\n])+/m,
-      lookbehind: true
+      lookbehind: true,
+      alias: 'attr-value'
     },
-    'attr-name': /^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+(?= *[=:]| )/m,
+    key: {
+      pattern: /^[ \t]*(?:\\(?:\r\n|[\s\S])|[^\\\s:=])+(?= *[=:]| )/m,
+      alias: 'attr-name'
+    },
     punctuation: /[=:]/
   };
 }
@@ -79841,7 +80636,7 @@ function purebasic(Prism) {
     keyword: /\b(?:align|and|as|break|calldebugger|case|compilercase|compilerdefault|compilerelse|compilerelseif|compilerendif|compilerendselect|compilererror|compilerif|compilerselect|continue|data|datasection|debug|debuglevel|declare|declarec|declarecdll|declaredll|declaremodule|default|define|dim|disableasm|disabledebugger|disableexplicit|else|elseif|enableasm|enabledebugger|enableexplicit|end|enddatasection|enddeclaremodule|endenumeration|endif|endimport|endinterface|endmacro|endmodule|endprocedure|endselect|endstructure|endstructureunion|endwith|enumeration|extends|fakereturn|for|foreach|forever|global|gosub|goto|if|import|importc|includebinary|includefile|includepath|interface|macro|module|newlist|newmap|next|not|or|procedure|procedurec|procedurecdll|proceduredll|procedurereturn|protected|prototype|prototypec|read|redim|repeat|restore|return|runtime|select|shared|static|step|structure|structureunion|swap|threaded|to|until|wend|while|with|xincludefile|xor)\b/i,
     "function": /\b\w+(?:\.\w+)?\s*(?=\()/,
     number: /(?:\$[\da-f]+|\b-?(?:\d+(?:\.\d+)?|\.\d+)(?:e[+-]?\d+)?)\b/i,
-    operator: /(?:@\*?|\?|\*)\w+|-[>-]?|\+\+?|!=?|<<?=?|>>?=?|==?|&&?|\|?\||[~^%?*/@]/
+    operator: /(?:@\*?|\?|\*)\w+\$?|-[>-]?|\+\+?|!=?|<<?=?|>>?=?|==?|&&?|\|?\||[~^%?*/@]/
   });
   Prism.languages.insertBefore('purebasic', 'keyword', {
     tag: /#\w+\$?/,
@@ -80280,9 +81075,10 @@ function cshtml(Prism) {
     }
 
     var round = nested(/\((?:[^()'"@/]|<str>|<comment>|<self>)*\)/.source, 2);
-    var square = nested(/\[(?:[^\[\]'"@/]|<str>|<comment>|<self>)*\]/.source, 2);
+    var square = nested(/\[(?:[^\[\]'"@/]|<str>|<comment>|<self>)*\]/.source, 1);
     var curly = nested(/\{(?:[^{}'"@/]|<str>|<comment>|<self>)*\}/.source, 2);
-    var angle = nested(/<(?:[^<>'"@/]|<str>|<comment>|<self>)*>/.source, 2); // Note about the above bracket patterns:
+    var angle = nested(/<(?:[^<>'"@/]|<comment>|<self>)*>/.source, 1);
+    var inlineCs = /@/.source + /(?:await\b\s*)?/.source + '(?:' + /(?!await\b)\w+\b/.source + '|' + round + ')' + '(?:' + /[?!]?\.\w+\b/.source + '|' + '(?:' + angle + ')?' + round + '|' + square + ')*' + /(?![?!\.(\[]|<(?!\/))/.source; // Note about the above bracket patterns:
     // They all ignore HTML expressions that might be in the C# code. This is a problem because HTML (like strings and
     // comments) is parsed differently. This is a huge problem because HTML might contain brackets and quotes which
     // messes up the bracket and string counting implemented by the above patterns.
@@ -80294,7 +81090,9 @@ function cshtml(Prism) {
     // To somewhat alleviate the problem a bit, the patterns for characters (e.g. 'a') is very permissive, it also
     // allows invalid characters to support HTML expressions like this: <p>That's it!</p>.
 
-    var tagAttrs = /(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?/.source;
+    var tagAttrInlineCs = /@(?![\w()])/.source + '|' + inlineCs;
+    var tagAttrValue = '(?:' + /"[^"@]*"|'[^'@]*'|[^\s'"@>=]+(?=[\s>])/.source + '|' + '["\'][^"\'@]*(?:(?:' + tagAttrInlineCs + ')[^"\'@]*)+["\']' + ')';
+    var tagAttrs = /(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*<tagAttrValue>|(?=[\s/>])))+)?/.source.replace(/<tagAttrValue>/, tagAttrValue);
     var tagContent = /(?!\d)[^\s>\/=$<%]+/.source + tagAttrs + /\s*\/?>/.source;
     var tagRegion = /\B@?/.source + '(?:' + /<([a-zA-Z][\w:]*)/.source + tagAttrs + /\s*>/.source + '(?:' + (/[^<]/.source + '|' + // all tags that are not the start tag
     // eslint-disable-next-line regexp/strict
@@ -80328,6 +81126,21 @@ function cshtml(Prism) {
       alias: 'language-csharp',
       inside: csharpWithHtml
     };
+    var inlineValue = {
+      pattern: RegExp(/(^|[^@])/.source + inlineCs),
+      lookbehind: true,
+      greedy: true,
+      alias: 'variable',
+      inside: {
+        keyword: /^@/,
+        csharp: cs
+      }
+    };
+    Prism.languages.cshtml.tag.pattern = RegExp(/<\/?/.source + tagContent);
+    Prism.languages.cshtml.tag.inside['attr-value'].pattern = RegExp(/=\s*/.source + tagAttrValue);
+    Prism.languages.insertBefore('inside', 'punctuation', {
+      value: inlineValue
+    }, Prism.languages.cshtml.tag.inside['attr-value']);
     Prism.languages.insertBefore('cshtml', 'prolog', {
       'razor-comment': {
         pattern: /@\*[\s\S]*?\*@/,
@@ -80341,7 +81154,8 @@ function cshtml(Prism) {
         /(?:for|foreach|lock|switch|using|while)\s*/.source + round + /\s*/.source + curly, // @do { ... } while (...);
         /do\s*/.source + curly + /\s*while\s*/.source + round + /(?:\s*;)?/.source, // @try { ... } catch (...) { ... } finally { ... }
         /try\s*/.source + curly + /\s*catch\s*/.source + round + /\s*/.source + curly + /\s*finally\s*/.source + curly, // @if (...) {...} else if (...) {...} else {...}
-        /if\s*/.source + round + /\s*/.source + curly + '(?:' + /\s*else/.source + '(?:' + /\s+if\s*/.source + round + ')?' + /\s*/.source + curly + ')*'].join('|') + ')'),
+        /if\s*/.source + round + /\s*/.source + curly + '(?:' + /\s*else/.source + '(?:' + /\s+if\s*/.source + round + ')?' + /\s*/.source + curly + ')*', // @helper Ident(params) { ... }
+        /helper\s+\w+\s*/.source + round + /\s*/.source + curly].join('|') + ')'),
         lookbehind: true,
         greedy: true,
         inside: {
@@ -80358,16 +81172,7 @@ function cshtml(Prism) {
           csharp: cs
         }
       },
-      value: {
-        pattern: RegExp(/(^|[^@])@/.source + /(?:await\b\s*)?/.source + '(?:' + /\w+\b/.source + '|' + round + ')' + '(?:' + /[?!]?\.\w+\b/.source + '|' + round + '|' + square + '|' + angle + round + ')*'),
-        lookbehind: true,
-        greedy: true,
-        alias: 'variable',
-        inside: {
-          keyword: /^@/,
-          csharp: cs
-        }
-      },
+      value: inlineValue,
       'delegate-operator': {
         pattern: /(^|[^@])@(?=<)/,
         lookbehind: true,
@@ -80647,6 +81452,75 @@ function renpy(Prism) {
     punctuation: /[{}[\];(),.:]/
   };
   Prism.languages.rpy = Prism.languages.renpy;
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rescript.js
+// @ts-nocheck
+rescript.displayName = 'rescript';
+rescript.aliases = ['res'];
+/** @type {import('../core.js').Syntax} */
+
+function rescript(Prism) {
+  Prism.languages.rescript = {
+    comment: {
+      pattern: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/,
+      greedy: true
+    },
+    "char": {
+      pattern: /'(?:[^\r\n\\]|\\(?:.|\w+))'/,
+      greedy: true
+    },
+    string: {
+      pattern: /"(?:\\(?:\r\n|[\s\S])|[^\\\r\n"])*"/,
+      greedy: true
+    },
+    'class-name': /\b[A-Z]\w*|@[a-z.]*|#[A-Za-z]\w*|#\d/,
+    "function": {
+      pattern: /[a-zA-Z]\w*(?=\()|(\.)[a-z]\w*/,
+      lookbehind: true
+    },
+    number: /(?:\b0x(?:[\da-f]+(?:\.[\da-f]*)?|\.[\da-f]+)(?:p[+-]?\d+)?|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e[+-]?\d+)?)[ful]{0,4}/i,
+    "boolean": /\b(?:false|true)\b/,
+    'attr-value': /[A-Za-z]\w*(?==)/,
+    constant: {
+      pattern: /(\btype\s+)[a-z]\w*/,
+      lookbehind: true
+    },
+    tag: {
+      pattern: /(<)[a-z]\w*|(?:<\/)[a-z]\w*/,
+      lookbehind: true,
+      inside: {
+        operator: /<|>|\//
+      }
+    },
+    keyword: /\b(?:and|as|assert|begin|bool|class|constraint|do|done|downto|else|end|exception|external|float|for|fun|function|if|in|include|inherit|initializer|int|lazy|let|method|module|mutable|new|nonrec|object|of|open|or|private|rec|string|switch|then|to|try|type|when|while|with)\b/,
+    operator: /\.{3}|:[:=]?|\|>|->|=(?:==?|>)?|<=?|>=?|[|^?'#!~`]|[+\-*\/]\.?|\b(?:asr|land|lor|lsl|lsr|lxor|mod)\b/,
+    punctuation: /[(){}[\],;.]/
+  };
+  Prism.languages.insertBefore('rescript', 'string', {
+    'template-string': {
+      pattern: /`(?:\\[\s\S]|\$\{(?:[^{}]|\{(?:[^{}]|\{[^}]*\})*\})+\}|(?!\$\{)[^\\`])*`/,
+      greedy: true,
+      inside: {
+        'template-punctuation': {
+          pattern: /^`|`$/,
+          alias: 'string'
+        },
+        interpolation: {
+          pattern: /((?:^|[^\\])(?:\\{2})*)\$\{(?:[^{}]|\{(?:[^{}]|\{[^}]*\})*\})+\}/,
+          lookbehind: true,
+          inside: {
+            'interpolation-punctuation': {
+              pattern: /^\$\{|\}$/,
+              alias: 'tag'
+            },
+            rest: Prism.languages.rescript
+          }
+        },
+        string: /[\s\S]+/
+      }
+    }
+  });
+  Prism.languages.res = Prism.languages.rescript;
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rest.js
 // @ts-nocheck
@@ -82153,6 +83027,86 @@ function stan(Prism) {
     Prism.languages.stan.constraint.inside.expression.inside = Prism.languages.stan;
   })(Prism);
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/stata.js
+// @ts-nocheck
+
+
+
+stata.displayName = 'stata';
+stata.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function stata(Prism) {
+  Prism.register(java);
+  Prism.register(mata);
+  Prism.register(python); // https://www.stata.com/manuals/u.pdf
+  // https://www.stata.com/manuals/p.pdf
+
+  Prism.languages.stata = {
+    comment: [{
+      pattern: /(^[ \t]*)\*.*/m,
+      lookbehind: true,
+      greedy: true
+    }, {
+      pattern: /(^|\s)\/\/.*|\/\*[\s\S]*?\*\//,
+      lookbehind: true,
+      greedy: true
+    }],
+    'string-literal': {
+      pattern: /"[^"\r\n]*"|[‘`']".*?"[’`']/,
+      greedy: true,
+      inside: {
+        interpolation: {
+          pattern: /\$\{[^{}]*\}|[‘`']\w[^’`'\r\n]*[’`']/,
+          inside: {
+            punctuation: /^\$\{|\}$/,
+            expression: {
+              pattern: /[\s\S]+/,
+              inside: null // see below
+
+            }
+          }
+        },
+        string: /[\s\S]+/
+      }
+    },
+    mata: {
+      pattern: /(^[ \t]*mata[ \t]*:)[\s\S]+?(?=^end\b)/m,
+      lookbehind: true,
+      greedy: true,
+      alias: 'language-mata',
+      inside: Prism.languages.mata
+    },
+    java: {
+      pattern: /(^[ \t]*java[ \t]*:)[\s\S]+?(?=^end\b)/m,
+      lookbehind: true,
+      greedy: true,
+      alias: 'language-java',
+      inside: Prism.languages.java
+    },
+    python: {
+      pattern: /(^[ \t]*python[ \t]*:)[\s\S]+?(?=^end\b)/m,
+      lookbehind: true,
+      greedy: true,
+      alias: 'language-python',
+      inside: Prism.languages.python
+    },
+    command: {
+      pattern: /(^[ \t]*(?:\.[ \t]+)?(?:(?:bayes|bootstrap|by|bysort|capture|collect|fmm|fp|frame|jackknife|mfp|mi|nestreg|noisily|permute|quietly|rolling|simulate|statsby|stepwise|svy|version|xi)\b[^:\r\n]*:[ \t]*|(?:capture|noisily|quietly|version)[ \t]+)?)[a-zA-Z]\w*/m,
+      lookbehind: true,
+      greedy: true,
+      alias: 'keyword'
+    },
+    variable: /\$\w+|[‘`']\w[^’`'\r\n]*[’`']/,
+    keyword: /\b(?:bayes|bootstrap|by|bysort|capture|clear|collect|fmm|fp|frame|if|in|jackknife|mi[ \t]+estimate|mfp|nestreg|noisily|of|permute|quietly|rolling|simulate|sort|statsby|stepwise|svy|varlist|version|xi)\b/,
+    "boolean": /\b(?:off|on)\b/,
+    number: /\b\d+(?:\.\d+)?\b|\B\.\d+/,
+    "function": /\b[a-z_]\w*(?=\()/i,
+    operator: /\+\+|--|##?|[<>!=~]=?|[+\-*^&|/]/,
+    punctuation: /[(){}[\],:]/
+  };
+  Prism.languages.stata['string-literal'].inside.interpolation.inside.expression.inside = Prism.languages.stata;
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/iecst.js
 // @ts-nocheck
 iecst.displayName = 'iecst';
@@ -82186,6 +83140,45 @@ function iecst(Prism) {
     "function": /\b[a-z_]\w*(?=\s*\()/i,
     punctuation: /[()[\].,;]/
   };
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/supercollider.js
+// @ts-nocheck
+supercollider.displayName = 'supercollider';
+supercollider.aliases = ['sclang'];
+/** @type {import('../core.js').Syntax} */
+
+function supercollider(Prism) {
+  Prism.languages.supercollider = {
+    comment: {
+      pattern: /\/\/.*|\/\*(?:[^*/]|\*(?!\/)|\/(?!\*)|\/\*(?:[^*]|\*(?!\/))*\*\/)*\*\//,
+      greedy: true
+    },
+    string: {
+      pattern: /(^|[^\\])"(?:[^"\\]|\\[\s\S])*"/,
+      lookbehind: true,
+      greedy: true
+    },
+    "char": {
+      pattern: /\$(?:[^\\\r\n]|\\.)/,
+      greedy: true
+    },
+    symbol: {
+      pattern: /(^|[^\\])'(?:[^'\\]|\\[\s\S])*'|\\\w+/,
+      lookbehind: true,
+      greedy: true
+    },
+    keyword: /\b(?:_|arg|classvar|const|nil|var|while)\b/,
+    "boolean": /\b(?:false|true)\b/,
+    label: {
+      pattern: /\b[a-z_]\w*(?=\s*:)/,
+      alias: 'property'
+    },
+    number: /\b(?:inf|pi|0x[0-9a-fA-F]+|\d+(?:\.\d+)?(?:[eE][+-]?\d+)?(?:pi)?|\d+r[0-9a-zA-Z]+(?:\.[0-9a-zA-Z]+)?|\d+[sb]{1,4}\d*)\b/,
+    'class-name': /\b[A-Z]\w*\b/,
+    operator: /\.{2,3}|#(?![[{])|&&|[!=]==?|\+>>|\+{1,3}|-[->]|=>|>>|\?\?|@\|?@|\|(?:@|[!=]=)?\||!\?|<[!=>]|\*{1,2}|<{2,3}\*?|[-!%&/<>?@|=`]/,
+    punctuation: /[{}()[\].:,;]|#[[{]/
+  };
+  Prism.languages.sclang = Prism.languages.supercollider;
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/systemd.js
 // @ts-nocheck
@@ -83082,9 +84075,12 @@ function vhdl(Prism) {
       alias: 'function'
     },
     string: /"(?:[^\\"\r\n]|\\(?:\r\n|[\s\S]))*"/,
-    constant: /\b(?:library|use)\b/i,
+    attribute: {
+      pattern: /\b'\w+/,
+      alias: 'attr-name'
+    },
     // support for predefined attributes included
-    keyword: /\b(?:'active|'ascending|'base|'delayed|'driving|'driving_value|'event|'high|'image|'instance_name|'last_active|'last_event|'last_value|'left|'leftof|'length|'low|'path_name|'pos|'pred|'quiet|'range|'reverse_range|'right|'rightof|'simple_name|'stable|'succ|'transaction|'val|'value|access|after|alias|all|architecture|array|assert|attribute|begin|block|body|buffer|bus|case|component|configuration|constant|disconnect|downto|else|elsif|end|entity|exit|file|for|function|generate|generic|group|guarded|if|impure|in|inertial|inout|is|label|library|linkage|literal|loop|map|new|next|null|of|on|open|others|out|package|port|postponed|procedure|process|pure|range|record|register|reject|report|return|select|severity|shared|signal|subtype|then|to|transport|type|unaffected|units|until|use|variable|wait|when|while|with)\b/i,
+    keyword: /\b(?:access|after|alias|all|architecture|array|assert|attribute|begin|block|body|buffer|bus|case|component|configuration|constant|disconnect|downto|else|elsif|end|entity|exit|file|for|function|generate|generic|group|guarded|if|impure|in|inertial|inout|is|label|library|linkage|literal|loop|map|new|next|null|of|on|open|others|out|package|port|postponed|private|procedure|process|pure|range|record|register|reject|report|return|select|severity|shared|signal|subtype|then|to|transport|type|unaffected|units|until|use|variable|view|wait|when|while|with)\b/i,
     "boolean": /\b(?:false|true)\b/i,
     "function": /\w+(?=\()/,
     // decimal, based, physical, and exponential numbers supported
@@ -83399,7 +84395,7 @@ function wolfram(Prism) {
     },
     "boolean": /\b(?:False|True)\b/,
     number: /(?:\b(?=\d)|\B(?=\.))(?:0[bo])?(?:(?:\d|0x[\da-f])[\da-f]*(?:\.\d*)?|\.\d+)(?:e[+-]?\d+)?j?\b/i,
-    operator: /\/\.|;|=\.|\^=|\^:=|:=|<<|>>|<\||\|>|:>|\|->|->|<-|@@@|@@|@|\/@|=!=|===|==|=|\+|-|\^|\[\/-+%=\]=?|!=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
+    operator: /\/\.|;|=\.|\^=|\^:=|:=|<<|>>|<\||\|>|:>|\|->|->|<-|@@@|@@|@|\/@|=!=|===|==|=|\+|-|\[\/-+%=\]=?|!=|\*\*?=?|\/\/?=?|<[<=>]?|>[=>]?|[&|^~]/,
     punctuation: /[{}[\];(),.:]/
   };
   Prism.languages.mathematica = Prism.languages.wolfram;
@@ -84269,6 +85265,19 @@ function zig(Prism) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 refractor.register(markup);
 refractor.register(css);
 refractor.register(clike);
@@ -84291,6 +85300,11 @@ refractor.register(c);
 refractor.register(cpp);
 refractor.register(arduino);
 refractor.register(arff);
+refractor.register(armasm);
+refractor.register(bash);
+refractor.register(yaml);
+refractor.register(markdown);
+refractor.register(arturo);
 refractor.register(asciidoc);
 refractor.register(csharp);
 refractor.register(aspnet);
@@ -84300,7 +85314,7 @@ refractor.register(autohotkey);
 refractor.register(autoit);
 refractor.register(avisynth);
 refractor.register(avroIdl);
-refractor.register(bash);
+refractor.register(awk);
 refractor.register(basic);
 refractor.register(batch);
 refractor.register(bbcode);
@@ -84321,11 +85335,13 @@ refractor.register(cobol);
 refractor.register(coffeescript);
 refractor.register(concurnas);
 refractor.register(csp);
+refractor.register(cooklang);
 refractor.register(coq);
 refractor.register(ruby);
 refractor.register(crystal);
 refractor.register(cssExtras);
 refractor.register(csv);
+refractor.register(cue);
 refractor.register(cypher);
 refractor.register(d);
 refractor.register(dart);
@@ -84361,14 +85377,14 @@ refractor.register(gap);
 refractor.register(gcode);
 refractor.register(gdscript);
 refractor.register(gedcom);
+refractor.register(gettext);
 refractor.register(gherkin);
 refractor.register(git);
 refractor.register(glsl);
 refractor.register(gn);
+refractor.register(linkerScript);
 refractor.register(go);
 refractor.register(goModule);
-refractor.register(yaml);
-refractor.register(markdown);
 refractor.register(graphql);
 refractor.register(groovy);
 refractor.register(less);
@@ -84430,6 +85446,7 @@ refractor.register(log);
 refractor.register(lolcode);
 refractor.register(magma);
 refractor.register(makefile);
+refractor.register(mata);
 refractor.register(matlab);
 refractor.register(maxscript);
 refractor.register(mel);
@@ -84450,6 +85467,7 @@ refractor.register(nix);
 refractor.register(nsis);
 refractor.register(objectivec);
 refractor.register(ocaml);
+refractor.register(odin);
 refractor.register(opencl);
 refractor.register(openqasm);
 refractor.register(oz);
@@ -84463,6 +85481,7 @@ refractor.register(peoplecode);
 refractor.register(perl);
 refractor.register(phpdoc);
 refractor.register(phpExtras);
+refractor.register(plantUml);
 refractor.register(plsql);
 refractor.register(powerquery);
 refractor.register(powershell);
@@ -84491,6 +85510,7 @@ refractor.register(tsx);
 refractor.register(reason);
 refractor.register(rego);
 refractor.register(renpy);
+refractor.register(rescript);
 refractor.register(rest);
 refractor.register(rip);
 refractor.register(roboconf);
@@ -84512,7 +85532,9 @@ refractor.register(splunkSpl);
 refractor.register(sqf);
 refractor.register(squirrel);
 refractor.register(stan);
+refractor.register(stata);
 refractor.register(iecst);
+refractor.register(supercollider);
 refractor.register(swift);
 refractor.register(systemd);
 refractor.register(t4Templating);
@@ -84547,7 +85569,7 @@ refractor.register(xquery);
 refractor.register(yang);
 refractor.register(zig);
 
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/dist/rehype-prism-plus.es.js
+;// CONCATENATED MODULE: ../../node_modules/@wcj/markdown-to-html/node_modules/rehype-prism-plus/dist/rehype-prism-plus.es.js
 
 
 
@@ -84831,16 +85853,19 @@ var rehype_prism_plus_es_p = function e(t) {
 
 
 
+
+
 function lib_markdown() {
   var markdownStr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var processor = unified().use(remark_parse).use(remarkGfm).use(options.remarkPlugins || []).use(remark_rehype_lib, Object.assign(Object.assign({}, options.remarkRehypeOptions), {
-    allowDangerousHtml: true
-  })).use(rehype_video_lib).use(rehypeRaw).use(m, {
-    ignoreMissing: true
-  }).use(lib, {
+  var filterPlugins = options.filterPlugins;
+  var remarkPlugins = [remarkGfm].concat(_toConsumableArray(options.remarkPlugins || []));
+  var rehypePlugins = [rehype_video_lib, rehypeRaw, [m, {
+    ignoreMissing: true,
+    showLineNumbers: true
+  }], [lib, {
     properties: 'attr'
-  }).use(options.rehypePlugins || []).use(rehype_rewrite_lib, {
+  }], rehype_ignore_lib].concat(_toConsumableArray(options.rehypePlugins || []), [[rehype_rewrite_lib, {
     rewrite: function rewrite(node, index, parent) {
       if (node.type == 'element' && node.tagName === 'code') {
         var _ref = node.properties || {},
@@ -84880,7 +85905,10 @@ function lib_markdown() {
         options.rewrite(node, index, parent);
       }
     }
-  }).use(rehypeKatex).use(rehypeStringify);
+  }], rehypeKatex, rehypeStringify]);
+  var processor = unified().use(remark_parse).use(filterPlugins && typeof filterPlugins === 'function' ? filterPlugins('remark', remarkPlugins) : remarkPlugins).use(remark_rehype_lib, Object.assign(Object.assign({}, options.remarkRehypeOptions), {
+    allowDangerousHtml: true
+  })).use(filterPlugins && typeof filterPlugins === 'function' ? filterPlugins('rehype', rehypePlugins) : rehypePlugins);
   var file = new VFile();
   file.value = markdownStr;
   var hastNode = processor.runSync(processor.parse(file), file);
@@ -84889,7 +85917,7 @@ function lib_markdown() {
     return hastNode;
   }
 
-  return processor.stringify(hastNode, file);
+  return String(processor.stringify(hastNode, file));
 }
 
 /* harmony default export */ const markdown_to_html_lib = (lib_markdown);
@@ -85212,7 +86240,7 @@ function rehypeAutolinkHeadings() {
 
   function inject(node) {
     node.children[behavior === 'prepend' ? 'unshift' : 'push'](create(node, extend(true, {}, props), toChildren(content, node)));
-    return [unist_util_visit_parents_SKIP];
+    return [SKIP];
   }
   /** @type {import('unist-util-visit/complex-types').Visitor<Element>} */
 
@@ -85238,14 +86266,14 @@ function rehypeAutolinkHeadings() {
 
     (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(_toConsumableArray(nodes)));
 
-    return [unist_util_visit_parents_SKIP, index + nodes.length];
+    return [SKIP, index + nodes.length];
   }
   /** @type {import('unist-util-visit/complex-types').Visitor<Element>} */
 
 
   function wrap(node) {
     node.children = [create(node, extend(true, {}, props), node.children)];
-    return [unist_util_visit_parents_SKIP];
+    return [SKIP];
   }
   /**
    * @param {ElementChild|ElementChild[]|Build} value
@@ -100398,8 +101426,70 @@ function inferWhiteSpace(node, context) {
 
   return context.whitespace;
 }
-// EXTERNAL MODULE: ../../node_modules/hast-util-is-body-ok-link/index.js
-var hast_util_is_body_ok_link = __webpack_require__(9147);
+;// CONCATENATED MODULE: ../../node_modules/hast-util-is-body-ok-link/index.js
+/**
+ * @fileoverview
+ *   Check if a `link` element is “Body OK”.
+ * @longdescription
+ *   ## Use
+ *
+ *   ```js
+ *   import {h} from 'hastscript'
+ *   import {isBodyOkLink} from 'hast-util-is-body-ok-link'
+ *
+ *   isBodyOkLink(h('link', {itemProp: 'foo'})) //=> true
+ *   isBodyOkLink(h('link', {rel: ['stylesheet'], href: 'index.css'})) //=> true
+ *   isBodyOkLink(h('link', {rel: ['author'], href: 'index.css'})) //=> false
+ *   ```
+ *
+ *   ## API
+ *
+ *   ### `isBodyOkLink(node)`
+ *
+ *   * Return `true` for `link` elements with an `itemProp`
+ *   * Return `true` for `link` elements with a `rel` list where one or more
+ *     entries are `pingback`, `prefetch`, or `stylesheet`.
+ */
+
+
+var hast_util_is_body_ok_link_list = new Set(['pingback', 'prefetch', 'stylesheet']);
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {Root|Root['children'][number]} Node
+ */
+
+/**
+ * Check if a `link` element is “Body OK”.
+ *
+ * @param {Node} node
+ * @returns {boolean}
+ */
+
+function isBodyOkLink(node) {
+  if (!isElement(node, 'link')) {
+    return false;
+  }
+
+  if (hasProperty(node, 'itemProp')) {
+    return true;
+  }
+
+  var props = node.properties || {};
+  var rel = props.rel || [];
+  var index = -1;
+
+  if (!Array.isArray(rel) || rel.length === 0) {
+    return false;
+  }
+
+  while (++index < rel.length) {
+    if (!hast_util_is_body_ok_link_list.has(String(rel[index]))) {
+      return false;
+    }
+  }
+
+  return true;
+}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-phrasing/index.js
 
 
@@ -100416,9 +101506,9 @@ var meta = convertElement('meta');
  */
 
 function phrasing(node) {
-  return (// @ts-ignore Looks like a text.
-    node && node.type === 'text' || hast_util_phrasing_basic(node) || embedded(node) || hast_util_is_body_ok_link(node) || meta(node) && hasProperty(node, 'itemProp')
-  );
+  return Boolean( // @ts-expect-error Looks like a node.
+  node && node.type === 'text' || hast_util_phrasing_basic(node) || embedded(node) || // @ts-expect-error Looks like a node.
+  isBodyOkLink(node) || meta(node) && hasProperty(node, 'itemProp'));
 }
 ;// CONCATENATED MODULE: ../../node_modules/html-whitespace-sensitive-tag-names/index.js
 /**
@@ -100500,7 +101590,7 @@ function rehypeFormat() {
 
     rehype_format_minify(tree); // eslint-disable-next-line complexity
 
-    unist_util_visit_parents_visitParents(tree, function (node, parents) {
+    visitParents(tree, function (node, parents) {
       var index = -1;
 
       if (!('children' in node)) {
@@ -100516,7 +101606,7 @@ function rehypeFormat() {
       }
 
       if (isElement(node, whitespaceSensitiveTagNames)) {
-        return unist_util_visit_parents_SKIP;
+        return SKIP;
       }
 
       var children = node.children;
@@ -100704,7 +101794,7 @@ var octiconLinkStyle = "\nmarkdown-style h1:hover a.anchor .octicon-link:before,
  * https://github.com/jaywcjlove/markdown-to-html/tree/main/packages/markdown-style
  */
 
-var markdown_style_scriptString = "const __TEMPLATE__ = document.createElement('template');\n__TEMPLATE__.innerHTML = `\n<style>\n".concat(octiconLinkStyle, "\n[data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='light'] { --color-prettylights-syntax-comment: #6e7781; --color-prettylights-syntax-constant: #0550ae; --color-prettylights-syntax-entity: #8250df; --color-prettylights-syntax-storage-modifier-import: #24292f; --color-prettylights-syntax-entity-tag: #116329; --color-prettylights-syntax-keyword: #cf222e; --color-prettylights-syntax-string: #0a3069; --color-prettylights-syntax-variable: #953800; --color-prettylights-syntax-brackethighlighter-unmatched: #82071e; --color-prettylights-syntax-invalid-illegal-text: #f6f8fa; --color-prettylights-syntax-invalid-illegal-bg: #82071e; --color-prettylights-syntax-carriage-return-text: #f6f8fa; --color-prettylights-syntax-carriage-return-bg: #cf222e; --color-prettylights-syntax-string-regexp: #116329; --color-prettylights-syntax-markup-list: #3b2300; --color-prettylights-syntax-markup-heading: #0550ae; --color-prettylights-syntax-markup-italic: #24292f; --color-prettylights-syntax-markup-bold: #24292f; --color-prettylights-syntax-markup-deleted-text: #82071e; --color-prettylights-syntax-markup-deleted-bg: #FFEBE9; --color-prettylights-syntax-markup-inserted-text: #116329; --color-prettylights-syntax-markup-inserted-bg: #dafbe1; --color-prettylights-syntax-markup-changed-text: #953800; --color-prettylights-syntax-markup-changed-bg: #ffd8b5; --color-prettylights-syntax-markup-ignored-text: #eaeef2; --color-prettylights-syntax-markup-ignored-bg: #0550ae; --color-prettylights-syntax-meta-diff-range: #8250df; --color-prettylights-syntax-brackethighlighter-angle: #57606a; --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f; --color-prettylights-syntax-constant-other-reference-link: #0a3069; --color-fg-default: #24292f; --color-fg-muted: #57606a; --color-fg-subtle: #6e7781; --color-canvas-default: #ffffff; --color-canvas-subtle: #f6f8fa; --color-border-default: #d0d7de; --color-border-muted: hsla(210,18%,87%,1); --color-neutral-muted: rgba(175,184,193,0.2); --color-accent-fg: #0969da; --color-accent-emphasis: #0969da; --color-attention-subtle: #fff8c5; --color-danger-fg: #cf222e; } [data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='dark'] { --color-prettylights-syntax-comment: #8b949e; --color-prettylights-syntax-constant: #79c0ff; --color-prettylights-syntax-entity: #d2a8ff; --color-prettylights-syntax-storage-modifier-import: #c9d1d9; --color-prettylights-syntax-entity-tag: #7ee787; --color-prettylights-syntax-keyword: #ff7b72; --color-prettylights-syntax-string: #a5d6ff; --color-prettylights-syntax-variable: #ffa657; --color-prettylights-syntax-brackethighlighter-unmatched: #f85149; --color-prettylights-syntax-invalid-illegal-text: #f0f6fc; --color-prettylights-syntax-invalid-illegal-bg: #8e1519; --color-prettylights-syntax-carriage-return-text: #f0f6fc; --color-prettylights-syntax-carriage-return-bg: #b62324; --color-prettylights-syntax-string-regexp: #7ee787; --color-prettylights-syntax-markup-list: #f2cc60; --color-prettylights-syntax-markup-heading: #1f6feb; --color-prettylights-syntax-markup-italic: #c9d1d9; --color-prettylights-syntax-markup-bold: #c9d1d9; --color-prettylights-syntax-markup-deleted-text: #ffdcd7; --color-prettylights-syntax-markup-deleted-bg: #67060c; --color-prettylights-syntax-markup-inserted-text: #aff5b4; --color-prettylights-syntax-markup-inserted-bg: #033a16; --color-prettylights-syntax-markup-changed-text: #ffdfb6; --color-prettylights-syntax-markup-changed-bg: #5a1e02; --color-prettylights-syntax-markup-ignored-text: #c9d1d9; --color-prettylights-syntax-markup-ignored-bg: #1158c7; --color-prettylights-syntax-meta-diff-range: #d2a8ff; --color-prettylights-syntax-brackethighlighter-angle: #8b949e; --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58; --color-prettylights-syntax-constant-other-reference-link: #a5d6ff; --color-fg-default: #c9d1d9; --color-fg-muted: #8b949e; --color-fg-subtle: #484f58; --color-canvas-default: #0d1117; --color-canvas-subtle: #161b22; --color-border-default: #30363d; --color-border-muted: #21262d; --color-neutral-muted: rgba(110,118,129,0.4); --color-accent-fg: #58a6ff; --color-accent-emphasis: #1f6feb; --color-attention-subtle: rgba(187,128,9,0.15); --color-danger-fg: #f85149; } markdown-style { display: block; -webkit-text-size-adjust: 100%; font-family: -apple-system,BlinkMacSystemFont,\"Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"; font-size: 16px; line-height: 1.5; word-wrap: break-word; color: var(--color-fg-default); background-color: var(--color-canvas-default); } markdown-style details, markdown-style figcaption, markdown-style figure { display: block; } markdown-style summary { display: list-item; } markdown-style [hidden] { display: none !important; } markdown-style a { background-color: transparent; color: var(--color-accent-fg); text-decoration: none; } markdown-style a:active, markdown-style a:hover { outline-width: 0; } markdown-style abbr[title] { border-bottom: none; text-decoration: underline dotted; } markdown-style b, markdown-style strong { font-weight: 600; } markdown-style dfn { font-style: italic; } markdown-style h1 { margin: .67em 0; font-weight: 600; padding-bottom: .3em; font-size: 2em; border-bottom: 1px solid var(--color-border-muted); } markdown-style mark { background-color: var(--color-attention-subtle); color: var(--color-text-primary); } markdown-style small { font-size: 90%; } markdown-style sub, markdown-style sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; } markdown-style sub { bottom: -0.25em; } markdown-style sup { top: -0.5em; } markdown-style img { border-style: none; max-width: 100%; box-sizing: content-box; background-color: var(--color-canvas-default); } markdown-style code, markdown-style kbd, markdown-style pre, markdown-style samp { font-family: monospace,monospace; font-size: 1em; } markdown-style figure { margin: 1em 40px; } markdown-style hr { box-sizing: content-box; overflow: hidden; background: transparent; border-bottom: 1px solid var(--color-border-muted); height: .25em; padding: 0; margin: 24px 0; background-color: var(--color-border-default); border: 0; } markdown-style input { font: inherit; margin: 0; overflow: visible; font-family: inherit; font-size: inherit; line-height: inherit; } markdown-style [type=button], markdown-style [type=reset], markdown-style [type=submit] { -webkit-appearance: button; } markdown-style [type=button]::-moz-focus-inner, markdown-style [type=reset]::-moz-focus-inner, markdown-style [type=submit]::-moz-focus-inner { border-style: none; padding: 0; } markdown-style [type=button]:-moz-focusring, markdown-style [type=reset]:-moz-focusring, markdown-style [type=submit]:-moz-focusring { outline: 1px dotted ButtonText; } markdown-style [type=checkbox], markdown-style [type=radio] { box-sizing: border-box; padding: 0; } markdown-style [type=number]::-webkit-inner-spin-button, markdown-style [type=number]::-webkit-outer-spin-button { height: auto; } markdown-style [type=search] { -webkit-appearance: textfield; outline-offset: -2px; } markdown-style [type=search]::-webkit-search-cancel-button, markdown-style [type=search]::-webkit-search-decoration { -webkit-appearance: none; } markdown-style ::-webkit-input-placeholder { color: inherit; opacity: .54; } markdown-style ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; } markdown-style a:hover { text-decoration: underline; } markdown-style hr::before { display: table; content: \"\"; } markdown-style hr::after { display: table; clear: both; content: \"\"; } markdown-style table { border-spacing: 0; border-collapse: collapse; display: block; width: max-content; max-width: 100%; overflow: auto; } markdown-style td, markdown-style th { padding: 0; } markdown-style details summary { cursor: pointer; } markdown-style details:not([open])>*:not(summary) { display: none !important; } markdown-style kbd { display: inline-block; padding: 3px 5px; font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; line-height: 10px; color: var(--color-fg-default); vertical-align: middle; background-color: var(--color-canvas-subtle); border: solid 1px var(--color-neutral-muted); border-bottom-color: var(--color-neutral-muted); border-radius: 6px; box-shadow: inset 0 -1px 0 var(--color-neutral-muted); } markdown-style h1, markdown-style h2, markdown-style h3, markdown-style h4, markdown-style h5, markdown-style h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; } markdown-style h2 { font-weight: 600; padding-bottom: .3em; font-size: 1.5em; border-bottom: 1px solid var(--color-border-muted); } markdown-style h3 { font-weight: 600; font-size: 1.25em; } markdown-style h4 { font-weight: 600; font-size: 1em; } markdown-style h5 { font-weight: 600; font-size: .875em; } markdown-style h6 { font-weight: 600; font-size: .85em; color: var(--color-fg-muted); } markdown-style p { margin-top: 0; margin-bottom: 10px; } markdown-style blockquote { margin: 0; padding: 0 1em; color: var(--color-fg-muted); border-left: .25em solid var(--color-border-default); } markdown-style ul, markdown-style ol { margin-top: 0; margin-bottom: 0; padding-left: 2em; } markdown-style ol ol, markdown-style ul ol { list-style-type: lower-roman; } markdown-style ul ul ol, markdown-style ul ol ol, markdown-style ol ul ol, markdown-style ol ol ol { list-style-type: lower-alpha; } markdown-style dd { margin-left: 0; } markdown-style tt, markdown-style code { font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; } markdown-style pre { margin-top: 0; margin-bottom: 0; font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; word-wrap: normal; } markdown-style .octicon { display: inline-block; overflow: visible !important; vertical-align: text-bottom; fill: currentColor; } markdown-style ::placeholder { color: var(--color-fg-subtle); opacity: 1; } markdown-style input::-webkit-outer-spin-button, markdown-style input::-webkit-inner-spin-button { margin: 0; -webkit-appearance: none; appearance: none; }\nmarkdown-style .token.comment, markdown-style .token.prolog, markdown-style .token.doctype, markdown-style .token.cdata { color: var(--color-prettylights-syntax-comment); } markdown-style .token.namespace { opacity: 0.7; } markdown-style .token.tag, markdown-style .token.selector, markdown-style .token.constant, markdown-style .token.symbol, markdown-style .token.deleted { color: var(--color-prettylights-syntax-entity-tag); } markdown-style .token.maybe-class-name { color: var(--color-prettylights-syntax-variable); } markdown-style .token.property-access, markdown-style .token.operator, markdown-style .token.boolean, markdown-style .token.number, markdown-style .token.selector markdown-style .token.class, markdown-style .token.attr-name, markdown-style .token.string, markdown-style .token.char, markdown-style .token.builtin { color: var(--color-prettylights-syntax-constant); } markdown-style .token.deleted { color: var(--color-prettylights-syntax-markup-deleted-text); } markdown-style .token.property { color: var(--color-prettylights-syntax-constant); } markdown-style .token.punctuation { color: var(--color-prettylights-syntax-markup-bold); } markdown-style .token.function { color: var(--color-prettylights-syntax-entity); } markdown-style .code-line .token.deleted { background-color: var(--color-prettylights-syntax-markup-deleted-bg); } markdown-style .token.inserted { color: var(--color-prettylights-syntax-markup-inserted-text); } markdown-style .code-line .token.inserted { background-color: var(--color-prettylights-syntax-markup-inserted-bg); } markdown-style .token.variable { color: var(--color-prettylights-syntax-constant); } markdown-style .token.entity, markdown-style .token.url, .language-css markdown-style .token.string, .style markdown-style .token.string { color: var(--color-prettylights-syntax-string); } markdown-style .token.color, markdown-style .token.atrule, markdown-style .token.attr-value, markdown-style .token.function, markdown-style .token.class-name { color: var(--color-prettylights-syntax-string); } markdown-style .token.rule, markdown-style .token.regex, markdown-style .token.important, markdown-style .token.keyword { color: var(--color-prettylights-syntax-keyword); } markdown-style .token.coord { color: var(--color-prettylights-syntax-meta-diff-range); } markdown-style .token.important, markdown-style .token.bold { font-weight: bold; } markdown-style .token.italic { font-style: italic; } markdown-style .token.entity { cursor: help; }\nmarkdown-style [data-catalyst] { display: block; } markdown-style g-emoji { font-family: \"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"; font-size: 1em; font-style: normal !important; font-weight: 400; line-height: 1; vertical-align: -0.075em; } markdown-style g-emoji img { width: 1em; height: 1em; } markdown-style::before { display: table; content: \"\"; } markdown-style::after { display: table; clear: both; content: \"\"; } markdown-style>*:first-child { margin-top: 0 !important; } markdown-style>*:last-child { margin-bottom: 0 !important; } markdown-style a:not([href]) { color: inherit; text-decoration: none; } markdown-style .absent { color: var(--color-danger-fg); } markdown-style .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1; } markdown-style .anchor:focus { outline: none; } markdown-style p, markdown-style blockquote, markdown-style ul, markdown-style ol, markdown-style dl, markdown-style table, markdown-style pre, markdown-style details { margin-top: 0; margin-bottom: 16px; } markdown-style blockquote>:first-child { margin-top: 0; } markdown-style blockquote>:last-child { margin-bottom: 0; } markdown-style sup>a::before { content: \"[\"; } markdown-style sup>a::after { content: \"]\"; } markdown-style h1 .octicon-link, markdown-style h2 .octicon-link, markdown-style h3 .octicon-link, markdown-style h4 .octicon-link, markdown-style h5 .octicon-link, markdown-style h6 .octicon-link { color: var(--color-fg-default); vertical-align: middle; visibility: hidden; } markdown-style h1:hover .anchor, markdown-style h2:hover .anchor, markdown-style h3:hover .anchor, markdown-style h4:hover .anchor, markdown-style h5:hover .anchor, markdown-style h6:hover .anchor { text-decoration: none; } markdown-style h1:hover .anchor .octicon-link, markdown-style h2:hover .anchor .octicon-link, markdown-style h3:hover .anchor .octicon-link, markdown-style h4:hover .anchor .octicon-link, markdown-style h5:hover .anchor .octicon-link, markdown-style h6:hover .anchor .octicon-link { visibility: visible; } markdown-style h1 tt, markdown-style h1 code, markdown-style h2 tt, markdown-style h2 code, markdown-style h3 tt, markdown-style h3 code, markdown-style h4 tt, markdown-style h4 code, markdown-style h5 tt, markdown-style h5 code, markdown-style h6 tt, markdown-style h6 code { padding: 0 .2em; font-size: inherit; } markdown-style ul.no-list, markdown-style ol.no-list { padding: 0; list-style-type: none; } markdown-style ol[type=\"1\"] { list-style-type: decimal; } markdown-style ol[type=a] { list-style-type: lower-alpha; } markdown-style ol[type=i] { list-style-type: lower-roman; } markdown-style div>ol:not([type]) { list-style-type: decimal; } markdown-style ul ul, markdown-style ul ol, markdown-style ol ol, markdown-style ol ul { margin-top: 0; margin-bottom: 0; } markdown-style li>p { margin-top: 16px; } markdown-style li+li { margin-top: .25em; } markdown-style dl { padding: 0; } markdown-style dl dt { padding: 0; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: 600; } markdown-style dl dd { padding: 0 16px; margin-bottom: 16px; } markdown-style table th { font-weight: 600; } markdown-style table th, markdown-style table td { padding: 6px 13px; border: 1px solid var(--color-border-default); } markdown-style table tr { background-color: var(--color-canvas-default); border-top: 1px solid var(--color-border-muted); } markdown-style table tr:nth-child(2n) { background-color: var(--color-canvas-subtle); } markdown-style table img { background-color: transparent; } markdown-style img[align=right] { padding-left: 20px; } markdown-style img[align=left] { padding-right: 20px; } markdown-style .emoji { max-width: none; vertical-align: text-top; background-color: transparent; } markdown-style span.frame { display: block; overflow: hidden; } markdown-style span.frame>span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0 0; overflow: hidden; border: 1px solid var(--color-border-default); } markdown-style span.frame span img { display: block; float: left; } markdown-style span.frame span span { display: block; padding: 5px 0 0; clear: both; color: var(--color-fg-default); } markdown-style span.align-center { display: block; overflow: hidden; clear: both; } markdown-style span.align-center>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: center; } markdown-style span.align-center span img { margin: 0 auto; text-align: center; } markdown-style span.align-right { display: block; overflow: hidden; clear: both; } markdown-style span.align-right>span { display: block; margin: 13px 0 0; overflow: hidden; text-align: right; } markdown-style span.align-right span img { margin: 0; text-align: right; } markdown-style span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; } markdown-style span.float-left span { margin: 13px 0 0; } markdown-style span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; } markdown-style span.float-right>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: right; } markdown-style code, markdown-style tt { padding: .2em .4em; margin: 0; font-size: 85%; background-color: var(--color-neutral-muted); border-radius: 6px; } markdown-style code br, markdown-style tt br { display: none; } markdown-style del code { text-decoration: inherit; } markdown-style pre code { font-size: 100%; } markdown-style pre>code { padding: 0; margin: 0; word-break: normal; white-space: pre; background: transparent; border: 0; } markdown-style pre { position: relative; font-size: 85%; line-height: 1.45; background-color: var(--color-canvas-subtle); border-radius: 6px; } markdown-style pre code, markdown-style pre tt { display: inline; max-width: auto; padding: 0; margin: 0; overflow: visible; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0; } markdown-style pre > code { padding: 16px; overflow: auto; display: block; } markdown-style .csv-data td, markdown-style .csv-data th { padding: 5px; overflow: hidden; font-size: 12px; line-height: 1; text-align: left; white-space: nowrap; } markdown-style .csv-data .blob-num { padding: 10px 8px 9px; text-align: right; background: var(--color-canvas-default); border: 0; } markdown-style .csv-data tr { border-top: 0; } markdown-style .csv-data th { font-weight: 600; background: var(--color-canvas-subtle); border-top: 0; } markdown-style .footnotes { font-size: 12px; color: var(--color-fg-muted); border-top: 1px solid var(--color-border-default); } markdown-style .footnotes ol { padding-left: 16px; } markdown-style .footnotes li { position: relative; } markdown-style .footnotes li:target::before { position: absolute; top: -8px; right: -8px; bottom: -8px; left: -24px; pointer-events: none; content: \"\"; border: 2px solid var(--color-accent-emphasis); border-radius: 6px; } markdown-style .footnotes li:target { color: var(--color-fg-default); } markdown-style .footnotes .data-footnote-backref g-emoji { font-family: monospace; } markdown-style .task-list-item { list-style-type: none; } markdown-style .task-list-item label { font-weight: 400; } markdown-style .task-list-item.enabled label { cursor: pointer; } markdown-style .task-list-item+.task-list-item { margin-top: 3px; } markdown-style .task-list-item .handle { display: none; } markdown-style .task-list-item-checkbox, markdown-style input[type=\"checkbox\"] { margin: 0 .2em .25em -1.6em; vertical-align: middle; } markdown-style .contains-task-list:dir(rtl) .task-list-item-checkbox, markdown-style .contains-task-list:dir(rtl) input[type=\"checkbox\"] { margin: 0 -1.6em .25em .2em; } markdown-style ::-webkit-calendar-picker-indicator { filter: invert(50%); }\n</style>\n<slot></slot>\n`;\nclass MarkdownStyle extends HTMLElement {\n    constructor() {\n        super();\n        this.shadow = this.attachShadow({ mode: 'open' });\n        this.shadow.appendChild(__TEMPLATE__.content.cloneNode(true));\n        const style = Array.prototype.slice\n            .call(this.shadow.children)\n            .find((item) => item.tagName === 'STYLE');\n        if (style) {\n            const id = '__MARKDOWN_STYLE__';\n            const findStyle = document.getElementById(id);\n            if (!findStyle) {\n                style.id = id;\n                document.head.append(style);\n            }\n        }\n    }\n    get theme() {\n        const value = this.getAttribute('theme');\n        return value === null ? '' : value;\n    }\n    set theme(name) {\n        this.setAttribute('theme', name);\n    }\n    connectedCallback() {\n        if (!this.theme) {\n            const { colorMode } = document.documentElement.dataset;\n            this.theme = colorMode;\n            const observer = new MutationObserver((mutationsList, observer) => {\n                this.theme = document.documentElement.dataset.colorMode;\n            });\n            observer.observe(document.documentElement, { attributes: true });\n            window.matchMedia('(prefers-color-scheme: light)').onchange = (event) => {\n                this.theme = event.matches ? 'light' : 'dark';\n            };\n            window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {\n                this.theme = event.matches ? 'dark' : 'light';\n            };\n        }\n    }\n}\ncustomElements.define('markdown-style', MarkdownStyle);");
+var markdown_style_scriptString = "const __TEMPLATE__ = document.createElement('template');\n__TEMPLATE__.innerHTML = `\n<style>\n".concat(octiconLinkStyle, "\n[data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='light'] { --color-prettylights-syntax-comment: #6e7781; --color-prettylights-syntax-constant: #0550ae; --color-prettylights-syntax-entity: #8250df; --color-prettylights-syntax-storage-modifier-import: #24292f; --color-prettylights-syntax-entity-tag: #116329; --color-prettylights-syntax-keyword: #cf222e; --color-prettylights-syntax-string: #0a3069; --color-prettylights-syntax-variable: #953800; --color-prettylights-syntax-brackethighlighter-unmatched: #82071e; --color-prettylights-syntax-invalid-illegal-text: #f6f8fa; --color-prettylights-syntax-invalid-illegal-bg: #82071e; --color-prettylights-syntax-carriage-return-text: #f6f8fa; --color-prettylights-syntax-carriage-return-bg: #cf222e; --color-prettylights-syntax-string-regexp: #116329; --color-prettylights-syntax-markup-list: #3b2300; --color-prettylights-syntax-markup-heading: #0550ae; --color-prettylights-syntax-markup-italic: #24292f; --color-prettylights-syntax-markup-bold: #24292f; --color-prettylights-syntax-markup-deleted-text: #82071e; --color-prettylights-syntax-markup-deleted-bg: #FFEBE9; --color-prettylights-syntax-markup-inserted-text: #116329; --color-prettylights-syntax-markup-inserted-bg: #dafbe1; --color-prettylights-syntax-markup-changed-text: #953800; --color-prettylights-syntax-markup-changed-bg: #ffd8b5; --color-prettylights-syntax-markup-ignored-text: #eaeef2; --color-prettylights-syntax-markup-ignored-bg: #0550ae; --color-prettylights-syntax-meta-diff-range: #8250df; --color-prettylights-syntax-brackethighlighter-angle: #57606a; --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f; --color-prettylights-syntax-constant-other-reference-link: #0a3069; --color-fg-default: #24292f; --color-fg-muted: #57606a; --color-fg-subtle: #6e7781; --color-canvas-default: #ffffff; --color-canvas-subtle: #f6f8fa; --color-border-default: #d0d7de; --color-border-muted: hsla(210,18%,87%,1); --color-neutral-muted: rgba(175,184,193,0.2); --color-accent-fg: #0969da; --color-accent-emphasis: #0969da; --color-attention-subtle: #fff8c5; --color-danger-fg: #cf222e; } [data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='dark'] { --color-prettylights-syntax-comment: #8b949e; --color-prettylights-syntax-constant: #79c0ff; --color-prettylights-syntax-entity: #d2a8ff; --color-prettylights-syntax-storage-modifier-import: #c9d1d9; --color-prettylights-syntax-entity-tag: #7ee787; --color-prettylights-syntax-keyword: #ff7b72; --color-prettylights-syntax-string: #a5d6ff; --color-prettylights-syntax-variable: #ffa657; --color-prettylights-syntax-brackethighlighter-unmatched: #f85149; --color-prettylights-syntax-invalid-illegal-text: #f0f6fc; --color-prettylights-syntax-invalid-illegal-bg: #8e1519; --color-prettylights-syntax-carriage-return-text: #f0f6fc; --color-prettylights-syntax-carriage-return-bg: #b62324; --color-prettylights-syntax-string-regexp: #7ee787; --color-prettylights-syntax-markup-list: #f2cc60; --color-prettylights-syntax-markup-heading: #1f6feb; --color-prettylights-syntax-markup-italic: #c9d1d9; --color-prettylights-syntax-markup-bold: #c9d1d9; --color-prettylights-syntax-markup-deleted-text: #ffdcd7; --color-prettylights-syntax-markup-deleted-bg: #67060c; --color-prettylights-syntax-markup-inserted-text: #aff5b4; --color-prettylights-syntax-markup-inserted-bg: #033a16; --color-prettylights-syntax-markup-changed-text: #ffdfb6; --color-prettylights-syntax-markup-changed-bg: #5a1e02; --color-prettylights-syntax-markup-ignored-text: #c9d1d9; --color-prettylights-syntax-markup-ignored-bg: #1158c7; --color-prettylights-syntax-meta-diff-range: #d2a8ff; --color-prettylights-syntax-brackethighlighter-angle: #8b949e; --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58; --color-prettylights-syntax-constant-other-reference-link: #a5d6ff; --color-fg-default: #c9d1d9; --color-fg-muted: #8b949e; --color-fg-subtle: #484f58; --color-canvas-default: #0d1117; --color-canvas-subtle: #161b22; --color-border-default: #30363d; --color-border-muted: #21262d; --color-neutral-muted: rgba(110,118,129,0.4); --color-accent-fg: #58a6ff; --color-accent-emphasis: #1f6feb; --color-attention-subtle: rgba(187,128,9,0.15); --color-danger-fg: #f85149; } markdown-style { display: block; -webkit-text-size-adjust: 100%; font-family: -apple-system,BlinkMacSystemFont,\"Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"; font-size: 16px; line-height: 1.5; word-wrap: break-word; color: var(--color-fg-default); background-color: var(--color-canvas-default); } markdown-style details, markdown-style figcaption, markdown-style figure { display: block; } markdown-style summary { display: list-item; } markdown-style [hidden] { display: none !important; } markdown-style a { background-color: transparent; color: var(--color-accent-fg); text-decoration: none; } markdown-style a:active, markdown-style a:hover { outline-width: 0; } markdown-style abbr[title] { border-bottom: none; text-decoration: underline dotted; } markdown-style b, markdown-style strong { font-weight: 600; } markdown-style dfn { font-style: italic; } markdown-style h1 { margin: .67em 0; font-weight: 600; padding-bottom: .3em; font-size: 2em; border-bottom: 1px solid var(--color-border-muted); } markdown-style mark { background-color: var(--color-attention-subtle); color: var(--color-text-primary); } markdown-style small { font-size: 90%; } markdown-style sub, markdown-style sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; } markdown-style sub { bottom: -0.25em; } markdown-style sup { top: -0.5em; } markdown-style img { border-style: none; max-width: 100%; box-sizing: content-box; background-color: var(--color-canvas-default); } markdown-style code, markdown-style kbd, markdown-style pre, markdown-style samp { font-family: monospace,monospace; font-size: 1em; } markdown-style figure { margin: 1em 40px; } markdown-style hr { box-sizing: content-box; overflow: hidden; background: transparent; border-bottom: 1px solid var(--color-border-muted); height: .25em; padding: 0; margin: 24px 0; background-color: var(--color-border-default); border: 0; } markdown-style input { font: inherit; margin: 0; overflow: visible; font-family: inherit; font-size: inherit; line-height: inherit; } markdown-style [type=button], markdown-style [type=reset], markdown-style [type=submit] { -webkit-appearance: button; } markdown-style [type=button]::-moz-focus-inner, markdown-style [type=reset]::-moz-focus-inner, markdown-style [type=submit]::-moz-focus-inner { border-style: none; padding: 0; } markdown-style [type=button]:-moz-focusring, markdown-style [type=reset]:-moz-focusring, markdown-style [type=submit]:-moz-focusring { outline: 1px dotted ButtonText; } markdown-style [type=checkbox], markdown-style [type=radio] { box-sizing: border-box; padding: 0; } markdown-style [type=number]::-webkit-inner-spin-button, markdown-style [type=number]::-webkit-outer-spin-button { height: auto; } markdown-style [type=search] { -webkit-appearance: textfield; outline-offset: -2px; } markdown-style [type=search]::-webkit-search-cancel-button, markdown-style [type=search]::-webkit-search-decoration { -webkit-appearance: none; } markdown-style ::-webkit-input-placeholder { color: inherit; opacity: .54; } markdown-style ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; } markdown-style a:hover { text-decoration: underline; } markdown-style hr::before { display: table; content: \"\"; } markdown-style hr::after { display: table; clear: both; content: \"\"; } markdown-style table { border-spacing: 0; border-collapse: collapse; display: block; width: max-content; max-width: 100%; overflow: auto; } markdown-style td, markdown-style th { padding: 0; } markdown-style details summary { cursor: pointer; } markdown-style details:not([open])>*:not(summary) { display: none !important; } markdown-style kbd { display: inline-block; padding: 3px 5px; font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; line-height: 10px; color: var(--color-fg-default); vertical-align: middle; background-color: var(--color-canvas-subtle); border: solid 1px var(--color-neutral-muted); border-bottom-color: var(--color-neutral-muted); border-radius: 6px; box-shadow: inset 0 -1px 0 var(--color-neutral-muted); } markdown-style h1, markdown-style h2, markdown-style h3, markdown-style h4, markdown-style h5, markdown-style h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; } markdown-style h2 { font-weight: 600; padding-bottom: .3em; font-size: 1.5em; border-bottom: 1px solid var(--color-border-muted); } markdown-style h3 { font-weight: 600; font-size: 1.25em; } markdown-style h4 { font-weight: 600; font-size: 1em; } markdown-style h5 { font-weight: 600; font-size: .875em; } markdown-style h6 { font-weight: 600; font-size: .85em; color: var(--color-fg-muted); } markdown-style p { margin-top: 0; margin-bottom: 10px; } markdown-style blockquote { margin: 0; padding: 0 1em; color: var(--color-fg-muted); border-left: .25em solid var(--color-border-default); } markdown-style ul, markdown-style ol { margin-top: 0; margin-bottom: 0; padding-left: 2em; } markdown-style ol ol, markdown-style ul ol { list-style-type: lower-roman; } markdown-style ul ul ol, markdown-style ul ol ol, markdown-style ol ul ol, markdown-style ol ol ol { list-style-type: lower-alpha; } markdown-style dd { margin-left: 0; } markdown-style tt, markdown-style code { font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; } markdown-style pre { margin-top: 0; margin-bottom: 0; font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; word-wrap: normal; } markdown-style .octicon { display: inline-block; overflow: visible !important; vertical-align: text-bottom; fill: currentColor; } markdown-style ::placeholder { color: var(--color-fg-subtle); opacity: 1; } markdown-style input::-webkit-outer-spin-button, markdown-style input::-webkit-inner-spin-button { margin: 0; -webkit-appearance: none; appearance: none; }\nmarkdown-style .token.comment, markdown-style .token.prolog, markdown-style .token.doctype, markdown-style .token.cdata { color: var(--color-prettylights-syntax-comment); } markdown-style .token.namespace { opacity: 0.7; } markdown-style .token.tag, markdown-style .token.selector, markdown-style .token.constant, markdown-style .token.symbol, markdown-style .token.deleted { color: var(--color-prettylights-syntax-entity-tag); } markdown-style .token.maybe-class-name { color: var(--color-prettylights-syntax-variable); } markdown-style .token.property-access, markdown-style .token.operator, markdown-style .token.boolean, markdown-style .token.number, markdown-style .token.selector markdown-style .token.class, markdown-style .token.attr-name, markdown-style .token.string, markdown-style .token.char, markdown-style .token.builtin { color: var(--color-prettylights-syntax-constant); } markdown-style .token.deleted { color: var(--color-prettylights-syntax-markup-deleted-text); } markdown-style .token.property { color: var(--color-prettylights-syntax-constant); } markdown-style .token.punctuation { color: var(--color-prettylights-syntax-markup-bold); } markdown-style .token.function { color: var(--color-prettylights-syntax-entity); } markdown-style .code-line .token.deleted { background-color: var(--color-prettylights-syntax-markup-deleted-bg); } markdown-style .token.inserted { color: var(--color-prettylights-syntax-markup-inserted-text); } markdown-style .code-line .token.inserted { background-color: var(--color-prettylights-syntax-markup-inserted-bg); } markdown-style .token.variable { color: var(--color-prettylights-syntax-constant); } markdown-style .token.entity, markdown-style .token.url, .language-css markdown-style .token.string, .style markdown-style .token.string { color: var(--color-prettylights-syntax-string); } markdown-style .token.color, markdown-style .token.atrule, markdown-style .token.attr-value, markdown-style .token.function, markdown-style .token.class-name { color: var(--color-prettylights-syntax-string); } markdown-style .token.rule, markdown-style .token.regex, markdown-style .token.important, markdown-style .token.keyword { color: var(--color-prettylights-syntax-keyword); } markdown-style .token.coord { color: var(--color-prettylights-syntax-meta-diff-range); } markdown-style .token.important, markdown-style .token.bold { font-weight: bold; } markdown-style .token.italic { font-style: italic; } markdown-style .token.entity { cursor: help; }\nmarkdown-style [data-catalyst] { display: block; } markdown-style g-emoji { font-family: \"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"; font-size: 1em; font-style: normal !important; font-weight: 400; line-height: 1; vertical-align: -0.075em; } markdown-style g-emoji img { width: 1em; height: 1em; } markdown-style::before { display: table; content: \"\"; } markdown-style::after { display: table; clear: both; content: \"\"; } markdown-style>*:first-child { margin-top: 0 !important; } markdown-style>*:last-child { margin-bottom: 0 !important; } markdown-style a:not([href]) { color: inherit; text-decoration: none; } markdown-style .absent { color: var(--color-danger-fg); } markdown-style .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1; } markdown-style .anchor:focus { outline: none; } markdown-style p, markdown-style blockquote, markdown-style ul, markdown-style ol, markdown-style dl, markdown-style table, markdown-style pre, markdown-style details { margin-top: 0; margin-bottom: 16px; } markdown-style blockquote>:first-child { margin-top: 0; } markdown-style blockquote>:last-child { margin-bottom: 0; } markdown-style sup>a::before { content: \"[\"; } markdown-style sup>a::after { content: \"]\"; } markdown-style h1 .octicon-link, markdown-style h2 .octicon-link, markdown-style h3 .octicon-link, markdown-style h4 .octicon-link, markdown-style h5 .octicon-link, markdown-style h6 .octicon-link { color: var(--color-fg-default); vertical-align: middle; visibility: hidden; } markdown-style h1:hover .anchor, markdown-style h2:hover .anchor, markdown-style h3:hover .anchor, markdown-style h4:hover .anchor, markdown-style h5:hover .anchor, markdown-style h6:hover .anchor { text-decoration: none; } markdown-style h1:hover .anchor .octicon-link, markdown-style h2:hover .anchor .octicon-link, markdown-style h3:hover .anchor .octicon-link, markdown-style h4:hover .anchor .octicon-link, markdown-style h5:hover .anchor .octicon-link, markdown-style h6:hover .anchor .octicon-link { visibility: visible; } markdown-style h1 tt, markdown-style h1 code, markdown-style h2 tt, markdown-style h2 code, markdown-style h3 tt, markdown-style h3 code, markdown-style h4 tt, markdown-style h4 code, markdown-style h5 tt, markdown-style h5 code, markdown-style h6 tt, markdown-style h6 code { padding: 0 .2em; font-size: inherit; } markdown-style ul.no-list, markdown-style ol.no-list { padding: 0; list-style-type: none; } markdown-style ol[type=\"1\"] { list-style-type: decimal; } markdown-style ol[type=a] { list-style-type: lower-alpha; } markdown-style ol[type=i] { list-style-type: lower-roman; } markdown-style div>ol:not([type]) { list-style-type: decimal; } markdown-style ul ul, markdown-style ul ol, markdown-style ol ol, markdown-style ol ul { margin-top: 0; margin-bottom: 0; } markdown-style li>p { margin-top: 16px; } markdown-style li+li { margin-top: .25em; } markdown-style dl { padding: 0; } markdown-style dl dt { padding: 0; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: 600; } markdown-style dl dd { padding: 0 16px; margin-bottom: 16px; } markdown-style table th { font-weight: 600; } markdown-style table th, markdown-style table td { padding: 6px 13px; border: 1px solid var(--color-border-default); } markdown-style table tr { background-color: var(--color-canvas-default); border-top: 1px solid var(--color-border-muted); } markdown-style table tr:nth-child(2n) { background-color: var(--color-canvas-subtle); } markdown-style table img { background-color: transparent; vertical-align: middle; } markdown-style img[align=right] { padding-left: 20px; } markdown-style img[align=left] { padding-right: 20px; } markdown-style .emoji { max-width: none; vertical-align: text-top; background-color: transparent; } markdown-style span.frame { display: block; overflow: hidden; } markdown-style span.frame>span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0 0; overflow: hidden; border: 1px solid var(--color-border-default); } markdown-style span.frame span img { display: block; float: left; } markdown-style span.frame span span { display: block; padding: 5px 0 0; clear: both; color: var(--color-fg-default); } markdown-style span.align-center { display: block; overflow: hidden; clear: both; } markdown-style span.align-center>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: center; } markdown-style span.align-center span img { margin: 0 auto; text-align: center; } markdown-style span.align-right { display: block; overflow: hidden; clear: both; } markdown-style span.align-right>span { display: block; margin: 13px 0 0; overflow: hidden; text-align: right; } markdown-style span.align-right span img { margin: 0; text-align: right; } markdown-style span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; } markdown-style span.float-left span { margin: 13px 0 0; } markdown-style span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; } markdown-style span.float-right>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: right; } markdown-style code, markdown-style tt { padding: .2em .4em; margin: 0; font-size: 85%; background-color: var(--color-neutral-muted); border-radius: 6px; } markdown-style code br, markdown-style tt br { display: none; } markdown-style del code { text-decoration: inherit; } markdown-style pre code { font-size: 100%; } markdown-style pre>code { padding: 0; margin: 0; word-break: normal; white-space: pre; background: transparent; border: 0; } markdown-style pre { position: relative; font-size: 85%; line-height: 1.45; background-color: var(--color-canvas-subtle); border-radius: 6px; } markdown-style pre code, markdown-style pre tt { display: inline; max-width: auto; padding: 0; margin: 0; overflow: visible; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0; } markdown-style pre > code { padding: 16px; overflow: auto; display: block; } markdown-style .csv-data td, markdown-style .csv-data th { padding: 5px; overflow: hidden; font-size: 12px; line-height: 1; text-align: left; white-space: nowrap; } markdown-style .csv-data .blob-num { padding: 10px 8px 9px; text-align: right; background: var(--color-canvas-default); border: 0; } markdown-style .csv-data tr { border-top: 0; } markdown-style .csv-data th { font-weight: 600; background: var(--color-canvas-subtle); border-top: 0; } markdown-style .footnotes { font-size: 12px; color: var(--color-fg-muted); border-top: 1px solid var(--color-border-default); } markdown-style .footnotes ol { padding-left: 16px; } markdown-style .footnotes li { position: relative; } markdown-style .footnotes li:target::before { position: absolute; top: -8px; right: -8px; bottom: -8px; left: -24px; pointer-events: none; content: \"\"; border: 2px solid var(--color-accent-emphasis); border-radius: 6px; } markdown-style .footnotes li:target { color: var(--color-fg-default); } markdown-style .footnotes .data-footnote-backref g-emoji { font-family: monospace; } markdown-style .task-list-item { list-style-type: none; } markdown-style .task-list-item label { font-weight: 400; } markdown-style .task-list-item.enabled label { cursor: pointer; } markdown-style .task-list-item+.task-list-item { margin-top: 3px; } markdown-style .task-list-item .handle { display: none; } markdown-style .task-list-item-checkbox, markdown-style input[type=\"checkbox\"] { margin: 0 .2em .25em -1.6em; vertical-align: middle; } markdown-style .contains-task-list:dir(rtl) .task-list-item-checkbox, markdown-style .contains-task-list:dir(rtl) input[type=\"checkbox\"] { margin: 0 -1.6em .25em .2em; } markdown-style ::-webkit-calendar-picker-indicator { filter: invert(50%); }\n</style>\n<slot></slot>\n`;\nclass MarkdownStyle extends HTMLElement {\n    constructor() {\n        super();\n        this.shadow = this.attachShadow({ mode: 'open' });\n        this.shadow.appendChild(__TEMPLATE__.content.cloneNode(true));\n        const style = Array.prototype.slice\n            .call(this.shadow.children)\n            .find((item) => item.tagName === 'STYLE');\n        if (style) {\n            const id = '__MARKDOWN_STYLE__';\n            const findStyle = document.getElementById(id);\n            if (!findStyle) {\n                style.id = id;\n                document.head.append(style);\n            }\n        }\n    }\n    get theme() {\n        const value = this.getAttribute('theme');\n        return value === null ? '' : value;\n    }\n    set theme(name) {\n        this.setAttribute('theme', name);\n    }\n    connectedCallback() {\n        if (!this.theme) {\n            const { colorMode } = document.documentElement.dataset;\n            this.theme = colorMode;\n            const observer = new MutationObserver((mutationsList, observer) => {\n                this.theme = document.documentElement.dataset.colorMode;\n            });\n            observer.observe(document.documentElement, { attributes: true });\n            window.matchMedia('(prefers-color-scheme: light)').onchange = (event) => {\n                this.theme = event.matches ? 'light' : 'dark';\n            };\n            window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {\n                this.theme = event.matches ? 'dark' : 'light';\n            };\n        }\n    }\n}\ncustomElements.define('markdown-style', MarkdownStyle);");
 function markdownStyle(child, markdownStyleTheme) {
   var properties = {
     style: 'max-width: 960px; margin: 0 auto 60px auto; padding: 8px',
@@ -101107,7 +102197,7 @@ function run() {
 var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
 var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
-;_asyncToGenerator(/*#__PURE__*/regenerator_default().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return regenerator_default().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=18;break;}_context.next=15;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 15:options.markdown=_context.sent.toString();_context.next=19;break;case 18:options.markdown=markdown;case 19:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;if(corners){_context.next=32;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=32;break;}_context.next=28;return external_fs_default().promises.readFile(projectPkg);case 28:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 32:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=53;break;case 49:_context.prev=49;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 53:case"end":return _context.stop();}}},_callee,null,[[0,49]]);}))();
+;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=18;break;}_context.next=15;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 15:options.markdown=_context.sent.toString();_context.next=19;break;case 18:options.markdown=markdown;case 19:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;if(corners){_context.next=32;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=32;break;}_context.next=28;return external_fs_default().promises.readFile(projectPkg);case 28:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 32:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=53;break;case 49:_context.prev=49;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 53:case"end":return _context.stop();}}},_callee,null,[[0,49]]);}))();
 })();
 
 module.exports = __webpack_exports__;
