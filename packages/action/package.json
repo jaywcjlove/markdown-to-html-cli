@@ -1,11 +1,11 @@
 {
   "name": "action",
-  "version": "3.4.14",
+  "version": "3.4.15",
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "dependencies": {
     "@actions/core": "~1.9.0",
-    "markdown-to-html-cli": "3.4.14"
+    "markdown-to-html-cli": "3.4.15"
   }
 }
