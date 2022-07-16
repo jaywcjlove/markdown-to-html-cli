@@ -243,6 +243,10 @@ export declare const cliHelp: string;
 export declare const exampleHelp: string;
 ```
 
+## Related
+
+- [markdown-to-html](https://github.com/jaywcjlove/markdown-to-html) Converts markdown text to HTML.
+
 ## Development
 
 ```bash
