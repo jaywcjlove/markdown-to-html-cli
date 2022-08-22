@@ -45,7 +45,7 @@
     "fs-extra": "~10.1.0",
     "minimist": "~1.2.5",
     "rehype-autolink-headings": "~6.1.0",
-    "rehype-document": "~6.0.1",
+    "rehype-document": "~6.1.0",
     "rehype-format": "~4.0.1",
     "rehype-prism-plus": "1.4.1",
     "rehype-slug": "~5.0.0",
