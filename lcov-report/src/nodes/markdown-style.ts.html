@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/2</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/1</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -167,7 +167,7 @@
 <a name='L102'></a><a href='#L102'>102</a>
 <a name='L103'></a><a href='#L103'>103</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -187,7 +187,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -242,14 +242,14 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -269,7 +269,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Element, ElementContent } from 'hast';
 &nbsp;
-const octiconLinkStyle = <span class="cstat-no" title="statement not covered" >`</span>
+const octiconLinkStyle = `
 markdown-style h1:hover a.anchor .octicon-link:before,
 markdown-style h2:hover a.anchor .octicon-link:before,
 markdown-style h3:hover a.anchor .octicon-link:before,
@@ -289,7 +289,7 @@ markdown-style h6:hover a.anchor .octicon-link:before {
  * @wcj/markdown-style@1.0.9
  * https://github.com/jaywcjlove/markdown-to-html/tree/main/packages/markdown-style
  */
-const scriptString = <span class="cstat-no" title="statement not covered" >`const __TEMPLATE__ = document.createElement('template');</span>
+const scriptString = `const __TEMPLATE__ = document.createElement('template');
 __TEMPLATE__.innerHTML = \`
 &lt;style&gt;
 ${octiconLinkStyle}
@@ -343,15 +343,15 @@ class MarkdownStyle extends HTMLElement {
 }
 customElements.define('markdown-style', MarkdownStyle);`
 &nbsp;
-export function <span class="fstat-no" title="function not covered" >markdownStyle(</span>child: ElementContent[], markdownStyleTheme?: 'dark' | 'light'): Element[] {
-  const properties: Record&lt;string, string&gt; = <span class="cstat-no" title="statement not covered" >{</span>
+export function markdownStyle(child: ElementContent[], markdownStyleTheme?: 'dark' | 'light'): Element[] {
+  const properties: Record&lt;string, string&gt; = {
     style: 'max-width: 960px; margin: 0 auto 60px auto; padding: 8px',
     className: 'markdown-style',
   }
-<span class="cstat-no" title="statement not covered" >  if (markdownStyleTheme) {</span>
-<span class="cstat-no" title="statement not covered" >    properties.theme = markdownStyleTheme;</span>
+  if (markdownStyleTheme) {
+    properties.theme = markdownStyleTheme;
   }
-<span class="cstat-no" title="statement not covered" >  return [{</span>
+  return [{
     type: 'element',
     tagName: 'script',
     // properties: {
@@ -376,7 +376,7 @@ export function <span class="fstat-no" title="function not covered" >markdownSty
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-07-16T09:04:19.095Z
+                at 2022-08-23T04:09:28.525Z
             </div>
         <script src="../../prettify.js"></script>
         <script>
