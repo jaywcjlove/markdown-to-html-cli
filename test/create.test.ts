@@ -90,7 +90,7 @@ it('github-corners test case', async () => {
   expect(html.indexOf('<github-corners target="__blank"') > 0).toBeTruthy();
   expect(html.indexOf('<markdown-style') > 0).toBeTruthy();
   expect(html.indexOf('max-width: 960px; margin: 0 auto 60px auto; padding: 8px') > 0).toBeTruthy();
-  expect(html.indexOf('class="markdown-body"') > 0).toBeTruthy();
+  expect(html.indexOf('class="markdown-style"') > 0).toBeTruthy();
 
   html = create({
     markdown: 'Hello World!',
@@ -113,7 +113,7 @@ it('video preview test case', async () => {
   let html = create({
     markdown: 'test\n\nhttps://user-images.githubusercontent.com/1680273/138299599-88547edd-859c-44c9-8b52-2cc06f7f2dd3.mov',
     rewrite: (node) => {
-      if (node.type === 'element' && node.tagName === 'p') {
+      if (node.type === 'element' && node.tagName === 'p' && node.properties) {
         node.properties.className = 'test';
       }
     }

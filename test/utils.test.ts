@@ -1,4 +1,4 @@
-import { formatConfig } from '../packages/cli/src';
+import { formatConfig } from '../packages/cli/src/index';
 
 it('document.title test case', async () => {
   expect(formatConfig({ })).toHaveProperty('document.title', 'markdown-to-html-cli-title-test');

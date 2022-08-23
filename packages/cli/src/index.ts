@@ -3,11 +3,11 @@ import path from 'path';
 import minimist, { ParsedArgs } from 'minimist';
 import { Options } from 'rehype-document';
 import { RehypeRewriteOptions } from 'rehype-rewrite';
-import { create } from './create.js';
-import { formatConfig } from './utils.js';
+import { create } from './create';
+import { formatConfig } from './utils';
 
-export * from './create.js';
-export * from './utils.js';
+export * from './create';
+export * from './utils';
 
 export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   version?: string;

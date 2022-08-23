@@ -3,7 +3,7 @@ import { copyElement } from '../packages/cli/src/nodes/copy';
 import { githubCorners } from '../packages/cli/src/nodes/github-corners';
 import { markdownStyle } from '../packages/cli/src/nodes/markdown-style';
 import { githubCornersFork } from '../packages/cli/src/nodes/github-corners-fork';
-import { cliHelp, exampleHelp, run } from '../packages/cli/src';
+import { cliHelp, exampleHelp, run } from '../packages/cli/src/index';
 import pkg from '../packages/cli/package.json';
 
 console.log = jest.fn();

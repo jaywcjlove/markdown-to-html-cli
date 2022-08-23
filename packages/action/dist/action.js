@@ -226,6 +226,8 @@ var os = __importStar(__webpack_require__(2037));
 
 var path = __importStar(__webpack_require__(1017));
 
+var uuid_1 = __webpack_require__(6073);
+
 var oidc_utils_1 = __webpack_require__(2322);
 /**
  * The code to exit an action
@@ -262,7 +264,16 @@ function exportVariable(name, val) {
   var filePath = process.env['GITHUB_ENV'] || '';
 
   if (filePath) {
-    var delimiter = '_GitHubActionsFileCommandDelimeter_';
+    var delimiter = "ghadelimiter_".concat(uuid_1.v4()); // These should realistically never happen, but just in case someone finds a way to exploit uuid generation let's not allow keys or values that contain the delimiter.
+
+    if (name.includes(delimiter)) {
+      throw new Error("Unexpected input: name should not contain the delimiter \"".concat(delimiter, "\""));
+    }
+
+    if (convertedVal.includes(delimiter)) {
+      throw new Error("Unexpected input: value should not contain the delimiter \"".concat(delimiter, "\""));
+    }
+
     var commandValue = "".concat(name, "<<").concat(delimiter).concat(os.EOL).concat(convertedVal).concat(os.EOL).concat(delimiter);
     file_command_1.issueCommand('ENV', commandValue);
   } else {
@@ -3962,7 +3973,7 @@ function copySync(src, dest, opts) {
   // Warn about using preserveTimestamps on 32-bit node
 
   if (opts.preserveTimestamps && process.arch === 'ia32') {
-    console.warn("fs-extra: Using the preserveTimestamps option in 32-bit node is not recommended;\n\n    see https://github.com/jprichardson/node-fs-extra/issues/269");
+    process.emitWarning('Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' + '\tsee https://github.com/jprichardson/node-fs-extra/issues/269', 'Warning', 'fs-extra-WARN0002');
   }
 
   var _stat$checkPathsSync = stat.checkPathsSync(src, dest, 'copy', opts),
@@ -4154,7 +4165,7 @@ function copy(src, dest, opts, cb) {
   // Warn about using preserveTimestamps on 32-bit node
 
   if (opts.preserveTimestamps && process.arch === 'ia32') {
-    console.warn("fs-extra: Using the preserveTimestamps option in 32-bit node is not recommended;\n\n    see https://github.com/jprichardson/node-fs-extra/issues/269");
+    process.emitWarning('Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' + '\tsee https://github.com/jprichardson/node-fs-extra/issues/269', 'Warning', 'fs-extra-WARN0001');
   }
 
   stat.checkPaths(src, dest, 'copy', opts, function (err, stats) {
@@ -4936,8 +4947,7 @@ Object.assign(exports, fs); // Universalify async methods:
 
 api.forEach(function (method) {
   exports[method] = u(fs[method]);
-});
-exports.realpath.native = u(fs.realpath["native"]); // We differ from mz/fs in that we still ship the old, broken, fs.exists()
+}); // We differ from mz/fs in that we still ship the old, broken, fs.exists()
 // since we are a drop-in replacement for the native module
 
 exports.exists = function (filename, callback) {
@@ -5016,6 +5026,13 @@ if (typeof fs.writev === 'function') {
       }]));
     });
   };
+} // fs.realpath.native sometimes not available if fs is monkey-patched
+
+
+if (typeof fs.realpath["native"] === 'function') {
+  exports.realpath.native = u(fs.realpath["native"]);
+} else {
+  process.emitWarning('fs.realpath.native is not a function. Is fs being monkey-patched?', 'Warning', 'fs-extra-WARN0003');
 }
 
 /***/ }),
@@ -5369,6 +5386,7 @@ function move(src, dest, opts, cb) {
     opts = {};
   }
 
+  opts = opts || {};
   var overwrite = opts.overwrite || opts.clobber || false;
   stat.checkPaths(src, dest, 'move', opts, function (err, stats) {
     if (err) return cb(err);
@@ -16786,6 +16804,370 @@ exports.fromPromise = function (fn) {
 
 /***/ }),
 
+/***/ 6073:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "NIL": () => (/* reexport */ nil),
+  "parse": () => (/* reexport */ esm_node_parse),
+  "stringify": () => (/* reexport */ esm_node_stringify),
+  "v1": () => (/* reexport */ esm_node_v1),
+  "v3": () => (/* reexport */ esm_node_v3),
+  "v4": () => (/* reexport */ esm_node_v4),
+  "v5": () => (/* reexport */ esm_node_v5),
+  "validate": () => (/* reexport */ esm_node_validate),
+  "version": () => (/* reexport */ esm_node_version)
+});
+
+;// CONCATENATED MODULE: external "crypto"
+const external_crypto_namespaceObject = require("crypto");
+var external_crypto_default = /*#__PURE__*/__webpack_require__.n(external_crypto_namespaceObject);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/rng.js
+
+var rnds8Pool = new Uint8Array(256); // # of random values to pre-allocate
+
+var poolPtr = rnds8Pool.length;
+function rng() {
+  if (poolPtr > rnds8Pool.length - 16) {
+    external_crypto_default().randomFillSync(rnds8Pool);
+    poolPtr = 0;
+  }
+
+  return rnds8Pool.slice(poolPtr, poolPtr += 16);
+}
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/regex.js
+/* harmony default export */ const regex = (/^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/validate.js
+
+
+function validate(uuid) {
+  return typeof uuid === 'string' && regex.test(uuid);
+}
+
+/* harmony default export */ const esm_node_validate = (validate);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/stringify.js
+
+/**
+ * Convert array of 16 byte values to UUID string format of the form:
+ * XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX
+ */
+
+var byteToHex = [];
+
+for (var i = 0; i < 256; ++i) {
+  byteToHex.push((i + 0x100).toString(16).substr(1));
+}
+
+function stringify(arr) {
+  var offset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  // Note: Be careful editing this code!  It's been tuned for performance
+  // and works in ways you may not expect. See https://github.com/uuidjs/uuid/pull/434
+  var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + '-' + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + '-' + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + '-' + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + '-' + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase(); // Consistency check for valid UUID.  If this throws, it's likely due to one
+  // of the following:
+  // - One or more input array values don't map to a hex octet (leading to
+  // "undefined" in the uuid)
+  // - Invalid input values for the RFC `version` or `variant` fields
+
+  if (!esm_node_validate(uuid)) {
+    throw TypeError('Stringified UUID is invalid');
+  }
+
+  return uuid;
+}
+
+/* harmony default export */ const esm_node_stringify = (stringify);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/v1.js
+
+ // **`v1()` - Generate time-based UUID**
+//
+// Inspired by https://github.com/LiosK/UUID.js
+// and http://docs.python.org/library/uuid.html
+
+var _nodeId;
+
+var _clockseq; // Previous uuid creation time
+
+
+var _lastMSecs = 0;
+var _lastNSecs = 0; // See https://github.com/uuidjs/uuid for API details
+
+function v1(options, buf, offset) {
+  var i = buf && offset || 0;
+  var b = buf || new Array(16);
+  options = options || {};
+  var node = options.node || _nodeId;
+  var clockseq = options.clockseq !== undefined ? options.clockseq : _clockseq; // node and clockseq need to be initialized to random values if they're not
+  // specified.  We do this lazily to minimize issues related to insufficient
+  // system entropy.  See #189
+
+  if (node == null || clockseq == null) {
+    var seedBytes = options.random || (options.rng || rng)();
+
+    if (node == null) {
+      // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
+      node = _nodeId = [seedBytes[0] | 0x01, seedBytes[1], seedBytes[2], seedBytes[3], seedBytes[4], seedBytes[5]];
+    }
+
+    if (clockseq == null) {
+      // Per 4.2.2, randomize (14 bit) clockseq
+      clockseq = _clockseq = (seedBytes[6] << 8 | seedBytes[7]) & 0x3fff;
+    }
+  } // UUID timestamps are 100 nano-second units since the Gregorian epoch,
+  // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
+  // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
+  // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
+
+
+  var msecs = options.msecs !== undefined ? options.msecs : Date.now(); // Per 4.2.1.2, use count of uuid's generated during the current clock
+  // cycle to simulate higher resolution clock
+
+  var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1; // Time since last uuid creation (in msecs)
+
+  var dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000; // Per 4.2.1.2, Bump clockseq on clock regression
+
+  if (dt < 0 && options.clockseq === undefined) {
+    clockseq = clockseq + 1 & 0x3fff;
+  } // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
+  // time interval
+
+
+  if ((dt < 0 || msecs > _lastMSecs) && options.nsecs === undefined) {
+    nsecs = 0;
+  } // Per 4.2.1.2 Throw error if too many uuids are requested
+
+
+  if (nsecs >= 10000) {
+    throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
+  }
+
+  _lastMSecs = msecs;
+  _lastNSecs = nsecs;
+  _clockseq = clockseq; // Per 4.1.4 - Convert from unix epoch to Gregorian epoch
+
+  msecs += 12219292800000; // `time_low`
+
+  var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
+  b[i++] = tl >>> 24 & 0xff;
+  b[i++] = tl >>> 16 & 0xff;
+  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = tl & 0xff; // `time_mid`
+
+  var tmh = msecs / 0x100000000 * 10000 & 0xfffffff;
+  b[i++] = tmh >>> 8 & 0xff;
+  b[i++] = tmh & 0xff; // `time_high_and_version`
+
+  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
+
+  b[i++] = tmh >>> 16 & 0xff; // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
+
+  b[i++] = clockseq >>> 8 | 0x80; // `clock_seq_low`
+
+  b[i++] = clockseq & 0xff; // `node`
+
+  for (var n = 0; n < 6; ++n) {
+    b[i + n] = node[n];
+  }
+
+  return buf || esm_node_stringify(b);
+}
+
+/* harmony default export */ const esm_node_v1 = (v1);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/parse.js
+
+
+function parse(uuid) {
+  if (!esm_node_validate(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  var v;
+  var arr = new Uint8Array(16); // Parse ########-....-....-....-............
+
+  arr[0] = (v = parseInt(uuid.slice(0, 8), 16)) >>> 24;
+  arr[1] = v >>> 16 & 0xff;
+  arr[2] = v >>> 8 & 0xff;
+  arr[3] = v & 0xff; // Parse ........-####-....-....-............
+
+  arr[4] = (v = parseInt(uuid.slice(9, 13), 16)) >>> 8;
+  arr[5] = v & 0xff; // Parse ........-....-####-....-............
+
+  arr[6] = (v = parseInt(uuid.slice(14, 18), 16)) >>> 8;
+  arr[7] = v & 0xff; // Parse ........-....-....-####-............
+
+  arr[8] = (v = parseInt(uuid.slice(19, 23), 16)) >>> 8;
+  arr[9] = v & 0xff; // Parse ........-....-....-....-############
+  // (Use "/" to avoid 32-bit truncation when bit-shifting high-order bytes)
+
+  arr[10] = (v = parseInt(uuid.slice(24, 36), 16)) / 0x10000000000 & 0xff;
+  arr[11] = v / 0x100000000 & 0xff;
+  arr[12] = v >>> 24 & 0xff;
+  arr[13] = v >>> 16 & 0xff;
+  arr[14] = v >>> 8 & 0xff;
+  arr[15] = v & 0xff;
+  return arr;
+}
+
+/* harmony default export */ const esm_node_parse = (parse);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/v35.js
+
+
+
+function stringToBytes(str) {
+  str = unescape(encodeURIComponent(str)); // UTF8 escape
+
+  var bytes = [];
+
+  for (var i = 0; i < str.length; ++i) {
+    bytes.push(str.charCodeAt(i));
+  }
+
+  return bytes;
+}
+
+var DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
+var URL = '6ba7b811-9dad-11d1-80b4-00c04fd430c8';
+/* harmony default export */ function v35(name, version, hashfunc) {
+  function generateUUID(value, namespace, buf, offset) {
+    if (typeof value === 'string') {
+      value = stringToBytes(value);
+    }
+
+    if (typeof namespace === 'string') {
+      namespace = esm_node_parse(namespace);
+    }
+
+    if (namespace.length !== 16) {
+      throw TypeError('Namespace must be array-like (16 iterable integer values, 0-255)');
+    } // Compute hash of namespace and value, Per 4.3
+    // Future: Use spread syntax when supported on all platforms, e.g. `bytes =
+    // hashfunc([...namespace, ... value])`
+
+
+    var bytes = new Uint8Array(16 + value.length);
+    bytes.set(namespace);
+    bytes.set(value, namespace.length);
+    bytes = hashfunc(bytes);
+    bytes[6] = bytes[6] & 0x0f | version;
+    bytes[8] = bytes[8] & 0x3f | 0x80;
+
+    if (buf) {
+      offset = offset || 0;
+
+      for (var i = 0; i < 16; ++i) {
+        buf[offset + i] = bytes[i];
+      }
+
+      return buf;
+    }
+
+    return esm_node_stringify(bytes);
+  } // Function#name is not settable on some platforms (#270)
+
+
+  try {
+    generateUUID.name = name; // eslint-disable-next-line no-empty
+  } catch (err) {} // For CommonJS default export support
+
+
+  generateUUID.DNS = DNS;
+  generateUUID.URL = URL;
+  return generateUUID;
+}
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/md5.js
+
+
+function md5(bytes) {
+  if (Array.isArray(bytes)) {
+    bytes = Buffer.from(bytes);
+  } else if (typeof bytes === 'string') {
+    bytes = Buffer.from(bytes, 'utf8');
+  }
+
+  return external_crypto_default().createHash('md5').update(bytes).digest();
+}
+
+/* harmony default export */ const esm_node_md5 = (md5);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/v3.js
+
+
+var v3 = v35('v3', 0x30, esm_node_md5);
+/* harmony default export */ const esm_node_v3 = (v3);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/v4.js
+
+
+
+function v4(options, buf, offset) {
+  options = options || {};
+  var rnds = options.random || (options.rng || rng)(); // Per 4.4, set bits for version and `clock_seq_hi_and_reserved`
+
+  rnds[6] = rnds[6] & 0x0f | 0x40;
+  rnds[8] = rnds[8] & 0x3f | 0x80; // Copy bytes to buffer, if provided
+
+  if (buf) {
+    offset = offset || 0;
+
+    for (var i = 0; i < 16; ++i) {
+      buf[offset + i] = rnds[i];
+    }
+
+    return buf;
+  }
+
+  return esm_node_stringify(rnds);
+}
+
+/* harmony default export */ const esm_node_v4 = (v4);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/sha1.js
+
+
+function sha1(bytes) {
+  if (Array.isArray(bytes)) {
+    bytes = Buffer.from(bytes);
+  } else if (typeof bytes === 'string') {
+    bytes = Buffer.from(bytes, 'utf8');
+  }
+
+  return external_crypto_default().createHash('sha1').update(bytes).digest();
+}
+
+/* harmony default export */ const esm_node_sha1 = (sha1);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/v5.js
+
+
+var v5 = v35('v5', 0x50, esm_node_sha1);
+/* harmony default export */ const esm_node_v5 = (v5);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/nil.js
+/* harmony default export */ const nil = ('00000000-0000-0000-0000-000000000000');
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/version.js
+
+
+function version(uuid) {
+  if (!esm_node_validate(uuid)) {
+    throw TypeError('Invalid UUID');
+  }
+
+  return parseInt(uuid.substr(14, 1), 16);
+}
+
+/* harmony default export */ const esm_node_version = (version);
+;// CONCATENATED MODULE: ../../node_modules/uuid/dist/esm-node/index.js
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ 9491:
 /***/ ((module) => {
 
@@ -22882,11 +23264,11 @@ function color(d) {
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('./complex-types').Action} Action
- * @typedef {import('./complex-types').Index} Index
- * @typedef {import('./complex-types').ActionTuple} ActionTuple
- * @typedef {import('./complex-types').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
+ * @typedef {import('./complex-types.js').Action} Action
+ * @typedef {import('./complex-types.js').Index} Index
+ * @typedef {import('./complex-types.js').ActionTuple} ActionTuple
+ * @typedef {import('./complex-types.js').VisitorResult} VisitorResult
+ * @typedef {import('./complex-types.js').Visitor} Visitor
  */
 
 
@@ -22906,27 +23288,31 @@ var SKIP = 'skip';
 
 var EXIT = false;
 /**
- * Visit children of tree which pass a test
+ * Visit children of tree which pass test.
  *
- * @param tree Abstract syntax tree to walk
- * @param test Test node, optional
- * @param visitor Function to run for each node
- * @param reverse Visit the tree in reverse order, defaults to false
+ * @param tree
+ *   Tree to walk
+ * @param [test]
+ *   `unist-util-is`-compatible test
+ * @param visitor
+ *   Function called for nodes that pass `test`.
+ * @param [reverse=false]
+ *   Traverse in reverse preorder (NRL) instead of preorder (NLR) (default).
  */
 
 var visitParents =
 /**
  * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
+ *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types.js').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
+ *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types.js').BuildVisitor<Tree>, reverse?: boolean) => void)
  * )}
  */
 
 /**
  * @param {Node} tree
  * @param {Test} test
- * @param {import('./complex-types').Visitor<Node>} visitor
- * @param {boolean} [reverse]
+ * @param {import('./complex-types.js').Visitor<Node>} visitor
+ * @param {boolean} [reverse=false]
  */
 function visitParents(tree, test, visitor, reverse) {
   if (typeof test === 'function' && typeof visitor !== 'function') {
@@ -22942,11 +23328,11 @@ function visitParents(tree, test, visitor, reverse) {
   /**
    * @param {Node} node
    * @param {number?} index
-   * @param {Array.<Parent>} parents
+   * @param {Array<Parent>} parents
    */
 
   function factory(node, index, parents) {
-    /** @type {Object.<string, unknown>} */
+    /** @type {Record<string, unknown>} */
     // @ts-expect-error: hush
     var value = typeof node === 'object' && node !== null ? node : {};
     /** @type {string|undefined} */
@@ -22971,7 +23357,7 @@ function visitParents(tree, test, visitor, reverse) {
       /** @type {number} */
 
       var offset;
-      /** @type {Array.<Parent>} */
+      /** @type {Array<Parent>} */
 
       var grandparents;
 
@@ -23161,6 +23547,7 @@ function findAndReplace(tree, find, replace, options) {
     var start = 0; // @ts-expect-error: TS is wrong, some of these children can be text.
 
     var index = parent.children.indexOf(node);
+    var change = false;
     /** @type {Array<PhrasingContent>} */
 
     var nodes = [];
@@ -23188,9 +23575,7 @@ function findAndReplace(tree, find, replace, options) {
         } : undefined;
       }
 
-      if (value === false) {
-        position = undefined;
-      } else {
+      if (value !== false) {
         if (start !== position) {
           nodes.push({
             type: 'text',
@@ -23207,6 +23592,7 @@ function findAndReplace(tree, find, replace, options) {
         }
 
         start = position + match[0].length;
+        change = true;
       }
 
       if (!find.global) {
@@ -23216,9 +23602,7 @@ function findAndReplace(tree, find, replace, options) {
       match = find.exec(node.value);
     }
 
-    if (position === undefined) {
-      nodes = [node];
-    } else {
+    if (change) {
       var _parent$children;
 
       if (start < node.value.length) {
@@ -23229,6 +23613,8 @@ function findAndReplace(tree, find, replace, options) {
       }
 
       (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(_toConsumableArray(nodes)));
+    } else {
+      nodes = [node];
     }
 
     return index + nodes.length;
@@ -27530,31 +27916,34 @@ function remarkGfm() {
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
  * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types').Visitor} Visitor
+ * @typedef {import('./complex-types.js').Visitor} Visitor
  */
 
-
 /**
- * Visit children of tree which pass a test
+ * Visit children of tree which pass test.
  *
- * @param tree Abstract syntax tree to walk
- * @param test Test, optional
- * @param visitor Function to run for each node
- * @param reverse Fisit the tree in reverse, defaults to false
+ * @param tree
+ *   Tree to walk
+ * @param [test]
+ *   `unist-util-is`-compatible test
+ * @param visitor
+ *   Function called for nodes that pass `test`.
+ * @param reverse
+ *   Traverse in reverse preorder (NRL) instead of preorder (NLR) (default).
  */
 
 var visit =
 /**
  * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types').BuildVisitor<Tree>, reverse?: boolean) => void)
+ *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types.js').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
+ *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types.js').BuildVisitor<Tree>, reverse?: boolean) => void)
  * )}
  */
 
 /**
  * @param {Node} tree
  * @param {Test} test
- * @param {import('./complex-types').Visitor} visitor
+ * @param {import('./complex-types.js').Visitor} visitor
  * @param {boolean} [reverse]
  */
 function visit(tree, test, visitor, reverse) {
@@ -27567,7 +27956,7 @@ function visit(tree, test, visitor, reverse) {
   visitParents(tree, test, overload, reverse);
   /**
    * @param {Node} node
-   * @param {Array.<Parent>} parents
+   * @param {Array<Parent>} parents
    */
 
   function overload(node, parents) {
@@ -27575,6 +27964,7 @@ function visit(tree, test, visitor, reverse) {
     return visitor(node, parent ? parent.children.indexOf(node) : null, parent);
   }
 };
+
 ;// CONCATENATED MODULE: ../../node_modules/rehype-attr/lib/utils.js
 
 var getURLParameters = function getURLParameters(url) {
@@ -34978,6 +35368,7 @@ function wrap_wrap(nodes, loose) {
 
 /**
  * @param {H} h
+ * @returns {Element|null}
  */
 
 function footer(h) {
@@ -35091,11 +35482,8 @@ function footer(h) {
     },
     children: [{
       type: 'element',
-      tagName: 'h2',
-      properties: {
-        id: 'footnote-label',
-        className: ['sr-only']
-      },
+      tagName: h.footnoteLabelTagName,
+      properties: JSON.parse(JSON.stringify(h.footnoteLabelProperties)),
       children: [u('text', h.footnoteLabel)]
     }, {
       type: 'text',
@@ -35937,6 +36325,8 @@ function ignore() {
  * @property {boolean} dangerous Whether HTML is allowed
  * @property {string} clobberPrefix Prefix to use to prevent DOM clobbering
  * @property {string} footnoteLabel Label to use to introduce the footnote section
+ * @property {string} footnoteLabelTagName HTML used for the footnote label
+ * @property {Properties} footnoteLabelProperties properties on the HTML tag used for the footnote label
  * @property {string} footnoteBackLabel Label to use to go back to a footnote call from the footnote section
  * @property {(identifier: string) => Definition|null} definition Definition cache
  * @property {Record<string, FootnoteDefinition>} footnoteById Footnote cache
@@ -35966,6 +36356,13 @@ function ignore() {
  *   Label to use for the footnotes section.
  *   Affects screen reader users.
  *   Change it if you’re authoring in a different language.
+ * @property {string} [footnoteLabelTagName='h2']
+ *   HTML tag to use for the footnote label.
+ *   Can be changed to match your document structure and play well with your choice of css.
+ * @property {Properties} [footnoteLabelProperties={id: 'footnote-label', className: ['sr-only']}]
+ *   Properties to use on the footnote label.
+ *   A 'sr-only' class is added by default to hide this from sighted users.
+ *   Change it to make the label visible, or add classes for other purposes.
  * @property {string} [footnoteBackLabel='Back to content']
  *   Label to use from backreferences back to their footnote call.
  *   Affects screen reader users.
@@ -36007,6 +36404,11 @@ function factory(tree, options) {
   h.dangerous = dangerous;
   h.clobberPrefix = settings.clobberPrefix === undefined || settings.clobberPrefix === null ? 'user-content-' : settings.clobberPrefix;
   h.footnoteLabel = settings.footnoteLabel || 'Footnotes';
+  h.footnoteLabelTagName = settings.footnoteLabelTagName || 'h2';
+  h.footnoteLabelProperties = settings.footnoteLabelProperties || {
+    id: 'footnote-label',
+    className: ['sr-only']
+  };
   h.footnoteBackLabel = settings.footnoteBackLabel || 'Back to content';
   h.definition = definitions(tree);
   h.footnoteById = footnoteById;
@@ -58990,22 +59392,22 @@ var htmlVoidElements = ['area', 'base', 'basefont', 'bgsound', 'br', 'col', 'com
  * @typedef {Omit<Comment, 'value'> & {value: {stitch: Node}}} Stitch
  *
  * @typedef Options
- * @property {Array.<string>} [passThrough]
+ * @property {Array<string>} [passThrough]
  *   List of custom hast node types to pass through (keep) in hast.
  *   If the passed through nodes have children, those children are expected to
  *   be hast and will be handled.
  *
  * @typedef HiddenTokenizer
- * @property {Array.<HiddenLocationTracker>} __mixins
+ * @property {Array<HiddenLocationTracker>} __mixins
  *   Way too simple, but works for us.
  * @property {HiddenPreprocessor} preprocessor
  * @property {(value: string) => void} write
  * @property {() => number} _consume
- * @property {Array.<HiddenToken>} tokenQueue
+ * @property {Array<HiddenToken>} tokenQueue
  * @property {string} state
  * @property {string} returnState
  * @property {number} charRefCode
- * @property {Array.<number>} tempBuff
+ * @property {Array<number>} tempBuff
  * @property {Function} _flushCodePointsConsumedAsCharacterReference
  * @property {string} lastStartTagName
  * @property {number} consumedAfterSnapshot
@@ -59016,14 +59418,14 @@ var htmlVoidElements = ['area', 'base', 'basefont', 'bgsound', 'br', 'col', 'com
  * @property {Function} NAMED_CHARACTER_REFERENCE_STATE
  * @property {Function} NUMERIC_CHARACTER_REFERENCE_END_STATE
  *
- * @typedef {Object.<string, unknown> & {location: P5Location}} HiddenToken
+ * @typedef {Record<string, unknown> & {location: P5Location}} HiddenToken
  *
  * @typedef HiddenPreprocessor
  * @property {string|undefined} html
  * @property {number} pos
  * @property {number} lastGapPos
  * @property {number} lastCharPos
- * @property {Array.<number>} gapStack
+ * @property {Array<number>} gapStack
  * @property {boolean} skipNextNewLine
  * @property {boolean} lastChunkWritten
  * @property {boolean} endOfChunkHit
@@ -59205,6 +59607,7 @@ function raw(tree, file, options) {
     locationTracker = tokenizer.__mixins[0];
     posTracker = locationTracker.posTracker;
     one(tree);
+    resetTokenizer();
 
     parser._adoptNodes(mock.childNodes[0], doc);
 
@@ -59229,10 +59632,11 @@ function raw(tree, file, options) {
     locationTracker = tokenizer.__mixins[0];
     posTracker = locationTracker.posTracker;
     one(tree);
+    resetTokenizer();
     return doc;
   }
   /**
-   * @param {Content[]} nodes
+   * @param {Array<Content>} nodes
    * @returns {void}
    */
 
@@ -59340,7 +59744,7 @@ function raw(tree, file, options) {
     if (!tokenizer) throw new Error('Expected `tokenizer`');
     if (!posTracker) throw new Error('Expected `posTracker`');
     if (!locationTracker) throw new Error('Expected `locationTracker`'); // Reset preprocessor:
-    // See: <https://github.com/inikulin/parse5/blob/9c683e1/packages/parse5/lib/tokenizer/preprocessor.js>.
+    // See: <https://github.com/inikulin/parse5/blob/9c683e1/packages/parse5/lib/tokenizer/preprocessor.js#L17>.
 
     preprocessor.html = undefined;
     preprocessor.pos = -1;
@@ -59377,19 +59781,6 @@ function raw(tree, file, options) {
     if (tokenizer.state === 'NAMED_CHARACTER_REFERENCE_STATE' || tokenizer.state === 'NUMERIC_CHARACTER_REFERENCE_END_STATE') {
       preprocessor.lastChunkWritten = true;
       tokenizer[tokenizer.state](tokenizer._consume());
-    } // Process final characters if they’re still there after hibernating.
-    // Similar to:
-    // See: <https://github.com/inikulin/parse5/blob/9c683e1/packages/parse5/lib/extensions/location-info/tokenizer-mixin.js#L95>.
-
-
-    var token = tokenizer.currentCharacterToken;
-
-    if (token) {
-      token.location.endLine = posTracker.line;
-      token.location.endCol = posTracker.col + 1;
-      token.location.endOffset = posTracker.offset + 1;
-
-      parser._processToken(token);
     }
   }
   /**
@@ -59428,14 +59819,28 @@ function raw(tree, file, options) {
   }
 
   function resetTokenizer() {
-    /* c8 ignore next */
-    if (!tokenizer) throw new Error('Expected `tokenizer`'); // Reset tokenizer:
+    /* c8 ignore next 2 */
+    if (!tokenizer) throw new Error('Expected `tokenizer`');
+    if (!posTracker) throw new Error('Expected `posTracker`'); // Process final characters if they’re still there after hibernating.
+    // Similar to:
+    // See: <https://github.com/inikulin/parse5/blob/9c683e1/packages/parse5/lib/extensions/location-info/tokenizer-mixin.js#L95>.
+
+    var token = tokenizer.currentCharacterToken;
+
+    if (token) {
+      token.location.endLine = posTracker.line;
+      token.location.endCol = posTracker.col + 1;
+      token.location.endOffset = posTracker.offset + 1;
+
+      parser._processToken(token);
+    } // Reset tokenizer:
     // See: <https://github.com/inikulin/parse5/blob/9c683e1/packages/parse5/lib/tokenizer/index.js#L218-L234>.
     // Especially putting it back in the `data` state is useful: some elements,
     // like textareas and iframes, change the state.
     // See GH-7.
     // But also if broken HTML is in `raw`, and then a correct element is given.
     // See GH-11.
+
 
     tokenizer.tokenQueue = [];
     tokenizer.state = dataState;
@@ -59471,7 +59876,7 @@ function startTag(node) {
 }
 /**
  * @param {Element} node
- * @returns {Array.<P5Attribute>}
+ * @returns {Array<P5Attribute>}
  */
 
 
@@ -85569,7 +85974,7 @@ refractor.register(xquery);
 refractor.register(yang);
 refractor.register(zig);
 
-;// CONCATENATED MODULE: ../../node_modules/@wcj/markdown-to-html/node_modules/rehype-prism-plus/dist/rehype-prism-plus.es.js
+;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/dist/rehype-prism-plus.es.js
 
 
 
@@ -85578,51 +85983,51 @@ refractor.register(zig);
 
 
 function a() {
-  a = function a(e, t) {
-    return new r(e, void 0, t);
+  a = function a(e, r) {
+    return new t(e, void 0, r);
   };
 
   var e = RegExp.prototype,
-      t = new WeakMap();
+      r = new WeakMap();
 
-  function r(e, n, i) {
+  function t(e, n, i) {
     var o = new RegExp(e, n);
-    return t.set(o, i || t.get(e)), l(o, r.prototype);
+    return r.set(o, i || r.get(e)), l(o, t.prototype);
   }
 
-  function n(e, r) {
-    var n = t.get(r);
-    return Object.keys(n).reduce(function (t, r) {
-      return t[r] = e[n[r]], t;
+  function n(e, t) {
+    var n = r.get(t);
+    return Object.keys(n).reduce(function (r, t) {
+      return r[t] = e[n[t]], r;
     }, Object.create(null));
   }
 
-  return rehype_prism_plus_es_s(r, RegExp), r.prototype.exec = function (t) {
-    var r = e.exec.call(this, t);
-    return r && (r.groups = n(r, this)), r;
-  }, r.prototype[Symbol.replace] = function (r, i) {
+  return rehype_prism_plus_es_s(t, RegExp), t.prototype.exec = function (r) {
+    var t = e.exec.call(this, r);
+    return t && (t.groups = n(t, this)), t;
+  }, t.prototype[Symbol.replace] = function (t, i) {
     if ("string" == typeof i) {
-      var o = t.get(this);
-      return e[Symbol.replace].call(this, r, i.replace(/\$<([^>]+)>/g, function (e, t) {
-        return "$" + o[t];
+      var o = r.get(this);
+      return e[Symbol.replace].call(this, t, i.replace(/\$<([^>]+)>/g, function (e, r) {
+        return "$" + o[r];
       }));
     }
 
     if ("function" == typeof i) {
       var a = this;
-      return e[Symbol.replace].call(this, r, function () {
+      return e[Symbol.replace].call(this, t, function () {
         var e = arguments;
         return "object" != typeof e[e.length - 1] && (e = [].slice.call(e)).push(n(e, a)), i.apply(this, e);
       });
     }
 
-    return e[Symbol.replace].call(this, r, i);
+    return e[Symbol.replace].call(this, t, i);
   }, a.apply(this, arguments);
 }
 
-function rehype_prism_plus_es_s(e, t) {
-  if ("function" != typeof t && null !== t) throw new TypeError("Super expression must either be null or a function");
-  e.prototype = Object.create(t && t.prototype, {
+function rehype_prism_plus_es_s(e, r) {
+  if ("function" != typeof r && null !== r) throw new TypeError("Super expression must either be null or a function");
+  e.prototype = Object.create(r && r.prototype, {
     constructor: {
       value: e,
       writable: !0,
@@ -85630,37 +86035,37 @@ function rehype_prism_plus_es_s(e, t) {
     }
   }), Object.defineProperty(e, "prototype", {
     writable: !1
-  }), t && l(e, t);
+  }), r && l(e, r);
 }
 
-function l(e, t) {
-  return l = Object.setPrototypeOf || function (e, t) {
-    return e.__proto__ = t, e;
-  }, l(e, t);
+function l(e, r) {
+  return l = Object.setPrototypeOf || function (e, r) {
+    return e.__proto__ = r, e;
+  }, l(e, r);
 }
 
-function rehype_prism_plus_es_u(e, t) {
-  (null == t || t > e.length) && (t = e.length);
+function rehype_prism_plus_es_u(e, r) {
+  (null == r || r > e.length) && (r = e.length);
 
-  for (var r = 0, n = new Array(t); r < t; r++) {
-    n[r] = e[r];
+  for (var t = 0, n = new Array(r); t < r; t++) {
+    n[t] = e[t];
   }
 
   return n;
 }
 
-function rehype_prism_plus_es_c(e, t) {
-  var r = "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
-  if (r) return (r = r.call(e)).next.bind(r);
+function rehype_prism_plus_es_c(e, r) {
+  var t = "undefined" != typeof Symbol && e[Symbol.iterator] || e["@@iterator"];
+  if (t) return (t = t.call(e)).next.bind(t);
 
-  if (Array.isArray(e) || (r = function (e, t) {
+  if (Array.isArray(e) || (t = function (e, r) {
     if (e) {
-      if ("string" == typeof e) return rehype_prism_plus_es_u(e, t);
-      var r = Object.prototype.toString.call(e).slice(8, -1);
-      return "Object" === r && e.constructor && (r = e.constructor.name), "Map" === r || "Set" === r ? Array.from(e) : "Arguments" === r || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(r) ? rehype_prism_plus_es_u(e, t) : void 0;
+      if ("string" == typeof e) return rehype_prism_plus_es_u(e, r);
+      var t = Object.prototype.toString.call(e).slice(8, -1);
+      return "Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t ? Array.from(e) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? rehype_prism_plus_es_u(e, r) : void 0;
     }
-  }(e)) || t && e && "number" == typeof e.length) {
-    r && (e = r);
+  }(e)) || r && e && "number" == typeof e.length) {
+    t && (e = t);
     var n = 0;
     return function () {
       return n >= e.length ? {
@@ -85675,39 +86080,10 @@ function rehype_prism_plus_es_c(e, t) {
   throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
-var rehype_prism_plus_es_p = function e(t) {
-  return t.reduce(function (t, r) {
-    if ("text" === r.type) {
-      if (-1 === r.value.indexOf("\n")) return t.push(r), t;
-
-      for (var n, i = r.value.split("\n"), o = rehype_prism_plus_es_c(i.entries()); !(n = o()).done;) {
-        var a = n.value,
-            s = a[0],
-            l = a[1];
-        t.push({
-          type: "text",
-          value: s === i.length - 1 ? l : l + "\n",
-          position: {
-            start: {
-              line: r.position.start.line + s
-            },
-            end: {
-              line: r.position.start.line + s
-            }
-          }
-        });
-      }
-
-      return t;
-    }
-
-    return Object.prototype.hasOwnProperty.call(r, "children") ? (r.children = e(r.children), t.push(r), t) : (t.push(r), t);
-  }, []);
-},
-    f = function f(i) {
+var rehype_prism_plus_es_p = function p(i) {
   return function (o) {
-    return void 0 === o && (o = {}), function (t) {
-      visit(t, "element", s);
+    return void 0 === o && (o = {}), function (r) {
+      visit(r, "element", s);
     };
 
     function s(e, s, l) {
@@ -85715,75 +86091,101 @@ var rehype_prism_plus_es_p = function e(t) {
         var u = e.data && e.data.meta ? e.data.meta : "";
         e.properties.className ? "boolean" == typeof e.properties.className ? e.properties.className = [] : Array.isArray(e.properties.className) || (e.properties.className = [e.properties.className]) : e.properties.className = [], e.properties.className.push("code-highlight");
 
-        var f,
-            h = function (e) {
-          for (var t, r = rehype_prism_plus_es_c(e.properties.className); !(t = r()).done;) {
-            var n = t.value;
+        var p,
+            f,
+            m = function (e) {
+          for (var r, t = rehype_prism_plus_es_c(e.properties.className); !(r = t()).done;) {
+            var n = r.value;
             if ("language-" === n.slice(0, 9)) return n.slice(9).toLowerCase();
           }
 
           return null;
         }(e);
 
-        if (h) try {
-          f = i.highlight(hast_util_to_string_toString(e), h), l.properties.className = (l.properties.className || []).concat("language-" + h);
-        } catch (t) {
-          if (!o.ignoreMissing || !/Unknown language/.test(t.message)) throw t;
-          f = e;
-        } else f = e;
-        var m,
-            d = (m = 1, function e(t) {
-          return t.reduce(function (t, r) {
-            if ("text" === r.type) {
-              var n = (r.value.match(/\n/g) || "").length;
-              return r.position = {
+        if (m) try {
+          p = i.highlight(hast_util_to_string_toString(e), m), l.properties.className = (l.properties.className || []).concat("language-" + m);
+        } catch (r) {
+          if (!o.ignoreMissing || !/Unknown language/.test(r.message)) throw r;
+          p = e;
+        } else p = e;
+        p.children = (f = 1, function e(r) {
+          return r.reduce(function (r, t) {
+            if ("text" === t.type) {
+              var n = t.value,
+                  i = (n.match(/\n/g) || "").length;
+              if (0 === i) t.position = {
+                start: {
+                  line: f,
+                  column: 0
+                },
+                end: {
+                  line: f,
+                  column: 0
+                }
+              }, r.push(t);else for (var o, a = n.split("\n"), s = rehype_prism_plus_es_c(a.entries()); !(o = s()).done;) {
+                var l = o.value,
+                    u = l[0],
+                    p = l[1];
+                r.push({
+                  type: "text",
+                  value: u === a.length - 1 ? p : p + "\n",
+                  position: {
+                    start: {
+                      line: f + u
+                    },
+                    end: {
+                      line: f + u
+                    }
+                  }
+                });
+              }
+              return f += i, r;
+            }
+
+            if (Object.prototype.hasOwnProperty.call(t, "children")) {
+              var m = f;
+              return t.children = e(t.children), r.push(t), t.position = {
                 start: {
                   line: m,
                   column: 0
                 },
                 end: {
-                  line: m + n,
+                  line: f,
                   column: 0
                 }
-              }, m += n, t.push(r), t;
+              }, r;
             }
 
-            if (Object.prototype.hasOwnProperty.call(r, "children")) {
-              var i = m;
-              return r.children = e(r.children), t.push(r), r.position = {
-                start: {
-                  line: i,
-                  column: 0
-                },
-                end: {
-                  line: m,
-                  column: 0
-                }
-              }, t;
-            }
-
-            return t.push(r), t;
+            return r.push(t), r;
           }, []);
-        })(f.children);
-        f.children = rehype_prism_plus_es_p(d), f.children.length > 0 && (f.position = {
+        })(p.children), p.position = p.children.length > 0 ? {
           start: {
-            line: f.children[0].position.start.line,
+            line: p.children[0].position.start.line,
             column: 0
           },
           end: {
-            line: f.children[f.children.length - 1].position.end.line,
+            line: p.children[p.children.length - 1].position.end.line,
             column: 0
           }
-        });
+        } : {
+          start: {
+            line: 0,
+            column: 0
+          },
+          end: {
+            line: 0,
+            column: 0
+          }
+        };
 
-        for (var g, y, v = function (e) {
-          var t = /{([\d,-]+)}/,
-              r = e.split(",").map(function (e) {
+        for (var h, d = function (e) {
+          var r = /{([\d,-]+)}/,
+              t = e.split(",").map(function (e) {
             return e.trim();
           }).join();
 
-          if (t.test(r)) {
-            var i = t.exec(r)[1],
+          if (r.test(t)) {
+            var i = r.exec(t)[1],
                 o = parse_numeric_range(i);
             return function (e) {
               return o.includes(e + 1);
@@ -85793,49 +86195,52 @@ var rehype_prism_plus_es_p = function e(t) {
           return function () {
             return !1;
           };
-        }(u), b = function (e) {
-          var t = /*#__PURE__*/a(/showLineNumbers=([0-9]+)/i, {
+        }(u), g = function (e) {
+          var r = /*#__PURE__*/a(/showLineNumbers=([0-9]+)/i, {
             lines: 1
           });
 
-          if (t.test(e)) {
-            var r = t.exec(e);
-            return Number(r.groups.lines);
+          if (r.test(e)) {
+            var t = r.exec(e);
+            return Number(t.groups.lines);
           }
 
           return 1;
-        }(u), N = ("" === (g = hast_util_to_string_toString(e).split(/\n/))[g.length - 1].trim() && g.pop(), g.map(function (e) {
-          return {
-            type: "element",
-            tagName: "span",
-            properties: {
-              className: ["code-line"]
-            },
-            children: [{
-              type: "text",
-              value: e
-            }]
-          };
-        })), w = function w() {
-          var e = y.value,
+        }(u), y = function (e) {
+          for (var r = new Array(e), t = 0; t < e; t++) {
+            r[t] = {
+              type: "element",
+              tagName: "span",
+              properties: {
+                className: []
+              },
+              children: []
+            };
+          }
+
+          return r;
+        }(p.position.end.line), v = ["showlinenumbers=false", 'showlinenumbers="false"', "showlinenumbers={false}"], b = function b() {
+          var e = h.value,
               n = e[0],
               i = e[1];
-          (u.toLowerCase().includes("showLineNumbers".toLowerCase()) || o.showLineNumbers) && (i.properties.line = [(n + b).toString()], i.properties.className.push("line-number")), v(n) && i.properties.className.push("highlight-line"), "diff" === h && "-" === hast_util_to_string_toString(i).substring(0, 1) ? i.properties.className.push("deleted") : "diff" === h && "+" === hast_util_to_string_toString(i).substring(0, 1) && i.properties.className.push("inserted");
-          var a = filter(f, function (e) {
+          i.properties.className = ["code-line"];
+          var a = filter(p, function (e) {
             return e.position.start.line <= n + 1 && e.position.end.line >= n + 1;
           });
-          i.children = a.children;
-        }, x = rehype_prism_plus_es_c(N.entries()); !(y = x()).done;) {
-          w();
+          i.children = a.children, !u.toLowerCase().includes("showLineNumbers".toLowerCase()) && !o.showLineNumbers || v.some(function (e) {
+            return u.toLowerCase().includes(e);
+          }) || (i.properties.line = [(n + g).toString()], i.properties.className.push("line-number")), d(n) && i.properties.className.push("highlight-line"), "diff" === m && "-" === hast_util_to_string_toString(i).substring(0, 1) ? i.properties.className.push("deleted") : "diff" === m && "+" === hast_util_to_string_toString(i).substring(0, 1) && i.properties.className.push("inserted");
+        }, w = rehype_prism_plus_es_c(y.entries()); !(h = w()).done;) {
+          b();
         }
 
-        e.children = N;
+        y.length > 0 && "" === hast_util_to_string_toString(y[y.length - 1]).trim() && y.pop(), e.children = y;
       }
     }
   };
 },
-    rehype_prism_plus_es_h = f(refractor),
-    m = f(refractor);
+    f = rehype_prism_plus_es_p(refractor),
+    m = rehype_prism_plus_es_p(refractor);
 
 
 ;// CONCATENATED MODULE: ../../node_modules/@wcj/markdown-to-html/lib/index.js
@@ -101794,11 +102199,11 @@ var octiconLinkStyle = "\nmarkdown-style h1:hover a.anchor .octicon-link:before,
  * https://github.com/jaywcjlove/markdown-to-html/tree/main/packages/markdown-style
  */
 
-var markdown_style_scriptString = "const __TEMPLATE__ = document.createElement('template');\n__TEMPLATE__.innerHTML = `\n<style>\n".concat(octiconLinkStyle, "\n[data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='light'] { --color-prettylights-syntax-comment: #6e7781; --color-prettylights-syntax-constant: #0550ae; --color-prettylights-syntax-entity: #8250df; --color-prettylights-syntax-storage-modifier-import: #24292f; --color-prettylights-syntax-entity-tag: #116329; --color-prettylights-syntax-keyword: #cf222e; --color-prettylights-syntax-string: #0a3069; --color-prettylights-syntax-variable: #953800; --color-prettylights-syntax-brackethighlighter-unmatched: #82071e; --color-prettylights-syntax-invalid-illegal-text: #f6f8fa; --color-prettylights-syntax-invalid-illegal-bg: #82071e; --color-prettylights-syntax-carriage-return-text: #f6f8fa; --color-prettylights-syntax-carriage-return-bg: #cf222e; --color-prettylights-syntax-string-regexp: #116329; --color-prettylights-syntax-markup-list: #3b2300; --color-prettylights-syntax-markup-heading: #0550ae; --color-prettylights-syntax-markup-italic: #24292f; --color-prettylights-syntax-markup-bold: #24292f; --color-prettylights-syntax-markup-deleted-text: #82071e; --color-prettylights-syntax-markup-deleted-bg: #FFEBE9; --color-prettylights-syntax-markup-inserted-text: #116329; --color-prettylights-syntax-markup-inserted-bg: #dafbe1; --color-prettylights-syntax-markup-changed-text: #953800; --color-prettylights-syntax-markup-changed-bg: #ffd8b5; --color-prettylights-syntax-markup-ignored-text: #eaeef2; --color-prettylights-syntax-markup-ignored-bg: #0550ae; --color-prettylights-syntax-meta-diff-range: #8250df; --color-prettylights-syntax-brackethighlighter-angle: #57606a; --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f; --color-prettylights-syntax-constant-other-reference-link: #0a3069; --color-fg-default: #24292f; --color-fg-muted: #57606a; --color-fg-subtle: #6e7781; --color-canvas-default: #ffffff; --color-canvas-subtle: #f6f8fa; --color-border-default: #d0d7de; --color-border-muted: hsla(210,18%,87%,1); --color-neutral-muted: rgba(175,184,193,0.2); --color-accent-fg: #0969da; --color-accent-emphasis: #0969da; --color-attention-subtle: #fff8c5; --color-danger-fg: #cf222e; } [data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='dark'] { --color-prettylights-syntax-comment: #8b949e; --color-prettylights-syntax-constant: #79c0ff; --color-prettylights-syntax-entity: #d2a8ff; --color-prettylights-syntax-storage-modifier-import: #c9d1d9; --color-prettylights-syntax-entity-tag: #7ee787; --color-prettylights-syntax-keyword: #ff7b72; --color-prettylights-syntax-string: #a5d6ff; --color-prettylights-syntax-variable: #ffa657; --color-prettylights-syntax-brackethighlighter-unmatched: #f85149; --color-prettylights-syntax-invalid-illegal-text: #f0f6fc; --color-prettylights-syntax-invalid-illegal-bg: #8e1519; --color-prettylights-syntax-carriage-return-text: #f0f6fc; --color-prettylights-syntax-carriage-return-bg: #b62324; --color-prettylights-syntax-string-regexp: #7ee787; --color-prettylights-syntax-markup-list: #f2cc60; --color-prettylights-syntax-markup-heading: #1f6feb; --color-prettylights-syntax-markup-italic: #c9d1d9; --color-prettylights-syntax-markup-bold: #c9d1d9; --color-prettylights-syntax-markup-deleted-text: #ffdcd7; --color-prettylights-syntax-markup-deleted-bg: #67060c; --color-prettylights-syntax-markup-inserted-text: #aff5b4; --color-prettylights-syntax-markup-inserted-bg: #033a16; --color-prettylights-syntax-markup-changed-text: #ffdfb6; --color-prettylights-syntax-markup-changed-bg: #5a1e02; --color-prettylights-syntax-markup-ignored-text: #c9d1d9; --color-prettylights-syntax-markup-ignored-bg: #1158c7; --color-prettylights-syntax-meta-diff-range: #d2a8ff; --color-prettylights-syntax-brackethighlighter-angle: #8b949e; --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58; --color-prettylights-syntax-constant-other-reference-link: #a5d6ff; --color-fg-default: #c9d1d9; --color-fg-muted: #8b949e; --color-fg-subtle: #484f58; --color-canvas-default: #0d1117; --color-canvas-subtle: #161b22; --color-border-default: #30363d; --color-border-muted: #21262d; --color-neutral-muted: rgba(110,118,129,0.4); --color-accent-fg: #58a6ff; --color-accent-emphasis: #1f6feb; --color-attention-subtle: rgba(187,128,9,0.15); --color-danger-fg: #f85149; } markdown-style { display: block; -webkit-text-size-adjust: 100%; font-family: -apple-system,BlinkMacSystemFont,\"Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"; font-size: 16px; line-height: 1.5; word-wrap: break-word; color: var(--color-fg-default); background-color: var(--color-canvas-default); } markdown-style details, markdown-style figcaption, markdown-style figure { display: block; } markdown-style summary { display: list-item; } markdown-style [hidden] { display: none !important; } markdown-style a { background-color: transparent; color: var(--color-accent-fg); text-decoration: none; } markdown-style a:active, markdown-style a:hover { outline-width: 0; } markdown-style abbr[title] { border-bottom: none; text-decoration: underline dotted; } markdown-style b, markdown-style strong { font-weight: 600; } markdown-style dfn { font-style: italic; } markdown-style h1 { margin: .67em 0; font-weight: 600; padding-bottom: .3em; font-size: 2em; border-bottom: 1px solid var(--color-border-muted); } markdown-style mark { background-color: var(--color-attention-subtle); color: var(--color-text-primary); } markdown-style small { font-size: 90%; } markdown-style sub, markdown-style sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; } markdown-style sub { bottom: -0.25em; } markdown-style sup { top: -0.5em; } markdown-style img { border-style: none; max-width: 100%; box-sizing: content-box; background-color: var(--color-canvas-default); } markdown-style code, markdown-style kbd, markdown-style pre, markdown-style samp { font-family: monospace,monospace; font-size: 1em; } markdown-style figure { margin: 1em 40px; } markdown-style hr { box-sizing: content-box; overflow: hidden; background: transparent; border-bottom: 1px solid var(--color-border-muted); height: .25em; padding: 0; margin: 24px 0; background-color: var(--color-border-default); border: 0; } markdown-style input { font: inherit; margin: 0; overflow: visible; font-family: inherit; font-size: inherit; line-height: inherit; } markdown-style [type=button], markdown-style [type=reset], markdown-style [type=submit] { -webkit-appearance: button; } markdown-style [type=button]::-moz-focus-inner, markdown-style [type=reset]::-moz-focus-inner, markdown-style [type=submit]::-moz-focus-inner { border-style: none; padding: 0; } markdown-style [type=button]:-moz-focusring, markdown-style [type=reset]:-moz-focusring, markdown-style [type=submit]:-moz-focusring { outline: 1px dotted ButtonText; } markdown-style [type=checkbox], markdown-style [type=radio] { box-sizing: border-box; padding: 0; } markdown-style [type=number]::-webkit-inner-spin-button, markdown-style [type=number]::-webkit-outer-spin-button { height: auto; } markdown-style [type=search] { -webkit-appearance: textfield; outline-offset: -2px; } markdown-style [type=search]::-webkit-search-cancel-button, markdown-style [type=search]::-webkit-search-decoration { -webkit-appearance: none; } markdown-style ::-webkit-input-placeholder { color: inherit; opacity: .54; } markdown-style ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; } markdown-style a:hover { text-decoration: underline; } markdown-style hr::before { display: table; content: \"\"; } markdown-style hr::after { display: table; clear: both; content: \"\"; } markdown-style table { border-spacing: 0; border-collapse: collapse; display: block; width: max-content; max-width: 100%; overflow: auto; } markdown-style td, markdown-style th { padding: 0; } markdown-style details summary { cursor: pointer; } markdown-style details:not([open])>*:not(summary) { display: none !important; } markdown-style kbd { display: inline-block; padding: 3px 5px; font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; line-height: 10px; color: var(--color-fg-default); vertical-align: middle; background-color: var(--color-canvas-subtle); border: solid 1px var(--color-neutral-muted); border-bottom-color: var(--color-neutral-muted); border-radius: 6px; box-shadow: inset 0 -1px 0 var(--color-neutral-muted); } markdown-style h1, markdown-style h2, markdown-style h3, markdown-style h4, markdown-style h5, markdown-style h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; } markdown-style h2 { font-weight: 600; padding-bottom: .3em; font-size: 1.5em; border-bottom: 1px solid var(--color-border-muted); } markdown-style h3 { font-weight: 600; font-size: 1.25em; } markdown-style h4 { font-weight: 600; font-size: 1em; } markdown-style h5 { font-weight: 600; font-size: .875em; } markdown-style h6 { font-weight: 600; font-size: .85em; color: var(--color-fg-muted); } markdown-style p { margin-top: 0; margin-bottom: 10px; } markdown-style blockquote { margin: 0; padding: 0 1em; color: var(--color-fg-muted); border-left: .25em solid var(--color-border-default); } markdown-style ul, markdown-style ol { margin-top: 0; margin-bottom: 0; padding-left: 2em; } markdown-style ol ol, markdown-style ul ol { list-style-type: lower-roman; } markdown-style ul ul ol, markdown-style ul ol ol, markdown-style ol ul ol, markdown-style ol ol ol { list-style-type: lower-alpha; } markdown-style dd { margin-left: 0; } markdown-style tt, markdown-style code { font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; } markdown-style pre { margin-top: 0; margin-bottom: 0; font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; word-wrap: normal; } markdown-style .octicon { display: inline-block; overflow: visible !important; vertical-align: text-bottom; fill: currentColor; } markdown-style ::placeholder { color: var(--color-fg-subtle); opacity: 1; } markdown-style input::-webkit-outer-spin-button, markdown-style input::-webkit-inner-spin-button { margin: 0; -webkit-appearance: none; appearance: none; }\nmarkdown-style .token.comment, markdown-style .token.prolog, markdown-style .token.doctype, markdown-style .token.cdata { color: var(--color-prettylights-syntax-comment); } markdown-style .token.namespace { opacity: 0.7; } markdown-style .token.tag, markdown-style .token.selector, markdown-style .token.constant, markdown-style .token.symbol, markdown-style .token.deleted { color: var(--color-prettylights-syntax-entity-tag); } markdown-style .token.maybe-class-name { color: var(--color-prettylights-syntax-variable); } markdown-style .token.property-access, markdown-style .token.operator, markdown-style .token.boolean, markdown-style .token.number, markdown-style .token.selector markdown-style .token.class, markdown-style .token.attr-name, markdown-style .token.string, markdown-style .token.char, markdown-style .token.builtin { color: var(--color-prettylights-syntax-constant); } markdown-style .token.deleted { color: var(--color-prettylights-syntax-markup-deleted-text); } markdown-style .token.property { color: var(--color-prettylights-syntax-constant); } markdown-style .token.punctuation { color: var(--color-prettylights-syntax-markup-bold); } markdown-style .token.function { color: var(--color-prettylights-syntax-entity); } markdown-style .code-line .token.deleted { background-color: var(--color-prettylights-syntax-markup-deleted-bg); } markdown-style .token.inserted { color: var(--color-prettylights-syntax-markup-inserted-text); } markdown-style .code-line .token.inserted { background-color: var(--color-prettylights-syntax-markup-inserted-bg); } markdown-style .token.variable { color: var(--color-prettylights-syntax-constant); } markdown-style .token.entity, markdown-style .token.url, .language-css markdown-style .token.string, .style markdown-style .token.string { color: var(--color-prettylights-syntax-string); } markdown-style .token.color, markdown-style .token.atrule, markdown-style .token.attr-value, markdown-style .token.function, markdown-style .token.class-name { color: var(--color-prettylights-syntax-string); } markdown-style .token.rule, markdown-style .token.regex, markdown-style .token.important, markdown-style .token.keyword { color: var(--color-prettylights-syntax-keyword); } markdown-style .token.coord { color: var(--color-prettylights-syntax-meta-diff-range); } markdown-style .token.important, markdown-style .token.bold { font-weight: bold; } markdown-style .token.italic { font-style: italic; } markdown-style .token.entity { cursor: help; }\nmarkdown-style [data-catalyst] { display: block; } markdown-style g-emoji { font-family: \"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"; font-size: 1em; font-style: normal !important; font-weight: 400; line-height: 1; vertical-align: -0.075em; } markdown-style g-emoji img { width: 1em; height: 1em; } markdown-style::before { display: table; content: \"\"; } markdown-style::after { display: table; clear: both; content: \"\"; } markdown-style>*:first-child { margin-top: 0 !important; } markdown-style>*:last-child { margin-bottom: 0 !important; } markdown-style a:not([href]) { color: inherit; text-decoration: none; } markdown-style .absent { color: var(--color-danger-fg); } markdown-style .anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1; } markdown-style .anchor:focus { outline: none; } markdown-style p, markdown-style blockquote, markdown-style ul, markdown-style ol, markdown-style dl, markdown-style table, markdown-style pre, markdown-style details { margin-top: 0; margin-bottom: 16px; } markdown-style blockquote>:first-child { margin-top: 0; } markdown-style blockquote>:last-child { margin-bottom: 0; } markdown-style sup>a::before { content: \"[\"; } markdown-style sup>a::after { content: \"]\"; } markdown-style h1 .octicon-link, markdown-style h2 .octicon-link, markdown-style h3 .octicon-link, markdown-style h4 .octicon-link, markdown-style h5 .octicon-link, markdown-style h6 .octicon-link { color: var(--color-fg-default); vertical-align: middle; visibility: hidden; } markdown-style h1:hover .anchor, markdown-style h2:hover .anchor, markdown-style h3:hover .anchor, markdown-style h4:hover .anchor, markdown-style h5:hover .anchor, markdown-style h6:hover .anchor { text-decoration: none; } markdown-style h1:hover .anchor .octicon-link, markdown-style h2:hover .anchor .octicon-link, markdown-style h3:hover .anchor .octicon-link, markdown-style h4:hover .anchor .octicon-link, markdown-style h5:hover .anchor .octicon-link, markdown-style h6:hover .anchor .octicon-link { visibility: visible; } markdown-style h1 tt, markdown-style h1 code, markdown-style h2 tt, markdown-style h2 code, markdown-style h3 tt, markdown-style h3 code, markdown-style h4 tt, markdown-style h4 code, markdown-style h5 tt, markdown-style h5 code, markdown-style h6 tt, markdown-style h6 code { padding: 0 .2em; font-size: inherit; } markdown-style ul.no-list, markdown-style ol.no-list { padding: 0; list-style-type: none; } markdown-style ol[type=\"1\"] { list-style-type: decimal; } markdown-style ol[type=a] { list-style-type: lower-alpha; } markdown-style ol[type=i] { list-style-type: lower-roman; } markdown-style div>ol:not([type]) { list-style-type: decimal; } markdown-style ul ul, markdown-style ul ol, markdown-style ol ol, markdown-style ol ul { margin-top: 0; margin-bottom: 0; } markdown-style li>p { margin-top: 16px; } markdown-style li+li { margin-top: .25em; } markdown-style dl { padding: 0; } markdown-style dl dt { padding: 0; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: 600; } markdown-style dl dd { padding: 0 16px; margin-bottom: 16px; } markdown-style table th { font-weight: 600; } markdown-style table th, markdown-style table td { padding: 6px 13px; border: 1px solid var(--color-border-default); } markdown-style table tr { background-color: var(--color-canvas-default); border-top: 1px solid var(--color-border-muted); } markdown-style table tr:nth-child(2n) { background-color: var(--color-canvas-subtle); } markdown-style table img { background-color: transparent; vertical-align: middle; } markdown-style img[align=right] { padding-left: 20px; } markdown-style img[align=left] { padding-right: 20px; } markdown-style .emoji { max-width: none; vertical-align: text-top; background-color: transparent; } markdown-style span.frame { display: block; overflow: hidden; } markdown-style span.frame>span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0 0; overflow: hidden; border: 1px solid var(--color-border-default); } markdown-style span.frame span img { display: block; float: left; } markdown-style span.frame span span { display: block; padding: 5px 0 0; clear: both; color: var(--color-fg-default); } markdown-style span.align-center { display: block; overflow: hidden; clear: both; } markdown-style span.align-center>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: center; } markdown-style span.align-center span img { margin: 0 auto; text-align: center; } markdown-style span.align-right { display: block; overflow: hidden; clear: both; } markdown-style span.align-right>span { display: block; margin: 13px 0 0; overflow: hidden; text-align: right; } markdown-style span.align-right span img { margin: 0; text-align: right; } markdown-style span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; } markdown-style span.float-left span { margin: 13px 0 0; } markdown-style span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; } markdown-style span.float-right>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: right; } markdown-style code, markdown-style tt { padding: .2em .4em; margin: 0; font-size: 85%; background-color: var(--color-neutral-muted); border-radius: 6px; } markdown-style code br, markdown-style tt br { display: none; } markdown-style del code { text-decoration: inherit; } markdown-style pre code { font-size: 100%; } markdown-style pre>code { padding: 0; margin: 0; word-break: normal; white-space: pre; background: transparent; border: 0; } markdown-style pre { position: relative; font-size: 85%; line-height: 1.45; background-color: var(--color-canvas-subtle); border-radius: 6px; } markdown-style pre code, markdown-style pre tt { display: inline; max-width: auto; padding: 0; margin: 0; overflow: visible; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0; } markdown-style pre > code { padding: 16px; overflow: auto; display: block; } markdown-style .csv-data td, markdown-style .csv-data th { padding: 5px; overflow: hidden; font-size: 12px; line-height: 1; text-align: left; white-space: nowrap; } markdown-style .csv-data .blob-num { padding: 10px 8px 9px; text-align: right; background: var(--color-canvas-default); border: 0; } markdown-style .csv-data tr { border-top: 0; } markdown-style .csv-data th { font-weight: 600; background: var(--color-canvas-subtle); border-top: 0; } markdown-style .footnotes { font-size: 12px; color: var(--color-fg-muted); border-top: 1px solid var(--color-border-default); } markdown-style .footnotes ol { padding-left: 16px; } markdown-style .footnotes li { position: relative; } markdown-style .footnotes li:target::before { position: absolute; top: -8px; right: -8px; bottom: -8px; left: -24px; pointer-events: none; content: \"\"; border: 2px solid var(--color-accent-emphasis); border-radius: 6px; } markdown-style .footnotes li:target { color: var(--color-fg-default); } markdown-style .footnotes .data-footnote-backref g-emoji { font-family: monospace; } markdown-style .task-list-item { list-style-type: none; } markdown-style .task-list-item label { font-weight: 400; } markdown-style .task-list-item.enabled label { cursor: pointer; } markdown-style .task-list-item+.task-list-item { margin-top: 3px; } markdown-style .task-list-item .handle { display: none; } markdown-style .task-list-item-checkbox, markdown-style input[type=\"checkbox\"] { margin: 0 .2em .25em -1.6em; vertical-align: middle; } markdown-style .contains-task-list:dir(rtl) .task-list-item-checkbox, markdown-style .contains-task-list:dir(rtl) input[type=\"checkbox\"] { margin: 0 -1.6em .25em .2em; } markdown-style ::-webkit-calendar-picker-indicator { filter: invert(50%); }\n</style>\n<slot></slot>\n`;\nclass MarkdownStyle extends HTMLElement {\n    constructor() {\n        super();\n        this.shadow = this.attachShadow({ mode: 'open' });\n        this.shadow.appendChild(__TEMPLATE__.content.cloneNode(true));\n        const style = Array.prototype.slice\n            .call(this.shadow.children)\n            .find((item) => item.tagName === 'STYLE');\n        if (style) {\n            const id = '__MARKDOWN_STYLE__';\n            const findStyle = document.getElementById(id);\n            if (!findStyle) {\n                style.id = id;\n                document.head.append(style);\n            }\n        }\n    }\n    get theme() {\n        const value = this.getAttribute('theme');\n        return value === null ? '' : value;\n    }\n    set theme(name) {\n        this.setAttribute('theme', name);\n    }\n    connectedCallback() {\n        if (!this.theme) {\n            const { colorMode } = document.documentElement.dataset;\n            this.theme = colorMode;\n            const observer = new MutationObserver((mutationsList, observer) => {\n                this.theme = document.documentElement.dataset.colorMode;\n            });\n            observer.observe(document.documentElement, { attributes: true });\n            window.matchMedia('(prefers-color-scheme: light)').onchange = (event) => {\n                this.theme = event.matches ? 'light' : 'dark';\n            };\n            window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {\n                this.theme = event.matches ? 'dark' : 'light';\n            };\n        }\n    }\n}\ncustomElements.define('markdown-style', MarkdownStyle);");
+var markdown_style_scriptString = "const __TEMPLATE__ = document.createElement('template');\n__TEMPLATE__.innerHTML = `\n<style>\n".concat(octiconLinkStyle, "\n[data-color-mode*='light'], [data-color-mode*='light'] body, markdown-style[theme*='light'] { --color-prettylights-syntax-comment: #6e7781; --color-prettylights-syntax-constant: #0550ae; --color-prettylights-syntax-entity: #8250df; --color-prettylights-syntax-storage-modifier-import: #24292f; --color-prettylights-syntax-entity-tag: #116329; --color-prettylights-syntax-keyword: #cf222e; --color-prettylights-syntax-string: #0a3069; --color-prettylights-syntax-variable: #953800; --color-prettylights-syntax-brackethighlighter-unmatched: #82071e; --color-prettylights-syntax-invalid-illegal-text: #f6f8fa; --color-prettylights-syntax-invalid-illegal-bg: #82071e; --color-prettylights-syntax-carriage-return-text: #f6f8fa; --color-prettylights-syntax-carriage-return-bg: #cf222e; --color-prettylights-syntax-string-regexp: #116329; --color-prettylights-syntax-markup-list: #3b2300; --color-prettylights-syntax-markup-heading: #0550ae; --color-prettylights-syntax-markup-italic: #24292f; --color-prettylights-syntax-markup-bold: #24292f; --color-prettylights-syntax-markup-deleted-text: #82071e; --color-prettylights-syntax-markup-deleted-bg: #FFEBE9; --color-prettylights-syntax-markup-inserted-text: #116329; --color-prettylights-syntax-markup-inserted-bg: #dafbe1; --color-prettylights-syntax-markup-changed-text: #953800; --color-prettylights-syntax-markup-changed-bg: #ffd8b5; --color-prettylights-syntax-markup-ignored-text: #eaeef2; --color-prettylights-syntax-markup-ignored-bg: #0550ae; --color-prettylights-syntax-meta-diff-range: #8250df; --color-prettylights-syntax-brackethighlighter-angle: #57606a; --color-prettylights-syntax-sublimelinter-gutter-mark: #8c959f; --color-prettylights-syntax-constant-other-reference-link: #0a3069; --color-fg-default: #24292f; --color-fg-muted: #57606a; --color-fg-subtle: #6e7781; --color-canvas-default: #ffffff; --color-canvas-subtle: #f6f8fa; --color-border-default: #d0d7de; --color-border-muted: hsla(210,18%,87%,1); --color-neutral-muted: rgba(175,184,193,0.2); --color-accent-fg: #0969da; --color-accent-emphasis: #0969da; --color-attention-subtle: #fff8c5; --color-danger-fg: #cf222e; } [data-color-mode*='dark'], [data-color-mode*='dark'] body, markdown-style[theme*='dark'] { --color-prettylights-syntax-comment: #8b949e; --color-prettylights-syntax-constant: #79c0ff; --color-prettylights-syntax-entity: #d2a8ff; --color-prettylights-syntax-storage-modifier-import: #c9d1d9; --color-prettylights-syntax-entity-tag: #7ee787; --color-prettylights-syntax-keyword: #ff7b72; --color-prettylights-syntax-string: #a5d6ff; --color-prettylights-syntax-variable: #ffa657; --color-prettylights-syntax-brackethighlighter-unmatched: #f85149; --color-prettylights-syntax-invalid-illegal-text: #f0f6fc; --color-prettylights-syntax-invalid-illegal-bg: #8e1519; --color-prettylights-syntax-carriage-return-text: #f0f6fc; --color-prettylights-syntax-carriage-return-bg: #b62324; --color-prettylights-syntax-string-regexp: #7ee787; --color-prettylights-syntax-markup-list: #f2cc60; --color-prettylights-syntax-markup-heading: #1f6feb; --color-prettylights-syntax-markup-italic: #c9d1d9; --color-prettylights-syntax-markup-bold: #c9d1d9; --color-prettylights-syntax-markup-deleted-text: #ffdcd7; --color-prettylights-syntax-markup-deleted-bg: #67060c; --color-prettylights-syntax-markup-inserted-text: #aff5b4; --color-prettylights-syntax-markup-inserted-bg: #033a16; --color-prettylights-syntax-markup-changed-text: #ffdfb6; --color-prettylights-syntax-markup-changed-bg: #5a1e02; --color-prettylights-syntax-markup-ignored-text: #c9d1d9; --color-prettylights-syntax-markup-ignored-bg: #1158c7; --color-prettylights-syntax-meta-diff-range: #d2a8ff; --color-prettylights-syntax-brackethighlighter-angle: #8b949e; --color-prettylights-syntax-sublimelinter-gutter-mark: #484f58; --color-prettylights-syntax-constant-other-reference-link: #a5d6ff; --color-fg-default: #c9d1d9; --color-fg-muted: #8b949e; --color-fg-subtle: #484f58; --color-canvas-default: #0d1117; --color-canvas-subtle: #161b22; --color-border-default: #30363d; --color-border-muted: #21262d; --color-neutral-muted: rgba(110,118,129,0.4); --color-accent-fg: #58a6ff; --color-accent-emphasis: #1f6feb; --color-attention-subtle: rgba(187,128,9,0.15); --color-danger-fg: #f85149; } markdown-style { display: block; -webkit-text-size-adjust: 100%; font-family: -apple-system,BlinkMacSystemFont,\"Segoe UI\",Helvetica,Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\"; font-size: 16px; line-height: 1.5; word-wrap: break-word; color: var(--color-fg-default); background-color: var(--color-canvas-default); } markdown-style details, markdown-style figcaption, markdown-style figure { display: block; } markdown-style summary { display: list-item; } markdown-style [hidden] { display: none !important; } markdown-style a { background-color: transparent; color: var(--color-accent-fg); text-decoration: none; } markdown-style a:active, markdown-style a:hover { outline-width: 0; } markdown-style abbr[title] { border-bottom: none; text-decoration: underline dotted; } markdown-style b, markdown-style strong { font-weight: 600; } markdown-style dfn { font-style: italic; } markdown-style h1 { margin: .67em 0; font-weight: 600; padding-bottom: .3em; font-size: 2em; border-bottom: 1px solid var(--color-border-muted); } markdown-style mark { background-color: var(--color-attention-subtle); color: var(--color-text-primary); } markdown-style small { font-size: 90%; } markdown-style sub, markdown-style sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; } markdown-style sub { bottom: -0.25em; } markdown-style sup { top: -0.5em; } markdown-style img { border-style: none; max-width: 100%; box-sizing: content-box; background-color: var(--color-canvas-default); } markdown-style code, markdown-style kbd, markdown-style pre, markdown-style samp { font-family: monospace,monospace; font-size: 1em; } markdown-style figure { margin: 1em 40px; } markdown-style hr { box-sizing: content-box; overflow: hidden; background: transparent; border-bottom: 1px solid var(--color-border-muted); height: .25em; padding: 0; margin: 24px 0; background-color: var(--color-border-default); border: 0; } markdown-style input { font: inherit; margin: 0; overflow: visible; font-family: inherit; font-size: inherit; line-height: inherit; } markdown-style [type=button], markdown-style [type=reset], markdown-style [type=submit] { -webkit-appearance: button; } markdown-style [type=button]::-moz-focus-inner, markdown-style [type=reset]::-moz-focus-inner, markdown-style [type=submit]::-moz-focus-inner { border-style: none; padding: 0; } markdown-style [type=button]:-moz-focusring, markdown-style [type=reset]:-moz-focusring, markdown-style [type=submit]:-moz-focusring { outline: 1px dotted ButtonText; } markdown-style [type=checkbox], markdown-style [type=radio] { box-sizing: border-box; padding: 0; } markdown-style [type=number]::-webkit-inner-spin-button, markdown-style [type=number]::-webkit-outer-spin-button { height: auto; } markdown-style [type=search] { -webkit-appearance: textfield; outline-offset: -2px; } markdown-style [type=search]::-webkit-search-cancel-button, markdown-style [type=search]::-webkit-search-decoration { -webkit-appearance: none; } markdown-style ::-webkit-input-placeholder { color: inherit; opacity: .54; } markdown-style ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; } markdown-style a:hover { text-decoration: underline; } markdown-style hr::before { display: table; content: \"\"; } markdown-style hr::after { display: table; clear: both; content: \"\"; } markdown-style table { border-spacing: 0; border-collapse: collapse; display: block; width: max-content; max-width: 100%; overflow: auto; } markdown-style td, markdown-style th { padding: 0; } markdown-style details summary { cursor: pointer; } markdown-style details:not([open])>*:not(summary) { display: none !important; } markdown-style kbd { display: inline-block; padding: 3px 5px; font: 11px ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; line-height: 10px; color: var(--color-fg-default); vertical-align: middle; background-color: var(--color-canvas-subtle); border: solid 1px var(--color-neutral-muted); border-bottom-color: var(--color-neutral-muted); border-radius: 6px; box-shadow: inset 0 -1px 0 var(--color-neutral-muted); } markdown-style h1, markdown-style h2, markdown-style h3, markdown-style h4, markdown-style h5, markdown-style h6 { margin-top: 24px; margin-bottom: 16px; font-weight: 600; line-height: 1.25; } markdown-style h2 { font-weight: 600; padding-bottom: .3em; font-size: 1.5em; border-bottom: 1px solid var(--color-border-muted); } markdown-style h3 { font-weight: 600; font-size: 1.25em; } markdown-style h4 { font-weight: 600; font-size: 1em; } markdown-style h5 { font-weight: 600; font-size: .875em; } markdown-style h6 { font-weight: 600; font-size: .85em; color: var(--color-fg-muted); } markdown-style p { margin-top: 0; margin-bottom: 10px; } markdown-style blockquote { margin: 0; padding: 0 1em; color: var(--color-fg-muted); border-left: .25em solid var(--color-border-default); } markdown-style ul, markdown-style ol { margin-top: 0; margin-bottom: 0; padding-left: 2em; } markdown-style ol ol, markdown-style ul ol { list-style-type: lower-roman; } markdown-style ul ul ol, markdown-style ul ol ol, markdown-style ol ul ol, markdown-style ol ol ol { list-style-type: lower-alpha; } markdown-style dd { margin-left: 0; } markdown-style tt, markdown-style code { font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; } markdown-style pre { margin-top: 0; margin-bottom: 0; font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; font-size: 12px; word-wrap: normal; } markdown-style .octicon { display: inline-block; overflow: visible !important; vertical-align: text-bottom; fill: currentColor; } markdown-style ::placeholder { color: var(--color-fg-subtle); opacity: 1; } markdown-style input::-webkit-outer-spin-button, markdown-style input::-webkit-inner-spin-button { margin: 0; -webkit-appearance: none; appearance: none; }\nmarkdown-style .token.comment, markdown-style .token.prolog, markdown-style .token.doctype, markdown-style .token.cdata { color: var(--color-prettylights-syntax-comment); } markdown-style .token.namespace { opacity: 0.7; } markdown-style .token.tag, markdown-style .token.selector, markdown-style .token.constant, markdown-style .token.symbol, markdown-style .token.deleted { color: var(--color-prettylights-syntax-entity-tag); } markdown-style .token.maybe-class-name { color: var(--color-prettylights-syntax-variable); } markdown-style .token.property-access, markdown-style .token.operator, markdown-style .token.boolean, markdown-style .token.number, markdown-style .token.selector markdown-style .token.class, markdown-style .token.attr-name, markdown-style .token.string, markdown-style .token.char, markdown-style .token.builtin { color: var(--color-prettylights-syntax-constant); } markdown-style .token.deleted { color: var(--color-prettylights-syntax-markup-deleted-text); } markdown-style .token.property { color: var(--color-prettylights-syntax-constant); } markdown-style .token.punctuation { color: var(--color-prettylights-syntax-markup-bold); } markdown-style .token.function { color: var(--color-prettylights-syntax-entity); } markdown-style .code-line .token.deleted { background-color: var(--color-prettylights-syntax-markup-deleted-bg); } markdown-style .token.inserted { color: var(--color-prettylights-syntax-markup-inserted-text); } markdown-style .code-line .token.inserted { background-color: var(--color-prettylights-syntax-markup-inserted-bg); } markdown-style .token.variable { color: var(--color-prettylights-syntax-constant); } markdown-style .token.entity, markdown-style .token.url, .language-css markdown-style .token.string, .style markdown-style .token.string { color: var(--color-prettylights-syntax-string); } markdown-style .token.color, markdown-style .token.atrule, markdown-style .token.attr-value, markdown-style .token.function, markdown-style .token.class-name { color: var(--color-prettylights-syntax-string); } markdown-style .token.rule, markdown-style .token.regex, markdown-style .token.important, markdown-style .token.keyword { color: var(--color-prettylights-syntax-keyword); } markdown-style .token.coord { color: var(--color-prettylights-syntax-meta-diff-range); } markdown-style .token.important, markdown-style .token.bold { font-weight: bold; } markdown-style .token.italic { font-style: italic; } markdown-style .token.entity { cursor: help; }\nmarkdown-style [data-catalyst] { display: block; } markdown-style g-emoji { font-family: \"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\"; font-size: 1em; font-style: normal !important; font-weight: 400; line-height: 1; vertical-align: -0.075em; } markdown-style g-emoji img { width: 1em; height: 1em; } markdown-style::before { display: table; content: \"\"; } markdown-style::after { display: table; clear: both; content: \"\"; } markdown-style>*:first-child { margin-top: 0 !important; } markdown-style>*:last-child { margin-bottom: 0 !important; } markdown-style a:not([href]) { color: inherit; text-decoration: none; } markdown-style .absent { color: var(--color-danger-fg); } markdown-style a.anchor { float: left; padding-right: 4px; margin-left: -20px; line-height: 1; } markdown-style a.anchor:focus { outline: none; } markdown-style p, markdown-style blockquote, markdown-style ul, markdown-style ol, markdown-style dl, markdown-style table, markdown-style pre, markdown-style details { margin-top: 0; margin-bottom: 16px; } markdown-style blockquote>:first-child { margin-top: 0; } markdown-style blockquote>:last-child { margin-bottom: 0; } markdown-style sup>a::before { content: \"[\"; } markdown-style sup>a::after { content: \"]\"; }\nmarkdown-style .octicon-video { border: 1px solid #d0d7de !important; border-radius: 6px !important; display: block; } markdown-style .octicon-video summary { border-bottom: 1px solid #d0d7de !important; padding: 8px 16px !important; cursor: pointer; } markdown-style .octicon-video > video { display: block !important; max-width: 100% !important; padding: 2px; box-sizing: border-box; border-bottom-right-radius: 6px !important; border-bottom-left-radius: 6px !important; } markdown-style details.octicon-video:not([open])>*:not(summary) { display: none !important; } markdown-style details.octicon-video:not([open]) > summary { border-bottom: 0 !important; } markdown-style h1 .octicon-link, markdown-style h2 .octicon-link, markdown-style h3 .octicon-link, markdown-style h4 .octicon-link, markdown-style h5 .octicon-link, markdown-style h6 .octicon-link { color: var(--color-fg-default); vertical-align: middle; visibility: hidden; } markdown-style h1:hover .anchor, markdown-style h2:hover .anchor, markdown-style h3:hover .anchor, markdown-style h4:hover .anchor, markdown-style h5:hover .anchor, markdown-style h6:hover .anchor { text-decoration: none; } markdown-style h1:hover .anchor .octicon-link, markdown-style h2:hover .anchor .octicon-link, markdown-style h3:hover .anchor .octicon-link, markdown-style h4:hover .anchor .octicon-link, markdown-style h5:hover .anchor .octicon-link, markdown-style h6:hover .anchor .octicon-link { visibility: visible; } markdown-style h1 tt, markdown-style h1 code, markdown-style h2 tt, markdown-style h2 code, markdown-style h3 tt, markdown-style h3 code, markdown-style h4 tt, markdown-style h4 code, markdown-style h5 tt, markdown-style h5 code, markdown-style h6 tt, markdown-style h6 code { padding: 0 .2em; font-size: inherit; } markdown-style ul.no-list, markdown-style ol.no-list { padding: 0; list-style-type: none; } markdown-style ol[type=\"1\"] { list-style-type: decimal; } markdown-style ol[type=a] { list-style-type: lower-alpha; } markdown-style ol[type=i] { list-style-type: lower-roman; } markdown-style div>ol:not([type]) { list-style-type: decimal; } markdown-style ul ul, markdown-style ul ol, markdown-style ol ol, markdown-style ol ul { margin-top: 0; margin-bottom: 0; } markdown-style li>p { margin-top: 16px; } markdown-style li+li { margin-top: .25em; } markdown-style dl { padding: 0; } markdown-style dl dt { padding: 0; margin-top: 16px; font-size: 1em; font-style: italic; font-weight: 600; } markdown-style dl dd { padding: 0 16px; margin-bottom: 16px; } markdown-style table th { font-weight: 600; } markdown-style table th, markdown-style table td { padding: 6px 13px; border: 1px solid var(--color-border-default); } markdown-style table tr { background-color: var(--color-canvas-default); border-top: 1px solid var(--color-border-muted); } markdown-style table tr:nth-child(2n) { background-color: var(--color-canvas-subtle); } markdown-style table img { background-color: transparent; vertical-align: middle; } markdown-style img[align=right] { padding-left: 20px; } markdown-style img[align=left] { padding-right: 20px; } markdown-style .emoji { max-width: none; vertical-align: text-top; background-color: transparent; } markdown-style span.frame { display: block; overflow: hidden; } markdown-style span.frame>span { display: block; float: left; width: auto; padding: 7px; margin: 13px 0 0; overflow: hidden; border: 1px solid var(--color-border-default); } markdown-style span.frame span img { display: block; float: left; } markdown-style span.frame span span { display: block; padding: 5px 0 0; clear: both; color: var(--color-fg-default); } markdown-style span.align-center { display: block; overflow: hidden; clear: both; } markdown-style span.align-center>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: center; } markdown-style span.align-center span img { margin: 0 auto; text-align: center; } markdown-style span.align-right { display: block; overflow: hidden; clear: both; } markdown-style span.align-right>span { display: block; margin: 13px 0 0; overflow: hidden; text-align: right; } markdown-style span.align-right span img { margin: 0; text-align: right; } markdown-style span.float-left { display: block; float: left; margin-right: 13px; overflow: hidden; } markdown-style span.float-left span { margin: 13px 0 0; } markdown-style span.float-right { display: block; float: right; margin-left: 13px; overflow: hidden; } markdown-style span.float-right>span { display: block; margin: 13px auto 0; overflow: hidden; text-align: right; } markdown-style code, markdown-style tt { padding: .2em .4em; margin: 0; font-size: 85%; background-color: var(--color-neutral-muted); border-radius: 6px; } markdown-style code br, markdown-style tt br { display: none; } markdown-style del code { text-decoration: inherit; } markdown-style pre code { font-size: 100%; } markdown-style pre>code { padding: 0; margin: 0; word-break: normal; white-space: pre; background: transparent; border: 0; } markdown-style pre { position: relative; font-size: 85%; line-height: 1.45; background-color: var(--color-canvas-subtle); border-radius: 6px; } markdown-style pre code, markdown-style pre tt { display: inline; max-width: auto; padding: 0; margin: 0; overflow: visible; line-height: inherit; word-wrap: normal; background-color: transparent; border: 0; } markdown-style pre > code { padding: 16px; overflow: auto; display: block; } markdown-style .csv-data td, markdown-style .csv-data th { padding: 5px; overflow: hidden; font-size: 12px; line-height: 1; text-align: left; white-space: nowrap; } markdown-style .csv-data .blob-num { padding: 10px 8px 9px; text-align: right; background: var(--color-canvas-default); border: 0; } markdown-style .csv-data tr { border-top: 0; } markdown-style .csv-data th { font-weight: 600; background: var(--color-canvas-subtle); border-top: 0; } markdown-style .footnotes { font-size: 12px; color: var(--color-fg-muted); border-top: 1px solid var(--color-border-default); } markdown-style .footnotes ol { padding-left: 16px; } markdown-style .footnotes li { position: relative; } markdown-style .footnotes li:target::before { position: absolute; top: -8px; right: -8px; bottom: -8px; left: -24px; pointer-events: none; content: \"\"; border: 2px solid var(--color-accent-emphasis); border-radius: 6px; } markdown-style .footnotes li:target { color: var(--color-fg-default); } markdown-style .footnotes .data-footnote-backref g-emoji { font-family: monospace; } markdown-style .task-list-item { list-style-type: none; } markdown-style .task-list-item label { font-weight: 400; } markdown-style .task-list-item.enabled label { cursor: pointer; } markdown-style .task-list-item+.task-list-item { margin-top: 3px; } markdown-style .task-list-item .handle { display: none; } markdown-style .task-list-item-checkbox, markdown-style input[type=\"checkbox\"] { margin: 0 .2em .25em -1.6em; vertical-align: middle; } markdown-style .contains-task-list:dir(rtl) .task-list-item-checkbox, markdown-style .contains-task-list:dir(rtl) input[type=\"checkbox\"] { margin: 0 -1.6em .25em .2em; } markdown-style ::-webkit-calendar-picker-indicator { filter: invert(50%); }\n</style>\n<slot></slot>\n`;\nclass MarkdownStyle extends HTMLElement {\n    constructor() {\n        super();\n        this.shadow = this.attachShadow({ mode: 'open' });\n        this.shadow.appendChild(__TEMPLATE__.content.cloneNode(true));\n        const style = Array.prototype.slice\n            .call(this.shadow.children)\n            .find((item) => item.tagName === 'STYLE');\n        if (style) {\n            const id = '__MARKDOWN_STYLE__';\n            const findStyle = document.getElementById(id);\n            if (!findStyle) {\n                style.id = id;\n                document.head.append(style);\n            }\n        }\n    }\n    get theme() {\n        const value = this.getAttribute('theme');\n        return value === null ? '' : value;\n    }\n    set theme(name) {\n        this.setAttribute('theme', name);\n    }\n    connectedCallback() {\n        if (!this.theme) {\n            const { colorMode } = document.documentElement.dataset;\n            this.theme = colorMode;\n            const observer = new MutationObserver((mutationsList, observer) => {\n                this.theme = document.documentElement.dataset.colorMode;\n            });\n            observer.observe(document.documentElement, { attributes: true });\n            window.matchMedia('(prefers-color-scheme: light)').onchange = (event) => {\n                this.theme = event.matches ? 'light' : 'dark';\n            };\n            window.matchMedia('(prefers-color-scheme: dark)').onchange = (event) => {\n                this.theme = event.matches ? 'dark' : 'light';\n            };\n        }\n    }\n}\ncustomElements.define('markdown-style', MarkdownStyle);");
 function markdownStyle(child, markdownStyleTheme) {
   var properties = {
     style: 'max-width: 960px; margin: 0 auto 60px auto; padding: 8px',
-    className: 'markdown-body'
+    className: 'markdown-style'
   };
 
   if (markdownStyleTheme) {
@@ -101824,7 +102229,7 @@ function markdownStyle(child, markdownStyleTheme) {
   }];
 }
 ;// CONCATENATED MODULE: ../cli/lib/nodes/copy.js
-var copy_style = ".markdown-body pre .copied {\n  display: flex;\n  position: absolute;\n  cursor: pointer;\n  color: #a5afbb;\n  top: 6px;\n  right: 6px;\n  border-radius: 5px;\n  background: #82828226;\n  padding: 6px;\n  font-size: 12px;\n  transition: all .3s;\n}\n.markdown-body pre .copied:not(.active) {\n  visibility: hidden;\n}\n.markdown-body pre:hover .copied {\n  visibility: visible;\n}\n.markdown-body pre:hover .copied:hover {\n  background: #4caf50;\n  color: #fff;\n}\n.markdown-body pre:hover .copied:active,\n.markdown-body pre .copied.active {\n  background: #2e9b33;\n  color: #fff;\n}\n.markdown-body pre .copied .octicon-copy {\n  display: block;\n}\n.markdown-body pre .copied .octicon-check {\n  display: none;\n}\n.markdown-body pre .active .octicon-copy {\n  display: none;\n}\n.markdown-body pre .active .octicon-check {\n  display: block;\n}";
+var copy_style = "markdown-style pre .copied {\n  display: flex;\n  position: absolute;\n  cursor: pointer;\n  color: #a5afbb;\n  top: 6px;\n  right: 6px;\n  border-radius: 5px;\n  background: #82828226;\n  padding: 6px;\n  font-size: 12px;\n  transition: all .3s;\n}\nmarkdown-style pre .copied:not(.active) {\n  visibility: hidden;\n}\nmarkdown-style pre:hover .copied {\n  visibility: visible;\n}\nmarkdown-style pre:hover .copied:hover {\n  background: #4caf50;\n  color: #fff;\n}\nmarkdown-style pre:hover .copied:active,\nmarkdown-style pre .copied.active {\n  background: #2e9b33;\n  color: #fff;\n}\nmarkdown-style pre .copied .octicon-copy {\n  display: block;\n}\nmarkdown-style pre .copied .octicon-check {\n  display: none;\n}\nmarkdown-style pre .active .octicon-copy {\n  display: none;\n}\nmarkdown-style pre .active .octicon-check {\n  display: block;\n}";
 function copyStyle() {
   return {
     type: 'element',
