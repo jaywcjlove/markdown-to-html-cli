@@ -137,6 +137,7 @@ Options:
   --keywords              Define keywords for search engines.
   --no-dark-mode          Disable light and dark theme styles button.
   --markdown              Markdown string.
+  --style                 Override default styles. css file path or css string.
   --markdown-style-theme  Setting markdown-style light/dark theme.
   --output, -o            Output static pages to the specified directory. Default: "index.html"
   --source, -s            The path of the target file "README.md". Default: "README.md"
@@ -156,6 +157,8 @@ Example:
   npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
   npm markdown-to-html-cli --output coverage/index.html
   npm markdown-to-html-cli --source README.md
+  npm markdown-to-html-cli --source README.md --style=./style.css
+  npm markdown-to-html-cli --source README.md --style='body { color: red; }'
 ```
 
 ## Markdown Features

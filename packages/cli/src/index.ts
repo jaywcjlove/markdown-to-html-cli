@@ -35,6 +35,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   favicon?: string;
   /** Define the author of a page */
   author?: string;
+  /** Override default styles */
+  style?: string;
 }
 
 export interface MDToHTMLOptions extends RunArgvs {
@@ -81,6 +83,18 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   const options = formatConfig({ ...opts, ...argvs });
   const output = path.resolve(argvs.output);
 
+
+  if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
+  if (options.style) {
+    const stylePath = path.resolve(process.cwd(), options.style);
+    if (fs.existsSync(stylePath)) {
+      const cssString = fs.readFileSync(stylePath).toString();
+      options.document.style.push(cssString);
+    } else {
+      options.document.style.push(options.style);
+    }
+  }
+
   const strMarkdown = create({ ...argvs, ...options });
   fs.writeFileSync(output, strMarkdown);
   console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
@@ -98,6 +112,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --keywords              Define keywords for search engines.
     --no-dark-mode          Disable light and dark theme styles button.
     --markdown              Markdown string.
+    --style                 Override default styles. css file path or css string.
     --markdown-style-theme  Setting markdown-style light/dark theme.
     --output, -o            Output static pages to the specified directory. Default: "index.html"
     --source, -s            The path of the target file "README.md". Default: "README.md"
@@ -118,5 +133,7 @@ export const exampleHelp: string =`\n  Example:
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove --github-corners-fork
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md --style=./style.css
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md --style='body { color: red; }'
   
 `;

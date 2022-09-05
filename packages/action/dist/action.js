@@ -3943,2193 +3943,6 @@ module.exports = function extend() {
 
 /***/ }),
 
-/***/ 1397:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-var path = __webpack_require__(1017);
-
-var mkdirsSync = (__webpack_require__(9524).mkdirsSync);
-
-var utimesMillisSync = (__webpack_require__(9039).utimesMillisSync);
-
-var stat = __webpack_require__(5959);
-
-function copySync(src, dest, opts) {
-  if (typeof opts === 'function') {
-    opts = {
-      filter: opts
-    };
-  }
-
-  opts = opts || {};
-  opts.clobber = 'clobber' in opts ? !!opts.clobber : true; // default to true for now
-
-  opts.overwrite = 'overwrite' in opts ? !!opts.overwrite : opts.clobber; // overwrite falls back to clobber
-  // Warn about using preserveTimestamps on 32-bit node
-
-  if (opts.preserveTimestamps && process.arch === 'ia32') {
-    process.emitWarning('Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' + '\tsee https://github.com/jprichardson/node-fs-extra/issues/269', 'Warning', 'fs-extra-WARN0002');
-  }
-
-  var _stat$checkPathsSync = stat.checkPathsSync(src, dest, 'copy', opts),
-      srcStat = _stat$checkPathsSync.srcStat,
-      destStat = _stat$checkPathsSync.destStat;
-
-  stat.checkParentPathsSync(src, srcStat, dest, 'copy');
-  return handleFilterAndCopy(destStat, src, dest, opts);
-}
-
-function handleFilterAndCopy(destStat, src, dest, opts) {
-  if (opts.filter && !opts.filter(src, dest)) return;
-  var destParent = path.dirname(dest);
-  if (!fs.existsSync(destParent)) mkdirsSync(destParent);
-  return getStats(destStat, src, dest, opts);
-}
-
-function startCopy(destStat, src, dest, opts) {
-  if (opts.filter && !opts.filter(src, dest)) return;
-  return getStats(destStat, src, dest, opts);
-}
-
-function getStats(destStat, src, dest, opts) {
-  var statSync = opts.dereference ? fs.statSync : fs.lstatSync;
-  var srcStat = statSync(src);
-  if (srcStat.isDirectory()) return onDir(srcStat, destStat, src, dest, opts);else if (srcStat.isFile() || srcStat.isCharacterDevice() || srcStat.isBlockDevice()) return onFile(srcStat, destStat, src, dest, opts);else if (srcStat.isSymbolicLink()) return onLink(destStat, src, dest, opts);else if (srcStat.isSocket()) throw new Error("Cannot copy a socket file: ".concat(src));else if (srcStat.isFIFO()) throw new Error("Cannot copy a FIFO pipe: ".concat(src));
-  throw new Error("Unknown file: ".concat(src));
-}
-
-function onFile(srcStat, destStat, src, dest, opts) {
-  if (!destStat) return copyFile(srcStat, src, dest, opts);
-  return mayCopyFile(srcStat, src, dest, opts);
-}
-
-function mayCopyFile(srcStat, src, dest, opts) {
-  if (opts.overwrite) {
-    fs.unlinkSync(dest);
-    return copyFile(srcStat, src, dest, opts);
-  } else if (opts.errorOnExist) {
-    throw new Error("'".concat(dest, "' already exists"));
-  }
-}
-
-function copyFile(srcStat, src, dest, opts) {
-  fs.copyFileSync(src, dest);
-  if (opts.preserveTimestamps) handleTimestamps(srcStat.mode, src, dest);
-  return setDestMode(dest, srcStat.mode);
-}
-
-function handleTimestamps(srcMode, src, dest) {
-  // Make sure the file is writable before setting the timestamp
-  // otherwise open fails with EPERM when invoked with 'r+'
-  // (through utimes call)
-  if (fileIsNotWritable(srcMode)) makeFileWritable(dest, srcMode);
-  return setDestTimestamps(src, dest);
-}
-
-function fileIsNotWritable(srcMode) {
-  return (srcMode & 128) === 0;
-}
-
-function makeFileWritable(dest, srcMode) {
-  return setDestMode(dest, srcMode | 128);
-}
-
-function setDestMode(dest, srcMode) {
-  return fs.chmodSync(dest, srcMode);
-}
-
-function setDestTimestamps(src, dest) {
-  // The initial srcStat.atime cannot be trusted
-  // because it is modified by the read(2) system call
-  // (See https://nodejs.org/api/fs.html#fs_stat_time_values)
-  var updatedSrcStat = fs.statSync(src);
-  return utimesMillisSync(dest, updatedSrcStat.atime, updatedSrcStat.mtime);
-}
-
-function onDir(srcStat, destStat, src, dest, opts) {
-  if (!destStat) return mkDirAndCopy(srcStat.mode, src, dest, opts);
-  return copyDir(src, dest, opts);
-}
-
-function mkDirAndCopy(srcMode, src, dest, opts) {
-  fs.mkdirSync(dest);
-  copyDir(src, dest, opts);
-  return setDestMode(dest, srcMode);
-}
-
-function copyDir(src, dest, opts) {
-  fs.readdirSync(src).forEach(function (item) {
-    return copyDirItem(item, src, dest, opts);
-  });
-}
-
-function copyDirItem(item, src, dest, opts) {
-  var srcItem = path.join(src, item);
-  var destItem = path.join(dest, item);
-
-  var _stat$checkPathsSync2 = stat.checkPathsSync(srcItem, destItem, 'copy', opts),
-      destStat = _stat$checkPathsSync2.destStat;
-
-  return startCopy(destStat, srcItem, destItem, opts);
-}
-
-function onLink(destStat, src, dest, opts) {
-  var resolvedSrc = fs.readlinkSync(src);
-
-  if (opts.dereference) {
-    resolvedSrc = path.resolve(process.cwd(), resolvedSrc);
-  }
-
-  if (!destStat) {
-    return fs.symlinkSync(resolvedSrc, dest);
-  } else {
-    var resolvedDest;
-
-    try {
-      resolvedDest = fs.readlinkSync(dest);
-    } catch (err) {
-      // dest exists and is a regular file or directory,
-      // Windows may throw UNKNOWN error. If dest already exists,
-      // fs throws error anyway, so no need to guard against it here.
-      if (err.code === 'EINVAL' || err.code === 'UNKNOWN') return fs.symlinkSync(resolvedSrc, dest);
-      throw err;
-    }
-
-    if (opts.dereference) {
-      resolvedDest = path.resolve(process.cwd(), resolvedDest);
-    }
-
-    if (stat.isSrcSubdir(resolvedSrc, resolvedDest)) {
-      throw new Error("Cannot copy '".concat(resolvedSrc, "' to a subdirectory of itself, '").concat(resolvedDest, "'."));
-    } // prevent copy if src is a subdir of dest since unlinking
-    // dest in this case would result in removing src contents
-    // and therefore a broken symlink would be created.
-
-
-    if (fs.statSync(dest).isDirectory() && stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
-      throw new Error("Cannot overwrite '".concat(resolvedDest, "' with '").concat(resolvedSrc, "'."));
-    }
-
-    return copyLink(resolvedSrc, dest);
-  }
-}
-
-function copyLink(resolvedSrc, dest) {
-  fs.unlinkSync(dest);
-  return fs.symlinkSync(resolvedSrc, dest);
-}
-
-module.exports = copySync;
-
-/***/ }),
-
-/***/ 7628:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-var path = __webpack_require__(1017);
-
-var mkdirs = (__webpack_require__(9524).mkdirs);
-
-var pathExists = (__webpack_require__(3233).pathExists);
-
-var utimesMillis = (__webpack_require__(9039).utimesMillis);
-
-var stat = __webpack_require__(5959);
-
-function copy(src, dest, opts, cb) {
-  if (typeof opts === 'function' && !cb) {
-    cb = opts;
-    opts = {};
-  } else if (typeof opts === 'function') {
-    opts = {
-      filter: opts
-    };
-  }
-
-  cb = cb || function () {};
-
-  opts = opts || {};
-  opts.clobber = 'clobber' in opts ? !!opts.clobber : true; // default to true for now
-
-  opts.overwrite = 'overwrite' in opts ? !!opts.overwrite : opts.clobber; // overwrite falls back to clobber
-  // Warn about using preserveTimestamps on 32-bit node
-
-  if (opts.preserveTimestamps && process.arch === 'ia32') {
-    process.emitWarning('Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' + '\tsee https://github.com/jprichardson/node-fs-extra/issues/269', 'Warning', 'fs-extra-WARN0001');
-  }
-
-  stat.checkPaths(src, dest, 'copy', opts, function (err, stats) {
-    if (err) return cb(err);
-    var srcStat = stats.srcStat,
-        destStat = stats.destStat;
-    stat.checkParentPaths(src, srcStat, dest, 'copy', function (err) {
-      if (err) return cb(err);
-      if (opts.filter) return handleFilter(checkParentDir, destStat, src, dest, opts, cb);
-      return checkParentDir(destStat, src, dest, opts, cb);
-    });
-  });
-}
-
-function checkParentDir(destStat, src, dest, opts, cb) {
-  var destParent = path.dirname(dest);
-  pathExists(destParent, function (err, dirExists) {
-    if (err) return cb(err);
-    if (dirExists) return getStats(destStat, src, dest, opts, cb);
-    mkdirs(destParent, function (err) {
-      if (err) return cb(err);
-      return getStats(destStat, src, dest, opts, cb);
-    });
-  });
-}
-
-function handleFilter(onInclude, destStat, src, dest, opts, cb) {
-  Promise.resolve(opts.filter(src, dest)).then(function (include) {
-    if (include) return onInclude(destStat, src, dest, opts, cb);
-    return cb();
-  }, function (error) {
-    return cb(error);
-  });
-}
-
-function startCopy(destStat, src, dest, opts, cb) {
-  if (opts.filter) return handleFilter(getStats, destStat, src, dest, opts, cb);
-  return getStats(destStat, src, dest, opts, cb);
-}
-
-function getStats(destStat, src, dest, opts, cb) {
-  var stat = opts.dereference ? fs.stat : fs.lstat;
-  stat(src, function (err, srcStat) {
-    if (err) return cb(err);
-    if (srcStat.isDirectory()) return onDir(srcStat, destStat, src, dest, opts, cb);else if (srcStat.isFile() || srcStat.isCharacterDevice() || srcStat.isBlockDevice()) return onFile(srcStat, destStat, src, dest, opts, cb);else if (srcStat.isSymbolicLink()) return onLink(destStat, src, dest, opts, cb);else if (srcStat.isSocket()) return cb(new Error("Cannot copy a socket file: ".concat(src)));else if (srcStat.isFIFO()) return cb(new Error("Cannot copy a FIFO pipe: ".concat(src)));
-    return cb(new Error("Unknown file: ".concat(src)));
-  });
-}
-
-function onFile(srcStat, destStat, src, dest, opts, cb) {
-  if (!destStat) return copyFile(srcStat, src, dest, opts, cb);
-  return mayCopyFile(srcStat, src, dest, opts, cb);
-}
-
-function mayCopyFile(srcStat, src, dest, opts, cb) {
-  if (opts.overwrite) {
-    fs.unlink(dest, function (err) {
-      if (err) return cb(err);
-      return copyFile(srcStat, src, dest, opts, cb);
-    });
-  } else if (opts.errorOnExist) {
-    return cb(new Error("'".concat(dest, "' already exists")));
-  } else return cb();
-}
-
-function copyFile(srcStat, src, dest, opts, cb) {
-  fs.copyFile(src, dest, function (err) {
-    if (err) return cb(err);
-    if (opts.preserveTimestamps) return handleTimestampsAndMode(srcStat.mode, src, dest, cb);
-    return setDestMode(dest, srcStat.mode, cb);
-  });
-}
-
-function handleTimestampsAndMode(srcMode, src, dest, cb) {
-  // Make sure the file is writable before setting the timestamp
-  // otherwise open fails with EPERM when invoked with 'r+'
-  // (through utimes call)
-  if (fileIsNotWritable(srcMode)) {
-    return makeFileWritable(dest, srcMode, function (err) {
-      if (err) return cb(err);
-      return setDestTimestampsAndMode(srcMode, src, dest, cb);
-    });
-  }
-
-  return setDestTimestampsAndMode(srcMode, src, dest, cb);
-}
-
-function fileIsNotWritable(srcMode) {
-  return (srcMode & 128) === 0;
-}
-
-function makeFileWritable(dest, srcMode, cb) {
-  return setDestMode(dest, srcMode | 128, cb);
-}
-
-function setDestTimestampsAndMode(srcMode, src, dest, cb) {
-  setDestTimestamps(src, dest, function (err) {
-    if (err) return cb(err);
-    return setDestMode(dest, srcMode, cb);
-  });
-}
-
-function setDestMode(dest, srcMode, cb) {
-  return fs.chmod(dest, srcMode, cb);
-}
-
-function setDestTimestamps(src, dest, cb) {
-  // The initial srcStat.atime cannot be trusted
-  // because it is modified by the read(2) system call
-  // (See https://nodejs.org/api/fs.html#fs_stat_time_values)
-  fs.stat(src, function (err, updatedSrcStat) {
-    if (err) return cb(err);
-    return utimesMillis(dest, updatedSrcStat.atime, updatedSrcStat.mtime, cb);
-  });
-}
-
-function onDir(srcStat, destStat, src, dest, opts, cb) {
-  if (!destStat) return mkDirAndCopy(srcStat.mode, src, dest, opts, cb);
-  return copyDir(src, dest, opts, cb);
-}
-
-function mkDirAndCopy(srcMode, src, dest, opts, cb) {
-  fs.mkdir(dest, function (err) {
-    if (err) return cb(err);
-    copyDir(src, dest, opts, function (err) {
-      if (err) return cb(err);
-      return setDestMode(dest, srcMode, cb);
-    });
-  });
-}
-
-function copyDir(src, dest, opts, cb) {
-  fs.readdir(src, function (err, items) {
-    if (err) return cb(err);
-    return copyDirItems(items, src, dest, opts, cb);
-  });
-}
-
-function copyDirItems(items, src, dest, opts, cb) {
-  var item = items.pop();
-  if (!item) return cb();
-  return copyDirItem(items, item, src, dest, opts, cb);
-}
-
-function copyDirItem(items, item, src, dest, opts, cb) {
-  var srcItem = path.join(src, item);
-  var destItem = path.join(dest, item);
-  stat.checkPaths(srcItem, destItem, 'copy', opts, function (err, stats) {
-    if (err) return cb(err);
-    var destStat = stats.destStat;
-    startCopy(destStat, srcItem, destItem, opts, function (err) {
-      if (err) return cb(err);
-      return copyDirItems(items, src, dest, opts, cb);
-    });
-  });
-}
-
-function onLink(destStat, src, dest, opts, cb) {
-  fs.readlink(src, function (err, resolvedSrc) {
-    if (err) return cb(err);
-
-    if (opts.dereference) {
-      resolvedSrc = path.resolve(process.cwd(), resolvedSrc);
-    }
-
-    if (!destStat) {
-      return fs.symlink(resolvedSrc, dest, cb);
-    } else {
-      fs.readlink(dest, function (err, resolvedDest) {
-        if (err) {
-          // dest exists and is a regular file or directory,
-          // Windows may throw UNKNOWN error. If dest already exists,
-          // fs throws error anyway, so no need to guard against it here.
-          if (err.code === 'EINVAL' || err.code === 'UNKNOWN') return fs.symlink(resolvedSrc, dest, cb);
-          return cb(err);
-        }
-
-        if (opts.dereference) {
-          resolvedDest = path.resolve(process.cwd(), resolvedDest);
-        }
-
-        if (stat.isSrcSubdir(resolvedSrc, resolvedDest)) {
-          return cb(new Error("Cannot copy '".concat(resolvedSrc, "' to a subdirectory of itself, '").concat(resolvedDest, "'.")));
-        } // do not copy if src is a subdir of dest since unlinking
-        // dest in this case would result in removing src contents
-        // and therefore a broken symlink would be created.
-
-
-        if (destStat.isDirectory() && stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
-          return cb(new Error("Cannot overwrite '".concat(resolvedDest, "' with '").concat(resolvedSrc, "'.")));
-        }
-
-        return copyLink(resolvedSrc, dest, cb);
-      });
-    }
-  });
-}
-
-function copyLink(resolvedSrc, dest, cb) {
-  fs.unlink(dest, function (err) {
-    if (err) return cb(err);
-    return fs.symlink(resolvedSrc, dest, cb);
-  });
-}
-
-module.exports = copy;
-
-/***/ }),
-
-/***/ 3008:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromCallback);
-
-module.exports = {
-  copy: u(__webpack_require__(7628)),
-  copySync: __webpack_require__(1397)
-};
-
-/***/ }),
-
-/***/ 9855:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
-
-var _asyncToGenerator = (__webpack_require__(1461)["default"]);
-
-var u = (__webpack_require__(9689).fromPromise);
-
-var fs = __webpack_require__(3817);
-
-var path = __webpack_require__(1017);
-
-var mkdir = __webpack_require__(9524);
-
-var remove = __webpack_require__(9547);
-
-var emptyDir = u( /*#__PURE__*/function () {
-  var _emptyDir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir) {
-    var items;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return fs.readdir(dir);
-
-          case 3:
-            items = _context.sent;
-            _context.next = 9;
-            break;
-
-          case 6:
-            _context.prev = 6;
-            _context.t0 = _context["catch"](0);
-            return _context.abrupt("return", mkdir.mkdirs(dir));
-
-          case 9:
-            return _context.abrupt("return", Promise.all(items.map(function (item) {
-              return remove.remove(path.join(dir, item));
-            })));
-
-          case 10:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[0, 6]]);
-  }));
-
-  function emptyDir(_x) {
-    return _emptyDir.apply(this, arguments);
-  }
-
-  return emptyDir;
-}());
-
-function emptyDirSync(dir) {
-  var items;
-
-  try {
-    items = fs.readdirSync(dir);
-  } catch (_unused2) {
-    return mkdir.mkdirsSync(dir);
-  }
-
-  items.forEach(function (item) {
-    item = path.join(dir, item);
-    remove.removeSync(item);
-  });
-}
-
-module.exports = {
-  emptyDirSync: emptyDirSync,
-  emptydirSync: emptyDirSync,
-  emptyDir: emptyDir,
-  emptydir: emptyDir
-};
-
-/***/ }),
-
-/***/ 1275:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromCallback);
-
-var path = __webpack_require__(1017);
-
-var fs = __webpack_require__(8173);
-
-var mkdir = __webpack_require__(9524);
-
-function createFile(file, callback) {
-  function makeFile() {
-    fs.writeFile(file, '', function (err) {
-      if (err) return callback(err);
-      callback();
-    });
-  }
-
-  fs.stat(file, function (err, stats) {
-    // eslint-disable-line handle-callback-err
-    if (!err && stats.isFile()) return callback();
-    var dir = path.dirname(file);
-    fs.stat(dir, function (err, stats) {
-      if (err) {
-        // if the directory doesn't exist, make it
-        if (err.code === 'ENOENT') {
-          return mkdir.mkdirs(dir, function (err) {
-            if (err) return callback(err);
-            makeFile();
-          });
-        }
-
-        return callback(err);
-      }
-
-      if (stats.isDirectory()) makeFile();else {
-        // parent is not a directory
-        // This is just to cause an internal ENOTDIR error to be thrown
-        fs.readdir(dir, function (err) {
-          if (err) return callback(err);
-        });
-      }
-    });
-  });
-}
-
-function createFileSync(file) {
-  var stats;
-
-  try {
-    stats = fs.statSync(file);
-  } catch (_unused) {}
-
-  if (stats && stats.isFile()) return;
-  var dir = path.dirname(file);
-
-  try {
-    if (!fs.statSync(dir).isDirectory()) {
-      // parent is not a directory
-      // This is just to cause an internal ENOTDIR error to be thrown
-      fs.readdirSync(dir);
-    }
-  } catch (err) {
-    // If the stat call above failed because the directory doesn't exist, create it
-    if (err && err.code === 'ENOENT') mkdir.mkdirsSync(dir);else throw err;
-  }
-
-  fs.writeFileSync(file, '');
-}
-
-module.exports = {
-  createFile: u(createFile),
-  createFileSync: createFileSync
-};
-
-/***/ }),
-
-/***/ 6213:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _require = __webpack_require__(1275),
-    createFile = _require.createFile,
-    createFileSync = _require.createFileSync;
-
-var _require2 = __webpack_require__(7554),
-    createLink = _require2.createLink,
-    createLinkSync = _require2.createLinkSync;
-
-var _require3 = __webpack_require__(5154),
-    createSymlink = _require3.createSymlink,
-    createSymlinkSync = _require3.createSymlinkSync;
-
-module.exports = {
-  // file
-  createFile: createFile,
-  createFileSync: createFileSync,
-  ensureFile: createFile,
-  ensureFileSync: createFileSync,
-  // link
-  createLink: createLink,
-  createLinkSync: createLinkSync,
-  ensureLink: createLink,
-  ensureLinkSync: createLinkSync,
-  // symlink
-  createSymlink: createSymlink,
-  createSymlinkSync: createSymlinkSync,
-  ensureSymlink: createSymlink,
-  ensureSymlinkSync: createSymlinkSync
-};
-
-/***/ }),
-
-/***/ 7554:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromCallback);
-
-var path = __webpack_require__(1017);
-
-var fs = __webpack_require__(8173);
-
-var mkdir = __webpack_require__(9524);
-
-var pathExists = (__webpack_require__(3233).pathExists);
-
-var _require = __webpack_require__(5959),
-    areIdentical = _require.areIdentical;
-
-function createLink(srcpath, dstpath, callback) {
-  function makeLink(srcpath, dstpath) {
-    fs.link(srcpath, dstpath, function (err) {
-      if (err) return callback(err);
-      callback(null);
-    });
-  }
-
-  fs.lstat(dstpath, function (_, dstStat) {
-    fs.lstat(srcpath, function (err, srcStat) {
-      if (err) {
-        err.message = err.message.replace('lstat', 'ensureLink');
-        return callback(err);
-      }
-
-      if (dstStat && areIdentical(srcStat, dstStat)) return callback(null);
-      var dir = path.dirname(dstpath);
-      pathExists(dir, function (err, dirExists) {
-        if (err) return callback(err);
-        if (dirExists) return makeLink(srcpath, dstpath);
-        mkdir.mkdirs(dir, function (err) {
-          if (err) return callback(err);
-          makeLink(srcpath, dstpath);
-        });
-      });
-    });
-  });
-}
-
-function createLinkSync(srcpath, dstpath) {
-  var dstStat;
-
-  try {
-    dstStat = fs.lstatSync(dstpath);
-  } catch (_unused) {}
-
-  try {
-    var srcStat = fs.lstatSync(srcpath);
-    if (dstStat && areIdentical(srcStat, dstStat)) return;
-  } catch (err) {
-    err.message = err.message.replace('lstat', 'ensureLink');
-    throw err;
-  }
-
-  var dir = path.dirname(dstpath);
-  var dirExists = fs.existsSync(dir);
-  if (dirExists) return fs.linkSync(srcpath, dstpath);
-  mkdir.mkdirsSync(dir);
-  return fs.linkSync(srcpath, dstpath);
-}
-
-module.exports = {
-  createLink: u(createLink),
-  createLinkSync: createLinkSync
-};
-
-/***/ }),
-
-/***/ 7720:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var path = __webpack_require__(1017);
-
-var fs = __webpack_require__(8173);
-
-var pathExists = (__webpack_require__(3233).pathExists);
-/**
- * Function that returns two types of paths, one relative to symlink, and one
- * relative to the current working directory. Checks if path is absolute or
- * relative. If the path is relative, this function checks if the path is
- * relative to symlink or relative to current working directory. This is an
- * initiative to find a smarter `srcpath` to supply when building symlinks.
- * This allows you to determine which path to use out of one of three possible
- * types of source paths. The first is an absolute path. This is detected by
- * `path.isAbsolute()`. When an absolute path is provided, it is checked to
- * see if it exists. If it does it's used, if not an error is returned
- * (callback)/ thrown (sync). The other two options for `srcpath` are a
- * relative url. By default Node's `fs.symlink` works by creating a symlink
- * using `dstpath` and expects the `srcpath` to be relative to the newly
- * created symlink. If you provide a `srcpath` that does not exist on the file
- * system it results in a broken symlink. To minimize this, the function
- * checks to see if the 'relative to symlink' source file exists, and if it
- * does it will use it. If it does not, it checks if there's a file that
- * exists that is relative to the current working directory, if does its used.
- * This preserves the expectations of the original fs.symlink spec and adds
- * the ability to pass in `relative to current working direcotry` paths.
- */
-
-
-function symlinkPaths(srcpath, dstpath, callback) {
-  if (path.isAbsolute(srcpath)) {
-    return fs.lstat(srcpath, function (err) {
-      if (err) {
-        err.message = err.message.replace('lstat', 'ensureSymlink');
-        return callback(err);
-      }
-
-      return callback(null, {
-        toCwd: srcpath,
-        toDst: srcpath
-      });
-    });
-  } else {
-    var dstdir = path.dirname(dstpath);
-    var relativeToDst = path.join(dstdir, srcpath);
-    return pathExists(relativeToDst, function (err, exists) {
-      if (err) return callback(err);
-
-      if (exists) {
-        return callback(null, {
-          toCwd: relativeToDst,
-          toDst: srcpath
-        });
-      } else {
-        return fs.lstat(srcpath, function (err) {
-          if (err) {
-            err.message = err.message.replace('lstat', 'ensureSymlink');
-            return callback(err);
-          }
-
-          return callback(null, {
-            toCwd: srcpath,
-            toDst: path.relative(dstdir, srcpath)
-          });
-        });
-      }
-    });
-  }
-}
-
-function symlinkPathsSync(srcpath, dstpath) {
-  var exists;
-
-  if (path.isAbsolute(srcpath)) {
-    exists = fs.existsSync(srcpath);
-    if (!exists) throw new Error('absolute srcpath does not exist');
-    return {
-      toCwd: srcpath,
-      toDst: srcpath
-    };
-  } else {
-    var dstdir = path.dirname(dstpath);
-    var relativeToDst = path.join(dstdir, srcpath);
-    exists = fs.existsSync(relativeToDst);
-
-    if (exists) {
-      return {
-        toCwd: relativeToDst,
-        toDst: srcpath
-      };
-    } else {
-      exists = fs.existsSync(srcpath);
-      if (!exists) throw new Error('relative srcpath does not exist');
-      return {
-        toCwd: srcpath,
-        toDst: path.relative(dstdir, srcpath)
-      };
-    }
-  }
-}
-
-module.exports = {
-  symlinkPaths: symlinkPaths,
-  symlinkPathsSync: symlinkPathsSync
-};
-
-/***/ }),
-
-/***/ 2046:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-function symlinkType(srcpath, type, callback) {
-  callback = typeof type === 'function' ? type : callback;
-  type = typeof type === 'function' ? false : type;
-  if (type) return callback(null, type);
-  fs.lstat(srcpath, function (err, stats) {
-    if (err) return callback(null, 'file');
-    type = stats && stats.isDirectory() ? 'dir' : 'file';
-    callback(null, type);
-  });
-}
-
-function symlinkTypeSync(srcpath, type) {
-  var stats;
-  if (type) return type;
-
-  try {
-    stats = fs.lstatSync(srcpath);
-  } catch (_unused) {
-    return 'file';
-  }
-
-  return stats && stats.isDirectory() ? 'dir' : 'file';
-}
-
-module.exports = {
-  symlinkType: symlinkType,
-  symlinkTypeSync: symlinkTypeSync
-};
-
-/***/ }),
-
-/***/ 5154:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _slicedToArray = (__webpack_require__(3681)["default"]);
-
-var u = (__webpack_require__(9689).fromCallback);
-
-var path = __webpack_require__(1017);
-
-var fs = __webpack_require__(3817);
-
-var _mkdirs = __webpack_require__(9524);
-
-var mkdirs = _mkdirs.mkdirs;
-var mkdirsSync = _mkdirs.mkdirsSync;
-
-var _symlinkPaths = __webpack_require__(7720);
-
-var symlinkPaths = _symlinkPaths.symlinkPaths;
-var symlinkPathsSync = _symlinkPaths.symlinkPathsSync;
-
-var _symlinkType = __webpack_require__(2046);
-
-var symlinkType = _symlinkType.symlinkType;
-var symlinkTypeSync = _symlinkType.symlinkTypeSync;
-
-var pathExists = (__webpack_require__(3233).pathExists);
-
-var _require = __webpack_require__(5959),
-    areIdentical = _require.areIdentical;
-
-function createSymlink(srcpath, dstpath, type, callback) {
-  callback = typeof type === 'function' ? type : callback;
-  type = typeof type === 'function' ? false : type;
-  fs.lstat(dstpath, function (err, stats) {
-    if (!err && stats.isSymbolicLink()) {
-      Promise.all([fs.stat(srcpath), fs.stat(dstpath)]).then(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            srcStat = _ref2[0],
-            dstStat = _ref2[1];
-
-        if (areIdentical(srcStat, dstStat)) return callback(null);
-
-        _createSymlink(srcpath, dstpath, type, callback);
-      });
-    } else _createSymlink(srcpath, dstpath, type, callback);
-  });
-}
-
-function _createSymlink(srcpath, dstpath, type, callback) {
-  symlinkPaths(srcpath, dstpath, function (err, relative) {
-    if (err) return callback(err);
-    srcpath = relative.toDst;
-    symlinkType(relative.toCwd, type, function (err, type) {
-      if (err) return callback(err);
-      var dir = path.dirname(dstpath);
-      pathExists(dir, function (err, dirExists) {
-        if (err) return callback(err);
-        if (dirExists) return fs.symlink(srcpath, dstpath, type, callback);
-        mkdirs(dir, function (err) {
-          if (err) return callback(err);
-          fs.symlink(srcpath, dstpath, type, callback);
-        });
-      });
-    });
-  });
-}
-
-function createSymlinkSync(srcpath, dstpath, type) {
-  var stats;
-
-  try {
-    stats = fs.lstatSync(dstpath);
-  } catch (_unused) {}
-
-  if (stats && stats.isSymbolicLink()) {
-    var srcStat = fs.statSync(srcpath);
-    var dstStat = fs.statSync(dstpath);
-    if (areIdentical(srcStat, dstStat)) return;
-  }
-
-  var relative = symlinkPathsSync(srcpath, dstpath);
-  srcpath = relative.toDst;
-  type = symlinkTypeSync(relative.toCwd, type);
-  var dir = path.dirname(dstpath);
-  var exists = fs.existsSync(dir);
-  if (exists) return fs.symlinkSync(srcpath, dstpath, type);
-  mkdirsSync(dir);
-  return fs.symlinkSync(srcpath, dstpath, type);
-}
-
-module.exports = {
-  createSymlink: u(createSymlink),
-  createSymlinkSync: createSymlinkSync
-};
-
-/***/ }),
-
-/***/ 3817:
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
-
-"use strict";
- // This is adapted from https://github.com/normalize/mz
-// Copyright (c) 2014-2016 Jonathan Ong me@jongleberry.com and Contributors
-
-var u = (__webpack_require__(9689).fromCallback);
-
-var fs = __webpack_require__(8173);
-
-var api = ['access', 'appendFile', 'chmod', 'chown', 'close', 'copyFile', 'fchmod', 'fchown', 'fdatasync', 'fstat', 'fsync', 'ftruncate', 'futimes', 'lchmod', 'lchown', 'link', 'lstat', 'mkdir', 'mkdtemp', 'open', 'opendir', 'readdir', 'readFile', 'readlink', 'realpath', 'rename', 'rm', 'rmdir', 'stat', 'symlink', 'truncate', 'unlink', 'utimes', 'writeFile'].filter(function (key) {
-  // Some commands are not available on some systems. Ex:
-  // fs.opendir was added in Node.js v12.12.0
-  // fs.rm was added in Node.js v14.14.0
-  // fs.lchown is not available on at least some Linux
-  return typeof fs[key] === 'function';
-}); // Export cloned fs:
-
-Object.assign(exports, fs); // Universalify async methods:
-
-api.forEach(function (method) {
-  exports[method] = u(fs[method]);
-}); // We differ from mz/fs in that we still ship the old, broken, fs.exists()
-// since we are a drop-in replacement for the native module
-
-exports.exists = function (filename, callback) {
-  if (typeof callback === 'function') {
-    return fs.exists(filename, callback);
-  }
-
-  return new Promise(function (resolve) {
-    return fs.exists(filename, resolve);
-  });
-}; // fs.read(), fs.write(), & fs.writev() need special treatment due to multiple callback args
-
-
-exports.read = function (fd, buffer, offset, length, position, callback) {
-  if (typeof callback === 'function') {
-    return fs.read(fd, buffer, offset, length, position, callback);
-  }
-
-  return new Promise(function (resolve, reject) {
-    fs.read(fd, buffer, offset, length, position, function (err, bytesRead, buffer) {
-      if (err) return reject(err);
-      resolve({
-        bytesRead: bytesRead,
-        buffer: buffer
-      });
-    });
-  });
-}; // Function signature can be
-// fs.write(fd, buffer[, offset[, length[, position]]], callback)
-// OR
-// fs.write(fd, string[, position[, encoding]], callback)
-// We need to handle both cases, so we use ...args
-
-
-exports.write = function (fd, buffer) {
-  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-    args[_key - 2] = arguments[_key];
-  }
-
-  if (typeof args[args.length - 1] === 'function') {
-    return fs.write.apply(fs, [fd, buffer].concat(args));
-  }
-
-  return new Promise(function (resolve, reject) {
-    fs.write.apply(fs, [fd, buffer].concat(args, [function (err, bytesWritten, buffer) {
-      if (err) return reject(err);
-      resolve({
-        bytesWritten: bytesWritten,
-        buffer: buffer
-      });
-    }]));
-  });
-}; // fs.writev only available in Node v12.9.0+
-
-
-if (typeof fs.writev === 'function') {
-  // Function signature is
-  // s.writev(fd, buffers[, position], callback)
-  // We need to handle the optional arg, so we use ...args
-  exports.writev = function (fd, buffers) {
-    for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-      args[_key2 - 2] = arguments[_key2];
-    }
-
-    if (typeof args[args.length - 1] === 'function') {
-      return fs.writev.apply(fs, [fd, buffers].concat(args));
-    }
-
-    return new Promise(function (resolve, reject) {
-      fs.writev.apply(fs, [fd, buffers].concat(args, [function (err, bytesWritten, buffers) {
-        if (err) return reject(err);
-        resolve({
-          bytesWritten: bytesWritten,
-          buffers: buffers
-        });
-      }]));
-    });
-  };
-} // fs.realpath.native sometimes not available if fs is monkey-patched
-
-
-if (typeof fs.realpath["native"] === 'function') {
-  exports.realpath.native = u(fs.realpath["native"]);
-} else {
-  process.emitWarning('fs.realpath.native is not a function. Is fs being monkey-patched?', 'Warning', 'fs-extra-WARN0003');
-}
-
-/***/ }),
-
-/***/ 7215:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _objectSpread = (__webpack_require__(814)["default"]);
-
-module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(3817)), __webpack_require__(3008)), __webpack_require__(9855)), __webpack_require__(6213)), __webpack_require__(8179)), __webpack_require__(9524)), __webpack_require__(347)), __webpack_require__(6716)), __webpack_require__(3233)), __webpack_require__(9547));
-
-/***/ }),
-
-/***/ 8179:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromPromise);
-
-var jsonFile = __webpack_require__(6266);
-
-jsonFile.outputJson = u(__webpack_require__(894));
-jsonFile.outputJsonSync = __webpack_require__(6975); // aliases
-
-jsonFile.outputJSON = jsonFile.outputJson;
-jsonFile.outputJSONSync = jsonFile.outputJsonSync;
-jsonFile.writeJSON = jsonFile.writeJson;
-jsonFile.writeJSONSync = jsonFile.writeJsonSync;
-jsonFile.readJSON = jsonFile.readJson;
-jsonFile.readJSONSync = jsonFile.readJsonSync;
-module.exports = jsonFile;
-
-/***/ }),
-
-/***/ 6266:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var jsonFile = __webpack_require__(4394);
-
-module.exports = {
-  // jsonfile exports
-  readJson: jsonFile.readFile,
-  readJsonSync: jsonFile.readFileSync,
-  writeJson: jsonFile.writeFile,
-  writeJsonSync: jsonFile.writeFileSync
-};
-
-/***/ }),
-
-/***/ 6975:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _require = __webpack_require__(3178),
-    stringify = _require.stringify;
-
-var _require2 = __webpack_require__(6716),
-    outputFileSync = _require2.outputFileSync;
-
-function outputJsonSync(file, data, options) {
-  var str = stringify(data, options);
-  outputFileSync(file, str, options);
-}
-
-module.exports = outputJsonSync;
-
-/***/ }),
-
-/***/ 894:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
-
-var _asyncToGenerator = (__webpack_require__(1461)["default"]);
-
-var _require = __webpack_require__(3178),
-    stringify = _require.stringify;
-
-var _require2 = __webpack_require__(6716),
-    outputFile = _require2.outputFile;
-
-function outputJson(_x, _x2) {
-  return _outputJson.apply(this, arguments);
-}
-
-function _outputJson() {
-  _outputJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(file, data) {
-    var options,
-        str,
-        _args = arguments;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            options = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
-            str = stringify(data, options);
-            _context.next = 4;
-            return outputFile(file, str, options);
-
-          case 4:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _outputJson.apply(this, arguments);
-}
-
-module.exports = outputJson;
-
-/***/ }),
-
-/***/ 9524:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromPromise);
-
-var _require = __webpack_require__(2034),
-    _makeDir = _require.makeDir,
-    makeDirSync = _require.makeDirSync;
-
-var makeDir = u(_makeDir);
-module.exports = {
-  mkdirs: makeDir,
-  mkdirsSync: makeDirSync,
-  // alias
-  mkdirp: makeDir,
-  mkdirpSync: makeDirSync,
-  ensureDir: makeDir,
-  ensureDirSync: makeDirSync
-};
-
-/***/ }),
-
-/***/ 2034:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
-
-var _asyncToGenerator = (__webpack_require__(1461)["default"]);
-
-var _objectSpread = (__webpack_require__(814)["default"]);
-
-var fs = __webpack_require__(3817);
-
-var _require = __webpack_require__(1802),
-    checkPath = _require.checkPath;
-
-var getMode = function getMode(options) {
-  var defaults = {
-    mode: 511
-  };
-  if (typeof options === 'number') return options;
-  return _objectSpread(_objectSpread({}, defaults), options).mode;
-};
-
-module.exports.makeDir = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir, options) {
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            checkPath(dir);
-            return _context.abrupt("return", fs.mkdir(dir, {
-              mode: getMode(options),
-              recursive: true
-            }));
-
-          case 2:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function (_x, _x2) {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-module.exports.makeDirSync = function (dir, options) {
-  checkPath(dir);
-  return fs.mkdirSync(dir, {
-    mode: getMode(options),
-    recursive: true
-  });
-};
-
-/***/ }),
-
-/***/ 1802:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-// Adapted from https://github.com/sindresorhus/make-dir
-// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-
-var path = __webpack_require__(1017); // https://github.com/nodejs/node/issues/8987
-// https://github.com/libuv/libuv/pull/1088
-
-
-module.exports.checkPath = function checkPath(pth) {
-  if (process.platform === 'win32') {
-    var pathHasInvalidWinCharacters = /[<>:"|?*]/.test(pth.replace(path.parse(pth).root, ''));
-
-    if (pathHasInvalidWinCharacters) {
-      var error = new Error("Path contains invalid characters: ".concat(pth));
-      error.code = 'EINVAL';
-      throw error;
-    }
-  }
-};
-
-/***/ }),
-
-/***/ 347:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromCallback);
-
-module.exports = {
-  move: u(__webpack_require__(8060)),
-  moveSync: __webpack_require__(5511)
-};
-
-/***/ }),
-
-/***/ 5511:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-var path = __webpack_require__(1017);
-
-var copySync = (__webpack_require__(3008).copySync);
-
-var removeSync = (__webpack_require__(9547).removeSync);
-
-var mkdirpSync = (__webpack_require__(9524).mkdirpSync);
-
-var stat = __webpack_require__(5959);
-
-function moveSync(src, dest, opts) {
-  opts = opts || {};
-  var overwrite = opts.overwrite || opts.clobber || false;
-
-  var _stat$checkPathsSync = stat.checkPathsSync(src, dest, 'move', opts),
-      srcStat = _stat$checkPathsSync.srcStat,
-      _stat$checkPathsSync$ = _stat$checkPathsSync.isChangingCase,
-      isChangingCase = _stat$checkPathsSync$ === void 0 ? false : _stat$checkPathsSync$;
-
-  stat.checkParentPathsSync(src, srcStat, dest, 'move');
-  if (!isParentRoot(dest)) mkdirpSync(path.dirname(dest));
-  return doRename(src, dest, overwrite, isChangingCase);
-}
-
-function isParentRoot(dest) {
-  var parent = path.dirname(dest);
-  var parsedPath = path.parse(parent);
-  return parsedPath.root === parent;
-}
-
-function doRename(src, dest, overwrite, isChangingCase) {
-  if (isChangingCase) return rename(src, dest, overwrite);
-
-  if (overwrite) {
-    removeSync(dest);
-    return rename(src, dest, overwrite);
-  }
-
-  if (fs.existsSync(dest)) throw new Error('dest already exists.');
-  return rename(src, dest, overwrite);
-}
-
-function rename(src, dest, overwrite) {
-  try {
-    fs.renameSync(src, dest);
-  } catch (err) {
-    if (err.code !== 'EXDEV') throw err;
-    return moveAcrossDevice(src, dest, overwrite);
-  }
-}
-
-function moveAcrossDevice(src, dest, overwrite) {
-  var opts = {
-    overwrite: overwrite,
-    errorOnExist: true
-  };
-  copySync(src, dest, opts);
-  return removeSync(src);
-}
-
-module.exports = moveSync;
-
-/***/ }),
-
-/***/ 8060:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-var path = __webpack_require__(1017);
-
-var copy = (__webpack_require__(3008).copy);
-
-var remove = (__webpack_require__(9547).remove);
-
-var mkdirp = (__webpack_require__(9524).mkdirp);
-
-var pathExists = (__webpack_require__(3233).pathExists);
-
-var stat = __webpack_require__(5959);
-
-function move(src, dest, opts, cb) {
-  if (typeof opts === 'function') {
-    cb = opts;
-    opts = {};
-  }
-
-  opts = opts || {};
-  var overwrite = opts.overwrite || opts.clobber || false;
-  stat.checkPaths(src, dest, 'move', opts, function (err, stats) {
-    if (err) return cb(err);
-    var srcStat = stats.srcStat,
-        _stats$isChangingCase = stats.isChangingCase,
-        isChangingCase = _stats$isChangingCase === void 0 ? false : _stats$isChangingCase;
-    stat.checkParentPaths(src, srcStat, dest, 'move', function (err) {
-      if (err) return cb(err);
-      if (isParentRoot(dest)) return doRename(src, dest, overwrite, isChangingCase, cb);
-      mkdirp(path.dirname(dest), function (err) {
-        if (err) return cb(err);
-        return doRename(src, dest, overwrite, isChangingCase, cb);
-      });
-    });
-  });
-}
-
-function isParentRoot(dest) {
-  var parent = path.dirname(dest);
-  var parsedPath = path.parse(parent);
-  return parsedPath.root === parent;
-}
-
-function doRename(src, dest, overwrite, isChangingCase, cb) {
-  if (isChangingCase) return rename(src, dest, overwrite, cb);
-
-  if (overwrite) {
-    return remove(dest, function (err) {
-      if (err) return cb(err);
-      return rename(src, dest, overwrite, cb);
-    });
-  }
-
-  pathExists(dest, function (err, destExists) {
-    if (err) return cb(err);
-    if (destExists) return cb(new Error('dest already exists.'));
-    return rename(src, dest, overwrite, cb);
-  });
-}
-
-function rename(src, dest, overwrite, cb) {
-  fs.rename(src, dest, function (err) {
-    if (!err) return cb();
-    if (err.code !== 'EXDEV') return cb(err);
-    return moveAcrossDevice(src, dest, overwrite, cb);
-  });
-}
-
-function moveAcrossDevice(src, dest, overwrite, cb) {
-  var opts = {
-    overwrite: overwrite,
-    errorOnExist: true
-  };
-  copy(src, dest, opts, function (err) {
-    if (err) return cb(err);
-    return remove(src, cb);
-  });
-}
-
-module.exports = move;
-
-/***/ }),
-
-/***/ 6716:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromCallback);
-
-var fs = __webpack_require__(8173);
-
-var path = __webpack_require__(1017);
-
-var mkdir = __webpack_require__(9524);
-
-var pathExists = (__webpack_require__(3233).pathExists);
-
-function outputFile(file, data, encoding, callback) {
-  if (typeof encoding === 'function') {
-    callback = encoding;
-    encoding = 'utf8';
-  }
-
-  var dir = path.dirname(file);
-  pathExists(dir, function (err, itDoes) {
-    if (err) return callback(err);
-    if (itDoes) return fs.writeFile(file, data, encoding, callback);
-    mkdir.mkdirs(dir, function (err) {
-      if (err) return callback(err);
-      fs.writeFile(file, data, encoding, callback);
-    });
-  });
-}
-
-function outputFileSync(file) {
-  var dir = path.dirname(file);
-
-  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    args[_key - 1] = arguments[_key];
-  }
-
-  if (fs.existsSync(dir)) {
-    return fs.writeFileSync.apply(fs, [file].concat(args));
-  }
-
-  mkdir.mkdirsSync(dir);
-  fs.writeFileSync.apply(fs, [file].concat(args));
-}
-
-module.exports = {
-  outputFile: u(outputFile),
-  outputFileSync: outputFileSync
-};
-
-/***/ }),
-
-/***/ 3233:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var u = (__webpack_require__(9689).fromPromise);
-
-var fs = __webpack_require__(3817);
-
-function pathExists(path) {
-  return fs.access(path).then(function () {
-    return true;
-  })["catch"](function () {
-    return false;
-  });
-}
-
-module.exports = {
-  pathExists: u(pathExists),
-  pathExistsSync: fs.existsSync
-};
-
-/***/ }),
-
-/***/ 9547:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-var u = (__webpack_require__(9689).fromCallback);
-
-var rimraf = __webpack_require__(2081);
-
-function remove(path, callback) {
-  // Node 14.14.0+
-  if (fs.rm) return fs.rm(path, {
-    recursive: true,
-    force: true
-  }, callback);
-  rimraf(path, callback);
-}
-
-function removeSync(path) {
-  // Node 14.14.0+
-  if (fs.rmSync) return fs.rmSync(path, {
-    recursive: true,
-    force: true
-  });
-  rimraf.sync(path);
-}
-
-module.exports = {
-  remove: u(remove),
-  removeSync: removeSync
-};
-
-/***/ }),
-
-/***/ 2081:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-var path = __webpack_require__(1017);
-
-var assert = __webpack_require__(9491);
-
-var isWindows = process.platform === 'win32';
-
-function defaults(options) {
-  var methods = ['unlink', 'chmod', 'stat', 'lstat', 'rmdir', 'readdir'];
-  methods.forEach(function (m) {
-    options[m] = options[m] || fs[m];
-    m = m + 'Sync';
-    options[m] = options[m] || fs[m];
-  });
-  options.maxBusyTries = options.maxBusyTries || 3;
-}
-
-function rimraf(p, options, cb) {
-  var busyTries = 0;
-
-  if (typeof options === 'function') {
-    cb = options;
-    options = {};
-  }
-
-  assert(p, 'rimraf: missing path');
-  assert.strictEqual(typeof p, 'string', 'rimraf: path should be a string');
-  assert.strictEqual(typeof cb, 'function', 'rimraf: callback function required');
-  assert(options, 'rimraf: invalid options argument provided');
-  assert.strictEqual(typeof options, 'object', 'rimraf: options should be object');
-  defaults(options);
-  rimraf_(p, options, function CB(er) {
-    if (er) {
-      if ((er.code === 'EBUSY' || er.code === 'ENOTEMPTY' || er.code === 'EPERM') && busyTries < options.maxBusyTries) {
-        busyTries++;
-        var time = busyTries * 100; // try again, with the same exact callback as this one.
-
-        return setTimeout(function () {
-          return rimraf_(p, options, CB);
-        }, time);
-      } // already gone
-
-
-      if (er.code === 'ENOENT') er = null;
-    }
-
-    cb(er);
-  });
-} // Two possible strategies.
-// 1. Assume it's a file.  unlink it, then do the dir stuff on EPERM or EISDIR
-// 2. Assume it's a directory.  readdir, then do the file stuff on ENOTDIR
-//
-// Both result in an extra syscall when you guess wrong.  However, there
-// are likely far more normal files in the world than directories.  This
-// is based on the assumption that a the average number of files per
-// directory is >= 1.
-//
-// If anyone ever complains about this, then I guess the strategy could
-// be made configurable somehow.  But until then, YAGNI.
-
-
-function rimraf_(p, options, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function'); // sunos lets the root user unlink directories, which is... weird.
-  // so we have to lstat here and make sure it's not a dir.
-
-  options.lstat(p, function (er, st) {
-    if (er && er.code === 'ENOENT') {
-      return cb(null);
-    } // Windows can EPERM on stat.  Life is suffering.
-
-
-    if (er && er.code === 'EPERM' && isWindows) {
-      return fixWinEPERM(p, options, er, cb);
-    }
-
-    if (st && st.isDirectory()) {
-      return rmdir(p, options, er, cb);
-    }
-
-    options.unlink(p, function (er) {
-      if (er) {
-        if (er.code === 'ENOENT') {
-          return cb(null);
-        }
-
-        if (er.code === 'EPERM') {
-          return isWindows ? fixWinEPERM(p, options, er, cb) : rmdir(p, options, er, cb);
-        }
-
-        if (er.code === 'EISDIR') {
-          return rmdir(p, options, er, cb);
-        }
-      }
-
-      return cb(er);
-    });
-  });
-}
-
-function fixWinEPERM(p, options, er, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function');
-  options.chmod(p, 438, function (er2) {
-    if (er2) {
-      cb(er2.code === 'ENOENT' ? null : er);
-    } else {
-      options.stat(p, function (er3, stats) {
-        if (er3) {
-          cb(er3.code === 'ENOENT' ? null : er);
-        } else if (stats.isDirectory()) {
-          rmdir(p, options, er, cb);
-        } else {
-          options.unlink(p, cb);
-        }
-      });
-    }
-  });
-}
-
-function fixWinEPERMSync(p, options, er) {
-  var stats;
-  assert(p);
-  assert(options);
-
-  try {
-    options.chmodSync(p, 438);
-  } catch (er2) {
-    if (er2.code === 'ENOENT') {
-      return;
-    } else {
-      throw er;
-    }
-  }
-
-  try {
-    stats = options.statSync(p);
-  } catch (er3) {
-    if (er3.code === 'ENOENT') {
-      return;
-    } else {
-      throw er;
-    }
-  }
-
-  if (stats.isDirectory()) {
-    rmdirSync(p, options, er);
-  } else {
-    options.unlinkSync(p);
-  }
-}
-
-function rmdir(p, options, originalEr, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function'); // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
-  // if we guessed wrong, and it's not a directory, then
-  // raise the original error.
-
-  options.rmdir(p, function (er) {
-    if (er && (er.code === 'ENOTEMPTY' || er.code === 'EEXIST' || er.code === 'EPERM')) {
-      rmkids(p, options, cb);
-    } else if (er && er.code === 'ENOTDIR') {
-      cb(originalEr);
-    } else {
-      cb(er);
-    }
-  });
-}
-
-function rmkids(p, options, cb) {
-  assert(p);
-  assert(options);
-  assert(typeof cb === 'function');
-  options.readdir(p, function (er, files) {
-    if (er) return cb(er);
-    var n = files.length;
-    var errState;
-    if (n === 0) return options.rmdir(p, cb);
-    files.forEach(function (f) {
-      rimraf(path.join(p, f), options, function (er) {
-        if (errState) {
-          return;
-        }
-
-        if (er) return cb(errState = er);
-
-        if (--n === 0) {
-          options.rmdir(p, cb);
-        }
-      });
-    });
-  });
-} // this looks simpler, and is strictly *faster*, but will
-// tie up the JavaScript thread and fail on excessively
-// deep directory trees.
-
-
-function rimrafSync(p, options) {
-  var st;
-  options = options || {};
-  defaults(options);
-  assert(p, 'rimraf: missing path');
-  assert.strictEqual(typeof p, 'string', 'rimraf: path should be a string');
-  assert(options, 'rimraf: missing options');
-  assert.strictEqual(typeof options, 'object', 'rimraf: options should be object');
-
-  try {
-    st = options.lstatSync(p);
-  } catch (er) {
-    if (er.code === 'ENOENT') {
-      return;
-    } // Windows can EPERM on stat.  Life is suffering.
-
-
-    if (er.code === 'EPERM' && isWindows) {
-      fixWinEPERMSync(p, options, er);
-    }
-  }
-
-  try {
-    // sunos lets the root user unlink directories, which is... weird.
-    if (st && st.isDirectory()) {
-      rmdirSync(p, options, null);
-    } else {
-      options.unlinkSync(p);
-    }
-  } catch (er) {
-    if (er.code === 'ENOENT') {
-      return;
-    } else if (er.code === 'EPERM') {
-      return isWindows ? fixWinEPERMSync(p, options, er) : rmdirSync(p, options, er);
-    } else if (er.code !== 'EISDIR') {
-      throw er;
-    }
-
-    rmdirSync(p, options, er);
-  }
-}
-
-function rmdirSync(p, options, originalEr) {
-  assert(p);
-  assert(options);
-
-  try {
-    options.rmdirSync(p);
-  } catch (er) {
-    if (er.code === 'ENOTDIR') {
-      throw originalEr;
-    } else if (er.code === 'ENOTEMPTY' || er.code === 'EEXIST' || er.code === 'EPERM') {
-      rmkidsSync(p, options);
-    } else if (er.code !== 'ENOENT') {
-      throw er;
-    }
-  }
-}
-
-function rmkidsSync(p, options) {
-  assert(p);
-  assert(options);
-  options.readdirSync(p).forEach(function (f) {
-    return rimrafSync(path.join(p, f), options);
-  });
-
-  if (isWindows) {
-    // We only end up here once we got ENOTEMPTY at least once, and
-    // at this point, we are guaranteed to have removed all the kids.
-    // So, we know that it won't be ENOENT or ENOTDIR or anything else.
-    // try really hard to delete stuff on windows, because it has a
-    // PROFOUNDLY annoying habit of not closing handles promptly when
-    // files are deleted, resulting in spurious ENOTEMPTY errors.
-    var startTime = Date.now();
-
-    do {
-      try {
-        var ret = options.rmdirSync(p, options);
-        return ret;
-      } catch (_unused) {}
-    } while (Date.now() - startTime < 500); // give up after 500ms
-
-  } else {
-    var _ret = options.rmdirSync(p, options);
-
-    return _ret;
-  }
-}
-
-module.exports = rimraf;
-rimraf.sync = rimrafSync;
-
-/***/ }),
-
-/***/ 5959:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var _slicedToArray = (__webpack_require__(3681)["default"]);
-
-var fs = __webpack_require__(3817);
-
-var path = __webpack_require__(1017);
-
-var util = __webpack_require__(3837);
-
-function getStats(src, dest, opts) {
-  var statFunc = opts.dereference ? function (file) {
-    return fs.stat(file, {
-      bigint: true
-    });
-  } : function (file) {
-    return fs.lstat(file, {
-      bigint: true
-    });
-  };
-  return Promise.all([statFunc(src), statFunc(dest)["catch"](function (err) {
-    if (err.code === 'ENOENT') return null;
-    throw err;
-  })]).then(function (_ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
-        srcStat = _ref2[0],
-        destStat = _ref2[1];
-
-    return {
-      srcStat: srcStat,
-      destStat: destStat
-    };
-  });
-}
-
-function getStatsSync(src, dest, opts) {
-  var destStat;
-  var statFunc = opts.dereference ? function (file) {
-    return fs.statSync(file, {
-      bigint: true
-    });
-  } : function (file) {
-    return fs.lstatSync(file, {
-      bigint: true
-    });
-  };
-  var srcStat = statFunc(src);
-
-  try {
-    destStat = statFunc(dest);
-  } catch (err) {
-    if (err.code === 'ENOENT') return {
-      srcStat: srcStat,
-      destStat: null
-    };
-    throw err;
-  }
-
-  return {
-    srcStat: srcStat,
-    destStat: destStat
-  };
-}
-
-function checkPaths(src, dest, funcName, opts, cb) {
-  util.callbackify(getStats)(src, dest, opts, function (err, stats) {
-    if (err) return cb(err);
-    var srcStat = stats.srcStat,
-        destStat = stats.destStat;
-
-    if (destStat) {
-      if (areIdentical(srcStat, destStat)) {
-        var srcBaseName = path.basename(src);
-        var destBaseName = path.basename(dest);
-
-        if (funcName === 'move' && srcBaseName !== destBaseName && srcBaseName.toLowerCase() === destBaseName.toLowerCase()) {
-          return cb(null, {
-            srcStat: srcStat,
-            destStat: destStat,
-            isChangingCase: true
-          });
-        }
-
-        return cb(new Error('Source and destination must not be the same.'));
-      }
-
-      if (srcStat.isDirectory() && !destStat.isDirectory()) {
-        return cb(new Error("Cannot overwrite non-directory '".concat(dest, "' with directory '").concat(src, "'.")));
-      }
-
-      if (!srcStat.isDirectory() && destStat.isDirectory()) {
-        return cb(new Error("Cannot overwrite directory '".concat(dest, "' with non-directory '").concat(src, "'.")));
-      }
-    }
-
-    if (srcStat.isDirectory() && isSrcSubdir(src, dest)) {
-      return cb(new Error(errMsg(src, dest, funcName)));
-    }
-
-    return cb(null, {
-      srcStat: srcStat,
-      destStat: destStat
-    });
-  });
-}
-
-function checkPathsSync(src, dest, funcName, opts) {
-  var _getStatsSync = getStatsSync(src, dest, opts),
-      srcStat = _getStatsSync.srcStat,
-      destStat = _getStatsSync.destStat;
-
-  if (destStat) {
-    if (areIdentical(srcStat, destStat)) {
-      var srcBaseName = path.basename(src);
-      var destBaseName = path.basename(dest);
-
-      if (funcName === 'move' && srcBaseName !== destBaseName && srcBaseName.toLowerCase() === destBaseName.toLowerCase()) {
-        return {
-          srcStat: srcStat,
-          destStat: destStat,
-          isChangingCase: true
-        };
-      }
-
-      throw new Error('Source and destination must not be the same.');
-    }
-
-    if (srcStat.isDirectory() && !destStat.isDirectory()) {
-      throw new Error("Cannot overwrite non-directory '".concat(dest, "' with directory '").concat(src, "'."));
-    }
-
-    if (!srcStat.isDirectory() && destStat.isDirectory()) {
-      throw new Error("Cannot overwrite directory '".concat(dest, "' with non-directory '").concat(src, "'."));
-    }
-  }
-
-  if (srcStat.isDirectory() && isSrcSubdir(src, dest)) {
-    throw new Error(errMsg(src, dest, funcName));
-  }
-
-  return {
-    srcStat: srcStat,
-    destStat: destStat
-  };
-} // recursively check if dest parent is a subdirectory of src.
-// It works for all file types including symlinks since it
-// checks the src and dest inodes. It starts from the deepest
-// parent and stops once it reaches the src parent or the root path.
-
-
-function checkParentPaths(src, srcStat, dest, funcName, cb) {
-  var srcParent = path.resolve(path.dirname(src));
-  var destParent = path.resolve(path.dirname(dest));
-  if (destParent === srcParent || destParent === path.parse(destParent).root) return cb();
-  fs.stat(destParent, {
-    bigint: true
-  }, function (err, destStat) {
-    if (err) {
-      if (err.code === 'ENOENT') return cb();
-      return cb(err);
-    }
-
-    if (areIdentical(srcStat, destStat)) {
-      return cb(new Error(errMsg(src, dest, funcName)));
-    }
-
-    return checkParentPaths(src, srcStat, destParent, funcName, cb);
-  });
-}
-
-function checkParentPathsSync(src, srcStat, dest, funcName) {
-  var srcParent = path.resolve(path.dirname(src));
-  var destParent = path.resolve(path.dirname(dest));
-  if (destParent === srcParent || destParent === path.parse(destParent).root) return;
-  var destStat;
-
-  try {
-    destStat = fs.statSync(destParent, {
-      bigint: true
-    });
-  } catch (err) {
-    if (err.code === 'ENOENT') return;
-    throw err;
-  }
-
-  if (areIdentical(srcStat, destStat)) {
-    throw new Error(errMsg(src, dest, funcName));
-  }
-
-  return checkParentPathsSync(src, srcStat, destParent, funcName);
-}
-
-function areIdentical(srcStat, destStat) {
-  return destStat.ino && destStat.dev && destStat.ino === srcStat.ino && destStat.dev === srcStat.dev;
-} // return true if dest is a subdir of src, otherwise false.
-// It only checks the path strings.
-
-
-function isSrcSubdir(src, dest) {
-  var srcArr = path.resolve(src).split(path.sep).filter(function (i) {
-    return i;
-  });
-  var destArr = path.resolve(dest).split(path.sep).filter(function (i) {
-    return i;
-  });
-  return srcArr.reduce(function (acc, cur, i) {
-    return acc && destArr[i] === cur;
-  }, true);
-}
-
-function errMsg(src, dest, funcName) {
-  return "Cannot ".concat(funcName, " '").concat(src, "' to a subdirectory of itself, '").concat(dest, "'.");
-}
-
-module.exports = {
-  checkPaths: checkPaths,
-  checkPathsSync: checkPathsSync,
-  checkParentPaths: checkParentPaths,
-  checkParentPathsSync: checkParentPathsSync,
-  isSrcSubdir: isSrcSubdir,
-  areIdentical: areIdentical
-};
-
-/***/ }),
-
-/***/ 9039:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-"use strict";
-
-
-var fs = __webpack_require__(8173);
-
-function utimesMillis(path, atime, mtime, callback) {
-  // if (!HAS_MILLIS_RES) return fs.utimes(path, atime, mtime, callback)
-  fs.open(path, 'r+', function (err, fd) {
-    if (err) return callback(err);
-    fs.futimes(fd, atime, mtime, function (futimesErr) {
-      fs.close(fd, function (closeErr) {
-        if (callback) callback(futimesErr || closeErr);
-      });
-    });
-  });
-}
-
-function utimesMillisSync(path, atime, mtime) {
-  var fd = fs.openSync(path, 'r+');
-  fs.futimesSync(fd, atime, mtime);
-  return fs.closeSync(fd);
-}
-
-module.exports = {
-  utimesMillis: utimesMillis,
-  utimesMillisSync: utimesMillisSync
-};
-
-/***/ }),
-
 /***/ 5499:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -17165,6 +14978,2193 @@ function version(uuid) {
 
 
 
+
+/***/ }),
+
+/***/ 6125:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+var path = __webpack_require__(1017);
+
+var mkdirsSync = (__webpack_require__(1977).mkdirsSync);
+
+var utimesMillisSync = (__webpack_require__(9211).utimesMillisSync);
+
+var stat = __webpack_require__(8524);
+
+function copySync(src, dest, opts) {
+  if (typeof opts === 'function') {
+    opts = {
+      filter: opts
+    };
+  }
+
+  opts = opts || {};
+  opts.clobber = 'clobber' in opts ? !!opts.clobber : true; // default to true for now
+
+  opts.overwrite = 'overwrite' in opts ? !!opts.overwrite : opts.clobber; // overwrite falls back to clobber
+  // Warn about using preserveTimestamps on 32-bit node
+
+  if (opts.preserveTimestamps && process.arch === 'ia32') {
+    process.emitWarning('Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' + '\tsee https://github.com/jprichardson/node-fs-extra/issues/269', 'Warning', 'fs-extra-WARN0002');
+  }
+
+  var _stat$checkPathsSync = stat.checkPathsSync(src, dest, 'copy', opts),
+      srcStat = _stat$checkPathsSync.srcStat,
+      destStat = _stat$checkPathsSync.destStat;
+
+  stat.checkParentPathsSync(src, srcStat, dest, 'copy');
+  return handleFilterAndCopy(destStat, src, dest, opts);
+}
+
+function handleFilterAndCopy(destStat, src, dest, opts) {
+  if (opts.filter && !opts.filter(src, dest)) return;
+  var destParent = path.dirname(dest);
+  if (!fs.existsSync(destParent)) mkdirsSync(destParent);
+  return getStats(destStat, src, dest, opts);
+}
+
+function startCopy(destStat, src, dest, opts) {
+  if (opts.filter && !opts.filter(src, dest)) return;
+  return getStats(destStat, src, dest, opts);
+}
+
+function getStats(destStat, src, dest, opts) {
+  var statSync = opts.dereference ? fs.statSync : fs.lstatSync;
+  var srcStat = statSync(src);
+  if (srcStat.isDirectory()) return onDir(srcStat, destStat, src, dest, opts);else if (srcStat.isFile() || srcStat.isCharacterDevice() || srcStat.isBlockDevice()) return onFile(srcStat, destStat, src, dest, opts);else if (srcStat.isSymbolicLink()) return onLink(destStat, src, dest, opts);else if (srcStat.isSocket()) throw new Error("Cannot copy a socket file: ".concat(src));else if (srcStat.isFIFO()) throw new Error("Cannot copy a FIFO pipe: ".concat(src));
+  throw new Error("Unknown file: ".concat(src));
+}
+
+function onFile(srcStat, destStat, src, dest, opts) {
+  if (!destStat) return copyFile(srcStat, src, dest, opts);
+  return mayCopyFile(srcStat, src, dest, opts);
+}
+
+function mayCopyFile(srcStat, src, dest, opts) {
+  if (opts.overwrite) {
+    fs.unlinkSync(dest);
+    return copyFile(srcStat, src, dest, opts);
+  } else if (opts.errorOnExist) {
+    throw new Error("'".concat(dest, "' already exists"));
+  }
+}
+
+function copyFile(srcStat, src, dest, opts) {
+  fs.copyFileSync(src, dest);
+  if (opts.preserveTimestamps) handleTimestamps(srcStat.mode, src, dest);
+  return setDestMode(dest, srcStat.mode);
+}
+
+function handleTimestamps(srcMode, src, dest) {
+  // Make sure the file is writable before setting the timestamp
+  // otherwise open fails with EPERM when invoked with 'r+'
+  // (through utimes call)
+  if (fileIsNotWritable(srcMode)) makeFileWritable(dest, srcMode);
+  return setDestTimestamps(src, dest);
+}
+
+function fileIsNotWritable(srcMode) {
+  return (srcMode & 128) === 0;
+}
+
+function makeFileWritable(dest, srcMode) {
+  return setDestMode(dest, srcMode | 128);
+}
+
+function setDestMode(dest, srcMode) {
+  return fs.chmodSync(dest, srcMode);
+}
+
+function setDestTimestamps(src, dest) {
+  // The initial srcStat.atime cannot be trusted
+  // because it is modified by the read(2) system call
+  // (See https://nodejs.org/api/fs.html#fs_stat_time_values)
+  var updatedSrcStat = fs.statSync(src);
+  return utimesMillisSync(dest, updatedSrcStat.atime, updatedSrcStat.mtime);
+}
+
+function onDir(srcStat, destStat, src, dest, opts) {
+  if (!destStat) return mkDirAndCopy(srcStat.mode, src, dest, opts);
+  return copyDir(src, dest, opts);
+}
+
+function mkDirAndCopy(srcMode, src, dest, opts) {
+  fs.mkdirSync(dest);
+  copyDir(src, dest, opts);
+  return setDestMode(dest, srcMode);
+}
+
+function copyDir(src, dest, opts) {
+  fs.readdirSync(src).forEach(function (item) {
+    return copyDirItem(item, src, dest, opts);
+  });
+}
+
+function copyDirItem(item, src, dest, opts) {
+  var srcItem = path.join(src, item);
+  var destItem = path.join(dest, item);
+
+  var _stat$checkPathsSync2 = stat.checkPathsSync(srcItem, destItem, 'copy', opts),
+      destStat = _stat$checkPathsSync2.destStat;
+
+  return startCopy(destStat, srcItem, destItem, opts);
+}
+
+function onLink(destStat, src, dest, opts) {
+  var resolvedSrc = fs.readlinkSync(src);
+
+  if (opts.dereference) {
+    resolvedSrc = path.resolve(process.cwd(), resolvedSrc);
+  }
+
+  if (!destStat) {
+    return fs.symlinkSync(resolvedSrc, dest);
+  } else {
+    var resolvedDest;
+
+    try {
+      resolvedDest = fs.readlinkSync(dest);
+    } catch (err) {
+      // dest exists and is a regular file or directory,
+      // Windows may throw UNKNOWN error. If dest already exists,
+      // fs throws error anyway, so no need to guard against it here.
+      if (err.code === 'EINVAL' || err.code === 'UNKNOWN') return fs.symlinkSync(resolvedSrc, dest);
+      throw err;
+    }
+
+    if (opts.dereference) {
+      resolvedDest = path.resolve(process.cwd(), resolvedDest);
+    }
+
+    if (stat.isSrcSubdir(resolvedSrc, resolvedDest)) {
+      throw new Error("Cannot copy '".concat(resolvedSrc, "' to a subdirectory of itself, '").concat(resolvedDest, "'."));
+    } // prevent copy if src is a subdir of dest since unlinking
+    // dest in this case would result in removing src contents
+    // and therefore a broken symlink would be created.
+
+
+    if (fs.statSync(dest).isDirectory() && stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
+      throw new Error("Cannot overwrite '".concat(resolvedDest, "' with '").concat(resolvedSrc, "'."));
+    }
+
+    return copyLink(resolvedSrc, dest);
+  }
+}
+
+function copyLink(resolvedSrc, dest) {
+  fs.unlinkSync(dest);
+  return fs.symlinkSync(resolvedSrc, dest);
+}
+
+module.exports = copySync;
+
+/***/ }),
+
+/***/ 2533:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+var path = __webpack_require__(1017);
+
+var mkdirs = (__webpack_require__(1977).mkdirs);
+
+var pathExists = (__webpack_require__(288).pathExists);
+
+var utimesMillis = (__webpack_require__(9211).utimesMillis);
+
+var stat = __webpack_require__(8524);
+
+function copy(src, dest, opts, cb) {
+  if (typeof opts === 'function' && !cb) {
+    cb = opts;
+    opts = {};
+  } else if (typeof opts === 'function') {
+    opts = {
+      filter: opts
+    };
+  }
+
+  cb = cb || function () {};
+
+  opts = opts || {};
+  opts.clobber = 'clobber' in opts ? !!opts.clobber : true; // default to true for now
+
+  opts.overwrite = 'overwrite' in opts ? !!opts.overwrite : opts.clobber; // overwrite falls back to clobber
+  // Warn about using preserveTimestamps on 32-bit node
+
+  if (opts.preserveTimestamps && process.arch === 'ia32') {
+    process.emitWarning('Using the preserveTimestamps option in 32-bit node is not recommended;\n\n' + '\tsee https://github.com/jprichardson/node-fs-extra/issues/269', 'Warning', 'fs-extra-WARN0001');
+  }
+
+  stat.checkPaths(src, dest, 'copy', opts, function (err, stats) {
+    if (err) return cb(err);
+    var srcStat = stats.srcStat,
+        destStat = stats.destStat;
+    stat.checkParentPaths(src, srcStat, dest, 'copy', function (err) {
+      if (err) return cb(err);
+      if (opts.filter) return handleFilter(checkParentDir, destStat, src, dest, opts, cb);
+      return checkParentDir(destStat, src, dest, opts, cb);
+    });
+  });
+}
+
+function checkParentDir(destStat, src, dest, opts, cb) {
+  var destParent = path.dirname(dest);
+  pathExists(destParent, function (err, dirExists) {
+    if (err) return cb(err);
+    if (dirExists) return getStats(destStat, src, dest, opts, cb);
+    mkdirs(destParent, function (err) {
+      if (err) return cb(err);
+      return getStats(destStat, src, dest, opts, cb);
+    });
+  });
+}
+
+function handleFilter(onInclude, destStat, src, dest, opts, cb) {
+  Promise.resolve(opts.filter(src, dest)).then(function (include) {
+    if (include) return onInclude(destStat, src, dest, opts, cb);
+    return cb();
+  }, function (error) {
+    return cb(error);
+  });
+}
+
+function startCopy(destStat, src, dest, opts, cb) {
+  if (opts.filter) return handleFilter(getStats, destStat, src, dest, opts, cb);
+  return getStats(destStat, src, dest, opts, cb);
+}
+
+function getStats(destStat, src, dest, opts, cb) {
+  var stat = opts.dereference ? fs.stat : fs.lstat;
+  stat(src, function (err, srcStat) {
+    if (err) return cb(err);
+    if (srcStat.isDirectory()) return onDir(srcStat, destStat, src, dest, opts, cb);else if (srcStat.isFile() || srcStat.isCharacterDevice() || srcStat.isBlockDevice()) return onFile(srcStat, destStat, src, dest, opts, cb);else if (srcStat.isSymbolicLink()) return onLink(destStat, src, dest, opts, cb);else if (srcStat.isSocket()) return cb(new Error("Cannot copy a socket file: ".concat(src)));else if (srcStat.isFIFO()) return cb(new Error("Cannot copy a FIFO pipe: ".concat(src)));
+    return cb(new Error("Unknown file: ".concat(src)));
+  });
+}
+
+function onFile(srcStat, destStat, src, dest, opts, cb) {
+  if (!destStat) return copyFile(srcStat, src, dest, opts, cb);
+  return mayCopyFile(srcStat, src, dest, opts, cb);
+}
+
+function mayCopyFile(srcStat, src, dest, opts, cb) {
+  if (opts.overwrite) {
+    fs.unlink(dest, function (err) {
+      if (err) return cb(err);
+      return copyFile(srcStat, src, dest, opts, cb);
+    });
+  } else if (opts.errorOnExist) {
+    return cb(new Error("'".concat(dest, "' already exists")));
+  } else return cb();
+}
+
+function copyFile(srcStat, src, dest, opts, cb) {
+  fs.copyFile(src, dest, function (err) {
+    if (err) return cb(err);
+    if (opts.preserveTimestamps) return handleTimestampsAndMode(srcStat.mode, src, dest, cb);
+    return setDestMode(dest, srcStat.mode, cb);
+  });
+}
+
+function handleTimestampsAndMode(srcMode, src, dest, cb) {
+  // Make sure the file is writable before setting the timestamp
+  // otherwise open fails with EPERM when invoked with 'r+'
+  // (through utimes call)
+  if (fileIsNotWritable(srcMode)) {
+    return makeFileWritable(dest, srcMode, function (err) {
+      if (err) return cb(err);
+      return setDestTimestampsAndMode(srcMode, src, dest, cb);
+    });
+  }
+
+  return setDestTimestampsAndMode(srcMode, src, dest, cb);
+}
+
+function fileIsNotWritable(srcMode) {
+  return (srcMode & 128) === 0;
+}
+
+function makeFileWritable(dest, srcMode, cb) {
+  return setDestMode(dest, srcMode | 128, cb);
+}
+
+function setDestTimestampsAndMode(srcMode, src, dest, cb) {
+  setDestTimestamps(src, dest, function (err) {
+    if (err) return cb(err);
+    return setDestMode(dest, srcMode, cb);
+  });
+}
+
+function setDestMode(dest, srcMode, cb) {
+  return fs.chmod(dest, srcMode, cb);
+}
+
+function setDestTimestamps(src, dest, cb) {
+  // The initial srcStat.atime cannot be trusted
+  // because it is modified by the read(2) system call
+  // (See https://nodejs.org/api/fs.html#fs_stat_time_values)
+  fs.stat(src, function (err, updatedSrcStat) {
+    if (err) return cb(err);
+    return utimesMillis(dest, updatedSrcStat.atime, updatedSrcStat.mtime, cb);
+  });
+}
+
+function onDir(srcStat, destStat, src, dest, opts, cb) {
+  if (!destStat) return mkDirAndCopy(srcStat.mode, src, dest, opts, cb);
+  return copyDir(src, dest, opts, cb);
+}
+
+function mkDirAndCopy(srcMode, src, dest, opts, cb) {
+  fs.mkdir(dest, function (err) {
+    if (err) return cb(err);
+    copyDir(src, dest, opts, function (err) {
+      if (err) return cb(err);
+      return setDestMode(dest, srcMode, cb);
+    });
+  });
+}
+
+function copyDir(src, dest, opts, cb) {
+  fs.readdir(src, function (err, items) {
+    if (err) return cb(err);
+    return copyDirItems(items, src, dest, opts, cb);
+  });
+}
+
+function copyDirItems(items, src, dest, opts, cb) {
+  var item = items.pop();
+  if (!item) return cb();
+  return copyDirItem(items, item, src, dest, opts, cb);
+}
+
+function copyDirItem(items, item, src, dest, opts, cb) {
+  var srcItem = path.join(src, item);
+  var destItem = path.join(dest, item);
+  stat.checkPaths(srcItem, destItem, 'copy', opts, function (err, stats) {
+    if (err) return cb(err);
+    var destStat = stats.destStat;
+    startCopy(destStat, srcItem, destItem, opts, function (err) {
+      if (err) return cb(err);
+      return copyDirItems(items, src, dest, opts, cb);
+    });
+  });
+}
+
+function onLink(destStat, src, dest, opts, cb) {
+  fs.readlink(src, function (err, resolvedSrc) {
+    if (err) return cb(err);
+
+    if (opts.dereference) {
+      resolvedSrc = path.resolve(process.cwd(), resolvedSrc);
+    }
+
+    if (!destStat) {
+      return fs.symlink(resolvedSrc, dest, cb);
+    } else {
+      fs.readlink(dest, function (err, resolvedDest) {
+        if (err) {
+          // dest exists and is a regular file or directory,
+          // Windows may throw UNKNOWN error. If dest already exists,
+          // fs throws error anyway, so no need to guard against it here.
+          if (err.code === 'EINVAL' || err.code === 'UNKNOWN') return fs.symlink(resolvedSrc, dest, cb);
+          return cb(err);
+        }
+
+        if (opts.dereference) {
+          resolvedDest = path.resolve(process.cwd(), resolvedDest);
+        }
+
+        if (stat.isSrcSubdir(resolvedSrc, resolvedDest)) {
+          return cb(new Error("Cannot copy '".concat(resolvedSrc, "' to a subdirectory of itself, '").concat(resolvedDest, "'.")));
+        } // do not copy if src is a subdir of dest since unlinking
+        // dest in this case would result in removing src contents
+        // and therefore a broken symlink would be created.
+
+
+        if (destStat.isDirectory() && stat.isSrcSubdir(resolvedDest, resolvedSrc)) {
+          return cb(new Error("Cannot overwrite '".concat(resolvedDest, "' with '").concat(resolvedSrc, "'.")));
+        }
+
+        return copyLink(resolvedSrc, dest, cb);
+      });
+    }
+  });
+}
+
+function copyLink(resolvedSrc, dest, cb) {
+  fs.unlink(dest, function (err) {
+    if (err) return cb(err);
+    return fs.symlink(resolvedSrc, dest, cb);
+  });
+}
+
+module.exports = copy;
+
+/***/ }),
+
+/***/ 527:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromCallback);
+
+module.exports = {
+  copy: u(__webpack_require__(2533)),
+  copySync: __webpack_require__(6125)
+};
+
+/***/ }),
+
+/***/ 7090:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
+
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
+
+var u = (__webpack_require__(9689).fromPromise);
+
+var fs = __webpack_require__(2272);
+
+var path = __webpack_require__(1017);
+
+var mkdir = __webpack_require__(1977);
+
+var remove = __webpack_require__(2318);
+
+var emptyDir = u( /*#__PURE__*/function () {
+  var _emptyDir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir) {
+    var items;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            _context.next = 3;
+            return fs.readdir(dir);
+
+          case 3:
+            items = _context.sent;
+            _context.next = 9;
+            break;
+
+          case 6:
+            _context.prev = 6;
+            _context.t0 = _context["catch"](0);
+            return _context.abrupt("return", mkdir.mkdirs(dir));
+
+          case 9:
+            return _context.abrupt("return", Promise.all(items.map(function (item) {
+              return remove.remove(path.join(dir, item));
+            })));
+
+          case 10:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 6]]);
+  }));
+
+  function emptyDir(_x) {
+    return _emptyDir.apply(this, arguments);
+  }
+
+  return emptyDir;
+}());
+
+function emptyDirSync(dir) {
+  var items;
+
+  try {
+    items = fs.readdirSync(dir);
+  } catch (_unused2) {
+    return mkdir.mkdirsSync(dir);
+  }
+
+  items.forEach(function (item) {
+    item = path.join(dir, item);
+    remove.removeSync(item);
+  });
+}
+
+module.exports = {
+  emptyDirSync: emptyDirSync,
+  emptydirSync: emptyDirSync,
+  emptyDir: emptyDir,
+  emptydir: emptyDir
+};
+
+/***/ }),
+
+/***/ 277:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromCallback);
+
+var path = __webpack_require__(1017);
+
+var fs = __webpack_require__(8173);
+
+var mkdir = __webpack_require__(1977);
+
+function createFile(file, callback) {
+  function makeFile() {
+    fs.writeFile(file, '', function (err) {
+      if (err) return callback(err);
+      callback();
+    });
+  }
+
+  fs.stat(file, function (err, stats) {
+    // eslint-disable-line handle-callback-err
+    if (!err && stats.isFile()) return callback();
+    var dir = path.dirname(file);
+    fs.stat(dir, function (err, stats) {
+      if (err) {
+        // if the directory doesn't exist, make it
+        if (err.code === 'ENOENT') {
+          return mkdir.mkdirs(dir, function (err) {
+            if (err) return callback(err);
+            makeFile();
+          });
+        }
+
+        return callback(err);
+      }
+
+      if (stats.isDirectory()) makeFile();else {
+        // parent is not a directory
+        // This is just to cause an internal ENOTDIR error to be thrown
+        fs.readdir(dir, function (err) {
+          if (err) return callback(err);
+        });
+      }
+    });
+  });
+}
+
+function createFileSync(file) {
+  var stats;
+
+  try {
+    stats = fs.statSync(file);
+  } catch (_unused) {}
+
+  if (stats && stats.isFile()) return;
+  var dir = path.dirname(file);
+
+  try {
+    if (!fs.statSync(dir).isDirectory()) {
+      // parent is not a directory
+      // This is just to cause an internal ENOTDIR error to be thrown
+      fs.readdirSync(dir);
+    }
+  } catch (err) {
+    // If the stat call above failed because the directory doesn't exist, create it
+    if (err && err.code === 'ENOENT') mkdir.mkdirsSync(dir);else throw err;
+  }
+
+  fs.writeFileSync(file, '');
+}
+
+module.exports = {
+  createFile: u(createFile),
+  createFileSync: createFileSync
+};
+
+/***/ }),
+
+/***/ 3258:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _require = __webpack_require__(277),
+    createFile = _require.createFile,
+    createFileSync = _require.createFileSync;
+
+var _require2 = __webpack_require__(417),
+    createLink = _require2.createLink,
+    createLinkSync = _require2.createLinkSync;
+
+var _require3 = __webpack_require__(7349),
+    createSymlink = _require3.createSymlink,
+    createSymlinkSync = _require3.createSymlinkSync;
+
+module.exports = {
+  // file
+  createFile: createFile,
+  createFileSync: createFileSync,
+  ensureFile: createFile,
+  ensureFileSync: createFileSync,
+  // link
+  createLink: createLink,
+  createLinkSync: createLinkSync,
+  ensureLink: createLink,
+  ensureLinkSync: createLinkSync,
+  // symlink
+  createSymlink: createSymlink,
+  createSymlinkSync: createSymlinkSync,
+  ensureSymlink: createSymlink,
+  ensureSymlinkSync: createSymlinkSync
+};
+
+/***/ }),
+
+/***/ 417:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromCallback);
+
+var path = __webpack_require__(1017);
+
+var fs = __webpack_require__(8173);
+
+var mkdir = __webpack_require__(1977);
+
+var pathExists = (__webpack_require__(288).pathExists);
+
+var _require = __webpack_require__(8524),
+    areIdentical = _require.areIdentical;
+
+function createLink(srcpath, dstpath, callback) {
+  function makeLink(srcpath, dstpath) {
+    fs.link(srcpath, dstpath, function (err) {
+      if (err) return callback(err);
+      callback(null);
+    });
+  }
+
+  fs.lstat(dstpath, function (_, dstStat) {
+    fs.lstat(srcpath, function (err, srcStat) {
+      if (err) {
+        err.message = err.message.replace('lstat', 'ensureLink');
+        return callback(err);
+      }
+
+      if (dstStat && areIdentical(srcStat, dstStat)) return callback(null);
+      var dir = path.dirname(dstpath);
+      pathExists(dir, function (err, dirExists) {
+        if (err) return callback(err);
+        if (dirExists) return makeLink(srcpath, dstpath);
+        mkdir.mkdirs(dir, function (err) {
+          if (err) return callback(err);
+          makeLink(srcpath, dstpath);
+        });
+      });
+    });
+  });
+}
+
+function createLinkSync(srcpath, dstpath) {
+  var dstStat;
+
+  try {
+    dstStat = fs.lstatSync(dstpath);
+  } catch (_unused) {}
+
+  try {
+    var srcStat = fs.lstatSync(srcpath);
+    if (dstStat && areIdentical(srcStat, dstStat)) return;
+  } catch (err) {
+    err.message = err.message.replace('lstat', 'ensureLink');
+    throw err;
+  }
+
+  var dir = path.dirname(dstpath);
+  var dirExists = fs.existsSync(dir);
+  if (dirExists) return fs.linkSync(srcpath, dstpath);
+  mkdir.mkdirsSync(dir);
+  return fs.linkSync(srcpath, dstpath);
+}
+
+module.exports = {
+  createLink: u(createLink),
+  createLinkSync: createLinkSync
+};
+
+/***/ }),
+
+/***/ 4895:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var path = __webpack_require__(1017);
+
+var fs = __webpack_require__(8173);
+
+var pathExists = (__webpack_require__(288).pathExists);
+/**
+ * Function that returns two types of paths, one relative to symlink, and one
+ * relative to the current working directory. Checks if path is absolute or
+ * relative. If the path is relative, this function checks if the path is
+ * relative to symlink or relative to current working directory. This is an
+ * initiative to find a smarter `srcpath` to supply when building symlinks.
+ * This allows you to determine which path to use out of one of three possible
+ * types of source paths. The first is an absolute path. This is detected by
+ * `path.isAbsolute()`. When an absolute path is provided, it is checked to
+ * see if it exists. If it does it's used, if not an error is returned
+ * (callback)/ thrown (sync). The other two options for `srcpath` are a
+ * relative url. By default Node's `fs.symlink` works by creating a symlink
+ * using `dstpath` and expects the `srcpath` to be relative to the newly
+ * created symlink. If you provide a `srcpath` that does not exist on the file
+ * system it results in a broken symlink. To minimize this, the function
+ * checks to see if the 'relative to symlink' source file exists, and if it
+ * does it will use it. If it does not, it checks if there's a file that
+ * exists that is relative to the current working directory, if does its used.
+ * This preserves the expectations of the original fs.symlink spec and adds
+ * the ability to pass in `relative to current working direcotry` paths.
+ */
+
+
+function symlinkPaths(srcpath, dstpath, callback) {
+  if (path.isAbsolute(srcpath)) {
+    return fs.lstat(srcpath, function (err) {
+      if (err) {
+        err.message = err.message.replace('lstat', 'ensureSymlink');
+        return callback(err);
+      }
+
+      return callback(null, {
+        toCwd: srcpath,
+        toDst: srcpath
+      });
+    });
+  } else {
+    var dstdir = path.dirname(dstpath);
+    var relativeToDst = path.join(dstdir, srcpath);
+    return pathExists(relativeToDst, function (err, exists) {
+      if (err) return callback(err);
+
+      if (exists) {
+        return callback(null, {
+          toCwd: relativeToDst,
+          toDst: srcpath
+        });
+      } else {
+        return fs.lstat(srcpath, function (err) {
+          if (err) {
+            err.message = err.message.replace('lstat', 'ensureSymlink');
+            return callback(err);
+          }
+
+          return callback(null, {
+            toCwd: srcpath,
+            toDst: path.relative(dstdir, srcpath)
+          });
+        });
+      }
+    });
+  }
+}
+
+function symlinkPathsSync(srcpath, dstpath) {
+  var exists;
+
+  if (path.isAbsolute(srcpath)) {
+    exists = fs.existsSync(srcpath);
+    if (!exists) throw new Error('absolute srcpath does not exist');
+    return {
+      toCwd: srcpath,
+      toDst: srcpath
+    };
+  } else {
+    var dstdir = path.dirname(dstpath);
+    var relativeToDst = path.join(dstdir, srcpath);
+    exists = fs.existsSync(relativeToDst);
+
+    if (exists) {
+      return {
+        toCwd: relativeToDst,
+        toDst: srcpath
+      };
+    } else {
+      exists = fs.existsSync(srcpath);
+      if (!exists) throw new Error('relative srcpath does not exist');
+      return {
+        toCwd: srcpath,
+        toDst: path.relative(dstdir, srcpath)
+      };
+    }
+  }
+}
+
+module.exports = {
+  symlinkPaths: symlinkPaths,
+  symlinkPathsSync: symlinkPathsSync
+};
+
+/***/ }),
+
+/***/ 3915:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+function symlinkType(srcpath, type, callback) {
+  callback = typeof type === 'function' ? type : callback;
+  type = typeof type === 'function' ? false : type;
+  if (type) return callback(null, type);
+  fs.lstat(srcpath, function (err, stats) {
+    if (err) return callback(null, 'file');
+    type = stats && stats.isDirectory() ? 'dir' : 'file';
+    callback(null, type);
+  });
+}
+
+function symlinkTypeSync(srcpath, type) {
+  var stats;
+  if (type) return type;
+
+  try {
+    stats = fs.lstatSync(srcpath);
+  } catch (_unused) {
+    return 'file';
+  }
+
+  return stats && stats.isDirectory() ? 'dir' : 'file';
+}
+
+module.exports = {
+  symlinkType: symlinkType,
+  symlinkTypeSync: symlinkTypeSync
+};
+
+/***/ }),
+
+/***/ 7349:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _slicedToArray = (__webpack_require__(3681)["default"]);
+
+var u = (__webpack_require__(9689).fromCallback);
+
+var path = __webpack_require__(1017);
+
+var fs = __webpack_require__(2272);
+
+var _mkdirs = __webpack_require__(1977);
+
+var mkdirs = _mkdirs.mkdirs;
+var mkdirsSync = _mkdirs.mkdirsSync;
+
+var _symlinkPaths = __webpack_require__(4895);
+
+var symlinkPaths = _symlinkPaths.symlinkPaths;
+var symlinkPathsSync = _symlinkPaths.symlinkPathsSync;
+
+var _symlinkType = __webpack_require__(3915);
+
+var symlinkType = _symlinkType.symlinkType;
+var symlinkTypeSync = _symlinkType.symlinkTypeSync;
+
+var pathExists = (__webpack_require__(288).pathExists);
+
+var _require = __webpack_require__(8524),
+    areIdentical = _require.areIdentical;
+
+function createSymlink(srcpath, dstpath, type, callback) {
+  callback = typeof type === 'function' ? type : callback;
+  type = typeof type === 'function' ? false : type;
+  fs.lstat(dstpath, function (err, stats) {
+    if (!err && stats.isSymbolicLink()) {
+      Promise.all([fs.stat(srcpath), fs.stat(dstpath)]).then(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            srcStat = _ref2[0],
+            dstStat = _ref2[1];
+
+        if (areIdentical(srcStat, dstStat)) return callback(null);
+
+        _createSymlink(srcpath, dstpath, type, callback);
+      });
+    } else _createSymlink(srcpath, dstpath, type, callback);
+  });
+}
+
+function _createSymlink(srcpath, dstpath, type, callback) {
+  symlinkPaths(srcpath, dstpath, function (err, relative) {
+    if (err) return callback(err);
+    srcpath = relative.toDst;
+    symlinkType(relative.toCwd, type, function (err, type) {
+      if (err) return callback(err);
+      var dir = path.dirname(dstpath);
+      pathExists(dir, function (err, dirExists) {
+        if (err) return callback(err);
+        if (dirExists) return fs.symlink(srcpath, dstpath, type, callback);
+        mkdirs(dir, function (err) {
+          if (err) return callback(err);
+          fs.symlink(srcpath, dstpath, type, callback);
+        });
+      });
+    });
+  });
+}
+
+function createSymlinkSync(srcpath, dstpath, type) {
+  var stats;
+
+  try {
+    stats = fs.lstatSync(dstpath);
+  } catch (_unused) {}
+
+  if (stats && stats.isSymbolicLink()) {
+    var srcStat = fs.statSync(srcpath);
+    var dstStat = fs.statSync(dstpath);
+    if (areIdentical(srcStat, dstStat)) return;
+  }
+
+  var relative = symlinkPathsSync(srcpath, dstpath);
+  srcpath = relative.toDst;
+  type = symlinkTypeSync(relative.toCwd, type);
+  var dir = path.dirname(dstpath);
+  var exists = fs.existsSync(dir);
+  if (exists) return fs.symlinkSync(srcpath, dstpath, type);
+  mkdirsSync(dir);
+  return fs.symlinkSync(srcpath, dstpath, type);
+}
+
+module.exports = {
+  createSymlink: u(createSymlink),
+  createSymlinkSync: createSymlinkSync
+};
+
+/***/ }),
+
+/***/ 2272:
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+ // This is adapted from https://github.com/normalize/mz
+// Copyright (c) 2014-2016 Jonathan Ong me@jongleberry.com and Contributors
+
+var u = (__webpack_require__(9689).fromCallback);
+
+var fs = __webpack_require__(8173);
+
+var api = ['access', 'appendFile', 'chmod', 'chown', 'close', 'copyFile', 'fchmod', 'fchown', 'fdatasync', 'fstat', 'fsync', 'ftruncate', 'futimes', 'lchmod', 'lchown', 'link', 'lstat', 'mkdir', 'mkdtemp', 'open', 'opendir', 'readdir', 'readFile', 'readlink', 'realpath', 'rename', 'rm', 'rmdir', 'stat', 'symlink', 'truncate', 'unlink', 'utimes', 'writeFile'].filter(function (key) {
+  // Some commands are not available on some systems. Ex:
+  // fs.opendir was added in Node.js v12.12.0
+  // fs.rm was added in Node.js v14.14.0
+  // fs.lchown is not available on at least some Linux
+  return typeof fs[key] === 'function';
+}); // Export cloned fs:
+
+Object.assign(exports, fs); // Universalify async methods:
+
+api.forEach(function (method) {
+  exports[method] = u(fs[method]);
+}); // We differ from mz/fs in that we still ship the old, broken, fs.exists()
+// since we are a drop-in replacement for the native module
+
+exports.exists = function (filename, callback) {
+  if (typeof callback === 'function') {
+    return fs.exists(filename, callback);
+  }
+
+  return new Promise(function (resolve) {
+    return fs.exists(filename, resolve);
+  });
+}; // fs.read(), fs.write(), & fs.writev() need special treatment due to multiple callback args
+
+
+exports.read = function (fd, buffer, offset, length, position, callback) {
+  if (typeof callback === 'function') {
+    return fs.read(fd, buffer, offset, length, position, callback);
+  }
+
+  return new Promise(function (resolve, reject) {
+    fs.read(fd, buffer, offset, length, position, function (err, bytesRead, buffer) {
+      if (err) return reject(err);
+      resolve({
+        bytesRead: bytesRead,
+        buffer: buffer
+      });
+    });
+  });
+}; // Function signature can be
+// fs.write(fd, buffer[, offset[, length[, position]]], callback)
+// OR
+// fs.write(fd, string[, position[, encoding]], callback)
+// We need to handle both cases, so we use ...args
+
+
+exports.write = function (fd, buffer) {
+  for (var _len = arguments.length, args = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+    args[_key - 2] = arguments[_key];
+  }
+
+  if (typeof args[args.length - 1] === 'function') {
+    return fs.write.apply(fs, [fd, buffer].concat(args));
+  }
+
+  return new Promise(function (resolve, reject) {
+    fs.write.apply(fs, [fd, buffer].concat(args, [function (err, bytesWritten, buffer) {
+      if (err) return reject(err);
+      resolve({
+        bytesWritten: bytesWritten,
+        buffer: buffer
+      });
+    }]));
+  });
+}; // fs.writev only available in Node v12.9.0+
+
+
+if (typeof fs.writev === 'function') {
+  // Function signature is
+  // s.writev(fd, buffers[, position], callback)
+  // We need to handle the optional arg, so we use ...args
+  exports.writev = function (fd, buffers) {
+    for (var _len2 = arguments.length, args = new Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
+      args[_key2 - 2] = arguments[_key2];
+    }
+
+    if (typeof args[args.length - 1] === 'function') {
+      return fs.writev.apply(fs, [fd, buffers].concat(args));
+    }
+
+    return new Promise(function (resolve, reject) {
+      fs.writev.apply(fs, [fd, buffers].concat(args, [function (err, bytesWritten, buffers) {
+        if (err) return reject(err);
+        resolve({
+          bytesWritten: bytesWritten,
+          buffers: buffers
+        });
+      }]));
+    });
+  };
+} // fs.realpath.native sometimes not available if fs is monkey-patched
+
+
+if (typeof fs.realpath["native"] === 'function') {
+  exports.realpath.native = u(fs.realpath["native"]);
+} else {
+  process.emitWarning('fs.realpath.native is not a function. Is fs being monkey-patched?', 'Warning', 'fs-extra-WARN0003');
+}
+
+/***/ }),
+
+/***/ 7433:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _objectSpread = (__webpack_require__(814)["default"]);
+
+module.exports = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, __webpack_require__(2272)), __webpack_require__(527)), __webpack_require__(7090)), __webpack_require__(3258)), __webpack_require__(3986)), __webpack_require__(1977)), __webpack_require__(8943)), __webpack_require__(7471)), __webpack_require__(288)), __webpack_require__(2318));
+
+/***/ }),
+
+/***/ 3986:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromPromise);
+
+var jsonFile = __webpack_require__(1257);
+
+jsonFile.outputJson = u(__webpack_require__(9811));
+jsonFile.outputJsonSync = __webpack_require__(6484); // aliases
+
+jsonFile.outputJSON = jsonFile.outputJson;
+jsonFile.outputJSONSync = jsonFile.outputJsonSync;
+jsonFile.writeJSON = jsonFile.writeJson;
+jsonFile.writeJSONSync = jsonFile.writeJsonSync;
+jsonFile.readJSON = jsonFile.readJson;
+jsonFile.readJSONSync = jsonFile.readJsonSync;
+module.exports = jsonFile;
+
+/***/ }),
+
+/***/ 1257:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var jsonFile = __webpack_require__(4394);
+
+module.exports = {
+  // jsonfile exports
+  readJson: jsonFile.readFile,
+  readJsonSync: jsonFile.readFileSync,
+  writeJson: jsonFile.writeFile,
+  writeJsonSync: jsonFile.writeFileSync
+};
+
+/***/ }),
+
+/***/ 6484:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _require = __webpack_require__(3178),
+    stringify = _require.stringify;
+
+var _require2 = __webpack_require__(7471),
+    outputFileSync = _require2.outputFileSync;
+
+function outputJsonSync(file, data, options) {
+  var str = stringify(data, options);
+  outputFileSync(file, str, options);
+}
+
+module.exports = outputJsonSync;
+
+/***/ }),
+
+/***/ 9811:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
+
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
+
+var _require = __webpack_require__(3178),
+    stringify = _require.stringify;
+
+var _require2 = __webpack_require__(7471),
+    outputFile = _require2.outputFile;
+
+function outputJson(_x, _x2) {
+  return _outputJson.apply(this, arguments);
+}
+
+function _outputJson() {
+  _outputJson = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(file, data) {
+    var options,
+        str,
+        _args = arguments;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            options = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
+            str = stringify(data, options);
+            _context.next = 4;
+            return outputFile(file, str, options);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _outputJson.apply(this, arguments);
+}
+
+module.exports = outputJson;
+
+/***/ }),
+
+/***/ 1977:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromPromise);
+
+var _require = __webpack_require__(1986),
+    _makeDir = _require.makeDir,
+    makeDirSync = _require.makeDirSync;
+
+var makeDir = u(_makeDir);
+module.exports = {
+  mkdirs: makeDir,
+  mkdirsSync: makeDirSync,
+  // alias
+  mkdirp: makeDir,
+  mkdirpSync: makeDirSync,
+  ensureDir: makeDir,
+  ensureDirSync: makeDirSync
+};
+
+/***/ }),
+
+/***/ 1986:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _regeneratorRuntime = (__webpack_require__(7609)["default"]);
+
+var _asyncToGenerator = (__webpack_require__(1461)["default"]);
+
+var _objectSpread = (__webpack_require__(814)["default"]);
+
+var fs = __webpack_require__(2272);
+
+var _require = __webpack_require__(5132),
+    checkPath = _require.checkPath;
+
+var getMode = function getMode(options) {
+  var defaults = {
+    mode: 511
+  };
+  if (typeof options === 'number') return options;
+  return _objectSpread(_objectSpread({}, defaults), options).mode;
+};
+
+module.exports.makeDir = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir, options) {
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            checkPath(dir);
+            return _context.abrupt("return", fs.mkdir(dir, {
+              mode: getMode(options),
+              recursive: true
+            }));
+
+          case 2:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function (_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+module.exports.makeDirSync = function (dir, options) {
+  checkPath(dir);
+  return fs.mkdirSync(dir, {
+    mode: getMode(options),
+    recursive: true
+  });
+};
+
+/***/ }),
+
+/***/ 5132:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+// Adapted from https://github.com/sindresorhus/make-dir
+// Copyright (c) Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+// The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+
+var path = __webpack_require__(1017); // https://github.com/nodejs/node/issues/8987
+// https://github.com/libuv/libuv/pull/1088
+
+
+module.exports.checkPath = function checkPath(pth) {
+  if (process.platform === 'win32') {
+    var pathHasInvalidWinCharacters = /[<>:"|?*]/.test(pth.replace(path.parse(pth).root, ''));
+
+    if (pathHasInvalidWinCharacters) {
+      var error = new Error("Path contains invalid characters: ".concat(pth));
+      error.code = 'EINVAL';
+      throw error;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ 8943:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromCallback);
+
+module.exports = {
+  move: u(__webpack_require__(5492)),
+  moveSync: __webpack_require__(8404)
+};
+
+/***/ }),
+
+/***/ 8404:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+var path = __webpack_require__(1017);
+
+var copySync = (__webpack_require__(527).copySync);
+
+var removeSync = (__webpack_require__(2318).removeSync);
+
+var mkdirpSync = (__webpack_require__(1977).mkdirpSync);
+
+var stat = __webpack_require__(8524);
+
+function moveSync(src, dest, opts) {
+  opts = opts || {};
+  var overwrite = opts.overwrite || opts.clobber || false;
+
+  var _stat$checkPathsSync = stat.checkPathsSync(src, dest, 'move', opts),
+      srcStat = _stat$checkPathsSync.srcStat,
+      _stat$checkPathsSync$ = _stat$checkPathsSync.isChangingCase,
+      isChangingCase = _stat$checkPathsSync$ === void 0 ? false : _stat$checkPathsSync$;
+
+  stat.checkParentPathsSync(src, srcStat, dest, 'move');
+  if (!isParentRoot(dest)) mkdirpSync(path.dirname(dest));
+  return doRename(src, dest, overwrite, isChangingCase);
+}
+
+function isParentRoot(dest) {
+  var parent = path.dirname(dest);
+  var parsedPath = path.parse(parent);
+  return parsedPath.root === parent;
+}
+
+function doRename(src, dest, overwrite, isChangingCase) {
+  if (isChangingCase) return rename(src, dest, overwrite);
+
+  if (overwrite) {
+    removeSync(dest);
+    return rename(src, dest, overwrite);
+  }
+
+  if (fs.existsSync(dest)) throw new Error('dest already exists.');
+  return rename(src, dest, overwrite);
+}
+
+function rename(src, dest, overwrite) {
+  try {
+    fs.renameSync(src, dest);
+  } catch (err) {
+    if (err.code !== 'EXDEV') throw err;
+    return moveAcrossDevice(src, dest, overwrite);
+  }
+}
+
+function moveAcrossDevice(src, dest, overwrite) {
+  var opts = {
+    overwrite: overwrite,
+    errorOnExist: true
+  };
+  copySync(src, dest, opts);
+  return removeSync(src);
+}
+
+module.exports = moveSync;
+
+/***/ }),
+
+/***/ 5492:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+var path = __webpack_require__(1017);
+
+var copy = (__webpack_require__(527).copy);
+
+var remove = (__webpack_require__(2318).remove);
+
+var mkdirp = (__webpack_require__(1977).mkdirp);
+
+var pathExists = (__webpack_require__(288).pathExists);
+
+var stat = __webpack_require__(8524);
+
+function move(src, dest, opts, cb) {
+  if (typeof opts === 'function') {
+    cb = opts;
+    opts = {};
+  }
+
+  opts = opts || {};
+  var overwrite = opts.overwrite || opts.clobber || false;
+  stat.checkPaths(src, dest, 'move', opts, function (err, stats) {
+    if (err) return cb(err);
+    var srcStat = stats.srcStat,
+        _stats$isChangingCase = stats.isChangingCase,
+        isChangingCase = _stats$isChangingCase === void 0 ? false : _stats$isChangingCase;
+    stat.checkParentPaths(src, srcStat, dest, 'move', function (err) {
+      if (err) return cb(err);
+      if (isParentRoot(dest)) return doRename(src, dest, overwrite, isChangingCase, cb);
+      mkdirp(path.dirname(dest), function (err) {
+        if (err) return cb(err);
+        return doRename(src, dest, overwrite, isChangingCase, cb);
+      });
+    });
+  });
+}
+
+function isParentRoot(dest) {
+  var parent = path.dirname(dest);
+  var parsedPath = path.parse(parent);
+  return parsedPath.root === parent;
+}
+
+function doRename(src, dest, overwrite, isChangingCase, cb) {
+  if (isChangingCase) return rename(src, dest, overwrite, cb);
+
+  if (overwrite) {
+    return remove(dest, function (err) {
+      if (err) return cb(err);
+      return rename(src, dest, overwrite, cb);
+    });
+  }
+
+  pathExists(dest, function (err, destExists) {
+    if (err) return cb(err);
+    if (destExists) return cb(new Error('dest already exists.'));
+    return rename(src, dest, overwrite, cb);
+  });
+}
+
+function rename(src, dest, overwrite, cb) {
+  fs.rename(src, dest, function (err) {
+    if (!err) return cb();
+    if (err.code !== 'EXDEV') return cb(err);
+    return moveAcrossDevice(src, dest, overwrite, cb);
+  });
+}
+
+function moveAcrossDevice(src, dest, overwrite, cb) {
+  var opts = {
+    overwrite: overwrite,
+    errorOnExist: true
+  };
+  copy(src, dest, opts, function (err) {
+    if (err) return cb(err);
+    return remove(src, cb);
+  });
+}
+
+module.exports = move;
+
+/***/ }),
+
+/***/ 7471:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromCallback);
+
+var fs = __webpack_require__(8173);
+
+var path = __webpack_require__(1017);
+
+var mkdir = __webpack_require__(1977);
+
+var pathExists = (__webpack_require__(288).pathExists);
+
+function outputFile(file, data, encoding, callback) {
+  if (typeof encoding === 'function') {
+    callback = encoding;
+    encoding = 'utf8';
+  }
+
+  var dir = path.dirname(file);
+  pathExists(dir, function (err, itDoes) {
+    if (err) return callback(err);
+    if (itDoes) return fs.writeFile(file, data, encoding, callback);
+    mkdir.mkdirs(dir, function (err) {
+      if (err) return callback(err);
+      fs.writeFile(file, data, encoding, callback);
+    });
+  });
+}
+
+function outputFileSync(file) {
+  var dir = path.dirname(file);
+
+  for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    args[_key - 1] = arguments[_key];
+  }
+
+  if (fs.existsSync(dir)) {
+    return fs.writeFileSync.apply(fs, [file].concat(args));
+  }
+
+  mkdir.mkdirsSync(dir);
+  fs.writeFileSync.apply(fs, [file].concat(args));
+}
+
+module.exports = {
+  outputFile: u(outputFile),
+  outputFileSync: outputFileSync
+};
+
+/***/ }),
+
+/***/ 288:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var u = (__webpack_require__(9689).fromPromise);
+
+var fs = __webpack_require__(2272);
+
+function pathExists(path) {
+  return fs.access(path).then(function () {
+    return true;
+  })["catch"](function () {
+    return false;
+  });
+}
+
+module.exports = {
+  pathExists: u(pathExists),
+  pathExistsSync: fs.existsSync
+};
+
+/***/ }),
+
+/***/ 2318:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+var u = (__webpack_require__(9689).fromCallback);
+
+var rimraf = __webpack_require__(2759);
+
+function remove(path, callback) {
+  // Node 14.14.0+
+  if (fs.rm) return fs.rm(path, {
+    recursive: true,
+    force: true
+  }, callback);
+  rimraf(path, callback);
+}
+
+function removeSync(path) {
+  // Node 14.14.0+
+  if (fs.rmSync) return fs.rmSync(path, {
+    recursive: true,
+    force: true
+  });
+  rimraf.sync(path);
+}
+
+module.exports = {
+  remove: u(remove),
+  removeSync: removeSync
+};
+
+/***/ }),
+
+/***/ 2759:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+var path = __webpack_require__(1017);
+
+var assert = __webpack_require__(9491);
+
+var isWindows = process.platform === 'win32';
+
+function defaults(options) {
+  var methods = ['unlink', 'chmod', 'stat', 'lstat', 'rmdir', 'readdir'];
+  methods.forEach(function (m) {
+    options[m] = options[m] || fs[m];
+    m = m + 'Sync';
+    options[m] = options[m] || fs[m];
+  });
+  options.maxBusyTries = options.maxBusyTries || 3;
+}
+
+function rimraf(p, options, cb) {
+  var busyTries = 0;
+
+  if (typeof options === 'function') {
+    cb = options;
+    options = {};
+  }
+
+  assert(p, 'rimraf: missing path');
+  assert.strictEqual(typeof p, 'string', 'rimraf: path should be a string');
+  assert.strictEqual(typeof cb, 'function', 'rimraf: callback function required');
+  assert(options, 'rimraf: invalid options argument provided');
+  assert.strictEqual(typeof options, 'object', 'rimraf: options should be object');
+  defaults(options);
+  rimraf_(p, options, function CB(er) {
+    if (er) {
+      if ((er.code === 'EBUSY' || er.code === 'ENOTEMPTY' || er.code === 'EPERM') && busyTries < options.maxBusyTries) {
+        busyTries++;
+        var time = busyTries * 100; // try again, with the same exact callback as this one.
+
+        return setTimeout(function () {
+          return rimraf_(p, options, CB);
+        }, time);
+      } // already gone
+
+
+      if (er.code === 'ENOENT') er = null;
+    }
+
+    cb(er);
+  });
+} // Two possible strategies.
+// 1. Assume it's a file.  unlink it, then do the dir stuff on EPERM or EISDIR
+// 2. Assume it's a directory.  readdir, then do the file stuff on ENOTDIR
+//
+// Both result in an extra syscall when you guess wrong.  However, there
+// are likely far more normal files in the world than directories.  This
+// is based on the assumption that a the average number of files per
+// directory is >= 1.
+//
+// If anyone ever complains about this, then I guess the strategy could
+// be made configurable somehow.  But until then, YAGNI.
+
+
+function rimraf_(p, options, cb) {
+  assert(p);
+  assert(options);
+  assert(typeof cb === 'function'); // sunos lets the root user unlink directories, which is... weird.
+  // so we have to lstat here and make sure it's not a dir.
+
+  options.lstat(p, function (er, st) {
+    if (er && er.code === 'ENOENT') {
+      return cb(null);
+    } // Windows can EPERM on stat.  Life is suffering.
+
+
+    if (er && er.code === 'EPERM' && isWindows) {
+      return fixWinEPERM(p, options, er, cb);
+    }
+
+    if (st && st.isDirectory()) {
+      return rmdir(p, options, er, cb);
+    }
+
+    options.unlink(p, function (er) {
+      if (er) {
+        if (er.code === 'ENOENT') {
+          return cb(null);
+        }
+
+        if (er.code === 'EPERM') {
+          return isWindows ? fixWinEPERM(p, options, er, cb) : rmdir(p, options, er, cb);
+        }
+
+        if (er.code === 'EISDIR') {
+          return rmdir(p, options, er, cb);
+        }
+      }
+
+      return cb(er);
+    });
+  });
+}
+
+function fixWinEPERM(p, options, er, cb) {
+  assert(p);
+  assert(options);
+  assert(typeof cb === 'function');
+  options.chmod(p, 438, function (er2) {
+    if (er2) {
+      cb(er2.code === 'ENOENT' ? null : er);
+    } else {
+      options.stat(p, function (er3, stats) {
+        if (er3) {
+          cb(er3.code === 'ENOENT' ? null : er);
+        } else if (stats.isDirectory()) {
+          rmdir(p, options, er, cb);
+        } else {
+          options.unlink(p, cb);
+        }
+      });
+    }
+  });
+}
+
+function fixWinEPERMSync(p, options, er) {
+  var stats;
+  assert(p);
+  assert(options);
+
+  try {
+    options.chmodSync(p, 438);
+  } catch (er2) {
+    if (er2.code === 'ENOENT') {
+      return;
+    } else {
+      throw er;
+    }
+  }
+
+  try {
+    stats = options.statSync(p);
+  } catch (er3) {
+    if (er3.code === 'ENOENT') {
+      return;
+    } else {
+      throw er;
+    }
+  }
+
+  if (stats.isDirectory()) {
+    rmdirSync(p, options, er);
+  } else {
+    options.unlinkSync(p);
+  }
+}
+
+function rmdir(p, options, originalEr, cb) {
+  assert(p);
+  assert(options);
+  assert(typeof cb === 'function'); // try to rmdir first, and only readdir on ENOTEMPTY or EEXIST (SunOS)
+  // if we guessed wrong, and it's not a directory, then
+  // raise the original error.
+
+  options.rmdir(p, function (er) {
+    if (er && (er.code === 'ENOTEMPTY' || er.code === 'EEXIST' || er.code === 'EPERM')) {
+      rmkids(p, options, cb);
+    } else if (er && er.code === 'ENOTDIR') {
+      cb(originalEr);
+    } else {
+      cb(er);
+    }
+  });
+}
+
+function rmkids(p, options, cb) {
+  assert(p);
+  assert(options);
+  assert(typeof cb === 'function');
+  options.readdir(p, function (er, files) {
+    if (er) return cb(er);
+    var n = files.length;
+    var errState;
+    if (n === 0) return options.rmdir(p, cb);
+    files.forEach(function (f) {
+      rimraf(path.join(p, f), options, function (er) {
+        if (errState) {
+          return;
+        }
+
+        if (er) return cb(errState = er);
+
+        if (--n === 0) {
+          options.rmdir(p, cb);
+        }
+      });
+    });
+  });
+} // this looks simpler, and is strictly *faster*, but will
+// tie up the JavaScript thread and fail on excessively
+// deep directory trees.
+
+
+function rimrafSync(p, options) {
+  var st;
+  options = options || {};
+  defaults(options);
+  assert(p, 'rimraf: missing path');
+  assert.strictEqual(typeof p, 'string', 'rimraf: path should be a string');
+  assert(options, 'rimraf: missing options');
+  assert.strictEqual(typeof options, 'object', 'rimraf: options should be object');
+
+  try {
+    st = options.lstatSync(p);
+  } catch (er) {
+    if (er.code === 'ENOENT') {
+      return;
+    } // Windows can EPERM on stat.  Life is suffering.
+
+
+    if (er.code === 'EPERM' && isWindows) {
+      fixWinEPERMSync(p, options, er);
+    }
+  }
+
+  try {
+    // sunos lets the root user unlink directories, which is... weird.
+    if (st && st.isDirectory()) {
+      rmdirSync(p, options, null);
+    } else {
+      options.unlinkSync(p);
+    }
+  } catch (er) {
+    if (er.code === 'ENOENT') {
+      return;
+    } else if (er.code === 'EPERM') {
+      return isWindows ? fixWinEPERMSync(p, options, er) : rmdirSync(p, options, er);
+    } else if (er.code !== 'EISDIR') {
+      throw er;
+    }
+
+    rmdirSync(p, options, er);
+  }
+}
+
+function rmdirSync(p, options, originalEr) {
+  assert(p);
+  assert(options);
+
+  try {
+    options.rmdirSync(p);
+  } catch (er) {
+    if (er.code === 'ENOTDIR') {
+      throw originalEr;
+    } else if (er.code === 'ENOTEMPTY' || er.code === 'EEXIST' || er.code === 'EPERM') {
+      rmkidsSync(p, options);
+    } else if (er.code !== 'ENOENT') {
+      throw er;
+    }
+  }
+}
+
+function rmkidsSync(p, options) {
+  assert(p);
+  assert(options);
+  options.readdirSync(p).forEach(function (f) {
+    return rimrafSync(path.join(p, f), options);
+  });
+
+  if (isWindows) {
+    // We only end up here once we got ENOTEMPTY at least once, and
+    // at this point, we are guaranteed to have removed all the kids.
+    // So, we know that it won't be ENOENT or ENOTDIR or anything else.
+    // try really hard to delete stuff on windows, because it has a
+    // PROFOUNDLY annoying habit of not closing handles promptly when
+    // files are deleted, resulting in spurious ENOTEMPTY errors.
+    var startTime = Date.now();
+
+    do {
+      try {
+        var ret = options.rmdirSync(p, options);
+        return ret;
+      } catch (_unused) {}
+    } while (Date.now() - startTime < 500); // give up after 500ms
+
+  } else {
+    var _ret = options.rmdirSync(p, options);
+
+    return _ret;
+  }
+}
+
+module.exports = rimraf;
+rimraf.sync = rimrafSync;
+
+/***/ }),
+
+/***/ 8524:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _slicedToArray = (__webpack_require__(3681)["default"]);
+
+var fs = __webpack_require__(2272);
+
+var path = __webpack_require__(1017);
+
+var util = __webpack_require__(3837);
+
+function getStats(src, dest, opts) {
+  var statFunc = opts.dereference ? function (file) {
+    return fs.stat(file, {
+      bigint: true
+    });
+  } : function (file) {
+    return fs.lstat(file, {
+      bigint: true
+    });
+  };
+  return Promise.all([statFunc(src), statFunc(dest)["catch"](function (err) {
+    if (err.code === 'ENOENT') return null;
+    throw err;
+  })]).then(function (_ref) {
+    var _ref2 = _slicedToArray(_ref, 2),
+        srcStat = _ref2[0],
+        destStat = _ref2[1];
+
+    return {
+      srcStat: srcStat,
+      destStat: destStat
+    };
+  });
+}
+
+function getStatsSync(src, dest, opts) {
+  var destStat;
+  var statFunc = opts.dereference ? function (file) {
+    return fs.statSync(file, {
+      bigint: true
+    });
+  } : function (file) {
+    return fs.lstatSync(file, {
+      bigint: true
+    });
+  };
+  var srcStat = statFunc(src);
+
+  try {
+    destStat = statFunc(dest);
+  } catch (err) {
+    if (err.code === 'ENOENT') return {
+      srcStat: srcStat,
+      destStat: null
+    };
+    throw err;
+  }
+
+  return {
+    srcStat: srcStat,
+    destStat: destStat
+  };
+}
+
+function checkPaths(src, dest, funcName, opts, cb) {
+  util.callbackify(getStats)(src, dest, opts, function (err, stats) {
+    if (err) return cb(err);
+    var srcStat = stats.srcStat,
+        destStat = stats.destStat;
+
+    if (destStat) {
+      if (areIdentical(srcStat, destStat)) {
+        var srcBaseName = path.basename(src);
+        var destBaseName = path.basename(dest);
+
+        if (funcName === 'move' && srcBaseName !== destBaseName && srcBaseName.toLowerCase() === destBaseName.toLowerCase()) {
+          return cb(null, {
+            srcStat: srcStat,
+            destStat: destStat,
+            isChangingCase: true
+          });
+        }
+
+        return cb(new Error('Source and destination must not be the same.'));
+      }
+
+      if (srcStat.isDirectory() && !destStat.isDirectory()) {
+        return cb(new Error("Cannot overwrite non-directory '".concat(dest, "' with directory '").concat(src, "'.")));
+      }
+
+      if (!srcStat.isDirectory() && destStat.isDirectory()) {
+        return cb(new Error("Cannot overwrite directory '".concat(dest, "' with non-directory '").concat(src, "'.")));
+      }
+    }
+
+    if (srcStat.isDirectory() && isSrcSubdir(src, dest)) {
+      return cb(new Error(errMsg(src, dest, funcName)));
+    }
+
+    return cb(null, {
+      srcStat: srcStat,
+      destStat: destStat
+    });
+  });
+}
+
+function checkPathsSync(src, dest, funcName, opts) {
+  var _getStatsSync = getStatsSync(src, dest, opts),
+      srcStat = _getStatsSync.srcStat,
+      destStat = _getStatsSync.destStat;
+
+  if (destStat) {
+    if (areIdentical(srcStat, destStat)) {
+      var srcBaseName = path.basename(src);
+      var destBaseName = path.basename(dest);
+
+      if (funcName === 'move' && srcBaseName !== destBaseName && srcBaseName.toLowerCase() === destBaseName.toLowerCase()) {
+        return {
+          srcStat: srcStat,
+          destStat: destStat,
+          isChangingCase: true
+        };
+      }
+
+      throw new Error('Source and destination must not be the same.');
+    }
+
+    if (srcStat.isDirectory() && !destStat.isDirectory()) {
+      throw new Error("Cannot overwrite non-directory '".concat(dest, "' with directory '").concat(src, "'."));
+    }
+
+    if (!srcStat.isDirectory() && destStat.isDirectory()) {
+      throw new Error("Cannot overwrite directory '".concat(dest, "' with non-directory '").concat(src, "'."));
+    }
+  }
+
+  if (srcStat.isDirectory() && isSrcSubdir(src, dest)) {
+    throw new Error(errMsg(src, dest, funcName));
+  }
+
+  return {
+    srcStat: srcStat,
+    destStat: destStat
+  };
+} // recursively check if dest parent is a subdirectory of src.
+// It works for all file types including symlinks since it
+// checks the src and dest inodes. It starts from the deepest
+// parent and stops once it reaches the src parent or the root path.
+
+
+function checkParentPaths(src, srcStat, dest, funcName, cb) {
+  var srcParent = path.resolve(path.dirname(src));
+  var destParent = path.resolve(path.dirname(dest));
+  if (destParent === srcParent || destParent === path.parse(destParent).root) return cb();
+  fs.stat(destParent, {
+    bigint: true
+  }, function (err, destStat) {
+    if (err) {
+      if (err.code === 'ENOENT') return cb();
+      return cb(err);
+    }
+
+    if (areIdentical(srcStat, destStat)) {
+      return cb(new Error(errMsg(src, dest, funcName)));
+    }
+
+    return checkParentPaths(src, srcStat, destParent, funcName, cb);
+  });
+}
+
+function checkParentPathsSync(src, srcStat, dest, funcName) {
+  var srcParent = path.resolve(path.dirname(src));
+  var destParent = path.resolve(path.dirname(dest));
+  if (destParent === srcParent || destParent === path.parse(destParent).root) return;
+  var destStat;
+
+  try {
+    destStat = fs.statSync(destParent, {
+      bigint: true
+    });
+  } catch (err) {
+    if (err.code === 'ENOENT') return;
+    throw err;
+  }
+
+  if (areIdentical(srcStat, destStat)) {
+    throw new Error(errMsg(src, dest, funcName));
+  }
+
+  return checkParentPathsSync(src, srcStat, destParent, funcName);
+}
+
+function areIdentical(srcStat, destStat) {
+  return destStat.ino && destStat.dev && destStat.ino === srcStat.ino && destStat.dev === srcStat.dev;
+} // return true if dest is a subdir of src, otherwise false.
+// It only checks the path strings.
+
+
+function isSrcSubdir(src, dest) {
+  var srcArr = path.resolve(src).split(path.sep).filter(function (i) {
+    return i;
+  });
+  var destArr = path.resolve(dest).split(path.sep).filter(function (i) {
+    return i;
+  });
+  return srcArr.reduce(function (acc, cur, i) {
+    return acc && destArr[i] === cur;
+  }, true);
+}
+
+function errMsg(src, dest, funcName) {
+  return "Cannot ".concat(funcName, " '").concat(src, "' to a subdirectory of itself, '").concat(dest, "'.");
+}
+
+module.exports = {
+  checkPaths: checkPaths,
+  checkPathsSync: checkPathsSync,
+  checkParentPaths: checkParentPaths,
+  checkParentPathsSync: checkParentPathsSync,
+  isSrcSubdir: isSrcSubdir,
+  areIdentical: areIdentical
+};
+
+/***/ }),
+
+/***/ 9211:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+
+var fs = __webpack_require__(8173);
+
+function utimesMillis(path, atime, mtime, callback) {
+  // if (!HAS_MILLIS_RES) return fs.utimes(path, atime, mtime, callback)
+  fs.open(path, 'r+', function (err, fd) {
+    if (err) return callback(err);
+    fs.futimes(fd, atime, mtime, function (futimesErr) {
+      fs.close(fd, function (closeErr) {
+        if (callback) callback(futimesErr || closeErr);
+      });
+    });
+  });
+}
+
+function utimesMillisSync(path, atime, mtime) {
+  var fd = fs.openSync(path, 'r+');
+  fs.futimesSync(fd, atime, mtime);
+  return fs.closeSync(fd);
+}
+
+module.exports = {
+  utimesMillis: utimesMillis,
+  utimesMillisSync: utimesMillisSync
+};
 
 /***/ }),
 
@@ -35355,9 +35355,9 @@ function wrap_wrap(nodes, loose) {
   return result;
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/footer.js
+
+
 /**
- * @typedef {import('mdast').BlockContent} BlockContent
- * @typedef {import('mdast').FootnoteDefinition} FootnoteDefinition
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').ElementContent} ElementContent
  * @typedef {import('./index.js').H} H
@@ -35483,7 +35483,9 @@ function footer(h) {
     children: [{
       type: 'element',
       tagName: h.footnoteLabelTagName,
-      properties: JSON.parse(JSON.stringify(h.footnoteLabelProperties)),
+      properties: _objectSpread2(_objectSpread2({}, JSON.parse(JSON.stringify(h.footnoteLabelProperties))), {}, {
+        id: 'footnote-label'
+      }),
       children: [u('text', h.footnoteLabel)]
     }, {
       type: 'text',
@@ -35534,7 +35536,6 @@ function hardBreak(h, node) {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/code.js
 /**
  * @typedef {import('mdast').Code} Code
- * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
  * @typedef {import('../index.js').Handler} Handler
  */
@@ -36076,7 +36077,6 @@ function strong(h, node) {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/table.js
 /**
  * @typedef {import('mdast').Table} Table
- * @typedef {import('mdast').TableCell} TableCell
  * @typedef {import('hast').Element} Element
  * @typedef {import('../index.js').Handler} Handler
  * @typedef {import('../index.js').Content} Content
@@ -36286,60 +36286,91 @@ function ignore() {
  * @typedef {import('mdast').Definition} Definition
  * @typedef {import('mdast').FootnoteDefinition} FootnoteDefinition
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('hast').Text} Text
- * @typedef {import('hast').Comment} Comment
  * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Root} Root
  * @typedef {import('hast').ElementContent} Content
  * @typedef {import('unist-util-position').PositionLike} PositionLike
  *
  * @typedef EmbeddedHastFields
- * @property {string} [hName] Defines the tag name of an element
- * @property {Properties} [hProperties] Defines the properties of an element
- * @property {Array<Content>} [hChildren] Defines the (hast) children of an element
+ * @property {string} [hName]
+ *   Defines the tag name of an element.
+ * @property {Properties} [hProperties]
+ *   Defines the properties of an element.
+ * @property {Array<Content>} [hChildren]
+ *   Defines the (hast) children of an element.
  *
- * @typedef {Record<string, unknown> & EmbeddedHastFields} Data unist data with embedded hast fields
+ * @typedef {Record<string, unknown> & EmbeddedHastFields} Data
+ *   unist data with embedded hast fields.
  *
- * @typedef {MdastNode & {data?: Data}} NodeWithData unist node with embedded hast data
+ * @typedef {MdastNode & {data?: Data}} NodeWithData
+ *   unist node with embedded hast data.
  *
  * @callback Handler
- * @param {H} h Handle context
- * @param {any} node mdast node to handle
- * @param {Parent|null} parent Parent of `node`
- * @returns {Content|Array<Content>|null|undefined} hast node
+ *   Handle a node.
+ * @param {H} h
+ *   Handle context.
+ * @param {any} node
+ *   mdast node to handle.
+ * @param {Parent|null} parent
+ *   Parent of `node`.
+ * @returns {Content|Array<Content>|null|undefined}
+ *   hast node.
  *
  * @callback HFunctionProps
- * @param {MdastNode|PositionLike|null|undefined} node mdast node or unist position
- * @param {string} tagName HTML tag name
- * @param {Properties} props Properties
- * @param {Array<Content>?} [children] hast content
+ * @param {MdastNode|PositionLike|null|undefined} node
+ *   mdast node or unist position.
+ * @param {string} tagName
+ *   HTML tag name.
+ * @param {Properties} props
+ *   Properties.
+ * @param {Array<Content>?} [children]
+ *   hast content.
  * @returns {Element}
+ *   Compiled element.
  *
  * @callback HFunctionNoProps
- * @param {MdastNode|PositionLike|null|undefined} node mdast node or unist position
- * @param {string} tagName HTML tag name
- * @param {Array<Content>?} [children] hast content
+ * @param {MdastNode|PositionLike|null|undefined} node
+ *   mdast node or unist position.
+ * @param {string} tagName
+ *   HTML tag name.
+ * @param {Array<Content>?} [children]
+ *   hast content
  * @returns {Element}
+ *   Compiled element.
  *
  * @typedef HFields
- * @property {boolean} dangerous Whether HTML is allowed
- * @property {string} clobberPrefix Prefix to use to prevent DOM clobbering
- * @property {string} footnoteLabel Label to use to introduce the footnote section
- * @property {string} footnoteLabelTagName HTML used for the footnote label
- * @property {Properties} footnoteLabelProperties properties on the HTML tag used for the footnote label
- * @property {string} footnoteBackLabel Label to use to go back to a footnote call from the footnote section
- * @property {(identifier: string) => Definition|null} definition Definition cache
- * @property {Record<string, FootnoteDefinition>} footnoteById Footnote cache
- * @property {Array<string>} footnoteOrder Order in which footnotes occur
- * @property {Record<string, number>} footnoteCounts Counts the same footnote was used
- * @property {Handlers} handlers Applied handlers
- * @property {Handler} unknownHandler Handler for any none not in `passThrough` or otherwise handled
- * @property {(left: NodeWithData|PositionLike|null|undefined, right: Content) => Content} augment Like `h` but lower-level and usable on non-elements.
- * @property {Array<string>} passThrough List of node types to pass through untouched (except for their children).
+ * @property {boolean} dangerous
+ *   Whether HTML is allowed.
+ * @property {string} clobberPrefix
+ *   Prefix to use to prevent DOM clobbering.
+ * @property {string} footnoteLabel
+ *   Label to use to introduce the footnote section.
+ * @property {string} footnoteLabelTagName
+ *   HTML used for the footnote label.
+ * @property {Properties} footnoteLabelProperties
+ *   Properties on the HTML tag used for the footnote label.
+ * @property {string} footnoteBackLabel
+ *   Label to use to go back to a footnote call from the footnote section.
+ * @property {(identifier: string) => Definition|null} definition
+ *   Definition cache.
+ * @property {Record<string, FootnoteDefinition>} footnoteById
+ *   Footnote cache.
+ * @property {Array<string>} footnoteOrder
+ *   Order in which footnotes occur.
+ * @property {Record<string, number>} footnoteCounts
+ *   Counts the same footnote was used.
+ * @property {Handlers} handlers
+ *   Applied handlers.
+ * @property {Handler} unknownHandler
+ *   Handler for any none not in `passThrough` or otherwise handled.
+ * @property {(left: NodeWithData|PositionLike|null|undefined, right: Content) => Content} augment
+ *   Like `h` but lower-level and usable on non-elements.
+ * @property {Array<string>} passThrough
+ *   List of node types to pass through untouched (except for their children).
  *
  * @typedef Options
+ *   Configuration (optional).
  * @property {boolean} [allowDangerousHtml=false]
- *   Whether to allow `html` nodes and inject them as `raw` HTML
+ *   Whether to allow `html` nodes and inject them as `raw` HTML.
  * @property {string} [clobberPrefix='user-content-']
  *   Prefix to use before the `id` attribute to prevent it from *clobbering*.
  *   attributes.
@@ -36359,7 +36390,7 @@ function ignore() {
  * @property {string} [footnoteLabelTagName='h2']
  *   HTML tag to use for the footnote label.
  *   Can be changed to match your document structure and play well with your choice of css.
- * @property {Properties} [footnoteLabelProperties={id: 'footnote-label', className: ['sr-only']}]
+ * @property {Properties} [footnoteLabelProperties={className: ['sr-only']}]
  *   Properties to use on the footnote label.
  *   A 'sr-only' class is added by default to hide this from sighted users.
  *   Change it to make the label visible, or add classes for other purposes.
@@ -36389,10 +36420,14 @@ function ignore() {
 
 var mdast_util_to_hast_lib_own = {}.hasOwnProperty;
 /**
- * Factory to transform.
- * @param {MdastNode} tree mdast node
- * @param {Options} [options] Configuration
- * @returns {H} `h` function
+ * Turn mdast into hast.
+ *
+ * @param {MdastNode} tree
+ *   mdast node.
+ * @param {Options} [options]
+ *   Configuration (optional).
+ * @returns {H}
+ *   `h` function.
  */
 
 function factory(tree, options) {
@@ -36406,7 +36441,6 @@ function factory(tree, options) {
   h.footnoteLabel = settings.footnoteLabel || 'Footnotes';
   h.footnoteLabelTagName = settings.footnoteLabelTagName || 'h2';
   h.footnoteLabelProperties = settings.footnoteLabelProperties || {
-    id: 'footnote-label',
     className: ['sr-only']
   };
   h.footnoteBackLabel = settings.footnoteBackLabel || 'Back to content';
@@ -36434,6 +36468,7 @@ function factory(tree, options) {
   return h;
   /**
    * Finalise the created `right`, a hast node, from `left`, an mdast node.
+   *
    * @param {(NodeWithData|PositionLike)?} left
    * @param {Content} right
    * @returns {Content}
@@ -63830,7 +63865,7 @@ function arduino(Prism) {
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bash.js
 // @ts-nocheck
 bash.displayName = 'bash';
-bash.aliases = ['shell'];
+bash.aliases = ['sh', 'shell'];
 /** @type {import('../core.js').Syntax} */
 
 function bash(Prism) {
@@ -63928,7 +63963,7 @@ function bash(Prism) {
       // Highlight variable names as variables in the left-hand part
       // of assignments (“=” and “+=”).
       'assign-left': {
-        pattern: /(^|[\s;|&]|[<>]\()\w+(?=\+?=)/,
+        pattern: /(^|[\s;|&]|[<>]\()\w+(?:\.\w+)*(?=\+?=)/,
         inside: {
           environment: {
             pattern: RegExp('(^|[\\s;|&]|[<>]\\()' + envVars),
@@ -63936,6 +63971,12 @@ function bash(Prism) {
             alias: 'constant'
           }
         },
+        alias: 'variable',
+        lookbehind: true
+      },
+      // Highlight parameter names as variables
+      parameter: {
+        pattern: /(^|\s)-{1,2}(?:\w+:[+-]?)?\w+(?:\.\w+)*(?=[=\s]|$)/,
         alias: 'variable',
         lookbehind: true
       },
@@ -63980,7 +64021,7 @@ function bash(Prism) {
       },
       variable: insideString.variable,
       "function": {
-        pattern: /(^|[\s;|&]|[<>]\()(?:add|apropos|apt|apt-cache|apt-get|aptitude|aspell|automysqlbackup|awk|basename|bash|bc|bconsole|bg|bzip2|cal|cat|cfdisk|chgrp|chkconfig|chmod|chown|chroot|cksum|clear|cmp|column|comm|composer|cp|cron|crontab|csplit|curl|cut|date|dc|dd|ddrescue|debootstrap|df|diff|diff3|dig|dir|dircolors|dirname|dirs|dmesg|docker|docker-compose|du|egrep|eject|env|ethtool|expand|expect|expr|fdformat|fdisk|fg|fgrep|file|find|fmt|fold|format|free|fsck|ftp|fuser|gawk|git|gparted|grep|groupadd|groupdel|groupmod|groups|grub-mkconfig|gzip|halt|head|hg|history|host|hostname|htop|iconv|id|ifconfig|ifdown|ifup|import|install|ip|jobs|join|kill|killall|less|link|ln|locate|logname|logrotate|look|lpc|lpr|lprint|lprintd|lprintq|lprm|ls|lsof|lynx|make|man|mc|mdadm|mkconfig|mkdir|mke2fs|mkfifo|mkfs|mkisofs|mknod|mkswap|mmv|more|most|mount|mtools|mtr|mutt|mv|nano|nc|netstat|nice|nl|node|nohup|notify-send|npm|nslookup|op|open|parted|passwd|paste|pathchk|ping|pkill|pnpm|podman|podman-compose|popd|pr|printcap|printenv|ps|pushd|pv|quota|quotacheck|quotactl|ram|rar|rcp|reboot|remsync|rename|renice|rev|rm|rmdir|rpm|rsync|scp|screen|sdiff|sed|sendmail|seq|service|sftp|sh|shellcheck|shuf|shutdown|sleep|slocate|sort|split|ssh|stat|strace|su|sudo|sum|suspend|swapon|sync|tac|tail|tar|tee|time|timeout|top|touch|tr|traceroute|tsort|tty|umount|uname|unexpand|uniq|units|unrar|unshar|unzip|update-grub|uptime|useradd|userdel|usermod|users|uudecode|uuencode|v|vcpkg|vdir|vi|vim|virsh|vmstat|wait|watch|wc|wget|whereis|which|who|whoami|write|xargs|xdg-open|yarn|yes|zenity|zip|zsh|zypper)(?=$|[)\s;|&])/,
+        pattern: /(^|[\s;|&]|[<>]\()(?:add|apropos|apt|apt-cache|apt-get|aptitude|aspell|automysqlbackup|awk|basename|bash|bc|bconsole|bg|bzip2|cal|cargo|cat|cfdisk|chgrp|chkconfig|chmod|chown|chroot|cksum|clear|cmp|column|comm|composer|cp|cron|crontab|csplit|curl|cut|date|dc|dd|ddrescue|debootstrap|df|diff|diff3|dig|dir|dircolors|dirname|dirs|dmesg|docker|docker-compose|du|egrep|eject|env|ethtool|expand|expect|expr|fdformat|fdisk|fg|fgrep|file|find|fmt|fold|format|free|fsck|ftp|fuser|gawk|git|gparted|grep|groupadd|groupdel|groupmod|groups|grub-mkconfig|gzip|halt|head|hg|history|host|hostname|htop|iconv|id|ifconfig|ifdown|ifup|import|install|ip|java|jobs|join|kill|killall|less|link|ln|locate|logname|logrotate|look|lpc|lpr|lprint|lprintd|lprintq|lprm|ls|lsof|lynx|make|man|mc|mdadm|mkconfig|mkdir|mke2fs|mkfifo|mkfs|mkisofs|mknod|mkswap|mmv|more|most|mount|mtools|mtr|mutt|mv|nano|nc|netstat|nice|nl|node|nohup|notify-send|npm|nslookup|op|open|parted|passwd|paste|pathchk|ping|pkill|pnpm|podman|podman-compose|popd|pr|printcap|printenv|ps|pushd|pv|quota|quotacheck|quotactl|ram|rar|rcp|reboot|remsync|rename|renice|rev|rm|rmdir|rpm|rsync|scp|screen|sdiff|sed|sendmail|seq|service|sftp|sh|shellcheck|shuf|shutdown|sleep|slocate|sort|split|ssh|stat|strace|su|sudo|sum|suspend|swapon|sync|sysctl|tac|tail|tar|tee|time|timeout|top|touch|tr|traceroute|tsort|tty|umount|uname|unexpand|uniq|units|unrar|unshar|unzip|update-grub|uptime|useradd|userdel|usermod|users|uudecode|uuencode|v|vcpkg|vdir|vi|vim|virsh|vmstat|wait|watch|wc|wget|whereis|which|who|whoami|write|xargs|xdg-open|yarn|yes|zenity|zip|zsh|zypper)(?=$|[)\s;|&])/,
         lookbehind: true
       },
       keyword: {
@@ -64021,13 +64062,14 @@ function bash(Prism) {
     commandAfterHeredoc.inside = Prism.languages.bash;
     /* Patterns in command substitution. */
 
-    var toBeCopied = ['comment', 'function-name', 'for-or-select', 'assign-left', 'string', 'environment', 'function', 'keyword', 'builtin', 'boolean', 'file-descriptor', 'operator', 'punctuation', 'number'];
+    var toBeCopied = ['comment', 'function-name', 'for-or-select', 'assign-left', 'parameter', 'string', 'environment', 'function', 'keyword', 'builtin', 'boolean', 'file-descriptor', 'operator', 'punctuation', 'number'];
     var inside = insideString.variable[1].inside;
 
     for (var i = 0; i < toBeCopied.length; i++) {
       inside[toBeCopied[i]] = Prism.languages.bash[toBeCopied[i]];
     }
 
+    Prism.languages.sh = Prism.languages.bash;
     Prism.languages.shell = Prism.languages.bash;
   })(Prism);
 }
@@ -64442,7 +64484,10 @@ function markup(Prism) {
             punctuation: [{
               pattern: /^=/,
               alias: 'attr-equals'
-            }, /"|'/]
+            }, {
+              pattern: /^(\s*)["']|["']$/,
+              lookbehind: true
+            }]
           }
         },
         punctuation: /\/?>/,
@@ -64568,7 +64613,7 @@ function css(Prism) {
     Prism.languages.css = {
       comment: /\/\*[\s\S]*?\*\//,
       atrule: {
-        pattern: /@[\w-](?:[^;{\s]|\s+(?![\s{]))*(?:;|(?=\s*\{))/,
+        pattern: RegExp('@[\\w-](?:' + /[^;{\s"']|\s+(?!\s)/.source + '|' + string.source + ')*?' + /(?:;|(?=\s*\{))/.source),
         inside: {
           rule: /^@[\w-]+/,
           'selector-function-argument': {
@@ -64826,7 +64871,8 @@ function java(Prism) {
       operator: {
         pattern: /(^|[^.])(?:<<=?|>>>?=?|->|--|\+\+|&&|\|\||::|[?:~]|[-+*/%&|^!=<>]=?)/m,
         lookbehind: true
-      }
+      },
+      constant: /\b[A-Z][A-Z_\d]+\b/
     });
     Prism.languages.insertBefore('java', 'string', {
       'triple-quoted-string': {
@@ -68625,7 +68671,7 @@ var Prism = _; // some additional documentation/types
  *
  * @typedef {import('prismjs').Languages} Languages
  * @typedef {import('prismjs').Grammar} Grammar Whatever this is, Prism handles it.
- * @typedef {((prism: unknown) => void) & {displayName: string, aliases?: string[]}} Syntax A refractor syntax function
+ * @typedef {((prism: unknown) => void) & {displayName: string, aliases?: Array<string>}} Syntax A refractor syntax function
  *
  * @typedef Refractor Virtual syntax highlighting
  * @property {highlight} highlight
@@ -69710,7 +69756,7 @@ function asciidoc(Prism) {
     };
     var asciidoc = Prism.languages.asciidoc = {
       'comment-block': {
-        pattern: /^(\/{4,})(?:\r?\n|\r)(?:[\s\S]*(?:\r?\n|\r))??\1/m,
+        pattern: /^(\/{4,})$[\s\S]*?^\1/m,
         alias: 'comment'
       },
       table: {
@@ -69728,7 +69774,7 @@ function asciidoc(Prism) {
         }
       },
       'passthrough-block': {
-        pattern: /^(\+{4,})(?:\r?\n|\r)(?:[\s\S]*(?:\r?\n|\r))??\1$/m,
+        pattern: /^(\+{4,})$[\s\S]*?^\1$/m,
         inside: {
           punctuation: /^\++|\++$/ // See rest below
 
@@ -69736,7 +69782,7 @@ function asciidoc(Prism) {
       },
       // Literal blocks and listing blocks
       'literal-block': {
-        pattern: /^(-{4,}|\.{4,})(?:\r?\n|\r)(?:[\s\S]*(?:\r?\n|\r))??\1$/m,
+        pattern: /^(-{4,}|\.{4,})$[\s\S]*?^\1$/m,
         inside: {
           punctuation: /^(?:-+|\.+)|(?:-+|\.+)$/ // See rest below
 
@@ -69744,7 +69790,7 @@ function asciidoc(Prism) {
       },
       // Sidebar blocks, quote blocks, example blocks and open blocks
       'other-block': {
-        pattern: /^(--|\*{4,}|_{4,}|={4,})(?:\r?\n|\r)(?:[\s\S]*(?:\r?\n|\r))??\1$/m,
+        pattern: /^(--|\*{4,}|_{4,}|={4,})$[\s\S]*?^\1$/m,
         inside: {
           punctuation: /^(?:-+|\*+|_+|=+)|(?:-+|\*+|_+|=+)$/ // See rest below
 
@@ -70475,6 +70521,35 @@ function bbcode(Prism) {
   };
   Prism.languages.shortcode = Prism.languages.bbcode;
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bbj.js
+// @ts-nocheck
+bbj.displayName = 'bbj';
+bbj.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function bbj(Prism) {
+  ;
+
+  (function (Prism) {
+    Prism.languages.bbj = {
+      comment: {
+        pattern: /(^|[^\\:])rem\s+.*/i,
+        lookbehind: true,
+        greedy: true
+      },
+      string: {
+        pattern: /(['"])(?:(?!\1|\\).|\\.)*\1/,
+        greedy: true
+      },
+      number: /(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:E[+-]?\d+)?/i,
+      keyword: /\b(?:abstract|all|argc|begin|bye|callback|case|chn|class|classend|ctl|day|declare|delete|dim|dom|dread|dsz|else|end|endif|err|exitto|extends|fi|field|for|from|gosub|goto|if|implements|interface|interfaceend|iol|iolist|let|list|load|method|methodend|methodret|on|opts|pfx|print|private|process_events|protected|psz|public|read|read_resource|release|remove_callback|repeat|restore|return|rev|seterr|setesc|sqlchn|sqlunt|ssn|start|static|swend|switch|sys|then|tim|unt|until|use|void|wend|where|while)\b/i,
+      "function": /\b\w+(?=\()/,
+      "boolean": /\b(?:BBjAPI\.TRUE|BBjAPI\.FALSE)\b/i,
+      operator: /<[=>]?|>=?|[+\-*\/^=&]|\b(?:and|not|or|xor)\b/i,
+      punctuation: /[.,;:()]/
+    };
+  })(Prism);
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bicep.js
 // @ts-nocheck
 bicep.displayName = 'bicep';
@@ -70648,6 +70723,77 @@ function bnf(Prism) {
     operator: /::=|[|()[\]{}*+?]|\.{3}/
   };
   Prism.languages.rbnf = Prism.languages.bnf;
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/bqn.js
+// @ts-nocheck
+bqn.displayName = 'bqn';
+bqn.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function bqn(Prism) {
+  Prism.languages.bqn = {
+    shebang: {
+      pattern: /^#![ \t]*\/.*/,
+      alias: 'important',
+      greedy: true
+    },
+    comment: {
+      pattern: /#.*/,
+      greedy: true
+    },
+    'string-literal': {
+      pattern: /"(?:[^"]|"")*"/,
+      greedy: true,
+      alias: 'string'
+    },
+    'character-literal': {
+      pattern: /'(?:[\s\S]|[\uD800-\uDBFF][\uDC00-\uDFFF])'/,
+      greedy: true,
+      alias: 'char'
+    },
+    "function": /•[\w¯.∞π]+[\w¯.∞π]*/,
+    'dot-notation-on-brackets': {
+      pattern: /\{(?=.*\}\.)|\}\./,
+      alias: 'namespace'
+    },
+    'special-name': {
+      pattern: /(?:𝕨|𝕩|𝕗|𝕘|𝕤|𝕣|𝕎|𝕏|𝔽|𝔾|𝕊|_𝕣_|_𝕣)/,
+      alias: 'keyword'
+    },
+    'dot-notation-on-name': {
+      pattern: /[A-Za-z_][\w¯∞π]*\./,
+      alias: 'namespace'
+    },
+    'word-number-scientific': {
+      pattern: /\d+(?:\.\d+)?[eE]¯?\d+/,
+      alias: 'number'
+    },
+    'word-name': {
+      pattern: /[A-Za-z_][\w¯∞π]*/,
+      alias: 'symbol'
+    },
+    'word-number': {
+      pattern: /[¯∞π]?(?:\d*\.?\b\d+(?:e[+¯]?\d+|E[+¯]?\d+)?|¯|∞|π)(?:j¯?(?:(?:\d+(?:\.\d+)?|\.\d+)(?:e[+¯]?\d+|E[+¯]?\d+)?|¯|∞|π))?/,
+      alias: 'number'
+    },
+    'null-literal': {
+      pattern: /@/,
+      alias: 'char'
+    },
+    'primitive-functions': {
+      pattern: /[-+×÷⋆√⌊⌈|¬∧∨<>≠=≤≥≡≢⊣⊢⥊∾≍⋈↑↓↕«»⌽⍉/⍋⍒⊏⊑⊐⊒∊⍷⊔!]/,
+      alias: 'operator'
+    },
+    'primitive-1-operators': {
+      pattern: /[`˜˘¨⁼⌜´˝˙]/,
+      alias: 'operator'
+    },
+    'primitive-2-operators': {
+      pattern: /[∘⊸⟜○⌾⎉⚇⍟⊘◶⎊]/,
+      alias: 'operator'
+    },
+    punctuation: /[←⇐↩(){}⟨⟩[\]‿·⋄,.;:?]/
+  };
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/brainfuck.js
 // @ts-nocheck
@@ -70968,6 +71114,41 @@ function cil(Prism) {
     number: /\b-?(?:0x[0-9a-f]+|\d+)(?:\.[0-9a-f]+)?\b/i,
     punctuation: /[{}[\];(),:=]|IL_[0-9A-Za-z]+/
   };
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cilkc.js
+// @ts-nocheck
+
+cilkc.displayName = 'cilkc';
+cilkc.aliases = ['cilk-c'];
+/** @type {import('../core.js').Syntax} */
+
+function cilkc(Prism) {
+  Prism.register(c);
+  Prism.languages.cilkc = Prism.languages.insertBefore('c', 'function', {
+    'parallel-keyword': {
+      pattern: /\bcilk_(?:for|reducer|s(?:cope|pawn|ync))\b/,
+      alias: 'keyword'
+    }
+  });
+  Prism.languages['cilk-c'] = Prism.languages['cilkc'];
+}
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/cilkcpp.js
+// @ts-nocheck
+
+cilkcpp.displayName = 'cilkcpp';
+cilkcpp.aliases = ['cilk', 'cilk-cpp'];
+/** @type {import('../core.js').Syntax} */
+
+function cilkcpp(Prism) {
+  Prism.register(cpp);
+  Prism.languages.cilkcpp = Prism.languages.insertBefore('cpp', 'function', {
+    'parallel-keyword': {
+      pattern: /\bcilk_(?:for|reducer|s(?:cope|pawn|ync))\b/,
+      alias: 'keyword'
+    }
+  });
+  Prism.languages['cilk-cpp'] = Prism.languages['cilkcpp'];
+  Prism.languages['cilk'] = Prism.languages['cilkcpp'];
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/clojure.js
 // @ts-nocheck
@@ -71681,7 +71862,7 @@ function cssExtras(Prism) {
         alias: 'color'
       },
       color: [{
-        pattern: /(^|[^\w-])(?:AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGr[ae]y|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|DarkOrange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGr[ae]y|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGr[ae]y|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gr[ae]y|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGr[ae]y|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGr[ae]y|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGr[ae]y|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Transparent|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen)(?![\w-])/i,
+        pattern: /(^|[^\w-])(?:AliceBlue|AntiqueWhite|Aqua|Aquamarine|Azure|Beige|Bisque|Black|BlanchedAlmond|Blue|BlueViolet|Brown|BurlyWood|CadetBlue|Chartreuse|Chocolate|Coral|CornflowerBlue|Cornsilk|Crimson|Cyan|DarkBlue|DarkCyan|DarkGoldenRod|DarkGr[ae]y|DarkGreen|DarkKhaki|DarkMagenta|DarkOliveGreen|DarkOrange|DarkOrchid|DarkRed|DarkSalmon|DarkSeaGreen|DarkSlateBlue|DarkSlateGr[ae]y|DarkTurquoise|DarkViolet|DeepPink|DeepSkyBlue|DimGr[ae]y|DodgerBlue|FireBrick|FloralWhite|ForestGreen|Fuchsia|Gainsboro|GhostWhite|Gold|GoldenRod|Gr[ae]y|Green|GreenYellow|HoneyDew|HotPink|IndianRed|Indigo|Ivory|Khaki|Lavender|LavenderBlush|LawnGreen|LemonChiffon|LightBlue|LightCoral|LightCyan|LightGoldenRodYellow|LightGr[ae]y|LightGreen|LightPink|LightSalmon|LightSeaGreen|LightSkyBlue|LightSlateGr[ae]y|LightSteelBlue|LightYellow|Lime|LimeGreen|Linen|Magenta|Maroon|MediumAquaMarine|MediumBlue|MediumOrchid|MediumPurple|MediumSeaGreen|MediumSlateBlue|MediumSpringGreen|MediumTurquoise|MediumVioletRed|MidnightBlue|MintCream|MistyRose|Moccasin|NavajoWhite|Navy|OldLace|Olive|OliveDrab|Orange|OrangeRed|Orchid|PaleGoldenRod|PaleGreen|PaleTurquoise|PaleVioletRed|PapayaWhip|PeachPuff|Peru|Pink|Plum|PowderBlue|Purple|RebeccaPurple|Red|RosyBrown|RoyalBlue|SaddleBrown|Salmon|SandyBrown|SeaGreen|SeaShell|Sienna|Silver|SkyBlue|SlateBlue|SlateGr[ae]y|Snow|SpringGreen|SteelBlue|Tan|Teal|Thistle|Tomato|Transparent|Turquoise|Violet|Wheat|White|WhiteSmoke|Yellow|YellowGreen)(?![\w-])/i,
         lookbehind: true
       }, {
         pattern: /\b(?:hsl|rgb)\(\s*\d{1,3}\s*,\s*\d{1,3}%?\s*,\s*\d{1,3}%?\s*\)\B|\b(?:hsl|rgb)a\(\s*\d{1,3}\s*,\s*\d{1,3}%?\s*,\s*\d{1,3}%?\s*,\s*(?:0|0?\.\d+|1)\s*\)\B/i,
@@ -74056,6 +74237,72 @@ function goModule(Prism) {
     punctuation: /[()[\],]/
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/gradle.js
+// @ts-nocheck
+
+gradle.displayName = 'gradle';
+gradle.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function gradle(Prism) {
+  Prism.register(clike);
+
+  (function (Prism) {
+    var interpolation = {
+      pattern: /((?:^|[^\\$])(?:\\{2})*)\$(?:\w+|\{[^{}]*\})/,
+      lookbehind: true,
+      inside: {
+        'interpolation-punctuation': {
+          pattern: /^\$\{?|\}$/,
+          alias: 'punctuation'
+        },
+        expression: {
+          pattern: /[\s\S]+/,
+          inside: null
+        }
+      }
+    };
+    Prism.languages.gradle = Prism.languages.extend('clike', {
+      string: {
+        pattern: /'''(?:[^\\]|\\[\s\S])*?'''|'(?:\\.|[^\\'\r\n])*'/,
+        greedy: true
+      },
+      keyword: /\b(?:apply|def|dependencies|else|if|implementation|import|plugin|plugins|project|repositories|repository|sourceSets|tasks|val)\b/,
+      number: /\b(?:0b[01_]+|0x[\da-f_]+(?:\.[\da-f_p\-]+)?|[\d_]+(?:\.[\d_]+)?(?:e[+-]?\d+)?)[glidf]?\b/i,
+      operator: {
+        pattern: /(^|[^.])(?:~|==?~?|\?[.:]?|\*(?:[.=]|\*=?)?|\.[@&]|\.\.<|\.\.(?!\.)|-[-=>]?|\+[+=]?|!=?|<(?:<=?|=>?)?|>(?:>>?=?|=)?|&[&=]?|\|[|=]?|\/=?|\^=?|%=?)/,
+        lookbehind: true
+      },
+      punctuation: /\.+|[{}[\];(),:$]/
+    });
+    Prism.languages.insertBefore('gradle', 'string', {
+      shebang: {
+        pattern: /#!.+/,
+        alias: 'comment',
+        greedy: true
+      },
+      'interpolation-string': {
+        pattern: /"""(?:[^\\]|\\[\s\S])*?"""|(["/])(?:\\.|(?!\1)[^\\\r\n])*\1|\$\/(?:[^/$]|\$(?:[/$]|(?![/$]))|\/(?!\$))*\/\$/,
+        greedy: true,
+        inside: {
+          interpolation: interpolation,
+          string: /[\s\S]+/
+        }
+      }
+    });
+    Prism.languages.insertBefore('gradle', 'punctuation', {
+      'spock-block': /\b(?:and|cleanup|expect|given|setup|then|when|where):/
+    });
+    Prism.languages.insertBefore('gradle', 'function', {
+      annotation: {
+        pattern: /(^|[^.])@\w+/,
+        lookbehind: true,
+        alias: 'punctuation'
+      }
+    });
+    interpolation.inside.expression.inside = Prism.languages.gradle;
+  })(Prism);
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/graphql.js
 // @ts-nocheck
 graphql.displayName = 'graphql';
@@ -75069,7 +75316,7 @@ function hoon(Prism) {
       greedy: true
     },
     string: {
-      pattern: /"[^"]*"|'[^']*'/,
+      pattern: /"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'/,
       greedy: true
     },
     constant: /%(?:\.[ny]|[\w-]+)/,
@@ -75876,7 +76123,7 @@ function scala(Prism) {
       pattern: /("|')(?:\\.|(?!\1)[^\\\r\n])*\1/,
       greedy: true
     },
-    keyword: /<-|=>|\b(?:abstract|case|catch|class|def|do|else|extends|final|finally|for|forSome|if|implicit|import|lazy|match|new|null|object|override|package|private|protected|return|sealed|self|super|this|throw|trait|try|type|val|var|while|with|yield)\b/,
+    keyword: /<-|=>|\b(?:abstract|case|catch|class|def|derives|do|else|enum|extends|extension|final|finally|for|forSome|given|if|implicit|import|infix|inline|lazy|match|new|null|object|opaque|open|override|package|private|protected|return|sealed|self|super|this|throw|trait|transparent|try|type|using|val|var|while|with|yield)\b/,
     number: /\b0x(?:[\da-f]*\.)?[\da-f]+|(?:\b\d+(?:\.\d*)?|\B\.\d+)(?:e\d+)?[dfl]?/i,
     builtin: /\b(?:Any|AnyRef|AnyVal|Boolean|Byte|Char|Double|Float|Int|Long|Nothing|Short|String|Unit)\b/,
     symbol: /'[^\d\s\\]\w*/
@@ -75913,6 +76160,7 @@ function scala(Prism) {
   });
   delete Prism.languages.scala['class-name'];
   delete Prism.languages.scala['function'];
+  delete Prism.languages.scala['constant'];
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/javadoc.js
 // @ts-nocheck
@@ -78503,6 +78751,82 @@ function mermaid(Prism) {
     punctuation: /[(){};]/
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/metafont.js
+// @ts-nocheck
+metafont.displayName = 'metafont';
+metafont.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function metafont(Prism) {
+  Prism.languages.metafont = {
+    // Syntax of METAFONT with the added (public) elements of PlainMETAFONT. Except for internal quantities they are expected to be rarely redefined. Freely inspired by the syntax of Christophe Grandsire for the Crimson Editor.
+    comment: {
+      pattern: /%.*/,
+      greedy: true
+    },
+    string: {
+      pattern: /"[^\r\n"]*"/,
+      greedy: true
+    },
+    number: /\d*\.?\d+/,
+    "boolean": /\b(?:false|true)\b/,
+    punctuation: [/[,;()]/, {
+      pattern: /(^|[^{}])(?:\{|\})(?![{}])/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^[])\[(?!\[)/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^\]])\](?!\])/,
+      lookbehind: true
+    }],
+    constant: [{
+      pattern: /(^|[^!?])\?\?\?(?![!?])/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^/*\\])(?:\\|\\\\)(?![/*\\])/,
+      lookbehind: true
+    }, /\b(?:_|blankpicture|bp|cc|cm|dd|ditto|down|eps|epsilon|fullcircle|halfcircle|identity|in|infinity|left|mm|nullpen|nullpicture|origin|pc|penrazor|penspeck|pensquare|penstroke|proof|pt|quartercircle|relax|right|smoke|unitpixel|unitsquare|up)\b/],
+    quantity: {
+      pattern: /\b(?:autorounding|blacker|boundarychar|charcode|chardp|chardx|chardy|charext|charht|charic|charwd|currentwindow|day|designsize|displaying|fillin|fontmaking|granularity|hppp|join_radius|month|o_correction|pausing|pen_(?:bot|lft|rt|top)|pixels_per_inch|proofing|showstopping|smoothing|time|tolerance|tracingcapsules|tracingchoices|tracingcommands|tracingedges|tracingequations|tracingmacros|tracingonline|tracingoutput|tracingpens|tracingrestores|tracingspecs|tracingstats|tracingtitles|turningcheck|vppp|warningcheck|xoffset|year|yoffset)\b/,
+      alias: 'keyword'
+    },
+    command: {
+      pattern: /\b(?:addto|batchmode|charlist|cull|display|errhelp|errmessage|errorstopmode|everyjob|extensible|fontdimen|headerbyte|inner|interim|let|ligtable|message|newinternal|nonstopmode|numspecial|openwindow|outer|randomseed|save|scrollmode|shipout|show|showdependencies|showstats|showtoken|showvariable|special)\b/,
+      alias: 'builtin'
+    },
+    operator: [{
+      pattern: /(^|[^>=<:|])(?:<|<=|=|=:|\|=:|\|=:>|=:\|>|=:\||\|=:\||\|=:\|>|\|=:\|>>|>|>=|:|:=|<>|::|\|\|:)(?![>=<:|])/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^+-])(?:\+|\+\+|-{1,3}|\+-\+)(?![+-])/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^/*\\])(?:\*|\*\*|\/)(?![/*\\])/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^.])(?:\.{2,3})(?!\.)/,
+      lookbehind: true
+    }, {
+      pattern: /(^|[^@#&$])&(?![@#&$])/,
+      lookbehind: true
+    }, /\b(?:and|not|or)\b/],
+    macro: {
+      pattern: /\b(?:abs|beginchar|bot|byte|capsule_def|ceiling|change_width|clear_pen_memory|clearit|clearpen|clearxy|counterclockwise|cullit|cutdraw|cutoff|decr|define_blacker_pixels|define_corrected_pixels|define_good_x_pixels|define_good_y_pixels|define_horizontal_corrected_pixels|define_pixels|define_whole_blacker_pixels|define_whole_pixels|define_whole_vertical_blacker_pixels|define_whole_vertical_pixels|dir|direction|directionpoint|div|dotprod|downto|draw|drawdot|endchar|erase|fill|filldraw|fix_units|flex|font_coding_scheme|font_extra_space|font_identifier|font_normal_shrink|font_normal_space|font_normal_stretch|font_quad|font_size|font_slant|font_x_height|gfcorners|gobble|gobbled|good\.(?:bot|lft|rt|top|x|y)|grayfont|hide|hround|imagerules|incr|interact|interpath|intersectionpoint|inverse|italcorr|killtext|labelfont|labels|lft|loggingall|lowres_fix|makegrid|makelabel(?:\.(?:bot|lft|rt|top)(?:\.nodot)?)?|max|min|mod|mode_def|mode_setup|nodisplays|notransforms|numtok|openit|penlabels|penpos|pickup|proofoffset|proofrule|proofrulethickness|range|reflectedabout|rotatedabout|rotatedaround|round|rt|savepen|screenchars|screenrule|screenstrokes|shipit|showit|slantfont|softjoin|solve|stop|superellipse|tensepath|thru|titlefont|top|tracingall|tracingnone|undraw|undrawdot|unfill|unfilldraw|upto|vround)\b/,
+      alias: 'function'
+    },
+    builtin: /\b(?:ASCII|angle|char|cosd|decimal|directiontime|floor|hex|intersectiontimes|jobname|known|length|makepath|makepen|mexp|mlog|normaldeviate|oct|odd|pencircle|penoffset|point|postcontrol|precontrol|reverse|rotated|sind|sqrt|str|subpath|substring|totalweight|turningnumber|uniformdeviate|unknown|xpart|xxpart|xypart|ypart|yxpart|yypart)\b/,
+    keyword: /\b(?:also|at|atleast|begingroup|charexists|contour|controls|curl|cycle|def|delimiters|doublepath|dropping|dump|else|elseif|end|enddef|endfor|endgroup|endinput|exitif|exitunless|expandafter|fi|for|forever|forsuffixes|from|if|input|inwindow|keeping|kern|of|primarydef|quote|readstring|scaled|scantokens|secondarydef|shifted|skipto|slanted|step|tension|tertiarydef|to|transformed|until|vardef|withpen|withweight|xscaled|yscaled|zscaled)\b/,
+    type: {
+      pattern: /\b(?:boolean|expr|numeric|pair|path|pen|picture|primary|secondary|string|suffix|tertiary|text|transform)\b/,
+      alias: 'property'
+    },
+    variable: {
+      pattern: /(^|[^@#&$])(?:@#|#@|#|@)(?![@#&$])|\b(?:aspect_ratio|currentpen|currentpicture|currenttransform|d|extra_beginchar|extra_endchar|extra_setup|h|localfont|mag|mode|screen_cols|screen_rows|w|whatever|x|y|z)\b/,
+      lookbehind: true
+    }
+  };
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/mizar.js
 // @ts-nocheck
 mizar.displayName = 'mizar';
@@ -79264,7 +79588,7 @@ function nsis(Prism) {
       greedy: true
     },
     keyword: {
-      pattern: /(^[\t ]*)(?:Abort|Add(?:BrandingImage|Size)|AdvSplash|Allow(?:RootDirInstall|SkipFiles)|AutoCloseWindow|BG(?:Font|Gradient|Image)|Banner|BrandingText|BringToFront|CRCCheck|Call(?:InstDLL)?|Caption|ChangeUI|CheckBitmap|ClearErrors|CompletedText|ComponentText|CopyFiles|Create(?:Directory|Font|ShortCut)|Delete(?:INISec|INIStr|RegKey|RegValue)?|Detail(?:Print|sButtonText)|Dialer|Dir(?:Text|Var|Verify)|EnableWindow|Enum(?:RegKey|RegValue)|Exch|Exec(?:Shell(?:Wait)?|Wait)?|ExpandEnvStrings|File(?:BufSize|Close|ErrorText|Open|Read|ReadByte|ReadUTF16LE|ReadWord|Seek|Write|WriteByte|WriteUTF16LE|WriteWord)?|Find(?:Close|First|Next|Window)|FlushINI|Get(?:CurInstType|CurrentAddress|DLLVersion(?:Local)?|DlgItem|ErrorLevel|FileTime(?:Local)?|FullPathName|Function(?:Address|End)?|InstDirError|LabelAddress|TempFileName)|Goto|HideWindow|Icon|If(?:Abort|Errors|FileExists|RebootFlag|Silent)|InitPluginsDir|InstProgressFlags|Inst(?:Type(?:GetText|SetText)?)|Install(?:ButtonText|Colors|Dir(?:RegKey)?)|Int(?:64|Ptr)?CmpU?|Int(?:64)?Fmt|Int(?:Ptr)?Op|IsWindow|Lang(?:DLL|String)|License(?:BkColor|Data|ForceSelection|LangString|Text)|LoadLanguageFile|LockWindow|Log(?:Set|Text)|Manifest(?:DPIAware|SupportedOS)|Math|MessageBox|MiscButtonText|NSISdl|Name|Nop|OutFile|PE(?:DllCharacteristics|SubsysVer)|Page(?:Callbacks)?|Pop|Push|Quit|RMDir|Read(?:EnvStr|INIStr|RegDWORD|RegStr)|Reboot|RegDLL|Rename|RequestExecutionLevel|ReserveFile|Return|SearchPath|Section(?:End|GetFlags|GetInstTypes|GetSize|GetText|Group|In|SetFlags|SetInstTypes|SetSize|SetText)?|SendMessage|Set(?:AutoClose|BrandingImage|Compress|Compressor(?:DictSize)?|CtlColors|CurInstType|DatablockOptimize|DateSave|Details(?:Print|View)|ErrorLevel|Errors|FileAttributes|Font|OutPath|Overwrite|PluginUnload|RebootFlag|RegView|ShellVarContext|Silent)|Show(?:InstDetails|UninstDetails|Window)|Silent(?:Install|UnInstall)|Sleep|SpaceTexts|Splash|StartMenu|Str(?:CmpS?|Cpy|Len)|SubCaption|System|UnRegDLL|Unicode|UninstPage|Uninstall(?:ButtonText|Caption|Icon|SubCaption|Text)|UserInfo|VI(?:AddVersionKey|FileVersion|ProductVersion)|VPatch|Var|WindowIcon|Write(?:INIStr|Reg(?:Bin|DWORD|ExpandStr|MultiStr|None|Str)|Uninstaller)|XPStyle|ns(?:Dialogs|Exec))\b/m,
+      pattern: /(^[\t ]*)(?:Abort|Add(?:BrandingImage|Size)|AdvSplash|Allow(?:RootDirInstall|SkipFiles)|AutoCloseWindow|BG(?:Font|Gradient|Image)|Banner|BrandingText|BringToFront|CRCCheck|Call(?:InstDLL)?|Caption|ChangeUI|CheckBitmap|ClearErrors|CompletedText|ComponentText|CopyFiles|Create(?:Directory|Font|ShortCut)|Delete(?:INISec|INIStr|RegKey|RegValue)?|Detail(?:Print|sButtonText)|Dialer|Dir(?:Text|Var|Verify)|EnableWindow|Enum(?:RegKey|RegValue)|Exch|Exec(?:Shell(?:Wait)?|Wait)?|ExpandEnvStrings|File(?:BufSize|Close|ErrorText|Open|Read|ReadByte|ReadUTF16LE|ReadWord|Seek|Write|WriteByte|WriteUTF16LE|WriteWord)?|Find(?:Close|First|Next|Window)|FlushINI|Get(?:CurInstType|CurrentAddress|DLLVersion(?:Local)?|DlgItem|ErrorLevel|FileTime(?:Local)?|FullPathName|Function(?:Address|End)?|InstDirError|KnownFolderPath|LabelAddress|TempFileName|WinVer)|Goto|HideWindow|Icon|If(?:Abort|Errors|FileExists|RebootFlag|RtlLanguage|ShellVarContextAll|Silent)|InitPluginsDir|InstProgressFlags|Inst(?:Type(?:GetText|SetText)?)|Install(?:ButtonText|Colors|Dir(?:RegKey)?)|Int(?:64|Ptr)?CmpU?|Int(?:64)?Fmt|Int(?:Ptr)?Op|IsWindow|Lang(?:DLL|String)|License(?:BkColor|Data|ForceSelection|LangString|Text)|LoadLanguageFile|LockWindow|Log(?:Set|Text)|Manifest(?:DPIAware|SupportedOS)|Math|MessageBox|MiscButtonText|NSISdl|Name|Nop|OutFile|PE(?:DllCharacteristics|SubsysVer)|Page(?:Callbacks)?|Pop|Push|Quit|RMDir|Read(?:EnvStr|INIStr|RegDWORD|RegStr)|Reboot|RegDLL|Rename|RequestExecutionLevel|ReserveFile|Return|SearchPath|Section(?:End|GetFlags|GetInstTypes|GetSize|GetText|Group|In|SetFlags|SetInstTypes|SetSize|SetText)?|SendMessage|Set(?:AutoClose|BrandingImage|Compress|Compressor(?:DictSize)?|CtlColors|CurInstType|DatablockOptimize|DateSave|Details(?:Print|View)|ErrorLevel|Errors|FileAttributes|Font|OutPath|Overwrite|PluginUnload|RebootFlag|RegView|ShellVarContext|Silent)|Show(?:InstDetails|UninstDetails|Window)|Silent(?:Install|UnInstall)|Sleep|SpaceTexts|Splash|StartMenu|Str(?:CmpS?|Cpy|Len)|SubCaption|System|Target|UnRegDLL|Unicode|UninstPage|Uninstall(?:ButtonText|Caption|Icon|SubCaption|Text)|UserInfo|VI(?:AddVersionKey|FileVersion|ProductVersion)|VPatch|Var|WindowIcon|Write(?:INIStr|Reg(?:Bin|DWORD|ExpandStr|MultiStr|None|Str)|Uninstaller)|XPStyle|ns(?:Dialogs|Exec))\b/m,
       lookbehind: true
     },
     property: /\b(?:ARCHIVE|FILE_(?:ATTRIBUTE_ARCHIVE|ATTRIBUTE_NORMAL|ATTRIBUTE_OFFLINE|ATTRIBUTE_READONLY|ATTRIBUTE_SYSTEM|ATTRIBUTE_TEMPORARY)|HK(?:(?:CR|CU|LM)(?:32|64)?|DD|PD|U)|HKEY_(?:CLASSES_ROOT|CURRENT_CONFIG|CURRENT_USER|DYN_DATA|LOCAL_MACHINE|PERFORMANCE_DATA|USERS)|ID(?:ABORT|CANCEL|IGNORE|NO|OK|RETRY|YES)|MB_(?:ABORTRETRYIGNORE|DEFBUTTON1|DEFBUTTON2|DEFBUTTON3|DEFBUTTON4|ICONEXCLAMATION|ICONINFORMATION|ICONQUESTION|ICONSTOP|OK|OKCANCEL|RETRYCANCEL|RIGHT|RTLREADING|SETFOREGROUND|TOPMOST|USERICON|YESNO)|NORMAL|OFFLINE|READONLY|SHCTX|SHELL_CONTEXT|SYSTEM|TEMPORARY|admin|all|auto|both|colored|false|force|hide|highest|lastused|leave|listonly|none|normal|notset|off|on|open|print|show|silent|silentlog|smooth|textonly|true|user)\b/,
@@ -84690,6 +85014,99 @@ function webIdl(Prism) {
     Prism.languages['webidl'] = Prism.languages['web-idl'];
   })(Prism);
 }
+;// CONCATENATED MODULE: ../../node_modules/refractor/lang/wgsl.js
+// @ts-nocheck
+wgsl.displayName = 'wgsl';
+wgsl.aliases = [];
+/** @type {import('../core.js').Syntax} */
+
+function wgsl(Prism) {
+  Prism.languages.wgsl = {
+    comment: {
+      pattern: /\/\/.*|\/\*[\s\S]*?(?:\*\/|$)/,
+      greedy: true
+    },
+    'builtin-attribute': {
+      pattern: /(@)builtin\(.*?\)/,
+      lookbehind: true,
+      inside: {
+        attribute: {
+          pattern: /^builtin/,
+          alias: 'attr-name'
+        },
+        punctuation: /[(),]/,
+        'built-in-values': {
+          pattern: /\b(?:frag_depth|front_facing|global_invocation_id|instance_index|local_invocation_id|local_invocation_index|num_workgroups|position|sample_index|sample_mask|vertex_index|workgroup_id)\b/,
+          alias: 'attr-value'
+        }
+      }
+    },
+    attributes: {
+      pattern: /(@)(?:align|binding|compute|const|fragment|group|id|interpolate|invariant|location|size|vertex|workgroup_size)/i,
+      lookbehind: true,
+      alias: 'attr-name'
+    },
+    functions: {
+      pattern: /\b(fn\s+)[_a-zA-Z]\w*(?=[(<])/,
+      lookbehind: true,
+      alias: 'function'
+    },
+    keyword: /\b(?:bitcast|break|case|const|continue|continuing|default|discard|else|enable|fallthrough|fn|for|function|if|let|loop|private|return|storage|struct|switch|type|uniform|var|while|workgroup)\b/,
+    builtin: /\b(?:abs|acos|acosh|all|any|array|asin|asinh|atan|atan2|atanh|atomic|atomicAdd|atomicAnd|atomicCompareExchangeWeak|atomicExchange|atomicLoad|atomicMax|atomicMin|atomicOr|atomicStore|atomicSub|atomicXor|bool|ceil|clamp|cos|cosh|countLeadingZeros|countOneBits|countTrailingZeros|cross|degrees|determinant|distance|dot|dpdx|dpdxCoarse|dpdxFine|dpdy|dpdyCoarse|dpdyFine|exp|exp2|extractBits|f32|f64|faceForward|firstLeadingBit|floor|fma|fract|frexp|fwidth|fwidthCoarse|fwidthFine|i32|i64|insertBits|inverseSqrt|ldexp|length|log|log2|mat[2-4]x[2-4]|max|min|mix|modf|normalize|override|pack2x16float|pack2x16snorm|pack2x16unorm|pack4x8snorm|pack4x8unorm|pow|ptr|quantizeToF16|radians|reflect|refract|reverseBits|round|sampler|sampler_comparison|select|shiftLeft|shiftRight|sign|sin|sinh|smoothstep|sqrt|staticAssert|step|storageBarrier|tan|tanh|textureDimensions|textureGather|textureGatherCompare|textureLoad|textureNumLayers|textureNumLevels|textureNumSamples|textureSample|textureSampleBias|textureSampleCompare|textureSampleCompareLevel|textureSampleGrad|textureSampleLevel|textureStore|texture_1d|texture_2d|texture_2d_array|texture_3d|texture_cube|texture_cube_array|texture_depth_2d|texture_depth_2d_array|texture_depth_cube|texture_depth_cube_array|texture_depth_multisampled_2d|texture_multisampled_2d|texture_storage_1d|texture_storage_2d|texture_storage_2d_array|texture_storage_3d|transpose|trunc|u32|u64|unpack2x16float|unpack2x16snorm|unpack2x16unorm|unpack4x8snorm|unpack4x8unorm|vec[2-4]|workgroupBarrier)\b/,
+    'function-calls': {
+      pattern: /\b[_a-z]\w*(?=\()/i,
+      alias: 'function'
+    },
+    'class-name': /\b(?:[A-Z][A-Za-z0-9]*)\b/,
+    'bool-literal': {
+      pattern: /\b(?:false|true)\b/,
+      alias: 'boolean'
+    },
+    'hex-int-literal': {
+      pattern: /\b0[xX][0-9a-fA-F]+[iu]?\b(?![.pP])/,
+      alias: 'number'
+    },
+    'hex-float-literal': {
+      pattern: /\b0[xX][0-9a-fA-F]*(?:\.[0-9a-fA-F]*)?(?:[pP][+-]?\d+[fh]?)?/,
+      alias: 'number'
+    },
+    'decimal-float-literal': [{
+      pattern: /\d*\.\d+(?:[eE](?:\+|-)?\d+)?[fh]?/,
+      alias: 'number'
+    }, {
+      pattern: /\d+\.\d*(?:[eE](?:\+|-)?\d+)?[fh]?/,
+      alias: 'number'
+    }, {
+      pattern: /\d+[eE](?:\+|-)?\d+[fh]?/,
+      alias: 'number'
+    }, {
+      pattern: /\b\d+[fh]\b/,
+      alias: 'number'
+    }],
+    'int-literal': {
+      pattern: /\b\d+[iu]?\b/,
+      alias: 'number'
+    },
+    operator: [{
+      pattern: /(?:\^|~|\|(?!\|)|\|\||&&|<<|>>|!)(?!=)/
+    }, {
+      pattern: /&(?![&=])/
+    }, {
+      pattern: /(?:\+=|-=|\*=|\/=|%=|\^=|&=|\|=|<<=|>>=)/
+    }, {
+      pattern: /(^|[^<>=!])=(?![=>])/,
+      lookbehind: true
+    }, {
+      pattern: /(?:==|!=|<=|\+\+|--|(^|[^=])>=)/,
+      lookbehind: true
+    }, {
+      pattern: /(?:(?:[+%]|(?:\*(?!\w)))(?!=))|(?:-(?!>))|(?:\/(?!\/))/
+    }, {
+      pattern: /->/
+    }],
+    punctuation: /[@(){}[\],;<>:.]/
+  };
+}
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/wiki.js
 // @ts-nocheck
 
@@ -85683,6 +86100,13 @@ function zig(Prism) {
 
 
 
+
+
+
+
+
+
+
 refractor.register(markup);
 refractor.register(css);
 refractor.register(clike);
@@ -85723,10 +86147,12 @@ refractor.register(awk);
 refractor.register(basic);
 refractor.register(batch);
 refractor.register(bbcode);
+refractor.register(bbj);
 refractor.register(bicep);
 refractor.register(birb);
 refractor.register(bison);
 refractor.register(bnf);
+refractor.register(bqn);
 refractor.register(brainfuck);
 refractor.register(brightscript);
 refractor.register(bro);
@@ -85734,6 +86160,8 @@ refractor.register(bsl);
 refractor.register(cfscript);
 refractor.register(chaiscript);
 refractor.register(cil);
+refractor.register(cilkc);
+refractor.register(cilkcpp);
 refractor.register(clojure);
 refractor.register(cmake);
 refractor.register(cobol);
@@ -85790,6 +86218,7 @@ refractor.register(gn);
 refractor.register(linkerScript);
 refractor.register(go);
 refractor.register(goModule);
+refractor.register(gradle);
 refractor.register(graphql);
 refractor.register(groovy);
 refractor.register(less);
@@ -85856,6 +86285,7 @@ refractor.register(matlab);
 refractor.register(maxscript);
 refractor.register(mel);
 refractor.register(mermaid);
+refractor.register(metafont);
 refractor.register(mizar);
 refractor.register(mongodb);
 refractor.register(monkey);
@@ -85964,6 +86394,7 @@ refractor.register(visualBasic);
 refractor.register(warpscript);
 refractor.register(wasm);
 refractor.register(webIdl);
+refractor.register(wgsl);
 refractor.register(wiki);
 refractor.register(wolfram);
 refractor.register(wren);
@@ -85974,7 +86405,7 @@ refractor.register(xquery);
 refractor.register(yang);
 refractor.register(zig);
 
-;// CONCATENATED MODULE: ../../node_modules/rehype-prism-plus/dist/rehype-prism-plus.es.js
+;// CONCATENATED MODULE: ../../node_modules/@wcj/markdown-to-html/node_modules/rehype-prism-plus/dist/rehype-prism-plus.es.js
 
 
 
@@ -86340,6 +86771,8 @@ function lib_markdown() {
  * @property {string|undefined} [language='en']
  *   Natural language of document.
  *   Should be a [BCP 47](https://tools.ietf.org/html/bcp47) language tag.
+ * @property {'ltr'|'rtl'|'auto'|undefined} [dir]
+ *   Direction of the document.
  * @property {boolean|undefined} [responsive=true]
  *   Whether to insert a `meta[viewport]`.
  * @property {string|Array<string>|undefined} [style=[]]
@@ -86394,12 +86827,15 @@ function rehypeDocument() {
 
     var contents = tree.type === 'root' ? tree.children.concat() : [tree];
     /** @type {Array<Node>} */
+    // XO is wrong, HTML wants the `-`.
+
+    /* eslint-disable-next-line unicorn/text-encoding-identifier-case */
 
     var head = [{
       type: 'text',
       value: '\n'
     }, h('meta', {
-      charset: 'utf-8'
+      charSet: 'utf-8'
     })];
     var index = -1;
 
@@ -86496,7 +86932,8 @@ function rehypeDocument() {
         type: 'text',
         value: '\n'
       }, h('html', {
-        lang: options.language || 'en'
+        lang: options.language || 'en',
+        dir: options.dir
       }, [{
         type: 'text',
         value: '\n'
@@ -102456,8 +102893,8 @@ function lib_create_create() {
 
   return markdown_to_html_lib(string || '', mdOptions);
 }
-// EXTERNAL MODULE: ../../node_modules/fs-extra/lib/index.js
-var fs_extra_lib = __webpack_require__(7215);
+// EXTERNAL MODULE: ../cli/node_modules/fs-extra/lib/index.js
+var fs_extra_lib = __webpack_require__(7433);
 ;// CONCATENATED MODULE: ../cli/lib/utils.js
 
 
@@ -102595,12 +103032,25 @@ function run() {
 
   var options = formatConfig(_objectSpread(_objectSpread({}, opts), argvs));
   var output = path.resolve(argvs.output);
+  if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
+
+  if (options.style) {
+    var stylePath = path.resolve(process.cwd(), options.style);
+
+    if (fs.existsSync(stylePath)) {
+      var cssString = fs.readFileSync(stylePath).toString();
+      options.document.style.push(cssString);
+    } else {
+      options.document.style.push(options.style);
+    }
+  }
+
   var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
   fs.writeFileSync(output, strMarkdown);
   console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));
 }
-var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
-var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n  \n";
+var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
+var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style=./style.css\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style='body { color: red; }'\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
 ;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=18;break;}_context.next=15;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 15:options.markdown=_context.sent.toString();_context.next=19;break;case 18:options.markdown=markdown;case 19:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;if(corners){_context.next=32;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=32;break;}_context.next=28;return external_fs_default().promises.readFile(projectPkg);case 28:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 32:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=53;break;case 49:_context.prev=49;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 53:case"end":return _context.stop();}}},_callee,null,[[0,49]]);}))();
 })();
