@@ -147,18 +147,18 @@ Options:
 
 Example:
 
-  npm markdown-to-html-cli
-  npm markdown-to-html     --title="Hello World!"
-  npm markdown-to-html     --config="config/conf.json"
-  npm markdown-to-html-cli --markdown="Hello World!"
-  npm markdown-to-html-cli --no-dark-mode
-  npm markdown-to-html-cli --markdown-style-theme dark
-  npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
-  npm markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
-  npm markdown-to-html-cli --output coverage/index.html
-  npm markdown-to-html-cli --source README.md
-  npm markdown-to-html-cli --source README.md --style=./style.css
-  npm markdown-to-html-cli --source README.md --style='body { color: red; }'
+  markdown-to-html     --title="Hello World!"
+  markdown-to-html     --config="config/conf.json"
+  npx markdown-to-html-cli
+  npx markdown-to-html-cli --markdown="Hello World!"
+  npx markdown-to-html-cli --no-dark-mode
+  npx markdown-to-html-cli --markdown-style-theme dark
+  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
+  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
+  npx markdown-to-html-cli --output coverage/index.html
+  npx markdown-to-html-cli --source README.md
+  npx markdown-to-html-cli --source README.md --style=./style.css
+  npx markdown-to-html-cli --source README.md --style='body { color: red; }'
 ```
 
 ## Markdown Features
