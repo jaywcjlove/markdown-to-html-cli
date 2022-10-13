@@ -56,7 +56,7 @@ outputs:
     description: HTML string
 
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'packages/action/dist/action.js'
 
 branding:
