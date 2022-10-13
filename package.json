@@ -55,7 +55,7 @@
     "packages/**"
   ],
   "devDependencies": {
-    "@kkt/ncc": "1.0.14",
+    "@kkt/ncc": "1.0.15",
     "ajv": "^8.8.0",
     "husky": "^8.0.1",
     "jest": "^28.1.3",
