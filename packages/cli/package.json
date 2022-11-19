@@ -41,7 +41,7 @@
     "@types/minimist": "~1.2.2",
     "@uiw/github-corners": "~1.5.14",
     "@wcj/markdown-style": "~1.0.9",
-    "@wcj/markdown-to-html": "~2.1.0",
+    "@wcj/markdown-to-html": "~2.2.0",
     "fs-extra": "~10.1.0",
     "minimist": "~1.2.5",
     "rehype-autolink-headings": "~6.1.0",
