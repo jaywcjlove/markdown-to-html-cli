@@ -21,7 +21,7 @@ export function darkMode(): Element[] {
     type: 'element',
     tagName: 'dark-mode',
     properties: {
-      permanent: true,
+      permanent: 'true',
       style: 'position: fixed; top: 8px; left: 10px; z-index: 999;',
       dark: 'Dark',
       light: 'Light',
