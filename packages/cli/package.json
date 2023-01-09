@@ -37,7 +37,7 @@
     "src"
   ],
   "dependencies": {
-    "@types/fs-extra": "~9.0.13",
+    "@types/fs-extra": "~11.0.0",
     "@types/minimist": "~1.2.2",
     "@uiw/github-corners": "~1.5.14",
     "@wcj/markdown-style": "~1.0.9",
