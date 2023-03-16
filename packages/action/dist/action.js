@@ -32,9 +32,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -141,9 +139,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -426,25 +422,23 @@ function group(name, fn) {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
     var result;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            startGroup(name);
-            _context.prev = 1;
-            _context.next = 4;
-            return fn();
-          case 4:
-            result = _context.sent;
-          case 5:
-            _context.prev = 5;
-            endGroup();
-            return _context.finish(5);
-          case 8:
-            return _context.abrupt("return", result);
-          case 9:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          startGroup(name);
+          _context.prev = 1;
+          _context.next = 4;
+          return fn();
+        case 4:
+          result = _context.sent;
+        case 5:
+          _context.prev = 5;
+          endGroup();
+          return _context.finish(5);
+        case 8:
+          return _context.abrupt("return", result);
+        case 9:
+        case "end":
+          return _context.stop();
       }
     }, _callee, null, [[1,, 5, 8]]);
   }));
@@ -483,17 +477,15 @@ exports.getState = getState;
 function getIDToken(aud) {
   return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            _context2.next = 2;
-            return oidc_utils_1.OidcClient.getIDToken(aud);
-          case 2:
-            return _context2.abrupt("return", _context2.sent);
-          case 3:
-          case "end":
-            return _context2.stop();
-        }
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return oidc_utils_1.OidcClient.getIDToken(aud);
+        case 2:
+          return _context2.abrupt("return", _context2.sent);
+        case 3:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -574,9 +566,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -704,28 +694,26 @@ var OidcClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var httpclient, res, id_token;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                httpclient = OidcClient.createHttpClient();
-                _context.next = 3;
-                return httpclient.getJson(id_token_url)["catch"](function (error) {
-                  throw new Error("Failed to get ID Token. \n \n        Error Code : ".concat(error.statusCode, "\n \n        Error Message: ").concat(error.result.message));
-                });
-              case 3:
-                res = _context.sent;
-                id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
-                if (id_token) {
-                  _context.next = 7;
-                  break;
-                }
-                throw new Error('Response json body do not have ID Token field');
-              case 7:
-                return _context.abrupt("return", id_token);
-              case 8:
-              case "end":
-                return _context.stop();
-            }
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              httpclient = OidcClient.createHttpClient();
+              _context.next = 3;
+              return httpclient.getJson(id_token_url)["catch"](function (error) {
+                throw new Error("Failed to get ID Token. \n \n        Error Code : ".concat(error.statusCode, "\n \n        Error Message: ").concat(error.result.message));
+              });
+            case 3:
+              res = _context.sent;
+              id_token = (_a = res.result) === null || _a === void 0 ? void 0 : _a.value;
+              if (id_token) {
+                _context.next = 7;
+                break;
+              }
+              throw new Error('Response json body do not have ID Token field');
+            case 7:
+              return _context.abrupt("return", id_token);
+            case 8:
+            case "end":
+              return _context.stop();
           }
         }, _callee);
       }));
@@ -736,31 +724,29 @@ var OidcClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var id_token_url, encodedAudience, id_token;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                // New ID Token is requested from action service
-                id_token_url = OidcClient.getIDTokenUrl();
-                if (audience) {
-                  encodedAudience = encodeURIComponent(audience);
-                  id_token_url = "".concat(id_token_url, "&audience=").concat(encodedAudience);
-                }
-                core_1.debug("ID token url is ".concat(id_token_url));
-                _context2.next = 6;
-                return OidcClient.getCall(id_token_url);
-              case 6:
-                id_token = _context2.sent;
-                core_1.setSecret(id_token);
-                return _context2.abrupt("return", id_token);
-              case 11:
-                _context2.prev = 11;
-                _context2.t0 = _context2["catch"](0);
-                throw new Error("Error message: ".concat(_context2.t0.message));
-              case 14:
-              case "end":
-                return _context2.stop();
-            }
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.prev = 0;
+              // New ID Token is requested from action service
+              id_token_url = OidcClient.getIDTokenUrl();
+              if (audience) {
+                encodedAudience = encodeURIComponent(audience);
+                id_token_url = "".concat(id_token_url, "&audience=").concat(encodedAudience);
+              }
+              core_1.debug("ID token url is ".concat(id_token_url));
+              _context2.next = 6;
+              return OidcClient.getCall(id_token_url);
+            case 6:
+              id_token = _context2.sent;
+              core_1.setSecret(id_token);
+              return _context2.abrupt("return", id_token);
+            case 11:
+              _context2.prev = 11;
+              _context2.t0 = _context2["catch"](0);
+              throw new Error("Error message: ".concat(_context2.t0.message));
+            case 14:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2, null, [[0, 11]]);
       }));
@@ -801,9 +787,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -915,39 +899,37 @@ var Summary = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var pathFromEnv;
         return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!this._filePath) {
-                  _context.next = 2;
-                  break;
-                }
-                return _context.abrupt("return", this._filePath);
-              case 2:
-                pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
-                if (pathFromEnv) {
-                  _context.next = 5;
-                  break;
-                }
-                throw new Error("Unable to find environment variable for $".concat(exports.SUMMARY_ENV_VAR, ". Check if your runtime environment supports job summaries."));
-              case 5:
-                _context.prev = 5;
-                _context.next = 8;
-                return access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
-              case 8:
-                _context.next = 13;
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!this._filePath) {
+                _context.next = 2;
                 break;
-              case 10:
-                _context.prev = 10;
-                _context.t0 = _context["catch"](5);
-                throw new Error("Unable to access summary file: '".concat(pathFromEnv, "'. Check if the file has correct read/write permissions."));
-              case 13:
-                this._filePath = pathFromEnv;
-                return _context.abrupt("return", this._filePath);
-              case 15:
-              case "end":
-                return _context.stop();
-            }
+              }
+              return _context.abrupt("return", this._filePath);
+            case 2:
+              pathFromEnv = process.env[exports.SUMMARY_ENV_VAR];
+              if (pathFromEnv) {
+                _context.next = 5;
+                break;
+              }
+              throw new Error("Unable to find environment variable for $".concat(exports.SUMMARY_ENV_VAR, ". Check if your runtime environment supports job summaries."));
+            case 5:
+              _context.prev = 5;
+              _context.next = 8;
+              return access(pathFromEnv, fs_1.constants.R_OK | fs_1.constants.W_OK);
+            case 8:
+              _context.next = 13;
+              break;
+            case 10:
+              _context.prev = 10;
+              _context.t0 = _context["catch"](5);
+              throw new Error("Unable to access summary file: '".concat(pathFromEnv, "'. Check if the file has correct read/write permissions."));
+            case 13:
+              this._filePath = pathFromEnv;
+              return _context.abrupt("return", this._filePath);
+            case 15:
+            case "end":
+              return _context.stop();
           }
         }, _callee, this, [[5, 10]]);
       }));
@@ -989,25 +971,23 @@ var Summary = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var overwrite, filePath, writeFunc;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
-                _context2.next = 3;
-                return this.filePath();
-              case 3:
-                filePath = _context2.sent;
-                writeFunc = overwrite ? writeFile : appendFile;
-                _context2.next = 7;
-                return writeFunc(filePath, this._buffer, {
-                  encoding: 'utf8'
-                });
-              case 7:
-                return _context2.abrupt("return", this.emptyBuffer());
-              case 8:
-              case "end":
-                return _context2.stop();
-            }
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              overwrite = !!(options === null || options === void 0 ? void 0 : options.overwrite);
+              _context2.next = 3;
+              return this.filePath();
+            case 3:
+              filePath = _context2.sent;
+              writeFunc = overwrite ? writeFile : appendFile;
+              _context2.next = 7;
+              return writeFunc(filePath, this._buffer, {
+                encoding: 'utf8'
+              });
+            case 7:
+              return _context2.abrupt("return", this.emptyBuffer());
+            case 8:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2, this);
       }));
@@ -1022,16 +1002,14 @@ var Summary = /*#__PURE__*/function () {
     value: function clear() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                return _context3.abrupt("return", this.emptyBuffer().write({
-                  overwrite: true
-                }));
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", this.emptyBuffer().write({
+                overwrite: true
+              }));
+            case 1:
+            case "end":
+              return _context3.stop();
           }
         }, _callee3, this);
       }));
@@ -1398,14 +1376,12 @@ var BasicCredentialHandler = /*#__PURE__*/function () {
     value: function handleAuthentication() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         return _regeneratorRuntime().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                throw new Error('not implemented');
-              case 1:
-              case "end":
-                return _context.stop();
-            }
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              throw new Error('not implemented');
+            case 1:
+            case "end":
+              return _context.stop();
           }
         }, _callee);
       }));
@@ -1440,14 +1416,12 @@ var BearerCredentialHandler = /*#__PURE__*/function () {
     value: function handleAuthentication() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                throw new Error('not implemented');
-              case 1:
-              case "end":
-                return _context2.stop();
-            }
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              throw new Error('not implemented');
+            case 1:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2);
       }));
@@ -1482,14 +1456,12 @@ var PersonalAccessTokenCredentialHandler = /*#__PURE__*/function () {
     value: function handleAuthentication() {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                throw new Error('not implemented');
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              throw new Error('not implemented');
+            case 1:
+            case "end":
+              return _context3.stop();
           }
         }, _callee3);
       }));
@@ -1539,9 +1511,7 @@ var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? fun
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
   var result = {};
-  if (mod != null) for (var k in mod) {
-    if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
+  if (mod != null) for (var k in mod) if (k !== "default" && Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
   __setModuleDefault(result, mod);
   return result;
 };
@@ -1659,35 +1629,31 @@ var HttpClientResponse = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
         var _this2 = this;
         return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                return _context2.abrupt("return", new Promise(function (resolve) {
-                  return __awaiter(_this2, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-                    var output;
-                    return _regeneratorRuntime().wrap(function _callee$(_context) {
-                      while (1) {
-                        switch (_context.prev = _context.next) {
-                          case 0:
-                            output = Buffer.alloc(0);
-                            this.message.on('data', function (chunk) {
-                              output = Buffer.concat([output, chunk]);
-                            });
-                            this.message.on('end', function () {
-                              resolve(output.toString());
-                            });
-                          case 3:
-                          case "end":
-                            return _context.stop();
-                        }
-                      }
-                    }, _callee, this);
-                  }));
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              return _context2.abrupt("return", new Promise(function (resolve) {
+                return __awaiter(_this2, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+                  var output;
+                  return _regeneratorRuntime().wrap(function _callee$(_context) {
+                    while (1) switch (_context.prev = _context.next) {
+                      case 0:
+                        output = Buffer.alloc(0);
+                        this.message.on('data', function (chunk) {
+                          output = Buffer.concat([output, chunk]);
+                        });
+                        this.message.on('end', function () {
+                          resolve(output.toString());
+                        });
+                      case 3:
+                      case "end":
+                        return _context.stop();
+                    }
+                  }, _callee, this);
                 }));
-              case 1:
-              case "end":
-                return _context2.stop();
-            }
+              }));
+            case 1:
+            case "end":
+              return _context2.stop();
           }
         }, _callee2);
       }));
@@ -1745,14 +1711,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function options(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
         return _regeneratorRuntime().wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                return _context3.abrupt("return", this.request('OPTIONS', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context3.stop();
-            }
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", this.request('OPTIONS', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context3.stop();
           }
         }, _callee3, this);
       }));
@@ -1762,14 +1726,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function get(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
         return _regeneratorRuntime().wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                return _context4.abrupt("return", this.request('GET', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context4.stop();
-            }
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              return _context4.abrupt("return", this.request('GET', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context4.stop();
           }
         }, _callee4, this);
       }));
@@ -1779,14 +1741,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function del(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
         return _regeneratorRuntime().wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                return _context5.abrupt("return", this.request('DELETE', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context5.stop();
-            }
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              return _context5.abrupt("return", this.request('DELETE', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context5.stop();
           }
         }, _callee5, this);
       }));
@@ -1796,14 +1756,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function post(requestUrl, data, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
         return _regeneratorRuntime().wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                return _context6.abrupt("return", this.request('POST', requestUrl, data, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context6.stop();
-            }
+          while (1) switch (_context6.prev = _context6.next) {
+            case 0:
+              return _context6.abrupt("return", this.request('POST', requestUrl, data, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context6.stop();
           }
         }, _callee6, this);
       }));
@@ -1813,14 +1771,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function patch(requestUrl, data, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
         return _regeneratorRuntime().wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                return _context7.abrupt("return", this.request('PATCH', requestUrl, data, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context7.stop();
-            }
+          while (1) switch (_context7.prev = _context7.next) {
+            case 0:
+              return _context7.abrupt("return", this.request('PATCH', requestUrl, data, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context7.stop();
           }
         }, _callee7, this);
       }));
@@ -1830,14 +1786,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function put(requestUrl, data, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
         return _regeneratorRuntime().wrap(function _callee8$(_context8) {
-          while (1) {
-            switch (_context8.prev = _context8.next) {
-              case 0:
-                return _context8.abrupt("return", this.request('PUT', requestUrl, data, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context8.stop();
-            }
+          while (1) switch (_context8.prev = _context8.next) {
+            case 0:
+              return _context8.abrupt("return", this.request('PUT', requestUrl, data, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context8.stop();
           }
         }, _callee8, this);
       }));
@@ -1847,14 +1801,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function head(requestUrl, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
         return _regeneratorRuntime().wrap(function _callee9$(_context9) {
-          while (1) {
-            switch (_context9.prev = _context9.next) {
-              case 0:
-                return _context9.abrupt("return", this.request('HEAD', requestUrl, null, additionalHeaders || {}));
-              case 1:
-              case "end":
-                return _context9.stop();
-            }
+          while (1) switch (_context9.prev = _context9.next) {
+            case 0:
+              return _context9.abrupt("return", this.request('HEAD', requestUrl, null, additionalHeaders || {}));
+            case 1:
+            case "end":
+              return _context9.stop();
           }
         }, _callee9, this);
       }));
@@ -1864,14 +1816,12 @@ var HttpClient = /*#__PURE__*/function () {
     value: function sendStream(verb, requestUrl, stream, additionalHeaders) {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
         return _regeneratorRuntime().wrap(function _callee10$(_context10) {
-          while (1) {
-            switch (_context10.prev = _context10.next) {
-              case 0:
-                return _context10.abrupt("return", this.request(verb, requestUrl, stream, additionalHeaders));
-              case 1:
-              case "end":
-                return _context10.stop();
-            }
+          while (1) switch (_context10.prev = _context10.next) {
+            case 0:
+              return _context10.abrupt("return", this.request(verb, requestUrl, stream, additionalHeaders));
+            case 1:
+            case "end":
+              return _context10.stop();
           }
         }, _callee10, this);
       }));
@@ -1887,19 +1837,17 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee11() {
         var res;
         return _regeneratorRuntime().wrap(function _callee11$(_context11) {
-          while (1) {
-            switch (_context11.prev = _context11.next) {
-              case 0:
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                _context11.next = 3;
-                return this.get(requestUrl, additionalHeaders);
-              case 3:
-                res = _context11.sent;
-                return _context11.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 5:
-              case "end":
-                return _context11.stop();
-            }
+          while (1) switch (_context11.prev = _context11.next) {
+            case 0:
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              _context11.next = 3;
+              return this.get(requestUrl, additionalHeaders);
+            case 3:
+              res = _context11.sent;
+              return _context11.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 5:
+            case "end":
+              return _context11.stop();
           }
         }, _callee11, this);
       }));
@@ -1911,21 +1859,19 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee12() {
         var data, res;
         return _regeneratorRuntime().wrap(function _callee12$(_context12) {
-          while (1) {
-            switch (_context12.prev = _context12.next) {
-              case 0:
-                data = JSON.stringify(obj, null, 2);
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context12.next = 5;
-                return this.post(requestUrl, data, additionalHeaders);
-              case 5:
-                res = _context12.sent;
-                return _context12.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 7:
-              case "end":
-                return _context12.stop();
-            }
+          while (1) switch (_context12.prev = _context12.next) {
+            case 0:
+              data = JSON.stringify(obj, null, 2);
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+              _context12.next = 5;
+              return this.post(requestUrl, data, additionalHeaders);
+            case 5:
+              res = _context12.sent;
+              return _context12.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 7:
+            case "end":
+              return _context12.stop();
           }
         }, _callee12, this);
       }));
@@ -1937,21 +1883,19 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
         var data, res;
         return _regeneratorRuntime().wrap(function _callee13$(_context13) {
-          while (1) {
-            switch (_context13.prev = _context13.next) {
-              case 0:
-                data = JSON.stringify(obj, null, 2);
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context13.next = 5;
-                return this.put(requestUrl, data, additionalHeaders);
-              case 5:
-                res = _context13.sent;
-                return _context13.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 7:
-              case "end":
-                return _context13.stop();
-            }
+          while (1) switch (_context13.prev = _context13.next) {
+            case 0:
+              data = JSON.stringify(obj, null, 2);
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+              _context13.next = 5;
+              return this.put(requestUrl, data, additionalHeaders);
+            case 5:
+              res = _context13.sent;
+              return _context13.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 7:
+            case "end":
+              return _context13.stop();
           }
         }, _callee13, this);
       }));
@@ -1963,21 +1907,19 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee14() {
         var data, res;
         return _regeneratorRuntime().wrap(function _callee14$(_context14) {
-          while (1) {
-            switch (_context14.prev = _context14.next) {
-              case 0:
-                data = JSON.stringify(obj, null, 2);
-                additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
-                additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
-                _context14.next = 5;
-                return this.patch(requestUrl, data, additionalHeaders);
-              case 5:
-                res = _context14.sent;
-                return _context14.abrupt("return", this._processResponse(res, this.requestOptions));
-              case 7:
-              case "end":
-                return _context14.stop();
-            }
+          while (1) switch (_context14.prev = _context14.next) {
+            case 0:
+              data = JSON.stringify(obj, null, 2);
+              additionalHeaders[Headers.Accept] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.Accept, MediaTypes.ApplicationJson);
+              additionalHeaders[Headers.ContentType] = this._getExistingOrDefaultHeader(additionalHeaders, Headers.ContentType, MediaTypes.ApplicationJson);
+              _context14.next = 5;
+              return this.patch(requestUrl, data, additionalHeaders);
+            case 5:
+              res = _context14.sent;
+              return _context14.abrupt("return", this._processResponse(res, this.requestOptions));
+            case 7:
+            case "end":
+              return _context14.stop();
           }
         }, _callee14, this);
       }));
@@ -1993,136 +1935,134 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee15() {
         var parsedUrl, info, maxTries, numTries, response, authenticationHandler, _iterator, _step, handler, redirectsRemaining, redirectUrl, parsedRedirectUrl, header;
         return _regeneratorRuntime().wrap(function _callee15$(_context15) {
-          while (1) {
-            switch (_context15.prev = _context15.next) {
-              case 0:
-                if (!this._disposed) {
-                  _context15.next = 2;
-                  break;
-                }
-                throw new Error('Client has already been disposed.');
-              case 2:
-                parsedUrl = new URL(requestUrl);
-                info = this._prepareRequest(verb, parsedUrl, headers); // Only perform retries on reads since writes may not be idempotent.
-                maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb) ? this._maxRetries + 1 : 1;
-                numTries = 0;
-              case 6:
-                _context15.next = 8;
-                return this.requestRaw(info, data);
-              case 8:
-                response = _context15.sent;
-                if (!(response && response.message && response.message.statusCode === HttpCodes.Unauthorized)) {
-                  _context15.next = 34;
-                  break;
-                }
-                authenticationHandler = void 0;
-                _iterator = _createForOfIteratorHelper(this.handlers);
-                _context15.prev = 12;
-                _iterator.s();
-              case 14:
-                if ((_step = _iterator.n()).done) {
-                  _context15.next = 21;
-                  break;
-                }
-                handler = _step.value;
-                if (!handler.canHandleAuthentication(response)) {
-                  _context15.next = 19;
-                  break;
-                }
-                authenticationHandler = handler;
-                return _context15.abrupt("break", 21);
-              case 19:
-                _context15.next = 14;
+          while (1) switch (_context15.prev = _context15.next) {
+            case 0:
+              if (!this._disposed) {
+                _context15.next = 2;
                 break;
-              case 21:
-                _context15.next = 26;
+              }
+              throw new Error('Client has already been disposed.');
+            case 2:
+              parsedUrl = new URL(requestUrl);
+              info = this._prepareRequest(verb, parsedUrl, headers); // Only perform retries on reads since writes may not be idempotent.
+              maxTries = this._allowRetries && RetryableHttpVerbs.includes(verb) ? this._maxRetries + 1 : 1;
+              numTries = 0;
+            case 6:
+              _context15.next = 8;
+              return this.requestRaw(info, data);
+            case 8:
+              response = _context15.sent;
+              if (!(response && response.message && response.message.statusCode === HttpCodes.Unauthorized)) {
+                _context15.next = 34;
                 break;
-              case 23:
-                _context15.prev = 23;
-                _context15.t0 = _context15["catch"](12);
-                _iterator.e(_context15.t0);
-              case 26:
-                _context15.prev = 26;
-                _iterator.f();
-                return _context15.finish(26);
-              case 29:
-                if (!authenticationHandler) {
-                  _context15.next = 33;
-                  break;
-                }
-                return _context15.abrupt("return", authenticationHandler.handleAuthentication(this, info, data));
-              case 33:
-                return _context15.abrupt("return", response);
-              case 34:
-                redirectsRemaining = this._maxRedirects;
-              case 35:
-                if (!(response.message.statusCode && HttpRedirectCodes.includes(response.message.statusCode) && this._allowRedirects && redirectsRemaining > 0)) {
-                  _context15.next = 52;
-                  break;
-                }
-                redirectUrl = response.message.headers['location'];
-                if (redirectUrl) {
-                  _context15.next = 39;
-                  break;
-                }
-                return _context15.abrupt("break", 52);
-              case 39:
-                parsedRedirectUrl = new URL(redirectUrl);
-                if (!(parsedUrl.protocol === 'https:' && parsedUrl.protocol !== parsedRedirectUrl.protocol && !this._allowRedirectDowngrade)) {
-                  _context15.next = 42;
-                  break;
-                }
-                throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
-              case 42:
-                _context15.next = 44;
-                return response.readBody();
-              case 44:
-                // strip authorization header if redirected to a different hostname
-                if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
-                  for (header in headers) {
-                    // header names are case insensitive
-                    if (header.toLowerCase() === 'authorization') {
-                      delete headers[header];
-                    }
+              }
+              authenticationHandler = void 0;
+              _iterator = _createForOfIteratorHelper(this.handlers);
+              _context15.prev = 12;
+              _iterator.s();
+            case 14:
+              if ((_step = _iterator.n()).done) {
+                _context15.next = 21;
+                break;
+              }
+              handler = _step.value;
+              if (!handler.canHandleAuthentication(response)) {
+                _context15.next = 19;
+                break;
+              }
+              authenticationHandler = handler;
+              return _context15.abrupt("break", 21);
+            case 19:
+              _context15.next = 14;
+              break;
+            case 21:
+              _context15.next = 26;
+              break;
+            case 23:
+              _context15.prev = 23;
+              _context15.t0 = _context15["catch"](12);
+              _iterator.e(_context15.t0);
+            case 26:
+              _context15.prev = 26;
+              _iterator.f();
+              return _context15.finish(26);
+            case 29:
+              if (!authenticationHandler) {
+                _context15.next = 33;
+                break;
+              }
+              return _context15.abrupt("return", authenticationHandler.handleAuthentication(this, info, data));
+            case 33:
+              return _context15.abrupt("return", response);
+            case 34:
+              redirectsRemaining = this._maxRedirects;
+            case 35:
+              if (!(response.message.statusCode && HttpRedirectCodes.includes(response.message.statusCode) && this._allowRedirects && redirectsRemaining > 0)) {
+                _context15.next = 52;
+                break;
+              }
+              redirectUrl = response.message.headers['location'];
+              if (redirectUrl) {
+                _context15.next = 39;
+                break;
+              }
+              return _context15.abrupt("break", 52);
+            case 39:
+              parsedRedirectUrl = new URL(redirectUrl);
+              if (!(parsedUrl.protocol === 'https:' && parsedUrl.protocol !== parsedRedirectUrl.protocol && !this._allowRedirectDowngrade)) {
+                _context15.next = 42;
+                break;
+              }
+              throw new Error('Redirect from HTTPS to HTTP protocol. This downgrade is not allowed for security reasons. If you want to allow this behavior, set the allowRedirectDowngrade option to true.');
+            case 42:
+              _context15.next = 44;
+              return response.readBody();
+            case 44:
+              // strip authorization header if redirected to a different hostname
+              if (parsedRedirectUrl.hostname !== parsedUrl.hostname) {
+                for (header in headers) {
+                  // header names are case insensitive
+                  if (header.toLowerCase() === 'authorization') {
+                    delete headers[header];
                   }
                 }
-                // let's make the request with the new redirectUrl
-                info = this._prepareRequest(verb, parsedRedirectUrl, headers);
-                _context15.next = 48;
-                return this.requestRaw(info, data);
-              case 48:
-                response = _context15.sent;
-                redirectsRemaining--;
-                _context15.next = 35;
+              }
+              // let's make the request with the new redirectUrl
+              info = this._prepareRequest(verb, parsedRedirectUrl, headers);
+              _context15.next = 48;
+              return this.requestRaw(info, data);
+            case 48:
+              response = _context15.sent;
+              redirectsRemaining--;
+              _context15.next = 35;
+              break;
+            case 52:
+              if (!(!response.message.statusCode || !HttpResponseRetryCodes.includes(response.message.statusCode))) {
+                _context15.next = 54;
                 break;
-              case 52:
-                if (!(!response.message.statusCode || !HttpResponseRetryCodes.includes(response.message.statusCode))) {
-                  _context15.next = 54;
-                  break;
-                }
-                return _context15.abrupt("return", response);
-              case 54:
-                numTries += 1;
-                if (!(numTries < maxTries)) {
-                  _context15.next = 60;
-                  break;
-                }
-                _context15.next = 58;
-                return response.readBody();
-              case 58:
+              }
+              return _context15.abrupt("return", response);
+            case 54:
+              numTries += 1;
+              if (!(numTries < maxTries)) {
                 _context15.next = 60;
-                return this._performExponentialBackoff(numTries);
-              case 60:
-                if (numTries < maxTries) {
-                  _context15.next = 6;
-                  break;
-                }
-              case 61:
-                return _context15.abrupt("return", response);
-              case 62:
-              case "end":
-                return _context15.stop();
-            }
+                break;
+              }
+              _context15.next = 58;
+              return response.readBody();
+            case 58:
+              _context15.next = 60;
+              return this._performExponentialBackoff(numTries);
+            case 60:
+              if (numTries < maxTries) {
+                _context15.next = 6;
+                break;
+              }
+            case 61:
+              return _context15.abrupt("return", response);
+            case 62:
+            case "end":
+              return _context15.stop();
           }
         }, _callee15, this, [[12, 23, 26, 29]]);
       }));
@@ -2149,26 +2089,24 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee16() {
         var _this3 = this;
         return _regeneratorRuntime().wrap(function _callee16$(_context16) {
-          while (1) {
-            switch (_context16.prev = _context16.next) {
-              case 0:
-                return _context16.abrupt("return", new Promise(function (resolve, reject) {
-                  function callbackForResult(err, res) {
-                    if (err) {
-                      reject(err);
-                    } else if (!res) {
-                      // If `err` is not passed, then `res` must be passed.
-                      reject(new Error('Unknown error'));
-                    } else {
-                      resolve(res);
-                    }
+          while (1) switch (_context16.prev = _context16.next) {
+            case 0:
+              return _context16.abrupt("return", new Promise(function (resolve, reject) {
+                function callbackForResult(err, res) {
+                  if (err) {
+                    reject(err);
+                  } else if (!res) {
+                    // If `err` is not passed, then `res` must be passed.
+                    reject(new Error('Unknown error'));
+                  } else {
+                    resolve(res);
                   }
-                  _this3.requestRawWithCallback(info, data, callbackForResult);
-                }));
-              case 1:
-              case "end":
-                return _context16.stop();
-            }
+                }
+                _this3.requestRawWithCallback(info, data, callbackForResult);
+              }));
+            case 1:
+            case "end":
+              return _context16.stop();
           }
         }, _callee16);
       }));
@@ -2362,20 +2300,18 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee17() {
         var ms;
         return _regeneratorRuntime().wrap(function _callee17$(_context17) {
-          while (1) {
-            switch (_context17.prev = _context17.next) {
-              case 0:
-                retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
-                ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
-                return _context17.abrupt("return", new Promise(function (resolve) {
-                  return setTimeout(function () {
-                    return resolve();
-                  }, ms);
-                }));
-              case 3:
-              case "end":
-                return _context17.stop();
-            }
+          while (1) switch (_context17.prev = _context17.next) {
+            case 0:
+              retryNumber = Math.min(ExponentialBackoffCeiling, retryNumber);
+              ms = ExponentialBackoffTimeSlice * Math.pow(2, retryNumber);
+              return _context17.abrupt("return", new Promise(function (resolve) {
+                return setTimeout(function () {
+                  return resolve();
+                }, ms);
+              }));
+            case 3:
+            case "end":
+              return _context17.stop();
           }
         }, _callee17);
       }));
@@ -2386,84 +2322,80 @@ var HttpClient = /*#__PURE__*/function () {
       return __awaiter(this, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee19() {
         var _this4 = this;
         return _regeneratorRuntime().wrap(function _callee19$(_context19) {
-          while (1) {
-            switch (_context19.prev = _context19.next) {
-              case 0:
-                return _context19.abrupt("return", new Promise(function (resolve, reject) {
-                  return __awaiter(_this4, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
-                    var statusCode, response, dateTimeDeserializer, obj, contents, msg, err;
-                    return _regeneratorRuntime().wrap(function _callee18$(_context18) {
-                      while (1) {
-                        switch (_context18.prev = _context18.next) {
-                          case 0:
-                            dateTimeDeserializer = function _dateTimeDeserializer(key, value) {
-                              if (typeof value === 'string') {
-                                var a = new Date(value);
-                                if (!isNaN(a.valueOf())) {
-                                  return a;
-                                }
-                              }
-                              return value;
-                            };
-                            statusCode = res.message.statusCode || 0;
-                            response = {
-                              statusCode: statusCode,
-                              result: null,
-                              headers: {}
-                            }; // not found leads to null obj returned
-                            if (statusCode === HttpCodes.NotFound) {
-                              resolve(response);
+          while (1) switch (_context19.prev = _context19.next) {
+            case 0:
+              return _context19.abrupt("return", new Promise(function (resolve, reject) {
+                return __awaiter(_this4, void 0, void 0, /*#__PURE__*/_regeneratorRuntime().mark(function _callee18() {
+                  var statusCode, response, dateTimeDeserializer, obj, contents, msg, err;
+                  return _regeneratorRuntime().wrap(function _callee18$(_context18) {
+                    while (1) switch (_context18.prev = _context18.next) {
+                      case 0:
+                        dateTimeDeserializer = function _dateTimeDeserializer(key, value) {
+                          if (typeof value === 'string') {
+                            var a = new Date(value);
+                            if (!isNaN(a.valueOf())) {
+                              return a;
                             }
-                            // get the result from the body
-                            _context18.prev = 4;
-                            _context18.next = 7;
-                            return res.readBody();
-                          case 7:
-                            contents = _context18.sent;
-                            if (contents && contents.length > 0) {
-                              if (options && options.deserializeDates) {
-                                obj = JSON.parse(contents, dateTimeDeserializer);
-                              } else {
-                                obj = JSON.parse(contents);
-                              }
-                              response.result = obj;
-                            }
-                            response.headers = res.message.headers;
-                            _context18.next = 14;
-                            break;
-                          case 12:
-                            _context18.prev = 12;
-                            _context18.t0 = _context18["catch"](4);
-                          case 14:
-                            // note that 3xx redirects are handled by the http layer.
-                            if (statusCode > 299) {
-                              // if exception/error in body, attempt to get better error
-                              if (obj && obj.message) {
-                                msg = obj.message;
-                              } else if (contents && contents.length > 0) {
-                                // it may be the case that the exception is in the body message as string
-                                msg = contents;
-                              } else {
-                                msg = "Failed request: (".concat(statusCode, ")");
-                              }
-                              err = new HttpClientError(msg, statusCode);
-                              err.result = response.result;
-                              reject(err);
-                            } else {
-                              resolve(response);
-                            }
-                          case 15:
-                          case "end":
-                            return _context18.stop();
+                          }
+                          return value;
+                        };
+                        statusCode = res.message.statusCode || 0;
+                        response = {
+                          statusCode: statusCode,
+                          result: null,
+                          headers: {}
+                        }; // not found leads to null obj returned
+                        if (statusCode === HttpCodes.NotFound) {
+                          resolve(response);
                         }
-                      }
-                    }, _callee18, null, [[4, 12]]);
-                  }));
+                        // get the result from the body
+                        _context18.prev = 4;
+                        _context18.next = 7;
+                        return res.readBody();
+                      case 7:
+                        contents = _context18.sent;
+                        if (contents && contents.length > 0) {
+                          if (options && options.deserializeDates) {
+                            obj = JSON.parse(contents, dateTimeDeserializer);
+                          } else {
+                            obj = JSON.parse(contents);
+                          }
+                          response.result = obj;
+                        }
+                        response.headers = res.message.headers;
+                        _context18.next = 14;
+                        break;
+                      case 12:
+                        _context18.prev = 12;
+                        _context18.t0 = _context18["catch"](4);
+                      case 14:
+                        // note that 3xx redirects are handled by the http layer.
+                        if (statusCode > 299) {
+                          // if exception/error in body, attempt to get better error
+                          if (obj && obj.message) {
+                            msg = obj.message;
+                          } else if (contents && contents.length > 0) {
+                            // it may be the case that the exception is in the body message as string
+                            msg = contents;
+                          } else {
+                            msg = "Failed request: (".concat(statusCode, ")");
+                          }
+                          err = new HttpClientError(msg, statusCode);
+                          err.result = response.result;
+                          reject(err);
+                        } else {
+                          resolve(response);
+                        }
+                      case 15:
+                      case "end":
+                        return _context18.stop();
+                    }
+                  }, _callee18, null, [[4, 12]]);
                 }));
-              case 1:
-              case "end":
-                return _context19.stop();
-            }
+              }));
+            case 1:
+            case "end":
+              return _context19.stop();
           }
         }, _callee19);
       }));
@@ -2514,6 +2446,10 @@ function checkBypass(reqUrl) {
   if (!reqUrl.hostname) {
     return false;
   }
+  var reqHost = reqUrl.hostname;
+  if (isLoopbackAddress(reqHost)) {
+    return true;
+  }
   var noProxy = process.env['no_proxy'] || process.env['NO_PROXY'] || '';
   if (!noProxy) {
     return false;
@@ -2542,8 +2478,8 @@ function checkBypass(reqUrl) {
   try {
     var _loop = function _loop() {
       var upperNoProxyItem = _step.value;
-      if (upperReqHosts.some(function (x) {
-        return x === upperNoProxyItem;
+      if (upperNoProxyItem === '*' || upperReqHosts.some(function (x) {
+        return x === upperNoProxyItem || x.endsWith(".".concat(upperNoProxyItem)) || upperNoProxyItem.startsWith('.') && x.endsWith("".concat(upperNoProxyItem));
       })) {
         return {
           v: true
@@ -2562,6 +2498,10 @@ function checkBypass(reqUrl) {
   return false;
 }
 exports.checkBypass = checkBypass;
+function isLoopbackAddress(host) {
+  var hostLower = host.toLowerCase();
+  return hostLower === 'localhost' || hostLower.startsWith('127.') || hostLower.startsWith('[::1]') || hostLower.startsWith('[0:0:0:0:0:0:0:1]');
+}
 
 /***/ }),
 
@@ -4152,258 +4092,6 @@ function patch(fs) {
 
 /***/ }),
 
-/***/ 7365:
-/***/ ((module) => {
-
-// http://www.w3.org/TR/CSS21/grammar.html
-// https://github.com/visionmedia/css-parse/pull/49#issuecomment-30088027
-var COMMENT_REGEX = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g;
-var NEWLINE_REGEX = /\n/g;
-var WHITESPACE_REGEX = /^\s*/;
-
-// declaration
-var PROPERTY_REGEX = /^(\*?[-#/*\\\w]+(\[[0-9a-z_-]+\])?)\s*/;
-var COLON_REGEX = /^:\s*/;
-var VALUE_REGEX = /^((?:'(?:\\'|.)*?'|"(?:\\"|.)*?"|\([^)]*?\)|[^};])+)/;
-var SEMICOLON_REGEX = /^[;\s]*/;
-
-// https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim#Polyfill
-var TRIM_REGEX = /^\s+|\s+$/g;
-
-// strings
-var NEWLINE = '\n';
-var FORWARD_SLASH = '/';
-var ASTERISK = '*';
-var EMPTY_STRING = '';
-
-// types
-var TYPE_COMMENT = 'comment';
-var TYPE_DECLARATION = 'declaration';
-
-/**
- * @param {String} style
- * @param {Object} [options]
- * @return {Object[]}
- * @throws {TypeError}
- * @throws {Error}
- */
-module.exports = function (style, options) {
-  if (typeof style !== 'string') {
-    throw new TypeError('First argument must be a string');
-  }
-  if (!style) return [];
-  options = options || {};
-
-  /**
-   * Positional.
-   */
-  var lineno = 1;
-  var column = 1;
-
-  /**
-   * Update lineno and column based on `str`.
-   *
-   * @param {String} str
-   */
-  function updatePosition(str) {
-    var lines = str.match(NEWLINE_REGEX);
-    if (lines) lineno += lines.length;
-    var i = str.lastIndexOf(NEWLINE);
-    column = ~i ? str.length - i : column + str.length;
-  }
-
-  /**
-   * Mark position and patch `node.position`.
-   *
-   * @return {Function}
-   */
-  function position() {
-    var start = {
-      line: lineno,
-      column: column
-    };
-    return function (node) {
-      node.position = new Position(start);
-      whitespace();
-      return node;
-    };
-  }
-
-  /**
-   * Store position information for a node.
-   *
-   * @constructor
-   * @property {Object} start
-   * @property {Object} end
-   * @property {undefined|String} source
-   */
-  function Position(start) {
-    this.start = start;
-    this.end = {
-      line: lineno,
-      column: column
-    };
-    this.source = options.source;
-  }
-
-  /**
-   * Non-enumerable source string.
-   */
-  Position.prototype.content = style;
-  var errorsList = [];
-
-  /**
-   * Error `msg`.
-   *
-   * @param {String} msg
-   * @throws {Error}
-   */
-  function error(msg) {
-    var err = new Error(options.source + ':' + lineno + ':' + column + ': ' + msg);
-    err.reason = msg;
-    err.filename = options.source;
-    err.line = lineno;
-    err.column = column;
-    err.source = style;
-    if (options.silent) {
-      errorsList.push(err);
-    } else {
-      throw err;
-    }
-  }
-
-  /**
-   * Match `re` and return captures.
-   *
-   * @param {RegExp} re
-   * @return {undefined|Array}
-   */
-  function match(re) {
-    var m = re.exec(style);
-    if (!m) return;
-    var str = m[0];
-    updatePosition(str);
-    style = style.slice(str.length);
-    return m;
-  }
-
-  /**
-   * Parse whitespace.
-   */
-  function whitespace() {
-    match(WHITESPACE_REGEX);
-  }
-
-  /**
-   * Parse comments.
-   *
-   * @param {Object[]} [rules]
-   * @return {Object[]}
-   */
-  function comments(rules) {
-    var c;
-    rules = rules || [];
-    while (c = comment()) {
-      if (c !== false) {
-        rules.push(c);
-      }
-    }
-    return rules;
-  }
-
-  /**
-   * Parse comment.
-   *
-   * @return {Object}
-   * @throws {Error}
-   */
-  function comment() {
-    var pos = position();
-    if (FORWARD_SLASH != style.charAt(0) || ASTERISK != style.charAt(1)) return;
-    var i = 2;
-    while (EMPTY_STRING != style.charAt(i) && (ASTERISK != style.charAt(i) || FORWARD_SLASH != style.charAt(i + 1))) {
-      ++i;
-    }
-    i += 2;
-    if (EMPTY_STRING === style.charAt(i - 1)) {
-      return error('End of comment missing');
-    }
-    var str = style.slice(2, i - 2);
-    column += 2;
-    updatePosition(str);
-    style = style.slice(i);
-    column += 2;
-    return pos({
-      type: TYPE_COMMENT,
-      comment: str
-    });
-  }
-
-  /**
-   * Parse declaration.
-   *
-   * @return {Object}
-   * @throws {Error}
-   */
-  function declaration() {
-    var pos = position();
-
-    // prop
-    var prop = match(PROPERTY_REGEX);
-    if (!prop) return;
-    comment();
-
-    // :
-    if (!match(COLON_REGEX)) return error("property missing ':'");
-
-    // val
-    var val = match(VALUE_REGEX);
-    var ret = pos({
-      type: TYPE_DECLARATION,
-      property: trim(prop[0].replace(COMMENT_REGEX, EMPTY_STRING)),
-      value: val ? trim(val[0].replace(COMMENT_REGEX, EMPTY_STRING)) : EMPTY_STRING
-    });
-
-    // ;
-    match(SEMICOLON_REGEX);
-    return ret;
-  }
-
-  /**
-   * Parse declarations.
-   *
-   * @return {Object[]}
-   */
-  function declarations() {
-    var decls = [];
-    comments(decls);
-
-    // declarations
-    var decl;
-    while (decl = declaration()) {
-      if (decl !== false) {
-        decls.push(decl);
-        comments(decls);
-      }
-    }
-    return decls;
-  }
-  whitespace();
-  return declarations();
-};
-
-/**
- * Trim `str`.
- *
- * @param {String} str
- * @return {String}
- */
-function trim(str) {
-  return str ? str.replace(TRIM_REGEX, EMPTY_STRING) : EMPTY_STRING;
-}
-
-/***/ }),
-
 /***/ 5352:
 /***/ ((module) => {
 
@@ -4447,43 +4135,41 @@ function _readFile2() {
       obj,
       _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
-            if (typeof options === 'string') {
-              options = {
-                encoding: options
-              };
-            }
-            fs = options.fs || _fs;
-            shouldThrow = 'throws' in options ? options["throws"] : true;
-            _context.next = 6;
-            return universalify.fromCallback(fs.readFile)(file, options);
-          case 6:
-            data = _context.sent;
-            data = stripBom(data);
-            _context.prev = 8;
-            obj = JSON.parse(data, options ? options.reviver : null);
-            _context.next = 20;
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+          if (typeof options === 'string') {
+            options = {
+              encoding: options
+            };
+          }
+          fs = options.fs || _fs;
+          shouldThrow = 'throws' in options ? options["throws"] : true;
+          _context.next = 6;
+          return universalify.fromCallback(fs.readFile)(file, options);
+        case 6:
+          data = _context.sent;
+          data = stripBom(data);
+          _context.prev = 8;
+          obj = JSON.parse(data, options ? options.reviver : null);
+          _context.next = 20;
+          break;
+        case 12:
+          _context.prev = 12;
+          _context.t0 = _context["catch"](8);
+          if (!shouldThrow) {
+            _context.next = 19;
             break;
-          case 12:
-            _context.prev = 12;
-            _context.t0 = _context["catch"](8);
-            if (!shouldThrow) {
-              _context.next = 19;
-              break;
-            }
-            _context.t0.message = "".concat(file, ": ").concat(_context.t0.message);
-            throw _context.t0;
-          case 19:
-            return _context.abrupt("return", null);
-          case 20:
-            return _context.abrupt("return", obj);
-          case 21:
-          case "end":
-            return _context.stop();
-        }
+          }
+          _context.t0.message = "".concat(file, ": ").concat(_context.t0.message);
+          throw _context.t0;
+        case 19:
+          return _context.abrupt("return", null);
+        case 20:
+          return _context.abrupt("return", obj);
+        case 21:
+        case "end":
+          return _context.stop();
       }
     }, _callee, null, [[8, 12]]);
   }));
@@ -4522,18 +4208,16 @@ function _writeFile2() {
       str,
       _args2 = arguments;
     return _regeneratorRuntime().wrap(function _callee2$(_context2) {
-      while (1) {
-        switch (_context2.prev = _context2.next) {
-          case 0:
-            options = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : {};
-            fs = options.fs || _fs;
-            str = stringify(obj, options);
-            _context2.next = 5;
-            return universalify.fromCallback(fs.writeFile)(file, str, options);
-          case 5:
-          case "end":
-            return _context2.stop();
-        }
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          options = _args2.length > 2 && _args2[2] !== undefined ? _args2[2] : {};
+          fs = options.fs || _fs;
+          str = stringify(obj, options);
+          _context2.next = 5;
+          return universalify.fromCallback(fs.writeFile)(file, str, options);
+        case 5:
+        case "end":
+          return _context2.stop();
       }
     }, _callee2);
   }));
@@ -4588,24 +4272,54 @@ module.exports = {
 /***/ 2748:
 /***/ ((module) => {
 
+"use strict";
+
+
+function hasKey(obj, keys) {
+  var o = obj;
+  keys.slice(0, -1).forEach(function (key) {
+    o = o[key] || {};
+  });
+  var key = keys[keys.length - 1];
+  return key in o;
+}
+function isNumber(x) {
+  if (typeof x === 'number') {
+    return true;
+  }
+  if (/^0x[0-9a-f]+$/i.test(x)) {
+    return true;
+  }
+  return /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(e[-+]?\d+)?$/.test(x);
+}
+function isConstructorOrProto(obj, key) {
+  return key === 'constructor' && typeof obj[key] === 'function' || key === '__proto__';
+}
 module.exports = function (args, opts) {
-  if (!opts) opts = {};
+  if (!opts) {
+    opts = {};
+  }
   var flags = {
     bools: {},
     strings: {},
     unknownFn: null
   };
-  if (typeof opts['unknown'] === 'function') {
-    flags.unknownFn = opts['unknown'];
+  if (typeof opts.unknown === 'function') {
+    flags.unknownFn = opts.unknown;
   }
-  if (typeof opts['boolean'] === 'boolean' && opts['boolean']) {
+  if (typeof opts["boolean"] === 'boolean' && opts["boolean"]) {
     flags.allBools = true;
   } else {
-    [].concat(opts['boolean']).filter(Boolean).forEach(function (key) {
+    [].concat(opts["boolean"]).filter(Boolean).forEach(function (key) {
       flags.bools[key] = true;
     });
   }
   var aliases = {};
+  function aliasIsBoolean(key) {
+    return aliases[key].some(function (x) {
+      return flags.bools[x];
+    });
+  }
   Object.keys(opts.alias || {}).forEach(function (key) {
     aliases[key] = [].concat(opts.alias[key]);
     aliases[key].forEach(function (x) {
@@ -4617,13 +4331,66 @@ module.exports = function (args, opts) {
   [].concat(opts.string).filter(Boolean).forEach(function (key) {
     flags.strings[key] = true;
     if (aliases[key]) {
-      flags.strings[aliases[key]] = true;
+      [].concat(aliases[key]).forEach(function (k) {
+        flags.strings[k] = true;
+      });
     }
   });
-  var defaults = opts['default'] || {};
+  var defaults = opts["default"] || {};
   var argv = {
     _: []
   };
+  function argDefined(key, arg) {
+    return flags.allBools && /^--[^=]+$/.test(arg) || flags.strings[key] || flags.bools[key] || aliases[key];
+  }
+  function setKey(obj, keys, value) {
+    var o = obj;
+    for (var i = 0; i < keys.length - 1; i++) {
+      var key = keys[i];
+      if (isConstructorOrProto(o, key)) {
+        return;
+      }
+      if (o[key] === undefined) {
+        o[key] = {};
+      }
+      if (o[key] === Object.prototype || o[key] === Number.prototype || o[key] === String.prototype) {
+        o[key] = {};
+      }
+      if (o[key] === Array.prototype) {
+        o[key] = [];
+      }
+      o = o[key];
+    }
+    var lastKey = keys[keys.length - 1];
+    if (isConstructorOrProto(o, lastKey)) {
+      return;
+    }
+    if (o === Object.prototype || o === Number.prototype || o === String.prototype) {
+      o = {};
+    }
+    if (o === Array.prototype) {
+      o = [];
+    }
+    if (o[lastKey] === undefined || flags.bools[lastKey] || typeof o[lastKey] === 'boolean') {
+      o[lastKey] = value;
+    } else if (Array.isArray(o[lastKey])) {
+      o[lastKey].push(value);
+    } else {
+      o[lastKey] = [o[lastKey], value];
+    }
+  }
+  function setArg(key, val, arg) {
+    if (arg && flags.unknownFn && !argDefined(key, arg)) {
+      if (flags.unknownFn(arg) === false) {
+        return;
+      }
+    }
+    var value = !flags.strings[key] && isNumber(val) ? Number(val) : val;
+    setKey(argv, key.split('.'), value);
+    (aliases[key] || []).forEach(function (x) {
+      setKey(argv, x.split('.'), value);
+    });
+  }
   Object.keys(flags.bools).forEach(function (key) {
     setArg(key, defaults[key] === undefined ? false : defaults[key]);
   });
@@ -4632,71 +4399,33 @@ module.exports = function (args, opts) {
     notFlags = args.slice(args.indexOf('--') + 1);
     args = args.slice(0, args.indexOf('--'));
   }
-  function argDefined(key, arg) {
-    return flags.allBools && /^--[^=]+$/.test(arg) || flags.strings[key] || flags.bools[key] || aliases[key];
-  }
-  function setArg(key, val, arg) {
-    if (arg && flags.unknownFn && !argDefined(key, arg)) {
-      if (flags.unknownFn(arg) === false) return;
-    }
-    var value = !flags.strings[key] && isNumber(val) ? Number(val) : val;
-    setKey(argv, key.split('.'), value);
-    (aliases[key] || []).forEach(function (x) {
-      setKey(argv, x.split('.'), value);
-    });
-  }
-  function setKey(obj, keys, value) {
-    var o = obj;
-    for (var i = 0; i < keys.length - 1; i++) {
-      var key = keys[i];
-      if (isConstructorOrProto(o, key)) return;
-      if (o[key] === undefined) o[key] = {};
-      if (o[key] === Object.prototype || o[key] === Number.prototype || o[key] === String.prototype) o[key] = {};
-      if (o[key] === Array.prototype) o[key] = [];
-      o = o[key];
-    }
-    var key = keys[keys.length - 1];
-    if (isConstructorOrProto(o, key)) return;
-    if (o === Object.prototype || o === Number.prototype || o === String.prototype) o = {};
-    if (o === Array.prototype) o = [];
-    if (o[key] === undefined || flags.bools[key] || typeof o[key] === 'boolean') {
-      o[key] = value;
-    } else if (Array.isArray(o[key])) {
-      o[key].push(value);
-    } else {
-      o[key] = [o[key], value];
-    }
-  }
-  function aliasIsBoolean(key) {
-    return aliases[key].some(function (x) {
-      return flags.bools[x];
-    });
-  }
   for (var i = 0; i < args.length; i++) {
     var arg = args[i];
+    var key;
+    var next;
     if (/^--.+=/.test(arg)) {
       // Using [\s\S] instead of . because js doesn't support the
       // 'dotall' regex modifier. See:
       // http://stackoverflow.com/a/1068308/13216
       var m = arg.match(/^--([^=]+)=([\s\S]*)$/);
-      var key = m[1];
+      key = m[1];
       var value = m[2];
       if (flags.bools[key]) {
         value = value !== 'false';
       }
       setArg(key, value, arg);
     } else if (/^--no-.+/.test(arg)) {
-      var key = arg.match(/^--no-(.+)/)[1];
+      key = arg.match(/^--no-(.+)/)[1];
       setArg(key, false, arg);
     } else if (/^--.+/.test(arg)) {
-      var key = arg.match(/^--(.+)/)[1];
-      var next = args[i + 1];
-      if (next !== undefined && !/^-/.test(next) && !flags.bools[key] && !flags.allBools && (aliases[key] ? !aliasIsBoolean(key) : true)) {
+      key = arg.match(/^--(.+)/)[1];
+      next = args[i + 1];
+      if (next !== undefined && !/^(-|--)[^-]/.test(next) && !flags.bools[key] && !flags.allBools && (aliases[key] ? !aliasIsBoolean(key) : true)) {
         setArg(key, next, arg);
-        i++;
+        i += 1;
       } else if (/^(true|false)$/.test(next)) {
         setArg(key, next === 'true', arg);
-        i++;
+        i += 1;
       } else {
         setArg(key, flags.strings[key] ? '' : true, arg);
       }
@@ -4704,13 +4433,13 @@ module.exports = function (args, opts) {
       var letters = arg.slice(1, -1).split('');
       var broken = false;
       for (var j = 0; j < letters.length; j++) {
-        var next = arg.slice(j + 2);
+        next = arg.slice(j + 2);
         if (next === '-') {
           setArg(letters[j], next, arg);
           continue;
         }
-        if (/[A-Za-z]/.test(letters[j]) && /=/.test(next)) {
-          setArg(letters[j], next.split('=')[1], arg);
+        if (/[A-Za-z]/.test(letters[j]) && next[0] === '=') {
+          setArg(letters[j], next.slice(1), arg);
           broken = true;
           break;
         }
@@ -4727,21 +4456,21 @@ module.exports = function (args, opts) {
           setArg(letters[j], flags.strings[letters[j]] ? '' : true, arg);
         }
       }
-      var key = arg.slice(-1)[0];
+      key = arg.slice(-1)[0];
       if (!broken && key !== '-') {
         if (args[i + 1] && !/^(-|--)[^-]/.test(args[i + 1]) && !flags.bools[key] && (aliases[key] ? !aliasIsBoolean(key) : true)) {
           setArg(key, args[i + 1], arg);
-          i++;
+          i += 1;
         } else if (args[i + 1] && /^(true|false)$/.test(args[i + 1])) {
           setArg(key, args[i + 1] === 'true', arg);
-          i++;
+          i += 1;
         } else {
           setArg(key, flags.strings[key] ? '' : true, arg);
         }
       }
     } else {
       if (!flags.unknownFn || flags.unknownFn(arg) !== false) {
-        argv._.push(flags.strings['_'] || !isNumber(arg) ? arg : Number(arg));
+        argv._.push(flags.strings._ || !isNumber(arg) ? arg : Number(arg));
       }
       if (opts.stopEarly) {
         argv._.push.apply(argv._, args.slice(i + 1));
@@ -4749,42 +4478,23 @@ module.exports = function (args, opts) {
       }
     }
   }
-  Object.keys(defaults).forEach(function (key) {
-    if (!hasKey(argv, key.split('.'))) {
-      setKey(argv, key.split('.'), defaults[key]);
-      (aliases[key] || []).forEach(function (x) {
-        setKey(argv, x.split('.'), defaults[key]);
+  Object.keys(defaults).forEach(function (k) {
+    if (!hasKey(argv, k.split('.'))) {
+      setKey(argv, k.split('.'), defaults[k]);
+      (aliases[k] || []).forEach(function (x) {
+        setKey(argv, x.split('.'), defaults[k]);
       });
     }
   });
   if (opts['--']) {
-    argv['--'] = new Array();
-    notFlags.forEach(function (key) {
-      argv['--'].push(key);
-    });
+    argv['--'] = notFlags.slice();
   } else {
-    notFlags.forEach(function (key) {
-      argv._.push(key);
+    notFlags.forEach(function (k) {
+      argv._.push(k);
     });
   }
   return argv;
 };
-function hasKey(obj, keys) {
-  var o = obj;
-  keys.slice(0, -1).forEach(function (key) {
-    o = o[key] || {};
-  });
-  var key = keys[keys.length - 1];
-  return key in o;
-}
-function isNumber(x) {
-  if (typeof x === 'number') return true;
-  if (/^0x[0-9a-f]+$/i.test(x)) return true;
-  return /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(e[-+]?\d+)?$/.test(x);
-}
-function isConstructorOrProto(obj, key) {
-  return key === 'constructor' && typeof obj[key] === 'function' || key === '__proto__';
-}
 
 /***/ }),
 
@@ -4825,9 +4535,7 @@ function parsePart(string) {
 
           // Make it inclusive by moving the right 'stop-point' away by one.
           if (sep === "-" || sep === ".." || sep === "\u2025") rhs += incr;
-          for (var i = lhs; i !== rhs; i += incr) {
-            res.push(i);
-          }
+          for (var i = lhs; i !== rhs; i += incr) res.push(i);
         }
       }
     }
@@ -12141,49 +11849,6 @@ module.exports = Str;
 
 /***/ }),
 
-/***/ 3061:
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
-
-var parse = __webpack_require__(7365);
-
-/**
- * Parses inline style to object.
- *
- * @example
- * // returns { 'line-height': '42' }
- * StyleToObject('line-height: 42;');
- *
- * @param  {String}      style      - The inline style.
- * @param  {Function}    [iterator] - The iterator function.
- * @return {null|Object}
- */
-function StyleToObject(style, iterator) {
-  var output = null;
-  if (!style || typeof style !== 'string') {
-    return output;
-  }
-  var declaration;
-  var declarations = parse(style);
-  var hasIterator = typeof iterator === 'function';
-  var property;
-  var value;
-  for (var i = 0, len = declarations.length; i < len; i++) {
-    declaration = declarations[i];
-    property = declaration.property;
-    value = declaration.value;
-    if (hasIterator) {
-      iterator(property, value, declaration);
-    } else if (value) {
-      output || (output = {});
-      output[property] = value;
-    }
-  }
-  return output;
-}
-module.exports = StyleToObject;
-
-/***/ }),
-
 /***/ 367:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -13174,28 +12839,26 @@ var emptyDir = u( /*#__PURE__*/function () {
   var _emptyDir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir) {
     var items;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            _context.next = 3;
-            return fs.readdir(dir);
-          case 3:
-            items = _context.sent;
-            _context.next = 9;
-            break;
-          case 6:
-            _context.prev = 6;
-            _context.t0 = _context["catch"](0);
-            return _context.abrupt("return", mkdir.mkdirs(dir));
-          case 9:
-            return _context.abrupt("return", Promise.all(items.map(function (item) {
-              return remove.remove(path.join(dir, item));
-            })));
-          case 10:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return fs.readdir(dir);
+        case 3:
+          items = _context.sent;
+          _context.next = 9;
+          break;
+        case 6:
+          _context.prev = 6;
+          _context.t0 = _context["catch"](0);
+          return _context.abrupt("return", mkdir.mkdirs(dir));
+        case 9:
+          return _context.abrupt("return", Promise.all(items.map(function (item) {
+            return remove.remove(path.join(dir, item));
+          })));
+        case 10:
+        case "end":
+          return _context.stop();
       }
     }, _callee, null, [[0, 6]]);
   }));
@@ -13826,17 +13489,15 @@ function _outputJson() {
       str,
       _args = arguments;
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            options = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
-            str = stringify(data, options);
-            _context.next = 4;
-            return outputFile(file, str, options);
-          case 4:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          options = _args.length > 2 && _args[2] !== undefined ? _args[2] : {};
+          str = stringify(data, options);
+          _context.next = 4;
+          return outputFile(file, str, options);
+        case 4:
+        case "end":
+          return _context.stop();
       }
     }, _callee);
   }));
@@ -13891,18 +13552,16 @@ var getMode = function getMode(options) {
 module.exports.makeDir = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(dir, options) {
     return _regeneratorRuntime().wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            checkPath(dir);
-            return _context.abrupt("return", fs.mkdir(dir, {
-              mode: getMode(options),
-              recursive: true
-            }));
-          case 2:
-          case "end":
-            return _context.stop();
-        }
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          checkPath(dir);
+          return _context.abrupt("return", fs.mkdir(dir, {
+            mode: getMode(options),
+            recursive: true
+          }));
+        case 2:
+        case "end":
+          return _context.stop();
       }
     }, _callee);
   }));
@@ -14522,9 +14181,7 @@ module.exports = require("util");
 
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
@@ -14863,9 +14520,7 @@ function _iterableToArrayLimit(arr, i) {
       if (_x = (_i = _i.call(arr)).next, 0 === i) {
         if (Object(_i) !== _i) return;
         _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
-        ;
-      }
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
     } catch (err) {
       _d = !0, _e = err;
     } finally {
@@ -15109,9 +14764,7 @@ function _regeneratorRuntime() {
       if (!isNaN(iterable.length)) {
         var i = -1,
           next = function next() {
-            for (; ++i < iterable.length;) {
-              if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-            }
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
             return next.value = undefined, next.done = !0, next;
           };
         return next.next = next;
@@ -15157,9 +14810,7 @@ function _regeneratorRuntime() {
   }), exports.keys = function (val) {
     var object = Object(val),
       keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
+    for (var key in object) keys.push(key);
     return keys.reverse(), function next() {
       for (; keys.length;) {
         var key = keys.pop();
@@ -15170,9 +14821,7 @@ function _regeneratorRuntime() {
   }, exports.values = values, Context.prototype = {
     constructor: Context,
     reset: function reset(skipTempReset) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
-        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-      }
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
     },
     stop: function stop() {
       this.done = !0;
@@ -15679,9 +15328,7 @@ function _regeneratorRuntime() {
       if (!isNaN(iterable.length)) {
         var i = -1,
           next = function next() {
-            for (; ++i < iterable.length;) {
-              if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
-            }
+            for (; ++i < iterable.length;) if (hasOwn.call(iterable, i)) return next.value = iterable[i], next.done = !1, next;
             return next.value = undefined, next.done = !0, next;
           };
         return next.next = next;
@@ -15727,9 +15374,7 @@ function _regeneratorRuntime() {
   }), exports.keys = function (val) {
     var object = Object(val),
       keys = [];
-    for (var key in object) {
-      keys.push(key);
-    }
+    for (var key in object) keys.push(key);
     return keys.reverse(), function next() {
       for (; keys.length;) {
         var key = keys.pop();
@@ -15740,9 +15385,7 @@ function _regeneratorRuntime() {
   }, exports.values = values, Context.prototype = {
     constructor: Context,
     reset: function reset(skipTempReset) {
-      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) {
-        "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
-      }
+      if (this.prev = 0, this.next = 0, this.sent = this._sent = undefined, this.done = !1, this.delegate = null, this.method = "next", this.arg = undefined, this.tryEntries.forEach(resetTryEntry), !skipTempReset) for (var name in this) "t" === name.charAt(0) && hasOwn.call(this, name) && !isNaN(+name.slice(1)) && (this[name] = undefined);
     },
     stop: function stop() {
       this.done = !0;
@@ -15922,9 +15565,7 @@ var node_modules_minimist = __webpack_require__(2748);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
 function _arrayLikeToArray(arr, len) {
   if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
   return arr2;
 }
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
@@ -16119,20 +15760,42 @@ function _wrapNativeSuper(Class) {
   };
   return _wrapNativeSuper(Class);
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-stringify-position/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-stringify-position/lib/index.js
 /**
- * @typedef {import('unist').Point} Point
  * @typedef {import('unist').Node} Node
+ * @typedef {import('unist').Point} Point
  * @typedef {import('unist').Position} Position
- * @typedef {object & {type: string, position?: Position|undefined}} NodeLike
  */
 
 /**
- * Stringify one point, a position (start and end points), or a node’s
- * positional information.
+ * @typedef NodeLike
+ * @property {string} type
+ * @property {PositionLike | null | undefined} [position]
  *
- * @param {Node|NodeLike|Position|Point|null} [value]
+ * @typedef PositionLike
+ * @property {PointLike | null | undefined} [start]
+ * @property {PointLike | null | undefined} [end]
+ *
+ * @typedef PointLike
+ * @property {number | null | undefined} [line]
+ * @property {number | null | undefined} [column]
+ * @property {number | null | undefined} [offset]
+ */
+
+/**
+ * Serialize the positional info of a point, position (start and end points),
+ * or node.
+ *
+ * @param {Node | NodeLike | Position | PositionLike | Point | PointLike | null | undefined} [value]
+ *   Node, position, or point.
  * @returns {string}
+ *   Pretty printed positional info of a node (`string`).
+ *
+ *   In the format of a range `ls:cs-le:ce` (when given `node` or `position`)
+ *   or a point `l:c` (when given `point`), where `l` stands for line, `c` for
+ *   column, `s` for `start`, and `e` for end.
+ *   An empty string (`''`) is returned if the given value is neither `node`,
+ *   `position`, nor `point`.
  */
 function stringifyPosition(value) {
   // Nothing.
@@ -16160,7 +15823,7 @@ function stringifyPosition(value) {
 }
 
 /**
- * @param {Point|undefined} point
+ * @param {Point | PointLike | null | undefined} point
  * @returns {string}
  */
 function point(point) {
@@ -16168,7 +15831,7 @@ function point(point) {
 }
 
 /**
- * @param {Position|undefined} pos
+ * @param {Position | PositionLike | null | undefined} pos
  * @returns {string}
  */
 function position(pos) {
@@ -16176,13 +15839,13 @@ function position(pos) {
 }
 
 /**
- * @param {number|undefined} value
+ * @param {number | null | undefined} value
  * @returns {number}
  */
 function index(value) {
   return value && typeof value === 'number' ? value : 1;
 }
-;// CONCATENATED MODULE: ../../node_modules/vfile-message/index.js
+;// CONCATENATED MODULE: ../../node_modules/vfile-message/lib/index.js
 
 
 
@@ -16192,10 +15855,14 @@ function index(value) {
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Position} Position
  * @typedef {import('unist').Point} Point
- * @typedef {object & {type: string, position?: Position|undefined}} NodeLike
+ * @typedef {object & {type: string, position?: Position | undefined}} NodeLike
  */
 
 
+
+/**
+ * Message.
+ */
 var VFileMessage = /*#__PURE__*/function (_Error) {
   _inherits(VFileMessage, _Error);
   var _super = _createSuper(VFileMessage);
@@ -16204,18 +15871,23 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
    *
    * When an error is passed in as `reason`, the `stack` is copied.
    *
-   * @param {string|Error|VFileMessage} reason
-   *   Reason for message.
-   *   Uses the stack and message of the error if given.
-   * @param {Node|NodeLike|Position|Point} [place]
-   *   Place at which the message occurred in a file.
-   * @param {string} [origin]
-   *   Place in code the message originates from (example `'my-package:my-rule-name'`)
+   * @param {string | Error | VFileMessage} reason
+   *   Reason for message, uses the stack and message of the error if given.
+   *
+   *   > 👉 **Note**: you should use markdown.
+   * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+   *   Place in file where the message occurred.
+   * @param {string | null | undefined} [origin]
+   *   Place in code where the message originates (example:
+   *   `'my-package:my-rule'` or `'my-rule'`).
+   * @returns
+   *   Instance of `VFileMessage`.
    */
+  // To do: next major: expose `undefined` everywhere instead of `null`.
   function VFileMessage(reason, place, origin) {
     var _this;
     _classCallCheck(this, VFileMessage);
-    /** @type {[string|null, string|null]} */
+    /** @type {[string | null, string | null]} */
     var parts = [null, null];
     /** @type {Position} */
     var position = {
@@ -16248,6 +15920,7 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
       // Node.
       if ('type' in place || 'position' in place) {
         if (place.position) {
+          // To do: next major: deep clone.
           // @ts-expect-error: looks like a position.
           position = place.position;
         }
@@ -16255,19 +15928,40 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
       // Position.
       else if ('start' in place || 'end' in place) {
         // @ts-expect-error: looks like a position.
+        // To do: next major: deep clone.
         position = place;
       }
       // Point.
       else if ('line' in place || 'column' in place) {
+        // To do: next major: deep clone.
         position.start = place;
       }
     }
 
-    // Fields from `Error`
+    // Fields from `Error`.
+    /**
+     * Serialized positional info of error.
+     *
+     * On normal errors, this would be something like `ParseError`, buit in
+     * `VFile` messages we use this space to show where an error happened.
+     */
     _this.name = stringifyPosition(place) || '1:1';
-    /** @type {string} */
+
+    /**
+     * Reason for message.
+     *
+     * @type {string}
+     */
     _this.message = typeof reason === 'object' ? reason.message : reason;
-    /** @type {string} */
+
+    /**
+     * Stack of message.
+     *
+     * This is used by normal errors to show where something happened in
+     * programming code, irrelevant for `VFile` messages,
+     *
+     * @type {string}
+     */
     _this.stack = '';
     if (typeof reason === 'object' && reason.stack) {
       _this.stack = reason.stack;
@@ -16276,64 +15970,63 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
     /**
      * Reason for message.
      *
+     * > 👉 **Note**: you should use markdown.
+     *
      * @type {string}
      */
     _this.reason = _this.message;
 
     /* eslint-disable no-unused-expressions */
     /**
-     * Whether this is a fatal problem that marks an associated file as no
-     * longer processable.
-     * If `true`, marks associated file as no longer processable.
-     * If `false`, necessitates a (potential) change.
-     * The value can also be `null` or `undefined`, for things that might not
-     * need changing.
+     * State of problem.
      *
-     * @type {boolean?}
+     * * `true` — marks associated file as no longer processable (error)
+     * * `false` — necessitates a (potential) change (warning)
+     * * `null | undefined` — for things that might not need changing (info)
+     *
+     * @type {boolean | null | undefined}
      */
     _this.fatal;
 
     /**
      * Starting line of error.
      *
-     * @type {number?}
+     * @type {number | null}
      */
     _this.line = position.start.line;
 
     /**
      * Starting column of error.
      *
-     * @type {number?}
+     * @type {number | null}
      */
     _this.column = position.start.column;
 
     /**
-     * Full range information, when available.
-     * Has `start` and `end` fields, both set to an object with `line` and
-     * `column`, set to `number?`.
+     * Full unist position.
      *
-     * @type {Position?}
+     * @type {Position | null}
      */
     _this.position = position;
 
     /**
-     * Namespace of warning (example: `'my-package'`).
+     * Namespace of message (example: `'my-package'`).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     _this.source = parts[0];
 
     /**
-     * Category of message (example: `'my-rule-name'`).
+     * Category of message (example: `'my-rule'`).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     _this.ruleId = parts[1];
 
     /**
-     * Path of a file (used throughout the VFile ecosystem).
+     * Path of a file (used throughout the `VFile` ecosystem).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     _this.file;
 
@@ -16345,29 +16038,31 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
      * Specify the source value that’s being reported, which is deemed
      * incorrect.
      *
-     * @type {string?}
+     * @type {string | null}
      */
     _this.actual;
 
     /**
-     * Suggest values that should be used instead of `actual`, one or more
-     * values that are deemed as acceptable.
+     * Suggest acceptable values that can be used instead of `actual`.
      *
-     * @type {Array<string>?}
+     * @type {Array<string> | null}
      */
     _this.expected;
 
     /**
-     * Link to documentation for the message.
+     * Link to docs for the message.
      *
-     * @type {string?}
+     * > 👉 **Note**: this must be an absolute URL that can be passed as `x`
+     * > to `new URL(x)`.
+     *
+     * @type {string | null}
      */
     _this.url;
 
     /**
-     * Long form description of the message (supported by `vfile-reporter`).
+     * Long form description of the message (you should use markdown).
      *
-     * @type {string?}
+     * @type {string | null}
      */
     _this.note;
     /* eslint-enable no-unused-expressions */
@@ -16408,16 +16103,20 @@ const external_process_namespaceObject = require("process");
  */
 
 /**
- * @param {unknown} fileURLOrPath
- * @returns {fileURLOrPath is URL}
+ * Check if `fileUrlOrPath` looks like a URL.
+ *
+ * @param {unknown} fileUrlOrPath
+ *   File path or URL.
+ * @returns {fileUrlOrPath is URL}
+ *   Whether it’s a URL.
  */
 // From: <https://github.com/nodejs/node/blob/fcf8ba4/lib/internal/url.js#L1501>
-function isUrl(fileURLOrPath) {
-  return fileURLOrPath !== null && typeof fileURLOrPath === 'object' &&
+function isUrl(fileUrlOrPath) {
+  return fileUrlOrPath !== null && typeof fileUrlOrPath === 'object' &&
   // @ts-expect-error: indexable.
-  fileURLOrPath.href &&
+  fileUrlOrPath.href &&
   // @ts-expect-error: indexable.
-  fileURLOrPath.origin;
+  fileUrlOrPath.origin;
 }
 // EXTERNAL MODULE: external "url"
 var external_url_ = __webpack_require__(7310);
@@ -16429,48 +16128,85 @@ var external_url_ = __webpack_require__(7310);
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Position} Position
  * @typedef {import('unist').Point} Point
- * @typedef {Record<string, unknown> & {type: string, position?: Position|undefined}} NodeLike
  * @typedef {import('./minurl.shared.js').URL} URL
  * @typedef {import('../index.js').Data} Data
  * @typedef {import('../index.js').Value} Value
+ */
+
+/**
+ * @typedef {Record<string, unknown> & {type: string, position?: Position | undefined}} NodeLike
  *
- * @typedef {'ascii'|'utf8'|'utf-8'|'utf16le'|'ucs2'|'ucs-2'|'base64'|'base64url'|'latin1'|'binary'|'hex'} BufferEncoding
+ * @typedef {'ascii' | 'utf8' | 'utf-8' | 'utf16le' | 'ucs2' | 'ucs-2' | 'base64' | 'base64url' | 'latin1' | 'binary' | 'hex'} BufferEncoding
  *   Encodings supported by the buffer class.
- *   This is a copy of the typing from Node, copied to prevent Node globals from
+ *
+ *   This is a copy of the types from Node, copied to prevent Node globals from
  *   being needed.
  *   Copied from: <https://github.com/DefinitelyTyped/DefinitelyTyped/blob/90a4ec8/types/node/buffer.d.ts#L170>
  *
- * @typedef {Value|Options|VFile|URL} Compatible
+ * @typedef {Options | URL | Value | VFile} Compatible
  *   Things that can be passed to the constructor.
  *
  * @typedef VFileCoreOptions
- * @property {Value} [value]
- * @property {string} [cwd]
- * @property {Array<string>} [history]
- * @property {string|URL} [path]
- * @property {string} [basename]
- * @property {string} [stem]
- * @property {string} [extname]
- * @property {string} [dirname]
- * @property {Data} [data]
+ *   Set multiple values.
+ * @property {Value | null | undefined} [value]
+ *   Set `value`.
+ * @property {string | null | undefined} [cwd]
+ *   Set `cwd`.
+ * @property {Array<string> | null | undefined} [history]
+ *   Set `history`.
+ * @property {URL | string | null | undefined} [path]
+ *   Set `path`.
+ * @property {string | null | undefined} [basename]
+ *   Set `basename`.
+ * @property {string | null | undefined} [stem]
+ *   Set `stem`.
+ * @property {string | null | undefined} [extname]
+ *   Set `extname`.
+ * @property {string | null | undefined} [dirname]
+ *   Set `dirname`.
+ * @property {Data | null | undefined} [data]
+ *   Set `data`.
  *
  * @typedef Map
- *   Raw source map, see:
+ *   Raw source map.
+ *
+ *   See:
  *   <https://github.com/mozilla/source-map/blob/58819f0/source-map.d.ts#L15-L23>.
  * @property {number} version
+ *   Which version of the source map spec this map is following.
  * @property {Array<string>} sources
+ *   An array of URLs to the original source files.
  * @property {Array<string>} names
- * @property {string|undefined} [sourceRoot]
- * @property {Array<string>|undefined} [sourcesContent]
+ *   An array of identifiers which can be referenced by individual mappings.
+ * @property {string | undefined} [sourceRoot]
+ *   The URL root from which all sources are relative.
+ * @property {Array<string> | undefined} [sourcesContent]
+ *   An array of contents of the original source files.
  * @property {string} mappings
+ *   A string of base64 VLQs which contain the actual mappings.
  * @property {string} file
+ *   The generated file this source map is associated with.
  *
  * @typedef {{[key: string]: unknown} & VFileCoreOptions} Options
- *   Configuration: a bunch of keys that will be shallow copied over to the new
- *   file.
+ *   Configuration.
+ *
+ *   A bunch of keys that will be shallow copied over to the new file.
  *
  * @typedef {Record<string, unknown>} ReporterSettings
- * @typedef {<T = ReporterSettings>(files: Array<VFile>, options: T) => string} Reporter
+ *   Configuration for reporters.
+ */
+
+/**
+ * @template {ReporterSettings} Settings
+ *   Options type.
+ * @callback Reporter
+ *   Type for a reporter.
+ * @param {Array<VFile>} files
+ *   Files to report.
+ * @param {Settings} options
+ *   Configuration.
+ * @returns {string}
+ *   Report.
  */
 
 
@@ -16479,36 +16215,44 @@ var external_url_ = __webpack_require__(7310);
 
 
 
-// Order of setting (least specific to most), we need this because otherwise
-// `{stem: 'a', path: '~/b.js'}` would throw, as a path is needed before a
-// stem can be set.
+/**
+ * Order of setting (least specific to most), we need this because otherwise
+ * `{stem: 'a', path: '~/b.js'}` would throw, as a path is needed before a
+ * stem can be set.
+ *
+ * @type {Array<'basename' | 'dirname' | 'extname' | 'history' | 'path' | 'stem'>}
+ */
 var order = ['history', 'path', 'basename', 'stem', 'extname', 'dirname'];
 var VFile = /*#__PURE__*/function () {
   /**
    * Create a new virtual file.
    *
-   * If `options` is `string` or `Buffer`, it’s treated as `{value: options}`.
-   * If `options` is a `URL`, it’s treated as `{path: options}`.
-   * If `options` is a `VFile`, shallow copies its data over to the new file.
-   * All fields in `options` are set on the newly created `VFile`.
+   * `options` is treated as:
+   *
+   * *   `string` or `Buffer` — `{value: options}`
+   * *   `URL` — `{path: options}`
+   * *   `VFile` — shallow copies its data over to the new file
+   * *   `object` — all fields are shallow copied over to the new file
    *
    * Path related fields are set in the following order (least specific to
    * most specific): `history`, `path`, `basename`, `stem`, `extname`,
    * `dirname`.
    *
-   * It’s not possible to set either `dirname` or `extname` without setting
-   * either `history`, `path`, `basename`, or `stem` as well.
+   * You cannot set `dirname` or `extname` without setting either `history`,
+   * `path`, `basename`, or `stem` too.
    *
-   * @param {Compatible} [value]
+   * @param {Compatible | null | undefined} [value]
+   *   File value.
+   * @returns
+   *   New instance.
    */
   function VFile(value) {
     _classCallCheck(this, VFile);
-    /** @type {Options} */
+    /** @type {Options | VFile} */
     var options;
     if (!value) {
       options = {};
-    } else if (typeof value === 'string' || is_buffer(value)) {
-      // @ts-expect-error Looks like a buffer.
+    } else if (typeof value === 'string' || buffer(value)) {
       options = {
         value: value
       };
@@ -16517,33 +16261,38 @@ var VFile = /*#__PURE__*/function () {
         path: value
       };
     } else {
-      // @ts-expect-error Looks like file or options.
       options = value;
     }
 
     /**
      * Place to store custom information (default: `{}`).
+     *
      * It’s OK to store custom data directly on the file but moving it to
      * `data` is recommended.
+     *
      * @type {Data}
      */
     this.data = {};
 
     /**
      * List of messages associated with the file.
+     *
      * @type {Array<VFileMessage>}
      */
     this.messages = [];
 
     /**
      * List of filepaths the file moved between.
+     *
      * The first is the original path and the last is the current path.
+     *
      * @type {Array<string>}
      */
     this.history = [];
 
     /**
      * Base of `path` (default: `process.cwd()` or `'/'` in browsers).
+     *
      * @type {string}
      */
     this.cwd = external_process_namespaceObject.cwd();
@@ -16551,6 +16300,7 @@ var VFile = /*#__PURE__*/function () {
     /* eslint-disable no-unused-expressions */
     /**
      * Raw value.
+     *
      * @type {Value}
      */
     this.value;
@@ -16560,26 +16310,30 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Whether a file was saved to disk.
+     *
      * This is used by vfile reporters.
+     *
      * @type {boolean}
      */
     this.stored;
 
     /**
-     * Sometimes files have a non-string, compiled, representation.
-     * This can be stored in the `result` field.
-     * One example is when turning markdown into React nodes.
+     * Custom, non-string, compiled, representation.
+     *
      * This is used by unified to store non-string results.
+     * One example is when turning markdown into React nodes.
+     *
      * @type {unknown}
      */
     this.result;
 
     /**
-     * Sometimes files have a source map associated with them.
-     * This can be stored in the `map` field.
-     * This should be a `Map` type, which is equivalent to the `RawSourceMap`
-     * type from the `source-map` module.
-     * @type {Map|undefined}
+     * Source map.
+     *
+     * This type is equivalent to the `RawSourceMap` type from the `source-map`
+     * module.
+     *
+     * @type {Map | null | undefined}
      */
     this.map;
     /* eslint-enable no-unused-expressions */
@@ -16591,8 +16345,8 @@ var VFile = /*#__PURE__*/function () {
 
       // Note: we specifically use `in` instead of `hasOwnProperty` to accept
       // `vfile`s too.
-      if (_prop in options && options[_prop] !== undefined) {
-        // @ts-expect-error: TS is confused by the different types for `history`.
+      if (_prop in options && options[_prop] !== undefined && options[_prop] !== null) {
+        // @ts-expect-error: TS doesn’t understand basic reality.
         this[_prop] = _prop === 'history' ? _toConsumableArray(options[_prop]) : options[_prop];
       }
     }
@@ -16603,12 +16357,16 @@ var VFile = /*#__PURE__*/function () {
     // Set non-path related properties.
     for (prop in options) {
       // @ts-expect-error: fine to set other things.
-      if (!order.includes(prop)) this[prop] = options[prop];
+      if (!order.includes(prop)) {
+        // @ts-expect-error: fine to set other things.
+        this[prop] = options[prop];
+      }
     }
   }
 
   /**
    * Get the full path (example: `'~/index.min.js'`).
+   *
    * @returns {string}
    */
   _createClass(VFile, [{
@@ -16619,10 +16377,12 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Set the full path (example: `'~/index.min.js'`).
+     *
      * Cannot be nullified.
      * You can set a file URL (a `URL` object with a `file:` protocol) which will
      * be turned into a path with `url.fileURLToPath`.
-     * @param {string|URL} path
+     *
+     * @param {string | URL} path
      */,
     set: function set(path) {
       if (isUrl(path)) {
@@ -16645,6 +16405,7 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Set the parent path (example: `'~'`).
+     *
      * Cannot be set if there’s no `path` yet.
      */,
     set: function set(dirname) {
@@ -16663,6 +16424,7 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Set basename (including extname) (`'index.min.js'`).
+     *
      * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
      * on windows).
      * Cannot be nullified (use `file.path = file.dirname` instead).
@@ -16684,6 +16446,7 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Set the extname (including dot) (example: `'.js'`).
+     *
      * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
      * on windows).
      * Cannot be set if there’s no `path` yet.
@@ -16713,6 +16476,7 @@ var VFile = /*#__PURE__*/function () {
 
     /**
      * Set the stem (basename w/o extname) (example: `'index.min'`).
+     *
      * Cannot contain path separators (`'/'` on unix, macOS, and browsers, `'\'`
      * on windows).
      * Cannot be nullified (use `file.path = file.dirname` instead).
@@ -16726,29 +16490,31 @@ var VFile = /*#__PURE__*/function () {
     /**
      * Serialize the file.
      *
-     * @param {BufferEncoding} [encoding='utf8']
-     *   When `value` is a `Buffer`, `encoding` is a character encoding to
-     *   understand it as (default: `'utf8'`).
+     * @param {BufferEncoding | null | undefined} [encoding='utf8']
+     *   Character encoding to understand `value` as when it’s a `Buffer`
+     *   (default: `'utf8'`).
      * @returns {string}
      *   Serialized file.
      */
   }, {
     key: "toString",
     value: function toString(encoding) {
-      return (this.value || '').toString(encoding);
+      return (this.value || '').toString(encoding || undefined);
     }
 
     /**
-     * Constructs a new `VFileMessage`, where `fatal` is set to `false`, and
-     * associates it with the file by adding it to `vfile.messages` and setting
-     * `message.file` to the current filepath.
+     * Create a warning message associated with the file.
      *
-     * @param {string|Error|VFileMessage} reason
-     *   Human readable reason for the message, uses the stack and message of the error if given.
-     * @param {Node|NodeLike|Position|Point} [place]
-     *   Place where the message occurred in the file.
-     * @param {string} [origin]
-     *   Computer readable reason for the message
+     * Its `fatal` is set to `false` and `file` is set to the current file path.
+     * Its added to `file.messages`.
+     *
+     * @param {string | Error | VFileMessage} reason
+     *   Reason for message, uses the stack and message of the error if given.
+     * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+     *   Place in file where the message occurred.
+     * @param {string | null | undefined} [origin]
+     *   Place in code where the message originates (example:
+     *   `'my-package:my-rule'` or `'my-rule'`).
      * @returns {VFileMessage}
      *   Message.
      */
@@ -16766,15 +16532,18 @@ var VFile = /*#__PURE__*/function () {
     }
 
     /**
-     * Like `VFile#message()`, but associates an informational message where
-     * `fatal` is set to `null`.
+     * Create an info message associated with the file.
      *
-     * @param {string|Error|VFileMessage} reason
-     *   Human readable reason for the message, uses the stack and message of the error if given.
-     * @param {Node|NodeLike|Position|Point} [place]
-     *   Place where the message occurred in the file.
-     * @param {string} [origin]
-     *   Computer readable reason for the message
+     * Its `fatal` is set to `null` and `file` is set to the current file path.
+     * Its added to `file.messages`.
+     *
+     * @param {string | Error | VFileMessage} reason
+     *   Reason for message, uses the stack and message of the error if given.
+     * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+     *   Place in file where the message occurred.
+     * @param {string | null | undefined} [origin]
+     *   Place in code where the message originates (example:
+     *   `'my-package:my-rule'` or `'my-rule'`).
      * @returns {VFileMessage}
      *   Message.
      */
@@ -16787,18 +16556,23 @@ var VFile = /*#__PURE__*/function () {
     }
 
     /**
-     * Like `VFile#message()`, but associates a fatal message where `fatal` is
-     * set to `true`, and then immediately throws it.
+     * Create a fatal error associated with the file.
+     *
+     * Its `fatal` is set to `true` and `file` is set to the current file path.
+     * Its added to `file.messages`.
      *
      * > 👉 **Note**: a fatal error means that a file is no longer processable.
      *
-     * @param {string|Error|VFileMessage} reason
-     *   Human readable reason for the message, uses the stack and message of the error if given.
-     * @param {Node|NodeLike|Position|Point} [place]
-     *   Place where the message occurred in the file.
-     * @param {string} [origin]
-     *   Computer readable reason for the message
+     * @param {string | Error | VFileMessage} reason
+     *   Reason for message, uses the stack and message of the error if given.
+     * @param {Node | NodeLike | Position | Point | null | undefined} [place]
+     *   Place in file where the message occurred.
+     * @param {string | null | undefined} [origin]
+     *   Place in code where the message originates (example:
+     *   `'my-package:my-rule'` or `'my-rule'`).
      * @returns {never}
+     *   Message.
+     * @throws {VFileMessage}
      *   Message.
      */
   }, {
@@ -16815,9 +16589,12 @@ var VFile = /*#__PURE__*/function () {
 /**
  * Assert that `part` is not a path (as in, does not contain `path.sep`).
  *
- * @param {string|undefined} part
+ * @param {string | null | undefined} part
+ *   File path part.
  * @param {string} name
+ *   Part name.
  * @returns {void}
+ *   Nothing.
  */
 function assertPart(part, name) {
   if (part && part.includes(external_path_.sep)) {
@@ -16828,9 +16605,12 @@ function assertPart(part, name) {
 /**
  * Assert that `part` is not empty.
  *
- * @param {string|undefined} part
+ * @param {string | undefined} part
+ *   Thing.
  * @param {string} name
+ *   Part name.
  * @returns {asserts part is string}
+ *   Nothing.
  */
 function assertNonEmpty(part, name) {
   if (!part) {
@@ -16841,14 +16621,29 @@ function assertNonEmpty(part, name) {
 /**
  * Assert `path` exists.
  *
- * @param {string|undefined} path
+ * @param {string | undefined} path
+ *   Path.
  * @param {string} name
+ *   Dependency name.
  * @returns {asserts path is string}
+ *   Nothing.
  */
 function assertPath(path, name) {
   if (!path) {
     throw new Error('Setting `' + name + '` requires `path` to be set too');
   }
+}
+
+/**
+ * Assert `value` is a buffer.
+ *
+ * @param {unknown} value
+ *   thing.
+ * @returns {value is Buffer}
+ *   Whether `value` is a Node.js buffer.
+ */
+function buffer(value) {
+  return is_buffer(value);
 }
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
 function _arrayWithHoles(arr) {
@@ -19820,83 +19615,117 @@ function escapeStringRegexp(string) {
   // Use a simple backslash escape when it’s always valid, and a `\xnn` escape when the simpler form would be disallowed by Unicode patterns’ stricter grammar.
   return string.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&').replace(/-/g, '\\x2d');
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-is/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-is/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
- *
- * @typedef {string} Type
- * @typedef {Object<string, unknown>} Props
- *
- * @typedef {null|undefined|Type|Props|TestFunctionAnything|Array.<Type|Props|TestFunctionAnything>} Test
  */
 
 /**
- * Check if a node passes a test
+ * @typedef {Record<string, unknown>} Props
+ * @typedef {null | undefined | string | Props | TestFunctionAnything | Array<string | Props | TestFunctionAnything>} Test
+ *   Check for an arbitrary node, unaware of TypeScript inferral.
  *
  * @callback TestFunctionAnything
+ *   Check if a node passes a test, unaware of TypeScript inferral.
+ * @param {unknown} this
+ *   The given context.
  * @param {Node} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {boolean|void}
+ *   A node.
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {boolean | void}
+ *   Whether this node passes the test.
  */
 
 /**
- * Check if a node passes a certain node test
+ * @template {Node} Kind
+ *   Node type.
+ * @typedef {Kind['type'] | Partial<Kind> | TestFunctionPredicate<Kind> | Array<Kind['type'] | Partial<Kind> | TestFunctionPredicate<Kind>>} PredicateTest
+ *   Check for a node that can be inferred by TypeScript.
+ */
+
+/**
+ * Check if a node passes a certain test.
  *
- * @template {Node} X
+ * @template {Node} Kind
+ *   Node type.
  * @callback TestFunctionPredicate
+ *   Complex test function for a node that can be inferred by TypeScript.
  * @param {Node} node
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is X}
+ *   A node.
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {node is Kind}
+ *   Whether this node passes the test.
  */
 
 /**
  * @callback AssertAnything
+ *   Check that an arbitrary value is a node, unaware of TypeScript inferral.
  * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
+ *   Anything (typically a node).
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
  * @returns {boolean}
+ *   Whether this is a node and passes a test.
  */
 
 /**
- * Check if a node passes a certain node test
+ * Check if a node is a node and passes a certain node test.
  *
- * @template {Node} Y
+ * @template {Node} Kind
+ *   Node type.
  * @callback AssertPredicate
+ *   Check that an arbitrary value is a specific node, aware of TypeScript.
  * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is Y}
+ *   Anything (typically a node).
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {node is Kind}
+ *   Whether this is a node and passes a test.
  */
 
+/**
+ * Check if `node` is a `Node` and whether it passes the given test.
+ *
+ * @param node
+ *   Thing to check, typically `Node`.
+ * @param test
+ *   A check for a specific node.
+ * @param index
+ *   The node’s position in its parent.
+ * @param parent
+ *   The node’s parent.
+ * @returns
+ *   Whether `node` is a node and passes a test.
+ */
 var is =
 /**
- * Check if a node passes a test.
- * When a `parent` node is known the `index` of node should also be given.
- *
  * @type {(
- *   (<T extends Node>(node: unknown, test: T['type']|Partial<T>|TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|TestFunctionPredicate<T>>, index?: number|null|undefined, parent?: Parent|null|undefined, context?: unknown) => node is T) &
- *   ((node?: unknown, test?: Test, index?: number|null|undefined, parent?: Parent|null|undefined, context?: unknown) => boolean)
+ *   (() => false) &
+ *   (<Kind extends Node = Node>(node: unknown, test: PredicateTest<Kind>, index: number, parent: Parent, context?: unknown) => node is Kind) &
+ *   (<Kind extends Node = Node>(node: unknown, test: PredicateTest<Kind>, index?: null | undefined, parent?: null | undefined, context?: unknown) => node is Kind) &
+ *   ((node: unknown, test: Test, index: number, parent: Parent, context?: unknown) => boolean) &
+ *   ((node: unknown, test?: Test, index?: null | undefined, parent?: null | undefined, context?: unknown) => boolean)
  * )}
  */
 
 /**
- * Check if a node passes a test.
- * When a `parent` node is known the `index` of node should also be given.
- *
- * @param {unknown} [node] Node to check
+ * @param {unknown} [node]
  * @param {Test} [test]
- * When nullish, checks if `node` is a `Node`.
- * When `string`, works like passing `function (node) {return node.type === test}`.
- * When `function` checks if function passed the node is true.
- * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
- * When `array`, checks any one of the subtests pass.
- * @param {number|null|undefined} [index] Position of `node` in `parent`
- * @param {Parent|null|undefined} [parent] Parent of `node`
- * @param {unknown} [context] Context object to invoke `test` with
- * @returns {boolean} Whether test passed and `node` is a `Node` (object with `type` set to non-empty `string`).
+ * @param {number | null | undefined} [index]
+ * @param {Parent | null | undefined} [parent]
+ * @param {unknown} [context]
+ * @returns {boolean}
  */
 // eslint-disable-next-line max-params
 function is(node, test, index, parent, context) {
@@ -19914,22 +19743,35 @@ function is(node, test, index, parent, context) {
   // @ts-expect-error Looks like a node.
   return node && node.type && typeof node.type === 'string' ? Boolean(check.call(context, node, index, parent)) : false;
 };
+
+/**
+ * Generate an assertion from a test.
+ *
+ * Useful if you’re going to test many nodes, for example when creating a
+ * utility where something else passes a compatible test.
+ *
+ * The created function is a bit faster because it expects valid input only:
+ * a `node`, `index`, and `parent`.
+ *
+ * @param test
+ *   *   when nullish, checks if `node` is a `Node`.
+ *   *   when `string`, works like passing `(node) => node.type === test`.
+ *   *   when `function` checks if function passed the node is true.
+ *   *   when `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
+ *   *   when `array`, checks if any one of the subtests pass.
+ * @returns
+ *   An assertion.
+ */
 var convert =
 /**
  * @type {(
- *   (<T extends Node>(test: T['type']|Partial<T>|TestFunctionPredicate<T>) => AssertPredicate<T>) &
+ *   (<Kind extends Node>(test: PredicateTest<Kind>) => AssertPredicate<Kind>) &
  *   ((test?: Test) => AssertAnything)
  * )}
  */
 
 /**
- * Generate an assertion from a check.
  * @param {Test} [test]
- * When nullish, checks if `node` is a `Node`.
- * When `string`, works like passing `function (node) {return node.type === test}`.
- * When `function` checks if function passed the node is true.
- * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
- * When `array`, checks any one of the subtests pass.
  * @returns {AssertAnything}
  */
 function convert(test) {
@@ -19947,12 +19789,13 @@ function convert(test) {
   }
   throw new Error('Expected function, string, or object as test');
 };
+
 /**
- * @param {Array.<Type|Props|TestFunctionAnything>} tests
+ * @param {Array<string | Props | TestFunctionAnything>} tests
  * @returns {AssertAnything}
  */
 function anyFactory(tests) {
-  /** @type {Array.<AssertAnything>} */
+  /** @type {Array<AssertAnything>} */
   var checks = [];
   var index = -1;
   while (++index < tests.length) {
@@ -19962,7 +19805,7 @@ function anyFactory(tests) {
 
   /**
    * @this {unknown}
-   * @param {unknown[]} parameters
+   * @param {Array<unknown>} parameters
    * @returns {boolean}
    */
   function any() {
@@ -19979,8 +19822,7 @@ function anyFactory(tests) {
 }
 
 /**
- * Utility to assert each property in `test` is represented in `node`, and each
- * values are strictly equal.
+ * Turn an object into a test for a node with a certain fields.
  *
  * @param {Props} check
  * @returns {AssertAnything}
@@ -20004,10 +19846,9 @@ function propsFactory(check) {
 }
 
 /**
- * Utility to convert a string into a function which checks a given node’s type
- * for said string.
+ * Turn a string into a test for a node with a certain type.
  *
- * @param {Type} check
+ * @param {string} check
  * @returns {AssertAnything}
  */
 function typeFactory(check) {
@@ -20022,8 +19863,8 @@ function typeFactory(check) {
 }
 
 /**
- * Utility to convert a string into a function which checks a given node’s type
- * for said string.
+ * Turn a custom test into a test for a node that passes that test.
+ *
  * @param {TestFunctionAnything} check
  * @returns {AssertAnything}
  */
@@ -20032,23 +19873,23 @@ function castFactory(check) {
 
   /**
    * @this {unknown}
-   * @param {Array.<unknown>} parameters
+   * @param {unknown} node
+   * @param {Array<unknown>} parameters
    * @returns {boolean}
    */
-  function assertion() {
-    for (var _len2 = arguments.length, parameters = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-      parameters[_key2] = arguments[_key2];
+  function assertion(node) {
+    for (var _len2 = arguments.length, parameters = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      parameters[_key2 - 1] = arguments[_key2];
     }
-    // @ts-expect-error: spreading is fine.
-    return Boolean(check.call.apply(check, [this].concat(parameters)));
+    return Boolean(node && typeof node === 'object' && 'type' in node &&
+    // @ts-expect-error: fine.
+    Boolean(check.call.apply(check, [this, node].concat(parameters))));
   }
 }
-
-// Utility to return true.
 function ok() {
   return true;
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/color.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/lib/color.js
 /**
  * @param {string} d
  * @returns {string}
@@ -20056,59 +19897,142 @@ function ok() {
 function color(d) {
   return "\x1B[33m" + d + "\x1B[39m";
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-visit-parents/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
- * @typedef {import('./complex-types.js').Action} Action
- * @typedef {import('./complex-types.js').Index} Index
- * @typedef {import('./complex-types.js').ActionTuple} ActionTuple
- * @typedef {import('./complex-types.js').VisitorResult} VisitorResult
- * @typedef {import('./complex-types.js').Visitor} Visitor
+ */
+
+/**
+ * @typedef {boolean | 'skip'} Action
+ *   Union of the action types.
+ *
+ * @typedef {number} Index
+ *   Move to the sibling at `index` next (after node itself is completely
+ *   traversed).
+ *
+ *   Useful if mutating the tree, such as removing the node the visitor is
+ *   currently on, or any of its previous siblings.
+ *   Results less than 0 or greater than or equal to `children.length` stop
+ *   traversing the parent.
+ *
+ * @typedef {[(Action | null | undefined | void)?, (Index | null | undefined)?]} ActionTuple
+ *   List with one or two values, the first an action, the second an index.
+ *
+ * @typedef {Action | ActionTuple | Index | null | undefined | void} VisitorResult
+ *   Any value that can be returned from a visitor.
+ */
+
+/**
+ * @template {Node} [Visited=Node]
+ *   Visited node type.
+ * @template {Parent} [Ancestor=Parent]
+ *   Ancestor type.
+ * @callback Visitor
+ *   Handle a node (matching `test`, if given).
+ *
+ *   Visitors are free to transform `node`.
+ *   They can also transform the parent of node (the last of `ancestors`).
+ *
+ *   Replacing `node` itself, if `SKIP` is not returned, still causes its
+ *   descendants to be walked (which is a bug).
+ *
+ *   When adding or removing previous siblings of `node` (or next siblings, in
+ *   case of reverse), the `Visitor` should return a new `Index` to specify the
+ *   sibling to traverse after `node` is traversed.
+ *   Adding or removing next siblings of `node` (or previous siblings, in case
+ *   of reverse) is handled as expected without needing to return a new `Index`.
+ *
+ *   Removing the children property of an ancestor still results in them being
+ *   traversed.
+ * @param {Visited} node
+ *   Found node.
+ * @param {Array<Ancestor>} ancestors
+ *   Ancestors of `node`.
+ * @returns {VisitorResult}
+ *   What to do next.
+ *
+ *   An `Index` is treated as a tuple of `[CONTINUE, Index]`.
+ *   An `Action` is treated as a tuple of `[Action]`.
+ *
+ *   Passing a tuple back only makes sense if the `Action` is `SKIP`.
+ *   When the `Action` is `EXIT`, that action can be returned.
+ *   When the `Action` is `CONTINUE`, `Index` can be returned.
+ */
+
+/**
+ * @template {Node} [Tree=Node]
+ *   Tree type.
+ * @template {Test} [Check=string]
+ *   Test type.
+ * @typedef {Visitor<import('./complex-types.js').Matches<import('./complex-types.js').InclusiveDescendant<Tree>, Check>, Extract<import('./complex-types.js').InclusiveDescendant<Tree>, Parent>>} BuildVisitor
+ *   Build a typed `Visitor` function from a tree and a test.
+ *
+ *   It will infer which values are passed as `node` and which as `parents`.
  */
 
 
 
 
 /**
- * Continue traversing as normal
+ * Continue traversing as normal.
  */
 var CONTINUE = true;
+
 /**
- * Do not traverse this node’s children
- */
-var SKIP = 'skip';
-/**
- * Stop traversing immediately
+ * Stop traversing immediately.
  */
 var EXIT = false;
 
 /**
- * Visit children of tree which pass test.
+ * Do not traverse this node’s children.
+ */
+var SKIP = 'skip';
+
+/**
+ * Visit nodes, with ancestral information.
+ *
+ * This algorithm performs *depth-first* *tree traversal* in *preorder*
+ * (**NLR**) or if `reverse` is given, in *reverse preorder* (**NRL**).
+ *
+ * You can choose for which nodes `visitor` is called by passing a `test`.
+ * For complex tests, you should test yourself in `visitor`, as it will be
+ * faster and will have improved type information.
+ *
+ * Walking the tree is an intensive task.
+ * Make use of the return values of the visitor when possible.
+ * Instead of walking a tree multiple times, walk it once, use `unist-util-is`
+ * to check if a node matches, and then perform different operations.
+ *
+ * You can change the tree.
+ * See `Visitor` for more info.
  *
  * @param tree
- *   Tree to walk
- * @param [test]
+ *   Tree to traverse.
+ * @param test
  *   `unist-util-is`-compatible test
  * @param visitor
- *   Function called for nodes that pass `test`.
- * @param [reverse=false]
- *   Traverse in reverse preorder (NRL) instead of preorder (NLR) (default).
+ *   Handle each node.
+ * @param reverse
+ *   Traverse in reverse preorder (NRL) instead of the default preorder (NLR).
+ * @returns
+ *   Nothing.
  */
 var visitParents =
 /**
  * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types.js').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types.js').BuildVisitor<Tree>, reverse?: boolean) => void)
+ *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: BuildVisitor<Tree, Check>, reverse?: boolean | null | undefined) => void) &
+ *   (<Tree extends Node>(tree: Tree, visitor: BuildVisitor<Tree>, reverse?: boolean | null | undefined) => void)
  * )}
  */
 
 /**
  * @param {Node} tree
  * @param {Test} test
- * @param {import('./complex-types.js').Visitor<Node>} visitor
- * @param {boolean} [reverse=false]
+ * @param {Visitor<Node>} visitor
+ * @param {boolean | null | undefined} [reverse]
+ * @returns {void}
  */
 function visitParents(tree, test, visitor, reverse) {
   if (typeof test === 'function' && typeof visitor !== 'function') {
@@ -20119,23 +20043,25 @@ function visitParents(tree, test, visitor, reverse) {
   }
   var is = convert(test);
   var step = reverse ? -1 : 1;
-  factory(tree, null, [])();
+  factory(tree, undefined, [])();
 
   /**
    * @param {Node} node
-   * @param {number?} index
+   * @param {number | undefined} index
    * @param {Array<Parent>} parents
    */
   function factory(node, index, parents) {
     /** @type {Record<string, unknown>} */
     // @ts-expect-error: hush
-    var value = typeof node === 'object' && node !== null ? node : {};
-    /** @type {string|undefined} */
-    var name;
+    var value = node && typeof node === 'object' ? node : {};
     if (typeof value.type === 'string') {
-      name = typeof value.tagName === 'string' ? value.tagName : typeof value.name === 'string' ? value.name : undefined;
+      var name =
+      // `hast`
+      typeof value.tagName === 'string' ? value.tagName :
+      // `xast`
+      typeof value.name === 'string' ? value.name : undefined;
       Object.defineProperty(visit, 'name', {
-        value: 'node (' + color(value.type + (name ? '<' + name + '>' : '')) + ')'
+        value: 'node (' + color(node.type + (name ? '<' + name + '>' : '')) + ')'
       });
     }
     return visit;
@@ -20178,8 +20104,12 @@ function visitParents(tree, test, visitor, reverse) {
 };
 
 /**
+ * Turn a return value into a clean result.
+ *
  * @param {VisitorResult} value
+ *   Valid return values from visitors.
  * @returns {ActionTuple}
+ *   Clean result.
  */
 function toResult(value) {
   if (Array.isArray(value)) {
@@ -20193,41 +20123,67 @@ function toResult(value) {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-find-and-replace/lib/index.js
 
 /**
- * @typedef Options
- *   Configuration (optional).
- * @property {Test} [ignore]
- *   `unist-util-is` test used to assert parents
- *
+ * @typedef {import('mdast').Parent} MdastParent
  * @typedef {import('mdast').Root} Root
  * @typedef {import('mdast').Content} Content
  * @typedef {import('mdast').PhrasingContent} PhrasingContent
  * @typedef {import('mdast').Text} Text
- * @typedef {Content|Root} Node
- * @typedef {Exclude<Extract<Node, import('mdast').Parent>, Root>} Parent
- *
  * @typedef {import('unist-util-visit-parents').Test} Test
  * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- *
- * @typedef RegExpMatchObject
- * @property {number} index
- * @property {string} input
- * @property {[Root, ...Array<Parent>, Text]} stack
- *
- * @typedef {string|RegExp} Find
- * @typedef {string|ReplaceFunction} Replace
- *
- * @typedef {[Find, Replace]} FindAndReplaceTuple
- * @typedef {Record<string, Replace>} FindAndReplaceSchema
- * @typedef {Array<FindAndReplaceTuple>} FindAndReplaceList
- *
- * @typedef {[RegExp, ReplaceFunction]} Pair
- * @typedef {Array<Pair>} Pairs
  */
 
 /**
+ * @typedef {Content | Root} Node
+ * @typedef {Extract<Node, MdastParent>} Parent
+ * @typedef {Exclude<Parent, Root>} ContentParent
+ *
+ * @typedef RegExpMatchObject
+ *   Info on the match.
+ * @property {number} index
+ *   The index of the search at which the result was found.
+ * @property {string} input
+ *   A copy of the search string in the text node.
+ * @property {[Root, ...Array<ContentParent>, Text]} stack
+ *   All ancestors of the text node, where the last node is the text itself.
+ *
  * @callback ReplaceFunction
+ *   Callback called when a search matches.
  * @param {...any} parameters
- * @returns {Array<PhrasingContent>|PhrasingContent|string|false|undefined|null}
+ *   The parameters are the result of corresponding search expression:
+ *
+ *   * `value` (`string`) — whole match
+ *   * `...capture` (`Array<string>`) — matches from regex capture groups
+ *   * `match` (`RegExpMatchObject`) — info on the match
+ * @returns {Array<PhrasingContent> | PhrasingContent | string | false | undefined | null}
+ *   Thing to replace with.
+ *
+ *   * when `null`, `undefined`, `''`, remove the match
+ *   * …or when `false`, do not replace at all
+ *   * …or when `string`, replace with a text node of that value
+ *   * …or when `Node` or `Array<Node>`, replace with those nodes
+ *
+ * @typedef {string | RegExp} Find
+ *   Pattern to find.
+ *
+ *   Strings are escaped and then turned into global expressions.
+ *
+ * @typedef {Array<FindAndReplaceTuple>} FindAndReplaceList
+ *   Several find and replaces, in array form.
+ * @typedef {Record<string, Replace>} FindAndReplaceSchema
+ *   Several find and replaces, in object form.
+ * @typedef {[Find, Replace]} FindAndReplaceTuple
+ *   Find and replace in tuple form.
+ * @typedef {string | ReplaceFunction} Replace
+ *   Thing to replace with.
+ * @typedef {[RegExp, ReplaceFunction]} Pair
+ *   Normalized find and replace.
+ * @typedef {Array<Pair>} Pairs
+ *   All find and replaced.
+ *
+ * @typedef Options
+ *   Configuration.
+ * @property {Test | null | undefined} [ignore]
+ *   Test for which nodes to ignore.
  */
 
 
@@ -20236,31 +20192,42 @@ function toResult(value) {
 var lib_own = {}.hasOwnProperty;
 
 /**
- * @param tree mdast tree
- * @param find Value to find and remove. When `string`, escaped and made into a global `RegExp`
- * @param [replace] Value to insert.
- *   * When `string`, turned into a Text node.
- *   * When `Function`, called with the results of calling `RegExp.exec` as
- *     arguments, in which case it can return a single or a list of `Node`,
- *     a `string` (which is wrapped in a `Text` node), or `false` to not replace
- * @param [options] Configuration.
+ * Find patterns in a tree and replace them.
+ *
+ * The algorithm searches the tree in *preorder* for complete values in `Text`
+ * nodes.
+ * Partial matches are not supported.
+ *
+ * @param tree
+ *   Tree to change.
+ * @param find
+ *   Patterns to find.
+ * @param replace
+ *   Things to replace with (when `find` is `Find`) or configuration.
+ * @param options
+ *   Configuration (when `find` is not `Find`).
+ * @returns
+ *   Given, modified, tree.
  */
+// To do: next major: remove `find` & `replace` combo, remove schema.
 var findAndReplace =
 /**
  * @type {(
- *   ((tree: Node, find: Find, replace?: Replace, options?: Options) => Node) &
- *   ((tree: Node, schema: FindAndReplaceSchema|FindAndReplaceList, options?: Options) => Node)
+ *   (<Tree extends Node>(tree: Tree, find: Find, replace?: Replace | null | undefined, options?: Options | null | undefined) => Tree) &
+ *   (<Tree extends Node>(tree: Tree, schema: FindAndReplaceSchema | FindAndReplaceList, options?: Options | null | undefined) => Tree)
  * )}
  **/
 
 /**
- * @param {Node} tree
- * @param {Find|FindAndReplaceSchema|FindAndReplaceList} find
- * @param {Replace|Options} [replace]
- * @param {Options} [options]
+ * @template {Node} Tree
+ * @param {Tree} tree
+ * @param {Find | FindAndReplaceSchema | FindAndReplaceList} find
+ * @param {Replace | Options | null | undefined} [replace]
+ * @param {Options | null | undefined} [options]
+ * @returns {Tree}
  */
 function findAndReplace(tree, find, replace, options) {
-  /** @type {Options|undefined} */
+  /** @type {Options | null | undefined} */
   var settings;
   /** @type {FindAndReplaceSchema|FindAndReplaceList} */
   var schema;
@@ -20282,32 +20249,38 @@ function findAndReplace(tree, find, replace, options) {
   while (++pairIndex < pairs.length) {
     visitParents(tree, 'text', visitor);
   }
+
+  // To do next major: don’t return the given tree.
   return tree;
 
-  /** @type {import('unist-util-visit-parents/complex-types').BuildVisitor<Root, 'text'>} */
+  /** @type {import('unist-util-visit-parents/complex-types.js').BuildVisitor<Root, 'text'>} */
   function visitor(node, parents) {
     var index = -1;
-    /** @type {Parent|undefined} */
+    /** @type {Parent | undefined} */
     var grandparent;
     while (++index < parents.length) {
-      var parent = /** @type {Parent} */parents[index];
+      var parent = parents[index];
       if (ignored(parent,
-      // @ts-expect-error mdast vs. unist parent.
+      // @ts-expect-error: TS doesn’t understand but it’s perfect.
       grandparent ? grandparent.children.indexOf(parent) : undefined, grandparent)) {
         return;
       }
       grandparent = parent;
     }
     if (grandparent) {
-      // @ts-expect-error: stack is fine.
       return handler(node, parents);
     }
   }
 
   /**
+   * Handle a text node which is not in an ignored parent.
+   *
    * @param {Text} node
-   * @param {[Root, ...Array<Parent>]} parents
+   *   Text node.
+   * @param {Array<Parent>} parents
+   *   Parents.
    * @returns {VisitorResult}
+   *   Result.
    */
   function handler(node, parents) {
     var parent = parents[parents.length - 1];
@@ -20319,16 +20292,15 @@ function findAndReplace(tree, find, replace, options) {
     var change = false;
     /** @type {Array<PhrasingContent>} */
     var nodes = [];
-    /** @type {number|undefined} */
-    var position;
     find.lastIndex = 0;
     var match = find.exec(node.value);
     while (match) {
-      position = match.index;
+      var position = match.index;
       /** @type {RegExpMatchObject} */
       var matchObject = {
         index: match.index,
         input: match.input,
+        // @ts-expect-error: stack is fine.
         stack: [].concat(_toConsumableArray(parents), [node])
       };
       var value = replace.apply(void 0, _toConsumableArray(match).concat([matchObject]));
@@ -20338,6 +20310,8 @@ function findAndReplace(tree, find, replace, options) {
           value: value
         } : undefined;
       }
+
+      // It wasn’t a match after all.
       if (value !== false) {
         if (start !== position) {
           nodes.push({
@@ -20376,8 +20350,12 @@ function findAndReplace(tree, find, replace, options) {
 };
 
 /**
- * @param {FindAndReplaceSchema|FindAndReplaceList} schema
+ * Turn a schema into pairs.
+ *
+ * @param {FindAndReplaceSchema | FindAndReplaceList} schema
+ *   Schema.
  * @returns {Pairs}
+ *   Clean pairs.
  */
 function toPairs(schema) {
   /** @type {Pairs} */
@@ -20403,41 +20381,63 @@ function toPairs(schema) {
 }
 
 /**
+ * Turn a find into an expression.
+ *
  * @param {Find} find
+ *   Find.
  * @returns {RegExp}
+ *   Expression.
  */
 function toExpression(find) {
   return typeof find === 'string' ? new RegExp(escapeStringRegexp(find), 'g') : find;
 }
 
 /**
+ * Turn a replace into a function.
+ *
  * @param {Replace} replace
+ *   Replace.
  * @returns {ReplaceFunction}
+ *   Function.
  */
 function toFunction(replace) {
   return typeof replace === 'function' ? replace : function () {
     return replace;
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-autolink-literal/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-autolink-literal/lib/index.js
 /**
  * @typedef {import('mdast').Link} Link
+ * @typedef {import('mdast').PhrasingContent} PhrasingContent
+ *
+ * @typedef {import('mdast-util-from-markdown').CompileContext} CompileContext
  * @typedef {import('mdast-util-from-markdown').Extension} FromMarkdownExtension
- * @typedef {import('mdast-util-from-markdown').Transform} FromMarkdownTransform
  * @typedef {import('mdast-util-from-markdown').Handle} FromMarkdownHandle
- * @typedef {import('mdast-util-to-markdown/lib/types.js').Options} ToMarkdownExtension
+ * @typedef {import('mdast-util-from-markdown').Transform} FromMarkdownTransform
+ *
+ * @typedef {import('mdast-util-to-markdown').ConstructName} ConstructName
+ * @typedef {import('mdast-util-to-markdown').Options} ToMarkdownExtension
+ *
  * @typedef {import('mdast-util-find-and-replace').ReplaceFunction} ReplaceFunction
  * @typedef {import('mdast-util-find-and-replace').RegExpMatchObject} RegExpMatchObject
- * @typedef {import('mdast-util-find-and-replace').PhrasingContent} PhrasingContent
  */
 
 
 
 
+
+/** @type {ConstructName} */
 var inConstruct = 'phrasing';
+/** @type {Array<ConstructName>} */
 var notInConstruct = ['autolink', 'link', 'image', 'label'];
 
-/** @type {FromMarkdownExtension} */
+// To do: next major: expose functions instead of extensions.
+
+/**
+ * Extension for `mdast-util-from-markdown` to enable GFM autolink literals.
+ *
+ * @type {FromMarkdownExtension}
+ */
 var gfmAutolinkLiteralFromMarkdown = {
   transforms: [transformGfmAutolinkLiterals],
   enter: {
@@ -20454,7 +20454,11 @@ var gfmAutolinkLiteralFromMarkdown = {
   }
 };
 
-/** @type {ToMarkdownExtension} */
+/**
+ * Extension for `mdast-util-to-markdown` to enable GFM autolink literals.
+ *
+ * @type {ToMarkdownExtension}
+ */
 var gfmAutolinkLiteralToMarkdown = {
   unsafe: [{
     character: '@',
@@ -20477,7 +20481,10 @@ var gfmAutolinkLiteralToMarkdown = {
   }]
 };
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function enterLiteralAutolink(token) {
   this.enter({
     type: 'link',
@@ -20487,29 +20494,44 @@ function enterLiteralAutolink(token) {
   }, token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function enterLiteralAutolinkValue(token) {
   this.config.enter.autolinkProtocol.call(this, token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitLiteralAutolinkHttp(token) {
   this.config.exit.autolinkProtocol.call(this, token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitLiteralAutolinkWww(token) {
   this.config.exit.data.call(this, token);
   var node = /** @type {Link} */this.stack[this.stack.length - 1];
   node.url = 'http://' + this.sliceSerialize(token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitLiteralAutolinkEmail(token) {
   this.config.exit.autolinkEmail.call(this, token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitLiteralAutolink(token) {
   this.exit(token);
 }
@@ -20528,6 +20550,7 @@ function transformGfmAutolinkLiterals(tree) {
  * @param {string} domain
  * @param {string} path
  * @param {RegExpMatchObject} match
+ * @returns {Link | Array<PhrasingContent> | false}
  */
 // eslint-disable-next-line max-params
 function findUrl(_, protocol, domain, path, match) {
@@ -20550,7 +20573,7 @@ function findUrl(_, protocol, domain, path, match) {
   var parts = splitUrl(domain + path);
   if (!parts[0]) return false;
 
-  /** @type {PhrasingContent} */
+  /** @type {Link} */
   var result = {
     type: 'link',
     title: null,
@@ -20575,13 +20598,14 @@ function findUrl(_, protocol, domain, path, match) {
  * @param {string} atext
  * @param {string} label
  * @param {RegExpMatchObject} match
+ * @returns {Link | false}
  */
 function findEmail(_, atext, label, match) {
   if (
   // Not an expected previous character.
   !previous(match, true) ||
   // Label ends in not allowed character.
-  /[_-\d]$/.test(label)) {
+  /[-\d_]$/.test(label)) {
     return false;
   }
   return {
@@ -20609,37 +20633,30 @@ function isCorrectDomain(domain) {
 
 /**
  * @param {string} url
- * @returns {[string, string|undefined]}
+ * @returns {[string, string | undefined]}
  */
 function splitUrl(url) {
   var trailExec = /[!"&'),.:;<>?\]}]+$/.exec(url);
-  /** @type {number} */
-  var closingParenIndex;
-  /** @type {number} */
-  var openingParens;
-  /** @type {number} */
-  var closingParens;
-  /** @type {string|undefined} */
-  var trail;
-  if (trailExec) {
-    url = url.slice(0, trailExec.index);
-    trail = trailExec[0];
+  if (!trailExec) {
+    return [url, undefined];
+  }
+  url = url.slice(0, trailExec.index);
+  var trail = trailExec[0];
+  var closingParenIndex = trail.indexOf(')');
+  var openingParens = ccount(url, '(');
+  var closingParens = ccount(url, ')');
+  while (closingParenIndex !== -1 && openingParens > closingParens) {
+    url += trail.slice(0, closingParenIndex + 1);
+    trail = trail.slice(closingParenIndex + 1);
     closingParenIndex = trail.indexOf(')');
-    openingParens = ccount(url, '(');
-    closingParens = ccount(url, ')');
-    while (closingParenIndex !== -1 && openingParens > closingParens) {
-      url += trail.slice(0, closingParenIndex + 1);
-      trail = trail.slice(closingParenIndex + 1);
-      closingParenIndex = trail.indexOf(')');
-      closingParens++;
-    }
+    closingParens++;
   }
   return [url, trail];
 }
 
 /**
  * @param {RegExpMatchObject} match
- * @param {boolean} [email=false]
+ * @param {boolean | null | undefined} [email=false]
  * @returns {boolean}
  */
 function previous(match, email) {
@@ -22865,25 +22882,30 @@ function decode($0, $1, $2) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/association.js
 /**
- * @typedef {import('mdast').Association} Association
+ * @typedef {import('../types.js').AssociationId} AssociationId
  */
 
 
 
 /**
+ * Get an identifier from an association to match it to others.
+ *
+ * Associations are nodes that match to something else through an ID:
+ * <https://github.com/syntax-tree/mdast#association>.
+ *
  * The `label` of an association is the string value: character escapes and
  * references work, and casing is intact.
- * The `identifier` is used to match one association to another: controversially,
- * character escapes and references don’t work in this matching: `&copy;` does
- * not match `©`, and `\+` does not match `+`.
+ * The `identifier` is used to match one association to another:
+ * controversially, character escapes and references don’t work in this
+ * matching: `&copy;` does not match `©`, and `\+` does not match `+`.
+ *
  * But casing is ignored (and whitespace) is trimmed and collapsed: ` A\nb`
  * matches `a b`.
  * So, we do prefer the label when figuring out how we’re going to serialize:
- * it has whitespace, casing, and we can ignore most useless character escapes
- * and all character references.
+ * it has whitespace, casing, and we can ignore most useless character
+ * escapes and all character references.
  *
- * @param {Association} node
- * @returns {string}
+ * @type {AssociationId}
  */
 function association(node) {
   if (node.label || !node.identifier) {
@@ -22891,95 +22913,30 @@ function association(node) {
   }
   return decodeString(node.identifier);
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/track.js
-/**
- * @typedef {import('unist').Point} Point
- * @typedef {import('../types.js').TrackFields} TrackFields
- */
-
-/**
- * Functions to track output positions.
- * This info isn’t used yet but suchs functionality allows line wrapping,
- * and theoretically source maps (though, is there practical use in that?).
- *
- * @param {TrackFields} options_
- */
-function track(options_) {
-  // Defaults are used to prevent crashes when older utilities somehow activate
-  // this code.
-  /* c8 ignore next 5 */
-  var options = options_ || {};
-  var now = options.now || {};
-  var lineShift = options.lineShift || 0;
-  var line = now.line || 1;
-  var column = now.column || 1;
-  return {
-    move: move,
-    current: current,
-    shift: shift
-  };
-
-  /**
-   * Get the current tracked info.
-   *
-   * @returns {{now: Point, lineShift: number}}
-   */
-  function current() {
-    return {
-      now: {
-        line: line,
-        column: column
-      },
-      lineShift: lineShift
-    };
-  }
-
-  /**
-   * Define an increased line shift (the typical indent for lines).
-   *
-   * @param {number} value
-   */
-  function shift(value) {
-    lineShift += value;
-  }
-
-  /**
-   * Move past a string.
-   *
-   * @param {string} value
-   * @returns {string}
-   */
-  function move() {
-    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var chunks = value.split(/\r?\n|\r/g);
-    var tail = chunks[chunks.length - 1];
-    line += chunks.length - 1;
-    column = chunks.length === 1 ? column + tail.length : 1 + tail.length + lineShift;
-    return value;
-  }
-}
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/container-flow.js
 
 /**
+ * @typedef {import('../types.js').FlowContent} FlowContent
  * @typedef {import('../types.js').Node} Node
  * @typedef {import('../types.js').Parent} Parent
- * @typedef {import('../types.js').Join} Join
- * @typedef {import('../types.js').Context} Context
+ * @typedef {import('../types.js').State} State
  * @typedef {import('../types.js').TrackFields} TrackFields
  */
 
-
-
 /**
- * @param {Parent} parent
- * @param {Context} context
- * @param {TrackFields} safeOptions
+ * @param {Parent & {children: Array<FlowContent>}} parent
+ *   Parent of flow nodes.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {TrackFields} info
+ *   Info on where we are in the document we are generating.
  * @returns {string}
+ *   Serialized children, joined by (blank) lines.
  */
-function containerFlow(parent, context, safeOptions) {
-  var indexStack = context.indexStack;
+function containerFlow(parent, state, info) {
+  var indexStack = state.indexStack;
   var children = parent.children || [];
-  var tracker = track(safeOptions);
+  var tracker = state.createTracker(info);
   /** @type {Array<string>} */
   var results = [];
   var index = -1;
@@ -22987,64 +22944,60 @@ function containerFlow(parent, context, safeOptions) {
   while (++index < children.length) {
     var child = children[index];
     indexStack[indexStack.length - 1] = index;
-    results.push(tracker.move(context.handle(child, parent, context, _objectSpread2({
+    results.push(tracker.move(state.handle(child, parent, state, _objectSpread2({
       before: '\n',
       after: '\n'
     }, tracker.current()))));
     if (child.type !== 'list') {
-      context.bulletLastUsed = undefined;
+      state.bulletLastUsed = undefined;
     }
     if (index < children.length - 1) {
-      results.push(tracker.move(between(child, children[index + 1])));
+      results.push(tracker.move(between(child, children[index + 1], parent, state)));
     }
   }
   indexStack.pop();
   return results.join('');
+}
 
-  /**
-   * @param {Node} left
-   * @param {Node} right
-   * @returns {string}
-   */
-  function between(left, right) {
-    var index = context.join.length;
-    while (index--) {
-      var result = context.join[index](left, right, parent, context);
-      if (result === true || result === 1) {
-        break;
-      }
-      if (typeof result === 'number') {
-        return '\n'.repeat(1 + result);
-      }
-      if (result === false) {
-        return '\n\n<!---->\n\n';
-      }
+/**
+ * @param {Node} left
+ * @param {Node} right
+ * @param {Parent} parent
+ * @param {State} state
+ * @returns {string}
+ */
+function between(left, right, parent, state) {
+  var index = state.join.length;
+  while (index--) {
+    var result = state.join[index](left, right, parent, state);
+    if (result === true || result === 1) {
+      break;
     }
-    return '\n\n';
+    if (typeof result === 'number') {
+      return '\n'.repeat(1 + result);
+    }
+    if (result === false) {
+      return '\n\n<!---->\n\n';
+    }
   }
+  return '\n\n';
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/indent-lines.js
 /**
- * @callback Map
- * @param {string} value
- * @param {number} line
- * @param {boolean} blank
- * @returns {string}
+ * @typedef {import('../types.js').IndentLines} IndentLines
  */
 
 var eol = /\r?\n|\r/g;
 
 /**
- * @param {string} value
- * @param {Map} map
- * @returns {string}
+ * @type {IndentLines}
  */
 function indentLines(value, map) {
   /** @type {Array<string>} */
   var result = [];
   var start = 0;
   var line = 0;
-  /** @type {RegExpExecArray|null} */
+  /** @type {RegExpExecArray | null} */
   var match;
   while (match = eol.exec(value)) {
     one(value.slice(start, match.index));
@@ -23081,10 +23034,11 @@ function patternCompile(pattern) {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/pattern-in-scope.js
 /**
  * @typedef {import('../types.js').Unsafe} Unsafe
+ * @typedef {import('../types.js').ConstructName} ConstructName
  */
 
 /**
- * @param {Array<string>} stack
+ * @param {Array<ConstructName>} stack
  * @param {Unsafe} pattern
  * @returns {boolean}
  */
@@ -23093,17 +23047,17 @@ function patternInScope(stack, pattern) {
 }
 
 /**
- * @param {Array<string>} stack
+ * @param {Array<ConstructName>} stack
  * @param {Unsafe['inConstruct']} list
  * @param {boolean} none
  * @returns {boolean}
  */
 function listInScope(stack, list, none) {
-  if (!list) {
-    return none;
-  }
   if (typeof list === 'string') {
     list = [list];
+  }
+  if (!list || list.length === 0) {
+    return none;
   }
   var index = -1;
   while (++index < list.length) {
@@ -23115,20 +23069,39 @@ function listInScope(stack, list, none) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/safe.js
 /**
- * @typedef {import('../types.js').Context} Context
- * @typedef {import('../types.js').SafeOptions} SafeOptions
+ * @typedef {import('../types.js').State} State
+ * @typedef {import('../types.js').SafeConfig} SafeConfig
  */
 
 
 
 
 /**
- * @param {Context} context
- * @param {string|null|undefined} input
- * @param {SafeOptions & {encode?: Array<string>}} config
+ * Make a string safe for embedding in markdown constructs.
+ *
+ * In markdown, almost all punctuation characters can, in certain cases,
+ * result in something.
+ * Whether they do is highly subjective to where they happen and in what
+ * they happen.
+ *
+ * To solve this, `mdast-util-to-markdown` tracks:
+ *
+ * * Characters before and after something;
+ * * What “constructs” we are in.
+ *
+ * This information is then used by this function to escape or encode
+ * special characters.
+ *
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {string | null | undefined} input
+ *   Raw value to make safe.
+ * @param {SafeConfig} config
+ *   Configuration.
  * @returns {string}
+ *   Serialized markdown safe for embedding.
  */
-function safe(context, input, config) {
+function safe(state, input, config) {
   var value = (config.before || '') + (input || '') + (config.after || '');
   /** @type {Array<number>} */
   var positions = [];
@@ -23137,13 +23110,13 @@ function safe(context, input, config) {
   /** @type {Record<number, {before: boolean, after: boolean}>} */
   var infos = {};
   var index = -1;
-  while (++index < context.unsafe.length) {
-    var pattern = context.unsafe[index];
-    if (!patternInScope(context.stack, pattern)) {
+  while (++index < state.unsafe.length) {
+    var pattern = state.unsafe[index];
+    if (!patternInScope(state.stack, pattern)) {
       continue;
     }
     var expression = patternCompile(pattern);
-    /** @type {RegExpExecArray|null} */
+    /** @type {RegExpExecArray | null} */
     var match = void 0;
     while (match = expression.exec(value)) {
       var before = 'before' in pattern || Boolean(pattern.atBreak);
@@ -23226,7 +23199,7 @@ function escapeBackslashes(value, after) {
   var whole = value + after;
   var index = -1;
   var start = 0;
-  /** @type {RegExpExecArray|null} */
+  /** @type {RegExpExecArray | null} */
   var match;
   while (match = expression.exec(whole)) {
     positions.push(match.index);
@@ -23241,11 +23214,79 @@ function escapeBackslashes(value, after) {
   results.push(value.slice(start));
   return results.join('');
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-footnote/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/track.js
+/**
+ * @typedef {import('../types.js').CreateTracker} CreateTracker
+ * @typedef {import('../types.js').TrackCurrent} TrackCurrent
+ * @typedef {import('../types.js').TrackMove} TrackMove
+ * @typedef {import('../types.js').TrackShift} TrackShift
+ */
+
+/**
+ * Track positional info in the output.
+ *
+ * @type {CreateTracker}
+ */
+function track(config) {
+  // Defaults are used to prevent crashes when older utilities somehow activate
+  // this code.
+  /* c8 ignore next 5 */
+  var options = config || {};
+  var now = options.now || {};
+  var lineShift = options.lineShift || 0;
+  var line = now.line || 1;
+  var column = now.column || 1;
+  return {
+    move: move,
+    current: current,
+    shift: shift
+  };
+
+  /**
+   * Get the current tracked info.
+   *
+   * @type {TrackCurrent}
+   */
+  function current() {
+    return {
+      now: {
+        line: line,
+        column: column
+      },
+      lineShift: lineShift
+    };
+  }
+
+  /**
+   * Define an increased line shift (the typical indent for lines).
+   *
+   * @type {TrackShift}
+   */
+  function shift(value) {
+    lineShift += value;
+  }
+
+  /**
+   * Move past some generated markdown.
+   *
+   * @type {TrackMove}
+   */
+  function move(input) {
+    // eslint-disable-next-line unicorn/prefer-default-parameters
+    var value = input || '';
+    var chunks = value.split(/\r?\n|\r/g);
+    var tail = chunks[chunks.length - 1];
+    line += chunks.length - 1;
+    column = chunks.length === 1 ? column + tail.length : 1 + tail.length + lineShift;
+    return value;
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-footnote/lib/index.js
 
 /**
  * @typedef {import('mdast').FootnoteReference} FootnoteReference
  * @typedef {import('mdast').FootnoteDefinition} FootnoteDefinition
+ * @typedef {import('mdast-util-from-markdown').CompileContext} CompileContext
  * @typedef {import('mdast-util-from-markdown').Extension} FromMarkdownExtension
  * @typedef {import('mdast-util-from-markdown').Handle} FromMarkdownHandle
  * @typedef {import('mdast-util-to-markdown').Options} ToMarkdownExtension
@@ -23259,9 +23300,17 @@ function escapeBackslashes(value, after) {
 
 
 
+footnoteReference.peek = footnoteReferencePeek;
+
+// To do: next major: rename `context` -> `state`, `safeOptions` to `info`, use
+// utilities on `state`.
 
 /**
+ * Create an extension for `mdast-util-from-markdown` to enable GFM footnotes
+ * in markdown.
+ *
  * @returns {FromMarkdownExtension}
+ *   Extension for `mdast-util-from-markdown`.
  */
 function gfmFootnoteFromMarkdown() {
   return {
@@ -23278,70 +23327,16 @@ function gfmFootnoteFromMarkdown() {
       gfmFootnoteCallString: exitFootnoteCallString
     }
   };
-
-  /** @type {FromMarkdownHandle} */
-  function enterFootnoteDefinition(token) {
-    this.enter({
-      type: 'footnoteDefinition',
-      identifier: '',
-      label: '',
-      children: []
-    }, token);
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function enterFootnoteDefinitionLabelString() {
-    this.buffer();
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function exitFootnoteDefinitionLabelString(token) {
-    var label = this.resume();
-    var node = /** @type {FootnoteDefinition} */
-    this.stack[this.stack.length - 1];
-    node.label = label;
-    node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function exitFootnoteDefinition(token) {
-    this.exit(token);
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function enterFootnoteCall(token) {
-    this.enter({
-      type: 'footnoteReference',
-      identifier: '',
-      label: ''
-    }, token);
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function enterFootnoteCallString() {
-    this.buffer();
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function exitFootnoteCallString(token) {
-    var label = this.resume();
-    var node = /** @type {FootnoteDefinition} */
-    this.stack[this.stack.length - 1];
-    node.label = label;
-    node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
-  }
-
-  /** @type {FromMarkdownHandle} */
-  function exitFootnoteCall(token) {
-    this.exit(token);
-  }
 }
 
 /**
+ * Create an extension for `mdast-util-to-markdown` to enable GFM footnotes
+ * in markdown.
+ *
  * @returns {ToMarkdownExtension}
+ *   Extension for `mdast-util-to-markdown`.
  */
 function gfmFootnoteToMarkdown() {
-  footnoteReference.peek = footnoteReferencePeek;
   return {
     // This is on by default already.
     unsafe: [{
@@ -23353,86 +23348,174 @@ function gfmFootnoteToMarkdown() {
       footnoteReference: footnoteReference
     }
   };
+}
 
-  /**
-   * @type {ToMarkdownHandle}
-   * @param {FootnoteReference} node
-   */
-  function footnoteReference(node, _, context, safeOptions) {
-    var tracker = track(safeOptions);
-    var value = tracker.move('[^');
-    var exit = context.enter('footnoteReference');
-    var subexit = context.enter('reference');
-    value += tracker.move(safe(context, association(node), _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
-      before: value,
-      after: ']'
-    })));
-    subexit();
-    exit();
-    value += tracker.move(']');
-    return value;
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function enterFootnoteDefinition(token) {
+  this.enter({
+    type: 'footnoteDefinition',
+    identifier: '',
+    label: '',
+    children: []
+  }, token);
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function enterFootnoteDefinitionLabelString() {
+  this.buffer();
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function exitFootnoteDefinitionLabelString(token) {
+  var label = this.resume();
+  var node = /** @type {FootnoteDefinition} */
+  this.stack[this.stack.length - 1];
+  node.label = label;
+  node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function exitFootnoteDefinition(token) {
+  this.exit(token);
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function enterFootnoteCall(token) {
+  this.enter({
+    type: 'footnoteReference',
+    identifier: '',
+    label: ''
+  }, token);
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function enterFootnoteCallString() {
+  this.buffer();
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function exitFootnoteCallString(token) {
+  var label = this.resume();
+  var node = /** @type {FootnoteDefinition} */
+  this.stack[this.stack.length - 1];
+  node.label = label;
+  node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
+}
+
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
+function exitFootnoteCall(token) {
+  this.exit(token);
+}
+
+/**
+ * @type {ToMarkdownHandle}
+ * @param {FootnoteReference} node
+ */
+function footnoteReference(node, _, context, safeOptions) {
+  var tracker = track(safeOptions);
+  var value = tracker.move('[^');
+  var exit = context.enter('footnoteReference');
+  var subexit = context.enter('reference');
+  value += tracker.move(safe(context, association(node), _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
+    before: value,
+    after: ']'
+  })));
+  subexit();
+  exit();
+  value += tracker.move(']');
+  return value;
+}
+
+/** @type {ToMarkdownHandle} */
+function footnoteReferencePeek() {
+  return '[';
+}
+
+/**
+ * @type {ToMarkdownHandle}
+ * @param {FootnoteDefinition} node
+ */
+function footnoteDefinition(node, _, context, safeOptions) {
+  var tracker = track(safeOptions);
+  var value = tracker.move('[^');
+  var exit = context.enter('footnoteDefinition');
+  var subexit = context.enter('label');
+  value += tracker.move(safe(context, association(node), _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
+    before: value,
+    after: ']'
+  })));
+  subexit();
+  value += tracker.move(']:' + (node.children && node.children.length > 0 ? ' ' : ''));
+  tracker.shift(4);
+  value += tracker.move(indentLines(containerFlow(node, context, tracker.current()), map));
+  exit();
+  return value;
+}
+
+/** @type {Map} */
+function map(line, index, blank) {
+  if (index === 0) {
+    return line;
   }
-
-  /** @type {ToMarkdownHandle} */
-  function footnoteReferencePeek() {
-    return '[';
-  }
-
-  /**
-   * @type {ToMarkdownHandle}
-   * @param {FootnoteDefinition} node
-   */
-  function footnoteDefinition(node, _, context, safeOptions) {
-    var tracker = track(safeOptions);
-    var value = tracker.move('[^');
-    var exit = context.enter('footnoteDefinition');
-    var subexit = context.enter('label');
-    value += tracker.move(safe(context, association(node), _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
-      before: value,
-      after: ']'
-    })));
-    subexit();
-    value += tracker.move(']:' + (node.children && node.children.length > 0 ? ' ' : ''));
-    tracker.shift(4);
-    value += tracker.move(indentLines(containerFlow(node, context, tracker.current()), map));
-    exit();
-    return value;
-
-    /** @type {Map} */
-    function map(line, index, blank) {
-      if (index) {
-        return (blank ? '' : '    ') + line;
-      }
-      return line;
-    }
-  }
+  return (blank ? '' : '    ') + line;
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/container-phrasing.js
 
 /**
- * @typedef {import('../types.js').Parent} Parent
- * @typedef {import('../types.js').SafeOptions} SafeOptions
  * @typedef {import('../types.js').Handle} Handle
- * @typedef {import('../types.js').Context} Context
+ * @typedef {import('../types.js').Info} Info
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').PhrasingContent} PhrasingContent
+ * @typedef {import('../types.js').State} State
  */
-
-
 
 /**
- * @param {Parent} parent
- * @param {Context} context
- * @param {SafeOptions} safeOptions
+ * Serialize the children of a parent that contains phrasing children.
+ *
+ * These children will be joined flush together.
+ *
+ * @param {Parent & {children: Array<PhrasingContent>}} parent
+ *   Parent of flow nodes.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {Info} info
+ *   Info on where we are in the document we are generating.
  * @returns {string}
+ *   Serialized children, joined together.
  */
-function containerPhrasing(parent, context, safeOptions) {
-  var indexStack = context.indexStack;
+function containerPhrasing(parent, state, info) {
+  var indexStack = state.indexStack;
   var children = parent.children || [];
   /** @type {Array<string>} */
   var results = [];
   var index = -1;
-  var before = safeOptions.before;
+  var before = info.before;
   indexStack.push(-1);
-  var tracker = track(safeOptions);
+  var tracker = state.createTracker(info);
   while (++index < children.length) {
     var child = children[index];
     /** @type {string} */
@@ -23441,16 +23524,16 @@ function containerPhrasing(parent, context, safeOptions) {
     if (index + 1 < children.length) {
       /** @type {Handle} */
       // @ts-expect-error: hush, it’s actually a `zwitch`.
-      var handle = context.handle.handlers[children[index + 1].type];
+      var handle = state.handle.handlers[children[index + 1].type];
       /** @type {Handle} */
       // @ts-expect-error: hush, it’s actually a `zwitch`.
       if (handle && handle.peek) handle = handle.peek;
-      after = handle ? handle(children[index + 1], parent, context, _objectSpread2({
+      after = handle ? handle(children[index + 1], parent, state, _objectSpread2({
         before: '',
         after: ''
       }, tracker.current())).charAt(0) : '';
     } else {
-      after = safeOptions.after;
+      after = info.after;
     }
 
     // In some cases, html (text) can be found in phrasing right after an eol.
@@ -23464,10 +23547,10 @@ function containerPhrasing(parent, context, safeOptions) {
       before = ' ';
 
       // To do: does this work to reset tracker?
-      tracker = track(safeOptions);
+      tracker = state.createTracker(info);
       tracker.move(results.join(''));
     }
-    results.push(tracker.move(context.handle(child, parent, context, _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
+    results.push(tracker.move(state.handle(child, parent, state, _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
       before: before,
       after: after
     }))));
@@ -23476,12 +23559,16 @@ function containerPhrasing(parent, context, safeOptions) {
   indexStack.pop();
   return results.join('');
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-strikethrough/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-strikethrough/lib/index.js
 
 /**
  * @typedef {import('mdast').Delete} Delete
+ *
+ * @typedef {import('mdast-util-from-markdown').CompileContext} CompileContext
  * @typedef {import('mdast-util-from-markdown').Extension} FromMarkdownExtension
  * @typedef {import('mdast-util-from-markdown').Handle} FromMarkdownHandle
+ *
+ * @typedef {import('mdast-util-to-markdown').ConstructName} ConstructName
  * @typedef {import('mdast-util-to-markdown').Options} ToMarkdownExtension
  * @typedef {import('mdast-util-to-markdown').Handle} ToMarkdownHandle
  */
@@ -23489,7 +23576,27 @@ function containerPhrasing(parent, context, safeOptions) {
 
 
 
-/** @type {FromMarkdownExtension} */
+// To do: next major: expose functions.
+// To do: next major: use `state`, state utilities.
+
+/**
+ * List of constructs that occur in phrasing (paragraphs, headings), but cannot
+ * contain strikethrough.
+ * So they sort of cancel each other out.
+ * Note: could use a better name.
+ *
+ * Note: keep in sync with: <https://github.com/syntax-tree/mdast-util-to-markdown/blob/8ce8dbf/lib/unsafe.js#L14>
+ *
+ * @type {Array<ConstructName>}
+ */
+var constructsWithoutStrikethrough = ['autolink', 'destinationLiteral', 'destinationRaw', 'reference', 'titleQuote', 'titleApostrophe'];
+handleDelete.peek = peekDelete;
+
+/**
+ * Extension for `mdast-util-from-markdown` to enable GFM strikethrough.
+ *
+ * @type {FromMarkdownExtension}
+ */
 var gfmStrikethroughFromMarkdown = {
   canContainEols: ['delete'],
   enter: {
@@ -23501,14 +23608,10 @@ var gfmStrikethroughFromMarkdown = {
 };
 
 /**
- * List of constructs that occur in phrasing (paragraphs, headings), but cannot
- * contain strikethroughs. So they sort of cancel each other out.
+ * Extension for `mdast-util-to-markdown` to enable GFM strikethrough.
  *
- * Note: keep in sync with: <https://github.com/syntax-tree/mdast-util-to-markdown/blob/c47743b/lib/unsafe.js#L11>
+ * @type {ToMarkdownExtension}
  */
-var constructsWithoutStrikethrough = ['autolink', 'destinationLiteral', 'destinationRaw', 'reference', 'titleQuote', 'titleApostrophe'];
-
-/** @type {ToMarkdownExtension} */
 var gfmStrikethroughToMarkdown = {
   unsafe: [{
     character: '~',
@@ -23519,9 +23622,11 @@ var gfmStrikethroughToMarkdown = {
     "delete": handleDelete
   }
 };
-handleDelete.peek = peekDelete;
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function enterStrikethrough(token) {
   this.enter({
     type: 'delete',
@@ -23529,7 +23634,10 @@ function enterStrikethrough(token) {
   }, token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitStrikethrough(token) {
   this.exit(token);
 }
@@ -23540,7 +23648,7 @@ function exitStrikethrough(token) {
  */
 function handleDelete(node, _, context, safeOptions) {
   var tracker = track(safeOptions);
-  var exit = context.enter('emphasis');
+  var exit = context.enter('strikethrough');
   var value = tracker.move('~~');
   value += containerPhrasing(node, context, _objectSpread2(_objectSpread2({}, tracker.current()), {}, {
     before: value,
@@ -23558,11 +23666,8 @@ function peekDelete() {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/handle/inline-code.js
 /**
  * @typedef {import('mdast').InlineCode} InlineCode
- * @typedef {import('mdast').Root} Root
- * @typedef {import('mdast').Content} Content
- * @typedef {Root|Content} Node
- * @typedef {Extract<Node, import('mdast').Parent>} Parent
- * @typedef {import('../types.js').Context} Context
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').State} State
  */
 
 
@@ -23570,11 +23675,11 @@ inlineCode.peek = inlineCodePeek;
 
 /**
  * @param {InlineCode} node
- * @param {Parent|undefined} _
- * @param {Context} context
+ * @param {Parent | undefined} _
+ * @param {State} state
  * @returns {string}
  */
-function inlineCode(node, _, context) {
+function inlineCode(node, _, state) {
   var value = node.value || '';
   var sequence = '`';
   var index = -1;
@@ -23599,10 +23704,10 @@ function inlineCode(node, _, context) {
   // We can’t escape characters in `inlineCode`, but because eols are
   // transformed to spaces when going from markdown to HTML anyway, we can swap
   // them out.
-  while (++index < context.unsafe.length) {
-    var pattern = context.unsafe[index];
+  while (++index < state.unsafe.length) {
+    var pattern = state.unsafe[index];
     var expression = patternCompile(pattern);
-    /** @type {RegExpExecArray|null} */
+    /** @type {RegExpExecArray | null} */
     var match = void 0;
 
     // Only look for `atBreak`s.
@@ -23957,30 +24062,48 @@ function toAlignment(value) {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-table/lib/index.js
 
 /**
- * @typedef {import('mdast').AlignType} AlignType
  * @typedef {import('mdast').Table} Table
  * @typedef {import('mdast').TableRow} TableRow
  * @typedef {import('mdast').TableCell} TableCell
  * @typedef {import('mdast').InlineCode} InlineCode
+ *
  * @typedef {import('markdown-table').MarkdownTableOptions} MarkdownTableOptions
+ *
+ * @typedef {import('mdast-util-from-markdown').CompileContext} CompileContext
  * @typedef {import('mdast-util-from-markdown').Extension} FromMarkdownExtension
  * @typedef {import('mdast-util-from-markdown').Handle} FromMarkdownHandle
+ *
  * @typedef {import('mdast-util-to-markdown').Options} ToMarkdownExtension
  * @typedef {import('mdast-util-to-markdown').Handle} ToMarkdownHandle
  * @typedef {import('mdast-util-to-markdown').Context} ToMarkdownContext
  * @typedef {import('mdast-util-to-markdown').SafeOptions} SafeOptions
- *
+ */
+
+/**
  * @typedef Options
- * @property {boolean} [tableCellPadding=true]
- * @property {boolean} [tablePipeAlign=true]
- * @property {MarkdownTableOptions['stringLength']} [stringLength]
+ *   Configuration.
+ * @property {boolean | null | undefined} [tableCellPadding=true]
+ *   Whether to add a space of padding between delimiters and cells.
+ * @property {boolean | null | undefined} [tablePipeAlign=true]
+ *   Whether to align the delimiters.
+ * @property {MarkdownTableOptions['stringLength'] | null | undefined} [stringLength]
+ *   Function to detect the length of table cell content, used when aligning
+ *   the delimiters between cells
  */
 
 
 
 
 
-/** @type {FromMarkdownExtension} */
+// To do: next major: use `state` and `state` utilities from `mdast-util-to-markdown`.
+// To do: next major: use `defaultHandlers.inlineCode`.
+// To do: next major: expose functions.
+
+/**
+ * Extension for `mdast-util-from-markdown` to enable GFM tables.
+ *
+ * @type {FromMarkdownExtension}
+ */
 var gfmTableFromMarkdown = {
   enter: {
     table: enterTable,
@@ -23997,9 +24120,12 @@ var gfmTableFromMarkdown = {
   }
 };
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function enterTable(token) {
-  /** @type {Array<'left'|'right'|'center'|'none'>} */
+  /** @type {Array<'left' | 'right' | 'center' | 'none'>} */
   // @ts-expect-error: `align` is custom.
   var align = token._align;
   this.enter({
@@ -24012,13 +24138,19 @@ function enterTable(token) {
   this.setData('inTable', true);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitTable(token) {
   this.exit(token);
   this.setData('inTable');
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function enterRow(token) {
   this.enter({
     type: 'tableRow',
@@ -24026,12 +24158,18 @@ function enterRow(token) {
   }, token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exit(token) {
   this.exit(token);
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function enterCell(token) {
   this.enter({
     type: 'tableCell',
@@ -24041,7 +24179,10 @@ function enterCell(token) {
 
 // Overwrite the default code text data handler to unescape escaped pipes when
 // they are in tables.
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitCodeText(token) {
   var value = this.resume();
   if (this.getData('inTable')) {
@@ -24063,8 +24204,13 @@ function replace($0, $1) {
 }
 
 /**
- * @param {Options} [options]
+ * Create an extension for `mdast-util-to-markdown` to enable GFM tables in
+ * markdown.
+ *
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
  * @returns {ToMarkdownExtension}
+ *   Extension for `mdast-util-to-markdown` to enable GFM tables.
  */
 function gfmTableToMarkdown(options) {
   var settings = options || {};
@@ -24122,9 +24268,7 @@ function gfmTableToMarkdown(options) {
    * @param {Table} node
    */
   function handleTable(node, _, context, safeOptions) {
-    return serializeData(handleTableAsData(node, context, safeOptions),
-    // @ts-expect-error: fixed in `markdown-table@3.0.1`.
-    node.align);
+    return serializeData(handleTableAsData(node, context, safeOptions), node.align);
   }
 
   /**
@@ -24137,8 +24281,8 @@ function gfmTableToMarkdown(options) {
    */
   function handleTableRow(node, _, context, safeOptions) {
     var row = handleTableRowAsData(node, context, safeOptions);
-    // `markdown-table` will always add an align row
     var value = serializeData([row]);
+    // `markdown-table` will always add an align row
     return value.slice(0, value.indexOf('\n'));
   }
 
@@ -24160,13 +24304,16 @@ function gfmTableToMarkdown(options) {
 
   /**
    * @param {Array<Array<string>>} matrix
-   * @param {Array<string>} [align]
+   * @param {Array<string | null | undefined> | null | undefined} [align]
    */
   function serializeData(matrix, align) {
     return markdownTable(matrix, {
       align: align,
+      // @ts-expect-error: `markdown-table` types should support `null`.
       alignDelimiters: alignDelimiters,
+      // @ts-expect-error: `markdown-table` types should support `null`.
       padding: padding,
+      // @ts-expect-error: `markdown-table` types should support `null`.
       stringLength: stringLength
     });
   }
@@ -24224,16 +24371,16 @@ function gfmTableToMarkdown(options) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/check-bullet.js
 /**
- * @typedef {import('../types.js').Context} Context
+ * @typedef {import('../types.js').State} State
  * @typedef {import('../types.js').Options} Options
  */
 
 /**
- * @param {Context} context
- * @returns {Exclude<Options['bullet'], undefined>}
+ * @param {State} state
+ * @returns {Exclude<Options['bullet'], null | undefined>}
  */
-function checkBullet(context) {
-  var marker = context.options.bullet || '*';
+function checkBullet(state) {
+  var marker = state.options.bullet || '*';
   if (marker !== '*' && marker !== '+' && marker !== '-') {
     throw new Error('Cannot serialize items with `' + marker + '` for `options.bullet`, expected `*`, `+`, or `-`');
   }
@@ -24241,16 +24388,16 @@ function checkBullet(context) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/util/check-list-item-indent.js
 /**
- * @typedef {import('../types.js').Context} Context
+ * @typedef {import('../types.js').State} State
  * @typedef {import('../types.js').Options} Options
  */
 
 /**
- * @param {Context} context
- * @returns {Exclude<Options['listItemIndent'], undefined>}
+ * @param {State} state
+ * @returns {Exclude<Options['listItemIndent'], null | undefined>}
  */
-function checkListItemIndent(context) {
-  var style = context.options.listItemIndent || 'tab';
+function checkListItemIndent(state) {
+  var style = state.options.listItemIndent || 'tab';
 
   // To do: remove in a major.
   // @ts-expect-error: deprecated.
@@ -24265,45 +24412,39 @@ function checkListItemIndent(context) {
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-markdown/lib/handle/list-item.js
 /**
  * @typedef {import('mdast').ListItem} ListItem
- * @typedef {import('../util/indent-lines.js').Map} Map
- * @typedef {import('mdast').Root} Root
- * @typedef {import('mdast').Content} Content
- * @typedef {Root|Content} Node
- * @typedef {Extract<Node, import('mdast').Parent>} Parent
- * @typedef {import('../types.js').Context} Context
- * @typedef {import('../types.js').SafeOptions} SafeOptions
+ * @typedef {import('../types.js').Map} Map
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').State} State
+ * @typedef {import('../types.js').Info} Info
  */
-
-
-
 
 
 
 
 /**
  * @param {ListItem} node
- * @param {Parent|undefined} parent
- * @param {Context} context
- * @param {SafeOptions} safeOptions
+ * @param {Parent | undefined} parent
+ * @param {State} state
+ * @param {Info} info
  * @returns {string}
  */
-function listItem(node, parent, context, safeOptions) {
-  var listItemIndent = checkListItemIndent(context);
-  var bullet = context.bulletCurrent || checkBullet(context);
+function listItem(node, parent, state, info) {
+  var listItemIndent = checkListItemIndent(state);
+  var bullet = state.bulletCurrent || checkBullet(state);
 
   // Add the marker value for ordered lists.
   if (parent && parent.type === 'list' && parent.ordered) {
-    bullet = (typeof parent.start === 'number' && parent.start > -1 ? parent.start : 1) + (context.options.incrementListMarker === false ? 0 : parent.children.indexOf(node)) + bullet;
+    bullet = (typeof parent.start === 'number' && parent.start > -1 ? parent.start : 1) + (state.options.incrementListMarker === false ? 0 : parent.children.indexOf(node)) + bullet;
   }
   var size = bullet.length + 1;
   if (listItemIndent === 'tab' || listItemIndent === 'mixed' && (parent && parent.type === 'list' && parent.spread || node.spread)) {
     size = Math.ceil(size / 4) * 4;
   }
-  var tracker = track(safeOptions);
+  var tracker = state.createTracker(info);
   tracker.move(bullet + ' '.repeat(size - bullet.length));
   tracker.shift(size);
-  var exit = context.enter('listItem');
-  var value = indentLines(containerFlow(node, context, tracker.current()), map);
+  var exit = state.enter('listItem');
+  var value = state.indentLines(state.containerFlow(node, tracker.current()), map);
   exit();
   return value;
 
@@ -24315,23 +24456,38 @@ function listItem(node, parent, context, safeOptions) {
     return (blank ? bullet : bullet + ' '.repeat(size - bullet.length)) + line;
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-task-list-item/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-gfm-task-list-item/lib/index.js
 
 /**
- * @typedef {Extract<import('mdast').Root|import('mdast').Content, import('unist').Parent>} Parent
+ * @typedef {import('mdast').Content} Content
  * @typedef {import('mdast').ListItem} ListItem
  * @typedef {import('mdast').Paragraph} Paragraph
- * @typedef {import('mdast').BlockContent} BlockContent
+ * @typedef {import('mdast').Parent} Parent
+ * @typedef {import('mdast').Root} Root
+ * @typedef {import('mdast-util-from-markdown').CompileContext} CompileContext
  * @typedef {import('mdast-util-from-markdown').Extension} FromMarkdownExtension
  * @typedef {import('mdast-util-from-markdown').Handle} FromMarkdownHandle
  * @typedef {import('mdast-util-to-markdown').Options} ToMarkdownExtension
  * @typedef {import('mdast-util-to-markdown').Handle} ToMarkdownHandle
  */
 
+/**
+ * @typedef {Extract<Root | Content, Parent>} Parents
+ */
 
 
 
-/** @type {FromMarkdownExtension} */
+
+// To do: next major: rename `context` -> `state`, `safeOptions` -> `info`, use
+// `track` from `state`.
+// To do: next major: replace exports with functions.
+// To do: next major: use `defaulthandlers.listItem`.
+
+/**
+ * Extension for `mdast-util-from-markdown` to enable GFM task list items.
+ *
+ * @type {FromMarkdownExtension}
+ */
 var gfmTaskListItemFromMarkdown = {
   exit: {
     taskListCheckValueChecked: exitCheck,
@@ -24340,7 +24496,11 @@ var gfmTaskListItemFromMarkdown = {
   }
 };
 
-/** @type {ToMarkdownExtension} */
+/**
+ * Extension for `mdast-util-to-markdown` to enable GFM task list items.
+ *
+ * @type {ToMarkdownExtension}
+ */
 var gfmTaskListItemToMarkdown = {
   unsafe: [{
     atBreak: true,
@@ -24352,39 +24512,47 @@ var gfmTaskListItemToMarkdown = {
   }
 };
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitCheck(token) {
   var node = /** @type {ListItem} */this.stack[this.stack.length - 2];
   // We’re always in a paragraph, in a list item.
   node.checked = token.type === 'taskListCheckValueChecked';
 }
 
-/** @type {FromMarkdownHandle} */
+/**
+ * @this {CompileContext}
+ * @type {FromMarkdownHandle}
+ */
 function exitParagraphWithTaskListItem(token) {
-  var parent = /** @type {Parent} */this.stack[this.stack.length - 2];
-  var node = /** @type {Paragraph} */this.stack[this.stack.length - 1];
-  var siblings = parent.children;
-  var head = node.children[0];
-  var index = -1;
-  /** @type {Paragraph|undefined} */
-  var firstParaghraph;
-  if (parent && parent.type === 'listItem' && typeof parent.checked === 'boolean' && head && head.type === 'text') {
-    while (++index < siblings.length) {
-      var sibling = siblings[index];
-      if (sibling.type === 'paragraph') {
-        firstParaghraph = sibling;
-        break;
+  var parent = /** @type {Parents} */this.stack[this.stack.length - 2];
+  if (parent && parent.type === 'listItem' && typeof parent.checked === 'boolean') {
+    var node = /** @type {Paragraph} */this.stack[this.stack.length - 1];
+    var head = node.children[0];
+    if (head && head.type === 'text') {
+      var siblings = parent.children;
+      var index = -1;
+      /** @type {Paragraph | undefined} */
+      var firstParaghraph;
+      while (++index < siblings.length) {
+        var sibling = siblings[index];
+        if (sibling.type === 'paragraph') {
+          firstParaghraph = sibling;
+          break;
+        }
       }
-    }
-    if (firstParaghraph === node) {
-      // Must start with a space or a tab.
-      head.value = head.value.slice(1);
-      if (head.value.length === 0) {
-        node.children.shift();
-      } else if (node.position && head.position && typeof head.position.start.offset === 'number') {
-        head.position.start.column++;
-        head.position.start.offset++;
-        node.position.start = Object.assign({}, head.position.start);
+      if (firstParaghraph === node) {
+        // Must start with a space or a tab.
+        head.value = head.value.slice(1);
+        if (head.value.length === 0) {
+          node.children.shift();
+        } else if (node.position && head.position && typeof head.position.start.offset === 'number') {
+          head.position.start.column++;
+          head.position.start.offset++;
+          node.position.start = Object.assign({}, head.position.start);
+        }
       }
     }
   }
@@ -24421,8 +24589,11 @@ function listItemWithTaskListItem(node, parent, context, safeOptions) {
 /**
  * @typedef {import('mdast-util-from-markdown').Extension} FromMarkdownExtension
  * @typedef {import('mdast-util-to-markdown').Options} ToMarkdownExtension
- *
+ */
+
+/**
  * @typedef {import('mdast-util-gfm-table').Options} Options
+ *   Configuration.
  */
 
 
@@ -24432,15 +24603,26 @@ function listItemWithTaskListItem(node, parent, context, safeOptions) {
 
 
 /**
+ * Create an extension for `mdast-util-from-markdown` to enable GFM (autolink
+ * literals, footnotes, strikethrough, tables, tasklists).
+ *
  * @returns {Array<FromMarkdownExtension>}
+ *   Extension for `mdast-util-from-markdown` to enable GFM (autolink literals,
+ *   footnotes, strikethrough, tables, tasklists).
  */
 function gfmFromMarkdown() {
   return [gfmAutolinkLiteralFromMarkdown, gfmFootnoteFromMarkdown(), gfmStrikethroughFromMarkdown, gfmTableFromMarkdown, gfmTaskListItemFromMarkdown];
 }
 
 /**
- * @param {Options} [options]
+ * Create an extension for `mdast-util-to-markdown` to enable GFM (autolink
+ * literals, footnotes, strikethrough, tables, tasklists).
+ *
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
  * @returns {ToMarkdownExtension}
+ *   Extension for `mdast-util-to-markdown` to enable GFM (autolink literals,
+ *   footnotes, strikethrough, tables, tasklists).
  */
 function gfmToMarkdown(options) {
   return {
@@ -24480,42 +24662,163 @@ function remarkGfm() {
     list.push(value);
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-visit/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-visit/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
  * @typedef {import('unist-util-visit-parents').VisitorResult} VisitorResult
- * @typedef {import('./complex-types.js').Visitor} Visitor
+ */
+
+/**
+ * Check if `Child` can be a child of `Ancestor`.
+ *
+ * Returns the ancestor when `Child` can be a child of `Ancestor`, or returns
+ * `never`.
+ *
+ * @template {Node} Ancestor
+ *   Node type.
+ * @template {Node} Child
+ *   Node type.
+ * @typedef {(
+ *   Ancestor extends Parent
+ *     ? Child extends Ancestor['children'][number]
+ *       ? Ancestor
+ *       : never
+ *     : never
+ * )} ParentsOf
+ */
+
+/**
+ * @template {Node} [Visited=Node]
+ *   Visited node type.
+ * @template {Parent} [Ancestor=Parent]
+ *   Ancestor type.
+ * @callback Visitor
+ *   Handle a node (matching `test`, if given).
+ *
+ *   Visitors are free to transform `node`.
+ *   They can also transform `parent`.
+ *
+ *   Replacing `node` itself, if `SKIP` is not returned, still causes its
+ *   descendants to be walked (which is a bug).
+ *
+ *   When adding or removing previous siblings of `node` (or next siblings, in
+ *   case of reverse), the `Visitor` should return a new `Index` to specify the
+ *   sibling to traverse after `node` is traversed.
+ *   Adding or removing next siblings of `node` (or previous siblings, in case
+ *   of reverse) is handled as expected without needing to return a new `Index`.
+ *
+ *   Removing the children property of `parent` still results in them being
+ *   traversed.
+ * @param {Visited} node
+ *   Found node.
+ * @param {Visited extends Node ? number | null : never} index
+ *   Index of `node` in `parent`.
+ * @param {Ancestor extends Node ? Ancestor | null : never} parent
+ *   Parent of `node`.
+ * @returns {VisitorResult}
+ *   What to do next.
+ *
+ *   An `Index` is treated as a tuple of `[CONTINUE, Index]`.
+ *   An `Action` is treated as a tuple of `[Action]`.
+ *
+ *   Passing a tuple back only makes sense if the `Action` is `SKIP`.
+ *   When the `Action` is `EXIT`, that action can be returned.
+ *   When the `Action` is `CONTINUE`, `Index` can be returned.
+ */
+
+/**
+ * Build a typed `Visitor` function from a node and all possible parents.
+ *
+ * It will infer which values are passed as `node` and which as `parent`.
+ *
+ * @template {Node} Visited
+ *   Node type.
+ * @template {Parent} Ancestor
+ *   Parent type.
+ * @typedef {Visitor<Visited, ParentsOf<Ancestor, Visited>>} BuildVisitorFromMatch
+ */
+
+/**
+ * Build a typed `Visitor` function from a list of descendants and a test.
+ *
+ * It will infer which values are passed as `node` and which as `parent`.
+ *
+ * @template {Node} Descendant
+ *   Node type.
+ * @template {Test} Check
+ *   Test type.
+ * @typedef {(
+ *   BuildVisitorFromMatch<
+ *     import('unist-util-visit-parents/complex-types.js').Matches<Descendant, Check>,
+ *     Extract<Descendant, Parent>
+ *   >
+ * )} BuildVisitorFromDescendants
+ */
+
+/**
+ * Build a typed `Visitor` function from a tree and a test.
+ *
+ * It will infer which values are passed as `node` and which as `parent`.
+ *
+ * @template {Node} [Tree=Node]
+ *   Node type.
+ * @template {Test} [Check=string]
+ *   Test type.
+ * @typedef {(
+ *   BuildVisitorFromDescendants<
+ *     import('unist-util-visit-parents/complex-types.js').InclusiveDescendant<Tree>,
+ *     Check
+ *   >
+ * )} BuildVisitor
  */
 
 
 
 /**
- * Visit children of tree which pass test.
+ * Visit nodes.
+ *
+ * This algorithm performs *depth-first* *tree traversal* in *preorder*
+ * (**NLR**) or if `reverse` is given, in *reverse preorder* (**NRL**).
+ *
+ * You can choose for which nodes `visitor` is called by passing a `test`.
+ * For complex tests, you should test yourself in `visitor`, as it will be
+ * faster and will have improved type information.
+ *
+ * Walking the tree is an intensive task.
+ * Make use of the return values of the visitor when possible.
+ * Instead of walking a tree multiple times, walk it once, use `unist-util-is`
+ * to check if a node matches, and then perform different operations.
+ *
+ * You can change the tree.
+ * See `Visitor` for more info.
  *
  * @param tree
- *   Tree to walk
- * @param [test]
+ *   Tree to traverse.
+ * @param test
  *   `unist-util-is`-compatible test
  * @param visitor
- *   Function called for nodes that pass `test`.
+ *   Handle each node.
  * @param reverse
- *   Traverse in reverse preorder (NRL) instead of preorder (NLR) (default).
+ *   Traverse in reverse preorder (NRL) instead of the default preorder (NLR).
+ * @returns
+ *   Nothing.
  */
 var visit =
 /**
  * @type {(
- *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: import('./complex-types.js').BuildVisitor<Tree, Check>, reverse?: boolean) => void) &
- *   (<Tree extends Node>(tree: Tree, visitor: import('./complex-types.js').BuildVisitor<Tree>, reverse?: boolean) => void)
+ *   (<Tree extends Node, Check extends Test>(tree: Tree, test: Check, visitor: BuildVisitor<Tree, Check>, reverse?: boolean | null | undefined) => void) &
+ *   (<Tree extends Node>(tree: Tree, visitor: BuildVisitor<Tree>, reverse?: boolean | null | undefined) => void)
  * )}
  */
 
 /**
  * @param {Node} tree
  * @param {Test} test
- * @param {import('./complex-types.js').Visitor} visitor
- * @param {boolean} [reverse]
+ * @param {Visitor} visitor
+ * @param {boolean | null | undefined} [reverse]
+ * @returns {void}
  */
 function visit(tree, test, visitor, reverse) {
   if (typeof test === 'function' && typeof visitor !== 'function') {
@@ -24537,7 +24840,8 @@ function visit(tree, test, visitor, reverse) {
 
 ;// CONCATENATED MODULE: ../../node_modules/rehype-attr/lib/utils.js
 
-var getURLParameters = function getURLParameters(url) {
+var getURLParameters = function getURLParameters() {
+  var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   return (url.match(/([^?=&]+)(=([^&]*))/g) || []).reduce(function (a, v) {
     return a[v.slice(0, v.indexOf('='))] = v.slice(v.indexOf('=') + 1), a;
   }, {});
@@ -24573,21 +24877,18 @@ var nextChild = function nextChild() {
       var _element = data[i];
       if (!_element || _element.type === 'element') return;
       if (_element.type === 'text' && _element.value.replace(/(\n|\s)/g, '') !== '') return;
-      if (/^(comment|raw)$/ig.test(_element === null || _element === void 0 ? void 0 : _element.type)) {
-        var _element$value;
-        if (!/^rehype:/.test(((_element$value = _element.value) === null || _element$value === void 0 ? void 0 : _element$value.replace(/^(\s+)?<!--(.*?)-->/, '$2')) || '')) {
+      if (_element.type && /^(comment|raw)$/ig.test(_element.type)) {
+        if (_element.value && !/^rehype:/.test(_element.value.replace(/^(\s+)?<!--(.*?)-->/, '$2') || '')) {
           return;
         }
         ;
         if (codeBlockParames) {
-          var _element$value2;
           var nextNode = nextChild(data, i, 'pre', codeBlockParames);
           if (nextNode) return;
-          _element.value = (_element$value2 = _element.value) === null || _element$value2 === void 0 ? void 0 : _element$value2.replace(/^(\n|\s)+/, '');
+          _element.value = (_element.value || '').replace(/^(\n|\s)+/, '');
           return _element;
         } else {
-          var _element$value3;
-          _element.value = (_element$value3 = _element.value) === null || _element$value3 === void 0 ? void 0 : _element$value3.replace(/^(\n|\s)+/, '');
+          _element.value = (_element.value || '').replace(/^(\n|\s)+/, '');
           return _element;
         }
       }
@@ -24674,56 +24975,78 @@ var rehypeAttrs = function rehypeAttrs() {
   };
 };
 /* harmony default export */ const lib = (rehypeAttrs);
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-string/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-string/lib/index.js
 /**
+ * @typedef {import('mdast').Root|import('mdast').Content} Node
+ *
  * @typedef Options
- * @property {boolean} [includeImageAlt=true]
+ *   Configuration (optional).
+ * @property {boolean | null | undefined} [includeImageAlt=true]
+ *   Whether to use `alt` for `image`s.
  */
 
 /**
- * Get the text content of a node.
- * Prefer the node’s plain-text fields, otherwise serialize its children,
+ * Get the text content of a node or list of nodes.
+ *
+ * Prefers the node’s plain-text fields, otherwise serializes its children,
  * and if the given value is an array, serialize the nodes in it.
  *
- * @param {unknown} node
- * @param {Options} [options]
+ * @param {unknown} value
+ *   Thing to serialize, typically `Node`.
+ * @param {Options | null | undefined} [options]
+ *   Configuration (optional).
  * @returns {string}
+ *   Serialized `value`.
  */
-function mdast_util_to_string_toString(node, options) {
-  var _ref = options || {},
-    _ref$includeImageAlt = _ref.includeImageAlt,
-    includeImageAlt = _ref$includeImageAlt === void 0 ? true : _ref$includeImageAlt;
-  return one(node, includeImageAlt);
+function lib_toString(value, options) {
+  var includeImageAlt = (options || {}).includeImageAlt;
+  return one(value, typeof includeImageAlt === 'boolean' ? includeImageAlt : true);
 }
 
 /**
- * @param {unknown} node
+ * One node or several nodes.
+ *
+ * @param {unknown} value
+ *   Thing to serialize.
  * @param {boolean} includeImageAlt
+ *   Include image `alt`s.
  * @returns {string}
+ *   Serialized node.
  */
-function one(node, includeImageAlt) {
-  return node && typeof node === 'object' && (
-  // @ts-ignore looks like a literal.
-  node.value || (
-  // @ts-ignore looks like an image.
-  includeImageAlt ? node.alt : '') ||
-  // @ts-ignore looks like a parent.
-  'children' in node && mdast_util_to_string_all(node.children, includeImageAlt) || Array.isArray(node) && mdast_util_to_string_all(node, includeImageAlt)) || '';
+function one(value, includeImageAlt) {
+  return node(value) && ('value' in value && value.value || includeImageAlt && 'alt' in value && value.alt || 'children' in value && lib_all(value.children, includeImageAlt)) || Array.isArray(value) && lib_all(value, includeImageAlt) || '';
 }
 
 /**
- * @param {Array.<unknown>} values
+ * Serialize a list of nodes.
+ *
+ * @param {Array<unknown>} values
+ *   Thing to serialize.
  * @param {boolean} includeImageAlt
+ *   Include image `alt`s.
  * @returns {string}
+ *   Serialized nodes.
  */
-function mdast_util_to_string_all(values, includeImageAlt) {
-  /** @type {Array.<string>} */
+function lib_all(values, includeImageAlt) {
+  /** @type {Array<string>} */
   var result = [];
   var index = -1;
   while (++index < values.length) {
     result[index] = one(values[index], includeImageAlt);
   }
   return result.join('');
+}
+
+/**
+ * Check if `value` looks like a node.
+ *
+ * @param {unknown} value
+ *   Thing.
+ * @returns {value is Node}
+ *   Whether `value` is a node.
+ */
+function node(value) {
+  return Boolean(value && typeof value === 'object');
 }
 ;// CONCATENATED MODULE: ../../node_modules/micromark/lib/initialize/content.js
 /**
@@ -29616,9 +29939,7 @@ function preprocess() {
             {
               next = Math.ceil(column / 4) * 4;
               chunks.push(-2);
-              while (column++ < next) {
-                chunks.push(-1);
-              }
+              while (column++ < next) chunks.push(-1);
               break;
             }
           case 10:
@@ -29669,12 +29990,13 @@ function postprocess(events) {
  * @typedef {import('micromark-util-types').Token} Token
  * @typedef {import('micromark-util-types').TokenizeContext} TokenizeContext
  * @typedef {import('micromark-util-types').Value} Value
+ *
  * @typedef {import('unist').Parent} UnistParent
  * @typedef {import('unist').Point} Point
+ *
  * @typedef {import('mdast').PhrasingContent} PhrasingContent
+ * @typedef {import('mdast').StaticPhrasingContent} StaticPhrasingContent
  * @typedef {import('mdast').Content} Content
- * @typedef {Root|Content} Node
- * @typedef {Extract<Node, UnistParent>} Parent
  * @typedef {import('mdast').Break} Break
  * @typedef {import('mdast').Blockquote} Blockquote
  * @typedef {import('mdast').Code} Code
@@ -29694,57 +30016,119 @@ function postprocess(events) {
  * @typedef {import('mdast').Strong} Strong
  * @typedef {import('mdast').Text} Text
  * @typedef {import('mdast').ThematicBreak} ThematicBreak
- *
- * @typedef {UnistParent & {type: 'fragment', children: Array<PhrasingContent>}} Fragment
+ * @typedef {import('mdast').ReferenceType} ReferenceType
+ * @typedef {import('../index.js').CompileData} CompileData
  */
 
 /**
- * @typedef _CompileDataFields
- * @property {boolean|undefined} expectingFirstListItemValue
- * @property {boolean|undefined} flowCodeInside
- * @property {boolean|undefined} setextHeadingSlurpLineEnding
- * @property {boolean|undefined} atHardBreak
- * @property {'collapsed'|'full'} referenceType
- * @property {boolean|undefined} inReference
- * @property {'characterReferenceMarkerHexadecimal'|'characterReferenceMarkerNumeric'} characterReferenceType
+ * @typedef {Root | Content} Node
+ * @typedef {Extract<Node, UnistParent>} Parent
  *
- * @typedef {Record<string, unknown> & Partial<_CompileDataFields>} CompileData
+ * @typedef {Omit<UnistParent, 'type' | 'children'> & {type: 'fragment', children: Array<PhrasingContent>}} Fragment
+ */
+
+/**
+ * @callback Transform
+ *   Extra transform, to change the AST afterwards.
+ * @param {Root} tree
+ *   Tree to transform.
+ * @returns {Root | undefined | null | void}
+ *   New tree or nothing (in which case the current tree is used).
  *
- * @typedef {(tree: Root) => Root|void} Transform
- * @typedef {(this: CompileContext, token: Token) => void} Handle
+ * @callback Handle
+ *   Handle a token.
+ * @param {CompileContext} this
+ *   Context.
+ * @param {Token} token
+ *   Current token.
+ * @returns {void}
+ *   Nothing.
+ *
  * @typedef {Record<string, Handle>} Handles
  *   Token types mapping to handles
- * @typedef {Record<string, Record<string, unknown>|Array<unknown>> & {canContainEols: Array<string>, transforms: Array<Transform>, enter: Handles, exit: Handles}} NormalizedExtension
- * @typedef {Partial<NormalizedExtension>} Extension
- *   An mdast extension changes how markdown tokens are turned into mdast.
  *
- * @typedef {(this: Omit<CompileContext, 'sliceSerialize'>, left: Token|undefined, right: Token) => void} OnEnterError
- * @typedef {(this: Omit<CompileContext, 'sliceSerialize'>, left: Token, right: Token) => void} OnExitError
+ * @callback OnEnterError
+ *   Handle the case where the `right` token is open, but it is closed (by the
+ *   `left` token) or because we reached the end of the document.
+ * @param {Omit<CompileContext, 'sliceSerialize'>} this
+ *   Context.
+ * @param {Token | undefined} left
+ *   Left token.
+ * @param {Token} right
+ *   Right token.
+ * @returns {void}
+ *   Nothing.
+ *
+ * @callback OnExitError
+ *   Handle the case where the `right` token is open but it is closed by
+ *   exiting the `left` token.
+ * @param {Omit<CompileContext, 'sliceSerialize'>} this
+ *   Context.
+ * @param {Token} left
+ *   Left token.
+ * @param {Token} right
+ *   Right token.
+ * @returns {void}
+ *   Nothing.
+ *
+ * @typedef {[Token, OnEnterError | undefined]} TokenTuple
+ *   Open token on the stack, with an optional error handler for when
+ *   that token isn’t closed properly.
+ */
+
+/**
+ * @typedef Config
+ *   Configuration.
+ *
+ *   We have our defaults, but extensions will add more.
+ * @property {Array<string>} canContainEols
+ *   Token types where line endings are used.
+ * @property {Handles} enter
+ *   Opening handles.
+ * @property {Handles} exit
+ *   Closing handles.
+ * @property {Array<Transform>} transforms
+ *   Tree transforms.
+ *
+ * @typedef {Partial<Config>} Extension
+ *   Change how markdown tokens from micromark are turned into mdast.
  *
  * @typedef CompileContext
- *   mdast compiler context
+ *   mdast compiler context.
  * @property {Array<Node | Fragment>} stack
- * @property {Array<[Token, OnEnterError|undefined]>} tokenStack
- * @property {(key: string, value?: unknown) => void} setData
- *   Set data into the key-value store.
- * @property {<K extends string>(key: K) => CompileData[K]} getData
- *   Get data from the key-value store.
+ *   Stack of nodes.
+ * @property {Array<TokenTuple>} tokenStack
+ *   Stack of tokens.
+ * @property {<Key extends keyof CompileData>(key: Key) => CompileData[Key]} getData
+ *   Get data from the key/value store.
+ * @property {<Key extends keyof CompileData>(key: Key, value?: CompileData[Key]) => void} setData
+ *   Set data into the key/value store.
  * @property {(this: CompileContext) => void} buffer
  *   Capture some of the output data.
  * @property {(this: CompileContext) => string} resume
  *   Stop capturing and access the output data.
- * @property {<N extends Node>(this: CompileContext, node: N, token: Token, onError?: OnEnterError) => N} enter
+ * @property {<Kind extends Node>(this: CompileContext, node: Kind, token: Token, onError?: OnEnterError) => Kind} enter
  *   Enter a token.
  * @property {(this: CompileContext, token: Token, onError?: OnExitError) => Node} exit
  *   Exit a token.
  * @property {TokenizeContext['sliceSerialize']} sliceSerialize
  *   Get the string value of a token.
- * @property {NormalizedExtension} config
+ * @property {Config} config
  *   Configuration.
  *
- * @typedef {{mdastExtensions?: Array<Extension|Array<Extension>>}} FromMarkdownOptions
+ * @typedef FromMarkdownOptions
+ *   Configuration for how to build mdast.
+ * @property {Array<Extension | Array<Extension>> | null | undefined} [mdastExtensions]
+ *   Extensions for this utility to change how tokens are turned into a tree.
+ *
  * @typedef {ParseOptions & FromMarkdownOptions} Options
+ *   Configuration.
  */
+
+// To do: micromark: create a registry of tokens?
+// To do: next major: don’t return given `Node` from `enter`.
+// To do: next major: remove setter/getter.
+
 
 
 
@@ -29755,24 +30139,29 @@ function postprocess(events) {
 
 
 var mdast_util_from_markdown_lib_own = {}.hasOwnProperty;
-/**
- * @param value Markdown to parse (`string` or `Buffer`).
- * @param [encoding] Character encoding to understand `value` as when it’s a `Buffer` (`string`, default: `'utf8'`).
- * @param [options] Configuration
- */
 
+/**
+ * @param value
+ *   Markdown to parse.
+ * @param encoding
+ *   Character encoding for when `value` is `Buffer`.
+ * @param options
+ *   Configuration.
+ * @returns
+ *   mdast tree.
+ */
 var fromMarkdown =
 /**
  * @type {(
- *   ((value: Value, encoding: Encoding, options?: Options) => Root) &
- *   ((value: Value, options?: Options) => Root)
+ *   ((value: Value, encoding: Encoding, options?: Options | null | undefined) => Root) &
+ *   ((value: Value, options?: Options | null | undefined) => Root)
  * )}
  */
 
 /**
  * @param {Value} value
- * @param {Encoding} [encoding]
- * @param {Options} [options]
+ * @param {Encoding | Options | null | undefined} [encoding]
+ * @param {Options | null | undefined} [options]
  * @returns {Root}
  */
 function fromMarkdown(value, encoding, options) {
@@ -29780,19 +30169,19 @@ function fromMarkdown(value, encoding, options) {
     options = encoding;
     encoding = undefined;
   }
-  return compiler(options)(postprocess(parse_parse(options).document().write(preprocess()(value, encoding, true))));
+  return compiler(options)(postprocess(
+  // @ts-expect-error: micromark types need to accept `null`.
+  parse_parse(options).document().write(preprocess()(value, encoding, true))));
 };
+
 /**
  * Note this compiler only understand complete buffering, not streaming.
  *
- * @param {Options} [options]
+ * @param {Options | null | undefined} [options]
  */
-
-function compiler() {
-  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  /** @type {NormalizedExtension} */
-  // @ts-expect-error: our base has all required fields, so the result will too.
-  var config = configure({
+function compiler(options) {
+  /** @type {Config} */
+  var config = {
     transforms: [],
     canContainEols: ['emphasis', 'fragment', 'heading', 'paragraph', 'strong'],
     enter: {
@@ -29888,36 +30277,31 @@ function compiler() {
       strong: closer(),
       thematicBreak: closer()
     }
-  }, options.mdastExtensions || []);
-  /** @type {CompileData} */
+  };
+  configure(config, (options || {}).mdastExtensions || []);
 
+  /** @type {CompileData} */
   var data = {};
   return compile;
-  /**
-   * @param {Array<Event>} events
-   * @returns {Root}
-   */
 
+  /**
+   * Turn micromark events into an mdast tree.
+   *
+   * @param {Array<Event>} events
+   *   Events.
+   * @returns {Root}
+   *   mdast tree.
+   */
   function compile(events) {
     /** @type {Root} */
     var tree = {
       type: 'root',
       children: []
     };
-    /** @type {CompileContext['stack']} */
-
-    var stack = [tree];
-    /** @type {CompileContext['tokenStack']} */
-
-    var tokenStack = [];
-    /** @type {Array<number>} */
-
-    var listStack = [];
     /** @type {Omit<CompileContext, 'sliceSerialize'>} */
-
     var context = {
-      stack: stack,
-      tokenStack: tokenStack,
+      stack: [tree],
+      tokenStack: [],
       config: config,
       enter: enter,
       exit: exit,
@@ -29926,6 +30310,8 @@ function compiler() {
       setData: setData,
       getData: getData
     };
+    /** @type {Array<number>} */
+    var listStack = [];
     var index = -1;
     while (++index < events.length) {
       // We preprocess lists to add `listItem` tokens, and to infer whether
@@ -29948,52 +30334,53 @@ function compiler() {
         }, context), events[index][1]);
       }
     }
-    if (tokenStack.length > 0) {
-      var _tail = tokenStack[tokenStack.length - 1];
+
+    // Handle tokens still being open.
+    if (context.tokenStack.length > 0) {
+      var _tail = context.tokenStack[context.tokenStack.length - 1];
       var _handler = _tail[1] || defaultOnError;
       _handler.call(context, undefined, _tail[0]);
-    } // Figure out `root` position.
+    }
 
+    // Figure out `root` position.
     tree.position = {
-      start: point(events.length > 0 ? events[0][1].start : {
+      start: lib_point(events.length > 0 ? events[0][1].start : {
         line: 1,
         column: 1,
         offset: 0
       }),
-      end: point(events.length > 0 ? events[events.length - 2][1].end : {
+      end: lib_point(events.length > 0 ? events[events.length - 2][1].end : {
         line: 1,
         column: 1,
         offset: 0
       })
     };
+
+    // Call transforms.
     index = -1;
     while (++index < config.transforms.length) {
       tree = config.transforms[index](tree) || tree;
     }
     return tree;
   }
+
   /**
    * @param {Array<Event>} events
    * @param {number} start
    * @param {number} length
    * @returns {number}
    */
-
   function prepareList(events, start, length) {
     var index = start - 1;
     var containerBalance = -1;
     var listSpread = false;
-    /** @type {Token|undefined} */
-
+    /** @type {Token | undefined} */
     var listItem;
-    /** @type {number|undefined} */
-
+    /** @type {number | undefined} */
     var lineIndex;
-    /** @type {number|undefined} */
-
+    /** @type {number | undefined} */
     var firstBlankLineIndex;
-    /** @type {boolean|undefined} */
-
+    /** @type {boolean | undefined} */
     var atMarker;
     while (++index <= length) {
       var event = events[index];
@@ -30039,22 +30426,24 @@ function compiler() {
           if (firstBlankLineIndex && (!lineIndex || firstBlankLineIndex < lineIndex)) {
             // @ts-expect-error Patched.
             listItem._spread = true;
-          } // Fix position.
+          }
 
+          // Fix position.
           listItem.end = Object.assign({}, lineIndex ? events[lineIndex][1].start : event[1].end);
           events.splice(lineIndex || index, 0, ['exit', listItem, event[2]]);
           index++;
           length++;
-        } // Create a new list item.
+        }
 
+        // Create a new list item.
         if (event[1].type === 'listItemPrefix') {
           listItem = {
             type: 'listItem',
             // @ts-expect-error Patched
             _spread: false,
             start: Object.assign({}, event[1].start)
-          }; // @ts-expect-error: `listItem` is most definitely defined, TS...
-
+          };
+          // @ts-expect-error: `listItem` is most definitely defined, TS...
           events.splice(index, 0, ['enter', listItem, event[2]]);
           index++;
           length++;
@@ -30062,116 +30451,137 @@ function compiler() {
           atMarker = true;
         }
       }
-    } // @ts-expect-error Patched.
+    }
 
+    // @ts-expect-error Patched.
     events[start][1]._spread = listSpread;
     return length;
   }
-  /**
-   * @type {CompileContext['setData']}
-   * @param [value]
-   */
 
+  /**
+   * Set data.
+   *
+   * @template {keyof CompileData} Key
+   *   Field type.
+   * @param {Key} key
+   *   Key of field.
+   * @param {CompileData[Key]} [value]
+   *   New value.
+   * @returns {void}
+   *   Nothing.
+   */
   function setData(key, value) {
     data[key] = value;
   }
-  /**
-   * @type {CompileContext['getData']}
-   * @template {string} K
-   * @param {K} key
-   * @returns {CompileData[K]}
-   */
 
+  /**
+   * Get data.
+   *
+   * @template {keyof CompileData} Key
+   *   Field type.
+   * @param {Key} key
+   *   Key of field.
+   * @returns {CompileData[Key]}
+   *   Value.
+   */
   function getData(key) {
     return data[key];
   }
-  /**
-   * @param {Point} d
-   * @returns {Point}
-   */
 
-  function point(d) {
-    return {
-      line: d.line,
-      column: d.column,
-      offset: d.offset
-    };
-  }
   /**
+   * Create an opener handle.
+   *
    * @param {(token: Token) => Node} create
+   *   Create a node.
    * @param {Handle} [and]
+   *   Optional function to also run.
    * @returns {Handle}
+   *   Handle.
    */
-
   function opener(create, and) {
     return open;
+
     /**
      * @this {CompileContext}
      * @param {Token} token
      * @returns {void}
      */
-
     function open(token) {
       enter.call(this, create(token), token);
       if (and) and.call(this, token);
     }
   }
-  /** @type {CompileContext['buffer']} */
 
+  /**
+   * @this {CompileContext}
+   * @returns {void}
+   */
   function buffer() {
     this.stack.push({
       type: 'fragment',
       children: []
     });
   }
-  /**
-   * @type {CompileContext['enter']}
-   * @template {Node} N
-   * @this {CompileContext}
-   * @param {N} node
-   * @param {Token} token
-   * @param {OnEnterError} [errorHandler]
-   * @returns {N}
-   */
 
+  /**
+   * @template {Node} Kind
+   *   Node type.
+   * @this {CompileContext}
+   *   Context.
+   * @param {Kind} node
+   *   Node to enter.
+   * @param {Token} token
+   *   Corresponding token.
+   * @param {OnEnterError | undefined} [errorHandler]
+   *   Handle the case where this token is open, but it is closed by something else.
+   * @returns {Kind}
+   *   The given node.
+   */
   function enter(node, token, errorHandler) {
     var parent = this.stack[this.stack.length - 1];
     // @ts-expect-error: Assume `Node` can exist as a child of `parent`.
     parent.children.push(node);
     this.stack.push(node);
-    this.tokenStack.push([token, errorHandler]); // @ts-expect-error: `end` will be patched later.
-
+    this.tokenStack.push([token, errorHandler]);
+    // @ts-expect-error: `end` will be patched later.
     node.position = {
-      start: point(token.start)
+      start: lib_point(token.start)
     };
     return node;
   }
-  /**
-   * @param {Handle} [and]
-   * @returns {Handle}
-   */
 
+  /**
+   * Create a closer handle.
+   *
+   * @param {Handle} [and]
+   *   Optional function to also run.
+   * @returns {Handle}
+   *   Handle.
+   */
   function closer(and) {
     return close;
+
     /**
      * @this {CompileContext}
      * @param {Token} token
      * @returns {void}
      */
-
     function close(token) {
       if (and) and.call(this, token);
       exit.call(this, token);
     }
   }
-  /**
-   * @type {CompileContext['exit']}
-   * @this {CompileContext}
-   * @param {Token} token
-   * @param {OnExitError} [onExitError]
-   * @returns {Node}
-   */
 
+  /**
+   * @this {CompileContext}
+   *   Context.
+   * @param {Token} token
+   *   Corresponding token.
+   * @param {OnExitError | undefined} [onExitError]
+   *   Handle the case where another token is open.
+   * @returns {Node}
+   *   The closed node.
+   */
   function exit(token, onExitError) {
     var node = this.stack.pop();
     var open = this.tokenStack.pop();
@@ -30188,165 +30598,205 @@ function compiler() {
         handler.call(this, token, open[0]);
       }
     }
-    node.position.end = point(token.end);
+    node.position.end = lib_point(token.end);
     return node;
   }
+
   /**
    * @this {CompileContext}
    * @returns {string}
    */
-
   function resume() {
-    return mdast_util_to_string_toString(this.stack.pop());
-  } //
+    return lib_toString(this.stack.pop());
+  }
+
+  //
   // Handlers.
   //
 
-  /** @type {Handle} */
-
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onenterlistordered() {
     setData('expectingFirstListItemValue', true);
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onenterlistitemvalue(token) {
     if (getData('expectingFirstListItemValue')) {
-      var ancestor = /** @type {List} */
-      this.stack[this.stack.length - 2];
+      var ancestor = this.stack[this.stack.length - 2];
       ancestor.start = Number.parseInt(this.sliceSerialize(token), 10);
       setData('expectingFirstListItemValue');
     }
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitcodefencedfenceinfo() {
     var data = this.resume();
-    var node = /** @type {Code} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.lang = data;
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitcodefencedfencemeta() {
     var data = this.resume();
-    var node = /** @type {Code} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.meta = data;
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitcodefencedfence() {
     // Exit if this is the closing fence.
     if (getData('flowCodeInside')) return;
     this.buffer();
     setData('flowCodeInside', true);
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitcodefenced() {
     var data = this.resume();
-    var node = /** @type {Code} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.value = data.replace(/^(\r?\n|\r)|(\r?\n|\r)$/g, '');
     setData('flowCodeInside');
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitcodeindented() {
     var data = this.resume();
-    var node = /** @type {Code} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.value = data.replace(/(\r?\n|\r)$/g, '');
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitdefinitionlabelstring(token) {
-    // Discard label, use the source content instead.
     var label = this.resume();
-    var node = /** @type {Definition} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.label = label;
     node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitdefinitiontitlestring() {
     var data = this.resume();
-    var node = /** @type {Definition} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.title = data;
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitdefinitiondestinationstring() {
     var data = this.resume();
-    var node = /** @type {Definition} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.url = data;
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitatxheadingsequence(token) {
-    var node = /** @type {Heading} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     if (!node.depth) {
       var depth = this.sliceSerialize(token).length;
       node.depth = depth;
     }
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitsetextheadingtext() {
     setData('setextHeadingSlurpLineEnding', true);
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitsetextheadinglinesequence(token) {
-    var node = /** @type {Heading} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.depth = this.sliceSerialize(token).charCodeAt(0) === 61 ? 1 : 2;
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitsetextheading() {
     setData('setextHeadingSlurpLineEnding');
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onenterdata(token) {
-    var parent = /** @type {Parent} */
-    this.stack[this.stack.length - 1];
-    /** @type {Node} */
-
-    var tail = parent.children[parent.children.length - 1];
+    var node = this.stack[this.stack.length - 1];
+    var tail = node.children[node.children.length - 1];
     if (!tail || tail.type !== 'text') {
       // Add a new text node.
-      tail = text(); // @ts-expect-error: we’ll add `end` later.
-
+      tail = text();
+      // @ts-expect-error: we’ll add `end` later.
       tail.position = {
-        start: point(token.start)
-      }; // @ts-expect-error: Assume `parent` accepts `text`.
-
-      parent.children.push(tail);
+        start: lib_point(token.start)
+      };
+      // @ts-expect-error: Assume `parent` accepts `text`.
+      node.children.push(tail);
     }
     this.stack.push(tail);
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitdata(token) {
     var tail = this.stack.pop();
     tail.value += this.sliceSerialize(token);
-    tail.position.end = point(token.end);
+    tail.position.end = lib_point(token.end);
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitlineending(token) {
     var context = this.stack[this.stack.length - 1];
-
     // If we’re at a hard break, include the line ending in there.
     if (getData('atHardBreak')) {
       var tail = context.children[context.children.length - 1];
-      tail.position.end = point(token.end);
+      tail.position.end = lib_point(token.end);
       setData('atHardBreak');
       return;
     }
@@ -30355,194 +30805,262 @@ function compiler() {
       onexitdata.call(this, token);
     }
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexithardbreak() {
     setData('atHardBreak', true);
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexithtmlflow() {
     var data = this.resume();
-    var node = /** @type {HTML} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.value = data;
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexithtmltext() {
     var data = this.resume();
-    var node = /** @type {HTML} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.value = data;
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitcodetext() {
     var data = this.resume();
-    var node = /** @type {InlineCode} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.value = data;
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitlink() {
-    var context = /** @type {Link & {identifier: string, label: string}} */
-    this.stack[this.stack.length - 1]; // To do: clean.
+    var node = this.stack[this.stack.length - 1];
+    // Note: there are also `identifier` and `label` fields on this link node!
+    // These are used / cleaned here.
 
+    // To do: clean.
     if (getData('inReference')) {
-      context.type += 'Reference'; // @ts-expect-error: mutate.
-
-      context.referenceType = getData('referenceType') || 'shortcut'; // @ts-expect-error: mutate.
-
-      delete context.url;
-      delete context.title;
+      /** @type {ReferenceType} */
+      var referenceType = getData('referenceType') || 'shortcut';
+      node.type += 'Reference';
+      // @ts-expect-error: mutate.
+      node.referenceType = referenceType;
+      // @ts-expect-error: mutate.
+      delete node.url;
+      delete node.title;
     } else {
       // @ts-expect-error: mutate.
-      delete context.identifier; // @ts-expect-error: mutate.
-
-      delete context.label;
+      delete node.identifier;
+      // @ts-expect-error: mutate.
+      delete node.label;
     }
     setData('referenceType');
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitimage() {
-    var context = /** @type {Image & {identifier: string, label: string}} */
-    this.stack[this.stack.length - 1]; // To do: clean.
+    var node = this.stack[this.stack.length - 1];
+    // Note: there are also `identifier` and `label` fields on this link node!
+    // These are used / cleaned here.
 
+    // To do: clean.
     if (getData('inReference')) {
-      context.type += 'Reference'; // @ts-expect-error: mutate.
-
-      context.referenceType = getData('referenceType') || 'shortcut'; // @ts-expect-error: mutate.
-
-      delete context.url;
-      delete context.title;
+      /** @type {ReferenceType} */
+      var referenceType = getData('referenceType') || 'shortcut';
+      node.type += 'Reference';
+      // @ts-expect-error: mutate.
+      node.referenceType = referenceType;
+      // @ts-expect-error: mutate.
+      delete node.url;
+      delete node.title;
     } else {
       // @ts-expect-error: mutate.
-      delete context.identifier; // @ts-expect-error: mutate.
-
-      delete context.label;
+      delete node.identifier;
+      // @ts-expect-error: mutate.
+      delete node.label;
     }
     setData('referenceType');
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitlabeltext(token) {
-    var ancestor = /** @type {(Link|Image) & {identifier: string, label: string}} */
-    this.stack[this.stack.length - 2];
     var string = this.sliceSerialize(token);
+    var ancestor = this.stack[this.stack.length - 2];
+    // @ts-expect-error: stash this on the node, as it might become a reference
+    // later.
     ancestor.label = decodeString(string);
+    // @ts-expect-error: same as above.
     ancestor.identifier = normalizeIdentifier(string).toLowerCase();
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitlabel() {
-    var fragment = /** @type {Fragment} */
-    this.stack[this.stack.length - 1];
+    var fragment = this.stack[this.stack.length - 1];
     var value = this.resume();
-    var node = /** @type {(Link|Image) & {identifier: string, label: string}} */
-    this.stack[this.stack.length - 1]; // Assume a reference.
-
+    var node = this.stack[this.stack.length - 1];
+    // Assume a reference.
     setData('inReference', true);
     if (node.type === 'link') {
+      /** @type {Array<StaticPhrasingContent>} */
       // @ts-expect-error: Assume static phrasing content.
-      node.children = fragment.children;
+      var children = fragment.children;
+      node.children = children;
     } else {
       node.alt = value;
     }
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitresourcedestinationstring() {
     var data = this.resume();
-    var node = /** @type {Link|Image} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.url = data;
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitresourcetitlestring() {
     var data = this.resume();
-    var node = /** @type {Link|Image} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.title = data;
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitresource() {
     setData('inReference');
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onenterreference() {
     setData('referenceType', 'collapsed');
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitreferencestring(token) {
     var label = this.resume();
-    var node = /** @type {LinkReference|ImageReference} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
+    // @ts-expect-error: stash this on the node, as it might become a reference
+    // later.
     node.label = label;
+    // @ts-expect-error: same as above.
     node.identifier = normalizeIdentifier(this.sliceSerialize(token)).toLowerCase();
     setData('referenceType', 'full');
   }
-  /** @type {Handle} */
+
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
 
   function onexitcharacterreferencemarker(token) {
     setData('characterReferenceType', token.type);
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitcharacterreferencevalue(token) {
     var data = this.sliceSerialize(token);
     var type = getData('characterReferenceType');
     /** @type {string} */
-
     var value;
     if (type) {
       value = decodeNumericCharacterReference(data, type === 'characterReferenceMarkerNumeric' ? 10 : 16);
       setData('characterReferenceType');
     } else {
-      // @ts-expect-error `decodeNamedCharacterReference` can return false for
-      // invalid named character references, but everything we’ve tokenized is
-      // valid.
-      value = decodeNamedCharacterReference(data);
+      var result = decodeNamedCharacterReference(data);
+      value = result;
     }
     var tail = this.stack.pop();
     tail.value += value;
-    tail.position.end = point(token.end);
+    tail.position.end = lib_point(token.end);
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitautolinkprotocol(token) {
     onexitdata.call(this, token);
-    var node = /** @type {Link} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.url = this.sliceSerialize(token);
   }
-  /** @type {Handle} */
 
+  /**
+   * @this {CompileContext}
+   * @type {Handle}
+   */
   function onexitautolinkemail(token) {
     onexitdata.call(this, token);
-    var node = /** @type {Link} */
-    this.stack[this.stack.length - 1];
+    var node = this.stack[this.stack.length - 1];
     node.url = 'mailto:' + this.sliceSerialize(token);
-  } //
+  }
+
+  //
   // Creaters.
   //
 
   /** @returns {Blockquote} */
-
   function blockQuote() {
     return {
       type: 'blockquote',
       children: []
     };
   }
-  /** @returns {Code} */
 
+  /** @returns {Code} */
   function codeFlow() {
     return {
       type: 'code',
@@ -30551,16 +31069,16 @@ function compiler() {
       value: ''
     };
   }
-  /** @returns {InlineCode} */
 
+  /** @returns {InlineCode} */
   function codeText() {
     return {
       type: 'inlineCode',
       value: ''
     };
   }
-  /** @returns {Definition} */
 
+  /** @returns {Definition} */
   function definition() {
     return {
       type: 'definition',
@@ -30570,16 +31088,16 @@ function compiler() {
       url: ''
     };
   }
-  /** @returns {Emphasis} */
 
+  /** @returns {Emphasis} */
   function emphasis() {
     return {
       type: 'emphasis',
       children: []
     };
   }
-  /** @returns {Heading} */
 
+  /** @returns {Heading} */
   function heading() {
     // @ts-expect-error `depth` will be set later.
     return {
@@ -30588,23 +31106,23 @@ function compiler() {
       children: []
     };
   }
-  /** @returns {Break} */
 
+  /** @returns {Break} */
   function hardBreak() {
     return {
       type: 'break'
     };
   }
-  /** @returns {HTML} */
 
+  /** @returns {HTML} */
   function html() {
     return {
       type: 'html',
       value: ''
     };
   }
-  /** @returns {Image} */
 
+  /** @returns {Image} */
   function image() {
     return {
       type: 'image',
@@ -30613,8 +31131,8 @@ function compiler() {
       alt: null
     };
   }
-  /** @returns {Link} */
 
+  /** @returns {Link} */
   function link() {
     return {
       type: 'link',
@@ -30623,11 +31141,11 @@ function compiler() {
       children: []
     };
   }
+
   /**
    * @param {Token} token
    * @returns {List}
    */
-
   function list(token) {
     return {
       type: 'list',
@@ -30638,11 +31156,11 @@ function compiler() {
       children: []
     };
   }
+
   /**
    * @param {Token} token
    * @returns {ListItem}
    */
-
   function listItem(token) {
     return {
       type: 'listItem',
@@ -30652,44 +31170,60 @@ function compiler() {
       children: []
     };
   }
-  /** @returns {Paragraph} */
 
+  /** @returns {Paragraph} */
   function paragraph() {
     return {
       type: 'paragraph',
       children: []
     };
   }
-  /** @returns {Strong} */
 
+  /** @returns {Strong} */
   function strong() {
     return {
       type: 'strong',
       children: []
     };
   }
-  /** @returns {Text} */
 
+  /** @returns {Text} */
   function text() {
     return {
       type: 'text',
       value: ''
     };
   }
-  /** @returns {ThematicBreak} */
 
+  /** @returns {ThematicBreak} */
   function thematicBreak() {
     return {
       type: 'thematicBreak'
     };
   }
 }
-/**
- * @param {Extension} combined
- * @param {Array<Extension|Array<Extension>>} extensions
- * @returns {Extension}
- */
 
+/**
+ * Copy a point-like value.
+ *
+ * @param {Point} d
+ *   Point-like value.
+ * @returns {Point}
+ *   unist point.
+ */
+function lib_point(d) {
+  return {
+    line: d.line,
+    column: d.column,
+    offset: d.offset
+  };
+}
+
+/**
+ * @param {Config} combined
+ * @param {Array<Extension | Array<Extension>>} extensions
+ * @returns {void}
+ */
 function configure(combined, extensions) {
   var index = -1;
   while (++index < extensions.length) {
@@ -30700,38 +31234,41 @@ function configure(combined, extensions) {
       extension(combined, value);
     }
   }
-  return combined;
 }
+
 /**
- * @param {Extension} combined
+ * @param {Config} combined
  * @param {Extension} extension
  * @returns {void}
  */
-
 function extension(combined, extension) {
-  /** @type {string} */
+  /** @type {keyof Extension} */
   var key;
   for (key in extension) {
     if (mdast_util_from_markdown_lib_own.call(extension, key)) {
-      var list = key === 'canContainEols' || key === 'transforms';
-      var maybe = mdast_util_from_markdown_lib_own.call(combined, key) ? combined[key] : undefined;
-      /* c8 ignore next */
-
-      var left = maybe || (combined[key] = list ? [] : {});
-      var right = extension[key];
-      if (right) {
-        if (list) {
-          // @ts-expect-error: `left` is an array.
-          combined[key] = [].concat(_toConsumableArray(left), _toConsumableArray(right));
-        } else {
-          Object.assign(left, right);
+      if (key === 'canContainEols') {
+        var right = extension[key];
+        if (right) {
+          var _combined$key;
+          (_combined$key = combined[key]).push.apply(_combined$key, _toConsumableArray(right));
+        }
+      } else if (key === 'transforms') {
+        var _right = extension[key];
+        if (_right) {
+          var _combined$key2;
+          (_combined$key2 = combined[key]).push.apply(_combined$key2, _toConsumableArray(_right));
+        }
+      } else if (key === 'enter' || key === 'exit') {
+        var _right2 = extension[key];
+        if (_right2) {
+          Object.assign(combined[key], _right2);
         }
       }
     }
   }
 }
-/** @type {OnEnterError} */
 
+/** @type {OnEnterError} */
 function defaultOnError(left, right) {
   if (left) {
     throw new Error('Cannot close `' + left.type + '` (' + stringifyPosition({
@@ -30778,269 +31315,6 @@ function remarkParse(options) {
 ;// CONCATENATED MODULE: ../../node_modules/remark-parse/index.js
 
 /* harmony default export */ const remark_parse = (remarkParse);
-;// CONCATENATED MODULE: ../../node_modules/unist-builder/index.js
-/**
- * @typedef {import('unist').Node} Node
- * @typedef {import('unist').Parent} Parent
- * @typedef {import('unist').Literal} Literal
- * @typedef {Object.<string, unknown>} Props
- * @typedef {Array.<Node>|string} ChildrenOrValue
- *
- * @typedef {(<T extends string, P extends Record<string, unknown>, C extends Node[]>(type: T, props: P, children: C) => {type: T, children: C} & P)} BuildParentWithProps
- * @typedef {(<T extends string, P extends Record<string, unknown>>(type: T, props: P, value: string) => {type: T, value: string} & P)} BuildLiteralWithProps
- * @typedef {(<T extends string, P extends Record<string, unknown>>(type: T, props: P) => {type: T} & P)} BuildVoidWithProps
- * @typedef {(<T extends string, C extends Node[]>(type: T, children: C) => {type: T, children: C})} BuildParent
- * @typedef {(<T extends string>(type: T, value: string) => {type: T, value: string})} BuildLiteral
- * @typedef {(<T extends string>(type: T) => {type: T})} BuildVoid
- */
-
-var u =
-/**
-* @type {BuildVoid & BuildVoidWithProps & BuildLiteral & BuildLiteralWithProps & BuildParent & BuildParentWithProps}
-*/
-/**
- * @param {string} type Type of node
- * @param {Props|ChildrenOrValue} [props] Additional properties for node (or `children` or `value`)
- * @param {ChildrenOrValue} [value] `children` or `value` of node
- * @returns {Node}
- */
-function u(type, props, value) {
-  /** @type {Node} */
-  var node = {
-    type: String(type)
-  };
-  if ((value === undefined || value === null) && (typeof props === 'string' || Array.isArray(props))) {
-    value = props;
-  } else {
-    Object.assign(node, props);
-  }
-  if (Array.isArray(value)) {
-    node.children = value;
-  } else if (value !== undefined && value !== null) {
-    node.value = String(value);
-  }
-  return node;
-};
-;// CONCATENATED MODULE: ../../node_modules/unist-util-position/index.js
-/**
- * @typedef {import('unist').Position} Position
- * @typedef {import('unist').Node} Node
- * @typedef {Record<string, unknown> & {type: string, position?: PositionLike|undefined}} NodeLike
- * @typedef {import('unist').Point} Point
- *
- * @typedef {Partial<Point>} PointLike
- *
- * @typedef PositionLike
- * @property {PointLike} [start]
- * @property {PointLike} [end]
- */
-
-var pointStart = unist_util_position_point('start');
-var pointEnd = unist_util_position_point('end');
-
-/**
- * Get the positional info of `node`.
- *
- * @param {NodeLike|Node} [node]
- * @returns {Position}
- */
-function unist_util_position_position(node) {
-  return {
-    start: pointStart(node),
-    end: pointEnd(node)
-  };
-}
-
-/**
- * Get the positional info of `node`.
- *
- * @param {'start'|'end'} type
- */
-function unist_util_position_point(type) {
-  return point;
-
-  /**
-   * Get the positional info of `node`.
-   *
-   * @param {NodeLike|Node} [node]
-   * @returns {Point}
-   */
-  function point(node) {
-    var point = node && node.position && node.position[type] || {};
-    return {
-      line: point.line || null,
-      column: point.column || null,
-      offset: point.offset > -1 ? point.offset : null
-    };
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/unist-util-generated/index.js
-/**
- * @typedef {Object} PointLike
- * @property {number} [line]
- * @property {number} [column]
- * @property {number} [offset]
- *
- * @typedef {Object} PositionLike
- * @property {PointLike} [start]
- * @property {PointLike} [end]
- *
- * @typedef {Object} NodeLike
- * @property {PositionLike} [position]
- */
-
-/**
- * Check if `node` is *generated*.
- *
- * @param {NodeLike} [node]
- * @returns {boolean}
- */
-function generated(node) {
-  return !node || !node.position || !node.position.start || !node.position.start.line || !node.position.start.column || !node.position.end || !node.position.end.line || !node.position.end.column;
-}
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-definitions/index.js
-/**
- * @typedef {import('mdast').Root|import('mdast').Content} Node
- * @typedef {import('mdast').Definition} Definition
- */
-
-
-var mdast_util_definitions_own = {}.hasOwnProperty;
-
-/**
- * Find definitions in `node`.
- * Uses CommonMark precedence, which means that earlier definitions are
- * preferred over duplicate later definitions.
- *
- * @param {Node} node
- */
-function definitions(node) {
-  /** @type {Record<string, Definition>} */
-  var cache = Object.create(null);
-  if (!node || !node.type) {
-    throw new Error('mdast-util-definitions expected node');
-  }
-  visit(node, 'definition', function (definition) {
-    var id = clean(definition.identifier);
-    if (id && !mdast_util_definitions_own.call(cache, id)) {
-      cache[id] = definition;
-    }
-  });
-  return definition;
-
-  /**
-   * Get a node from the bound definition cache.
-   *
-   * @param {string} identifier
-   * @returns {Definition|null}
-   */
-  function definition(identifier) {
-    var id = clean(identifier);
-    return id && mdast_util_definitions_own.call(cache, id) ? cache[id] : null;
-  }
-}
-
-/**
- * @param {string} [value]
- * @returns {string}
- */
-function clean(value) {
-  return String(value || '').toUpperCase();
-}
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/traverse.js
-
-
-/**
- * @typedef {import('mdast').Root|import('mdast').Parent['children'][number]} MdastNode
- * @typedef {import('./index.js').H} H
- * @typedef {import('./index.js').Handler} Handler
- * @typedef {import('./index.js').Content} Content
- */
-
-
-var traverse_own = {}.hasOwnProperty;
-
-/**
- * Transform an unknown node.
- * @type {Handler}
- * @param {MdastNode} node
- */
-function unknown(h, node) {
-  var data = node.data || {};
-  if ('value' in node && !(traverse_own.call(data, 'hName') || traverse_own.call(data, 'hProperties') || traverse_own.call(data, 'hChildren'))) {
-    return h.augment(node, u('text', node.value));
-  }
-  return h(node, 'div', traverse_all(h, node));
-}
-
-/**
- * @type {Handler}
- * @param {MdastNode} node
- */
-function traverse_one(h, node, parent) {
-  var type = node && node.type;
-  /** @type {Handler} */
-  var fn;
-
-  // Fail on non-nodes.
-  if (!type) {
-    throw new Error('Expected node, got `' + node + '`');
-  }
-  if (traverse_own.call(h.handlers, type)) {
-    fn = h.handlers[type];
-  } else if (h.passThrough && h.passThrough.includes(type)) {
-    fn = returnNode;
-  } else {
-    fn = h.unknownHandler;
-  }
-  return (typeof fn === 'function' ? fn : unknown)(h, node, parent);
-}
-
-/**
- * @type {Handler}
- * @param {MdastNode} node
- */
-function returnNode(h, node) {
-  // @ts-expect-error: Pass through custom node.
-  return 'children' in node ? _objectSpread2(_objectSpread2({}, node), {}, {
-    children: traverse_all(h, node)
-  }) : node;
-}
-
-/**
- * @param {H} h
- * @param {MdastNode} parent
- */
-function traverse_all(h, parent) {
-  /** @type {Array<Content>} */
-  var values = [];
-  if ('children' in parent) {
-    var nodes = parent.children;
-    var index = -1;
-    while (++index < nodes.length) {
-      var result = traverse_one(h, nodes[index], parent);
-      if (result) {
-        if (index && nodes[index - 1].type === 'break') {
-          if (!Array.isArray(result) && result.type === 'text') {
-            result.value = result.value.replace(/^\s+/, '');
-          }
-          if (!Array.isArray(result) && result.type === 'element') {
-            var head = result.children[0];
-            if (head && head.type === 'text') {
-              head.value = head.value.replace(/^\s+/, '');
-            }
-          }
-        }
-        if (Array.isArray(result)) {
-          values.push.apply(values, _toConsumableArray(result));
-        } else {
-          values.push(result);
-        }
-      }
-    }
-  }
-  return values;
-}
 ;// CONCATENATED MODULE: ../../node_modules/micromark-util-sanitize-uri/index.js
 
 
@@ -31140,79 +31414,50 @@ function normalizeUri(value) {
   }
   return result.join('') + value.slice(start);
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/wrap.js
-/**
- * @typedef {import('./index.js').Content} Content
- */
-
-
-
-/**
- * Wrap `nodes` with line feeds between each entry.
- * Optionally adds line feeds at the start and end.
- *
- * @param {Array<Content>} nodes
- * @param {boolean} [loose=false]
- * @returns {Array<Content>}
- */
-function wrap_wrap(nodes, loose) {
-  /** @type {Array<Content>} */
-  var result = [];
-  var index = -1;
-  if (loose) {
-    result.push(u('text', '\n'));
-  }
-  while (++index < nodes.length) {
-    if (index) result.push(u('text', '\n'));
-    result.push(nodes[index]);
-  }
-  if (loose && nodes.length > 0) {
-    result.push(u('text', '\n'));
-  }
-  return result;
-}
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/footer.js
 
 /**
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').ElementContent} ElementContent
- * @typedef {import('./index.js').H} H
+ *
+ * @typedef {import('./state.js').State} State
  */
-
-
-
 
 
 
 /**
- * @param {H} h
- * @returns {Element|null}
+ * Generate a hast footer for called footnote definitions.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @returns {Element | undefined}
+ *   `section` element or `undefined`.
  */
-function footer(h) {
-  var index = -1;
+function footer(state) {
   /** @type {Array<ElementContent>} */
   var listItems = [];
-  while (++index < h.footnoteOrder.length) {
-    var def = h.footnoteById[h.footnoteOrder[index].toUpperCase()];
+  var index = -1;
+  while (++index < state.footnoteOrder.length) {
+    var def = state.footnoteById[state.footnoteOrder[index]];
     if (!def) {
       continue;
     }
-    var content = traverse_all(h, def);
-    var id = String(def.identifier);
+    var content = state.all(def);
+    var id = String(def.identifier).toUpperCase();
     var safeId = normalizeUri(id.toLowerCase());
     var referenceIndex = 0;
     /** @type {Array<ElementContent>} */
     var backReferences = [];
-    while (++referenceIndex <= h.footnoteCounts[id]) {
+    while (++referenceIndex <= state.footnoteCounts[id]) {
       /** @type {Element} */
       var backReference = {
         type: 'element',
         tagName: 'a',
         properties: {
-          href: '#' + h.clobberPrefix + 'fnref-' + safeId + (referenceIndex > 1 ? '-' + referenceIndex : ''),
+          href: '#' + state.clobberPrefix + 'fnref-' + safeId + (referenceIndex > 1 ? '-' + referenceIndex : ''),
           dataFootnoteBackref: true,
           className: ['data-footnote-backref'],
-          ariaLabel: h.footnoteBackLabel
+          ariaLabel: state.footnoteBackLabel
         },
         children: [{
           type: 'text',
@@ -31259,17 +31504,15 @@ function footer(h) {
       type: 'element',
       tagName: 'li',
       properties: {
-        id: h.clobberPrefix + 'fn-' + safeId
+        id: state.clobberPrefix + 'fn-' + safeId
       },
-      children: wrap_wrap(content, true)
+      children: state.wrap(content, true)
     };
-    if (def.position) {
-      listItem.position = def.position;
-    }
+    state.patch(def, listItem);
     listItems.push(listItem);
   }
   if (listItems.length === 0) {
-    return null;
+    return;
   }
   return {
     type: 'element',
@@ -31280,11 +31523,14 @@ function footer(h) {
     },
     children: [{
       type: 'element',
-      tagName: h.footnoteLabelTagName,
-      properties: _objectSpread2(_objectSpread2({}, JSON.parse(JSON.stringify(h.footnoteLabelProperties))), {}, {
+      tagName: state.footnoteLabelTagName,
+      properties: _objectSpread2(_objectSpread2({}, JSON.parse(JSON.stringify(state.footnoteLabelProperties))), {}, {
         id: 'footnote-label'
       }),
-      children: [u('text', h.footnoteLabel)]
+      children: [{
+        type: 'text',
+        value: state.footnoteLabel
+      }]
     }, {
       type: 'text',
       value: '\n'
@@ -31292,168 +31538,455 @@ function footer(h) {
       type: 'element',
       tagName: 'ol',
       properties: {},
-      children: wrap_wrap(listItems, true)
+      children: state.wrap(listItems, true)
     }, {
       type: 'text',
       value: '\n'
     }]
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/unist-util-position/lib/index.js
+/**
+ * @typedef {import('unist').Position} Position
+ * @typedef {import('unist').Node} Node
+ * @typedef {import('unist').Point} Point
+ */
+
+/**
+ * @typedef NodeLike
+ * @property {string} type
+ * @property {PositionLike | null | undefined} [position]
+ *
+ * @typedef PositionLike
+ * @property {PointLike | null | undefined} [start]
+ * @property {PointLike | null | undefined} [end]
+ *
+ * @typedef PointLike
+ * @property {number | null | undefined} [line]
+ * @property {number | null | undefined} [column]
+ * @property {number | null | undefined} [offset]
+ */
+
+/**
+ * Get the starting point of `node`.
+ *
+ * @param node
+ *   Node.
+ * @returns
+ *   Point.
+ */
+var pointStart = unist_util_position_lib_point('start');
+
+/**
+ * Get the ending point of `node`.
+ *
+ * @param node
+ *   Node.
+ * @returns
+ *   Point.
+ */
+var pointEnd = unist_util_position_lib_point('end');
+
+/**
+ * Get the positional info of `node`.
+ *
+ * @param {NodeLike | Node | null | undefined} [node]
+ *   Node.
+ * @returns {Position}
+ *   Position.
+ */
+function lib_position(node) {
+  return {
+    start: pointStart(node),
+    end: pointEnd(node)
+  };
+}
+
+/**
+ * Get the positional info of `node`.
+ *
+ * @param {'start' | 'end'} type
+ *   Side.
+ * @returns
+ *   Getter.
+ */
+function unist_util_position_lib_point(type) {
+  return point;
+
+  /**
+   * Get the point info of `node` at a bound side.
+   *
+   * @param {NodeLike | Node | null | undefined} [node]
+   * @returns {Point}
+   */
+  function point(node) {
+    var point = node && node.position && node.position[type] || {};
+
+    // To do: next major: don’t return points when invalid.
+    return {
+      // @ts-expect-error: in practice, null is allowed.
+      line: point.line || null,
+      // @ts-expect-error: in practice, null is allowed.
+      column: point.column || null,
+      // @ts-expect-error: in practice, null is allowed.
+      offset: point.offset > -1 ? point.offset : null
+    };
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/unist-util-generated/lib/index.js
+/**
+ * @typedef PointLike
+ * @property {number | null | undefined} [line]
+ * @property {number | null | undefined} [column]
+ * @property {number | null | undefined} [offset]
+ *
+ * @typedef PositionLike
+ * @property {PointLike | null | undefined} [start]
+ * @property {PointLike | null | undefined} [end]
+ *
+ * @typedef NodeLike
+ * @property {PositionLike | null | undefined} [position]
+ */
+
+/**
+ * Check if `node` is generated.
+ *
+ * @param {NodeLike | null | undefined} [node]
+ *   Node to check.
+ * @returns {boolean}
+ *   Whether `node` is generated (does not have positional info).
+ */
+function generated(node) {
+  return !node || !node.position || !node.position.start || !node.position.start.line || !node.position.start.column || !node.position.end || !node.position.end.line || !node.position.end.column;
+}
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-definitions/lib/index.js
+/**
+ * @typedef {import('mdast').Root} Root
+ * @typedef {import('mdast').Content} Content
+ * @typedef {import('mdast').Definition} Definition
+ */
+
+/**
+ * @typedef {Root | Content} Node
+ *
+ * @callback GetDefinition
+ *   Get a definition by identifier.
+ * @param {string | null | undefined} [identifier]
+ *   Identifier of definition.
+ * @returns {Definition | null}
+ *   Definition corresponding to `identifier` or `null`.
+ */
+
+
+var mdast_util_definitions_lib_own = {}.hasOwnProperty;
+
+/**
+ * Find definitions in `tree`.
+ *
+ * Uses CommonMark precedence, which means that earlier definitions are
+ * preferred over duplicate later definitions.
+ *
+ * @param {Node} tree
+ *   Tree to check.
+ * @returns {GetDefinition}
+ *   Getter.
+ */
+function definitions(tree) {
+  /** @type {Record<string, Definition>} */
+  var cache = Object.create(null);
+  if (!tree || !tree.type) {
+    throw new Error('mdast-util-definitions expected node');
+  }
+  visit(tree, 'definition', function (definition) {
+    var id = clean(definition.identifier);
+    if (id && !mdast_util_definitions_lib_own.call(cache, id)) {
+      cache[id] = definition;
+    }
+  });
+  return definition;
+
+  /** @type {GetDefinition} */
+  function definition(identifier) {
+    var id = clean(identifier);
+    // To do: next major: return `undefined` when not found.
+    return id && mdast_util_definitions_lib_own.call(cache, id) ? cache[id] : null;
+  }
+}
+
+/**
+ * @param {string | null | undefined} [value]
+ * @returns {string}
+ */
+function clean(value) {
+  return String(value || '').toUpperCase();
+}
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/blockquote.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Blockquote} Blockquote
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `blockquote` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Blockquote} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function blockquote(h, node) {
-  return h(node, 'blockquote', wrap_wrap(traverse_all(h, node), true));
+function blockquote(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'blockquote',
+    properties: {},
+    children: state.wrap(state.all(node), true)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/break.js
 /**
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Text} Text
  * @typedef {import('mdast').Break} Break
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `break` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Break} node
- * @returns {Array<Element|Text>}
+ *   mdast node.
+ * @returns {Array<Element | Text>}
+ *   hast element content.
  */
-function hardBreak(h, node) {
-  return [h(node, 'br'), u('text', '\n')];
+function hardBreak(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'br',
+    properties: {},
+    children: []
+  };
+  state.patch(node, result);
+  return [state.applyData(node, result), {
+    type: 'text',
+    value: '\n'
+  }];
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/code.js
 /**
- * @typedef {import('mdast').Code} Code
+ * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').Code} Code
+ * @typedef {import('../state.js').State} State
+
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `code` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Code} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function code_code(h, node) {
+function code_code(state, node) {
   var value = node.value ? node.value + '\n' : '';
   // To do: next major, use `node.lang` w/o regex, the splitting’s been going
   // on for years in remark now.
-  var lang = node.lang && node.lang.match(/^[^ \t]+(?=[ \t]|$)/);
+  var lang = node.lang ? node.lang.match(/^[^ \t]+(?=[ \t]|$)/) : null;
   /** @type {Properties} */
-  var props = {};
+  var properties = {};
   if (lang) {
-    props.className = ['language-' + lang];
+    properties.className = ['language-' + lang];
   }
-  var code = h(node, 'code', props, [u('text', value)]);
+
+  // Create `<code>`.
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'code',
+    properties: properties,
+    children: [{
+      type: 'text',
+      value: value
+    }]
+  };
   if (node.meta) {
-    code.data = {
+    result.data = {
       meta: node.meta
     };
   }
-  return h(node.position, 'pre', [code]);
+  state.patch(node, result);
+  result = state.applyData(node, result);
+
+  // Create `<pre>`.
+  result = {
+    type: 'element',
+    tagName: 'pre',
+    properties: {},
+    children: [result]
+  };
+  state.patch(node, result);
+  return result;
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/delete.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Delete} Delete
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
+
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `delete` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Delete} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function strikethrough(h, node) {
-  return h(node, 'del', traverse_all(h, node));
+function strikethrough(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'del',
+    properties: {},
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/emphasis.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Emphasis} Emphasis
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `emphasis` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Emphasis} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function emphasis(h, node) {
-  return h(node, 'em', traverse_all(h, node));
+function emphasis(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'em',
+    properties: {},
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/footnote-reference.js
 /**
  * @typedef {import('mdast').FootnoteReference} FootnoteReference
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('../state.js').State} State
  */
-
 
 
 
 /**
- * @type {Handler}
+ * Turn an mdast `footnoteReference` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {FootnoteReference} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function footnoteReference(h, node) {
-  var id = String(node.identifier);
+function footnote_reference_footnoteReference(state, node) {
+  var id = String(node.identifier).toUpperCase();
   var safeId = normalizeUri(id.toLowerCase());
-  var index = h.footnoteOrder.indexOf(id);
+  var index = state.footnoteOrder.indexOf(id);
   /** @type {number} */
   var counter;
   if (index === -1) {
-    h.footnoteOrder.push(id);
-    h.footnoteCounts[id] = 1;
-    counter = h.footnoteOrder.length;
+    state.footnoteOrder.push(id);
+    state.footnoteCounts[id] = 1;
+    counter = state.footnoteOrder.length;
   } else {
-    h.footnoteCounts[id]++;
+    state.footnoteCounts[id]++;
     counter = index + 1;
   }
-  var reuseCounter = h.footnoteCounts[id];
-  return h(node, 'sup', [h(node.position, 'a', {
-    href: '#' + h.clobberPrefix + 'fn-' + safeId,
-    id: h.clobberPrefix + 'fnref-' + safeId + (reuseCounter > 1 ? '-' + reuseCounter : ''),
-    dataFootnoteRef: true,
-    ariaDescribedBy: 'footnote-label'
-  }, [u('text', String(counter))])]);
+  var reuseCounter = state.footnoteCounts[id];
+
+  /** @type {Element} */
+  var link = {
+    type: 'element',
+    tagName: 'a',
+    properties: {
+      href: '#' + state.clobberPrefix + 'fn-' + safeId,
+      id: state.clobberPrefix + 'fnref-' + safeId + (reuseCounter > 1 ? '-' + reuseCounter : ''),
+      dataFootnoteRef: true,
+      ariaDescribedBy: ['footnote-label']
+    },
+    children: [{
+      type: 'text',
+      value: String(counter)
+    }]
+  };
+  state.patch(node, link);
+
+  /** @type {Element} */
+  var sup = {
+    type: 'element',
+    tagName: 'sup',
+    properties: {},
+    children: [link]
+  };
+  state.patch(node, sup);
+  return state.applyData(node, sup);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/footnote.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Footnote} Footnote
- * @typedef {import('../index.js').Handler} Handler
- *
- * @todo
- *   `footnote` (or “inline note”) are a pandoc footnotes feature (`^[a note]`)
- *   that does not exist in GFM.
- *   We still have support for it, so that things remain working with
- *   `micromark-extension-footnote` and `mdast-util-footnote`, but in the future
- *   we might be able to remove it?
+ * @typedef {import('../state.js').State} State
  */
 
 
+
+// To do: when both:
+// * <https://github.com/micromark/micromark-extension-footnote>
+// * <https://github.com/syntax-tree/mdast-util-footnote>
+// …are archived, remove this (also from mdast).
+// These inline notes are not used in GFM.
 
 /**
- * @type {Handler}
+ * Turn an mdast `footnote` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Footnote} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function footnote(h, node) {
-  var footnoteById = h.footnoteById;
+function footnote(state, node) {
+  var footnoteById = state.footnoteById;
   var no = 1;
-  while (no in footnoteById) {
-    no++;
-  }
+  while (no in footnoteById) no++;
   var identifier = String(no);
   footnoteById[identifier] = {
     type: 'footnoteDefinition',
@@ -31464,7 +31997,7 @@ function footnote(h, node) {
     }],
     position: node.position
   };
-  return footnoteReference(h, {
+  return footnote_reference_footnoteReference(state, {
     type: 'footnoteReference',
     identifier: identifier,
     position: node.position
@@ -31472,55 +32005,94 @@ function footnote(h, node) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/heading.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Heading} Heading
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `heading` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Heading} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function heading(h, node) {
-  return h(node, 'h' + node.depth, traverse_all(h, node));
+function heading(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'h' + node.depth,
+    properties: {},
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/html.js
 /**
- * @typedef {import('mdast').HTML} HTML
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('mdast').HTML} Html
+ * @typedef {import('../state.js').State} State
+ * @typedef {import('../../index.js').Raw} Raw
  */
-
-
 
 /**
- * Return either a `raw` node in dangerous mode, otherwise nothing.
+ * Turn an mdast `html` node into hast (`raw` node in dangerous mode, otherwise
+ * nothing).
  *
- * @type {Handler}
- * @param {HTML} node
+ * @param {State} state
+ *   Info passed around.
+ * @param {Html} node
+ *   mdast node.
+ * @returns {Raw | Element | null}
+ *   hast node.
  */
-function html(h, node) {
-  return h.dangerous ? h.augment(node, u('raw', node.value)) : null;
+function html(state, node) {
+  if (state.dangerous) {
+    /** @type {Raw} */
+    var result = {
+      type: 'raw',
+      value: node.value
+    };
+    state.patch(node, result);
+    return state.applyData(node, result);
+  }
+
+  // To do: next major: return `undefined`.
+  return null;
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/revert.js
 /**
- * @typedef {import('mdast').LinkReference} LinkReference
- * @typedef {import('mdast').ImageReference} ImageReference
- * @typedef {import('./index.js').Handler} Handler
- * @typedef {import('./index.js').Content} Content
+ * @typedef {import('hast').ElementContent} ElementContent
+ *
+ * @typedef {import('mdast').Content} Content
+ * @typedef {import('mdast').Reference} Reference
+ * @typedef {import('mdast').Root} Root
+ *
+ * @typedef {import('./state.js').State} State
  */
 
+/**
+ * @typedef {Root | Content} Nodes
+ * @typedef {Extract<Nodes, Reference>} References
+ */
 
-
+// To do: next major: always return array.
 
 /**
  * Return the content of a reference without definition as plain text.
  *
- * @type {Handler}
- * @param {ImageReference|LinkReference} node
- * @returns {Content|Array<Content>}
+ * @param {State} state
+ *   Info passed around.
+ * @param {References} node
+ *   Reference node (image, link).
+ * @returns {ElementContent | Array<ElementContent>}
+ *   hast content.
  */
-function revert(h, node) {
+function revert(state, node) {
   var subtype = node.referenceType;
   var suffix = ']';
   if (subtype === 'collapsed') {
@@ -31529,229 +32101,368 @@ function revert(h, node) {
     suffix += '[' + (node.label || node.identifier) + ']';
   }
   if (node.type === 'imageReference') {
-    return u('text', '![' + node.alt + suffix);
+    return {
+      type: 'text',
+      value: '![' + node.alt + suffix
+    };
   }
-  var contents = traverse_all(h, node);
+  var contents = state.all(node);
   var head = contents[0];
   if (head && head.type === 'text') {
     head.value = '[' + head.value;
   } else {
-    contents.unshift(u('text', '['));
+    contents.unshift({
+      type: 'text',
+      value: '['
+    });
   }
   var tail = contents[contents.length - 1];
   if (tail && tail.type === 'text') {
     tail.value += suffix;
   } else {
-    contents.push(u('text', suffix));
+    contents.push({
+      type: 'text',
+      value: suffix
+    });
   }
   return contents;
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/image-reference.js
 /**
- * @typedef {import('mdast').ImageReference} ImageReference
+ * @typedef {import('hast').ElementContent} ElementContent
+ * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').ImageReference} ImageReference
+ * @typedef {import('../state.js').State} State
  */
 
 
 
 
 /**
- * @type {Handler}
+ * Turn an mdast `imageReference` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {ImageReference} node
+ *   mdast node.
+ * @returns {ElementContent | Array<ElementContent>}
+ *   hast node.
  */
-function imageReference(h, node) {
-  var def = h.definition(node.identifier);
+function imageReference(state, node) {
+  var def = state.definition(node.identifier);
   if (!def) {
-    return revert(h, node);
+    return revert(state, node);
   }
 
   /** @type {Properties} */
-  var props = {
+  var properties = {
     src: normalizeUri(def.url || ''),
     alt: node.alt
   };
   if (def.title !== null && def.title !== undefined) {
-    props.title = def.title;
+    properties.title = def.title;
   }
-  return h(node, 'img', props);
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'img',
+    properties: properties,
+    children: []
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/image.js
 /**
- * @typedef {import('mdast').Image} Image
+ * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').Image} Image
+ * @typedef {import('../state.js').State} State
  */
 
 
 
 /**
- * @type {Handler}
+ * Turn an mdast `image` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Image} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function image_image(h, node) {
+function image_image(state, node) {
   /** @type {Properties} */
-  var props = {
-    src: normalizeUri(node.url),
-    alt: node.alt
+  var properties = {
+    src: normalizeUri(node.url)
   };
-  if (node.title !== null && node.title !== undefined) {
-    props.title = node.title;
+  if (node.alt !== null && node.alt !== undefined) {
+    properties.alt = node.alt;
   }
-  return h(node, 'img', props);
+  if (node.title !== null && node.title !== undefined) {
+    properties.title = node.title;
+  }
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'img',
+    properties: properties,
+    children: []
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/inline-code.js
 /**
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('hast').Text} Text
  * @typedef {import('mdast').InlineCode} InlineCode
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `inlineCode` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {InlineCode} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function inline_code_inlineCode(h, node) {
-  return h(node, 'code', [u('text', node.value.replace(/\r?\n|\r/g, ' '))]);
+function inline_code_inlineCode(state, node) {
+  /** @type {Text} */
+  var text = {
+    type: 'text',
+    value: node.value.replace(/\r?\n|\r/g, ' ')
+  };
+  state.patch(node, text);
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'code',
+    properties: {},
+    children: [text]
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/link-reference.js
 /**
- * @typedef {import('mdast').LinkReference} LinkReference
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('hast').ElementContent} ElementContent
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').LinkReference} LinkReference
+ * @typedef {import('../state.js').State} State
  */
-
 
 
 
 
 /**
- * @type {Handler}
+ * Turn an mdast `linkReference` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {LinkReference} node
+ *   mdast node.
+ * @returns {ElementContent | Array<ElementContent>}
+ *   hast node.
  */
-function linkReference(h, node) {
-  var def = h.definition(node.identifier);
+function linkReference(state, node) {
+  var def = state.definition(node.identifier);
   if (!def) {
-    return revert(h, node);
+    return revert(state, node);
   }
 
   /** @type {Properties} */
-  var props = {
+  var properties = {
     href: normalizeUri(def.url || '')
   };
   if (def.title !== null && def.title !== undefined) {
-    props.title = def.title;
+    properties.title = def.title;
   }
-  return h(node, 'a', props, traverse_all(h, node));
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'a',
+    properties: properties,
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/link.js
 /**
- * @typedef {import('mdast').Link} Link
+ * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').Link} Link
+ * @typedef {import('../state.js').State} State
  */
-
 
 
 
 /**
- * @type {Handler}
+ * Turn an mdast `link` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Link} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function link_link(h, node) {
+function link_link(state, node) {
   /** @type {Properties} */
-  var props = {
+  var properties = {
     href: normalizeUri(node.url)
   };
   if (node.title !== null && node.title !== undefined) {
-    props.title = node.title;
+    properties.title = node.title;
   }
-  return h(node, 'a', props, traverse_all(h, node));
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'a',
+    properties: properties,
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/list-item.js
 
 /**
- * @typedef {import('mdast').ListItem} ListItem
- * @typedef {import('mdast').List} List
- * @typedef {import('hast').Properties} Properties
  * @typedef {import('hast').Element} Element
- * @typedef {import('../index.js').Handler} Handler
- * @typedef {import('../index.js').Content} Content
+ * @typedef {import('hast').ElementContent} ElementContent
+ * @typedef {import('hast').Properties} Properties
+ * @typedef {import('mdast').Content} Content
+ * @typedef {import('mdast').ListItem} ListItem
+ * @typedef {import('mdast').Parent} Parent
+ * @typedef {import('mdast').Root} Root
+ * @typedef {import('../state.js').State} State
  */
-
-
-
 
 /**
- * @type {Handler}
- * @param {ListItem} node
- * @param {List} parent
+ * @typedef {Root | Content} Nodes
+ * @typedef {Extract<Nodes, Parent>} Parents
  */
-function list_item_listItem(h, node, parent) {
-  var result = traverse_all(h, node);
+
+/**
+ * Turn an mdast `listItem` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {ListItem} node
+ *   mdast node.
+ * @param {Parents | null | undefined} parent
+ *   Parent of `node`.
+ * @returns {Element}
+ *   hast node.
+ */
+function list_item_listItem(state, node, parent) {
+  var results = state.all(node);
   var loose = parent ? listLoose(parent) : listItemLoose(node);
   /** @type {Properties} */
-  var props = {};
-  /** @type {Array<Content>} */
-  var wrapped = [];
+  var properties = {};
+  /** @type {Array<ElementContent>} */
+  var children = [];
   if (typeof node.checked === 'boolean') {
+    var head = results[0];
     /** @type {Element} */
     var paragraph;
-    if (result[0] && result[0].type === 'element' && result[0].tagName === 'p') {
-      paragraph = result[0];
+    if (head && head.type === 'element' && head.tagName === 'p') {
+      paragraph = head;
     } else {
-      paragraph = h(null, 'p', []);
-      result.unshift(paragraph);
+      paragraph = {
+        type: 'element',
+        tagName: 'p',
+        properties: {},
+        children: []
+      };
+      results.unshift(paragraph);
     }
     if (paragraph.children.length > 0) {
-      paragraph.children.unshift(u('text', ' '));
+      paragraph.children.unshift({
+        type: 'text',
+        value: ' '
+      });
     }
-    paragraph.children.unshift(h(null, 'input', {
-      type: 'checkbox',
-      checked: node.checked,
-      disabled: true
-    }));
+    paragraph.children.unshift({
+      type: 'element',
+      tagName: 'input',
+      properties: {
+        type: 'checkbox',
+        checked: node.checked,
+        disabled: true
+      },
+      children: []
+    });
 
     // According to github-markdown-css, this class hides bullet.
     // See: <https://github.com/sindresorhus/github-markdown-css>.
-    props.className = ['task-list-item'];
+    properties.className = ['task-list-item'];
   }
   var index = -1;
-  while (++index < result.length) {
-    var child = result[index];
+  while (++index < results.length) {
+    var child = results[index];
 
     // Add eols before nodes, except if this is a loose, first paragraph.
     if (loose || index !== 0 || child.type !== 'element' || child.tagName !== 'p') {
-      wrapped.push(u('text', '\n'));
+      children.push({
+        type: 'text',
+        value: '\n'
+      });
     }
     if (child.type === 'element' && child.tagName === 'p' && !loose) {
-      wrapped.push.apply(wrapped, _toConsumableArray(child.children));
+      children.push.apply(children, _toConsumableArray(child.children));
     } else {
-      wrapped.push(child);
+      children.push(child);
     }
   }
-  var tail = result[result.length - 1];
+  var tail = results[results.length - 1];
 
   // Add a final eol.
-  if (tail && (loose || !('tagName' in tail) || tail.tagName !== 'p')) {
-    wrapped.push(u('text', '\n'));
+  if (tail && (loose || tail.type !== 'element' || tail.tagName !== 'p')) {
+    children.push({
+      type: 'text',
+      value: '\n'
+    });
   }
-  return h(node, 'li', props, wrapped);
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'li',
+    properties: properties,
+    children: children
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 
 /**
- * @param {List} node
+ * @param {Parents} node
  * @return {Boolean}
  */
 function listLoose(node) {
-  var loose = node.spread;
-  var children = node.children;
-  var index = -1;
-  while (!loose && ++index < children.length) {
-    loose = listItemLoose(children[index]);
+  var loose = false;
+  if (node.type === 'list') {
+    loose = node.spread || false;
+    var children = node.children;
+    var index = -1;
+    while (!loose && ++index < children.length) {
+      loose = listItemLoose(children[index]);
+    }
   }
-  return Boolean(loose);
+  return loose;
 }
 
 /**
@@ -31764,129 +32475,299 @@ function listItemLoose(node) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/list.js
 /**
- * @typedef {import('mdast').List} List
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').List} List
+ * @typedef {import('../state.js').State} State
  */
-
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `list` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {List} node
+ *   mdast node.
  * @returns {Element}
+ *   hast node.
  */
-function list_list(h, node) {
+function list_list(state, node) {
   /** @type {Properties} */
-  var props = {};
-  var name = node.ordered ? 'ol' : 'ul';
-  var items = traverse_all(h, node);
+  var properties = {};
+  var results = state.all(node);
   var index = -1;
   if (typeof node.start === 'number' && node.start !== 1) {
-    props.start = node.start;
+    properties.start = node.start;
   }
 
   // Like GitHub, add a class for custom styling.
-  while (++index < items.length) {
-    var item = items[index];
-    if (item.type === 'element' && item.tagName === 'li' && item.properties && Array.isArray(item.properties.className) && item.properties.className.includes('task-list-item')) {
-      props.className = ['contains-task-list'];
+  while (++index < results.length) {
+    var child = results[index];
+    if (child.type === 'element' && child.tagName === 'li' && child.properties && Array.isArray(child.properties.className) && child.properties.className.includes('task-list-item')) {
+      properties.className = ['contains-task-list'];
       break;
     }
   }
-  return h(node, name, props, wrap_wrap(items, true));
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: node.ordered ? 'ol' : 'ul',
+    properties: properties,
+    children: state.wrap(results, true)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/paragraph.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Paragraph} Paragraph
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `paragraph` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Paragraph} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function paragraph(h, node) {
-  return h(node, 'p', traverse_all(h, node));
+function paragraph(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'p',
+    properties: {},
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/root.js
 /**
- * @typedef {import('mdast').Root} Root
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('hast').Root} HastRoot
+ * @typedef {import('hast').Element} HastElement
+ * @typedef {import('mdast').Root} MdastRoot
+ * @typedef {import('../state.js').State} State
  */
-
-
-
-
 
 /**
- * @type {Handler}
- * @param {Root} node
+ * Turn an mdast `root` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {MdastRoot} node
+ *   mdast node.
+ * @returns {HastRoot | HastElement}
+ *   hast node.
  */
-function root(h, node) {
-  // @ts-expect-error `root`s are also fine.
-  return h.augment(node, u('root', wrap_wrap(traverse_all(h, node))));
+function root(state, node) {
+  /** @type {HastRoot} */
+  var result = {
+    type: 'root',
+    children: state.wrap(state.all(node))
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/strong.js
 /**
+ * @typedef {import('hast').Element} Element
  * @typedef {import('mdast').Strong} Strong
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 /**
- * @type {Handler}
+ * Turn an mdast `strong` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Strong} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function strong(h, node) {
-  return h(node, 'strong', traverse_all(h, node));
+function strong(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'strong',
+    properties: {},
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/table.js
 /**
- * @typedef {import('mdast').Table} Table
  * @typedef {import('hast').Element} Element
- * @typedef {import('../index.js').Handler} Handler
- * @typedef {import('../index.js').Content} Content
+ * @typedef {import('mdast').Table} Table
+ * @typedef {import('../state.js').State} State
  */
-
-
 
 
 
 /**
- * @type {Handler}
+ * Turn an mdast `table` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
  * @param {Table} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
  */
-function table(h, node) {
-  var rows = node.children;
-  var index = -1;
-  var align = node.align || [];
+function table(state, node) {
+  var rows = state.all(node);
+  var firstRow = rows.shift();
   /** @type {Array<Element>} */
-  var result = [];
-  while (++index < rows.length) {
-    var row = rows[index].children;
-    var name = index === 0 ? 'th' : 'td';
-    /** @type {Array<Content>} */
-    var out = [];
-    var cellIndex = -1;
-    var length = node.align ? align.length : row.length;
-    while (++cellIndex < length) {
-      var cell = row[cellIndex];
-      out.push(h(cell, name, {
-        align: align[cellIndex]
-      }, cell ? traverse_all(h, cell) : []));
-    }
-    result[index] = h(rows[index], 'tr', wrap_wrap(out, true));
+  var tableContent = [];
+  if (firstRow) {
+    /** @type {Element} */
+    var head = {
+      type: 'element',
+      tagName: 'thead',
+      properties: {},
+      children: state.wrap([firstRow], true)
+    };
+    state.patch(node.children[0], head);
+    tableContent.push(head);
   }
-  return h(node, 'table', wrap_wrap([h(result[0].position, 'thead', wrap_wrap([result[0]], true))].concat(result[1] ? h({
-    start: pointStart(result[1]),
-    end: pointEnd(result[result.length - 1])
-  }, 'tbody', wrap_wrap(result.slice(1), true)) : []), true));
+  if (rows.length > 0) {
+    /** @type {Element} */
+    var body = {
+      type: 'element',
+      tagName: 'tbody',
+      properties: {},
+      children: state.wrap(rows, true)
+    };
+    var start = pointStart(node.children[1]);
+    var end = pointEnd(node.children[node.children.length - 1]);
+    if (start.line && end.line) body.position = {
+      start: start,
+      end: end
+    };
+    tableContent.push(body);
+  }
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'table',
+    properties: {},
+    children: state.wrap(tableContent, true)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
+}
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/table-row.js
+/**
+ * @typedef {import('hast').Properties} Properties
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('hast').ElementContent} ElementContent
+ * @typedef {import('mdast').Content} Content
+ * @typedef {import('mdast').Parent} Parent
+ * @typedef {import('mdast').Root} Root
+ * @typedef {import('mdast').TableRow} TableRow
+ * @typedef {import('../state.js').State} State
+ */
+
+/**
+ * @typedef {Root | Content} Nodes
+ * @typedef {Extract<Nodes, Parent>} Parents
+ */
+
+/**
+ * Turn an mdast `tableRow` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {TableRow} node
+ *   mdast node.
+ * @param {Parents | null | undefined} parent
+ *   Parent of `node`.
+ * @returns {Element}
+ *   hast node.
+ */
+function tableRow(state, node, parent) {
+  var siblings = parent ? parent.children : undefined;
+  // Generate a body row when without parent.
+  var rowIndex = siblings ? siblings.indexOf(node) : 1;
+  var tagName = rowIndex === 0 ? 'th' : 'td';
+  var align = parent && parent.type === 'table' ? parent.align : undefined;
+  var length = align ? align.length : node.children.length;
+  var cellIndex = -1;
+  /** @type {Array<ElementContent>} */
+  var cells = [];
+  while (++cellIndex < length) {
+    // Note: can also be undefined.
+    var cell = node.children[cellIndex];
+    /** @type {Properties} */
+    var properties = {};
+    var alignValue = align ? align[cellIndex] : undefined;
+    if (alignValue) {
+      properties.align = alignValue;
+    }
+
+    /** @type {Element} */
+    var _result = {
+      type: 'element',
+      tagName: tagName,
+      properties: properties,
+      children: []
+    };
+    if (cell) {
+      _result.children = state.all(cell);
+      state.patch(cell, _result);
+      _result = state.applyData(node, _result);
+    }
+    cells.push(_result);
+  }
+
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'tr',
+    properties: {},
+    children: state.wrap(cells, true)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
+}
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/table-cell.js
+/**
+ * @typedef {import('hast').Element} Element
+ * @typedef {import('mdast').TableCell} TableCell
+ * @typedef {import('../state.js').State} State
+ */
+
+/**
+ * Turn an mdast `tableCell` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {TableCell} node
+ *   mdast node.
+ * @returns {Element}
+ *   hast node.
+ */
+function tableCell(state, node) {
+  // Note: this function is normally not called: see `table-row` for how rows
+  // and their cells are compiled.
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'td',
+    // Assume body cell.
+    properties: {},
+    children: state.all(node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/trim-lines/index.js
 var tab = 9; /* `\t` */
@@ -31948,34 +32829,60 @@ function trimLine(value, start, end) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/text.js
 /**
- * @typedef {import('mdast').Text} Text
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('hast').Element} HastElement
+ * @typedef {import('hast').Text} HastText
+ * @typedef {import('mdast').Text} MdastText
+ * @typedef {import('../state.js').State} State
  */
-
 
 
 
 /**
- * @type {Handler}
- * @param {Text} node
+ * Turn an mdast `text` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {MdastText} node
+ *   mdast node.
+ * @returns {HastText | HastElement}
+ *   hast node.
  */
-function handlers_text_text(h, node) {
-  return h.augment(node, u('text', trimLines(String(node.value))));
+function handlers_text_text(state, node) {
+  /** @type {HastText} */
+  var result = {
+    type: 'text',
+    value: trimLines(String(node.value))
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/thematic-break.js
 /**
- * @typedef {import('mdast').ThematicBreak} ThematicBreak
  * @typedef {import('hast').Element} Element
- * @typedef {import('../index.js').Handler} Handler
+ * @typedef {import('mdast').ThematicBreak} ThematicBreak
+ * @typedef {import('../state.js').State} State
  */
 
 /**
- * @type {Handler}
- * @param {ThematicBreak} [node]
+ * Turn an mdast `thematicBreak` node into hast.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {ThematicBreak} node
+ *   mdast node.
  * @returns {Element}
+ *   hast node.
  */
-function thematic_break_thematicBreak(h, node) {
-  return h(node, 'hr');
+function thematic_break_thematicBreak(state, node) {
+  /** @type {Element} */
+  var result = {
+    type: 'element',
+    tagName: 'hr',
+    properties: {},
+    children: []
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
 }
 ;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/handlers/index.js
 
@@ -32000,13 +32907,19 @@ function thematic_break_thematicBreak(h, node) {
 
 
 
+
+
+
+/**
+ * Default handlers for nodes.
+ */
 var handlers = {
   blockquote: blockquote,
   "break": hardBreak,
   code: code_code,
   "delete": strikethrough,
   emphasis: emphasis,
-  footnoteReference: footnoteReference,
+  footnoteReference: footnote_reference_footnoteReference,
   footnote: footnote,
   heading: heading,
   html: html,
@@ -32021,6 +32934,8 @@ var handlers = {
   root: root,
   strong: strong,
   table: table,
+  tableCell: tableCell,
+  tableRow: tableRow,
   text: handlers_text_text,
   thematicBreak: thematic_break_thematicBreak,
   toml: ignore,
@@ -32031,69 +32946,100 @@ var handlers = {
 
 // Return nothing for nodes that are ignored.
 function ignore() {
+  // To do: next major: return `undefined`.
   return null;
 }
-;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/index.js
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/state.js
+
 
 /**
- * @typedef {import('mdast').Root|import('mdast').Parent['children'][number]} MdastNode
- * @typedef {import('hast').Root|import('hast').Parent['children'][number]} HastNode
- * @typedef {import('mdast').Parent} Parent
- * @typedef {import('mdast').Definition} Definition
- * @typedef {import('mdast').FootnoteDefinition} FootnoteDefinition
- * @typedef {import('hast').Properties} Properties
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').ElementContent} Content
- * @typedef {import('unist-util-position').PositionLike} PositionLike
+ * @typedef {import('hast').Content} HastContent
+ * @typedef {import('hast').Element} HastElement
+ * @typedef {import('hast').ElementContent} HastElementContent
+ * @typedef {import('hast').Properties} HastProperties
+ * @typedef {import('hast').Root} HastRoot
+ * @typedef {import('hast').Text} HastText
+ *
+ * @typedef {import('mdast').Content} MdastContent
+ * @typedef {import('mdast').Definition} MdastDefinition
+ * @typedef {import('mdast').FootnoteDefinition} MdastFootnoteDefinition
+ * @typedef {import('mdast').Parent} MdastParent
+ * @typedef {import('mdast').Root} MdastRoot
+ */
+
+/**
+ * @typedef {HastRoot | HastContent} HastNodes
+ * @typedef {MdastRoot | MdastContent} MdastNodes
+ * @typedef {Extract<MdastNodes, MdastParent>} MdastParents
  *
  * @typedef EmbeddedHastFields
- * @property {string} [hName]
- *   Defines the tag name of an element.
- * @property {Properties} [hProperties]
- *   Defines the properties of an element.
- * @property {Array<Content>} [hChildren]
- *   Defines the (hast) children of an element.
+ *   hast fields.
+ * @property {string | null | undefined} [hName]
+ *   Generate a specific element with this tag name instead.
+ * @property {HastProperties | null | undefined} [hProperties]
+ *   Generate an element with these properties instead.
+ * @property {Array<HastElementContent> | null | undefined} [hChildren]
+ *   Generate an element with this content instead.
  *
- * @typedef {Record<string, unknown> & EmbeddedHastFields} Data
- *   unist data with embedded hast fields.
+ * @typedef {Record<string, unknown> & EmbeddedHastFields} MdastData
+ *   mdast data with embedded hast fields.
  *
- * @typedef {MdastNode & {data?: Data}} NodeWithData
- *   unist node with embedded hast data.
+ * @typedef {MdastNodes & {data?: MdastData | null | undefined}} MdastNodeWithData
+ *   mdast node with embedded hast data.
+ *
+ * @typedef PointLike
+ *   Point-like value.
+ * @property {number | null | undefined} [line]
+ *   Line.
+ * @property {number | null | undefined} [column]
+ *   Column.
+ * @property {number | null | undefined} [offset]
+ *   Offset.
+ *
+ * @typedef PositionLike
+ *   Position-like value.
+ * @property {PointLike | null | undefined} [start]
+ *   Point-like value.
+ * @property {PointLike | null | undefined} [end]
+ *   Point-like value.
  *
  * @callback Handler
  *   Handle a node.
- * @param {H} h
- *   Handle context.
+ * @param {State} state
+ *   Info passed around.
  * @param {any} node
  *   mdast node to handle.
- * @param {Parent|null} parent
+ * @param {MdastParents | null | undefined} parent
  *   Parent of `node`.
- * @returns {Content|Array<Content>|null|undefined}
+ * @returns {HastElementContent | Array<HastElementContent> | null | undefined}
  *   hast node.
  *
  * @callback HFunctionProps
- * @param {MdastNode|PositionLike|null|undefined} node
+ *   Signature of `state` for when props are passed.
+ * @param {MdastNodes | PositionLike | null | undefined} node
  *   mdast node or unist position.
  * @param {string} tagName
  *   HTML tag name.
- * @param {Properties} props
+ * @param {HastProperties} props
  *   Properties.
- * @param {Array<Content>?} [children]
+ * @param {Array<HastElementContent> | null | undefined} [children]
  *   hast content.
- * @returns {Element}
+ * @returns {HastElement}
  *   Compiled element.
  *
  * @callback HFunctionNoProps
- * @param {MdastNode|PositionLike|null|undefined} node
+ *   Signature of `state` for when no props are passed.
+ * @param {MdastNodes | PositionLike | null | undefined} node
  *   mdast node or unist position.
  * @param {string} tagName
  *   HTML tag name.
- * @param {Array<Content>?} [children]
- *   hast content
- * @returns {Element}
+ * @param {Array<HastElementContent> | null | undefined} [children]
+ *   hast content.
+ * @returns {HastElement}
  *   Compiled element.
  *
  * @typedef HFields
+ *   Info on `state`.
  * @property {boolean} dangerous
  *   Whether HTML is allowed.
  * @property {string} clobberPrefix
@@ -32102,69 +33048,69 @@ function ignore() {
  *   Label to use to introduce the footnote section.
  * @property {string} footnoteLabelTagName
  *   HTML used for the footnote label.
- * @property {Properties} footnoteLabelProperties
+ * @property {HastProperties} footnoteLabelProperties
  *   Properties on the HTML tag used for the footnote label.
  * @property {string} footnoteBackLabel
- *   Label to use to go back to a footnote call from the footnote section.
- * @property {(identifier: string) => Definition|null} definition
+ *   Label to use from backreferences back to their footnote call.
+ * @property {(identifier: string) => MdastDefinition | null} definition
  *   Definition cache.
- * @property {Record<string, FootnoteDefinition>} footnoteById
- *   Footnote cache.
+ * @property {Record<string, MdastFootnoteDefinition>} footnoteById
+ *   Footnote definitions by their identifier.
  * @property {Array<string>} footnoteOrder
- *   Order in which footnotes occur.
+ *   Identifiers of order when footnote calls first appear in tree order.
  * @property {Record<string, number>} footnoteCounts
- *   Counts the same footnote was used.
+ *   Counts for how often the same footnote was called.
  * @property {Handlers} handlers
  *   Applied handlers.
  * @property {Handler} unknownHandler
  *   Handler for any none not in `passThrough` or otherwise handled.
- * @property {(left: NodeWithData|PositionLike|null|undefined, right: Content) => Content} augment
- *   Like `h` but lower-level and usable on non-elements.
+ * @property {(from: MdastNodes, node: HastNodes) => void} patch
+ *   Copy a node’s positional info.
+ * @property {<Type extends HastNodes>(from: MdastNodes, to: Type) => Type | HastElement} applyData
+ *   Honor the `data` of `from`, and generate an element instead of `node`.
+ * @property {(node: MdastNodes, parent: MdastParents | null | undefined) => HastElementContent | Array<HastElementContent> | null | undefined} one
+ *   Transform an mdast node to hast.
+ * @property {(node: MdastNodes) => Array<HastElementContent>} all
+ *   Transform the children of an mdast parent to hast.
+ * @property {<Type extends HastContent>(nodes: Array<Type>, loose?: boolean | null | undefined) => Array<Type | HastText>} wrap
+ *   Wrap `nodes` with line endings between each node, adds initial/final line endings when `loose`.
+ * @property {(left: MdastNodeWithData | PositionLike | null | undefined, right: HastElementContent) => HastElementContent} augment
+ *   Like `state` but lower-level and usable on non-elements.
+ *   Deprecated: use `patch` and `applyData`.
  * @property {Array<string>} passThrough
  *   List of node types to pass through untouched (except for their children).
  *
  * @typedef Options
  *   Configuration (optional).
- * @property {boolean} [allowDangerousHtml=false]
- *   Whether to allow `html` nodes and inject them as `raw` HTML.
- * @property {string} [clobberPrefix='user-content-']
- *   Prefix to use before the `id` attribute to prevent it from *clobbering*.
- *   attributes.
- *   DOM clobbering is this:
- *
- *   ```html
- *   <p id=x></p>
- *   <script>alert(x)</script>
- *   ```
- *
- *   Elements by their ID are made available in browsers on the `window` object.
- *   Using a prefix prevents this from being a problem.
- * @property {string} [footnoteLabel='Footnotes']
- *   Label to use for the footnotes section.
- *   Affects screen reader users.
- *   Change it if you’re authoring in a different language.
- * @property {string} [footnoteLabelTagName='h2']
- *   HTML tag to use for the footnote label.
- *   Can be changed to match your document structure and play well with your choice of css.
- * @property {Properties} [footnoteLabelProperties={className: ['sr-only']}]
- *   Properties to use on the footnote label.
- *   A 'sr-only' class is added by default to hide this from sighted users.
- *   Change it to make the label visible, or add classes for other purposes.
- * @property {string} [footnoteBackLabel='Back to content']
- *   Label to use from backreferences back to their footnote call.
- *   Affects screen reader users.
- *   Change it if you’re authoring in a different language.
- * @property {Handlers} [handlers]
- *   Object mapping mdast nodes to functions handling them
- * @property {Array<string>} [passThrough]
- *   List of custom mdast node types to pass through (keep) in hast
- * @property {Handler} [unknownHandler]
+ * @property {boolean | null | undefined} [allowDangerousHtml=false]
+ *   Whether to persist raw HTML in markdown in the hast tree.
+ * @property {string | null | undefined} [clobberPrefix='user-content-']
+ *   Prefix to use before the `id` attribute on footnotes to prevent it from
+ *   *clobbering*.
+ * @property {string | null | undefined} [footnoteBackLabel='Back to content']
+ *   Label to use from backreferences back to their footnote call (affects
+ *   screen readers).
+ * @property {string | null | undefined} [footnoteLabel='Footnotes']
+ *   Label to use for the footnotes section (affects screen readers).
+ * @property {HastProperties | null | undefined} [footnoteLabelProperties={className: ['sr-only']}]
+ *   Properties to use on the footnote label (note that `id: 'footnote-label'`
+ *   is always added as footnote calls use it with `aria-describedby` to
+ *   provide an accessible label).
+ * @property {string | null | undefined} [footnoteLabelTagName='h2']
+ *   Tag name to use for the footnote label.
+ * @property {Handlers | null | undefined} [handlers]
+ *   Extra handlers for nodes.
+ * @property {Array<string> | null | undefined} [passThrough]
+ *   List of custom mdast node types to pass through (keep) in hast (note that
+ *   the node itself is passed, but eventual children are transformed).
+ * @property {Handler | null | undefined} [unknownHandler]
  *   Handler for all unknown nodes.
  *
  * @typedef {Record<string, Handler>} Handlers
- *   Map of node types to handlers
- * @typedef {HFunctionProps & HFunctionNoProps & HFields} H
- *   Handle context
+ *   Handle nodes.
+ *
+ * @typedef {HFunctionProps & HFunctionNoProps & HFields} State
+ *   Info passed around.
  */
 
 
@@ -32172,68 +33118,90 @@ function ignore() {
 
 
 
-
-
-
-var mdast_util_to_hast_lib_own = {}.hasOwnProperty;
+var state_own = {}.hasOwnProperty;
 
 /**
- * Turn mdast into hast.
+ * Create `state` from an mdast tree.
  *
- * @param {MdastNode} tree
- *   mdast node.
- * @param {Options} [options]
- *   Configuration (optional).
- * @returns {H}
- *   `h` function.
+ * @param {MdastNodes} tree
+ *   mdast node to transform.
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
+ * @returns {State}
+ *   `state` function.
  */
-function factory(tree, options) {
+function createState(tree, options) {
   var settings = options || {};
   var dangerous = settings.allowDangerousHtml || false;
-  /** @type {Record<string, FootnoteDefinition>} */
+  /** @type {Record<string, MdastFootnoteDefinition>} */
   var footnoteById = {};
-  h.dangerous = dangerous;
-  h.clobberPrefix = settings.clobberPrefix === undefined || settings.clobberPrefix === null ? 'user-content-' : settings.clobberPrefix;
-  h.footnoteLabel = settings.footnoteLabel || 'Footnotes';
-  h.footnoteLabelTagName = settings.footnoteLabelTagName || 'h2';
-  h.footnoteLabelProperties = settings.footnoteLabelProperties || {
+
+  // To do: next major: add `options` to state, remove:
+  // `dangerous`, `clobberPrefix`, `footnoteLabel`, `footnoteLabelTagName`,
+  // `footnoteLabelProperties`, `footnoteBackLabel`, `passThrough`,
+  // `unknownHandler`.
+
+  // To do: next major: move to `state.options.allowDangerousHtml`.
+  state.dangerous = dangerous;
+  // To do: next major: move to `state.options`.
+  state.clobberPrefix = settings.clobberPrefix === undefined || settings.clobberPrefix === null ? 'user-content-' : settings.clobberPrefix;
+  // To do: next major: move to `state.options`.
+  state.footnoteLabel = settings.footnoteLabel || 'Footnotes';
+  // To do: next major: move to `state.options`.
+  state.footnoteLabelTagName = settings.footnoteLabelTagName || 'h2';
+  // To do: next major: move to `state.options`.
+  state.footnoteLabelProperties = settings.footnoteLabelProperties || {
     className: ['sr-only']
   };
-  h.footnoteBackLabel = settings.footnoteBackLabel || 'Back to content';
-  h.definition = definitions(tree);
-  h.footnoteById = footnoteById;
+  // To do: next major: move to `state.options`.
+  state.footnoteBackLabel = settings.footnoteBackLabel || 'Back to content';
+  // To do: next major: move to `state.options`.
+  state.unknownHandler = settings.unknownHandler;
+  // To do: next major: move to `state.options`.
+  state.passThrough = settings.passThrough;
+  state.handlers = _objectSpread2(_objectSpread2({}, handlers), settings.handlers);
+
+  // To do: next major: replace utility with `definitionById` object, so we
+  // only walk once (as we need footnotes too).
+  state.definition = definitions(tree);
+  state.footnoteById = footnoteById;
   /** @type {Array<string>} */
-  h.footnoteOrder = [];
+  state.footnoteOrder = [];
   /** @type {Record<string, number>} */
-  h.footnoteCounts = {};
-  h.augment = augment;
-  h.handlers = _objectSpread2(_objectSpread2({}, handlers), settings.handlers);
-  h.unknownHandler = settings.unknownHandler;
-  h.passThrough = settings.passThrough;
+  state.footnoteCounts = {};
+  state.patch = patch;
+  state.applyData = applyData;
+  state.one = oneBound;
+  state.all = allBound;
+  state.wrap = state_wrap;
+  // To do: next major: remove `augment`.
+  state.augment = augment;
   visit(tree, 'footnoteDefinition', function (definition) {
     var id = String(definition.identifier).toUpperCase();
 
     // Mimick CM behavior of link definitions.
     // See: <https://github.com/syntax-tree/mdast-util-definitions/blob/8290999/index.js#L26>.
-    if (!mdast_util_to_hast_lib_own.call(footnoteById, id)) {
+    if (!state_own.call(footnoteById, id)) {
       footnoteById[id] = definition;
     }
   });
 
   // @ts-expect-error Hush, it’s fine!
-  return h;
+  return state;
 
   /**
    * Finalise the created `right`, a hast node, from `left`, an mdast node.
    *
-   * @param {(NodeWithData|PositionLike)?} left
-   * @param {Content} right
-   * @returns {Content}
+   * @param {MdastNodeWithData | PositionLike | null | undefined} left
+   * @param {HastElementContent} right
+   * @returns {HastElementContent}
    */
+  /* c8 ignore start */
+  // To do: next major: remove.
   function augment(left, right) {
     // Handle `data.hName`, `data.hProperties, `data.hChildren`.
     if (left && 'data' in left && left.data) {
-      /** @type {Data} */
+      /** @type {MdastData} */
       var data = left.data;
       if (data.hName) {
         if (right.type !== 'element') {
@@ -32267,13 +33235,16 @@ function factory(tree, options) {
     }
     return right;
   }
+  /* c8 ignore stop */
 
   /**
    * Create an element for `node`.
    *
    * @type {HFunctionProps}
    */
-  function h(node, tagName, props, children) {
+  /* c8 ignore start */
+  // To do: next major: remove.
+  function state(node, tagName, props, children) {
     if (Array.isArray(props)) {
       children = props;
       props = {};
@@ -32287,31 +33258,373 @@ function factory(tree, options) {
       children: children || []
     });
   }
+  /* c8 ignore stop */
+
+  /**
+   * Transform an mdast node into a hast node.
+   *
+   * @param {MdastNodes} node
+   *   mdast node.
+   * @param {MdastParents | null | undefined} [parent]
+   *   Parent of `node`.
+   * @returns {HastElementContent | Array<HastElementContent> | null | undefined}
+   *   Resulting hast node.
+   */
+  function oneBound(node, parent) {
+    // @ts-expect-error: that’s a state :)
+    return state_one(state, node, parent);
+  }
+
+  /**
+   * Transform the children of an mdast node into hast nodes.
+   *
+   * @param {MdastNodes} parent
+   *   mdast node to compile
+   * @returns {Array<HastElementContent>}
+   *   Resulting hast nodes.
+   */
+  function allBound(parent) {
+    // @ts-expect-error: that’s a state :)
+    return state_all(state, parent);
+  }
 }
 
 /**
- * Transform `tree` (an mdast node) to a hast node.
+ * Copy a node’s positional info.
  *
- * @param {MdastNode} tree mdast node
- * @param {Options} [options] Configuration
- * @returns {HastNode|null|undefined} hast node
+ * @param {MdastNodes} from
+ *   mdast node to copy from.
+ * @param {HastNodes} to
+ *   hast node to copy into.
+ * @returns {void}
+ *   Nothing.
  */
+function patch(from, to) {
+  if (from.position) to.position = lib_position(from);
+}
+
+/**
+ * Honor the `data` of `from` and maybe generate an element instead of `to`.
+ *
+ * @template {HastNodes} Type
+ *   Node type.
+ * @param {MdastNodes} from
+ *   mdast node to use data from.
+ * @param {Type} to
+ *   hast node to change.
+ * @returns {Type | HastElement}
+ *   Nothing.
+ */
+function applyData(from, to) {
+  /** @type {Type | HastElement} */
+  var result = to;
+
+  // Handle `data.hName`, `data.hProperties, `data.hChildren`.
+  if (from && from.data) {
+    var hName = from.data.hName;
+    var hChildren = from.data.hChildren;
+    var hProperties = from.data.hProperties;
+    if (typeof hName === 'string') {
+      // Transforming the node resulted in an element with a different name
+      // than wanted:
+      if (result.type === 'element') {
+        result.tagName = hName;
+      }
+      // Transforming the node resulted in a non-element, which happens for
+      // raw, text, and root nodes (unless custom handlers are passed).
+      // The intent is likely to keep the content around (otherwise: pass
+      // `hChildren`).
+      else {
+        result = {
+          type: 'element',
+          tagName: hName,
+          properties: {},
+          children: []
+        };
+
+        // To do: next major: take the children from the `root`, or inject the
+        // raw/text/comment or so into the element?
+        // if ('children' in node) {
+        //   // @ts-expect-error: assume `children` are allowed in elements.
+        //   result.children = node.children
+        // } else {
+        //   // @ts-expect-error: assume `node` is allowed in elements.
+        //   result.children.push(node)
+        // }
+      }
+    }
+
+    if (result.type === 'element' && hProperties) {
+      result.properties = _objectSpread2(_objectSpread2({}, result.properties), hProperties);
+    }
+    if ('children' in result && result.children && hChildren !== null && hChildren !== undefined) {
+      // @ts-expect-error: assume valid children are defined.
+      result.children = hChildren;
+    }
+  }
+  return result;
+}
+
+/**
+ * Transform an mdast node into a hast node.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {MdastNodes} node
+ *   mdast node.
+ * @param {MdastParents | null | undefined} [parent]
+ *   Parent of `node`.
+ * @returns {HastElementContent | Array<HastElementContent> | null | undefined}
+ *   Resulting hast node.
+ */
+// To do: next major: do not expose, keep bound.
+function state_one(state, node, parent) {
+  var type = node && node.type;
+
+  // Fail on non-nodes.
+  if (!type) {
+    throw new Error('Expected node, got `' + node + '`');
+  }
+  if (state_own.call(state.handlers, type)) {
+    return state.handlers[type](state, node, parent);
+  }
+  if (state.passThrough && state.passThrough.includes(type)) {
+    // To do: next major: deep clone.
+    // @ts-expect-error: types of passed through nodes are expected to be added manually.
+    return 'children' in node ? _objectSpread2(_objectSpread2({}, node), {}, {
+      children: state_all(state, node)
+    }) : node;
+  }
+  if (state.unknownHandler) {
+    return state.unknownHandler(state, node, parent);
+  }
+  return defaultUnknownHandler(state, node);
+}
+
+/**
+ * Transform the children of an mdast node into hast nodes.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {MdastNodes} parent
+ *   mdast node to compile
+ * @returns {Array<HastElementContent>}
+ *   Resulting hast nodes.
+ */
+// To do: next major: do not expose, keep bound.
+function state_all(state, parent) {
+  /** @type {Array<HastElementContent>} */
+  var values = [];
+  if ('children' in parent) {
+    var nodes = parent.children;
+    var index = -1;
+    while (++index < nodes.length) {
+      var result = state_one(state, nodes[index], parent);
+
+      // To do: see if we van clean this? Can we merge texts?
+      if (result) {
+        if (index && nodes[index - 1].type === 'break') {
+          if (!Array.isArray(result) && result.type === 'text') {
+            result.value = result.value.replace(/^\s+/, '');
+          }
+          if (!Array.isArray(result) && result.type === 'element') {
+            var head = result.children[0];
+            if (head && head.type === 'text') {
+              head.value = head.value.replace(/^\s+/, '');
+            }
+          }
+        }
+        if (Array.isArray(result)) {
+          values.push.apply(values, _toConsumableArray(result));
+        } else {
+          values.push(result);
+        }
+      }
+    }
+  }
+  return values;
+}
+
+/**
+ * Transform an unknown node.
+ *
+ * @param {State} state
+ *   Info passed around.
+ * @param {MdastNodes} node
+ *   Unknown mdast node.
+ * @returns {HastText | HastElement}
+ *   Resulting hast node.
+ */
+function defaultUnknownHandler(state, node) {
+  var data = node.data || {};
+  /** @type {HastText | HastElement} */
+  var result = 'value' in node && !(state_own.call(data, 'hProperties') || state_own.call(data, 'hChildren')) ? {
+    type: 'text',
+    value: node.value
+  } : {
+    type: 'element',
+    tagName: 'div',
+    properties: {},
+    children: state_all(state, node)
+  };
+  state.patch(node, result);
+  return state.applyData(node, result);
+}
+
+/**
+ * Wrap `nodes` with line endings between each node.
+ *
+ * @template {HastContent} Type
+ *   Node type.
+ * @param {Array<Type>} nodes
+ *   List of nodes to wrap.
+ * @param {boolean | null | undefined} [loose=false]
+ *   Whether to add line endings at start and end.
+ * @returns {Array<Type | HastText>}
+ *   Wrapped nodes.
+ */
+function state_wrap(nodes, loose) {
+  /** @type {Array<Type | HastText>} */
+  var result = [];
+  var index = -1;
+  if (loose) {
+    result.push({
+      type: 'text',
+      value: '\n'
+    });
+  }
+  while (++index < nodes.length) {
+    if (index) result.push({
+      type: 'text',
+      value: '\n'
+    });
+    result.push(nodes[index]);
+  }
+  if (loose && nodes.length > 0) {
+    result.push({
+      type: 'text',
+      value: '\n'
+    });
+  }
+  return result;
+}
+;// CONCATENATED MODULE: ../../node_modules/mdast-util-to-hast/lib/index.js
+/**
+ * @typedef {import('hast').Content} HastContent
+ * @typedef {import('hast').Root} HastRoot
+ *
+ * @typedef {import('mdast').Content} MdastContent
+ * @typedef {import('mdast').Root} MdastRoot
+ *
+ * @typedef {import('./state.js').Options} Options
+ */
+
+/**
+ * @typedef {HastRoot | HastContent} HastNodes
+ * @typedef {MdastRoot | MdastContent} MdastNodes
+ */
+
+
+
+
+/**
+ * Transform mdast to hast.
+ *
+ * ##### Notes
+ *
+ * ###### HTML
+ *
+ * Raw HTML is available in mdast as `html` nodes and can be embedded in hast
+ * as semistandard `raw` nodes.
+ * Most utilities ignore `raw` nodes but two notable ones don’t:
+ *
+ * *   `hast-util-to-html` also has an option `allowDangerousHtml` which will
+ *     output the raw HTML.
+ *     This is typically discouraged as noted by the option name but is useful
+ *     if you completely trust authors
+ * *   `hast-util-raw` can handle the raw embedded HTML strings by parsing them
+ *     into standard hast nodes (`element`, `text`, etc).
+ *     This is a heavy task as it needs a full HTML parser, but it is the only
+ *     way to support untrusted content
+ *
+ * ###### Footnotes
+ *
+ * Many options supported here relate to footnotes.
+ * Footnotes are not specified by CommonMark, which we follow by default.
+ * They are supported by GitHub, so footnotes can be enabled in markdown with
+ * `mdast-util-gfm`.
+ *
+ * The options `footnoteBackLabel` and `footnoteLabel` define natural language
+ * that explains footnotes, which is hidden for sighted users but shown to
+ * assistive technology.
+ * When your page is not in English, you must define translated values.
+ *
+ * Back references use ARIA attributes, but the section label itself uses a
+ * heading that is hidden with an `sr-only` class.
+ * To show it to sighted users, define different attributes in
+ * `footnoteLabelProperties`.
+ *
+ * ###### Clobbering
+ *
+ * Footnotes introduces a problem, as it links footnote calls to footnote
+ * definitions on the page through `id` attributes generated from user content,
+ * which results in DOM clobbering.
+ *
+ * DOM clobbering is this:
+ *
+ * ```html
+ * <p id=x></p>
+ * <script>alert(x) // `x` now refers to the DOM `p#x` element</script>
+ * ```
+ *
+ * Elements by their ID are made available by browsers on the `window` object,
+ * which is a security risk.
+ * Using a prefix solves this problem.
+ *
+ * More information on how to handle clobbering and the prefix is explained in
+ * Example: headings (DOM clobbering) in `rehype-sanitize`.
+ *
+ * ###### Unknown nodes
+ *
+ * Unknown nodes are nodes with a type that isn’t in `handlers` or `passThrough`.
+ * The default behavior for unknown nodes is:
+ *
+ * *   when the node has a `value` (and doesn’t have `data.hName`,
+ *     `data.hProperties`, or `data.hChildren`, see later), create a hast `text`
+ *     node
+ * *   otherwise, create a `<div>` element (which could be changed with
+ *     `data.hName`), with its children mapped from mdast to hast as well
+ *
+ * This behavior can be changed by passing an `unknownHandler`.
+ *
+ * @param {MdastNodes} tree
+ *   mdast tree.
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
+ * @returns {HastNodes | null | undefined}
+ *   hast tree.
+ */
+// To do: next major: always return a single `root`.
 function toHast(tree, options) {
-  var h = factory(tree, options);
-  var node = traverse_one(h, tree, null);
-  var foot = footer(h);
+  var state = createState(tree, options);
+  var node = state.one(tree, null);
+  var foot = footer(state);
   if (foot) {
     // @ts-expect-error If there’s a footer, there were definitions, meaning block
     // content.
     // So assume `node` is a parent node.
-    node.children.push(u('text', '\n'), foot);
+    node.children.push({
+      type: 'text',
+      value: '\n'
+    }, foot);
   }
+
+  // To do: next major: always return root?
   return Array.isArray(node) ? {
     type: 'root',
     children: node
   } : node;
 }
-
 ;// CONCATENATED MODULE: ../../node_modules/remark-rehype/lib/index.js
 /**
  * @typedef {import('hast').Root} HastRoot
@@ -32396,9 +33709,7 @@ function _iterableToArrayLimit(arr, i) {
       if (_x = (_i = _i.call(arr)).next, 0 === i) {
         if (Object(_i) !== _i) return;
         _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0) {
-        ;
-      }
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
     } catch (err) {
       _d = !0, _e = err;
     } finally {
@@ -49467,42 +50778,43 @@ var katex = {
   }
 };
 
-;// CONCATENATED MODULE: ../../node_modules/unist-util-remove-position/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-remove-position/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  */
 
-
-
 /**
- * Utility to remove positions from a tree
+ * @typedef Options
+ *   Configuration.
+ * @property {boolean | null | undefined} [force=false]
+ *   Whether to use `delete` to remove `position` fields.
  *
- * @param node The unist tree
- * @param force if `force` is given, uses `delete`, otherwise, sets positions to `undefined`.
- * @returns The same node, but either with `position: undefined` or w/o `position` fields
- */
-var removePosition =
-/**
- * @type {(
- *   (<Tree extends Node>(tree: Tree, force?: false) => Tree) &
- *   (<Tree extends Node>(tree: Tree, force: true) => Tree)
- * )}
+ *   The default is to set them to `undefined`.
  */
 
+
+
 /**
+ * Remove the `position` field from a tree.
+ *
  * @template {Node} Tree
- * @param {Tree} node
- * @param {boolean} [force=false]
+ *   Node type.
+ * @param {Tree} tree
+ *   Tree to clean.
+ * @param {Options | boolean | null | undefined} [options]
+ *   Configuration.
  * @returns {Tree}
+ *   The given, modified, `tree`.
  */
-function removePosition(node, force) {
-  visit(node, remove);
-
-  // @ts-ignore hush TS, we know what we’re doing.
-  return node;
+// To do: next major: return `void`.
+// To do: remove `force` shortcut, replace with options.
+function removePosition(tree, options) {
+  var force = typeof options === 'boolean' ? options : options ? options.force : false;
+  visit(tree, remove);
+  return tree;
 
   /**
-   * @param {Node} node the unist tree
+   * @param {Node} node
    */
   function remove(node) {
     if (force) {
@@ -49511,70 +50823,99 @@ function removePosition(node, force) {
       node.position = undefined;
     }
   }
-};
+}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-is-element/index.js
 /**
- * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('hast').Element} Element
+ */
+
+/**
+ * @typedef {null | undefined | string | TestFunctionAnything | Array<string | TestFunctionAnything>} Test
+ *   Check for an arbitrary element, unaware of TypeScript inferral.
  *
- * @typedef {string} TagName
- * @typedef {null|undefined|TagName|TestFunctionAnything|Array.<TagName|TestFunctionAnything>} Test
+ * @callback TestFunctionAnything
+ *   Check if an element passes a test, unaware of TypeScript inferral.
+ * @param {Element} element
+ *   An element.
+ * @param {number | null | undefined} [index]
+ *   The element’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The element’s parent.
+ * @returns {boolean | void}
+ *   Whether this element passes the test.
  */
 
 /**
  * @template {Element} T
- * @typedef {null|undefined|T['tagName']|TestFunctionPredicate<T>|Array.<T['tagName']|TestFunctionPredicate<T>>} PredicateTest
+ *   Element type.
+ * @typedef {T['tagName'] | TestFunctionPredicate<T> | Array<T['tagName'] | TestFunctionPredicate<T>>} PredicateTest
+ *   Check for an element that can be inferred by TypeScript.
  */
 
 /**
- * Check if an element passes a test
+ * Check if an element passes a certain node test.
  *
- * @callback TestFunctionAnything
- * @param {Element} element
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {boolean|void}
- */
-
-/**
- * Check if an element passes a certain node test
- *
- * @template {Element} X
+ * @template {Element} T
+ *   Element type.
  * @callback TestFunctionPredicate
+ *   Complex test function for an element that can be inferred by TypeScript.
  * @param {Element} element
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {element is X}
+ *   An element.
+ * @param {number | null | undefined} [index]
+ *   The element’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The element’s parent.
+ * @returns {element is T}
+ *   Whether this element passes the test.
  */
 
 /**
- * Check if a node is an element and passes a certain node test
- *
  * @callback AssertAnything
+ *   Check that an arbitrary value is an element, unaware of TypeScript inferral.
  * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
+ *   Anything (typically a node).
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
  * @returns {boolean}
+ *   Whether this is an element and passes a test.
  */
 
 /**
  * Check if a node is an element and passes a certain node test
  *
- * @template {Element} Y
+ * @template {Element} T
+ *   Element type.
  * @callback AssertPredicate
+ *   Check that an arbitrary value is a specific element, aware of TypeScript.
  * @param {unknown} [node]
- * @param {number|null|undefined} [index]
- * @param {Parent|null|undefined} [parent]
- * @returns {node is Y}
+ *   Anything (typically a node).
+ * @param {number | null | undefined} [index]
+ *   The node’s position in its parent.
+ * @param {Parent | null | undefined} [parent]
+ *   The node’s parent.
+ * @returns {node is T}
+ *   Whether this is an element and passes a test.
  */
 
-// Check if `node` is an `element` and whether it passes the given test.
+/**
+ * Check if `node` is an `Element` and whether it passes the given test.
+ *
+ * @param node
+ *   Thing to check, typically `Node`.
+ * @param test
+ *   A check for a specific element.
+ * @param index
+ *   The node’s position in its parent.
+ * @param parent
+ *   The node’s parent.
+ * @returns
+ *   Whether `node` is an element and passes a test.
+ */
 var isElement =
 /**
- * Check if a node is an element and passes a test.
- * When a `parent` node is known the `index` of node should also be given.
- *
  * @type {(
  *   (() => false) &
  *   (<T extends Element = Element>(node: unknown, test?: PredicateTest<T>, index?: number, parent?: Parent, context?: unknown) => node is T) &
@@ -49583,18 +50924,12 @@ var isElement =
  */
 
 /**
- * Check if a node passes a test.
- * When a `parent` node is known the `index` of node should also be given.
- *
- * @param {unknown} [node] Node to check
- * @param {Test} [test] When nullish, checks if `node` is a `Node`.
- * When `string`, works like passing `function (node) {return node.type === test}`.
- * When `function` checks if function passed the node is true.
- * When `array`, checks any one of the subtests pass.
- * @param {number} [index] Position of `node` in `parent`
- * @param {Parent} [parent] Parent of `node`
- * @param {unknown} [context] Context object to invoke `test` with
- * @returns {boolean} Whether test passed and `node` is an `Element` (object with `type` set to `element` and `tagName` set to a non-empty string).
+ * @param {unknown} [node]
+ * @param {Test | undefined} [test]
+ * @param {number | null | undefined} [index]
+ * @param {Parent | null | undefined} [parent]
+ * @param {unknown} [context]
+ * @returns {boolean}
  */
 // eslint-disable-next-line max-params
 function isElement(node, test, index, parent, context) {
@@ -49615,22 +50950,34 @@ function isElement(node, test, index, parent, context) {
   }
   return check.call(context, node, index, parent);
 };
+
+/**
+ * Generate an assertion from a test.
+ *
+ * Useful if you’re going to test many nodes, for example when creating a
+ * utility where something else passes a compatible test.
+ *
+ * The created function is a bit faster because it expects valid input only:
+ * a `node`, `index`, and `parent`.
+ *
+ * @param test
+ *   *  When nullish, checks if `node` is an `Element`.
+ *   *  When `string`, works like passing `(element) => element.tagName === test`.
+ *   *  When `function` checks if function passed the element is true.
+ *   *  When `array`, checks any one of the subtests pass.
+ * @returns
+ *   An assertion.
+ */
 var convertElement =
 /**
  * @type {(
- *   (<T extends Element>(test: T['tagName']|TestFunctionPredicate<T>) => AssertPredicate<T>) &
+ *   (<T extends Element>(test: T['tagName'] | TestFunctionPredicate<T>) => AssertPredicate<T>) &
  *   ((test?: Test) => AssertAnything)
  * )}
  */
 
 /**
- * Generate an assertion from a check.
- * @param {Test} [test]
- * When nullish, checks if `node` is a `Node`.
- * When `string`, works like passing `function (node) {return node.type === test}`.
- * When `function` checks if function passed the node is true.
- * When `object`, checks that all keys in test are in node, and that they have (strictly) equal values.
- * When `array`, checks any one of the subtests pass.
+ * @param {Test | null | undefined} [test]
  * @returns {AssertAnything}
  */
 function convertElement(test) {
@@ -49650,11 +50997,13 @@ function convertElement(test) {
 };
 
 /**
- * @param {Array.<TagName|TestFunctionAnything>} tests
+ * Handle multiple tests.
+ *
+ * @param {Array<string | TestFunctionAnything>} tests
  * @returns {AssertAnything}
  */
 function hast_util_is_element_anyFactory(tests) {
-  /** @type {Array.<AssertAnything>} */
+  /** @type {Array<AssertAnything>} */
   var checks = [];
   var index = -1;
   while (++index < tests.length) {
@@ -49664,7 +51013,7 @@ function hast_util_is_element_anyFactory(tests) {
 
   /**
    * @this {unknown}
-   * @param {unknown[]} parameters
+   * @param {Array<unknown>} parameters
    * @returns {boolean}
    */
   function any() {
@@ -49683,10 +51032,9 @@ function hast_util_is_element_anyFactory(tests) {
 }
 
 /**
- * Utility to convert a string into a function which checks a given node’s tag
- * name for said string.
+ * Turn a string into a test for an element with a certain tag name.
  *
- * @param {TagName} check
+ * @param {string} check
  * @returns {AssertAnything}
  */
 function tagNameFactory(check) {
@@ -49702,6 +51050,8 @@ function tagNameFactory(check) {
 }
 
 /**
+ * Turn a custom test into a test for an element that passes that test.
+ *
  * @param {TestFunctionAnything} check
  * @returns {AssertAnything}
  */
@@ -49711,7 +51061,7 @@ function hast_util_is_element_castFactory(check) {
   /**
    * @this {unknown}
    * @param {unknown} node
-   * @param {Array.<unknown>} parameters
+   * @param {Array<unknown>} parameters
    * @returns {boolean}
    */
   function assertion(node) {
@@ -49724,7 +51074,8 @@ function hast_util_is_element_castFactory(check) {
 }
 
 /**
- * Utility to return true if this is an element.
+ * Make sure something is an element.
+ *
  * @param {unknown} node
  * @returns {node is Element}
  */
@@ -49735,30 +51086,41 @@ function hast_util_is_element_element(node) {
   // @ts-expect-error Looks like an element.
   typeof node.tagName === 'string');
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-find-after/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-find-after/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
- *
- * @typedef {import('unist-util-is').Type} Type
- * @typedef {import('unist-util-is').Props} Props
- * @typedef {import('unist-util-is').TestFunctionAnything} TestFunctionAnything
+ * @typedef {import('unist-util-is').Test} Test
  */
 
 
+
+/**
+ * Find the first node in `parent` after another `node` or after an index,
+ * that passes `test`.
+
+ * @param parent
+ *   Parent node.
+ * @param index
+ *   Child of `parent` or it’s index.
+ * @param test
+ *   `unist-util-is`-compatible test.
+ * @returns
+ *   Child of `parent` or `null`.
+ */
 var findAfter =
 /**
  * @type {(
- *  (<T extends Node>(node: Parent, index: Node|number, test: T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>|Array.<T['type']|Partial<T>|import('unist-util-is').TestFunctionPredicate<T>>) => T|null) &
- *  ((node: Parent, index: Node|number, test?: null|undefined|Type|Props|TestFunctionAnything|Array<Type|Props|TestFunctionAnything>) => Node|null)
+ *  (<T extends Node>(node: Parent, index: Node | number, test: import('unist-util-is').PredicateTest<T>) => T | null) &
+ *  ((node: Parent, index: Node | number, test?: Test) => Node | null)
  * )}
  */
 
 /**
- * @param {Parent} parent Parent node
- * @param {Node|number} index Child of `parent`, or it’s index
- * @param {null|undefined|Type|Props|TestFunctionAnything|Array<Type|Props|TestFunctionAnything>} [test] is-compatible test (such as a type)
- * @returns {Node|null}
+ * @param {Parent} parent
+ * @param {Node | number} index
+ * @param {Test} [test]
+ * @returns {Node | null}
  */
 function findAfter(parent, index, test) {
   var is = convert(test);
@@ -49782,33 +51144,51 @@ function findAfter(parent, index, test) {
   }
   return null;
 };
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-text/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-text/lib/index.js
+
 /**
  * @typedef {import('hast-util-is-element').TestFunctionAnything} TestFunctionAnything
- * @typedef {import('hast').Parent['children'][number]} HastChild
- * @typedef {import('hast').Text} HastText
- * @typedef {import('hast').Comment} HastComment
- * @typedef {import('hast').Root} HastRoot
- * @typedef {import('hast').Element} HastElement
- * @typedef {import('hast').Properties} HastProperties
- * @typedef {HastChild|HastRoot} HastNode
- * @typedef {HastRoot|HastElement} HastParent
+ * @typedef {import('hast').Content} Content
+ * @typedef {import('hast').Text} Text
+ * @typedef {import('hast').Comment} Comment
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Element} Element
+ */
+
+/**
+ * @typedef {Content | Root} Node
+ *   Any node.
+ * @typedef {Extract<Node, import('unist').Parent>} Parent
+ *   Any parent.
+ * @typedef {'normal' | 'pre' | 'nowrap' | 'pre-wrap'} Whitespace
+ *   Valid and useful whitespace values (from CSS).
+ * @typedef {0 | 1 | 2} BreakNumber
+ *   Specific break:
  *
- * @typedef {'normal'|'pre'|'nowrap'|'pre-wrap'} Whitespace
- * @typedef {boolean} BreakValue
- * @typedef {1|2} BreakNumber
+ *   *   `0` — space
+ *   *   `1` — line ending
+ *   *   `2` — blank line
  * @typedef {'\n'} BreakForce
- * @typedef {BreakValue|BreakNumber|undefined} BreakBefore
- * @typedef {BreakValue|BreakNumber|BreakForce|undefined} BreakAfter
+ *   Forced break.
+ * @typedef {boolean} BreakValue
+ *   Whether there was a break.
+ * @typedef {BreakValue | BreakNumber | undefined} BreakBefore
+ *   Any value for a break before.
+ * @typedef {BreakValue | BreakNumber | BreakForce | undefined} BreakAfter
+ *   Any value for a break after.
  *
- * @typedef CollectionOptions
+ * @typedef CollectionInfo
+ *   Info on current collection.
  * @property {Whitespace} whitespace
+ *   Current whitespace setting.
  * @property {BreakBefore} breakBefore
+ *   Whether there was a break before.
  * @property {BreakAfter} breakAfter
+ *   Whether there was a break after.
  *
  * @typedef Options
  *   Configuration.
- * @property {Whitespace} [whitespace='normal']
+ * @property {Whitespace | null | undefined} [whitespace='normal']
  *   Initial CSS whitespace setting to use.
  */
 
@@ -49829,7 +51209,7 @@ var notRendered = convertElement([
 // Act as if we support scripting.
 'rp', 'script', 'style', 'template', 'title',
 // Hidden attribute.
-hast_util_to_text_hidden,
+lib_hidden,
 // From: <https://html.spec.whatwg.org/#flow-content-3>
 closedDialog]);
 
@@ -49914,33 +51294,50 @@ var blockOrCaption = convertElement(['address',
 ]);
 
 /**
- * Implementation of the `innerText` getter:
- * <https://html.spec.whatwg.org/#the-innertext-idl-attribute>
- * Note that we act as if `node` is being rendered, and as if we’re a
- * CSS-supporting user agent.
+ * Get the plain-text value of a node.
  *
- * @param {HastNode} node
- * @param {Options} [options={}]
+ * ###### Algorithm
+ *
+ * *   if `tree` is a comment, returns its `value`
+ * *   if `tree` is a text, applies normal whitespace collapsing to its
+ *     `value`, as defined by the CSS Text spec
+ * *   if `tree` is a root or element, applies an algorithm similar to the
+ *     `innerText` getter as defined by HTML
+ *
+ * ###### Notes
+ *
+ * > 👉 **Note**: the algorithm acts as if `tree` is being rendered, and as if
+ * > we’re a CSS-supporting user agent, with scripting enabled.
+ *
+ * *   if `tree` is an element that is not displayed (such as a `head`), we’ll
+ *     still use the `innerText` algorithm instead of switching to `textContent`
+ * *   if descendants of `tree` are elements that are not displayed, they are
+ *     ignored
+ * *   CSS is not considered, except for the default user agent style sheet
+ * *   a line feed is collapsed instead of ignored in cases where Fullwidth, Wide,
+ *     or Halfwidth East Asian Width characters are used, the same goes for a case
+ *     with Chinese, Japanese, or Yi writing systems
+ * *   replaced elements (such as `audio`) are treated like non-replaced elements
+ *
+ * @param {Node} tree
+ *   Tree to turn into text.
+ * @param {Options} [options]
+ *   Configuration (optional).
  * @returns {string}
+ *   Serialized `tree`.
  */
-function toText(node) {
+function toText(tree) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  /** @type {Array.<HastChild>} */
-  // @ts-ignore looks like a parent.
-  var children = node.children || [];
-  var block = blockOrCaption(node);
-  var whitespace = inferWhitespace(node, {
+  var children = 'children' in tree ? tree.children : [];
+  var block = blockOrCaption(tree);
+  var whitespace = inferWhitespace(tree, {
     whitespace: options.whitespace || 'normal',
     breakBefore: false,
     breakAfter: false
   });
-  var index = -1;
-  /** @type {Array.<string|BreakNumber>} */
-  var results;
-  /** @type {string|BreakNumber} */
-  var value;
-  /** @type {number|undefined} */
-  var count;
+
+  /** @type {Array<string | BreakNumber>} */
+  var results = [];
 
   // Treat `text` and `comment` as having normal white-space.
   // This deviates from the spec as in the DOM the node’s `.data` has to be
@@ -49950,12 +51347,12 @@ function toText(node) {
   // algorithm also works on a `root`).
   // Nodes without children are treated as a void element, so `doctype` is thus
   // ignored.
-  if (node.type === 'text' || node.type === 'comment') {
-    return collectText(node, {
+  if (tree.type === 'text' || tree.type === 'comment') {
+    results.push.apply(results, _toConsumableArray(collectText(tree, {
       whitespace: whitespace,
       breakBefore: true,
       breakAfter: true
-    });
+    })));
   }
 
   // 1.  If this element is not being rendered, or if the user agent is a
@@ -49969,7 +51366,7 @@ function toText(node) {
   //     Important: we’ll have to account for this later though.
 
   // 2.  Let results be a new empty list.
-  results = [];
+  var index = -1;
 
   // 3.  For each child node node of this element:
   while (++index < children.length) {
@@ -49978,13 +51375,11 @@ function toText(node) {
     //      Each item in results will either be a JavaScript string or a
     //      positive integer (a required line break count).
     // 3.2. For each item item in current, append item to results.
-    results = results.concat(
-    // @ts-ignore Looks like a parent.
-    innerTextCollection(children[index], node, {
+    results.push.apply(results, _toConsumableArray(innerTextCollection(children[index], tree, {
       whitespace: whitespace,
-      breakBefore: index ? null : block,
+      breakBefore: index ? undefined : block,
       breakAfter: index < children.length - 1 ? br(children[index + 1]) : block
-    }));
+    })));
   }
 
   // 4.  Remove any items from results that are the empty string.
@@ -49994,16 +51389,20 @@ function toText(node) {
   //     items with a string consisting of as many U+000A LINE FEED (LF)
   //     characters as the maximum of the values in the required line break
   //     count items.
-  index = -1;
-  /** @type {Array.<string>} */
+  /** @type {Array<string>} */
   var result = [];
+  /** @type {number | undefined} */
+  var count;
+  index = -1;
   while (++index < results.length) {
-    value = results[index];
+    var value = results[index];
     if (typeof value === 'number') {
       if (count !== undefined && value > count) count = value;
     } else if (value) {
-      if (count) result.push('\n'.repeat(count));
-      count = 0;
+      if (count !== undefined && count > -1) {
+        result.push('\n'.repeat(count) || ' ');
+      }
+      count = -1;
       result.push(value);
     }
   }
@@ -50015,17 +51414,17 @@ function toText(node) {
 /**
  * <https://html.spec.whatwg.org/#inner-text-collection-steps>
  *
- * @param {HastNode} node
- * @param {HastParent} parent
- * @param {CollectionOptions} options
- * @returns {Array.<string|BreakNumber>}
+ * @param {Node} node
+ * @param {Parent} parent
+ * @param {CollectionInfo} info
+ * @returns {Array<string | BreakNumber>}
  */
-function innerTextCollection(node, parent, options) {
+function innerTextCollection(node, parent, info) {
   if (node.type === 'element') {
-    return collectElement(node, parent, options);
+    return collectElement(node, parent, info);
   }
   if (node.type === 'text') {
-    return [options.whitespace === 'normal' ? collectText(node, options) : collectPreText(node)];
+    return info.whitespace === 'normal' ? collectText(node, info) : collectPreText(node);
   }
   return [];
 }
@@ -50033,21 +51432,20 @@ function innerTextCollection(node, parent, options) {
 /**
  * Collect an element.
  *
- * @param {HastElement} node
- * @param {HastParent} parent
- * @param {CollectionOptions} options
+ * @param {Element} node
+ *   Element node.
+ * @param {Parent} parent
+ * @param {CollectionInfo} info
+ *   Info on current collection.
+ * @returns {Array<string | BreakNumber>}
  */
-function collectElement(node, parent, options) {
+function collectElement(node, parent, info) {
   // First we infer the `white-space` property.
-  var whitespace = inferWhitespace(node, options);
+  var whitespace = inferWhitespace(node, info);
   var children = node.children || [];
   var index = -1;
-  /** @type {Array.<string|BreakNumber>} */
+  /** @type {Array<string | BreakNumber>} */
   var items = [];
-  /** @type {BreakNumber|undefined} */
-  var prefix;
-  /** @type {BreakNumber|BreakForce|undefined} */
-  var suffix;
 
   // We’re ignoring point 3, and exiting without any content here, because we
   // deviated from the spec in `toText` at step 3.
@@ -50055,6 +51453,10 @@ function collectElement(node, parent, options) {
     return items;
   }
 
+  /** @type {BreakNumber | undefined} */
+  var prefix;
+  /** @type {BreakNumber | BreakForce | undefined} */
+  var suffix;
   // Note: we first detect if there is going to be a break before or after the
   // contents, as that changes the white-space handling.
 
@@ -50146,37 +51548,32 @@ function collectElement(node, parent, options) {
  *
  * See: <https://drafts.csswg.org/css-text/#white-space-phase-1>
  *
- * @param {HastText|HastComment} node
- * @param {CollectionOptions} options
- * @returns {string}
+ * @param {Text | Comment} node
+ *   Text node.
+ * @param {CollectionInfo} info
+ *   Info on current collection.
+ * @returns {Array<string | BreakNumber>}
+ *   Result.
  */
-function collectText(node, options) {
+function collectText(node, info) {
   var value = String(node.value);
-  /** @type {Array.<string>} */
+  /** @type {Array<string>} */
   var lines = [];
-  /** @type {Array.<string>} */
+  /** @type {Array<string | BreakNumber>} */
   var result = [];
   var start = 0;
-  var index = -1;
-  /** @type {RegExpMatchArray|null} */
-  var match;
-  /** @type {number} */
-  var end;
-  /** @type {string|undefined} */
-  var join;
-  while (start < value.length) {
+  while (start <= value.length) {
     searchLineFeeds.lastIndex = start;
-    match = searchLineFeeds.exec(value);
-    // @ts-expect-error: `index` is set.
-    end = match ? match.index : value.length;
+    var match = searchLineFeeds.exec(value);
+    var end = match && 'index' in match ? match.index : value.length;
     lines.push(
     // Any sequence of collapsible spaces and tabs immediately preceding or
     // following a segment break is removed.
     trimAndCollapseSpacesAndTabs(
-    // [...] ignoring bidi formatting characters (characters with the
+    // […] ignoring bidi formatting characters (characters with the
     // Bidi_Control property [UAX9]: ALM, LTR, RTL, LRE-RLO, LRI-PDI) as if
     // they were not there.
-    value.slice(start, end).replace(/[\u061C\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, ''), options.breakBefore, options.breakAfter));
+    value.slice(start, end).replace(/[\u061C\u200E\u200F\u202A-\u202E\u2066-\u2069]/g, ''), start === 0 ? info.breakBefore : true, end === value.length ? info.breakAfter : true));
     start = end + 1;
   }
 
@@ -50185,13 +51582,16 @@ function collectText(node, options) {
   // So here we jump to 4.1.2 of [CSSTEXT]:
   // Any collapsible segment break immediately following another collapsible
   // segment break is removed
+  var index = -1;
+  /** @type {BreakNumber | undefined} */
+  var join;
   while (++index < lines.length) {
     // *   If the character immediately before or immediately after the segment
     //     break is the zero-width space character (U+200B), then the break is
     //     removed, leaving behind the zero-width space.
     if (lines[index].charCodeAt(lines[index].length - 1) === 0x200b /* ZWSP */ || index < lines.length - 1 && lines[index + 1].charCodeAt(0) === 0x200b /* ZWSP */) {
       result.push(lines[index]);
-      join = '';
+      join = undefined;
     }
 
     // *   Otherwise, if the East Asian Width property [UAX11] of both the
@@ -50211,20 +51611,29 @@ function collectText(node, options) {
 
     // *   Otherwise, the segment break is converted to a space (U+0020).
     else if (lines[index]) {
-      if (join) result.push(join);
+      if (typeof join === 'number') result.push(join);
       result.push(lines[index]);
-      join = ' ';
+      join = 0;
+    } else if (index === 0 || index === lines.length - 1) {
+      // If this line is empty, and it’s the first or last, add a space.
+      // Note that this function is only called in normal whitespace, so we
+      // don’t worry about `pre`.
+      result.push(0);
     }
   }
-  return result.join('');
+  return result;
 }
 
 /**
- * @param {HastText|HastComment} node
- * @returns {string}
+ * Collect a text node as “pre” whitespace.
+ *
+ * @param {Text} node
+ *   Text node.
+ * @returns {Array<string | BreakNumber>}
+ *   Result.
  */
 function collectPreText(node) {
-  return String(node.value);
+  return [String(node.value)];
 }
 
 /**
@@ -50236,22 +51645,23 @@ function collectPreText(node) {
  *     but retains its soft wrap opportunity, if any.)
  *
  * @param {string} value
+ *   Value to collapse.
  * @param {BreakBefore} breakBefore
+ *   Whether there was a break before.
  * @param {BreakAfter} breakAfter
+ *   Whether there was a break after.
  * @returns {string}
+ *   Result.
  */
 function trimAndCollapseSpacesAndTabs(value, breakBefore, breakAfter) {
-  /** @type {Array.<string>} */
+  /** @type {Array<string>} */
   var result = [];
   var start = 0;
-  /** @type {RegExpMatchArray|null} */
-  var match;
-  /** @type {number} */
+  /** @type {number | undefined} */
   var end;
   while (start < value.length) {
     searchTabOrSpaces.lastIndex = start;
-    match = searchTabOrSpaces.exec(value);
-    // @ts-expect-error: `index` is set.
+    var match = searchTabOrSpaces.exec(value);
     end = match ? match.index : value.length;
 
     // If we’re not directly after a segment break, but there was white space,
@@ -50268,7 +51678,6 @@ function trimAndCollapseSpacesAndTabs(value, breakBefore, breakAfter) {
   // If we reached the end, there was trailing white space, and there’s no
   // segment break after this node, add an empty value that will be turned
   // into a space.
-  // @ts-expect-error: `end` is defined.
   if (start !== end && !breakAfter) {
     result.push('');
   }
@@ -50276,39 +51685,52 @@ function trimAndCollapseSpacesAndTabs(value, breakBefore, breakAfter) {
 }
 
 /**
+ * Figure out the whitespace of a node.
+ *
  * We don’t support void elements here (so `nobr wbr` -> `normal` is ignored).
  *
- * @param {HastNode} node
- * @param {CollectionOptions} options
+ * @param {Node} node
+ *   Node (typically `Element`).
+ * @param {CollectionInfo} info
+ *   Info on current collection.
  * @returns {Whitespace}
+ *   Applied whitespace.
  */
-function inferWhitespace(node, options) {
-  /** @type {HastProperties} */
-  var props;
+function inferWhitespace(node, info) {
   if (node.type === 'element') {
-    props = node.properties || {};
+    var props = node.properties || {};
     switch (node.tagName) {
       case 'listing':
       case 'plaintext':
       case 'xmp':
-        return 'pre';
+        {
+          return 'pre';
+        }
       case 'nobr':
-        return 'nowrap';
+        {
+          return 'nowrap';
+        }
       case 'pre':
-        return props.wrap ? 'pre-wrap' : 'pre';
+        {
+          return props.wrap ? 'pre-wrap' : 'pre';
+        }
       case 'td':
       case 'th':
-        return props.noWrap ? 'nowrap' : options.whitespace;
+        {
+          return props.noWrap ? 'nowrap' : info.whitespace;
+        }
       case 'textarea':
-        return 'pre-wrap';
+        {
+          return 'pre-wrap';
+        }
       default:
     }
   }
-  return options.whitespace;
+  return info.whitespace;
 }
 
 /** @type {TestFunctionAnything} */
-function hast_util_to_text_hidden(node) {
+function lib_hidden(node) {
   return Boolean((node.properties || {}).hidden);
 }
 
@@ -51639,54 +53061,48 @@ function kebab($0) {
 function camelcase($0) {
   return $0.charAt(1).toUpperCase();
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-parse-selector/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-parse-selector/lib/index.js
 /**
  * @typedef {import('hast').Properties} Properties
  * @typedef {import('hast').Element} Element
  */
 
-var hast_util_parse_selector_search = /[#.]/g;
+var lib_search = /[#.]/g;
 
 /**
  * Create a hast element from a simple CSS selector.
  *
- * @param selector A simple CSS selector.
- *   Can contain a tag-name (`foo`), classes (`.bar`), and an ID (`#baz`).
+ * @template {string} Selector
+ *   Type of selector.
+ * @template {string} [DefaultTagName='div']
+ *   Type of default tag name.
+ * @param {Selector | null | undefined} [selector]
+ *   Simple CSS selector.
+ *
+ *   Can contain a tag name (`foo`), classes (`.bar`), and an ID (`#baz`).
  *   Multiple classes are allowed.
  *   Uses the last ID if multiple IDs are found.
- * @param [defaultTagName='div'] Tag name to use if `selector` does not specify one.
+ * @param {DefaultTagName | null | undefined} [defaultTagName='div']
+ *   Tag name to use if `selector` does not specify one (default: `'div'`).
+ * @returns {Element & {tagName: import('./extract.js').ExtractTagName<Selector, DefaultTagName>}}
+ *   Built element.
  */
-var parseSelector =
-/**
- * @type {(
- *  <Selector extends string, DefaultTagName extends string = 'div'>(selector?: Selector, defaultTagName?: DefaultTagName) => Element & {tagName: import('./extract.js').ExtractTagName<Selector, DefaultTagName>}
- * )}
- */
-
-/**
- * @param {string} [selector]
- * @param {string} [defaultTagName='div']
- * @returns {Element}
- */
-function parseSelector(selector) {
-  var defaultTagName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'div';
+function parseSelector(selector, defaultTagName) {
   var value = selector || '';
   /** @type {Properties} */
   var props = {};
   var start = 0;
-  /** @type {string} */
-  var subvalue;
-  /** @type {string} */
+  /** @type {string | undefined} */
   var previous;
-  /** @type {RegExpMatchArray} */
-  var match;
+  /** @type {string | undefined} */
+  var tagName;
   while (start < value.length) {
-    hast_util_parse_selector_search.lastIndex = start;
-    match = hast_util_parse_selector_search.exec(value);
-    subvalue = value.slice(start, match ? match.index : value.length);
+    lib_search.lastIndex = start;
+    var match = lib_search.exec(value);
+    var subvalue = value.slice(start, match ? match.index : value.length);
     if (subvalue) {
       if (!previous) {
-        defaultTagName = subvalue;
+        tagName = subvalue;
       } else if (previous === '#') {
         props.id = subvalue;
       } else if (Array.isArray(props.className)) {
@@ -51703,11 +53119,12 @@ function parseSelector(selector) {
   }
   return {
     type: 'element',
-    tagName: defaultTagName,
+    // @ts-expect-error: fine.
+    tagName: tagName || defaultTagName || 'div',
     properties: props,
     children: []
   };
-};
+}
 ;// CONCATENATED MODULE: ../../node_modules/space-separated-tokens/index.js
 /**
  * Parse space-separated tokens to an array of strings.
@@ -51800,26 +53217,38 @@ function comma_separated_tokens_stringify(values, options) {
 ;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/core.js
 /**
  * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Content} Content
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Properties} Properties
- * @typedef {Root['children'][number]} Child
- * @typedef {Child|Root} Node
  * @typedef {import('property-information').Info} Info
  * @typedef {import('property-information').Schema} Schema
+ */
+
+/**
+ * @typedef {Content | Root} Node
+ *   Any concrete `hast` node.
+ * @typedef {Root | Element} HResult
+ *   Result from a `h` (or `s`) call.
  *
- * @typedef {Root|Element} HResult
- * @typedef {string|number} HStyleValue
+ * @typedef {string | number} HStyleValue
+ *   Value for a CSS style field.
  * @typedef {Record<string, HStyleValue>} HStyle
- * @typedef {string|number|boolean|null|undefined} HPrimitiveValue
- * @typedef {Array<string|number>} HArrayValue
- * @typedef {HPrimitiveValue|HArrayValue} HPropertyValue
- * @typedef {{[property: string]: HPropertyValue|HStyle}} HProperties
- *   Acceptable properties value.
+ *   Supported value of a `style` prop.
+ * @typedef {string | number | boolean | null | undefined} HPrimitiveValue
+ *   Primitive property value.
+ * @typedef {Array<string | number>} HArrayValue
+ *   List of property values for space- or comma separated values (such as `className`).
+ * @typedef {HPrimitiveValue | HArrayValue} HPropertyValue
+ *   Primitive value or list value.
+ * @typedef {{[property: string]: HPropertyValue | HStyle}} HProperties
+ *   Acceptable value for element properties.
  *
- * @typedef {string|number|null|undefined} HPrimitiveChild
- * @typedef {Array<Node|HPrimitiveChild>} HArrayChild
- * @typedef {Node|HPrimitiveChild|HArrayChild} HChild
- *   Acceptable child value
+ * @typedef {string | number | null | undefined} HPrimitiveChild
+ *   Primitive children, either ignored (nullish), or turned into text nodes.
+ * @typedef {Array<Node | HPrimitiveChild>} HArrayChild
+ *   List of children.
+ * @typedef {Node | HPrimitiveChild | HArrayChild} HChild
+ *   Acceptable child value.
  */
 
 
@@ -51840,7 +53269,7 @@ function core_core(schema, defaultTagName, caseSensitive) {
   /**
    * @type {{
    *   (): Root
-   *   (selector: null|undefined, ...children: Array<HChild>): Root
+   *   (selector: null | undefined, ...children: Array<HChild>): Root
    *   (selector: string, properties?: HProperties, ...children: Array<HChild>): Element
    *   (selector: string, ...children: Array<HChild>): Element
    * }}
@@ -51849,8 +53278,8 @@ function core_core(schema, defaultTagName, caseSensitive) {
   /**
    * Hyperscript compatible DSL for creating virtual hast trees.
    *
-   * @param {string|null} [selector]
-   * @param {HProperties|HChild} [properties]
+   * @param {string | null} [selector]
+   * @param {HProperties | HChild} [properties]
    * @param {Array<HChild>} children
    * @returns {HResult}
    */
@@ -51908,7 +53337,7 @@ function core_core(schema, defaultTagName, caseSensitive) {
 }
 
 /**
- * @param {HProperties|HChild} value
+ * @param {HProperties | HChild} value
  * @param {string} name
  * @returns {value is HProperties}
  */
@@ -51932,7 +53361,7 @@ function isProperties(value, name) {
  * @param {Schema} schema
  * @param {Properties} properties
  * @param {string} key
- * @param {HStyle|HPropertyValue} value
+ * @param {HStyle | HPropertyValue} value
  * @returns {void}
  */
 function addProperty(schema, properties, key, value) {
@@ -51969,7 +53398,7 @@ function addProperty(schema, properties, key, value) {
     result = info.property === 'style' ? style(value) : String(value);
   }
   if (Array.isArray(result)) {
-    /** @type {Array<string|number>} */
+    /** @type {Array<string | number>} */
     var finalResult = [];
     while (++index < result.length) {
       // @ts-expect-error Assume no booleans in array.
@@ -51987,7 +53416,7 @@ function addProperty(schema, properties, key, value) {
 }
 
 /**
- * @param {Array<Child>} nodes
+ * @param {Array<Content>} nodes
  * @param {HChild} value
  * @returns {void}
  */
@@ -52036,8 +53465,12 @@ function parsePrimitive(info, name, value) {
 }
 
 /**
+ * Serialize a `style` object as a string.
+ *
  * @param {HStyle} value
+ *   Style object.
  * @returns {string}
+ *   CSS string.
  */
 function style(value) {
   /** @type {Array<string>} */
@@ -52053,8 +53486,12 @@ function style(value) {
 }
 
 /**
+ * Create a map to adjust casing.
+ *
  * @param {Array<string>} values
+ *   List of properly cased keys.
  * @returns {Record<string, string>}
+ *   Map of lowercase keys to uppercase keys.
  */
 function createAdjustMap(values) {
   /** @type {Record<string, string>} */
@@ -52070,12 +53507,16 @@ var svgCaseSensitiveTagNames = ['altGlyph', 'altGlyphDef', 'altGlyphItem', 'anim
 ;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/svg.js
 /**
  * @typedef {import('./core.js').HChild} Child
+ *   Acceptable child value.
  * @typedef {import('./core.js').HProperties} Properties
+ *   Acceptable value for element properties.
+ * @typedef {import('./core.js').HResult} Result
+ *   Result from a `h` (or `s`) call.
  *
- * @typedef {import('./jsx-classic').Element} s.JSX.Element
- * @typedef {import('./jsx-classic').IntrinsicAttributes} s.JSX.IntrinsicAttributes
- * @typedef {import('./jsx-classic').IntrinsicElements} s.JSX.IntrinsicElements
- * @typedef {import('./jsx-classic').ElementChildrenAttribute} s.JSX.ElementChildrenAttribute
+ * @typedef {import('./jsx-classic.js').Element} s.JSX.Element
+ * @typedef {import('./jsx-classic.js').IntrinsicAttributes} s.JSX.IntrinsicAttributes
+ * @typedef {import('./jsx-classic.js').IntrinsicElements} s.JSX.IntrinsicElements
+ * @typedef {import('./jsx-classic.js').ElementChildrenAttribute} s.JSX.ElementChildrenAttribute
  */
 
 
@@ -52084,36 +53525,81 @@ var svgCaseSensitiveTagNames = ['altGlyph', 'altGlyphDef', 'altGlyphItem', 'anim
 var s = core_core(property_information_svg, 'g', svgCaseSensitiveTagNames);
 ;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/html.js
 /**
- * @typedef {import('./core.js').HChild} Child Acceptable child value
- * @typedef {import('./core.js').HProperties} Properties Acceptable properties value.
+ * @typedef {import('./core.js').HChild} Child
+ *   Acceptable child value.
+ * @typedef {import('./core.js').HProperties} Properties
+ *   Acceptable value for element properties.
+ * @typedef {import('./core.js').HResult} Result
+ *   Result from a `h` (or `s`) call.
  *
- * @typedef {import('./jsx-classic').Element} h.JSX.Element
- * @typedef {import('./jsx-classic').IntrinsicAttributes} h.JSX.IntrinsicAttributes
- * @typedef {import('./jsx-classic').IntrinsicElements} h.JSX.IntrinsicElements
- * @typedef {import('./jsx-classic').ElementChildrenAttribute} h.JSX.ElementChildrenAttribute
+ * @typedef {import('./jsx-classic.js').Element} h.JSX.Element
+ * @typedef {import('./jsx-classic.js').IntrinsicAttributes} h.JSX.IntrinsicAttributes
+ * @typedef {import('./jsx-classic.js').IntrinsicElements} h.JSX.IntrinsicElements
+ * @typedef {import('./jsx-classic.js').ElementChildrenAttribute} h.JSX.ElementChildrenAttribute
  */
 
 
 
 var h = core_core(property_information_html, 'div');
-;// CONCATENATED MODULE: ../../node_modules/vfile-location/index.js
+;// CONCATENATED MODULE: ../../node_modules/vfile-location/lib/index.js
 /**
- * @typedef {import('unist').Point} Point
  * @typedef {import('vfile').VFile} VFile
- *
- * @typedef {Pick<Point, 'line'|'column'>} PositionalPoint
- * @typedef {Required<Point>} FullPoint
- * @typedef {NonNullable<Point['offset']>} Offset
+ * @typedef {import('vfile').Value} Value
  */
 
 /**
- * Get transform functions for the given `document`.
+ * @typedef Point
+ *   unist point, where `line` and `column` can be `undefined`.
+ * @property {number | undefined} line
+ *   Line.
+ * @property {number | undefined} column
+ *   Column.
+ * @property {number | undefined} [offset]
+ *   Offset.
  *
- * @param {string|Uint8Array|VFile} file
+ * @typedef PointLike
+ *   unist point, allowed as input.
+ * @property {number | null | undefined} [line]
+ *   Line.
+ * @property {number | null | undefined} [column]
+ *   Column.
+ * @property {number | null | undefined} [offset]
+ *   Offset.
+ *
+ * @callback ToPoint
+ *   Get a line/column-based `point` from `offset`.
+ * @param {number | null | undefined} [offset]
+ *   Something that should be an `offset.
+ * @returns {Point}
+ *   Point, line/column are undefined for invalid or out of bounds input.
+ *
+ * @callback ToOffset
+ *   Get an offset from a line/column-based `point`.
+ * @param {Point | null | undefined} [point]
+ *   Something that should be a `point.
+ * @returns {number}
+ *   Offset or `-1` for invalid or out of bounds input.
+ *
+ * @typedef Location
+ *   Accessors for index.
+ * @property {ToPoint} toPoint
+ *   Get a line/column-based `point` from `offset`.
+ * @property {ToOffset} toOffset
+ *   Get an offset from a line/column-based `point`.
  */
-function vfile_location_location(file) {
+
+/**
+ * Index the given document so you can translate between line/column and offset
+ * based positional info.
+ *
+ * @param {VFile | Value} file
+ *   File to index.
+ * @returns {Location}
+ *   Accessors for index.
+ */
+function lib_location(file) {
   var value = String(file);
-  /** @type {Array.<number>} */
+  /** @type {Array<number>} */
   var indices = [];
   var search = /\r?\n|\r/g;
   while (search.test(value)) {
@@ -52125,22 +53611,15 @@ function vfile_location_location(file) {
     toOffset: toOffset
   };
 
-  /**
-   * Get the line and column-based `point` for `offset` in the bound indices.
-   * Returns a point with `undefined` values when given invalid or out of bounds
-   * input.
-   *
-   * @param {Offset} offset
-   * @returns {FullPoint}
-   */
+  /** @type {ToPoint} */
   function toPoint(offset) {
     var index = -1;
-    if (offset > -1 && offset < indices[indices.length - 1]) {
+    if (typeof offset === 'number' && offset > -1 && offset < indices[indices.length - 1]) {
       while (++index < indices.length) {
         if (indices[index] > offset) {
           return {
             line: index + 1,
-            column: offset - (indices[index - 1] || 0) + 1,
+            column: offset - (index > 0 ? indices[index - 1] : 0) + 1,
             offset: offset
           };
         }
@@ -52153,22 +53632,17 @@ function vfile_location_location(file) {
     };
   }
 
-  /**
-   * Get the `offset` for a line and column-based `point` in the bound indices.
-   * Returns `-1` when given invalid or out of bounds input.
-   *
-   * @param {PositionalPoint} point
-   * @returns {Offset}
-   */
+  /** @type {ToOffset} */
   function toOffset(point) {
     var line = point && point.line;
     var column = point && point.column;
-    /** @type {number} */
-    var offset;
     if (typeof line === 'number' && typeof column === 'number' && !Number.isNaN(line) && !Number.isNaN(column) && line - 1 in indices) {
-      offset = (indices[line - 2] || 0) + column - 1 || 0;
+      var offset = (indices[line - 2] || 0) + column - 1 || 0;
+      if (offset > -1 && offset < indices[indices.length - 1]) {
+        return offset;
+      }
     }
-    return offset > -1 && offset < indices[indices.length - 1] ? offset : -1;
+    return -1;
   }
 }
 ;// CONCATENATED MODULE: ../../node_modules/web-namespaces/index.js
@@ -52191,43 +53665,56 @@ var webNamespaces = {
  * @typedef {import('property-information').Schema} Schema
  * @typedef {import('unist').Position} Position
  * @typedef {import('unist').Point} Point
- * @typedef {import('hast').Parent} Parent
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Text} Text
- * @typedef {import('hast').Comment} Comment
- * @typedef {import('hast').DocType} Doctype
- * @typedef {Parent['children'][number]} Child
- * @typedef {Element['children'][number]} ElementChild
- * @typedef {Child|Root} Node
- * @typedef {import('parse5').Document} P5Document
- * @typedef {import('parse5').DocumentType} P5Doctype
- * @typedef {import('parse5').CommentNode} P5Comment
- * @typedef {import('parse5').TextNode} P5Text
- * @typedef {import('parse5').Element} P5Element
- * @typedef {import('parse5').ElementLocation} P5ElementLocation
- * @typedef {import('parse5').Location} P5Location
- * @typedef {import('parse5').Attribute} P5Attribute
- * @typedef {import('parse5').Node} P5Node
+ * @typedef {import('hast').Content} Content
+ * @typedef {import('parse5').DefaultTreeAdapterMap} DefaultTreeAdapterMap
+ * @typedef {import('parse5').Token.ElementLocation} P5ElementLocation
+ * @typedef {import('parse5').Token.Location} P5Location
+ */
+
+/**
+ * @typedef {Content | Root} Node
+ * @typedef {DefaultTreeAdapterMap['document']} P5Document
+ * @typedef {DefaultTreeAdapterMap['documentFragment']} P5DocumentFragment
+ * @typedef {DefaultTreeAdapterMap['documentType']} P5DocumentType
+ * @typedef {DefaultTreeAdapterMap['commentNode']} P5Comment
+ * @typedef {DefaultTreeAdapterMap['textNode']} P5Text
+ * @typedef {DefaultTreeAdapterMap['element']} P5Element
+ * @typedef {DefaultTreeAdapterMap['node']} P5Node
+ * @typedef {DefaultTreeAdapterMap['template']} P5Template
  *
- * @typedef {'html'|'svg'} Space
- *
- * @callback Handler
- * @param {Context} ctx
- * @param {P5Node} node
- * @param {Array.<Child>} [children]
- * @returns {Node}
+ * @typedef {'html' | 'svg'} Space
+ *   Namespace.
  *
  * @typedef Options
- * @property {Space} [space='html'] Whether the root of the tree is in the `'html'` or `'svg'` space. If an element in with the SVG namespace is found in `ast`, `fromParse5` automatically switches to the SVG space when entering the element, and switches back when leaving
- * @property {VFile} [file] `VFile`, used to add positional information to nodes. If given, the file should have the original HTML source as its contents
- * @property {boolean} [verbose=false] Whether to add extra positional information about starting tags, closing tags, and attributes to elements. Note: not used without `file`
+ *   Configuration.
+ * @property {Space | null | undefined} [space='html']
+ *   Which space the document is in.
  *
- * @typedef Context
+ *   When an `<svg>` element is found in the HTML space, this package already
+ *   automatically switches to and from the SVG space when entering and exiting
+ *   it.
+ * @property {VFile | null | undefined} [file]
+ *   File used to add positional info to nodes.
+ *
+ *   If given, the file should represent the original HTML source.
+ * @property {boolean} [verbose=false]
+ *   Whether to add extra positional info about starting tags, closing tags,
+ *   and attributes to elements.
+ *
+ *   > 👉 **Note**: only used when `file` is given.
+ *
+ * @typedef State
+ *   Info passed around about the current state.
  * @property {Schema} schema
- * @property {VFile|undefined} file
- * @property {boolean|undefined} verbose
+ *   Current schema.
+ * @property {VFile | undefined} file
+ *   Corresponding file.
+ * @property {boolean | undefined} verbose
+ *   Add extra positional info.
  * @property {boolean} location
+ *   Whether location info was found.
  */
 
 
@@ -52235,193 +53722,184 @@ var webNamespaces = {
 
 
 var hast_util_from_parse5_lib_own = {}.hasOwnProperty;
-
-// Handlers.
-var map = {
-  '#document': lib_root,
-  '#document-fragment': lib_root,
-  '#text': lib_text,
-  '#comment': comment,
-  '#documentType': doctype
-};
+/** @type {unknown} */
+// type-coverage:ignore-next-line
+var proto = Object.prototype;
 
 /**
- * Transform Parse5’s AST to a hast tree.
+ * Transform a `parse5` AST to hast.
  *
- * @param {P5Node} ast
- * @param {Options|VFile} [options]
+ * @param {P5Node} tree
+ *   `parse5` tree to transform.
+ * @param {Options | VFile | null | undefined} [options]
+ *   Configuration.
+ * @returns {Node}
+ *   hast tree.
  */
-function fromParse5(ast) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+function fromParse5(tree, options) {
+  var options_ = options || {};
   /** @type {Options} */
   var settings;
-  /** @type {VFile|undefined} */
+  /** @type {VFile | undefined} */
   var file;
-  if (isFile(options)) {
-    file = options;
+  if (isFile(options_)) {
+    file = options_;
     settings = {};
   } else {
-    file = options.file;
-    settings = options;
+    file = options_.file || undefined;
+    settings = options_;
   }
-  return transform({
+  return lib_one({
     schema: settings.space === 'svg' ? property_information_svg : property_information_html,
     file: file,
     verbose: settings.verbose,
     location: false
-  }, ast);
+  }, tree);
 }
 
 /**
- * Transform children.
+ * Transform a node.
  *
- * @param {Context} ctx
- * @param {P5Node} ast
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {P5Node} node
+ *   p5 node.
  * @returns {Node}
+ *   hast node.
  */
-function transform(ctx, ast) {
-  var schema = ctx.schema;
-  /** @type {Handler} */
-  // @ts-expect-error: index is fine.
-  var fn = hast_util_from_parse5_lib_own.call(map, ast.nodeName) ? map[ast.nodeName] : lib_element;
-  /** @type {Array.<Child>|undefined} */
-  var children;
+function lib_one(state, node) {
+  /** @type {Node} */
+  var result;
+  switch (node.nodeName) {
+    case '#comment':
+      {
+        var reference = /** @type {P5Comment} */node;
+        result = {
+          type: 'comment',
+          value: reference.data
+        };
+        lib_patch(state, reference, result);
+        return result;
+      }
+    case '#document':
+    case '#document-fragment':
+      {
+        var _reference = /** @type {P5Document | P5DocumentFragment} */node;
+        var quirksMode = 'mode' in _reference ? _reference.mode === 'quirks' || _reference.mode === 'limited-quirks' : false;
+        result = {
+          type: 'root',
+          children: hast_util_from_parse5_lib_all(state, node.childNodes),
+          data: {
+            quirksMode: quirksMode
+          }
+        };
+        if (state.file && state.location) {
+          var doc = String(state.file);
+          var loc = lib_location(doc);
+          var start = loc.toPoint(0);
+          var end = loc.toPoint(doc.length);
+          // @ts-expect-error: always defined as we give valid input.
+          result.position = {
+            start: start,
+            end: end
+          };
+        }
+        return result;
+      }
+    case '#documentType':
+      {
+        var _reference2 = /** @type {P5DocumentType} */node;
+        // @ts-expect-error Types are out of date.
+        result = {
+          type: 'doctype'
+        };
+        lib_patch(state, _reference2, result);
+        return result;
+      }
+    case '#text':
+      {
+        var _reference3 = /** @type {P5Text} */node;
+        result = {
+          type: 'text',
+          value: _reference3.value
+        };
+        lib_patch(state, _reference3, result);
+        return result;
+      }
 
-  // Element.
-  if ('tagName' in ast) {
-    ctx.schema = ast.namespaceURI === webNamespaces.svg ? property_information_svg : property_information_html;
+    // Element.
+    default:
+      {
+        var _reference4 = /** @type {P5Element} */node;
+        result = lib_element(state, _reference4);
+        return result;
+      }
   }
-  if ('childNodes' in ast) {
-    children = nodes(ctx, ast.childNodes);
-  }
-  var result = fn(ctx, ast, children);
-  if ('sourceCodeLocation' in ast && ast.sourceCodeLocation && ctx.file) {
-    // @ts-expect-error It’s fine.
-    var _position = createLocation(ctx, result, ast.sourceCodeLocation);
-    if (_position) {
-      ctx.location = true;
-      result.position = _position;
-    }
-  }
-  ctx.schema = schema;
-  return result;
 }
 
 /**
  * Transform children.
  *
- * @param {Context} ctx
- * @param {Array.<P5Node>} children
- * @returns {Array.<Child>}
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {Array<P5Node>} nodes
+ *   Nodes.
+ * @returns {Array<Content>}
+ *   hast nodes.
  */
-function nodes(ctx, children) {
+function hast_util_from_parse5_lib_all(state, nodes) {
   var index = -1;
-  /** @type {Array.<Child>} */
+  /** @type {Array<Content>} */
   var result = [];
-  while (++index < children.length) {
-    // @ts-expect-error Assume no roots in children.
-    result[index] = transform(ctx, children[index]);
+  while (++index < nodes.length) {
+    // @ts-expect-error Assume no roots in `nodes`.
+    result[index] = lib_one(state, nodes[index]);
   }
   return result;
-}
-
-/**
- * Transform a document.
- * Stores `ast.quirksMode` in `node.data.quirksMode`.
- *
- * @type {Handler}
- * @param {P5Document} ast
- * @param {Array.<Child>} children
- * @returns {Root}
- */
-function lib_root(ctx, ast, children) {
-  /** @type {Root} */
-  var result = {
-    type: 'root',
-    children: children,
-    data: {
-      quirksMode: ast.mode === 'quirks' || ast.mode === 'limited-quirks'
-    }
-  };
-  if (ctx.file && ctx.location) {
-    var doc = String(ctx.file);
-    var loc = vfile_location_location(doc);
-    result.position = {
-      start: loc.toPoint(0),
-      end: loc.toPoint(doc.length)
-    };
-  }
-  return result;
-}
-
-/**
- * Transform a doctype.
- *
- * @type {Handler}
- * @returns {Doctype}
- */
-function doctype() {
-  // @ts-expect-error Types are out of date.
-  return {
-    type: 'doctype'
-  };
-}
-
-/**
- * Transform a text.
- *
- * @type {Handler}
- * @param {P5Text} ast
- * @returns {Text}
- */
-function lib_text(_, ast) {
-  return {
-    type: 'text',
-    value: ast.value
-  };
-}
-
-/**
- * Transform a comment.
- *
- * @type {Handler}
- * @param {P5Comment} ast
- * @returns {Comment}
- */
-function comment(_, ast) {
-  return {
-    type: 'comment',
-    value: ast.data
-  };
 }
 
 /**
  * Transform an element.
  *
- * @type {Handler}
- * @param {P5Element} ast
- * @param {Array.<ElementChild>} children
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {P5Element} node
+ *   `parse5` node to transform.
  * @returns {Element}
+ *   hast node.
  */
-function lib_element(ctx, ast, children) {
-  var fn = ctx.schema.space === 'svg' ? s : h;
+function lib_element(state, node) {
+  var schema = state.schema;
+  state.schema = node.namespaceURI === webNamespaces.svg ? property_information_svg : property_information_html;
+
+  // Props.
   var index = -1;
-  /** @type {Object.<string, string>} */
+  /** @type {Record<string, string>} */
   var props = {};
-  while (++index < ast.attrs.length) {
-    var attribute = ast.attrs[index];
-    props[(attribute.prefix ? attribute.prefix + ':' : '') + attribute.name] = attribute.value;
+  while (++index < node.attrs.length) {
+    var attribute = node.attrs[index];
+    var name = (attribute.prefix ? attribute.prefix + ':' : '') + attribute.name;
+    if (!hast_util_from_parse5_lib_own.call(proto, name)) {
+      props[name] = attribute.value;
+    }
   }
-  var result = fn(ast.tagName, props, children);
-  if (result.tagName === 'template' && 'content' in ast) {
-    var pos = ast.sourceCodeLocation;
-    var startTag = pos && pos.startTag && lib_position(pos.startTag);
-    var endTag = pos && pos.endTag && lib_position(pos.endTag);
+
+  // Build.
+  var fn = state.schema.space === 'svg' ? s : h;
+  var result = fn(node.tagName, props, hast_util_from_parse5_lib_all(state, node.childNodes));
+  lib_patch(state, node, result);
+
+  // Switch content.
+  if (result.tagName === 'template') {
+    var reference = /** @type {P5Template} */node;
+    var pos = reference.sourceCodeLocation;
+    var startTag = pos && pos.startTag && hast_util_from_parse5_lib_position(pos.startTag);
+    var endTag = pos && pos.endTag && hast_util_from_parse5_lib_position(pos.endTag);
 
     /** @type {Root} */
     // @ts-expect-error Types are wrong.
-    var content = transform(ctx, ast.content);
-    if (startTag && endTag && ctx.file) {
+    var content = lib_one(state, reference.content);
+    if (startTag && endTag && state.file) {
       content.position = {
         start: startTag.end,
         end: endTag.start
@@ -52429,19 +53907,46 @@ function lib_element(ctx, ast, children) {
     }
     result.content = content;
   }
+  state.schema = schema;
   return result;
+}
+
+/**
+ * Patch positional info from `from` onto `to`.
+ *
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @param {P5Node} from
+ *   p5 node.
+ * @param {Node} to
+ *   hast node.
+ * @returns {void}
+ *   Nothing.
+ */
+function lib_patch(state, from, to) {
+  if ('sourceCodeLocation' in from && from.sourceCodeLocation && state.file) {
+    var _position = createLocation(state, to, from.sourceCodeLocation);
+    if (_position) {
+      state.location = true;
+      to.position = _position;
+    }
+  }
 }
 
 /**
  * Create clean positional information.
  *
- * @param {Context} ctx
+ * @param {State} state
+ *   Info passed around about the current state.
  * @param {Node} node
+ *   hast node.
  * @param {P5ElementLocation} location
- * @returns {Position|null}
+ *   p5 location info.
+ * @returns {Position | undefined}
+ *   Position, or nothing.
  */
-function createLocation(ctx, node, location) {
-  var result = lib_position(location);
+function createLocation(state, node, location) {
+  var result = hast_util_from_parse5_lib_position(location);
   if (node.type === 'element') {
     var tail = node.children[node.children.length - 1];
 
@@ -52450,20 +53955,23 @@ function createLocation(ctx, node, location) {
     if (result && !location.endTag && tail && tail.position && tail.position.end) {
       result.end = Object.assign({}, tail.position.end);
     }
-    if (ctx.verbose) {
-      /** @type {Object.<string, Position|null>} */
+    if (state.verbose) {
+      /** @type {Record<string, Position | undefined>} */
       var props = {};
       /** @type {string} */
       var key;
-      for (key in location.attrs) {
-        if (hast_util_from_parse5_lib_own.call(location.attrs, key)) {
-          props[find(ctx.schema, key).property] = lib_position(location.attrs[key]);
+      if (location.attrs) {
+        for (key in location.attrs) {
+          if (hast_util_from_parse5_lib_own.call(location.attrs, key)) {
+            props[find(state.schema, key).property] = hast_util_from_parse5_lib_position(location.attrs[key]);
+          }
         }
       }
       node.data = {
         position: {
-          opening: lib_position(location.startTag),
-          closing: location.endTag ? lib_position(location.endTag) : null,
+          // @ts-expect-error: assume not `undefined`.
+          opening: hast_util_from_parse5_lib_position(location.startTag),
+          closing: location.endTag ? hast_util_from_parse5_lib_position(location.endTag) : null,
           properties: props
         }
       };
@@ -52473,38 +53981,50 @@ function createLocation(ctx, node, location) {
 }
 
 /**
+ * Turn a p5 location into a position.
+ *
  * @param {P5Location} loc
- * @returns {Position|null}
+ *   Location.
+ * @returns {Position | undefined}
+ *   Position or nothing.
  */
-function lib_position(loc) {
-  var start = lib_point({
+function hast_util_from_parse5_lib_position(loc) {
+  var start = hast_util_from_parse5_lib_point({
     line: loc.startLine,
     column: loc.startCol,
     offset: loc.startOffset
   });
-  var end = lib_point({
+  var end = hast_util_from_parse5_lib_point({
     line: loc.endLine,
     column: loc.endCol,
     offset: loc.endOffset
   });
-  // @ts-expect-error `null` is fine.
+  // @ts-expect-error `undefined` is fine.
   return start || end ? {
     start: start,
     end: end
-  } : null;
+  } : undefined;
 }
 
 /**
+ * Filter out invalid points.
+ *
  * @param {Point} point
- * @returns {Point|null}
+ *   Point with potentially `undefined` values.
+ * @returns {Point | undefined}
+ *   Point or nothing.
  */
-function lib_point(point) {
-  return point.line && point.column ? point : null;
+function hast_util_from_parse5_lib_point(point) {
+  return point.line && point.column ? point : undefined;
 }
 
 /**
- * @param {VFile|Options} value
+ * Check if something is a file.
+ *
+ * @param {VFile | Options} value
+ *   File or options.
  * @returns {value is VFile}
+ *   Whether `value` is a file.
  */
 function isFile(value) {
   return 'messages' in value;
@@ -52976,8 +54496,7 @@ var rehypeIgnore = function rehypeIgnore() {
         var start = false;
         node.children = node.children.filter(function (item) {
           if (item.type === 'raw' || item.type === 'comment') {
-            var _item$value;
-            var str = (_item$value = item.value) === null || _item$value === void 0 ? void 0 : _item$value.trim();
+            var str = (item.value || '').trim();
             str = str.replace(/^<!--(.*?)-->/, '$1');
             if (str === openDelimiter) {
               start = true;
@@ -52995,327 +54514,6 @@ var rehypeIgnore = function rehypeIgnore() {
   };
 };
 /* harmony default export */ const rehype_ignore_lib = (rehypeIgnore);
-;// CONCATENATED MODULE: ../../node_modules/property-information/lib/hast-to-react.js
-/**
- * `hast` is close to `React`, but differs in a couple of cases.
- *
- * To get a React property from a hast property, check if it is in
- * `hastToReact`, if it is, then use the corresponding value,
- * otherwise, use the hast property.
- *
- * @type {Record<string, string>}
- */
-var hastToReact = {
-  classId: 'classID',
-  dataType: 'datatype',
-  itemId: 'itemID',
-  strokeDashArray: 'strokeDasharray',
-  strokeDashOffset: 'strokeDashoffset',
-  strokeLineCap: 'strokeLinecap',
-  strokeLineJoin: 'strokeLinejoin',
-  strokeMiterLimit: 'strokeMiterlimit',
-  typeOf: 'typeof',
-  xLinkActuate: 'xlinkActuate',
-  xLinkArcRole: 'xlinkArcrole',
-  xLinkHref: 'xlinkHref',
-  xLinkRole: 'xlinkRole',
-  xLinkShow: 'xlinkShow',
-  xLinkTitle: 'xlinkTitle',
-  xLinkType: 'xlinkType',
-  xmlnsXLink: 'xmlnsXlink'
-};
-// EXTERNAL MODULE: ../../node_modules/style-to-object/index.js
-var style_to_object = __webpack_require__(3061);
-;// CONCATENATED MODULE: ../../node_modules/hast-to-hyperscript/index.js
-
-/**
- * @typedef {import('hast').Element} Element
- * @typedef {import('hast').Root} Root
- * @typedef {import('hast').Text} Text
- *
- * @typedef {import('unist-util-is').AssertPredicate<Element>} AssertElement
- * @typedef {import('unist-util-is').AssertPredicate<Text>} AssertText
- * @typedef {import('unist-util-is').AssertPredicate<Root>} AssertRoot
- *
- * @callback CreateElementLike
- * @param {string} name
- * @param {any} attributes
- * @param {Array.<string|any>} [children]
- * @returns {any}
- *
- * @typedef Context
- * @property {html|svg} schema
- * @property {string|null} prefix
- * @property {number} key
- * @property {boolean} react
- * @property {boolean} vue
- * @property {boolean} vdom
- * @property {boolean} hyperscript
- *
- * @typedef Options
- * @property {string|null} [prefix]
- * @property {'html'|'svg'} [space]
- */
-
-
-
-
-
-
-
-var ns = /** @type {Record<string, string>} */webNamespaces;
-var toReact = /** @type {Record<string, string>} */hastToReact;
-var hast_to_hyperscript_own = {}.hasOwnProperty;
-
-/** @type {AssertRoot} */
-// @ts-expect-error it’s correct.
-var hast_to_hyperscript_root = convert('root');
-/** @type {AssertElement} */
-// @ts-expect-error it’s correct.
-var hast_to_hyperscript_element = convert('element');
-/** @type {AssertText} */
-// @ts-expect-error it’s correct.
-var hast_to_hyperscript_text = convert('text');
-
-/**
- * @template {CreateElementLike} H
- * @param {H} h
- * @param {Element|Root} tree
- * @param {string|boolean|Options} [options]
- * @returns {ReturnType<H>}
- */
-function toH(h, tree, options) {
-  if (typeof h !== 'function') {
-    throw new TypeError('h is not a function');
-  }
-  var r = react(h);
-  var v = vue(h);
-  var vd = vdom(h);
-  /** @type {string|boolean|null|undefined} */
-  var prefix;
-  /** @type {Element} */
-  var node;
-  if (typeof options === 'string' || typeof options === 'boolean') {
-    prefix = options;
-    options = {};
-  } else {
-    if (!options) options = {};
-    prefix = options.prefix;
-  }
-  if (hast_to_hyperscript_root(tree)) {
-    // @ts-expect-error Allow `doctypes` in there, we’ll filter them out later.
-    node = tree.children.length === 1 && hast_to_hyperscript_element(tree.children[0]) ? tree.children[0] : {
-      type: 'element',
-      tagName: 'div',
-      properties: {},
-      children: tree.children
-    };
-  } else if (hast_to_hyperscript_element(tree)) {
-    node = tree;
-  } else {
-    throw new Error(
-    // @ts-expect-error runtime.
-    'Expected root or element, not `' + (tree && tree.type || tree) + '`');
-  }
-  return hast_to_hyperscript_transform(h, node, {
-    schema: options.space === 'svg' ? property_information_svg : property_information_html,
-    prefix: prefix === undefined || prefix === null ? r || v || vd ? 'h-' : null : typeof prefix === 'string' ? prefix : prefix ? 'h-' : null,
-    key: 0,
-    react: r,
-    vue: v,
-    vdom: vd,
-    hyperscript: hyperscript(h)
-  });
-}
-
-/**
- * Transform a hast node through a hyperscript interface to *anything*!
- *
- * @template {CreateElementLike} H
- * @param {H} h
- * @param {Element} node
- * @param {Context} ctx
- */
-function hast_to_hyperscript_transform(h, node, ctx) {
-  var parentSchema = ctx.schema;
-  var schema = parentSchema;
-  var name = node.tagName;
-  /** @type {Record<string, unknown>} */
-  var attributes = {};
-  /** @type {Array.<ReturnType<H>|string>} */
-  var nodes = [];
-  var index = -1;
-  /** @type {string} */
-  var key;
-  if (parentSchema.space === 'html' && name.toLowerCase() === 'svg') {
-    schema = property_information_svg;
-    ctx.schema = schema;
-  }
-  for (key in node.properties) {
-    if (node.properties && hast_to_hyperscript_own.call(node.properties, key)) {
-      addAttribute(attributes, key, node.properties[key], ctx, name);
-    }
-  }
-  if (ctx.vdom) {
-    if (schema.space === 'html') {
-      name = name.toUpperCase();
-    } else if (schema.space) {
-      attributes.namespace = ns[schema.space];
-    }
-  }
-  if (ctx.prefix) {
-    ctx.key++;
-    attributes.key = ctx.prefix + ctx.key;
-  }
-  if (node.children) {
-    while (++index < node.children.length) {
-      var value = node.children[index];
-      if (hast_to_hyperscript_element(value)) {
-        nodes.push(hast_to_hyperscript_transform(h, value, ctx));
-      } else if (hast_to_hyperscript_text(value)) {
-        nodes.push(value.value);
-      }
-    }
-  }
-
-  // Restore parent schema.
-  ctx.schema = parentSchema;
-
-  // Ensure no React warnings are triggered for void elements having children
-  // passed in.
-  return nodes.length > 0 ? h.call(node, name, attributes, nodes) : h.call(node, name, attributes);
-}
-
-/**
- * @param {Record<string, unknown>} props
- * @param {string} prop
- * @param {unknown} value
- * @param {Context} ctx
- * @param {string} name
- */
-// eslint-disable-next-line complexity, max-params
-function addAttribute(props, prop, value, ctx, name) {
-  var info = find(ctx.schema, prop);
-  /** @type {string|undefined} */
-  var subprop;
-
-  // Ignore nullish and `NaN` values.
-  // Ignore `false` and falsey known booleans for hyperlike DSLs.
-  if (value === undefined || value === null || typeof value === 'number' && Number.isNaN(value) || value === false && (ctx.vue || ctx.vdom || ctx.hyperscript) || !value && info["boolean"] && (ctx.vue || ctx.vdom || ctx.hyperscript)) {
-    return;
-  }
-  if (Array.isArray(value)) {
-    // Accept `array`.
-    // Most props are space-separated.
-    value = info.commaSeparated ? comma_separated_tokens_stringify(value) : stringify(value);
-  }
-
-  // Treat `true` and truthy known booleans.
-  if (info["boolean"] && ctx.hyperscript) {
-    value = '';
-  }
-
-  // VDOM, Vue, and React accept `style` as object.
-  if (info.property === 'style' && typeof value === 'string' && (ctx.react || ctx.vue || ctx.vdom)) {
-    value = parseStyle(value, name);
-  }
-  if (ctx.vue) {
-    if (info.property !== 'style') subprop = 'attrs';
-  } else if (!info.mustUseProperty) {
-    if (ctx.vdom) {
-      if (info.property !== 'style') subprop = 'attributes';
-    } else if (ctx.hyperscript) {
-      subprop = 'attrs';
-    }
-  }
-  if (subprop) {
-    props[subprop] = Object.assign(props[subprop] || {}, _defineProperty({}, info.attribute, value));
-  } else if (info.space && ctx.react) {
-    props[toReact[info.property] || info.property] = value;
-  } else {
-    props[info.attribute] = value;
-  }
-}
-
-/**
- * Check if `h` is `react.createElement`.
- *
- * @param {CreateElementLike} h
- * @returns {boolean}
- */
-function react(h) {
-  /** @type {unknown} */
-  var node = h('div', {});
-  return Boolean(node && (
-  // @ts-expect-error Looks like a React node.
-  '_owner' in node || '_store' in node) && (
-  // @ts-expect-error Looks like a React node.
-  node.key === undefined || node.key === null));
-}
-
-/**
- * Check if `h` is `hyperscript`.
- *
- * @param {CreateElementLike} h
- * @returns {boolean}
- */
-function hyperscript(h) {
-  return 'context' in h && 'cleanup' in h;
-}
-
-/**
- * Check if `h` is `virtual-dom/h`.
- *
- * @param {CreateElementLike} h
- * @returns {boolean}
- */
-function vdom(h) {
-  /** @type {unknown} */
-  var node = h('div', {});
-  // @ts-expect-error Looks like a vnode.
-  return node.type === 'VirtualNode';
-}
-
-/**
- * Check if `h` is Vue.
- *
- * @param {CreateElementLike} h
- * @returns {boolean}
- */
-function vue(h) {
-  /** @type {unknown} */
-  var node = h('div', {});
-  // @ts-expect-error Looks like a Vue node.
-  return Boolean(node && node.context && node.context._isVue);
-}
-
-/**
- * @param {string} value
- * @param {string} tagName
- * @returns {Record<string, string>}
- */
-function parseStyle(value, tagName) {
-  /** @type {Record<string, string>} */
-  var result = {};
-  try {
-    style_to_object(value, function (name, value) {
-      if (name.slice(0, 4) === '-ms-') name = 'ms-' + name.slice(4);
-      result[name.replace(/-([a-z])/g,
-      /**
-       * @param {string} _
-       * @param {string} $1
-       * @returns {string}
-       */
-      function (_, $1) {
-        return $1.toUpperCase();
-      })] = value;
-    });
-  } catch (error) {
-    error.message = tagName + '[style]' + error.message.slice('undefined'.length);
-    throw error;
-  }
-  return result;
-}
 ;// CONCATENATED MODULE: ../../node_modules/zwitch/index.js
 /**
  * @callback Handler
@@ -53438,257 +54636,303 @@ function zwitch(key, options) {
 }
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-to-parse5/lib/index.js
 /**
- * @typedef {import('parse5').Node} P5Node
- * @typedef {import('parse5').Document} P5Document
- * @typedef {import('parse5').DocumentFragment} P5Fragment
- * @typedef {import('parse5').DocumentType} P5Doctype
- * @typedef {import('parse5').CommentNode} P5Comment
- * @typedef {import('parse5').TextNode} P5Text
- * @typedef {import('parse5').Element} P5Element
- * @typedef {import('parse5').Attribute} P5Attribute
- * @typedef {import('parse5').ParentNode} P5Parent
- * @typedef {Exclude<P5Node, P5Document|P5Fragment>} P5Child
+ * @typedef {import('parse5').DefaultTreeAdapterMap} DefaultTreeAdapterMap
+ * @typedef {DefaultTreeAdapterMap['document']} P5Document
+ * @typedef {DefaultTreeAdapterMap['documentFragment']} P5Fragment
+ * @typedef {DefaultTreeAdapterMap['element']} P5Element
+ * @typedef {DefaultTreeAdapterMap['node']} P5Node
+ * @typedef {DefaultTreeAdapterMap['documentType']} P5Doctype
+ * @typedef {DefaultTreeAdapterMap['commentNode']} P5Comment
+ * @typedef {DefaultTreeAdapterMap['textNode']} P5Text
+ * @typedef {DefaultTreeAdapterMap['parentNode']} P5Parent
+ * @typedef {import('parse5').Token.Attribute} P5Attribute
+ * @typedef {Exclude<P5Node, P5Document | P5Fragment>} P5Child
  * @typedef {import('property-information').Schema} Schema
- * @typedef {import('property-information').Info} Info
- * @typedef {'html'|'svg'} Space
- * @typedef {import('hast').Parent} Parent
  * @typedef {import('hast').Root} Root
  * @typedef {import('hast').DocType} Doctype
  * @typedef {import('hast').Element} Element
  * @typedef {import('hast').Text} Text
  * @typedef {import('hast').Comment} Comment
- * @typedef {Parent['children'][number]} Child
- * @typedef {Child|Root} Node
- *
- * @callback Handle
- * @param {Node} node
- * @param {Schema} schema
- * @returns {P5Node}
+ * @typedef {import('hast').Content} Content
  */
+
+/**
+ * @typedef {Content | Root} Node
+ * @typedef {'html' | 'svg'} Space
+ *
+ * @typedef Options
+ *   Configuration.
+ * @property {Space | null | undefined} [space='html']
+ *   Which space the document is in.
+ *
+ *   When an `<svg>` element is found in the HTML space, this package already
+ *   automatically switches to and from the SVG space when entering and exiting
+ *   it.
+ */
+
 
 
 
 
 
 var hast_util_to_parse5_lib_own = {}.hasOwnProperty;
-var lib_one = zwitch('type', {
+
+/** @type {(from: Node, schema: Schema) => P5Node} */
+var hast_util_to_parse5_lib_one = zwitch('type', {
   handlers: {
-    root: hast_util_to_parse5_lib_root,
+    root: lib_root,
     element: hast_util_to_parse5_lib_element,
-    text: hast_util_to_parse5_lib_text,
-    comment: lib_comment,
-    doctype: lib_doctype
+    text: lib_text,
+    comment: comment,
+    doctype: doctype
   }
 });
 
 /**
- * Transform a tree from hast to Parse5’s AST.
+ * Transform a hast tree to Parse5’s AST.
  *
  * @param {Node} tree
- * @param {Space} [space='html']
+ *   Tree to transform.
+ * @param {Options | Space | null | undefined} [options]
+ *   Configuration.
  * @returns {P5Node}
+ *   `parse5` node.
  */
-function toParse5(tree, space) {
-  // @ts-ignore Types are wrong.
-  return lib_one(tree, space === 'svg' ? property_information_svg : property_information_html);
+function toParse5(tree, options) {
+  var space = options && typeof options === 'object' ? options.space : options;
+  return hast_util_to_parse5_lib_one(tree, space === 'svg' ? property_information_svg : property_information_html);
 }
 
 /**
- * @type {Handle}
  * @param {Root} node
+ * @param {Schema} schema
+ *   Current schema.
  * @returns {P5Document}
  */
-function hast_util_to_parse5_lib_root(node, schema) {
+function lib_root(node, schema) {
   /** @type {P5Document} */
-  var p5 = {
+  var result = {
     nodeName: '#document',
+    // @ts-expect-error: `parse5` uses enums, which are actually strings.
     mode: (node.data || {}).quirksMode ? 'quirks' : 'no-quirks',
     childNodes: []
   };
-  // @ts-ignore Assume correct children.
-  p5.childNodes = lib_all(node.children, p5, schema);
-  return patch(node, p5);
+  result.childNodes = hast_util_to_parse5_lib_all(node.children, result, schema);
+  hast_util_to_parse5_lib_patch(node, result);
+  return result;
 }
 
 /**
- * @type {Handle}
  * @param {Root} node
+ * @param {Schema} schema
+ *   Current schema.
  * @returns {P5Fragment}
  */
 function fragment(node, schema) {
   /** @type {P5Fragment} */
-  var p5 = {
+  var result = {
     nodeName: '#document-fragment',
     childNodes: []
   };
-  // @ts-ignore Assume correct children.
-  p5.childNodes = lib_all(node.children, p5, schema);
-  return patch(node, p5);
+  result.childNodes = hast_util_to_parse5_lib_all(node.children, result, schema);
+  hast_util_to_parse5_lib_patch(node, result);
+  return result;
 }
 
 /**
- * @type {Handle}
  * @param {Doctype} node
  * @returns {P5Doctype}
  */
-function lib_doctype(node) {
-  return patch(node, {
+function doctype(node) {
+  /** @type {P5Doctype} */
+  var result = {
     nodeName: '#documentType',
     name: 'html',
     publicId: '',
     systemId: '',
+    // @ts-expect-error: change to `null` in a major?
     parentNode: undefined
-  });
+  };
+  hast_util_to_parse5_lib_patch(node, result);
+  return result;
 }
 
 /**
- * @type {Handle}
  * @param {Text} node
  * @returns {P5Text}
  */
-function hast_util_to_parse5_lib_text(node) {
-  return patch(node, {
+function lib_text(node) {
+  /** @type {P5Text} */
+  var result = {
     nodeName: '#text',
     value: node.value,
+    // @ts-expect-error: no `parentNode`
     parentNode: undefined
-  });
+  };
+  hast_util_to_parse5_lib_patch(node, result);
+  return result;
 }
 
 /**
- * @type {Handle}
  * @param {Comment} node
  * @returns {P5Comment}
  */
-function lib_comment(node) {
-  return patch(node, {
+function comment(node) {
+  /** @type {P5Comment} */
+  var result = {
     nodeName: '#comment',
     data: node.value,
+    // @ts-expect-error: no `parentNode`
     parentNode: undefined
-  });
+  };
+  hast_util_to_parse5_lib_patch(node, result);
+  return result;
 }
 
 /**
- * @type {Handle}
  * @param {Element} node
+ * @param {Schema} schema
+ *   Current schema.
  * @returns {P5Element}
+ *   `parse5` node.
  */
 function hast_util_to_parse5_lib_element(node, schema) {
-  /** @type {Space} */
-  // @ts-ignore Assume space.
-  var space = schema.space;
-  return toH(h, Object.assign({}, node, {
-    children: []
-  }), {
-    space: space
-  });
-
-  /**
-   * @param {string} name
-   * @param {Object.<string, string|boolean|number>} attrs
-   */
-  function h(name, attrs) {
-    /** @type {Array.<P5Attribute>} */
-    var values = [];
-    /** @type {Info} */
-    var info;
-    /** @type {P5Attribute} */
-    var value;
-    /** @type {string} */
-    var key;
-    /** @type {number} */
-    var index;
-    /** @type {P5Element} */
-    var p5;
-    for (key in attrs) {
-      if (!hast_util_to_parse5_lib_own.call(attrs, key) || attrs[key] === false) {
-        continue;
-      }
-      info = find(schema, key);
-      if (info["boolean"] && !attrs[key]) {
-        continue;
-      }
-      value = {
-        name: key,
-        value: attrs[key] === true ? '' : String(attrs[key])
-      };
-      if (info.space && info.space !== 'html' && info.space !== 'svg') {
-        index = key.indexOf(':');
-        if (index < 0) {
-          value.prefix = '';
-        } else {
-          value.name = key.slice(index + 1);
-          value.prefix = key.slice(0, index);
-        }
-        value.namespace = webNamespaces[info.space];
-      }
-      values.push(value);
-    }
-    if (schema.space === 'html' && node.tagName === 'svg') schema = property_information_svg;
-    p5 = patch(node, {
-      nodeName: name,
-      tagName: name,
-      attrs: values,
-      namespaceURI: webNamespaces[schema.space],
-      childNodes: [],
-      parentNode: undefined
-    });
-
-    // @ts-ignore Assume correct children.
-    p5.childNodes = lib_all(node.children, p5, schema);
-
-    // @ts-ignore Types are wrong.
-    if (name === 'template') p5.content = fragment(node.content, schema);
-    return p5;
+  var parentSchema = schema;
+  var currentSchema = parentSchema;
+  if (node.type === 'element' && node.tagName.toLowerCase() === 'svg' && parentSchema.space === 'html') {
+    currentSchema = property_information_svg;
   }
-}
 
-/**
- * @param {Array.<Child>} children
- * @param {P5Parent} p5
- * @param {Schema} schema
- * @returns {Array.<P5Child>}
- */
-function lib_all(children, p5, schema) {
-  var index = -1;
-  /** @type {Array.<P5Child>} */
-  var result = [];
-  /** @type {P5Child} */
-  var child;
-  if (children) {
-    while (++index < children.length) {
-      // @ts-ignore Assume child.
-      child = lib_one(children[index], schema);
-
-      // @ts-ignore types are wrong.
-      child.parentNode = p5;
-      result.push(child);
+  /** @type {Array<P5Attribute>} */
+  var attrs = [];
+  /** @type {string} */
+  var prop;
+  if (node.properties) {
+    for (prop in node.properties) {
+      if (prop !== 'children' && hast_util_to_parse5_lib_own.call(node.properties, prop)) {
+        var _result = createProperty(currentSchema, prop, node.properties[prop]);
+        if (_result) {
+          attrs.push(_result);
+        }
+      }
     }
+  }
+
+  /** @type {P5Element} */
+  var result = {
+    nodeName: node.tagName,
+    tagName: node.tagName,
+    attrs: attrs,
+    // @ts-expect-error: html and svg both have a space.
+    namespaceURI: webNamespaces[currentSchema.space],
+    childNodes: [],
+    // @ts-expect-error: no `parentNode`
+    parentNode: undefined
+  };
+  result.childNodes = hast_util_to_parse5_lib_all(node.children, result, currentSchema);
+  hast_util_to_parse5_lib_patch(node, result);
+  if (node.tagName === 'template' && node.content) {
+    // @ts-expect-error: `parse5` types are wrong.
+    result.content = fragment(node.content, currentSchema);
   }
   return result;
 }
 
 /**
- * Patch specific properties.
+ * Handle a property.
  *
- * @template {P5Node} T
- * @param {Node} node
- * @param {T} p5
- * @returns {T}
+ * @param {Schema} schema
+ *   Current schema.
+ * @param {string} prop
+ *   Key.
+ * @param {Array<string | number> | string | number | boolean | null | undefined} value
+ *   hast property value.
+ * @returns {P5Attribute | void}
+ *   Field for runtime, optional.
  */
-function patch(node, p5) {
-  var position = node.position;
+function createProperty(schema, prop, value) {
+  var info = find(schema, prop);
+
+  // Ignore nullish and `NaN` values.
+  if (value === undefined || value === null || value === false || typeof value === 'number' && Number.isNaN(value) || !value && info["boolean"]) {
+    return;
+  }
+  if (Array.isArray(value)) {
+    // Accept `array`.
+    // Most props are space-separated.
+    value = info.commaSeparated ? comma_separated_tokens_stringify(value) : stringify(value);
+  }
+
+  /** @type {P5Attribute} */
+  var attribute = {
+    name: info.attribute,
+    value: value === true ? '' : String(value)
+  };
+  if (info.space && info.space !== 'html' && info.space !== 'svg') {
+    var index = attribute.name.indexOf(':');
+    if (index < 0) {
+      attribute.prefix = '';
+    } else {
+      attribute.name = attribute.name.slice(index + 1);
+      attribute.prefix = info.attribute.slice(0, index);
+    }
+    attribute.namespace = webNamespaces[info.space];
+  }
+  return attribute;
+}
+
+/**
+ * Transform all hast nodes.
+ *
+ * @param {Array<Content>} children
+ *   List of children.
+ * @param {P5Parent} parentNode
+ *   `parse5` parent node.
+ * @param {Schema} schema
+ *   Current schema.
+ * @returns {Array<P5Child>}
+ *   Transformed children.
+ */
+function hast_util_to_parse5_lib_all(children, parentNode, schema) {
+  var index = -1;
+  /** @type {Array<P5Child>} */
+  var results = [];
+  if (children) {
+    while (++index < children.length) {
+      /** @type {P5Child} */
+      // @ts-expect-error assume no document.
+      var child = hast_util_to_parse5_lib_one(children[index], schema);
+      child.parentNode = parentNode;
+      results.push(child);
+    }
+  }
+  return results;
+}
+
+/**
+ * Add position info from `from` to `to`.
+ *
+ * @param {Node} from
+ *   hast node.
+ * @param {P5Node} to
+ *   `parse5` node.
+ * @returns {void}
+ *   Nothing.
+ */
+function hast_util_to_parse5_lib_patch(from, to) {
+  var position = from.position;
   if (position && position.start && position.end) {
-    // @ts-ignore Types are wrong.
-    p5.sourceCodeLocation = {
+    to.sourceCodeLocation = {
       startLine: position.start.line,
       startCol: position.start.column,
+      // @ts-expect-error assume this is set.
       startOffset: position.start.offset,
       endLine: position.end.line,
       endCol: position.end.column,
+      // @ts-expect-error assume this is set.
       endOffset: position.end.offset
     };
   }
-  return p5;
 }
 ;// CONCATENATED MODULE: ../../node_modules/html-void-elements/index.js
 /**
@@ -53831,7 +55075,7 @@ function raw(tree, file, options) {
       raw: handleRaw
     },
     // @ts-expect-error: hush.
-    unknown: lib_unknown
+    unknown: unknown
   });
   /** @type {boolean|undefined} */
   var stitches;
@@ -54194,7 +55438,7 @@ function endTag(node) {
 /**
  * @param {Node} node
  */
-function lib_unknown(node) {
+function unknown(node) {
   throw new Error('Cannot compile `' + node.type + '` node');
 }
 
@@ -54344,35 +55588,13 @@ function hast_util_to_string_all(node) {
   }
   return result.join('');
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/util.js
-/**
- * @typedef {import('./types.js').Node} Node
- * @typedef {import('./types.js').Element} Element
- * @typedef {import('./types.js').Parent} Parent
- * @typedef {import('hast-util-is-element').AssertPredicate<Element>} IsElement
- */
-
-
-
-/**
- * @param {Node} node
- * @returns {node is Parent}
- */
-function util_parent(node) {
-  // @ts-expect-error: hush.
-  return Array.isArray(node.children);
-}
-
-/** @type {IsElement} */
-// @ts-expect-error it works.
-var util_element = convertElement();
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/enter-state.js
 /**
  * @typedef {import('./types.js').SelectState} SelectState
- * @typedef {import('./types.js').HastNode} HastNode
+ * @typedef {import('./types.js').Node} Node
  * @typedef {import('./types.js').ElementChild} ElementChild
  * @typedef {import('./types.js').Direction} Direction
- * @typedef {import('unist-util-visit/complex-types').Visitor<ElementChild>} Visitor
+ * @typedef {import('unist-util-visit/complex-types.js').Visitor<ElementChild>} Visitor
  */
 
 
@@ -54380,12 +55602,19 @@ var util_element = convertElement();
 
 
 
-
-
 /**
+ * Enter a node.
+ *
+ * The caller is responsible for calling the return value `exit`.
+ *
  * @param {SelectState} state
- * @param {HastNode} node
+ *   Current state.
+ *
+ *   Will be mutated: `exit` undos the changes.
+ * @param {Node} node
+ *   Node to enter.
  * @returns {() => void}
+ *   Call to exit.
  */
 // eslint-disable-next-line complexity
 function enterState(state, node) {
@@ -54393,26 +55622,21 @@ function enterState(state, node) {
   var language = state.language;
   var currentDirection = state.direction;
   var editableOrEditingHost = state.editableOrEditingHost;
-  /** @type {Direction|undefined} */
+  /** @type {Direction | undefined} */
   var dirInferred;
-  /** @type {boolean|undefined} */
-  var found;
-  if (util_element(node) && node.properties) {
+  if (node.type === 'element' && node.properties) {
     var lang = node.properties.xmlLang || node.properties.lang;
     var type = node.properties.type || 'text';
     var dir = dirProperty(node);
     if (lang !== undefined && lang !== null) {
       state.language = String(lang);
-      found = true;
     }
     if (schema && schema.space === 'html') {
       if (node.properties.contentEditable === 'true') {
         state.editableOrEditingHost = true;
-        found = true;
       }
-      if (isElement(node, 'svg')) {
+      if (node.tagName === 'svg') {
         state.schema = property_information_svg;
-        found = true;
       }
 
       // See: <https://html.spec.whatwg.org/#the-directionality>.
@@ -54423,18 +55647,17 @@ function enterState(state, node) {
       // Explicit `[dir=ltr]`.
       dir === 'ltr' ||
       // HTML with an invalid or no `[dir]`.
-      dir !== 'auto' && isElement(node, 'html') ||
+      dir !== 'auto' && node.tagName === 'html' ||
       // `input[type=tel]` with an invalid or no `[dir]`.
-      dir !== 'auto' && isElement(node, 'input') && type === 'tel') {
+      dir !== 'auto' && node.tagName === 'input' && type === 'tel') {
         dirInferred = 'ltr';
         // `[dir=auto]` or `bdi` with an invalid or no `[dir]`.
-      } else if (dir === 'auto' || isElement(node, 'bdi')) {
-        if (isElement(node, 'textarea')) {
+      } else if (dir === 'auto' || node.tagName === 'bdi') {
+        if (node.tagName === 'textarea') {
           // Check contents of `<textarea>`.
           dirInferred = dirBidi(hast_util_to_string_toString(node));
-        } else if (isElement(node, 'input') && (type === 'email' || type === 'search' || type === 'tel' || type === 'text')) {
+        } else if (node.tagName === 'input' && (type === 'email' || type === 'search' || type === 'tel' || type === 'text')) {
           // Check value of `<input>`.
-          // @ts-expect-error something is `never` in types but this is needed.
           dirInferred = node.properties.value ?
           // @ts-expect-error Assume string
           dirBidi(node.properties.value) : 'ltr';
@@ -54445,16 +55668,14 @@ function enterState(state, node) {
       }
       if (dirInferred) {
         state.direction = dirInferred;
-        found = true;
       }
     }
     // Turn off editing mode in non-HTML spaces.
     else if (state.editableOrEditingHost) {
       state.editableOrEditingHost = false;
-      found = true;
     }
   }
-  return found ? reset : noop;
+  return reset;
   function reset() {
     state.schema = schema;
     state.language = language;
@@ -54466,9 +55687,9 @@ function enterState(state, node) {
   function inferDirectionality(child) {
     if (child.type === 'text') {
       dirInferred = dirBidi(child.value);
-      return dirInferred ? EXIT : null;
+      return dirInferred ? EXIT : undefined;
     }
-    if (child !== node && (isElement(child, ['bdi', 'script', 'style', 'textare']) || dirProperty(child))) {
+    if (child !== node && child.type === 'element' && (child.tagName === 'bdi' || child.tagName === 'script' || child.tagName === 'style' || child.tagName === 'textare' || dirProperty(child))) {
       return SKIP;
     }
   }
@@ -54476,7 +55697,7 @@ function enterState(state, node) {
 
 /**
  * @param {string} value
- * @returns {Direction|undefined}
+ * @returns {Direction | undefined}
  */
 function dirBidi(value) {
   var result = direction(value);
@@ -54485,220 +55706,286 @@ function dirBidi(value) {
 
 /**
  * @param {ElementChild} node
- * @returns {Direction|undefined}
+ * @returns {Direction | undefined}
  */
 function dirProperty(node) {
-  var value = util_element(node) && node.properties && typeof node.properties.dir === 'string' ? node.properties.dir.toLowerCase() : undefined;
+  var value = node.type === 'element' && node.properties && typeof node.properties.dir === 'string' ? node.properties.dir.toLowerCase() : undefined;
   return value === 'auto' || value === 'ltr' || value === 'rtl' ? value : undefined;
 }
-function noop() {}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/nest.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-has-property/lib/index.js
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Content} Content
+ */
+
+/**
+ * @typedef {Root | Content} Node
+ */
+
+var hast_util_has_property_lib_own = {}.hasOwnProperty;
+
+/**
+ * Check if `node`is an element and has a `field` property.
+ *
+ * @param {unknown} node
+ *   Thing to check (typically `Element`).
+ * @param {unknown} field
+ *   Field name to check (typically `string`).
+ * @returns {boolean}
+ *   Whether `node` is an element that has a `field` property.
+ */
+function hasProperty(node, field) {
+  var value = typeof field === 'string' && isNode(node) && node.type === 'element' && node.properties && hast_util_has_property_lib_own.call(node.properties, field) && node.properties[field];
+  return value !== null && value !== undefined && value !== false;
+}
+
+/**
+ * @param {unknown} value
+ * @returns {value is Node}
+ */
+function isNode(value) {
+  return Boolean(value && typeof value === 'object' && 'type' in value);
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/attribute.js
 /**
  * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').Node} Node
+ * @typedef {import('./types.js').RuleAttr} RuleAttr
  * @typedef {import('./types.js').Element} Element
- * @typedef {import('./types.js').Parent} Parent
- * @typedef {import('./types.js').SelectState} SelectState
- * @typedef {import('./types.js').SelectIterator} SelectIterator
- * @typedef {import('./types.js').Handler} Handler
+ * @typedef {import('./types.js').Schema} Schema
+ * @typedef {import('./types.js').Info} Info
+ * @typedef {import('./types.js').PropertyValue} PropertyValue
  */
 
 
 
 
-var nest_own = {}.hasOwnProperty;
-var handle = zwitch('nestingOperator', {
+
+
+
+/** @type {(query: RuleAttr, element: Element, info: Info) => boolean} */
+var handle = zwitch('operator', {
+  unknown: unknownOperator,
   // @ts-expect-error: hush.
-  unknown: unknownNesting,
-  // @ts-expect-error: hush.
-  invalid: topScan,
-  // `undefined` is the top query selector.
+  invalid: exists,
   handlers: {
-    // @ts-expect-error: hush.
-    "null": descendant,
-    // `null` is the descendant combinator.
-    // @ts-expect-error: hush.
-    '>': child,
-    // @ts-expect-error: hush.
-    '+': adjacentSibling,
-    // @ts-expect-error: hush.
-    '~': generalSibling
+    '=': exact,
+    '~=': spaceSeparatedList,
+    '|=': exactOrPrefix,
+    '^=': begins,
+    '$=': ends,
+    '*=': attribute_contains
   }
 });
 
-/** @type {Handler} */
-function nest(query, node, index, parent, state) {
-  handle(query, node, index, parent, state);
-}
-
-// Shouldn’t be called, parser gives correct data.
-/* c8 ignore next 6 */
 /**
- * @param {{[x: string]: unknown, type: string}} query
+ * @param {Rule} query
+ * @param {Element} element
+ * @param {Schema} schema
+ * @returns {boolean}
  */
-function unknownNesting(query) {
-  throw new Error('Unexpected nesting `' + query.nestingOperator + '`');
-}
-
-/** @type {Handler} */
-function topScan(query, node, index, parent, state) {
-  // Shouldn’t happen.
-  /* c8 ignore next 3 */
-  if (parent || index === null) {
-    throw new Error('topScan is supposed to be called from the root node');
-  }
-
-  // Shouldn’t happen.
-  /* c8 ignore next 3 */
-  if (!state.iterator) {
-    throw new Error('Expected `iterator`');
-  }
-  state.iterator(query, node, index, parent, state);
-  if (!state.shallow) descendant(query, node, index, parent, state);
-}
-
-/** @type {Handler} */
-function descendant(query, node, index, parent, state) {
-  var previous = state.iterator;
-  state.iterator = iterator;
-  child(query, node, index, parent, state);
-
-  /** @type {SelectIterator} */
-  function iterator(query, node, index, parent, state) {
-    // Shouldn’t happen.
-    /* c8 ignore next 3 */
-    if (!previous) {
-      throw new Error('Expected `iterator`');
+function attribute(query, element, schema) {
+  var attrs = query.attrs;
+  var index = -1;
+  while (++index < attrs.length) {
+    if (!handle(attrs[index], element, find(schema, attrs[index].name))) {
+      return false;
     }
-    state.iterator = previous;
-    previous(query, node, index, parent, state);
-    state.iterator = iterator;
-    if (state.one && state.found) return;
-    child(query, node, index, parent, state);
   }
-}
-
-/** @type {Handler} */
-function child(query, node, _1, _2, state) {
-  if (!util_parent(node)) return;
-  if (node.children.length === 0) return;
-  indexedSearch(query, node, state);
-}
-
-/** @type {Handler} */
-function adjacentSibling(query, _, index, parent, state) {
-  // Shouldn’t happen.
-  /* c8 ignore next */
-  if (!parent || index === null) return;
-  indexedSearch(query, parent, state, index + 1, true);
-}
-
-/** @type {Handler} */
-function generalSibling(query, _, index, parent, state) {
-  // Shouldn’t happen.
-  /* c8 ignore next */
-  if (!parent || index === null) return;
-  indexedSearch(query, parent, state, index + 1);
+  return true;
 }
 
 /**
- * Handles `typeIndex` and `typeCount` properties for every walker.
+ * Check whether an attribute exists.
+ *
+ * `[attr]`
+ *
+ * @param {RuleAttr} _
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function exists(_, element, info) {
+  return hasProperty(element, info.property);
+}
+
+/**
+ * Check whether an attribute has an exact value.
+ *
+ * `[attr=value]`
+ *
+ * @param {RuleAttr} query
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function exact(query, element, info) {
+  return Boolean(hasProperty(element, info.property) && element.properties && normalizeValue(element.properties[info.property], info) === query.value);
+}
+
+/**
+ * Check whether an attribute, interpreted as a space-separated list, contains
+ * a value.
+ *
+ * `[attr~=value]`
+ *
+ * @param {RuleAttr} query
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function spaceSeparatedList(query, element, info) {
+  var value = element.properties && element.properties[info.property];
+  return (
+    // If this is a space-separated list, and the query is contained in it, return
+    // true.
+    !info.commaSeparated && value && typeof value === 'object' && query.value && value.includes(query.value) ||
+    // For all other values (including comma-separated lists), return whether this
+    // is an exact match.
+    hasProperty(element, info.property) && normalizeValue(value, info) === query.value
+  );
+}
+
+/**
+ * Check whether an attribute has a substring as either the exact value or a
+ * prefix.
+ *
+ * `[attr|=value]`
+ *
+ * @param {RuleAttr} query
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function exactOrPrefix(query, element, info) {
+  var value = normalizeValue(element.properties && element.properties[info.property], info);
+  return Boolean(hasProperty(element, info.property) && query.value && (value === query.value || value.slice(0, query.value.length) === query.value && value.charAt(query.value.length) === '-'));
+}
+
+/**
+ * Check whether an attribute has a substring as its start.
+ *
+ * `[attr^=value]`
+ *
+ * @param {RuleAttr} query
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function begins(query, element, info) {
+  return Boolean(hasProperty(element, info.property) && element.properties && query.value && normalizeValue(element.properties[info.property], info).slice(0, query.value.length) === query.value);
+}
+
+/**
+ * Check whether an attribute has a substring as its end.
+ *
+ * `[attr$=value]`
+ *
+ * @param {RuleAttr} query
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function ends(query, element, info) {
+  return Boolean(hasProperty(element, info.property) && element.properties && query.value && normalizeValue(element.properties[info.property], info).slice(-query.value.length) === query.value);
+}
+
+/**
+ * Check whether an attribute contains a substring.
+ *
+ * `[attr*=value]`
+ *
+ * @param {RuleAttr} query
+ * @param {Element} element
+ * @param {Info} info
+ * @returns {boolean}
+ */
+function attribute_contains(query, element, info) {
+  return Boolean(hasProperty(element, info.property) && element.properties && query.value && normalizeValue(element.properties[info.property], info).includes(query.value));
+}
+
+// Shouldn’t be called, Parser throws an error instead.
+/**
+ * @param {unknown} query
+ * @returns {never}
+ */
+/* c8 ignore next 4 */
+function unknownOperator(query) {
+  // @ts-expect-error: `operator` guaranteed.
+  throw new Error('Unknown operator `' + query.operator + '`');
+}
+
+/**
+ * Stringify a hast value back to its HTML form.
+ *
+ * @param {PropertyValue} value
+ * @param {Info} info
+ * @returns {string}
+ */
+function normalizeValue(value, info) {
+  if (typeof value === 'boolean') {
+    return info.attribute;
+  }
+  if (Array.isArray(value)) {
+    return (info.commaSeparated ? comma_separated_tokens_stringify : stringify)(value);
+  }
+  return String(value);
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/class-name.js
+/**
+ * @typedef {import('./types.js').Rule} Rule
+ * @typedef {import('./types.js').Element} Element
+ */
+
+/**
+ * Check whether an element has all class names.
  *
  * @param {Rule} query
- * @param {Parent} parent
- * @param {SelectState} state
- * @param {number} [from=0]
- * @param {boolean} [firstElementOnly=false]
+ * @param {Element} element
+ * @returns {boolean}
  */
-function indexedSearch(query, parent, state, from, firstElementOnly) {
-  var handle = state.index ? delay : add;
-  var children = parent.children;
-  var elements = 0;
+function className(query, element) {
+  /** @type {readonly string[]} */
+  // @ts-expect-error Assume array.
+  var value = element.properties.className || [];
   var index = -1;
-  /** @type {Record<string, number>} */
-  var types = {};
-  /** @type {Array<Function>} */
-  var delayed = [];
-
-  // Start looking at `from`
-  if (from === undefined || from === null) from = 0;
-
-  // Exit if there are no further nodes.
-  if (from >= children.length) return;
-
-  // If we need to index for types, do so for all elements before `from`.
-  if (state.index) {
-    while (++index < from) {
-      var _child = children[index];
-      if (util_element(_child)) count(_child.tagName);
+  if (query.classNames) {
+    while (++index < query.classNames.length) {
+      if (!value.includes(query.classNames[index])) return false;
     }
   }
-  index = from - 1;
-  while (++index < children.length) {
-    var _child2 = children[index];
-    // Only check elements.
-    // Check either all elements, or only check the first sibling
-    if (util_element(_child2)) {
-      handle(_child2, index);
+  return true;
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/id.js
+/**
+ * @typedef {import('./types.js').Rule} Rule
+ * @typedef {import('./types.js').Element} Element
+ */
 
-      // Stop if we’re looking for one node and it’s already found.
-      if (state.one && state.found) return;
-      if (firstElementOnly) break;
-    }
-  }
-  if (state.index) {
-    index = -1;
-    while (++index < delayed.length) {
-      delayed[index]();
-      if (state.one && state.found) return;
-    }
-  }
+/**
+ * Check whether an element has an ID.
+ *
+ * @param {Rule} query
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function id(query, element) {
+  return Boolean(element.properties && element.properties.id === query.id);
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/name.js
+/**
+ * @typedef {import('./types.js').Rule} Rule
+ * @typedef {import('./types.js').Element} Element
+ */
 
-  /**
-   * @param {Element} node
-   * @param {number} childIndex
-   */
-  function delay(node, childIndex) {
-    var elementsBefore = elements;
-    var elementsByTypeBefore = nest_own.call(types, node.tagName) ? types[node.tagName] : 0;
-    count(node.tagName);
-    delayed.push(fn);
-    function fn() {
-      // Before counting further elements:
-      state.elementIndex = elementsBefore;
-      state.typeIndex = elementsByTypeBefore;
-
-      // After counting all elements.
-      state.elementCount = elements;
-      state.typeCount = types[node.tagName];
-      add(node, childIndex);
-    }
-  }
-
-  /**
-   * @param {Element} node
-   * @param {number} childIndex
-   */
-  function add(node, childIndex) {
-    var exit = enterState(state, node);
-
-    // Shouldn’t happen.
-    /* c8 ignore next 3 */
-    if (!state.iterator) {
-      throw new Error('Expected `iterator`');
-    }
-    state.iterator(query, node, childIndex, parent, state);
-    exit();
-  }
-
-  /**
-   * @param {string} name
-   */
-  function count(name) {
-    if (!nest_own.call(types, name)) types[name] = 0;
-    elements++;
-    types[name]++;
-  }
+/**
+ * Check whether an element has a tag name.
+ *
+ * @param {Rule} query
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function name_name(query, element) {
+  return query.tagName === '*' || query.tagName === element.tagName;
 }
 ;// CONCATENATED MODULE: ../../node_modules/bcp-47-match/index.js
 /**
@@ -54762,7 +56049,7 @@ function indexedSearch(query, parent, state, from, firstElementOnly) {
  * @returns {FilterOrLookup<IsFilter>}
  *   Filter or lookup.
  */
-function bcp_47_match_factory(check, filter) {
+function factory(check, filter) {
   /**
    * @param {Tag|Tags} tags
    *   One or more BCP-47 tags.
@@ -54820,7 +56107,7 @@ function bcp_47_match_factory(check, filter) {
  * @returns {Tags}
  *   List of BCP-47 tags.
  */
-var basicFilter = bcp_47_match_factory(function (tag, range) {
+var basicFilter = factory(function (tag, range) {
   return range === '*' || tag === range || tag.includes(range + '-');
 }, true);
 
@@ -54836,7 +56123,7 @@ var basicFilter = bcp_47_match_factory(function (tag, range) {
  * @returns {Tags}
  *   List of BCP-47 tags.
  */
-var extendedFilter = bcp_47_match_factory(function (tag, range) {
+var extendedFilter = factory(function (tag, range) {
   // 3.3.2.1
   var left = tag.split('-');
   var right = range.split('-');
@@ -54891,7 +56178,7 @@ var extendedFilter = bcp_47_match_factory(function (tag, range) {
  * @returns {Tag|undefined}
  *   BCP-47 tag.
  */
-var lookup = bcp_47_match_factory(function (tag, range) {
+var lookup = factory(function (tag, range) {
   var right = range;
 
   /* eslint-disable-next-line no-constant-condition */
@@ -54918,1010 +56205,31 @@ function cast(values, name) {
   }
   return value;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-has-property/index.js
-var hast_util_has_property_own = {}.hasOwnProperty;
-
-/**
- * Check if `node` has a set `name` property.
- *
- * @param {unknown} node
- * @param {string} name
- * @returns {boolean}
- */
-function hasProperty(node, name) {
-  /** @type {unknown} */
-  var value = name && node && typeof node === 'object' &&
-  // @ts-ignore Looks like a node.
-  node.type === 'element' &&
-  // @ts-ignore Looks like an element.
-  node.properties &&
-  // @ts-ignore Looks like an element.
-  hast_util_has_property_own.call(node.properties, name) &&
-  // @ts-ignore Looks like an element.
-  node.properties[name];
-  return value !== null && value !== undefined && value !== false;
-}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-whitespace/index.js
 /**
+ * Check if the given value is *inter-element whitespace*.
+ *
  * @param {unknown} thing
+ *   Thing to check (typically `Node` or `string`).
  * @returns {boolean}
+ *   Whether the `value` is inter-element whitespace (`boolean`): consisting of
+ *   zero or more of space, tab (`\t`), line feed (`\n`), carriage return
+ *   (`\r`), or form feed (`\f`).
+ *   If a node is passed it must be a `Text` node, whose `value` field is
+ *   checked.
  */
 function whitespace(thing) {
   /** @type {string} */
   var value =
-  // @ts-ignore looks like a node.
+  // @ts-expect-error looks like a node.
   thing && typeof thing === 'object' && thing.type === 'text' ?
-  // @ts-ignore looks like a text.
+  // @ts-expect-error looks like a text.
   thing.value || '' : thing;
 
   // HTML whitespace expression.
-  // See <https://html.spec.whatwg.org/#space-character>.
+  // See <https://infra.spec.whatwg.org/#ascii-whitespace>.
   return typeof value === 'string' && value.replace(/[ \t\n\f\r]/g, '') === '';
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/pseudo.js
-/**
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').RulePseudo} RulePseudo
- * @typedef {import('./types.js').RulePseudoNth} RulePseudoNth
- * @typedef {import('./types.js').RulePseudoSelector} RulePseudoSelector
- * @typedef {import('./types.js').Parent} Parent
- * @typedef {import('./types.js').Selector} Selector
- * @typedef {import('./types.js').Selectors} Selectors
- * @typedef {import('./types.js').SelectState} SelectState
- * @typedef {import('./types.js').Element} Element
- * @typedef {import('./types.js').ElementChild} ElementChild
- */
-
-
-
-
-
-
-
-
-var pseudo_handle = zwitch('name', {
-  // @ts-expect-error: hush.
-  unknown: unknownPseudo,
-  invalid: invalidPseudo,
-  handlers: {
-    // @ts-expect-error: hush.
-    any: matches,
-    // @ts-expect-error: hush.
-    'any-link': anyLink,
-    // @ts-expect-error: hush.
-    blank: blank,
-    // @ts-expect-error: hush.
-    checked: checked,
-    // @ts-expect-error: hush.
-    dir: dir,
-    // @ts-expect-error: hush.
-    disabled: disabled,
-    // @ts-expect-error: hush.
-    empty: empty,
-    // @ts-expect-error: hush.
-    enabled: enabled,
-    // @ts-expect-error: hush.
-    'first-child': firstChild,
-    // @ts-expect-error: hush.
-    'first-of-type': firstOfType,
-    // @ts-expect-error: hush.
-    has: has,
-    // @ts-expect-error: hush.
-    lang: lang,
-    // @ts-expect-error: hush.
-    'last-child': lastChild,
-    // @ts-expect-error: hush.
-    'last-of-type': lastOfType,
-    // @ts-expect-error: hush.
-    matches: matches,
-    // @ts-expect-error: hush.
-    not: not,
-    // @ts-expect-error: hush.
-    'nth-child': nthChild,
-    // @ts-expect-error: hush.
-    'nth-last-child': nthLastChild,
-    // @ts-expect-error: hush.
-    'nth-of-type': nthOfType,
-    // @ts-expect-error: hush.
-    'nth-last-of-type': nthLastOfType,
-    // @ts-expect-error: hush.
-    'only-child': onlyChild,
-    // @ts-expect-error: hush.
-    'only-of-type': onlyOfType,
-    // @ts-expect-error: hush.
-    optional: optional,
-    // @ts-expect-error: hush.
-    'read-only': readOnly,
-    // @ts-expect-error: hush.
-    'read-write': readWrite,
-    // @ts-expect-error: hush.
-    required: required,
-    // @ts-expect-error: hush.
-    root: pseudo_root,
-    // @ts-expect-error: hush.
-    scope: scope
-  }
-});
-pseudo.needsIndex = ['first-child', 'first-of-type', 'last-child', 'last-of-type', 'nth-child', 'nth-last-child', 'nth-of-type', 'nth-last-of-type', 'only-child', 'only-of-type'];
-
-/**
- * @param {Rule} query
- * @param {Element} element
- * @param {number|null} index
- * @param {Parent|null} parent
- * @param {SelectState} state
- * @returns {boolean}
- */
-function pseudo(query, element, index, parent, state) {
-  var pseudos = query.pseudos;
-  var offset = -1;
-  while (++offset < pseudos.length) {
-    if (!pseudo_handle(pseudos[offset], element, index, parent, state)) return false;
-  }
-  return true;
-}
-
-/**
- * @param {RulePseudoSelector} query
- * @param {Element} element
- * @param {number|null} _1
- * @param {Parent|null} _2
- * @param {SelectState} state
- * @returns {boolean}
- */
-function matches(query, element, _1, _2, state) {
-  var shallow = state.shallow;
-  var one = state.one;
-  state.shallow = true;
-  state.one = true;
-  var result = any_any(query.value, element, state)[0] === element;
-  state.shallow = shallow;
-  state.one = one;
-  return result;
-}
-
-/**
- * @param {RulePseudoSelector} query
- * @param {Element} element
- * @param {number|null} index
- * @param {Parent|null} parent
- * @param {SelectState} state
- * @returns {boolean}
- */
-function not(query, element, index, parent, state) {
-  return !matches(query, element, index, parent, state);
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @returns {boolean}
- */
-function anyLink(_, element) {
-  return isElement(element, ['a', 'area', 'link']) && hasProperty(element, 'href');
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @returns {boolean}
- */
-function checked(_, element) {
-  if (isElement(element, ['input', 'menuitem'])) {
-    return Boolean(element.properties && (element.properties.type === 'checkbox' || element.properties.type === 'radio') && hasProperty(element, 'checked'));
-  }
-  if (isElement(element, 'option')) {
-    return hasProperty(element, 'selected');
-  }
-  return false;
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function dir(query, _1, _2, _3, state) {
-  return state.direction === query.value;
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @returns {boolean}
- */
-function disabled(_, element) {
-  return isElement(element, ['button', 'input', 'select', 'textarea', 'optgroup', 'option', 'menuitem', 'fieldset']) && hasProperty(element, 'disabled');
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} element
- * @returns {boolean}
- */
-function enabled(query, element) {
-  return !disabled(query, element);
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @returns {boolean}
- */
-function required(_, element) {
-  return isElement(element, ['input', 'textarea', 'select']) && hasProperty(element, 'required');
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} element
- * @returns {boolean}
- */
-function optional(query, element) {
-  return !required(query, element);
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @param {number|null} _1
- * @param {Parent|null} _2
- * @param {SelectState} state
- * @returns {boolean}
- */
-function readWrite(_, element, _1, _2, state) {
-  return isElement(element, ['input', 'textarea']) ? !hasProperty(element, 'readOnly') && !hasProperty(element, 'disabled') : Boolean(state.editableOrEditingHost);
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} element
- * @param {number|null} index
- * @param {Parent|null} parent
- * @param {SelectState} state
- * @returns {boolean}
- */
-function readOnly(query, element, index, parent, state) {
-  return !readWrite(query, element, index, parent, state);
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @param {number|null} _1
- * @param {Parent|null} parent
- * @param {SelectState} state
- * @returns {boolean}
- */
-function pseudo_root(_, element, _1, parent, state) {
-  return Boolean((!parent || parent.type === 'root') && state.schema && (state.schema.space === 'html' || state.schema.space === 'svg') && isElement(element, ['html', 'svg']));
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @param {number|null} _1
- * @param {Parent|null} _2
- * @param {SelectState} state
- * @returns {boolean}
- */
-function scope(_, element, _1, _2, state) {
-  return Boolean(isElement(element) && state.scopeElements && state.scopeElements.includes(element));
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @returns {boolean}
- */
-function empty(_, element) {
-  return !someChildren(element, check);
-
-  /**
-   * @param {ElementChild} child
-   * @returns {boolean}
-   */
-  function check(child) {
-    return child.type === 'element' || child.type === 'text';
-  }
-}
-
-/**
- * @param {RulePseudo} _
- * @param {Element} element
- * @returns {boolean}
- */
-function blank(_, element) {
-  return !someChildren(element, check);
-
-  /**
-   * @param {ElementChild} child
-   * @returns {boolean}
-   */
-  function check(child) {
-    return child.type === 'element' || child.type === 'text' && !whitespace(child);
-  }
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function firstChild(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return state.elementIndex === 0;
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function lang(query, _1, _2, _3, state) {
-  return state.language !== '' && state.language !== undefined && state.language !== null &&
-  // @ts-expect-error never `selectors`.
-  extendedFilter(state.language, comma_separated_tokens_parse(query.value)).length > 0;
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function lastChild(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return Boolean(state.elementCount && state.elementIndex === state.elementCount - 1);
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function onlyChild(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return state.elementCount === 1;
-}
-
-/**
- * @param {RulePseudoNth} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function nthChild(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return typeof state.elementIndex === 'number' && query.value(state.elementIndex);
-}
-
-/**
- * @param {RulePseudoNth} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function nthLastChild(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return Boolean(typeof state.elementCount === 'number' && typeof state.elementIndex === 'number' && query.value(state.elementCount - state.elementIndex - 1));
-}
-
-/**
- * @param {RulePseudoNth} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function nthOfType(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return typeof state.typeIndex === 'number' && query.value(state.typeIndex);
-}
-
-/**
- * @param {RulePseudoNth} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function nthLastOfType(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return typeof state.typeCount === 'number' && typeof state.typeIndex === 'number' && query.value(state.typeCount - 1 - state.typeIndex);
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function firstOfType(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return state.typeIndex === 0;
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function lastOfType(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return typeof state.typeIndex === 'number' && typeof state.typeCount === 'number' && state.typeIndex === state.typeCount - 1;
-}
-
-/**
- * @param {RulePseudo} query
- * @param {Element} _1
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function onlyOfType(query, _1, _2, _3, state) {
-  assertDeep(state, query);
-  return state.typeCount === 1;
-}
-
-/**
- * @param {Element} element
- * @param {(child: ElementChild) => boolean} check
- * @returns {boolean}
- */
-function someChildren(element, check) {
-  var children = element.children;
-  var index = -1;
-  while (++index < children.length) {
-    if (check(children[index])) return true;
-  }
-  return false;
-}
-
-// Shouldn’t be called, parser gives correct data.
-/* c8 ignore next 3 */
-function invalidPseudo() {
-  throw new Error('Invalid pseudo-selector');
-}
-
-/**
- * @param {RulePseudo} query
- */
-function unknownPseudo(query) {
-  if (query.name) {
-    throw new Error('Unknown pseudo-selector `' + query.name + '`');
-  }
-  throw new Error('Unexpected pseudo-element or empty pseudo-class');
-}
-
-/**
- * @param {SelectState} state
- * @param {RulePseudo|RulePseudoNth} query
- */
-function assertDeep(state, query) {
-  if (state.shallow) {
-    throw new Error('Cannot use `:' + query.name + '` without parent');
-  }
-}
-
-/**
- * @param {RulePseudoSelector} query
- * @param {Element} element
- * @param {number|null} _2
- * @param {Parent|null} _3
- * @param {SelectState} state
- * @returns {boolean}
- */
-function has(query, element, _2, _3, state) {
-  var shallow = state.shallow;
-  var one = state.one;
-  var scopeElements = state.scopeElements;
-  var value = appendScope(query.value);
-  state.shallow = false;
-  state.one = true;
-  state.scopeElements = [element];
-  var result = any_any(value, element, state).length > 0;
-  state.shallow = shallow;
-  state.one = one;
-  state.scopeElements = scopeElements;
-  return result;
-}
-
-/**
- * @param {Selector} value
- * @returns {Selectors}
- */
-function appendScope(value) {
-  /** @type {Selectors} */
-  var selector = value.type === 'ruleSet' ? {
-    type: 'selectors',
-    selectors: [value]
-  } : value;
-  var index = -1;
-  while (++index < selector.selectors.length) {
-    var rule = selector.selectors[index].rule;
-    rule.nestingOperator = null;
-    if (!rule.pseudos || rule.pseudos.length !== 1 || rule.pseudos[0].name !== 'scope') {
-      selector.selectors[index] = {
-        type: 'ruleSet',
-        // @ts-expect-error pseudos are fine w/ just a name!
-        rule: {
-          type: 'rule',
-          rule: rule,
-          pseudos: [{
-            name: 'scope'
-          }]
-        }
-      };
-    }
-  }
-  return selector;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/attribute.js
-/**
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').RuleAttr} RuleAttr
- * @typedef {import('./types.js').Element} Element
- * @typedef {import('./types.js').Schema} Schema
- * @typedef {import('./types.js').Info} Info
- * @typedef {import('./types.js').PropertyValue} PropertyValue
- */
-
-
-
-
-
-
-var attribute_handle = zwitch('operator', {
-  // @ts-expect-error: hush.
-  unknown: unknownOperator,
-  // @ts-expect-error: hush.
-  invalid: exists,
-  handlers: {
-    // @ts-expect-error: hush.
-    '=': exact,
-    // @ts-expect-error: hush.
-    '~=': spaceSeparatedList,
-    // @ts-expect-error: hush.
-    '|=': exactOrPrefix,
-    // @ts-expect-error: hush.
-    '^=': begins,
-    // @ts-expect-error: hush.
-    '$=': ends,
-    // @ts-expect-error: hush.
-    '*=': attribute_contains
-  }
-});
-
-/**
- * @param {Rule} query
- * @param {Element} element
- * @param {Schema} schema
- * @returns {boolean}
- */
-function attribute(query, element, schema) {
-  var attrs = query.attrs;
-  var index = -1;
-  while (++index < attrs.length) {
-    if (!attribute_handle(attrs[index], element, find(schema, attrs[index].name))) {
-      return false;
-    }
-  }
-  return true;
-}
-
-/**
- * `[attr]`
- *
- * @param {RuleAttr} _
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function exists(_, element, info) {
-  return hasProperty(element, info.property);
-}
-
-/**
- * `[attr=value]`
- *
- * @param {RuleAttr} query
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function exact(query, element, info) {
-  return Boolean(hasProperty(element, info.property) && element.properties && normalizeValue(element.properties[info.property], info) === query.value);
-}
-
-/**
- * `[attr~=value]`
- *
- * @param {RuleAttr} query
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function spaceSeparatedList(query, element, info) {
-  var value = element.properties && element.properties[info.property];
-  return (
-    // If this is a comma-separated list, and the query is contained in it, return
-    // true.
-    !info.commaSeparated && value && typeof value === 'object' && query.value && value.includes(query.value) ||
-    // For all other values (including comma-separated lists), return whether this
-    // is an exact match.
-    hasProperty(element, info.property) && normalizeValue(value, info) === query.value
-  );
-}
-
-/**
- * `[attr|=value]`
- *
- * @param {RuleAttr} query
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function exactOrPrefix(query, element, info) {
-  var value = normalizeValue(element.properties && element.properties[info.property], info);
-  return Boolean(hasProperty(element, info.property) && query.value && (value === query.value || value.slice(0, query.value.length) === query.value && value.charAt(query.value.length) === '-'));
-}
-
-/**
- * `[attr^=value]`
- *
- * @param {RuleAttr} query
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function begins(query, element, info) {
-  return Boolean(hasProperty(element, info.property) && element.properties && query.value && normalizeValue(element.properties[info.property], info).slice(0, query.value.length) === query.value);
-}
-
-/**
- * `[attr$=value]`
- *
- * @param {RuleAttr} query
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function ends(query, element, info) {
-  return Boolean(hasProperty(element, info.property) && element.properties && query.value && normalizeValue(element.properties[info.property], info).slice(-query.value.length) === query.value);
-}
-
-/**
- * `[attr*=value]`
- *
- * @param {RuleAttr} query
- * @param {Element} element
- * @param {Info} info
- * @returns {boolean}
- */
-function attribute_contains(query, element, info) {
-  return Boolean(hasProperty(element, info.property) && element.properties && query.value && normalizeValue(element.properties[info.property], info).includes(query.value));
-}
-
-// Shouldn’t be called, Parser throws an error instead.
-/**
- * @param {RuleAttr} query
- * @returns {boolean}
- */
-/* c8 ignore next 3 */
-function unknownOperator(query) {
-  throw new Error('Unknown operator `' + query.operator + '`');
-}
-
-/**
- * Stringify a hast value back to its HTML form.
- *
- * @param {PropertyValue} value
- * @param {Info} info
- * @returns {string}
- */
-function normalizeValue(value, info) {
-  if (typeof value === 'boolean') {
-    return info.attribute;
-  }
-  if (Array.isArray(value)) {
-    return (info.commaSeparated ? comma_separated_tokens_stringify : stringify)(value);
-  }
-  return String(value);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/class-name.js
-/**
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').Element} Element
- */
-
-/**
- * @param {Rule} query
- * @param {Element} element
- * @returns {boolean}
- */
-function className(query, element) {
-  /** @type {Array<string>} */
-  // @ts-expect-error Assume array.
-  var value = element.properties.className || [];
-  var index = -1;
-  if (query.classNames) {
-    while (++index < query.classNames.length) {
-      if (!value.includes(query.classNames[index])) return false;
-    }
-  }
-  return true;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/id.js
-/**
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').Element} Element
- */
-
-/**
- * @param {Rule} query
- * @param {Element} element
- * @returns {boolean}
- */
-function id(query, element) {
-  return Boolean(element.properties && element.properties.id === query.id);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/name.js
-/**
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').Element} Element
- */
-
-/**
- * @param {Rule} query
- * @param {Element} element
- * @returns {boolean}
- */
-function name_name(query, element) {
-  return query.tagName === '*' || query.tagName === element.tagName;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/test.js
-/**
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').HastNode} HastNode
- * @typedef {import('./types.js').Element} Element
- * @typedef {import('./types.js').Parent} Parent
- * @typedef {import('./types.js').SelectState} SelectState
- * @typedef {import('hast-util-is-element').AssertPredicate<Element>} IsElement
- */
-
-
-
-
-
-
-
-
-/**
- * @param {Rule} query
- * @param {HastNode} node
- * @param {number|null} index
- * @param {Parent|null} parent
- * @param {SelectState} state
- * @returns {boolean}
- */
-function test(query, node, index, parent, state) {
-  return Boolean(util_element(node) && state.schema && (!query.tagName || name_name(query, node)) && (!query.classNames || className(query, node)) && (!query.id || id(query, node)) && (!query.attrs || attribute(query, node, state.schema)) && (!query.pseudos || pseudo(query, node, index, parent, state)));
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/any.js
-
-
-/**
- * @typedef {import('hast').Element} Element
- * @typedef {import('./types.js').Selectors} Selectors
- * @typedef {import('./types.js').Rule} Rule
- * @typedef {import('./types.js').RuleSet} RuleSet
- * @typedef {import('./types.js').HastNode} HastNode
- * @typedef {import('./types.js').SelectIterator} SelectIterator
- * @typedef {import('./types.js').SelectState} SelectState
- */
-
-
-
-
-
-
-
-var type = zwitch('type', {
-  // @ts-expect-error: hush.
-  unknown: unknownType,
-  invalid: invalidType,
-  // @ts-expect-error: hush.
-  handlers: {
-    selectors: selectors,
-    ruleSet: ruleSet,
-    rule: rule
-  }
-});
-
-/**
- * @param {Selectors|RuleSet|Rule} query
- * @param {HastNode|undefined} node
- * @param {SelectState} state
- * @returns {Array<Element>}
- */
-function any_any(query, node, state) {
-  // @ts-expect-error zwitch types are off.
-  return query && node ? type(query, node, state) : [];
-}
-
-/**
- * @param {Selectors} query
- * @param {HastNode} node
- * @param {SelectState} state
- * @returns {Array<Element>}
- */
-function selectors(query, node, state) {
-  var collector = new Collector(state.one);
-  var index = -1;
-  while (++index < query.selectors.length) {
-    collector.collectAll(ruleSet(query.selectors[index], node, state));
-  }
-  return collector.result;
-}
-
-/**
- * @param {RuleSet} query
- * @param {HastNode} node
- * @param {SelectState} state
- * @returns {Array<Element>}
- */
-function ruleSet(query, node, state) {
-  return rule(query.rule, node, state);
-}
-
-/**
- * @param {Rule} query
- * @param {HastNode} tree
- * @param {SelectState} state
- * @returns {Array<Element>}
- */
-function rule(query, tree, state) {
-  var collector = new Collector(state.one);
-  if (state.shallow && query.rule) {
-    throw new Error('Expected selector without nesting');
-  }
-  nest(query, tree, 0, null, configure(query, {
-    schema: state.space === 'svg' ? property_information_svg : property_information_html,
-    language: undefined,
-    direction: 'ltr',
-    editableOrEditingHost: false,
-    // @ts-expect-error assume elements.
-    scopeElements: tree.type === 'root' ? tree.children : [tree],
-    iterator: iterator,
-    one: state.one,
-    shallow: state.shallow
-  }));
-  return collector.result;
-
-  /** @type {SelectIterator} */
-  function iterator(query, node, index, parent, state) {
-    var exit = enterState(state, node);
-    if (test(query, node, index, parent, state)) {
-      if (query.rule) {
-        nest(query.rule, node, index, parent, configure(query.rule, state));
-      } else {
-        // @ts-expect-error `test` also asserts `node is Element`
-        collector.collect(node);
-        state.found = true;
-      }
-    }
-    exit();
-  }
-
-  /**
-   * @template {SelectState} S
-   * @param {Rule} query
-   * @param {S} state
-   * @returns {S}
-   */
-  function configure(query, state) {
-    var pseudos = query.pseudos || [];
-    var index = -1;
-    while (++index < pseudos.length) {
-      if (pseudo.needsIndex.includes(pseudos[index].name)) {
-        state.index = true;
-        break;
-      }
-    }
-    return state;
-  }
-}
-
-// Shouldn’t be called, all data is handled.
-/* c8 ignore next 6 */
-/**
- * @param {{[x: string]: unknown, type: string}} query
- */
-function unknownType(query) {
-  throw new Error('Unknown type `' + query.type + '`');
-}
-
-// Shouldn’t be called, parser gives correct data.
-/* c8 ignore next 3 */
-function invalidType() {
-  throw new Error('Invalid type');
-}
-var Collector = /*#__PURE__*/function () {
-  /**
-   * @param {boolean|undefined} [one]
-   */
-  function Collector(one) {
-    _classCallCheck(this, Collector);
-    /** @type {Array<Element>} */
-    this.result = [];
-    /** @type {boolean|undefined} */
-    this.one = one;
-    /** @type {boolean} */
-    this.found = false;
-  }
-
-  /**
-   * Append nodes to array, filtering out duplicates.
-   *
-   * @param {Array<Element>} elements
-   */
-  _createClass(Collector, [{
-    key: "collectAll",
-    value: function collectAll(elements) {
-      var index = -1;
-      while (++index < elements.length) {
-        this.collect(elements[index]);
-      }
-    }
-
-    /**
-     * Append one node.
-     *
-     * @param {Element} element
-     */
-  }, {
-    key: "collect",
-    value: function collect(element) {
-      if (this.one) {
-        // Shouldn’t happen, safeguards performance problems.
-        /* c8 ignore next */
-        if (this.found) return;
-        this.found = true;
-      }
-      if (!this.result.includes(element)) this.result.push(element);
-    }
-  }]);
-  return Collector;
-}();
-// EXTERNAL MODULE: ../../node_modules/css-selector-parser/lib/index.js
-var css_selector_parser_lib = __webpack_require__(9510);
 ;// CONCATENATED MODULE: ../../node_modules/nth-check/lib/esm/parse.js
 // Following http://www.w3.org/TR/css3-selectors/#nth-child-pseudo
 // Whitespace as per https://www.w3.org/TR/selectors-3/#lex is " \t\r\n\f"
@@ -56177,15 +56485,21 @@ function nthCheck(formula) {
 function sequence(formula) {
   return generate(parse(formula));
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/parse.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/pseudo.js
+
 /**
- * @typedef {import('./types.js').Selector} Selector
- * @typedef {import('./types.js').Selectors} Selectors
- * @typedef {import('./types.js').RuleSet} RuleSet
  * @typedef {import('./types.js').Rule} Rule
  * @typedef {import('./types.js').RulePseudo} RulePseudo
- * @typedef {import('./types.js').RulePseudoNth} RulePseudoNth
+ * @typedef {import('./types.js').RulePseudoSelector} RulePseudoSelector
+ * @typedef {import('./types.js').Parent} Parent
+ * @typedef {import('./types.js').SelectState} SelectState
+ * @typedef {import('./types.js').Element} Element
+ * @typedef {import('./types.js').ElementChild} ElementChild
  */
+
+
+
+
 
 
 
@@ -56193,121 +56507,994 @@ function sequence(formula) {
 
 /** @type {import('nth-check').default} */
 // @ts-expect-error
-var parse_nthCheck = nthCheck["default"] || nthCheck;
-var nth = new Set(['nth-child', 'nth-last-child', 'nth-of-type', 'nth-last-of-type']);
-var parser = new css_selector_parser_lib/* CssSelectorParser */.N();
+var pseudo_nthCheck = nthCheck["default"] || nthCheck;
 
-// @ts-expect-error: hush.
-var parse_compile = zwitch('type', {
+/** @type {(rule: Rule | RulePseudo, element: Element, index: number | undefined, parent: Parent | undefined, state: SelectState) => boolean} */
+var pseudo_handle = zwitch('name', {
+  unknown: unknownPseudo,
+  invalid: invalidPseudo,
   handlers: {
-    selectors: parse_selectors,
-    ruleSet: parse_ruleSet,
-    rule: parse_rule
+    any: matches,
+    'any-link': anyLink,
+    blank: blank,
+    checked: checked,
+    dir: dir,
+    disabled: disabled,
+    empty: empty,
+    enabled: enabled,
+    'first-child': firstChild,
+    'first-of-type': firstOfType,
+    has: has,
+    lang: lang,
+    'last-child': lastChild,
+    'last-of-type': lastOfType,
+    matches: matches,
+    not: not,
+    'nth-child': nthChild,
+    'nth-last-child': nthLastChild,
+    'nth-of-type': nthOfType,
+    'nth-last-of-type': nthLastOfType,
+    'only-child': onlyChild,
+    'only-of-type': onlyOfType,
+    optional: optional,
+    'read-only': readOnly,
+    'read-write': readWrite,
+    required: required,
+    root: pseudo_root,
+    scope: scope
   }
 });
+pseudo.needsIndex = ['any', 'first-child', 'first-of-type', 'last-child', 'last-of-type', 'matches', 'not', 'nth-child', 'nth-last-child', 'nth-of-type', 'nth-last-of-type', 'only-child', 'only-of-type'];
+
+/**
+ * Check whether an element matches pseudo selectors.
+ *
+ * @param {Rule} query
+ * @param {Element} element
+ * @param {number | undefined} index
+ * @param {Parent | undefined} parent
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function pseudo(query, element, index, parent, state) {
+  var pseudos = query.pseudos;
+  var offset = -1;
+  while (++offset < pseudos.length) {
+    if (!pseudo_handle(pseudos[offset], element, index, parent, state)) return false;
+  }
+  return true;
+}
+
+/**
+ * Check whether an element matches an `:any-link` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function anyLink(_, element) {
+  return (element.tagName === 'a' || element.tagName === 'area' || element.tagName === 'link') && hasProperty(element, 'href');
+}
+
+/**
+ * Check whether an element matches a `:blank` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function blank(_, element) {
+  return !someChildren(element, check);
+
+  /**
+   * @param {ElementChild} child
+   * @returns {boolean}
+   */
+  function check(child) {
+    return child.type === 'element' || child.type === 'text' && !whitespace(child);
+  }
+}
+
+/**
+ * Check whether an element matches a `:checked` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function checked(_, element) {
+  if (element.tagName === 'input' || element.tagName === 'menuitem') {
+    return Boolean(element.properties && (element.properties.type === 'checkbox' || element.properties.type === 'radio') && hasProperty(element, 'checked'));
+  }
+  if (element.tagName === 'option') {
+    return hasProperty(element, 'selected');
+  }
+  return false;
+}
+
+/**
+ * Check whether an element matches a `:dir()` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function dir(query, _1, _2, _3, state) {
+  return state.direction === query.value;
+}
+
+/**
+ * Check whether an element matches a `:disabled` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function disabled(_, element) {
+  return (element.tagName === 'button' || element.tagName === 'input' || element.tagName === 'select' || element.tagName === 'textarea' || element.tagName === 'optgroup' || element.tagName === 'option' || element.tagName === 'menuitem' || element.tagName === 'fieldset') && hasProperty(element, 'disabled');
+}
+
+/**
+ * Check whether an element matches an `:empty` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function empty(_, element) {
+  return !someChildren(element, check);
+
+  /**
+   * @param {ElementChild} child
+   * @returns {boolean}
+   */
+  function check(child) {
+    return child.type === 'element' || child.type === 'text';
+  }
+}
+
+/**
+ * Check whether an element matches an `:enabled` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function enabled(query, element) {
+  return !disabled(query, element);
+}
+
+/**
+ * Check whether an element matches a `:first-child` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function firstChild(query, _1, _2, _3, state) {
+  assertDeep(state, query);
+  return state.elementIndex === 0;
+}
+
+/**
+ * Check whether an element matches a `:first-of-type` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function firstOfType(query, _1, _2, _3, state) {
+  assertDeep(state, query);
+  return state.typeIndex === 0;
+}
+
+/**
+ * @param {RulePseudoSelector} query
+ * @param {Element} element
+ * @param {number | undefined} _1
+ * @param {Parent | undefined} _2
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function has(query, element, _1, _2, state) {
+  /** @type {SelectState} */
+  var childState = _objectSpread2(_objectSpread2({}, state), {}, {
+    // Not found yet.
+    found: false,
+    // Do walk deep.
+    shallow: false,
+    // One result is enough.
+    one: true,
+    scopeElements: [element],
+    results: [],
+    rootQuery: queryToSelectors(query.value)
+  });
+  walk_walk(childState, {
+    type: 'root',
+    children: element.children
+  });
+  return childState.results.length > 0;
+}
+
+/**
+ * Check whether an element matches a `:lang()` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function lang(query, _1, _2, _3, state) {
+  return state.language !== '' && state.language !== undefined &&
+  // @ts-expect-error never `selectors`.
+  extendedFilter(state.language, comma_separated_tokens_parse(query.value)).length > 0;
+}
+
+/**
+ * Check whether an element matches a `:last-child` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function lastChild(query, _1, _2, _3, state) {
+  assertDeep(state, query);
+  return Boolean(state.elementCount && state.elementIndex === state.elementCount - 1);
+}
+
+/**
+ * Check whether an element matches a `:last-of-type` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function lastOfType(query, _1, _2, _3, state) {
+  assertDeep(state, query);
+  return typeof state.typeIndex === 'number' && typeof state.typeCount === 'number' && state.typeIndex === state.typeCount - 1;
+}
+
+/**
+ * Check whether an element `:matches` further selectors.
+ *
+ * @param {RulePseudoSelector} query
+ * @param {Element} element
+ * @param {number | undefined} _
+ * @param {Parent | undefined} parent
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function matches(query, element, _, parent, state) {
+  /** @type {SelectState} */
+  var childState = _objectSpread2(_objectSpread2({}, state), {}, {
+    // Not found yet.
+    found: false,
+    // Do walk deep.
+    shallow: false,
+    // One result is enough.
+    one: true,
+    scopeElements: [element],
+    results: [],
+    rootQuery: queryToSelectors(query.value)
+  });
+  walk_walk(childState, element);
+  return childState.results[0] === element;
+}
+
+/**
+ * Check whether an element does `:not` match further selectors.
+ *
+ * @param {RulePseudoSelector} query
+ * @param {Element} element
+ * @param {number | undefined} index
+ * @param {Parent | undefined} parent
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function not(query, element, index, parent, state) {
+  return !matches(query, element, index, parent, state);
+}
+
+/**
+ * Check whether an element matches an `:nth-child` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function nthChild(query, _1, _2, _3, state) {
+  var fn = getCachedNthCheck(query);
+  assertDeep(state, query);
+  return typeof state.elementIndex === 'number' && fn(state.elementIndex);
+}
+
+/**
+ * Check whether an element matches an `:nth-last-child` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function nthLastChild(query, _1, _2, _3, state) {
+  var fn = getCachedNthCheck(query);
+  assertDeep(state, query);
+  return Boolean(typeof state.elementCount === 'number' && typeof state.elementIndex === 'number' && fn(state.elementCount - state.elementIndex - 1));
+}
+
+/**
+ * Check whether an element matches a `:nth-last-of-type` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function nthLastOfType(query, _1, _2, _3, state) {
+  var fn = getCachedNthCheck(query);
+  assertDeep(state, query);
+  return typeof state.typeCount === 'number' && typeof state.typeIndex === 'number' && fn(state.typeCount - 1 - state.typeIndex);
+}
+
+/**
+ * Check whether an element matches an `:nth-of-type` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function nthOfType(query, _1, _2, _3, state) {
+  var fn = getCachedNthCheck(query);
+  assertDeep(state, query);
+  return typeof state.typeIndex === 'number' && fn(state.typeIndex);
+}
+
+/**
+ * Check whether an element matches an `:only-child` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function onlyChild(query, _1, _2, _3, state) {
+  assertDeep(state, query);
+  return state.elementCount === 1;
+}
+
+/**
+ * Check whether an element matches an `:only-of-type` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} _1
+ * @param {number | undefined} _2
+ * @param {Parent | undefined} _3
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function onlyOfType(query, _1, _2, _3, state) {
+  assertDeep(state, query);
+  return state.typeCount === 1;
+}
+
+/**
+ * Check whether an element matches an `:optional` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function optional(query, element) {
+  return !required(query, element);
+}
+
+/**
+ * Check whether an element matches a `:read-only` pseudo.
+ *
+ * @param {RulePseudo} query
+ * @param {Element} element
+ * @param {number | undefined} index
+ * @param {Parent | undefined} parent
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function readOnly(query, element, index, parent, state) {
+  return !readWrite(query, element, index, parent, state);
+}
+
+/**
+ * Check whether an element matches a `:read-write` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @param {number | undefined} _1
+ * @param {Parent | undefined} _2
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function readWrite(_, element, _1, _2, state) {
+  return element.tagName === 'input' || element.tagName === 'textarea' ? !hasProperty(element, 'readOnly') && !hasProperty(element, 'disabled') : Boolean(state.editableOrEditingHost);
+}
+
+/**
+ * Check whether an element matches a `:required` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @returns {boolean}
+ */
+function required(_, element) {
+  return (element.tagName === 'input' || element.tagName === 'textarea' || element.tagName === 'select') && hasProperty(element, 'required');
+}
+
+/**
+ * Check whether an element matches a `:root` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @param {number | undefined} _1
+ * @param {Parent | undefined} parent
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function pseudo_root(_, element, _1, parent, state) {
+  return Boolean((!parent || parent.type === 'root') && state.schema && (state.schema.space === 'html' || state.schema.space === 'svg') && (element.tagName === 'html' || element.tagName === 'svg'));
+}
+
+/**
+ * Check whether an element matches a `:scope` pseudo.
+ *
+ * @param {RulePseudo} _
+ * @param {Element} element
+ * @param {number | undefined} _1
+ * @param {Parent | undefined} _2
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function scope(_, element, _1, _2, state) {
+  return state.scopeElements.includes(element);
+}
+
+// Shouldn’t be called, parser gives correct data.
+/* c8 ignore next 3 */
+function invalidPseudo() {
+  throw new Error('Invalid pseudo-selector');
+}
+
+/**
+ * @param {unknown} query
+ * @returns {never}
+ */
+function unknownPseudo(query) {
+  // @ts-expect-error: indexable.
+  if (query.name) {
+    // @ts-expect-error: indexable.
+    throw new Error('Unknown pseudo-selector `' + query.name + '`');
+  }
+  throw new Error('Unexpected pseudo-element or empty pseudo-class');
+}
+
+/**
+ * Check children.
+ *
+ * @param {Element} element
+ * @param {(child: ElementChild) => boolean} check
+ * @returns {boolean}
+ */
+function someChildren(element, check) {
+  var children = element.children;
+  var index = -1;
+  while (++index < children.length) {
+    if (check(children[index])) return true;
+  }
+  return false;
+}
+
+/**
+ * @param {SelectState} state
+ * @param {RulePseudo} query
+ */
+function assertDeep(state, query) {
+  if (state.shallow) {
+    throw new Error('Cannot use `:' + query.name + '` without parent');
+  }
+}
+
+/**
+ * @param {RulePseudo} query
+ * @returns {(value: number) => boolean}
+ */
+function getCachedNthCheck(query) {
+  /** @type {(value: number) => boolean} */
+  // @ts-expect-error: cache.
+  var fn = query._cachedFn;
+  if (!fn) {
+    // @ts-expect-error: always string.
+    fn = pseudo_nthCheck(query.value);
+    // @ts-expect-error: cache.
+    query._cachedFn = fn;
+  }
+  return fn;
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/test.js
+/**
+ * @typedef {import('./types.js').Rule} Rule
+ * @typedef {import('./types.js').Element} Element
+ * @typedef {import('./types.js').Parent} Parent
+ * @typedef {import('./types.js').SelectState} SelectState
+ */
+
+
+
+
+
+
+
+/**
+ * Test a rule.
+ *
+ * @param {Rule} query
+ * @param {Element} element
+ * @param {number | undefined} index
+ * @param {Parent | undefined} parent
+ * @param {SelectState} state
+ * @returns {boolean}
+ */
+function test(query, element, index, parent, state) {
+  return Boolean((!query.tagName || name_name(query, element)) && (!query.classNames || className(query, element)) && (!query.id || id(query, element)) && (!query.attrs || attribute(query, element, state.schema)) && (!query.pseudos || pseudo(query, element, index, parent, state)));
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/walk.js
+
+/**
+ * @typedef {import('./types.js').Node} Node
+ * @typedef {import('./types.js').Element} Element
+ * @typedef {import('./types.js').Parent} Parent
+ * @typedef {import('./types.js').RuleSet} RuleSet
+ * @typedef {import('./types.js').SelectState} SelectState
+ * @typedef {import('./types.js').Selectors} Selectors
+ *
+ * @typedef Nest
+ *   Rule sets by nesting.
+ * @property {Array<RuleSet> | undefined} descendant
+ *   `a b`
+ * @property {Array<RuleSet> | undefined} directChild
+ *   `a > b`
+ * @property {Array<RuleSet> | undefined} adjacentSibling
+ *   `a + b`
+ * @property {Array<RuleSet> | undefined} generalSibling
+ *   `a ~ b`
+ *
+ * @typedef Counts
+ *   Info on elements in a parent.
+ * @property {number} count
+ *   Number of elements.
+ * @property {Map<string, number>} types
+ *   Number of elements by tag name.
+ */
+
+
+
+
+/** @type {Array<never>} */
+var walk_empty = [];
+
+/**
+ * Turn a query into a uniform object.
+ *
+ * @param {Selectors | RuleSet | null} query
+ * @returns {Selectors}
+ */
+function queryToSelectors(query) {
+  if (query === null) {
+    return {
+      type: 'selectors',
+      selectors: []
+    };
+  }
+  if (query.type === 'ruleSet') {
+    return {
+      type: 'selectors',
+      selectors: [query]
+    };
+  }
+  return query;
+}
+
+/**
+ * Walk a tree.
+ *
+ * @param {SelectState} state
+ * @param {Node | undefined} tree
+ */
+function walk_walk(state, tree) {
+  if (tree) {
+    walk_one(state, [], tree, undefined, undefined);
+  }
+}
+
+/**
+ * Check a node.
+ *
+ * @param {SelectState} state
+ * @param {Array<RuleSet>} currentRules
+ * @param {Node} node
+ * @param {number | undefined} index
+ * @param {Parent | undefined} parent
+ * @returns {Nest}
+ */
+function walk_one(state, currentRules, node, index, parent) {
+  /** @type {Nest} */
+  var nestResult = {
+    directChild: undefined,
+    descendant: undefined,
+    adjacentSibling: undefined,
+    generalSibling: undefined
+  };
+  var exit = enterState(state, node);
+  if (node.type === 'element') {
+    nestResult = applySelectors(state,
+    // Try the root rules for this element too.
+    combine(currentRules, state.rootQuery.selectors), node, index, parent);
+  }
+
+  // If this is a parent, and we want to delve into them, and we haven’t found
+  // our single result yet.
+  if ('children' in node && !state.shallow && !(state.one && state.found)) {
+    walk_all(state, nestResult, node);
+  }
+  exit();
+  return nestResult;
+}
+
+/**
+ * Check a node.
+ *
+ * @param {SelectState} state
+ * @param {Nest} nest
+ * @param {Parent} node
+ * @returns {void}
+ */
+function walk_all(state, nest, node) {
+  var fromParent = combine(nest.descendant, nest.directChild);
+  /** @type {Array<RuleSet> | undefined} */
+  var fromSibling;
+  var index = -1;
+  /**
+   * Total counts.
+   * @type {Counts}
+   */
+  var total = {
+    count: 0,
+    types: new Map()
+  };
+  /**
+   * Counts of previous siblings.
+   * @type {Counts}
+   */
+  var before = {
+    count: 0,
+    types: new Map()
+  };
+  while (++index < node.children.length) {
+    count(total, node.children[index]);
+  }
+  index = -1;
+  while (++index < node.children.length) {
+    var child = node.children[index];
+    // Uppercase to prevent prototype polution, injecting `constructor` or so.
+    // Normalize because HTML is insensitive.
+    var name = child.type === 'element' ? child.tagName.toUpperCase() : undefined;
+    // Before counting further elements:
+    state.elementIndex = before.count;
+    state.typeIndex = name ? before.types.get(name) || 0 : 0;
+    // After counting all elements.
+    state.elementCount = total.count;
+    state.typeCount = name ? total.types.get(name) : 0;
+
+    // Only apply if this is a parent, this should be an element, but we check
+    // for parents so that we delve into custom nodes too.
+    if ('children' in child) {
+      var forSibling = combine(fromParent, fromSibling);
+      var _nest = walk_one(state, forSibling, node.children[index], index, node);
+      fromSibling = combine(_nest.generalSibling, _nest.adjacentSibling);
+    }
+
+    // We found one thing, and one is enough.
+    if (state.one && state.found) {
+      break;
+    }
+    count(before, node.children[index]);
+  }
+}
+
+/**
+ * Apply selectors to an element.
+ *
+ * @param {SelectState} state
+ *   Current state.
+ * @param {Array<RuleSet>} rules
+ *   Rules to apply.
+ * @param {Element} node
+ *   Element to apply rules to.
+ * @param {number | undefined} index
+ *   Index of node in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of node.
+ * @returns {Nest}
+ *   Further rules.
+ */
+function applySelectors(state, rules, node, index, parent) {
+  /** @type {Nest} */
+  var nestResult = {
+    directChild: undefined,
+    descendant: undefined,
+    adjacentSibling: undefined,
+    generalSibling: undefined
+  };
+  var selectorIndex = -1;
+  while (++selectorIndex < rules.length) {
+    var ruleSet = rules[selectorIndex];
+
+    // We found one thing, and one is enough.
+    if (state.one && state.found) {
+      break;
+    }
+
+    // When shallow, we don’t allow nested rules.
+    // Idea: we could allow a stack of parents?
+    // Might get quite complex though.
+    if (state.shallow && ruleSet.rule.rule) {
+      throw new Error('Expected selector without nesting');
+    }
+
+    // If this rule matches:
+    if (test(ruleSet.rule, node, index, parent, state)) {
+      var nest = ruleSet.rule.rule;
+
+      // Are there more?
+      if (nest) {
+        /** @type {RuleSet} */
+        var rule = {
+          type: 'ruleSet',
+          rule: nest
+        };
+        /** @type {keyof Nest} */
+        var label = nest.nestingOperator === '+' ? 'adjacentSibling' : nest.nestingOperator === '~' ? 'generalSibling' : nest.nestingOperator === '>' ? 'directChild' : 'descendant';
+        add(nestResult, label, rule);
+      } else {
+        // We have a match!
+        state.found = true;
+        if (!state.results.includes(node)) {
+          state.results.push(node);
+        }
+      }
+    }
+
+    // Descendant.
+    if (ruleSet.rule.nestingOperator === null) {
+      add(nestResult, 'descendant', ruleSet);
+    }
+    // Adjacent.
+    else if (ruleSet.rule.nestingOperator === '~') {
+      add(nestResult, 'generalSibling', ruleSet);
+    }
+    // Drop top-level nesting (`undefined`), direct child (`>`), adjacent sibling (`+`).
+  }
+
+  return nestResult;
+}
+
+/**
+ * Combine two lists, if needed.
+ *
+ * This is optimized to create as few lists as possible.
+ *
+ * @param {Array<RuleSet> | undefined} left
+ * @param {Array<RuleSet> | undefined} right
+ * @returns {Array<RuleSet>}
+ */
+function combine(left, right) {
+  return left && right && left.length > 0 && right.length > 0 ? [].concat(_toConsumableArray(left), _toConsumableArray(right)) : left && left.length > 0 ? left : right && right.length > 0 ? right : walk_empty;
+}
+
+/**
+ * Add a rule to a nesting map.
+ *
+ * @param {Nest} nest
+ * @param {keyof Nest} field
+ * @param {RuleSet} rule
+ */
+function add(nest, field, rule) {
+  var list = nest[field];
+  if (list) {
+    list.push(rule);
+  } else {
+    nest[field] = [rule];
+  }
+}
+
+/**
+ * Count a node.
+ *
+ * @param {Counts} counts
+ *   Counts.
+ * @param {Node} node
+ *   Node (we’re looking for elements).
+ * @returns {void}
+ *   Nothing.
+ */
+function count(counts, node) {
+  if (node.type === 'element') {
+    // Uppercase to prevent prototype polution, injecting `constructor` or so.
+    // Normalize because HTML is insensitive.
+    var name = node.tagName.toUpperCase();
+    var _count = (counts.types.get(name) || 0) + 1;
+    counts.count++;
+    counts.types.set(name, _count);
+  }
+}
+// EXTERNAL MODULE: ../../node_modules/css-selector-parser/lib/index.js
+var css_selector_parser_lib = __webpack_require__(9510);
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/parse.js
+/**
+ * @typedef {import('./types.js').Selectors} Selectors
+ * @typedef {import('./types.js').RuleSet} RuleSet
+ */
+
+
+var parser = new css_selector_parser_lib/* CssSelectorParser */.N();
 parser.registerAttrEqualityMods('~', '|', '^', '$', '*');
 parser.registerSelectorPseudos('any', 'matches', 'not', 'has');
 parser.registerNestingOperators('>', '+', '~');
 
 /**
  * @param {string} selector
- * @returns {Selector}
+ * @returns {Selectors | RuleSet | null}
  */
 function lib_parse_parse(selector) {
   if (typeof selector !== 'string') {
     throw new TypeError('Expected `string` as selector, not `' + selector + '`');
   }
-
-  // @ts-expect-error types are wrong.
-  return parse_compile(parser.parse(selector));
+  return parser.parse(selector);
 }
-
+;// CONCATENATED MODULE: ../../node_modules/hast-util-select/lib/index.js
 /**
- * @param {Selectors} query
- * @returns {Selectors}
- */
-function parse_selectors(query) {
-  var index = -1;
-  while (++index < query.selectors.length) {
-    parse_compile(query.selectors[index]);
-  }
-  return query;
-}
-
-/**
- * @param {RuleSet} query
- * @returns {Rule}
- */
-function parse_ruleSet(query) {
-  return parse_rule(query.rule);
-}
-
-/**
- * @param {Rule} query
- * @returns {Rule}
- */
-function parse_rule(query) {
-  var pseudos = query.pseudos || [];
-  var index = -1;
-  while (++index < pseudos.length) {
-    var pseudo = pseudos[index];
-    if (nth.has(pseudo.name)) {
-      // @ts-expect-error Patch a non-primitive type.
-      pseudo.value = parse_nthCheck(pseudo.value);
-      // @ts-expect-error Patch a non-primitive type.
-      pseudo.valueType = 'function';
-    }
-  }
-  parse_compile(query.rule);
-  return query;
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-select/index.js
-/**
- * @typedef {import('./lib/types.js').Element} Element
- * @typedef {import('./lib/types.js').HastNode} HastNode
- * @typedef {import('./lib/types.js').Space} Space
+ * @typedef {import('./types.js').Element} Element
+ * @typedef {import('./types.js').Node} Node
+ * @typedef {import('./types.js').Space} Space
+ * @typedef {import('./types.js').SelectState} SelectState
  */
 
 
 
 
+
 /**
+ * Check that the given `node` matches `selector`.
+ *
+ * This only checks the element itself, not the surrounding tree.
+ * Thus, nesting in selectors is not supported (`p b`, `p > b`), neither are
+ * selectors like `:first-child`, etc.
+ * This only checks that the given element matches the selector.
+ *
  * @param {string} selector
- * @param {HastNode} [node]
- * @param {Space} [space]
+ *   CSS selector, such as (`h1`, `a, b`).
+ * @param {Node | null | undefined} [node]
+ *   Node that might match `selector`, should be an element.
+ * @param {Space | null | undefined} [space='html']
+ *   Name of namespace (`'svg'` or `'html'`).
  * @returns {boolean}
+ *   Whether `node` matches `selector`.
  */
-function hast_util_select_matches(selector, node, space) {
-  return Boolean(any(parse(selector), node, {
-    space: space,
-    one: true,
-    shallow: true
-  })[0]);
+function lib_matches(selector, node, space) {
+  var state = lib_createState(selector, node, space);
+  state.one = true;
+  state.shallow = true;
+  walk(state, node || undefined);
+  return state.results.length > 0;
 }
 
 /**
+ * Select the first element that matches `selector` in the given `tree`.
+ * Searches the tree in *preorder*.
+ *
  * @param {string} selector
- * @param {HastNode} [node]
- * @param {Space} [space]
- * @returns {Element|null}
+ *   CSS selector, such as (`h1`, `a, b`).
+ * @param {Node | null | undefined} [tree]
+ *   Tree to search.
+ * @param {Space | null | undefined} [space='html']
+ *   Name of namespace (`'svg'` or `'html'`).
+ * @returns {Element | null}
+ *   First element in `tree` that matches `selector` or `null` if nothing is
+ *   found.
+ *   This could be `tree` itself.
  */
-function hast_util_select_select(selector, node, space) {
-  return any(parse(selector), node, {
-    space: space,
-    one: true
-  })[0] || null;
+function lib_select(selector, tree, space) {
+  var state = lib_createState(selector, tree, space);
+  state.one = true;
+  walk(state, tree || undefined);
+  // To do in major: return `undefined` instead.
+  return state.results[0] || null;
 }
 
 /**
+ * Select all elements that match `selector` in the given `tree`.
+ * Searches the tree in *preorder*.
+ *
  * @param {string} selector
- * @param {HastNode} [node]
- * @param {Space} [space]
+ *   CSS selector, such as (`h1`, `a, b`).
+ * @param {Node | null | undefined} [tree]
+ *   Tree to search.
+ * @param {Space | null | undefined} [space='html']
+ *   Name of namespace (`'svg'` or `'html'`).
  * @returns {Array<Element>}
+ *   Elements in `tree` that match `selector`.
+ *   This could include `tree` itself.
  */
-function selectAll(selector, node, space) {
-  return any_any(lib_parse_parse(selector), node, {
-    space: space
-  });
+function selectAll(selector, tree, space) {
+  var state = lib_createState(selector, tree, space);
+  walk_walk(state, tree || undefined);
+  return state.results;
+}
+
+/**
+ * @param {string} selector
+ *   Tree to search.
+ * @param {Node | null | undefined} [tree]
+ *   Tree to search.
+ * @param {Space | null | undefined} [space='html']
+ *   Name of namespace (`'svg'` or `'html'`).
+ * @returns {SelectState} SelectState
+ */
+function lib_createState(selector, tree, space) {
+  return {
+    // State of the query.
+    rootQuery: queryToSelectors(lib_parse_parse(selector)),
+    results: [],
+    // @ts-expect-error assume elements.
+    scopeElements: tree ? tree.type === 'root' ? tree.children : [tree] : [],
+    one: false,
+    shallow: false,
+    found: false,
+    // State in the tree.
+    schema: space === 'svg' ? property_information_svg : property_information_html,
+    language: undefined,
+    direction: 'ltr',
+    editableOrEditingHost: false,
+    typeIndex: undefined,
+    elementIndex: undefined,
+    typeCount: undefined,
+    elementCount: undefined
+  };
 }
 ;// CONCATENATED MODULE: ../../node_modules/rehype-rewrite/lib/index.js
 
@@ -56346,404 +57533,6 @@ var remarkRewrite = function remarkRewrite(options) {
   };
 };
 /* harmony default export */ const rehype_rewrite_lib = (remarkRewrite);
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/util/comment.js
-/**
- * @typedef {import('../../types.js').Comment} Comment
- */
-
-
-
-/** @type {import('unist-util-is').AssertPredicate<Comment>} */
-// @ts-ignore
-var comment_comment = convert('comment');
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/util/siblings.js
-/**
- * @typedef {import('../../types.js').Parent} Parent
- * @typedef {import('../../types.js').Child} Child
- */
-
-
-var siblingAfter = siblings(1);
-var siblingBefore = siblings(-1);
-
-/**
- * Factory to check siblings in a direction.
- *
- * @param {number} increment
- */
-function siblings(increment) {
-  return sibling;
-
-  /**
-   * Find applicable siblings in a direction.
-   *
-   * @param {Parent} parent
-   * @param {number} index
-   * @param {boolean} [includeWhitespace=false]
-   * @returns {Child}
-   */
-  function sibling(parent, index, includeWhitespace) {
-    var siblings = parent && parent.children;
-    var offset = index + increment;
-    var next = siblings && siblings[offset];
-    if (!includeWhitespace) {
-      while (next && whitespace(next)) {
-        offset += increment;
-        next = siblings[offset];
-      }
-    }
-    return next;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/util/whitespace-start.js
-/**
- * @typedef {import('../../types.js').Node} Node
- * @typedef {import('../../types.js').Text} Text
- */
-
-
-
-
-/** @type {import('unist-util-is').AssertPredicate<Text>} */
-// @ts-ignore
-var isText = convert('text');
-
-/**
- * Check if `node` starts with whitespace.
- *
- * @param {Node} node
- * @returns {boolean}
- */
-function whitespaceStart(node) {
-  return isText(node) && whitespace(node.value.charAt(0));
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/omission.js
-/**
- * @typedef {import('../types.js').OmitHandle} OmitHandle
- */
-
-var omission_own = {}.hasOwnProperty;
-
-/**
- * Factory to check if a given node can have a tag omitted.
- *
- * @param {Object.<string, OmitHandle>} handlers
- * @returns {OmitHandle}
- */
-function omission(handlers) {
-  return omit;
-
-  /**
-   * Check if a given node can have a tag omitted.
-   *
-   * @type {OmitHandle}
-   */
-  function omit(node, index, parent) {
-    return omission_own.call(handlers, node.tagName) && handlers[node.tagName](node, index, parent);
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/closing.js
-/**
- * @typedef {import('../types.js').OmitHandle} OmitHandle
- */
-
-
-
-
-
-
-var closing = omission({
-  html: closing_html,
-  head: headOrColgroupOrCaption,
-  body: body,
-  p: closing_p,
-  li: li,
-  dt: dt,
-  dd: dd,
-  rt: rubyElement,
-  rp: rubyElement,
-  optgroup: optgroup,
-  option: closing_option,
-  menuitem: menuitem,
-  colgroup: headOrColgroupOrCaption,
-  caption: headOrColgroupOrCaption,
-  thead: thead,
-  tbody: tbody,
-  tfoot: tfoot,
-  tr: tr,
-  td: cells,
-  th: cells
-});
-
-/**
- * Macro for `</head>`, `</colgroup>`, and `</caption>`.
- *
- * @type {OmitHandle}
- */
-function headOrColgroupOrCaption(_, index, parent) {
-  var next = siblingAfter(parent, index, true);
-  return !next || !comment_comment(next) && !whitespaceStart(next);
-}
-
-/**
- * Whether to omit `</html>`.
- *
- * @type {OmitHandle}
- */
-function closing_html(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || !comment_comment(next);
-}
-
-/**
- * Whether to omit `</body>`.
- *
- * @type {OmitHandle}
- */
-function body(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || !comment_comment(next);
-}
-
-/**
- * Whether to omit `</p>`.
- *
- * @type {OmitHandle}
- */
-function closing_p(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return next ? isElement(next, ['address', 'article', 'aside', 'blockquote', 'details', 'div', 'dl', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'main', 'menu', 'nav', 'ol', 'p', 'pre', 'section', 'table', 'ul']) : !parent ||
-  // Confusing parent.
-  !isElement(parent, ['a', 'audio', 'del', 'ins', 'map', 'noscript', 'video']);
-}
-
-/**
- * Whether to omit `</li>`.
- *
- * @type {OmitHandle}
- */
-function li(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, 'li');
-}
-
-/**
- * Whether to omit `</dt>`.
- *
- * @type {OmitHandle}
- */
-function dt(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return next && isElement(next, ['dt', 'dd']);
-}
-
-/**
- * Whether to omit `</dd>`.
- *
- * @type {OmitHandle}
- */
-function dd(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, ['dt', 'dd']);
-}
-
-/**
- * Whether to omit `</rt>` or `</rp>`.
- *
- * @type {OmitHandle}
- */
-function rubyElement(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, ['rp', 'rt']);
-}
-
-/**
- * Whether to omit `</optgroup>`.
- *
- * @type {OmitHandle}
- */
-function optgroup(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, 'optgroup');
-}
-
-/**
- * Whether to omit `</option>`.
- *
- * @type {OmitHandle}
- */
-function closing_option(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, ['option', 'optgroup']);
-}
-
-/**
- * Whether to omit `</menuitem>`.
- *
- * @type {OmitHandle}
- */
-function menuitem(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, ['menuitem', 'hr', 'menu']);
-}
-
-/**
- * Whether to omit `</thead>`.
- *
- * @type {OmitHandle}
- */
-function thead(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return next && isElement(next, ['tbody', 'tfoot']);
-}
-
-/**
- * Whether to omit `</tbody>`.
- *
- * @type {OmitHandle}
- */
-function tbody(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, ['tbody', 'tfoot']);
-}
-
-/**
- * Whether to omit `</tfoot>`.
- *
- * @type {OmitHandle}
- */
-function tfoot(_, index, parent) {
-  return !siblingAfter(parent, index);
-}
-
-/**
- * Whether to omit `</tr>`.
- *
- * @type {OmitHandle}
- */
-function tr(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, 'tr');
-}
-
-/**
- * Whether to omit `</td>` or `</th>`.
- *
- * @type {OmitHandle}
- */
-function cells(_, index, parent) {
-  var next = siblingAfter(parent, index);
-  return !next || isElement(next, ['td', 'th']);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/opening.js
-/**
- * @typedef {import('../types.js').OmitHandle} OmitHandle
- * @typedef {import('../types.js').Child} Child
- */
-
-
-
-
-
-
-
-var opening = omission({
-  html: opening_html,
-  head: head,
-  body: opening_body,
-  colgroup: colgroup,
-  tbody: opening_tbody
-});
-
-/**
- * Whether to omit `<html>`.
- *
- * @type {OmitHandle}
- */
-function opening_html(node) {
-  var head = siblingAfter(node, -1);
-  return !head || !comment_comment(head);
-}
-
-/**
- * Whether to omit `<head>`.
- *
- * @type {OmitHandle}
- */
-function head(node) {
-  var children = node.children;
-  /** @type {Array.<string>} */
-  var seen = [];
-  var index = -1;
-  /** @type {Child} */
-  var child;
-  while (++index < children.length) {
-    child = children[index];
-    if (isElement(child, ['title', 'base'])) {
-      if (seen.includes(child.tagName)) return false;
-      seen.push(child.tagName);
-    }
-  }
-  return children.length > 0;
-}
-
-/**
- * Whether to omit `<body>`.
- *
- * @type {OmitHandle}
- */
-function opening_body(node) {
-  var head = siblingAfter(node, -1, true);
-  return !head || !comment_comment(head) && !whitespaceStart(head) && !isElement(head, ['meta', 'link', 'script', 'style', 'template']);
-}
-
-/**
- * Whether to omit `<colgroup>`.
- * The spec describes some logic for the opening tag, but it’s easier to
- * implement in the closing tag, to the same effect, so we handle it there
- * instead.
- *
- * @type {OmitHandle}
- */
-function colgroup(node, index, parent) {
-  var previous = siblingBefore(parent, index);
-  var head = siblingAfter(node, -1, true);
-
-  // Previous colgroup was already omitted.
-  if (isElement(previous, 'colgroup') && closing(previous, parent.children.indexOf(previous), parent)) {
-    return false;
-  }
-  return head && isElement(head, 'col');
-}
-
-/**
- * Whether to omit `<tbody>`.
- *
- * @type {OmitHandle}
- */
-function opening_tbody(node, index, parent) {
-  var previous = siblingBefore(parent, index);
-  var head = siblingAfter(node, -1);
-
-  // Previous table section was already omitted.
-  if (isElement(previous, ['thead', 'tbody']) && closing(previous, parent.children.indexOf(previous), parent)) {
-    return false;
-  }
-  return head && isElement(head, 'tr');
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/index.js
-/**
- * @typedef {import('../types.js').Omission} Omission
- */
-
-
-
-
-/** @type {Omission} */
-var omission_omission = {
-  opening: opening,
-  closing: closing
-};
 ;// CONCATENATED MODULE: ../../node_modules/stringify-entities/lib/core.js
 /**
  * @typedef CoreOptions
@@ -57253,11 +58042,582 @@ function stringifyEntitiesLight(value, options) {
     format: formatBasic
   }, options));
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/constants.js
-// Maps of subsets.
-// Each value is a matrix of tuples.
-// The first value causes parse errors, the second is valid.
-// Of both values, the first value is unsafe, and the second is safe.
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/comment.js
+/**
+ * @typedef {import('../types.js').Comment} Comment
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').State} State
+ */
+
+
+
+/**
+ * Serialize a comment.
+ *
+ * @param {Comment} node
+ *   Node to handle.
+ * @param {number | undefined} _1
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} _2
+ *   Parent of `node`.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @returns {string}
+ *   Serialized node.
+ */
+function comment_comment(node, _1, _2, state) {
+  // See: <https://html.spec.whatwg.org/multipage/syntax.html#comments>
+  return state.settings.bogusComments ? '<?' + stringifyEntities(node.value, Object.assign({}, state.settings.characterReferences, {
+    subset: ['>']
+  })) + '>' : '<!--' + node.value.replace(/^>|^->|<!--|-->|--!>|<!-$/g, encode) + '-->';
+
+  /**
+   * @param {string} $0
+   */
+  function encode($0) {
+    return stringifyEntities($0, Object.assign({}, state.settings.characterReferences, {
+      subset: ['<', '>']
+    }));
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/doctype.js
+/**
+ * @typedef {import('../types.js').DocType} DocType
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').State} State
+ */
+
+/**
+ * Serialize a doctype.
+ *
+ * @param {DocType} _1
+ *   Node to handle.
+ * @param {number | undefined} _2
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} _3
+ *   Parent of `node`.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @returns {string}
+ *   Serialized node.
+ */
+function doctype_doctype(_1, _2, _3, state) {
+  return '<!' + (state.settings.upperDoctype ? 'DOCTYPE' : 'doctype') + (state.settings.tightDoctype ? '' : ' ') + 'html>';
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/util/siblings.js
+/**
+ * @typedef {import('../../types.js').Parent} Parent
+ * @typedef {import('../../types.js').Content} Content
+ */
+
+
+var siblingAfter = siblings(1);
+var siblingBefore = siblings(-1);
+
+/**
+ * Factory to check siblings in a direction.
+ *
+ * @param {number} increment
+ */
+function siblings(increment) {
+  return sibling;
+
+  /**
+   * Find applicable siblings in a direction.
+   *
+   * @param {Parent | null | undefined} parent
+   * @param {number | null | undefined} index
+   * @param {boolean | null | undefined} [includeWhitespace=false]
+   * @returns {Content}
+   */
+  function sibling(parent, index, includeWhitespace) {
+    var siblings = parent ? parent.children : [];
+    var offset = (index || 0) + increment;
+    var next = siblings && siblings[offset];
+    if (!includeWhitespace) {
+      while (next && whitespace(next)) {
+        offset += increment;
+        next = siblings[offset];
+      }
+    }
+    return next;
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/omission.js
+/**
+ * @typedef {import('../types.js').OmitHandle} OmitHandle
+ */
+
+var omission_own = {}.hasOwnProperty;
+
+/**
+ * Factory to check if a given node can have a tag omitted.
+ *
+ * @param {Record<string, OmitHandle>} handlers
+ *   Omission handlers, where each key is a tag name, and each value is the
+ *   corresponding handler.
+ * @returns {OmitHandle}
+ *   Whether to omit a tag of an element.
+ */
+function omission(handlers) {
+  return omit;
+
+  /**
+   * Check if a given node can have a tag omitted.
+   *
+   * @type {OmitHandle}
+   */
+  function omit(node, index, parent) {
+    return omission_own.call(handlers, node.tagName) && handlers[node.tagName](node, index, parent);
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/closing.js
+/**
+ * @typedef {import('../types.js').Element} Element
+ * @typedef {import('../types.js').Parent} Parent
+ */
+
+
+
+
+var closing = omission({
+  html: closing_html,
+  head: headOrColgroupOrCaption,
+  body: body,
+  p: closing_p,
+  li: li,
+  dt: dt,
+  dd: dd,
+  rt: rubyElement,
+  rp: rubyElement,
+  optgroup: optgroup,
+  option: closing_option,
+  menuitem: menuitem,
+  colgroup: headOrColgroupOrCaption,
+  caption: headOrColgroupOrCaption,
+  thead: thead,
+  tbody: tbody,
+  tfoot: tfoot,
+  tr: tr,
+  td: cells,
+  th: cells
+});
+
+/**
+ * Macro for `</head>`, `</colgroup>`, and `</caption>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function headOrColgroupOrCaption(_, index, parent) {
+  var next = siblingAfter(parent, index, true);
+  return !next || next.type !== 'comment' && !(next.type === 'text' && whitespace(next.value.charAt(0)));
+}
+
+/**
+ * Whether to omit `</html>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function closing_html(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type !== 'comment';
+}
+
+/**
+ * Whether to omit `</body>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function body(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type !== 'comment';
+}
+
+/**
+ * Whether to omit `</p>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+// eslint-disable-next-line complexity
+function closing_p(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return next ? next.type === 'element' && (next.tagName === 'address' || next.tagName === 'article' || next.tagName === 'aside' || next.tagName === 'blockquote' || next.tagName === 'details' || next.tagName === 'div' || next.tagName === 'dl' || next.tagName === 'fieldset' || next.tagName === 'figcaption' || next.tagName === 'figure' || next.tagName === 'footer' || next.tagName === 'form' || next.tagName === 'h1' || next.tagName === 'h2' || next.tagName === 'h3' || next.tagName === 'h4' || next.tagName === 'h5' || next.tagName === 'h6' || next.tagName === 'header' || next.tagName === 'hgroup' || next.tagName === 'hr' || next.tagName === 'main' || next.tagName === 'menu' || next.tagName === 'nav' || next.tagName === 'ol' || next.tagName === 'p' || next.tagName === 'pre' || next.tagName === 'section' || next.tagName === 'table' || next.tagName === 'ul') : !parent ||
+  // Confusing parent.
+  !(parent.type === 'element' && (parent.tagName === 'a' || parent.tagName === 'audio' || parent.tagName === 'del' || parent.tagName === 'ins' || parent.tagName === 'map' || parent.tagName === 'noscript' || parent.tagName === 'video'));
+}
+
+/**
+ * Whether to omit `</li>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function li(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && next.tagName === 'li';
+}
+
+/**
+ * Whether to omit `</dt>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function dt(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return next && next.type === 'element' && (next.tagName === 'dt' || next.tagName === 'dd');
+}
+
+/**
+ * Whether to omit `</dd>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function dd(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && (next.tagName === 'dt' || next.tagName === 'dd');
+}
+
+/**
+ * Whether to omit `</rt>` or `</rp>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function rubyElement(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && (next.tagName === 'rp' || next.tagName === 'rt');
+}
+
+/**
+ * Whether to omit `</optgroup>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function optgroup(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && next.tagName === 'optgroup';
+}
+
+/**
+ * Whether to omit `</option>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function closing_option(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && (next.tagName === 'option' || next.tagName === 'optgroup');
+}
+
+/**
+ * Whether to omit `</menuitem>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function menuitem(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && (next.tagName === 'menuitem' || next.tagName === 'hr' || next.tagName === 'menu');
+}
+
+/**
+ * Whether to omit `</thead>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function thead(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return next && next.type === 'element' && (next.tagName === 'tbody' || next.tagName === 'tfoot');
+}
+
+/**
+ * Whether to omit `</tbody>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function tbody(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && (next.tagName === 'tbody' || next.tagName === 'tfoot');
+}
+
+/**
+ * Whether to omit `</tfoot>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function tfoot(_, index, parent) {
+  return !siblingAfter(parent, index);
+}
+
+/**
+ * Whether to omit `</tr>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function tr(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && next.tagName === 'tr';
+}
+
+/**
+ * Whether to omit `</td>` or `</th>`.
+ *
+ * @param {Element} _
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the closing tag can be omitted.
+ */
+function cells(_, index, parent) {
+  var next = siblingAfter(parent, index);
+  return !next || next.type === 'element' && (next.tagName === 'td' || next.tagName === 'th');
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/omission/opening.js
+/**
+ * @typedef {import('../types.js').Element} Element
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').Content} Content
+ */
+
+
+
+
+
+var opening = omission({
+  html: opening_html,
+  head: head,
+  body: opening_body,
+  colgroup: colgroup,
+  tbody: opening_tbody
+});
+
+/**
+ * Whether to omit `<html>`.
+ *
+ * @param {Element} node
+ *   Element.
+ * @returns {boolean}
+ *   Whether the opening tag can be omitted.
+ */
+function opening_html(node) {
+  var head = siblingAfter(node, -1);
+  return !head || head.type !== 'comment';
+}
+
+/**
+ * Whether to omit `<head>`.
+ *
+ * @param {Element} node
+ *   Element.
+ * @returns {boolean}
+ *   Whether the opening tag can be omitted.
+ */
+function head(node) {
+  var children = node.children;
+  /** @type {Array<string>} */
+  var seen = [];
+  var index = -1;
+  while (++index < children.length) {
+    var child = children[index];
+    if (child.type === 'element' && (child.tagName === 'title' || child.tagName === 'base')) {
+      if (seen.includes(child.tagName)) return false;
+      seen.push(child.tagName);
+    }
+  }
+  return children.length > 0;
+}
+
+/**
+ * Whether to omit `<body>`.
+ *
+ * @param {Element} node
+ *   Element.
+ * @returns {boolean}
+ *   Whether the opening tag can be omitted.
+ */
+function opening_body(node) {
+  var head = siblingAfter(node, -1, true);
+  return !head || head.type !== 'comment' && !(head.type === 'text' && whitespace(head.value.charAt(0))) && !(head.type === 'element' && (head.tagName === 'meta' || head.tagName === 'link' || head.tagName === 'script' || head.tagName === 'style' || head.tagName === 'template'));
+}
+
+/**
+ * Whether to omit `<colgroup>`.
+ * The spec describes some logic for the opening tag, but it’s easier to
+ * implement in the closing tag, to the same effect, so we handle it there
+ * instead.
+ *
+ * @param {Element} node
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the opening tag can be omitted.
+ */
+function colgroup(node, index, parent) {
+  var previous = siblingBefore(parent, index);
+  var head = siblingAfter(node, -1, true);
+
+  // Previous colgroup was already omitted.
+  if (parent && previous && previous.type === 'element' && previous.tagName === 'colgroup' && closing(previous, parent.children.indexOf(previous), parent)) {
+    return false;
+  }
+  return head && head.type === 'element' && head.tagName === 'col';
+}
+
+/**
+ * Whether to omit `<tbody>`.
+ *
+ * @param {Element} node
+ *   Element.
+ * @param {number | undefined} index
+ *   Index of element in parent.
+ * @param {Parent | undefined} parent
+ *   Parent of element.
+ * @returns {boolean}
+ *   Whether the opening tag can be omitted.
+ */
+function opening_tbody(node, index, parent) {
+  var previous = siblingBefore(parent, index);
+  var head = siblingAfter(node, -1);
+
+  // Previous table section was already omitted.
+  if (parent && previous && previous.type === 'element' && (previous.tagName === 'thead' || previous.tagName === 'tbody') && closing(previous, parent.children.indexOf(previous), parent)) {
+    return false;
+  }
+  return head && head.type === 'element' && head.tagName === 'tr';
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/element.js
+/**
+ * @typedef {import('../types.js').State} State
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').Element} Element
+ * @typedef {import('../types.js').Properties} Properties
+ * @typedef {import('../types.js').PropertyValue} PropertyValue
+ */
+
+
+
+
+
+
+
+
+
+/**
+ * Maps of subsets.
+ *
+ * Each value is a matrix of tuples.
+ * The value at `0` causes parse errors, the value at `1` is valid.
+ * Of both, the value at `0` is unsafe, and the value at `1` is safe.
+ *
+ * @type {Record<'name' | 'unquoted' | 'single' | 'double', Array<[Array<string>, Array<string>]>>}
+ */
 var constants = {
   // See: <https://html.spec.whatwg.org/#attribute-name-state>.
   name: [['\t\n\f\r &/=>'.split(''), '\t\n\f\r "&\'/=>`'.split('')], ['\0\t\n\f\r "&\'/<=>'.split(''), '\0\t\n\f\r "&\'/<=>`'.split('')]],
@@ -57268,176 +58628,47 @@ var constants = {
   // See: <https://html.spec.whatwg.org/#attribute-value-(double-quoted)-state>.
   "double": [['"&'.split(''), '"&\'`'.split('')], ['\0"&'.split(''), '\0"&\'`'.split('')]]
 };
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/comment.js
-/**
- * @typedef {import('./types.js').Handle} Handle
- * @typedef {import('./types.js').Comment} Comment
- */
-
-
 
 /**
- * @type {Handle}
- * @param {Comment} node
- */
-function lib_comment_comment(ctx, node) {
-  // See: <https://html.spec.whatwg.org/multipage/syntax.html#comments>
-  return ctx.bogusComments ? '<?' + stringifyEntities(node.value, Object.assign({}, ctx.entities, {
-    subset: ['>']
-  })) + '>' : '<!--' + node.value.replace(/^>|^->|<!--|-->|--!>|<!-$/g, encode) + '-->';
-
-  /**
-   * @param {string} $0
-   */
-  function encode($0) {
-    return stringifyEntities($0, Object.assign({}, ctx.entities, {
-      subset: ['<', '>']
-    }));
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/doctype.js
-/**
- * @typedef {import('./types.js').Handle} Handle
- */
-
-/**
- * @type {Handle}
- */
-function doctype_doctype(ctx) {
-  return '<!' + (ctx.upperDoctype ? 'DOCTYPE' : 'doctype') + (ctx.tightDoctype ? '' : ' ') + 'html>';
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/text.js
-/**
- * @typedef {import('./types.js').Handle} Handle
- * @typedef {import('./types.js').Text} Text
- */
-
-
-
-/**
- * @type {Handle}
- * @param {Text} node
- */
-function lib_text_text(ctx, node, _, parent) {
-  // Check if content of `node` should be escaped.
-  return parent && parent.type === 'element' && (
-  // @ts-expect-error: hush.
-  parent.tagName === 'script' || parent.tagName === 'style') ? node.value : stringifyEntities(node.value, Object.assign({}, ctx.entities, {
-    subset: ['<', '&']
-  }));
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/raw.js
-/**
- * @typedef {import('./types.js').Handle} Handle
- * @typedef {import('./types.js').Raw} Raw
- */
-
-
-
-/**
- * @type {Handle}
- * @param {Raw} node
- */
-function raw_raw(ctx, node, index, parent) {
-  // @ts-ignore Hush.
-  return ctx.dangerous ? node.value : lib_text_text(ctx, node, index, parent);
-}
-;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/tree.js
-/**
- * @typedef {import('./types.js').Handle} Handle
- * @typedef {import('./types.js').Element} Element
- * @typedef {import('./types.js').Context} Context
- * @typedef {import('./types.js').Properties} Properties
- * @typedef {import('./types.js').PropertyValue} PropertyValue
- * @typedef {import('./types.js').Parent} Parent
- */
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * @type {Object.<string, Handle>}
- */
-var tree_handlers = {
-  comment: lib_comment_comment,
-  doctype: doctype_doctype,
-  element: tree_element,
-  // @ts-ignore `raw` is nonstandard
-  raw: raw_raw,
-  // @ts-ignore `root` is a parent.
-  root: tree_all,
-  text: lib_text_text
-};
-var tree_own = {}.hasOwnProperty;
-
-/**
- * @type {Handle}
- */
-function tree_one(ctx, node, index, parent) {
-  if (!node || !node.type) {
-    throw new Error('Expected node, not `' + node + '`');
-  }
-  if (!tree_own.call(tree_handlers, node.type)) {
-    throw new Error('Cannot compile unknown node `' + node.type + '`');
-  }
-  return tree_handlers[node.type](ctx, node, index, parent);
-}
-
-/**
- * Serialize all children of `parent`.
+ * Serialize an element node.
  *
- * @type {Handle}
- * @param {Parent} parent
- */
-function tree_all(ctx, parent) {
-  /** @type {Array.<string>} */
-  var results = [];
-  var children = parent && parent.children || [];
-  var index = -1;
-  while (++index < children.length) {
-    results[index] = tree_one(ctx, children[index], index, parent);
-  }
-  return results.join('');
-}
-
-/**
- * @type {Handle}
  * @param {Element} node
+ *   Node to handle.
+ * @param {number | undefined} index
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} parent
+ *   Parent of `node`.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @returns {string}
+ *   Serialized node.
  */
 // eslint-disable-next-line complexity
-function tree_element(ctx, node, index, parent) {
-  var schema = ctx.schema;
-  var omit = schema.space === 'svg' ? undefined : ctx.omit;
-  var selfClosing = schema.space === 'svg' ? ctx.closeEmpty : ctx.voids.includes(node.tagName.toLowerCase());
-  /** @type {Array.<string>} */
+function element_element(node, index, parent, state) {
+  var schema = state.schema;
+  var omit = schema.space === 'svg' ? false : state.settings.omitOptionalTags;
+  var selfClosing = schema.space === 'svg' ? state.settings.closeEmptyElements : state.settings.voids.includes(node.tagName.toLowerCase());
+  /** @type {Array<string>} */
   var parts = [];
   /** @type {string} */
   var last;
   if (schema.space === 'html' && node.tagName === 'svg') {
-    ctx.schema = property_information_svg;
+    state.schema = property_information_svg;
   }
-  var attrs = serializeAttributes(ctx, node.properties);
-  var content = tree_all(ctx, schema.space === 'html' && node.tagName === 'template' ? node.content : node);
-  ctx.schema = schema;
+  var attrs = serializeAttributes(state, node.properties);
+  var content = state.all(schema.space === 'html' && node.tagName === 'template' ? node.content : node);
+  state.schema = schema;
 
   // If the node is categorised as void, but it has children, remove the
   // categorisation.
   // This enables for example `menuitem`s, which are void in W3C HTML but not
   // void in WHATWG HTML, to be stringified properly.
   if (content) selfClosing = false;
-  if (attrs || !omit || !omit.opening(node, index, parent)) {
+  if (attrs || !omit || !opening(node, index, parent)) {
     parts.push('<', node.tagName, attrs ? ' ' + attrs : '');
-    if (selfClosing && (schema.space === 'svg' || ctx.close)) {
+    if (selfClosing && (schema.space === 'svg' || state.settings.closeSelfClosing)) {
       last = attrs.charAt(attrs.length - 1);
-      if (!ctx.tightClose || last === '/' || last && last !== '"' && last !== "'") {
+      if (!state.settings.tightSelfClosing || last === '/' || last && last !== '"' && last !== "'") {
         parts.push(' ');
       }
       parts.push('/');
@@ -57445,35 +58676,33 @@ function tree_element(ctx, node, index, parent) {
     parts.push('>');
   }
   parts.push(content);
-  if (!selfClosing && (!omit || !omit.closing(node, index, parent))) {
+  if (!selfClosing && (!omit || !closing(node, index, parent))) {
     parts.push('</' + node.tagName + '>');
   }
   return parts.join('');
 }
 
 /**
- * @param {Context} ctx
- * @param {Properties} props
+ * @param {State} state
+ * @param {Properties | null | undefined} props
  * @returns {string}
  */
-function serializeAttributes(ctx, props) {
-  /** @type {Array.<string>} */
+function serializeAttributes(state, props) {
+  /** @type {Array<string>} */
   var values = [];
   var index = -1;
   /** @type {string} */
   var key;
-  /** @type {string} */
-  var value;
-  /** @type {string} */
-  var last;
-  for (key in props) {
-    if (props[key] !== undefined && props[key] !== null) {
-      value = serializeAttribute(ctx, key, props[key]);
-      if (value) values.push(value);
+  if (props) {
+    for (key in props) {
+      if (props[key] !== undefined && props[key] !== null) {
+        var value = serializeAttribute(state, key, props[key]);
+        if (value) values.push(value);
+      }
     }
   }
   while (++index < values.length) {
-    last = ctx.tight ? values[index].charAt(values[index].length - 1) : null;
+    var last = state.settings.tightAttributes ? values[index].charAt(values[index].length - 1) : null;
 
     // In tight mode, don’t add a space after quoted attributes.
     if (index !== values.length - 1 && last !== '"' && last !== "'") {
@@ -57484,16 +58713,18 @@ function serializeAttributes(ctx, props) {
 }
 
 /**
- * @param {Context} ctx
+ * @param {State} state
  * @param {string} key
  * @param {PropertyValue} value
  * @returns {string}
  */
 // eslint-disable-next-line complexity
-function serializeAttribute(ctx, key, value) {
-  var info = find(ctx.schema, key);
-  var quote = ctx.quote;
-  /** @type {string} */
+function serializeAttribute(state, key, value) {
+  var info = find(state.schema, key);
+  var x = state.settings.allowParseErrors && state.schema.space === 'html' ? 0 : 1;
+  var y = state.settings.allowDangerousCharacters ? 0 : 1;
+  var quote = state.quote;
+  /** @type {string | undefined} */
   var result;
   if (info.overloadedBoolean && (value === info.attribute || value === '')) {
     value = true;
@@ -57503,16 +58734,16 @@ function serializeAttribute(ctx, key, value) {
   if (value === undefined || value === null || value === false || typeof value === 'number' && Number.isNaN(value)) {
     return '';
   }
-  var name = stringifyEntities(info.attribute, Object.assign({}, ctx.entities, {
+  var name = stringifyEntities(info.attribute, Object.assign({}, state.settings.characterReferences, {
     // Always encode without parse errors in non-HTML.
-    subset: constants.name[ctx.schema.space === 'html' ? ctx.valid : 1][ctx.safe]
+    subset: constants.name[x][y]
   }));
 
   // No value.
   // There is currently only one boolean property in SVG: `[download]` on
   // `<a>`.
-  // This property does not seem to work in browsers (FF, Sa, Ch), so I can’t
-  // test if dropping the value works.
+  // This property does not seem to work in browsers (Firefox, Safari, Chrome),
+  // so I can’t test if dropping the value works.
   // But I assume that it should:
   //
   // ```html
@@ -57526,18 +58757,18 @@ function serializeAttribute(ctx, key, value) {
   //
   // See: <https://github.com/wooorm/property-information/blob/main/lib/svg.js>
   if (value === true) return name;
-  value = typeof value === 'object' && 'length' in value ?
+
   // `spaces` doesn’t accept a second argument, but it’s given here just to
   // keep the code cleaner.
-  (info.commaSeparated ? comma_separated_tokens_stringify : stringify)(value, {
-    padLeft: !ctx.tightLists
+  value = Array.isArray(value) ? (info.commaSeparated ? comma_separated_tokens_stringify : stringify)(value, {
+    padLeft: !state.settings.tightCommaSeparatedLists
   }) : String(value);
-  if (ctx.collapseEmpty && !value) return name;
+  if (state.settings.collapseEmptyAttributes && !value) return name;
 
   // Check unquoted value.
-  if (ctx.unquoted) {
-    result = stringifyEntities(value, Object.assign({}, ctx.entities, {
-      subset: constants.unquoted[ctx.valid][ctx.safe],
+  if (state.settings.preferUnquoted) {
+    result = stringifyEntities(value, Object.assign({}, state.settings.characterReferences, {
+      subset: constants.unquoted[x][y],
       attribute: true
     }));
   }
@@ -57546,12 +58777,12 @@ function serializeAttribute(ctx, key, value) {
   // unquoted…
   if (result !== value) {
     // If the alternative is less common than `quote`, switch.
-    if (ctx.smart && ccount(value, quote) > ccount(value, ctx.alternative)) {
-      quote = ctx.alternative;
+    if (state.settings.quoteSmart && ccount(value, quote) > ccount(value, state.alternative)) {
+      quote = state.alternative;
     }
-    result = quote + stringifyEntities(value, Object.assign({}, ctx.entities, {
+    result = quote + stringifyEntities(value, Object.assign({}, state.settings.characterReferences, {
       // Always encode without parse errors in non-HTML.
-      subset: (quote === "'" ? constants.single : constants.double)[ctx.schema.space === 'html' ? ctx.valid : 1][ctx.safe],
+      subset: (quote === "'" ? constants.single : constants["double"])[x][y],
       attribute: true
     })) + quote;
   }
@@ -57559,62 +58790,242 @@ function serializeAttribute(ctx, key, value) {
   // Don’t add a `=` for unquoted empties.
   return name + (result ? '=' + result : result);
 }
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/text.js
+/**
+ * @typedef {import('../types.js').State} State
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').Raw} Raw
+ * @typedef {import('../types.js').Text} Text
+ */
+
+
+
+/**
+ * Serialize a text node.
+ *
+ * @param {Text | Raw} node
+ *   Node to handle.
+ * @param {number | undefined} _
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} parent
+ *   Parent of `node`.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @returns {string}
+ *   Serialized node.
+ */
+function handle_text_text(node, _, parent, state) {
+  // Check if content of `node` should be escaped.
+  return parent && parent.type === 'element' && (parent.tagName === 'script' || parent.tagName === 'style') ? node.value : stringifyEntities(node.value, Object.assign({}, state.settings.characterReferences, {
+    subset: ['<', '&']
+  }));
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/raw.js
+/**
+ * @typedef {import('../types.js').State} State
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').Raw} Raw
+ */
+
+
+
+/**
+ * Serialize a raw node.
+ *
+ * @param {Raw} node
+ *   Node to handle.
+ * @param {number | undefined} index
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} parent
+ *   Parent of `node`.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @returns {string}
+ *   Serialized node.
+ */
+function raw_raw(node, index, parent, state) {
+  return state.settings.allowDangerousHtml ? node.value : handle_text_text(node, index, parent, state);
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/root.js
+/**
+ * @typedef {import('../types.js').Root} Root
+ * @typedef {import('../types.js').Parent} Parent
+ * @typedef {import('../types.js').State} State
+ */
+
+/**
+ * Serialize a root.
+ *
+ * @param {Root} node
+ *   Node to handle.
+ * @param {number | undefined} _1
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} _2
+ *   Parent of `node`.
+ * @param {State} state
+ *   Info passed around about the current state.
+ * @returns {string}
+ *   Serialized node.
+ */
+function root_root(node, _1, _2, state) {
+  return state.all(node);
+}
+;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/handle/index.js
+/**
+ * @typedef {import('../types.js').State} State
+ * @typedef {import('../types.js').Node} Node
+ * @typedef {import('../types.js').Parent} Parent
+ */
+
+
+
+
+
+
+
+
+
+/**
+ * @type {(node: Node, index: number | undefined, parent: Parent | undefined, state: State) => string}
+ */
+var handle_handle = zwitch('type', {
+  invalid: invalid,
+  unknown: handle_unknown,
+  handlers: {
+    comment: comment_comment,
+    doctype: doctype_doctype,
+    element: element_element,
+    raw: raw_raw,
+    root: root_root,
+    text: handle_text_text
+  }
+});
+
+/**
+ * Fail when a non-node is found in the tree.
+ *
+ * @param {unknown} node
+ *   Unknown value.
+ * @returns {never}
+ *   Never.
+ */
+function invalid(node) {
+  throw new Error('Expected node, not `' + node + '`');
+}
+
+/**
+ * Fail when a node with an unknown type is found in the tree.
+ *
+ * @param {unknown} node
+ *  Unknown node.
+ * @returns {never}
+ *   Never.
+ */
+function handle_unknown(node) {
+  // @ts-expect-error: `type` is defined.
+  throw new Error('Cannot compile unknown node `' + node.type + '`');
+}
 ;// CONCATENATED MODULE: ../../node_modules/hast-util-to-html/lib/index.js
 /**
  * @typedef {import('./types.js').Node} Node
+ * @typedef {import('./types.js').Parent} Parent
+ * @typedef {import('./types.js').Content} Content
  * @typedef {import('./types.js').Options} Options
- * @typedef {import('./types.js').Context} Context
- * @typedef {import('./types.js').Quote} Quote
+ * @typedef {import('./types.js').State} State
  */
-
 
 
 
 
 
 /**
- * @param {Node|Array.<Node>} node
- * @param {Options} [options]
+ * Serialize hast as HTML.
+ *
+ * @param {Node | Array<Content>} tree
+ *   Tree to serialize.
+ * @param {Options | null | undefined} [options]
+ *   Configuration.
  * @returns {string}
+ *   Serialized HTML.
  */
-function toHtml(node) {
-  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var quote = options.quote || '"';
-  /** @type {Quote} */
+// eslint-disable-next-line complexity
+function toHtml(tree, options) {
+  var options_ = options || {};
+  var quote = options_.quote || '"';
   var alternative = quote === '"' ? "'" : '"';
   if (quote !== '"' && quote !== "'") {
     throw new Error('Invalid quote `' + quote + '`, expected `\'` or `"`');
   }
 
-  /** @type {Context} */
-  var context = {
-    valid: options.allowParseErrors ? 0 : 1,
-    safe: options.allowDangerousCharacters ? 0 : 1,
-    schema: options.space === 'svg' ? property_information_svg : property_information_html,
-    omit: options.omitOptionalTags ? omission_omission : undefined,
+  /** @type {State} */
+  var state = {
+    one: hast_util_to_html_lib_one,
+    all: hast_util_to_html_lib_all,
+    settings: {
+      omitOptionalTags: options_.omitOptionalTags || false,
+      allowParseErrors: options_.allowParseErrors || false,
+      allowDangerousCharacters: options_.allowDangerousCharacters || false,
+      quoteSmart: options_.quoteSmart || false,
+      preferUnquoted: options_.preferUnquoted || false,
+      tightAttributes: options_.tightAttributes || false,
+      upperDoctype: options_.upperDoctype || false,
+      tightDoctype: options_.tightDoctype || false,
+      bogusComments: options_.bogusComments || false,
+      tightCommaSeparatedLists: options_.tightCommaSeparatedLists || false,
+      tightSelfClosing: options_.tightSelfClosing || false,
+      collapseEmptyAttributes: options_.collapseEmptyAttributes || false,
+      allowDangerousHtml: options_.allowDangerousHtml || false,
+      voids: options_.voids || htmlVoidElements,
+      characterReferences: options_.characterReferences || options_.entities || {},
+      closeSelfClosing: options_.closeSelfClosing || false,
+      closeEmptyElements: options_.closeEmptyElements || false
+    },
+    schema: options_.space === 'svg' ? property_information_svg : property_information_html,
     quote: quote,
-    alternative: alternative,
-    smart: options.quoteSmart,
-    unquoted: options.preferUnquoted,
-    tight: options.tightAttributes,
-    upperDoctype: options.upperDoctype,
-    tightDoctype: options.tightDoctype,
-    bogusComments: options.bogusComments,
-    tightLists: options.tightCommaSeparatedLists,
-    tightClose: options.tightSelfClosing,
-    collapseEmpty: options.collapseEmptyAttributes,
-    dangerous: options.allowDangerousHtml,
-    voids: options.voids || htmlVoidElements.concat(),
-    entities: options.entities || {},
-    close: options.closeSelfClosing,
-    closeEmpty: options.closeEmptyElements
+    alternative: alternative
   };
-  return tree_one(context,
-  // @ts-ignore Assume `node` does not contain a root.
-  Array.isArray(node) ? {
+  return state.one(Array.isArray(tree) ? {
     type: 'root',
-    children: node
-  } : node, null, null);
+    children: tree
+  } : tree, undefined, undefined);
+}
+
+/**
+ * Serialize a node.
+ *
+ * @this {State}
+ *   Info passed around about the current state.
+ * @param {Node} node
+ *   Node to handle.
+ * @param {number | undefined} index
+ *   Index of `node` in `parent.
+ * @param {Parent | undefined} parent
+ *   Parent of `node`.
+ * @returns {string}
+ *   Serialized node.
+ */
+function hast_util_to_html_lib_one(node, index, parent) {
+  return handle_handle(node, index, parent, this);
+}
+
+/**
+ * Serialize all children of `parent`.
+ *
+ * @this {State}
+ *   Info passed around about the current state.
+ * @param {Parent | undefined} parent
+ *   Parent whose children to serialize.
+ * @returns {string}
+ */
+function hast_util_to_html_lib_all(parent) {
+  /** @type {Array<string>} */
+  var results = [];
+  var children = parent && parent.children || [];
+  var index = -1;
+  while (++index < children.length) {
+    results[index] = this.one(children[index], index, parent);
+  }
+  return results.join('');
 }
 ;// CONCATENATED MODULE: ../../node_modules/rehype-stringify/lib/index.js
 /**
@@ -57640,77 +59051,85 @@ function rehypeStringify(config) {
     return toHtml(tree, settings);
   }
 }
-;// CONCATENATED MODULE: ../../node_modules/unist-util-filter/index.js
+;// CONCATENATED MODULE: ../../node_modules/unist-util-filter/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
  * @typedef {import('unist').Parent} Parent
  * @typedef {import('unist-util-is').Test} Test
+ *
+ * @typedef Options
+ *   Configuration (optional).
+ * @property {boolean | null | undefined} [cascade=true]
+ *   Whether to drop parent nodes if they had children, but all their children
+ *   were filtered out.
  */
 
-/**
- * Options for unist util filter
- *
- * @typedef {Object} FilterOptions
- * @property {boolean} [cascade=true] Whether to drop parent nodes if they had children, but all their children were filtered out.
- */
 
-
-var unist_util_filter_own = {}.hasOwnProperty;
+var unist_util_filter_lib_own = {}.hasOwnProperty;
 
 /**
- * Create a new tree consisting of copies of all nodes that pass test.
- * The tree is walked in preorder (NLR), visiting the node itself, then its head, etc.
+ * Create a new `tree` of copies of all nodes that pass `test`.
  *
- * @param tree Tree to filter.
- * @param options Configuration (optional).
- * @param test is-compatible test (such as a type).
- * @returns Given `tree` or `null` if it didn’t pass `test`.
+ * The tree is walked in *preorder* (NLR), visiting the node itself, then its
+ * head, etc.
+ *
+ * @param tree
+ *   Tree to filter.
+ * @param options
+ *   Configuration (optional).
+ * @param test
+ *   `unist-util-is` compatible test.
+ * @returns
+ *   New filtered tree.
+ *
+ *   `null` is returned if `tree` itself didn’t pass the test, or is cascaded
+ *   away.
  */
 var filter =
 /**
  * @type {(
- *  (<Tree extends Node, Check extends Test>(node: Tree, options: FilterOptions, test: Check) => import('./complex-types').Matches<Tree, Check>) &
- *  (<Tree extends Node, Check extends Test>(node: Tree, test: Check) => import('./complex-types').Matches<Tree, Check>) &
- *  (<Tree extends Node>(node: Tree, options?: FilterOptions) => Tree)
+ *  (<Tree extends Node, Check extends Test>(node: Tree, options: Options | null | undefined, test: Check | null | undefined) => import('./complex-types.js').Matches<Tree, Check>) &
+ *  (<Tree extends Node, Check extends Test>(node: Tree, test: Check) => import('./complex-types.js').Matches<Tree, Check>) &
+ *  (<Tree extends Node>(node: Tree, options?: Options | null | undefined) => Tree)
  * )}
  */
 
 /**
  * @param {Node} tree
- * @param {FilterOptions} options
- * @param {Test} test
- * @returns {Node|null}
+ * @param {Options | Test | null | undefined} [options]
+ * @param {Test | null | undefined} [test]
+ * @returns {Node | null}
  */
 function filter(tree, options, test) {
   var is = convert(test || options);
-  var cascade = options.cascade === undefined || options.cascade === null ? true : options.cascade;
+  /** @type {boolean | null | undefined} */
+  var cascadeRaw = options && typeof options === 'object' && 'cascade' in options ? /** @type {boolean | null | undefined} */options.cascade : undefined;
+  var cascade = cascadeRaw === undefined || cascadeRaw === null ? true : cascadeRaw;
   return preorder(tree);
 
   /**
    * @param {Node} node
-   * @param {number|undefined} [index]
-   * @param {Parent|undefined} [parent]
-   * @returns {Node|null}
+   *   Current node.
+   * @param {number | undefined} [index]
+   *   Index of `node` in `parent`.
+   * @param {Parent | undefined} [parent]
+   *   Parent node.
+   * @returns {Node | null}
+   *   Shallow copy of `node`.
    */
   function preorder(node, index, parent) {
-    /** @type {Array.<Node>} */
+    /** @type {Array<Node>} */
     var children = [];
-    /** @type {number} */
-    var childIndex;
-    /** @type {Node} */
-    var result;
-    /** @type {string} */
-    var key;
     if (!is(node, index, parent)) return null;
 
     // @ts-expect-error: Looks like a parent.
     if (node.children) {
-      childIndex = -1;
+      var childIndex = -1;
 
       // @ts-expect-error Looks like a parent.
       while (++childIndex < node.children.length) {
         // @ts-expect-error Looks like a parent.
-        result = preorder(node.children[childIndex], childIndex, node);
+        var result = preorder(node.children[childIndex], childIndex, node);
         if (result) {
           children.push(result);
         }
@@ -57724,8 +59143,10 @@ function filter(tree, options, test) {
     /** @type {typeof node} */
     // @ts-expect-error all the fields will be copied over.
     var next = {};
+    /** @type {string} */
+    var key;
     for (key in node) {
-      if (unist_util_filter_own.call(node, key)) {
+      if (unist_util_filter_lib_own.call(node, key)) {
         // @ts-expect-error: Looks like a record.
         next[key] = key === 'children' ? children : node[key];
       }
@@ -58170,8 +59591,8 @@ function bash(Prism) {
       }
     };
     commandAfterHeredoc.inside = Prism.languages.bash;
-    /* Patterns in command substitution. */
 
+    /* Patterns in command substitution. */
     var toBeCopied = ['comment', 'function-name', 'for-or-select', 'assign-left', 'parameter', 'string', 'environment', 'function', 'keyword', 'builtin', 'boolean', 'file-descriptor', 'operator', 'punctuation', 'number'];
     var inside = insideString.variable[1].inside;
     for (var i = 0; i < toBeCopied.length; i++) {
@@ -58212,10 +59633,10 @@ function csharp(Prism) {
      * @param {string} [flags]
      * @returns {RegExp}
      */
-
     function re(pattern, replacements, flags) {
       return RegExp(replace(pattern, replacements), flags || '');
     }
+
     /**
      * Creates a nested pattern where all occurrences of the string `<<self>>` are replaced with the pattern itself.
      *
@@ -58223,7 +59644,6 @@ function csharp(Prism) {
      * @param {number} depthLog2
      * @returns {string}
      */
-
     function nested(pattern, depthLog2) {
       for (var i = 0; i < depthLog2; i++) {
         pattern = pattern.replace(/<<self>>/g, function () {
@@ -58231,8 +59651,9 @@ function csharp(Prism) {
         });
       }
       return pattern.replace(/<<self>>/g, '[^\\s\\S]');
-    } // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
+    }
 
+    // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
     var keywordKinds = {
       // keywords which represent a return or variable type
       type: 'bool byte char decimal double dynamic float int long object sbyte short string uint ulong ushort var void',
@@ -58243,18 +59664,19 @@ function csharp(Prism) {
       contextual: 'add alias and ascending async await by descending from(?=\\s*(?:\\w|$)) get global group into init(?=\\s*;) join let nameof not notnull on or orderby partial remove select set unmanaged value when where with(?=\\s*{)',
       // all other keywords
       other: 'abstract as base break case catch checked const continue default delegate do else event explicit extern finally fixed for foreach goto if implicit in internal is lock namespace new null operator out override params private protected public readonly ref return sealed sizeof stackalloc static switch this throw try typeof unchecked unsafe using virtual volatile while yield'
-    }; // keywords
+    };
 
+    // keywords
     function keywordsToPattern(words) {
       return '\\b(?:' + words.trim().replace(/ /g, '|') + ')\\b';
     }
     var typeDeclarationKeywords = keywordsToPattern(keywordKinds.typeDeclaration);
     var keywords = RegExp(keywordsToPattern(keywordKinds.type + ' ' + keywordKinds.typeDeclaration + ' ' + keywordKinds.contextual + ' ' + keywordKinds.other));
     var nonTypeKeywords = keywordsToPattern(keywordKinds.typeDeclaration + ' ' + keywordKinds.contextual + ' ' + keywordKinds.other);
-    var nonContextualKeywords = keywordsToPattern(keywordKinds.type + ' ' + keywordKinds.typeDeclaration + ' ' + keywordKinds.other); // types
+    var nonContextualKeywords = keywordsToPattern(keywordKinds.type + ' ' + keywordKinds.typeDeclaration + ' ' + keywordKinds.other);
 
+    // types
     var generic = nested(/<(?:[^<>;=+\-*/%&|^]|<<self>>)*>/.source, 2); // the idea behind the other forbidden characters is to prevent false positives. Same for tupleElement.
-
     var nestedRound = nested(/\((?:[^()]|<<self>>)*\)/.source, 2);
     var name = /@?\b[A-Za-z_]\w*\b/.source;
     var genericName = replace(/<<0>>(?:\s*<<1>>)?/.source, [name, generic]);
@@ -58267,12 +59689,12 @@ function csharp(Prism) {
     var typeInside = {
       keyword: keywords,
       punctuation: /[<>()?,.:[\]]/
-    }; // strings & characters
+    };
+
+    // strings & characters
     // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#character-literals
     // https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/language-specification/lexical-structure#string-literals
-
     var character = /'(?:[^\r\n'\\]|\\.|\\[Uux][\da-fA-F]{1,8})'/.source; // simplified pattern
-
     var regularString = /"(?:\\.|[^\\"\r\n])*"/.source;
     var verbatimString = /@"(?:""|\\[\s\S]|[^\\"])*"(?!")/.source;
     Prism.languages.csharp = Prism.languages.extend('clike', {
@@ -58438,12 +59860,14 @@ function csharp(Prism) {
           }
         }
       }
-    }); // attributes
+    });
 
+    // attributes
     var regularStringOrCharacter = regularString + '|' + character;
     var regularStringCharacterOrComment = replace(/\/(?![*/])|\/\/[^\r\n]*[\r\n]|\/\*(?:[^*]|\*(?!\/))*\*\/|<<0>>/.source, [regularStringOrCharacter]);
-    var roundExpression = nested(replace(/[^"'/()]|<<0>>|\(<<self>>*\)/.source, [regularStringCharacterOrComment]), 2); // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/#attribute-targets
+    var roundExpression = nested(replace(/[^"'/()]|<<0>>|\(<<self>>*\)/.source, [regularStringCharacterOrComment]), 2);
 
+    // https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/#attribute-targets
     var attrTarget = /\b(?:assembly|event|field|method|module|param|property|return|type)\b/.source;
     var attr = replace(/<<0>>(?:\s*\(<<1>>*\))?/.source, [identifier, roundExpression]);
     Prism.languages.insertBefore('csharp', 'class-name', {
@@ -58471,13 +59895,14 @@ function csharp(Prism) {
           punctuation: /[:,]/
         }
       }
-    }); // string interpolation
+    });
 
-    var formatString = /:[^}\r\n]+/.source; // multi line
-
+    // string interpolation
+    var formatString = /:[^}\r\n]+/.source;
+    // multi line
     var mInterpolationRound = nested(replace(/[^"'/()]|<<0>>|\(<<self>>*\)/.source, [regularStringCharacterOrComment]), 2);
-    var mInterpolation = replace(/\{(?!\{)(?:(?![}:])<<0>>)*<<1>>?\}/.source, [mInterpolationRound, formatString]); // single line
-
+    var mInterpolation = replace(/\{(?!\{)(?:(?![}:])<<0>>)*<<1>>?\}/.source, [mInterpolationRound, formatString]);
+    // single line
     var sInterpolationRound = nested(replace(/[^"'/()]|\/(?!\*)|\/\*(?:[^*]|\*(?!\/))*\*\/|<<0>>|\(<<self>>*\)/.source, [regularStringOrCharacter]), 2);
     var sInterpolation = replace(/\{(?!\{)(?:(?![}:])<<0>>)*<<1>>?\}/.source, [sInterpolationRound, formatString]);
     function createInterpolationInside(interpolation, interpolationRound) {
@@ -58604,8 +60029,9 @@ function markup(Prism) {
     }, /&#x?[\da-f]{1,8};/i]
   };
   Prism.languages.markup['tag'].inside['attr-value'].inside['entity'] = Prism.languages.markup['entity'];
-  Prism.languages.markup['doctype'].inside['internal-subset'].inside = Prism.languages.markup; // Plugin to make entity title show the real entity, idea by Roman Komarov
+  Prism.languages.markup['doctype'].inside['internal-subset'].inside = Prism.languages.markup;
 
+  // Plugin to make entity title show the real entity, idea by Roman Komarov
   Prism.hooks.add('wrap', function (env) {
     if (env.type === 'entity') {
       env.attributes['title'] = env.content.value.replace(/&amp;/, '&');
@@ -58722,7 +60148,8 @@ function css(Prism) {
           keyword: {
             pattern: /(^|[^\w-])(?:and|not|only|or)(?![\w-])/,
             lookbehind: true
-          } // See rest below
+          }
+          // See rest below
         }
       },
 
@@ -58782,14 +60209,16 @@ function diff(Prism) {
       // Match "@@ ... @@" coord lines in unified diff.
       /^@@.*@@$/m,
       // Match coord lines in normal diff (starts with a number).
-      /^\d.*$/m] // deleted, inserted, unchanged, diff
+      /^\d.*$/m]
+
+      // deleted, inserted, unchanged, diff
     };
+
     /**
      * A map from the name of a block to its line prefix.
      *
      * @type {Object<string, string>}
      */
-
     var PREFIXES = {
       'deleted-sign': '-',
       'deleted-arrow': '<',
@@ -58797,8 +60226,9 @@ function diff(Prism) {
       'inserted-arrow': '>',
       unchanged: ' ',
       diff: '!'
-    }; // add a token for each prefix
+    };
 
+    // add a token for each prefix
     Object.keys(PREFIXES).forEach(function (name) {
       var prefix = PREFIXES[name];
       var alias = [];
@@ -58823,8 +60253,9 @@ function diff(Prism) {
           }
         }
       };
-    }); // make prefixes available to Diff plugin
+    });
 
+    // make prefixes available to Diff plugin
     Object.defineProperty(Prism.languages.diff, 'PREFIXES', {
       value: PREFIXES
     });
@@ -58878,6 +60309,7 @@ function ini(Prism) {
      *
      * @see {@link https://github.com/PrismJS/prism/issues/2775#issuecomment-787477723}
      */
+
     comment: {
       pattern: /(^[ \f\t\v]*)[#;][^\n\r]*/m,
       lookbehind: true
@@ -58923,10 +60355,12 @@ java.aliases = [];
 function java(Prism) {
   Prism.register(clike);
   (function (Prism) {
-    var keywords = /\b(?:abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|exports|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|module|native|new|non-sealed|null|open|opens|package|permits|private|protected|provides|public|record(?!\s*[(){}[\]<>=%~.:,;?+\-*/&|^])|requires|return|sealed|short|static|strictfp|super|switch|synchronized|this|throw|throws|to|transient|transitive|try|uses|var|void|volatile|while|with|yield)\b/; // full package (optional) + parent classes (optional)
+    var keywords = /\b(?:abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|do|double|else|enum|exports|extends|final|finally|float|for|goto|if|implements|import|instanceof|int|interface|long|module|native|new|non-sealed|null|open|opens|package|permits|private|protected|provides|public|record(?!\s*[(){}[\]<>=%~.:,;?+\-*/&|^])|requires|return|sealed|short|static|strictfp|super|switch|synchronized|this|throw|throws|to|transient|transitive|try|uses|var|void|volatile|while|with|yield)\b/;
 
-    var classNamePrefix = /(?:[a-z]\w*\s*\.\s*)*(?:[A-Z]\w*\s*\.\s*)*/.source; // based on the java naming conventions
+    // full package (optional) + parent classes (optional)
+    var classNamePrefix = /(?:[a-z]\w*\s*\.\s*)*(?:[A-Z]\w*\s*\.\s*)*/.source;
 
+    // based on the java naming conventions
     var className = {
       pattern: RegExp(/(^|[^\w.])/.source + classNamePrefix + /[A-Z](?:[\d_A-Z]*[a-z]\w*)?\b/.source),
       lookbehind: true,
@@ -59054,8 +60488,9 @@ function regex(Prism) {
       alias: 'class-name'
     };
     var rangeChar = '(?:[^\\\\-]|' + escape.source + ')';
-    var range = RegExp(rangeChar + '-' + rangeChar); // the name of a capturing group
+    var range = RegExp(rangeChar + '-' + rangeChar);
 
+    // the name of a capturing group
     var groupName = {
       pattern: /(<|')[^<>']+(?=[>']$)/,
       lookbehind: true,
@@ -59111,6 +60546,7 @@ function regex(Prism) {
       group: [{
         // https://docs.oracle.com/javase/10/docs/api/java/util/regex/Pattern.html
         // https://docs.microsoft.com/en-us/dotnet/standard/base-types/regular-expression-language-quick-reference?view=netframework-4.7.2#grouping-constructs
+
         // (), (?<name>), (?'name'), (?>), (?:), (?=), (?!), (?<=), (?<!), (?is-m), (?i-m:)
         pattern: /\((?:\?(?:<[^<>']+>|'[^<>']+'|[>:]|<?[=!]|[idmnsuxU]+(?:-[idmnsuxU]+)?:?))?/,
         alias: 'punctuation',
@@ -59269,9 +60705,10 @@ function javascript(Prism) {
     }
   });
   if (Prism.languages.markup) {
-    Prism.languages.markup.tag.addInlined('script', 'javascript'); // add attribute support for all DOM events.
-    // https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events
+    Prism.languages.markup.tag.addInlined('script', 'javascript');
 
+    // add attribute support for all DOM events.
+    // https://developer.mozilla.org/en-US/docs/Web/Events#Standard_events
     Prism.languages.markup.tag.addAttribute(/on(?:abort|blur|change|click|composition(?:end|start|update)|dblclick|error|focus(?:in|out)?|key(?:down|up)|load|mouse(?:down|enter|leave|move|out|over|up)|reset|resize|scroll|select|slotchange|submit|unload|wheel)/.source, 'javascript');
   }
   Prism.languages.js = Prism.languages.javascript;
@@ -59411,6 +60848,7 @@ function less(Prism) {
   Detached rulesets are highlighted as at-rules.
   A comment before a mixin usage prevents the latter to be properly highlighted.
   */
+
   Prism.languages.less = Prism.languages.extend('css', {
     comment: [/\/\*[\s\S]*?\*\//, {
       pattern: /(^|[^\\])\/\/.*/,
@@ -59525,28 +60963,27 @@ function yaml(Prism) {
   (function (Prism) {
     // https://yaml.org/spec/1.2/spec.html#c-ns-anchor-property
     // https://yaml.org/spec/1.2/spec.html#c-ns-alias-node
-    var anchorOrAlias = /[*&][^\s[\]{},]+/; // https://yaml.org/spec/1.2/spec.html#c-ns-tag-property
-
-    var tag = /!(?:<[\w\-%#;/?:@&=+$,.!~*'()[\]]+>|(?:[a-zA-Z\d-]*!)?[\w\-%#;/?:@&=+$.~*'()]+)?/; // https://yaml.org/spec/1.2/spec.html#c-ns-properties(n,c)
-
-    var properties = '(?:' + tag.source + '(?:[ \t]+' + anchorOrAlias.source + ')?|' + anchorOrAlias.source + '(?:[ \t]+' + tag.source + ')?)'; // https://yaml.org/spec/1.2/spec.html#ns-plain(n,c)
+    var anchorOrAlias = /[*&][^\s[\]{},]+/;
+    // https://yaml.org/spec/1.2/spec.html#c-ns-tag-property
+    var tag = /!(?:<[\w\-%#;/?:@&=+$,.!~*'()[\]]+>|(?:[a-zA-Z\d-]*!)?[\w\-%#;/?:@&=+$.~*'()]+)?/;
+    // https://yaml.org/spec/1.2/spec.html#c-ns-properties(n,c)
+    var properties = '(?:' + tag.source + '(?:[ \t]+' + anchorOrAlias.source + ')?|' + anchorOrAlias.source + '(?:[ \t]+' + tag.source + ')?)';
+    // https://yaml.org/spec/1.2/spec.html#ns-plain(n,c)
     // This is a simplified version that doesn't support "#" and multiline keys
     // All these long scarry character classes are simplified versions of YAML's characters
-
     var plainKey = /(?:[^\s\x00-\x08\x0e-\x1f!"#%&'*,\-:>?@[\]`{|}\x7f-\x84\x86-\x9f\ud800-\udfff\ufffe\uffff]|[?:-]<PLAIN>)(?:[ \t]*(?:(?![#:])<PLAIN>|:<PLAIN>))*/.source.replace(/<PLAIN>/g, function () {
       return /[^\s\x00-\x08\x0e-\x1f,[\]{}\x7f-\x84\x86-\x9f\ud800-\udfff\ufffe\uffff]/.source;
     });
     var string = /"(?:[^"\\\r\n]|\\.)*"|'(?:[^'\\\r\n]|\\.)*'/.source;
+
     /**
      *
      * @param {string} value
      * @param {string} [flags]
      * @returns {RegExp}
      */
-
     function createValuePattern(value, flags) {
       flags = (flags || '').replace(/m/g, '') + 'm'; // add m flag
-
       var pattern = /([:\-,[{]\s*(?:\s<<prop>>[ \t]+)?)(?:<<value>>)(?=[ \t]*(?:$|,|\]|\}|(?:[\r\n]\s*)?#))/.source.replace(/<<prop>>/g, function () {
         return properties;
       }).replace(/<<value>>/g, function () {
@@ -59621,6 +61058,7 @@ function markdown(Prism) {
   (function (Prism) {
     // Allow only one line break
     var inner = /(?:\\.|[^\\\n\r]|(?:\n|\r\n?)(?![\r\n]))/.source;
+
     /**
      * This function is intended for the creation of the bold or italic pattern.
      *
@@ -59631,7 +61069,6 @@ function markdown(Prism) {
      * @param {string} pattern
      * @returns {RegExp}
      */
-
     function createInline(pattern) {
       pattern = pattern.replace(/<inner>/g, function () {
         return inner;
@@ -59723,6 +61160,7 @@ function markdown(Prism) {
       title: [{
         // title 1
         // =======
+
         // title 2
         // -------
         pattern: /\S.*(?:\n|\r\n?)(?:==+|--+)(?=[ \t]*$)/m,
@@ -59777,6 +61215,7 @@ function markdown(Prism) {
       bold: {
         // **strong**
         // __strong__
+
         // allow one nested instance of italic text using the same delimiter
         pattern: createInline(/\b__(?:(?!_)<inner>|_(?:(?!_)<inner>)+_)+__\b|\*\*(?:(?!\*)<inner>|\*(?:(?!\*)<inner>)+\*)+\*\*/.source),
         lookbehind: true,
@@ -59794,6 +61233,7 @@ function markdown(Prism) {
       italic: {
         // *em*
         // _em_
+
         // allow one nested instance of bold text using the same delimiter
         pattern: createInline(/\b_(?:(?!_)<inner>|__(?:(?!_)<inner>)+__)+_\b|\*(?:(?!\*)<inner>|\*\*(?:(?!\*)<inner>)+\*\*)+\*/.source),
         lookbehind: true,
@@ -59885,6 +61325,7 @@ function markdown(Prism) {
             walkTokens(token.content);
             continue;
           }
+
           /*
            * Add the correct `language-xxxx` class to this code block. Keep in mind that the `code-language` token
            * is optional. But the grammar is defined so that there is only one case we have to handle:
@@ -59903,12 +61344,14 @@ function markdown(Prism) {
           var codeBlock = token.content[3];
           if (codeLang && codeBlock && codeLang.type === 'code-language' && codeBlock.type === 'code-block' && typeof codeLang.content === 'string') {
             // this might be a language that Prism does not support
+
             // do some replacements to support C++, C#, and F#
-            var lang = codeLang.content.replace(/\b#/g, 'sharp').replace(/\b\+\+/g, 'pp'); // only use the first word
-
+            var lang = codeLang.content.replace(/\b#/g, 'sharp').replace(/\b\+\+/g, 'pp');
+            // only use the first word
             lang = (/[a-z][\w-]*/i.exec(lang) || [''])[0].toLowerCase();
-            var alias = 'language-' + lang; // add alias
+            var alias = 'language-' + lang;
 
+            // add alias
             if (!codeBlock.alias) {
               codeBlock.alias = [alias];
             } else if (typeof codeBlock.alias === 'string') {
@@ -59947,10 +61390,11 @@ function markdown(Prism) {
           });
         }
       } else {
-        env.content = Prism.highlight(textContent(env.content.value), grammar, codeLang);
+        env.content = Prism.highlight(env.content.value, grammar, codeLang);
       }
     });
     var tagPattern = RegExp(Prism.languages.markup.tag.pattern.source, 'gi');
+
     /**
      * A list of known entity names.
      *
@@ -59958,26 +61402,27 @@ function markdown(Prism) {
      *
      * @see {@link https://github.com/lodash/lodash/blob/2da024c3b4f9947a48517639de7560457cd4ec6c/unescape.js#L2}
      */
-
     var KNOWN_ENTITY_NAMES = {
       amp: '&',
       lt: '<',
       gt: '>',
       quot: '"'
-    }; // IE 11 doesn't support `String.fromCodePoint`
+    };
 
+    // IE 11 doesn't support `String.fromCodePoint`
     var fromCodePoint = String.fromCodePoint || String.fromCharCode;
+
     /**
      * Returns the text content of a given HTML source code string.
      *
      * @param {string} html
      * @returns {string}
      */
-
     function textContent(html) {
       // remove all tags
-      var text = html.replace(tagPattern, ''); // decode known entities
+      var text = html.replace(tagPattern, '');
 
+      // decode known entities
       text = text.replace(/&(\w{1,8}|#x?[\da-f]{1,8});/gi, function (m, code) {
         code = code.toLowerCase();
         if (code[0] === '#') {
@@ -59992,8 +61437,9 @@ function markdown(Prism) {
           var known = KNOWN_ENTITY_NAMES[code];
           if (known) {
             return known;
-          } // unable to decode
+          }
 
+          // unable to decode
           return m;
         }
       });
@@ -60188,16 +61634,19 @@ function markupTemplating(Prism) {
               return match;
             }
             var i = tokenStack.length;
-            var placeholder; // Check for existing strings
+            var placeholder;
 
+            // Check for existing strings
             while (env.code.indexOf(placeholder = getPlaceholder(language, i)) !== -1) {
               ++i;
-            } // Create a sparse array
+            }
 
+            // Create a sparse array
             tokenStack[i] = match;
             return placeholder;
-          }); // Switch the grammar to markup
+          });
 
+          // Switch the grammar to markup
           env.grammar = Prism.languages.markup;
         }
       },
@@ -60211,8 +61660,9 @@ function markupTemplating(Prism) {
         value: function value(env, language) {
           if (env.language !== language || !env.tokenStack) {
             return;
-          } // Switch the grammar back
+          }
 
+          // Switch the grammar back
           env.grammar = Prism.languages[language];
           var j = 0;
           var keys = Object.keys(env.tokenStack);
@@ -60248,8 +61698,7 @@ function markupTemplating(Prism) {
                     token.content = replacement;
                   }
                 }
-              } else if (token.content
-              /* && typeof token.content !== 'string' */) {
+              } else if (token.content /* && typeof token.content !== 'string' */) {
                 walkTokens(token.content);
               }
             }
@@ -61017,9 +62466,10 @@ function sass(Prism) {
       }
     });
     delete Prism.languages.sass.property;
-    delete Prism.languages.sass.important; // Now that whole lines for other patterns are consumed,
-    // what's left should be selectors
+    delete Prism.languages.sass.important;
 
+    // Now that whole lines for other patterns are consumed,
+    // what's left should be selectors
     Prism.languages.insertBefore('sass', 'punctuation', {
       selector: {
         pattern: /^([ \t]*)\S(?:,[^,\r\n]+|[^,\r\n]*)(?:,[^,\r\n]+)*(?:,(?:\r?\n|\r)\1[ \t]+\S(?:,[^,\r\n]+|[^,\r\n]*)(?:,[^,\r\n]+)*)*/m,
@@ -61046,7 +62496,8 @@ function scss(Prism) {
     atrule: {
       pattern: /@[\w-](?:\([^()]+\)|[^()\s]|\s+(?!\s))*?(?=\s+[{;])/,
       inside: {
-        rule: /@[\w-]+/ // See rest below
+        rule: /@[\w-]+/
+        // See rest below
       }
     },
 
@@ -61295,17 +62746,20 @@ function typescript(Prism) {
       },
 
       builtin: /\b(?:Array|Function|Promise|any|boolean|console|never|number|string|symbol|unknown)\b/
-    }); // The keywords TypeScript adds to JavaScript
+    });
 
+    // The keywords TypeScript adds to JavaScript
     Prism.languages.typescript.keyword.push(/\b(?:abstract|declare|is|keyof|readonly|require)\b/,
     // keywords that have to be followed by an identifier
     /\b(?:asserts|infer|interface|module|namespace|type)\b(?=\s*(?:[{_$a-zA-Z\xA0-\uFFFF]|$))/,
     // This is for `import type *, {}`
-    /\btype\b(?=\s*(?:[\{*]|$))/); // doesn't work with TS because TS is too complex
+    /\btype\b(?=\s*(?:[\{*]|$))/);
 
+    // doesn't work with TS because TS is too complex
     delete Prism.languages.typescript['parameter'];
-    delete Prism.languages.typescript['literal-property']; // a version of typescript specifically for highlighting types
+    delete Prism.languages.typescript['literal-property'];
 
+    // a version of typescript specifically for highlighting types
     var typeInside = Prism.languages.extend('typescript', {});
     delete typeInside['class-name'];
     Prism.languages.typescript['class-name'].inside = typeInside;
@@ -61511,18 +62965,20 @@ var messages = ['', /* 1: Non terminated (named) */
 function parseEntities(value) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var additional = typeof options.additional === 'string' ? options.additional.charCodeAt(0) : options.additional;
-  /** @type {string[]} */
+  /** @type {Array<string>} */
   var result = [];
   var index = 0;
   var lines = -1;
   var queue = '';
   /** @type {Point|undefined} */
   var point;
-  /** @type {number[]|undefined} */
+  /** @type {Array<number>|undefined} */
   var indent;
   if (options.position) {
     if ('start' in options.position || 'indent' in options.position) {
+      // @ts-expect-error: points don’t have indent.
       indent = options.position.indent;
+      // @ts-expect-error: points don’t have indent.
       point = options.position.start;
     } else {
       point = options.position;
@@ -63031,8 +64487,9 @@ function actionscript(Prism) {
     keyword: /\b(?:as|break|case|catch|class|const|default|delete|do|dynamic|each|else|extends|final|finally|for|function|get|if|implements|import|in|include|instanceof|interface|internal|is|namespace|native|new|null|override|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|use|var|void|while|with)\b/,
     operator: /\+\+|--|(?:[+\-*\/%^]|&&?|\|\|?|<<?|>>?>?|[!=]=?)=?|[~?@]/
   });
-  Prism.languages.actionscript['class-name'].alias = 'function'; // doesn't work with AS because AS is too complex
+  Prism.languages.actionscript['class-name'].alias = 'function';
 
+  // doesn't work with AS because AS is too complex
   delete Prism.languages.actionscript['parameter'];
   delete Prism.languages.actionscript['literal-property'];
   if (Prism.languages.markup) {
@@ -63112,6 +64569,7 @@ al.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function al(Prism) {
   // based on https://github.com/microsoft/AL/blob/master/grammar/alsyntax.tmlanguage
+
   Prism.languages.al = {
     comment: /\/\/.*|\/\*[\s\S]*?\*\//,
     string: {
@@ -63276,7 +64734,6 @@ function apex(Prism) {
       return keywords.source;
     });
     /** @param {string} pattern */
-
     function insertClassName(pattern) {
       return RegExp(pattern.replace(/<CLASS-NAME>/g, function () {
         return className;
@@ -63623,7 +65080,8 @@ function asciidoc(Prism) {
         interpreted: {
           pattern: /'(?:[^'\\]|\\.)*'/,
           inside: {
-            punctuation: /^'|'$/ // See rest below
+            punctuation: /^'|'$/
+            // See rest below
           }
         },
 
@@ -63650,14 +65108,16 @@ function asciidoc(Prism) {
           punctuation: {
             pattern: /(^|[^\\])[|!]=*/,
             lookbehind: true
-          } // See rest below
+          }
+          // See rest below
         }
       },
 
       'passthrough-block': {
         pattern: /^(\+{4,})$[\s\S]*?^\1$/m,
         inside: {
-          punctuation: /^\++|\++$/ // See rest below
+          punctuation: /^\++|\++$/
+          // See rest below
         }
       },
 
@@ -63665,7 +65125,8 @@ function asciidoc(Prism) {
       'literal-block': {
         pattern: /^(-{4,}|\.{4,})$[\s\S]*?^\1$/m,
         inside: {
-          punctuation: /^(?:-+|\.+)|(?:-+|\.+)$/ // See rest below
+          punctuation: /^(?:-+|\.+)|(?:-+|\.+)$/
+          // See rest below
         }
       },
 
@@ -63673,7 +65134,8 @@ function asciidoc(Prism) {
       'other-block': {
         pattern: /^(--|\*{4,}|_{4,}|={4,})$[\s\S]*?^\1$/m,
         inside: {
-          punctuation: /^(?:-+|\*+|_+|=+)|(?:-+|\*+|_+|=+)$/ // See rest below
+          punctuation: /^(?:-+|\*+|_+|=+)|(?:-+|\*+|_+|=+)$/
+          // See rest below
         }
       },
 
@@ -63697,7 +65159,8 @@ function asciidoc(Prism) {
         pattern: /^.+(?:\r?\n|\r)(?:={3,}|-{3,}|~{3,}|\^{3,}|\+{3,})$|^={1,5} .+|^\.(?![\s.]).*/m,
         alias: 'important',
         inside: {
-          punctuation: /^(?:\.|=+)|(?:=+|-+|~+|\^+|\++)$/ // See rest below
+          punctuation: /^(?:\.|=+)|(?:=+|-+|~+|\^+|\++)$/
+          // See rest below
         }
       },
 
@@ -63795,7 +65258,9 @@ function asciidoc(Prism) {
         lookbehind: true,
         alias: 'punctuation'
       }
-    }; // Allow some nesting. There is no recursion though, so cloning should not be needed.
+    };
+
+    // Allow some nesting. There is no recursion though, so cloning should not be needed.
 
     function copyFromAsciiDoc(keys) {
       keys = keys.split(' ');
@@ -63810,8 +65275,9 @@ function asciidoc(Prism) {
     asciidoc['literal-block'].inside.rest = copyFromAsciiDoc('callout');
     asciidoc['table'].inside.rest = copyFromAsciiDoc('comment-block passthrough-block literal-block other-block list-punctuation indented-block comment title attribute-entry attributes hr page-break admonition list-label callout macro inline replacement entity line-continuation');
     asciidoc['other-block'].inside.rest = copyFromAsciiDoc('table list-punctuation indented-block comment attribute-entry attributes hr page-break admonition list-label macro inline replacement entity line-continuation');
-    asciidoc['title'].inside.rest = copyFromAsciiDoc('macro inline replacement entity'); // Plugin to make entity title show the real entity, idea by Roman Komarov
+    asciidoc['title'].inside.rest = copyFromAsciiDoc('macro inline replacement entity');
 
+    // Plugin to make entity title show the real entity, idea by Roman Komarov
     Prism.hooks.add('wrap', function (env) {
       if (env.type === 'entity') {
         env.attributes['title'] = env.content.value.replace(/&amp;/, '&');
@@ -63854,10 +65320,11 @@ function aspnet(Prism) {
         rest: Prism.languages.csharp
       }
     }
-  }); // Regexp copied from prism-markup, with a negative look-ahead added
+  });
+  // Regexp copied from prism-markup, with a negative look-ahead added
+  Prism.languages.aspnet.tag.pattern = /<(?!%)\/?[^\s>\/]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+))?)*\s*\/?>/;
 
-  Prism.languages.aspnet.tag.pattern = /<(?!%)\/?[^\s>\/]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+))?)*\s*\/?>/; // match directives of attribute value foo="<% Bar %>"
-
+  // match directives of attribute value foo="<% Bar %>"
   Prism.languages.insertBefore('inside', 'punctuation', {
     directive: Prism.languages.aspnet['directive']
   }, Prism.languages.aspnet.tag.inside['attr-value']);
@@ -63866,8 +65333,9 @@ function aspnet(Prism) {
       pattern: /<%--[\s\S]*?--%>/,
       alias: ['asp', 'comment']
     }
-  }); // script runat="server" contains csharp, not javascript
+  });
 
+  // script runat="server" contains csharp, not javascript
   Prism.languages.insertBefore('aspnet', Prism.languages.javascript ? 'script' : 'tag', {
     'asp-script': {
       pattern: /(<script(?=.*runat=['"]?server\b)[^>]*>)[\s\S]*?(?=<\/script>)/i,
@@ -64221,6 +65689,7 @@ avroIdl.aliases = ['avdl'];
 function avroIdl(Prism) {
   // GitHub: https://github.com/apache/avro
   // Docs: https://avro.apache.org/docs/current/idl.html
+
   Prism.languages['avro-idl'] = {
     comment: {
       pattern: /\/\/.*|\/\*[\s\S]*?\*\//,
@@ -64822,6 +66291,7 @@ bsl.aliases = ['oscript'];
 /** @type {import('../core.js').Syntax} */
 function bsl(Prism) {
   /* eslint-disable no-misleading-character-class */
+
   // 1C:Enterprise
   // https://github.com/Diversus23/
   //
@@ -65363,6 +66833,7 @@ function csp(Prism) {
    *  - https://www.w3.org/TR/CSP2/
    *  - https://www.w3.org/TR/CSP3/
    */
+
   ;
   (function (Prism) {
     /**
@@ -65428,6 +66899,7 @@ function cooklang(Prism) {
   ;
   (function (Prism) {
     // see https://github.com/cooklang/spec/blob/main/EBNF.md
+
     var single_token_suffix = /(?:(?!\s)[\d$+<=a-zA-Z\x80-\uFFFF])+/.source;
     var multi_token_infix = /[^{}@#]+/.source;
     var multi_token_suffix = /\{[^}#@]*\}/.source;
@@ -65568,6 +67040,7 @@ function coq(Prism) {
   ;
   (function (Prism) {
     // https://github.com/coq/coq
+
     var commentSource = /\(\*(?:[^(*]|\((?!\*)|\*(?!\))|<self>)*\*\)/.source;
     for (var i = 0; i < 2; i++) {
       commentSource = commentSource.replace(/<self>/g, function () {
@@ -65733,6 +67206,7 @@ function cssExtras(Prism) {
         // the `tag` token has been existed and removed.
         // because we can't find a perfect tokenize to match it.
         // if you want to add it, please read https://github.com/PrismJS/prism/pull/2373 first.
+
         punctuation: /[(),]/
       }
     };
@@ -65746,8 +67220,8 @@ function cssExtras(Prism) {
     var unit = {
       pattern: /(\b\d+)(?:%|[a-z]+(?![\w-]))/,
       lookbehind: true
-    }; // 123 -123 .123 -.123 12.3 -12.3
-
+    };
+    // 123 -123 .123 -.123 12.3 -12.3
     var number = {
       pattern: /(^|[^\w.-])-?(?:\d+(?:\.\d+)?|\.\d+)/,
       lookbehind: true
@@ -65790,6 +67264,7 @@ csv.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function csv(Prism) {
   // https://tools.ietf.org/html/rfc4180
+
   Prism.languages.csv = {
     value: /[^\r\n,"]+|"(?:[^"]|"")*"(?!")/,
     punctuation: /,/
@@ -65805,9 +67280,10 @@ function cue(Prism) {
   ;
   (function (Prism) {
     // https://cuelang.org/docs/references/spec/
-    // eslint-disable-next-line regexp/strict
-    var stringEscape = /\\(?:(?!\2)|\2(?:[^()\r\n]|\([^()]*\)))/.source; // eslint-disable-next-line regexp/strict
 
+    // eslint-disable-next-line regexp/strict
+    var stringEscape = /\\(?:(?!\2)|\2(?:[^()\r\n]|\([^()]*\)))/.source;
+    // eslint-disable-next-line regexp/strict
     var stringTypes = /"""(?:[^\\"]|"(?!""\2)|<esc>)*"""/.source +
     // eslint-disable-next-line regexp/strict
     '|' + /'''(?:[^\\']|'(?!''\2)|<esc>)*'''/.source +
@@ -66003,10 +67479,12 @@ dart.aliases = [];
 function dart(Prism) {
   Prism.register(clike);
   (function (Prism) {
-    var keywords = [/\b(?:async|sync|yield)\*/, /\b(?:abstract|assert|async|await|break|case|catch|class|const|continue|covariant|default|deferred|do|dynamic|else|enum|export|extends|extension|external|factory|final|finally|for|get|hide|if|implements|import|in|interface|library|mixin|new|null|on|operator|part|rethrow|return|set|show|static|super|switch|sync|this|throw|try|typedef|var|void|while|with|yield)\b/]; // Handles named imports, such as http.Client
+    var keywords = [/\b(?:async|sync|yield)\*/, /\b(?:abstract|assert|async|await|break|case|catch|class|const|continue|covariant|default|deferred|do|dynamic|else|enum|export|extends|extension|external|factory|final|finally|for|get|hide|if|implements|import|in|interface|library|mixin|new|null|on|operator|part|rethrow|return|set|show|static|super|switch|sync|this|throw|try|typedef|var|void|while|with|yield)\b/];
 
-    var packagePrefix = /(^|[^\w.])(?:[a-z]\w*\s*\.\s*)*(?:[A-Z]\w*\s*\.\s*)*/.source; // based on the dart naming conventions
+    // Handles named imports, such as http.Client
+    var packagePrefix = /(^|[^\w.])(?:[a-z]\w*\s*\.\s*)*(?:[A-Z]\w*\s*\.\s*)*/.source;
 
+    // based on the dart naming conventions
     var className = {
       pattern: RegExp(packagePrefix + /[A-Z](?:[\d_A-Z]*[a-z]\w*)?\b/.source),
       lookbehind: true,
@@ -66160,6 +67638,7 @@ dhall.aliases = [];
 function dhall(Prism) {
   // ABNF grammar:
   // https://github.com/dhall-lang/dhall-lang/blob/master/standard/dhall.abnf
+
   Prism.languages.dhall = {
     // Multi-line comments can be nested. E.g. {- foo {- bar -} -}
     // The multi-line pattern is essentially this:
@@ -66236,6 +67715,7 @@ function django(Prism) {
   // Django/Jinja2 syntax definition for Prism.js <http://prismjs.com> syntax highlighter.
   // Mostly it works OK but can paint code incorrectly on complex html/template tag combinations.
   ;
+
   (function (Prism) {
     Prism.languages.django = {
       comment: /^\{#[\s\S]*?#\}$/,
@@ -66277,8 +67757,9 @@ function django(Prism) {
     });
     Prism.hooks.add('after-tokenize', function (env) {
       markupTemplating.tokenizePlaceholders(env, 'django');
-    }); // Add an Jinja2 alias
+    });
 
+    // Add an Jinja2 alias
     Prism.languages.jinja2 = Prism.languages.django;
     Prism.hooks.add('before-tokenize', function (env) {
       markupTemplating.buildPlaceholders(env, 'jinja2', pattern);
@@ -66336,8 +67817,9 @@ function docker(Prism) {
   (function (Prism) {
     // Many of the following regexes will contain negated lookaheads like `[ \t]+(?![ \t])`. This is a trick to ensure
     // that quantifiers behave *atomically*. Atomic quantifiers are necessary to prevent exponential backtracking.
-    var spaceAfterBackSlash = /\\[\r\n](?:\s|\\[\r\n]|#.*(?!.))*(?![\s#]|\\[\r\n])/.source; // At least one space, comment, or line break
 
+    var spaceAfterBackSlash = /\\[\r\n](?:\s|\\[\r\n]|#.*(?!.))*(?![\s#]|\\[\r\n])/.source;
+    // At least one space, comment, or line break
     var space = /(?:[ \t]+(?![ \t])(?:<SP_BS>)?|<SP_BS>)/.source.replace(/<SP_BS>/g, function () {
       return spaceAfterBackSlash;
     });
@@ -66354,12 +67836,12 @@ function docker(Prism) {
       lookbehind: true,
       greedy: true
     };
+
     /**
      * @param {string} source
      * @param {string} flags
      * @returns {RegExp}
      */
-
     function re(source, flags) {
       source = source.replace(/<OPT>/g, function () {
         return option;
@@ -66429,6 +67911,7 @@ dot.aliases = ['gv'];
 /** @type {import('../core.js').Syntax} */
 function dot(Prism) {
   // https://www.graphviz.org/doc/info/lang.html
+
   ;
   (function (Prism) {
     var ID = '(?:' + [
@@ -66448,12 +67931,12 @@ function dot(Prism) {
         inside: Prism.languages.markup
       }
     };
+
     /**
      * @param {string} source
      * @param {string} flags
      * @returns {RegExp}
      */
-
     function withID(source, flags) {
       return RegExp(source.replace(/<ID>/g, function () {
         return ID;
@@ -66910,12 +68393,14 @@ function excelFormula(Prism) {
     },
     reference: {
       // https://www.ablebits.com/office-addins-blog/2015/12/08/excel-reference-another-sheet-workbook/
+
       // Sales!B2
       // 'Winter sales'!B2
       // [Sales.xlsx]Jan!B2:B5
       // D:\Reports\[Sales.xlsx]Jan!B2:B5
       // '[Sales.xlsx]Jan sales'!B2:B5
       // 'D:\Reports\[Sales.xlsx]Jan sales'!B2:B5
+
       pattern: /(?:'[^']*'|(?:[^\s()[\]{}<>*?"';,$&]*\[[^^\s()[\]{}<>*?"']+\])?\w+)!/,
       greedy: true,
       alias: 'string',
@@ -67060,8 +68545,7 @@ function factor(Prism) {
         pattern: /(^|\s)(?:! .*|!$)/,
         lookbehind: true,
         inside: comment_inside
-      }, /* from basis/multiline: */
-      {
+      } /* from basis/multiline: */, {
         // /* comment */, /* comment*/
         pattern: /(^|\s)\/\*\s[\s\S]*?\*\/(?=\s|$)/,
         lookbehind: true,
@@ -67197,6 +68681,7 @@ function factor(Prism) {
       these are pretty complicated to highlight properly without a real parser, and therefore out of scope
       the old pattern, which may be later useful, was: (^|\s)(?:call|execute|eval)?\((?:\s+[^"\r\n\t ]\S*)*?\s+--(?:\s+[^"\n\t ]\S*)*?\s+\)(?=\s|$)
       */
+
       // current solution is not great
       'stack-effect-delimiter': [{
         // opening parenthesis
@@ -67348,7 +68833,8 @@ function factor(Prism) {
       // literals
       '$', '$[', '${'],
       'sequences-builtin': ['member-eq?', 'mismatch', 'append', 'assert-sequence=', 'longer', 'repetition', 'clone-like', '3sequence', 'assert-sequence?', 'last-index-from', 'reversed', 'index-from', 'cut*', 'pad-tail', 'join-as', 'remove-eq!', 'concat-as', 'but-last', 'snip', 'nths', 'nth', 'sequence', 'longest', 'slice?', '<slice>', 'remove-nth', 'tail-slice', 'empty?', 'tail*', 'member?', 'virtual-sequence?', 'set-length', 'drop-prefix', 'iota', 'unclip', 'bounds-error?', 'unclip-last-slice', 'non-negative-integer-expected', 'non-negative-integer-expected?', 'midpoint@', 'longer?', '?set-nth', '?first', 'rest-slice', 'prepend-as', 'prepend', 'fourth', 'sift', 'subseq-start', 'new-sequence', '?last', 'like', 'first4', '1sequence', 'reverse', 'slice', 'virtual@', 'repetition?', 'set-last', 'index', '4sequence', 'max-length', 'set-second', 'immutable-sequence', 'first2', 'first3', 'supremum', 'unclip-slice', 'suffix!', 'insert-nth', 'tail', '3append', 'short', 'suffix', 'concat', 'flip', 'immutable?', 'reverse!', '2sequence', 'sum', 'delete-all', 'indices', 'snip-slice', '<iota>', 'check-slice', 'sequence?', 'head', 'append-as', 'halves', 'sequence=', 'collapse-slice', '?second', 'slice-error?', 'product', 'bounds-check?', 'bounds-check', 'immutable', 'virtual-exemplar', 'harvest', 'remove', 'pad-head', 'last', 'set-fourth', 'cartesian-product', 'remove-eq', 'shorten', 'shorter', 'reversed?', 'shorter?', 'shortest', 'head-slice', 'pop*', 'tail-slice*', 'but-last-slice', 'iota?', 'append!', 'cut-slice', 'new-resizable', 'head-slice*', 'sequence-hashcode', 'pop', 'set-nth', '?nth', 'second', 'join', 'immutable-sequence?', '<reversed>', '3append-as', 'virtual-sequence', 'subseq?', 'remove-nth!', 'length', 'last-index', 'lengthen', 'assert-sequence', 'copy', 'move', 'third', 'first', 'tail?', 'set-first', 'prefix', 'bounds-error', '<repetition>', 'exchange', 'surround', 'cut', 'min-length', 'set-third', 'push-all', 'head?', 'subseq-start-from', 'delete-slice', 'rest', 'sum-lengths', 'head*', 'infimum', 'remove!', 'glue', 'slice-error', 'subseq', 'push', 'replace-slice', 'subseq-as', 'unclip-last'],
-      'math-builtin': ['number=', 'next-power-of-2', '?1+', 'fp-special?', 'imaginary-part', 'float>bits', 'number?', 'fp-infinity?', 'bignum?', 'fp-snan?', 'denominator', 'gcd', '*', '+', 'fp-bitwise=', '-', 'u>=', '/', '>=', 'bitand', 'power-of-2?', 'log2-expects-positive', 'neg?', '<', 'log2', '>', 'integer?', 'number', 'bits>double', '2/', 'zero?', 'bits>float', 'float?', 'shift', 'ratio?', 'rect>', 'even?', 'ratio', 'fp-sign', 'bitnot', '>fixnum', 'complex?', '/i', 'integer>fixnum', '/f', 'sgn', '>bignum', 'next-float', 'u<', 'u>', 'mod', 'recip', 'rational', '>float', '2^', 'integer', 'fixnum?', 'neg', 'fixnum', 'sq', 'bignum', '>rect', 'bit?', 'fp-qnan?', 'simple-gcd', 'complex', '<fp-nan>', 'real', '>fraction', 'double>bits', 'bitor', 'rem', 'fp-nan-payload', 'real-part', 'log2-expects-positive?', 'prev-float', 'align', 'unordered?', 'float', 'fp-nan?', 'abs', 'bitxor', 'integer>fixnum-strict', 'u<=', 'odd?', '<=', '/mod', '>integer', 'real?', 'rational?', 'numerator'] // that's all for now
+      'math-builtin': ['number=', 'next-power-of-2', '?1+', 'fp-special?', 'imaginary-part', 'float>bits', 'number?', 'fp-infinity?', 'bignum?', 'fp-snan?', 'denominator', 'gcd', '*', '+', 'fp-bitwise=', '-', 'u>=', '/', '>=', 'bitand', 'power-of-2?', 'log2-expects-positive', 'neg?', '<', 'log2', '>', 'integer?', 'number', 'bits>double', '2/', 'zero?', 'bits>float', 'float?', 'shift', 'ratio?', 'rect>', 'even?', 'ratio', 'fp-sign', 'bitnot', '>fixnum', 'complex?', '/i', 'integer>fixnum', '/f', 'sgn', '>bignum', 'next-float', 'u<', 'u>', 'mod', 'recip', 'rational', '>float', '2^', 'integer', 'fixnum?', 'neg', 'fixnum', 'sq', 'bignum', '>rect', 'bit?', 'fp-qnan?', 'simple-gcd', 'complex', '<fp-nan>', 'real', '>fraction', 'double>bits', 'bitor', 'rem', 'fp-nan-payload', 'real-part', 'log2-expects-positive?', 'prev-float', 'align', 'unordered?', 'float', 'fp-nan?', 'abs', 'bitxor', 'integer>fixnum-strict', 'u<=', 'odd?', '<=', '/mod', '>integer', 'real?', 'rational?', 'numerator']
+      // that's all for now
     };
 
     Object.keys(builtins).forEach(function (k) {
@@ -67368,7 +68854,8 @@ function factor(Prism) {
     // combinators.short-circuit
     '2||', '0||', 'n||', '0&&', '2&&', '3||', '1||', '1&&', 'n&&', '3&&',
     // combinators.smart
-    'smart-unless*', 'keep-inputs', 'reduce-outputs', 'smart-when*', 'cleave>array', 'smart-with', 'smart-apply', 'smart-if', 'inputs/outputs', 'output>sequence-n', 'map-outputs', 'map-reduce-outputs', 'dropping', 'output>array', 'smart-map-reduce', 'smart-2map-reduce', 'output>array-n', 'nullary', 'input<sequence', 'append-outputs', 'drop-inputs', 'inputs', 'smart-2reduce', 'drop-outputs', 'smart-reduce', 'preserving', 'smart-when', 'outputs', 'append-outputs-as', 'smart-unless', 'smart-if*', 'sum-outputs', 'input<sequence-unsafe', 'output>sequence' // tafn
+    'smart-unless*', 'keep-inputs', 'reduce-outputs', 'smart-when*', 'cleave>array', 'smart-with', 'smart-apply', 'smart-if', 'inputs/outputs', 'output>sequence-n', 'map-outputs', 'map-reduce-outputs', 'dropping', 'output>array', 'smart-map-reduce', 'smart-2map-reduce', 'output>array-n', 'nullary', 'input<sequence', 'append-outputs', 'drop-inputs', 'inputs', 'smart-2reduce', 'drop-outputs', 'smart-reduce', 'preserving', 'smart-when', 'outputs', 'append-outputs-as', 'smart-unless', 'smart-if*', 'sum-outputs', 'input<sequence-unsafe', 'output>sequence'
+    // tafn
     ];
 
     factor.combinators.pattern = arrToWordsRegExp(combinators);
@@ -67551,6 +69038,7 @@ function ftl(Prism) {
   Prism.register(markupTemplating);
   (function (Prism) {
     // https://freemarker.apache.org/docs/dgui_template_exp.html
+
     // FTL expression with 4 levels of nesting supported
     var FTL_EXPR = /[^<()"']|\((?:<expr>)*\)|<(?!#--)|<#--(?:[^-]|-(?!->))*-->|"(?:[^\\"]|\\.)*"|'(?:[^\\']|\\.)*'/.source;
     for (var i = 0; i < 2; i++) {
@@ -67671,6 +69159,7 @@ gap.aliases = [];
 function gap(Prism) {
   // https://www.gap-system.org/Manuals/doc/ref/chap4.html
   // https://www.gap-system.org/Manuals/doc/ref/chap27.html
+
   Prism.languages.gap = {
     shell: {
       pattern: /^gap>[\s\S]*?(?=^gap>|$(?![\s\S]))/m,
@@ -68036,6 +69525,7 @@ gn.aliases = ['gni'];
 /** @type {import('../core.js').Syntax} */
 function gn(Prism) {
   // https://gn.googlesource.com/gn/+/refs/heads/main/docs/reference.md#grammar
+
   Prism.languages.gn = {
     comment: {
       pattern: /#.*/,
@@ -68123,6 +69613,7 @@ goModule.aliases = ['go-mod'];
 /** @type {import('../core.js').Syntax} */
 function goModule(Prism) {
   // https://go.dev/ref/mod#go-mod-file-module
+
   Prism.languages['go-mod'] = Prism.languages['go-module'] = {
     comment: {
       pattern: /\/\/.*/,
@@ -68283,27 +69774,28 @@ function graphql(Prism) {
     if (env.language !== 'graphql') {
       return;
     }
+
     /**
      * get the graphql token stream that we want to customize
      *
      * @typedef {InstanceType<import("./prism-core")["Token"]>} Token
      * @type {Token[]}
      */
-
     var validTokens = env.tokens.filter(function (token) {
       return typeof token !== 'string' && token.type !== 'comment' && token.type !== 'scalar';
     });
     var currentIndex = 0;
+
     /**
      * Returns whether the token relative to the current index has the given type.
      *
      * @param {number} offset
      * @returns {Token | undefined}
      */
-
     function getToken(offset) {
       return validTokens[currentIndex + offset];
     }
+
     /**
      * Returns whether the token relative to the current index has the given type.
      *
@@ -68311,7 +69803,6 @@ function graphql(Prism) {
      * @param {number} [offset=0]
      * @returns {boolean}
      */
-
     function isTokenType(types, offset) {
       offset = offset || 0;
       for (var i = 0; i < types.length; i++) {
@@ -68322,6 +69813,7 @@ function graphql(Prism) {
       }
       return true;
     }
+
     /**
      * Returns the index of the closing bracket to an opening bracket.
      *
@@ -68333,7 +69825,6 @@ function graphql(Prism) {
      * @param {RegExp} close
      * @returns {number}
      */
-
     function findClosingBracket(open, close) {
       var stackHeight = 1;
       for (var i = currentIndex; i < validTokens.length; i++) {
@@ -68352,6 +69843,7 @@ function graphql(Prism) {
       }
       return -1;
     }
+
     /**
      * Adds an alias to the given token.
      *
@@ -68359,7 +69851,6 @@ function graphql(Prism) {
      * @param {string} alias
      * @returns {void}
      */
-
     function addAlias(token, alias) {
       var aliases = token.alias;
       if (!aliases) {
@@ -68370,20 +69861,23 @@ function graphql(Prism) {
       aliases.push(alias);
     }
     for (; currentIndex < validTokens.length;) {
-      var startToken = validTokens[currentIndex++]; // add special aliases for mutation tokens
+      var startToken = validTokens[currentIndex++];
 
+      // add special aliases for mutation tokens
       if (startToken.type === 'keyword' && startToken.content === 'mutation') {
         // any array of the names of all input variables (if any)
         var inputVariables = [];
         if (isTokenType(['definition-mutation', 'punctuation']) && getToken(1).content === '(') {
           // definition
+
           currentIndex += 2; // skip 'definition-mutation' and 'punctuation'
 
           var definitionEnd = findClosingBracket(/^\($/, /^\)$/);
           if (definitionEnd === -1) {
             continue;
-          } // find all input variables
+          }
 
+          // find all input variables
           for (; currentIndex < definitionEnd; currentIndex++) {
             var t = getToken(0);
             if (t.type === 'variable') {
@@ -68401,8 +69895,9 @@ function graphql(Prism) {
             var mutationEnd = findClosingBracket(/^\{$/, /^\}$/);
             if (mutationEnd === -1) {
               continue;
-            } // give references to input variables a special alias
+            }
 
+            // give references to input variables a special alias
             for (var i = currentIndex; i < mutationEnd; i++) {
               var varToken = validTokens[i];
               if (varToken.type === 'variable' && inputVariables.indexOf(varToken.content) >= 0) {
@@ -68496,15 +69991,14 @@ function textile(Prism) {
   (function (Prism) {
     // We don't allow for pipes inside parentheses
     // to not break table pattern |(. foo |). bar |
-    var modifierRegex = /\([^|()\n]+\)|\[[^\]\n]+\]|\{[^}\n]+\}/.source; // Opening and closing parentheses which are not a modifier
+    var modifierRegex = /\([^|()\n]+\)|\[[^\]\n]+\]|\{[^}\n]+\}/.source;
+    // Opening and closing parentheses which are not a modifier
     // This pattern is necessary to prevent exponential backtracking
-
     var parenthesesRegex = /\)|\((?![^|()\n]+\))/.source;
     /**
      * @param {string} source
      * @param {string} [flags]
      */
-
     function withModifier(source, flags) {
       return RegExp(source.replace(/<MOD>/g, function () {
         return '(?:' + modifierRegex + ')';
@@ -68585,6 +70079,7 @@ function textile(Prism) {
             lookbehind: true,
             inside: {
               // Note: superscripts and subscripts are not handled specifically
+
               // *bold*, **bold**
               bold: {
                 // eslint-disable-next-line regexp/no-super-linear-backtracking
@@ -68735,17 +70230,20 @@ function textile(Prism) {
       footnote: phraseInside['footnote'],
       acronym: phraseInside['acronym'],
       mark: phraseInside['mark']
-    }; // Only allow alpha-numeric HTML tags, not XML tags
+    };
 
-    textile.tag.pattern = /<\/?(?!\d)[a-z0-9]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+))?)*\s*\/?>/i; // Allow some nesting
+    // Only allow alpha-numeric HTML tags, not XML tags
+    textile.tag.pattern = /<\/?(?!\d)[a-z0-9]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\[\s\S]|(?!\1)[^\\])*\1|[^\s'">=]+))?)*\s*\/?>/i;
 
+    // Allow some nesting
     var phraseInlineInside = phraseInside['inline'].inside;
     phraseInlineInside['bold'].inside = nestedPatterns;
     phraseInlineInside['italic'].inside = nestedPatterns;
     phraseInlineInside['inserted'].inside = nestedPatterns;
     phraseInlineInside['deleted'].inside = nestedPatterns;
-    phraseInlineInside['span'].inside = nestedPatterns; // Allow some styles inside table cells
+    phraseInlineInside['span'].inside = nestedPatterns;
 
+    // Allow some styles inside table cells
     var phraseTableInside = phraseInside['table'].inside;
     phraseTableInside['inline'] = nestedPatterns['inline'];
     phraseTableInside['link'] = nestedPatterns['link'];
@@ -68770,9 +70268,11 @@ function haml(Prism) {
   multiline |
   code |
   */;
+
   (function (Prism) {
     Prism.languages.haml = {
       // Multiline stuff should appear before the rest
+
       'multiline-comment': {
         pattern: /((?:^|\r?\n|\r)([\t ]*))(?:\/|-#).*(?:(?:\r?\n|\r)\2[\t ].+)*/,
         lookbehind: true,
@@ -68859,8 +70359,9 @@ function haml(Prism) {
         lookbehind: true
       }
     };
-    var filter_pattern = '((?:^|\\r?\\n|\\r)([\\t ]*)):{{filter_name}}(?:(?:\\r?\\n|\\r)(?:\\2[\\t ].+|\\s*?(?=\\r?\\n|\\r)))+'; // Non exhaustive list of available filters and associated languages
+    var filter_pattern = '((?:^|\\r?\\n|\\r)([\\t ]*)):{{filter_name}}(?:(?:\\r?\\n|\\r)(?:\\2[\\t ].+|\\s*?(?=\\r?\\n|\\r)))+';
 
+    // Non exhaustive list of available filters and associated languages
     var filters = ['css', {
       filter: 'coffee',
       language: 'coffeescript'
@@ -69216,6 +70717,7 @@ function hpkp(Prism) {
    *
    * Reference: https://scotthelme.co.uk/hpkp-cheat-sheet/
    */
+
   Prism.languages.hpkp = {
     directive: {
       pattern: /\b(?:includeSubDomains|max-age|pin-sha256|preload|report-to|report-uri|strict)(?=[\s;=]|$)/i,
@@ -69237,6 +70739,7 @@ function hsts(Prism) {
    *
    * Reference: https://scotthelme.co.uk/hsts-cheat-sheet/
    */
+
   Prism.languages.hsts = {
     directive: {
       pattern: /\b(?:includeSubDomains|max-age|preload)(?=[\s;=]|$)/i,
@@ -69254,6 +70757,7 @@ uri.aliases = ['url'];
 /** @type {import('../core.js').Syntax} */
 function uri(Prism) {
   // https://tools.ietf.org/html/rfc3986#appendix-A
+
   Prism.languages.uri = {
     scheme: {
       pattern: /^[a-z][a-z0-9+.-]*:/im,
@@ -69432,8 +70936,9 @@ function http(Prism) {
           punctuation: /^:/
         }
       }
-    }; // Create a mapping of Content-Type headers to language definitions
+    };
 
+    // Create a mapping of Content-Type headers to language definitions
     var langs = Prism.languages;
     var httpLanguages = {
       'application/javascript': langs.javascript,
@@ -69443,26 +70948,28 @@ function http(Prism) {
       'text/html': langs.html,
       'text/css': langs.css,
       'text/plain': langs.plain
-    }; // Declare which types can also be suffixes
+    };
 
+    // Declare which types can also be suffixes
     var suffixTypes = {
       'application/json': true,
       'application/xml': true
     };
+
     /**
      * Returns a pattern for the given content type which matches it and any type which has it as a suffix.
      *
      * @param {string} contentType
      * @returns {string}
      */
-
     function getSuffixPattern(contentType) {
       var suffix = contentType.replace(/^[a-z]+\//, '');
       var suffixPattern = '\\w+/(?:[\\w.-]+\\+)+' + suffix + '(?![+\\w.-])';
       return '(?:' + contentType + '|' + suffixPattern + ')';
-    } // Insert each content type parser that has its associated language
-    // currently loaded.
+    }
 
+    // Insert each content type parser that has its associated language
+    // currently loaded.
     var options;
     for (var contentType in httpLanguages) {
       if (httpLanguages[contentType]) {
@@ -69546,6 +71053,7 @@ icuMessageFormat.aliases = [];
 function icuMessageFormat(Prism) {
   // https://unicode-org.github.io/icu/userguide/format_parse/messages/
   // https://unicode-org.github.io/icu-docs/apidoc/released/icu4j/com/ibm/icu/text/MessageFormat.html
+
   ;
   (function (Prism) {
     /**
@@ -69761,7 +71269,8 @@ function inform7(Prism) {
             delimiter: {
               pattern: /\[|\]/,
               alias: 'punctuation'
-            } // See rest below
+            }
+            // See rest below
           }
         }
       }
@@ -69805,8 +71314,8 @@ function inform7(Prism) {
     },
     punctuation: /[.,:;(){}]/
   };
-  Prism.languages.inform7['string'].inside['substitution'].inside.rest = Prism.languages.inform7; // We don't want the remaining text in the substitution to be highlighted as the string.
-
+  Prism.languages.inform7['string'].inside['substitution'].inside.rest = Prism.languages.inform7;
+  // We don't want the remaining text in the substitution to be highlighted as the string.
   Prism.languages.inform7['string'].inside['substitution'].inside.rest.text = {
     pattern: /\S(?:\s*\S)*/,
     alias: 'comment'
@@ -69900,13 +71409,13 @@ function javadoclike(Prism) {
       },
       punctuation: /[{}]/
     };
+
     /**
      * Adds doc comment support to the given language and calls a given callback on each doc comment pattern.
      *
      * @param {string} lang the language add doc comment support to.
      * @param {(pattern: {inside: {rest: undefined}}) => void} callback the function called with each doc comment pattern as argument.
      */
-
     function docCommentSupport(lang, callback) {
       var tokenName = 'doc-comment';
       var grammar = Prism.languages[lang];
@@ -69944,13 +71453,13 @@ function javadoclike(Prism) {
         callback(token);
       }
     }
+
     /**
      * Adds doc-comment support to the given languages for the given documentation language.
      *
      * @param {string[]|string} languages
      * @param {Object} docLanguage
      */
-
     function addSupport(languages, docLanguage) {
       if (typeof languages === 'string') {
         languages = [languages];
@@ -70128,6 +71637,7 @@ javastacktrace.aliases = [];
 function javastacktrace(Prism) {
   // Specification:
   // https://docs.oracle.com/en/java/javase/13/docs/api/java.base/java/lang/Throwable.html#printStackTrace()
+
   Prism.languages.javastacktrace = {
     // java.sql.SQLException: Violation of unique constraint MY_ENTITY_UK_1: duplicate value(s) for column(s) MY_COLUMN in statement [...]
     // Caused by: java.sql.SQLException: Violation of unique constraint MY_ENTITY_UK_1: duplicate value(s) for column(s) MY_COLUMN in statement [...]
@@ -70415,12 +71925,14 @@ jsTemplates.aliases = [];
 function jsTemplates(Prism) {
   Prism.register(javascript);
   (function (Prism) {
-    var templateString = Prism.languages.javascript['template-string']; // see the pattern in prism-javascript.js
+    var templateString = Prism.languages.javascript['template-string'];
 
+    // see the pattern in prism-javascript.js
     var templateLiteralPattern = templateString.pattern.source;
     var interpolationObject = templateString.inside['interpolation'];
     var interpolationPunctuationObject = interpolationObject.inside['interpolation-punctuation'];
     var interpolationPattern = interpolationObject.pattern.source;
+
     /**
      * Creates a new pattern to match a template string with a special tag.
      *
@@ -70432,7 +71944,6 @@ function jsTemplates(Prism) {
      * @example
      * createTemplate('css', /\bcss/.source);
      */
-
     function createTemplate(language, tag) {
       if (!Prism.languages[language]) {
         return undefined;
@@ -70472,6 +71983,7 @@ function jsTemplates(Prism) {
     createTemplate('sql', /\bsql/.source),
     // vanilla template string
     templateString].filter(Boolean);
+
     /**
      * Returns a specific placeholder literal for the given language.
      *
@@ -70479,10 +71991,10 @@ function jsTemplates(Prism) {
      * @param {string} language
      * @returns {string}
      */
-
     function getPlaceholder(counter, language) {
       return '___' + language.toUpperCase() + '_' + counter + '___';
     }
+
     /**
      * Returns the tokens of `Prism.tokenize` but also runs the `before-tokenize` and `after-tokenize` hooks.
      *
@@ -70491,7 +72003,6 @@ function jsTemplates(Prism) {
      * @param {string} language
      * @returns {(string|Token)[]}
      */
-
     function tokenizeWithHooks(code, grammar, language) {
       var env = {
         code: code,
@@ -70503,18 +72014,18 @@ function jsTemplates(Prism) {
       Prism.hooks.run('after-tokenize', env);
       return env.tokens;
     }
+
     /**
      * Returns the token of the given JavaScript interpolation expression.
      *
      * @param {string} expression The code of the expression. E.g. `"${42}"`
      * @returns {Token}
      */
-
     function tokenizeInterpolationExpression(expression) {
       var tempGrammar = {};
       tempGrammar['interpolation-punctuation'] = interpolationPunctuationObject;
-      /** @type {Array} */
 
+      /** @type {Array} */
       var tokens = Prism.tokenize(expression, tempGrammar);
       if (tokens.length === 3) {
         /**
@@ -70525,12 +72036,14 @@ function jsTemplates(Prism) {
          *     ["interpolation-punctuation", "}"]
          * ]
          */
+
         var args = [1, 1];
         args.push.apply(args, tokenizeWithHooks(tokens[1], Prism.languages.javascript, 'javascript'));
         tokens.splice.apply(tokens, args);
       }
       return new Prism.Token('interpolation', tokens, interpolationObject.alias, expression);
     }
+
     /**
      * Tokenizes the given code with support for JavaScript interpolation expressions mixed in.
      *
@@ -70548,22 +72061,21 @@ function jsTemplates(Prism) {
      * @param {string} language
      * @returns {Token}
      */
-
     function tokenizeEmbedded(code, grammar, language) {
       // 1. First filter out all interpolations
-      // because they might be escaped, we need a lookbehind, so we use Prism
 
+      // because they might be escaped, we need a lookbehind, so we use Prism
       /** @type {(Token|string)[]} */
       var _tokens = Prism.tokenize(code, {
         interpolation: {
           pattern: RegExp(interpolationPattern),
           lookbehind: true
         }
-      }); // replace all interpolations with a placeholder which is not in the code already
+      });
 
+      // replace all interpolations with a placeholder which is not in the code already
       var placeholderCounter = 0;
       /** @type {Object<string, string>} */
-
       var placeholderMap = {};
       var embeddedCode = _tokens.map(function (token) {
         if (typeof token === 'string') {
@@ -70577,18 +72089,22 @@ function jsTemplates(Prism) {
           placeholderMap[placeholder] = interpolationExpression;
           return placeholder;
         }
-      }).join(''); // 2. Tokenize the embedded code
+      }).join('');
 
-      var embeddedTokens = tokenizeWithHooks(embeddedCode, grammar, language); // 3. Re-insert the interpolation
+      // 2. Tokenize the embedded code
+
+      var embeddedTokens = tokenizeWithHooks(embeddedCode, grammar, language);
+
+      // 3. Re-insert the interpolation
 
       var placeholders = Object.keys(placeholderMap);
       placeholderCounter = 0;
+
       /**
        *
        * @param {(Token|string)[]} tokens
        * @returns {void}
        */
-
       function walkTokens(tokens) {
         for (var i = 0; i < tokens.length; i++) {
           if (placeholderCounter >= placeholders.length) {
@@ -70597,8 +72113,7 @@ function jsTemplates(Prism) {
           var token = tokens[i];
           if (typeof token === 'string' || typeof token.content === 'string') {
             var placeholder = placeholders[placeholderCounter];
-            var s = typeof token === 'string' ? token : /** @type {string} */
-            token.content;
+            var s = typeof token === 'string' ? token : /** @type {string} */token.content;
             var index = s.indexOf(placeholder);
             if (index !== -1) {
               ++placeholderCounter;
@@ -70635,12 +72150,12 @@ function jsTemplates(Prism) {
       walkTokens(embeddedTokens);
       return new Prism.Token(language, embeddedTokens, 'language-' + language, code);
     }
+
     /**
      * The languages for which JS templating will handle tagged template literals.
      *
      * JS templating isn't active for only JavaScript but also related languages like TypeScript, JSX, and TSX.
      */
-
     var supportedLanguages = {
       javascript: true,
       js: true,
@@ -70653,13 +72168,13 @@ function jsTemplates(Prism) {
       if (!(env.language in supportedLanguages)) {
         return;
       }
+
       /**
        * Finds and tokenizes all template strings with an embedded languages.
        *
        * @param {(Token | string)[]} tokens
        * @returns {void}
        */
-
       function findTemplateStrings(tokens) {
         for (var i = 0, l = tokens.length; i < l; i++) {
           var token = tokens[i];
@@ -70688,6 +72203,7 @@ function jsTemplates(Prism) {
              *     ["template-punctuation", "`"]
              * ]]
              */
+
             var embedded = content[1];
             if (content.length === 3 && typeof embedded !== 'string' && embedded.type === 'embedded-code') {
               // get string content
@@ -70708,13 +72224,13 @@ function jsTemplates(Prism) {
       }
       findTemplateStrings(env.tokens);
     });
+
     /**
      * Returns the string content of a token or token stream.
      *
      * @param {string | Token | (string | Token)[]} value
      * @returns {string}
      */
-
     function stringContent(value) {
       if (typeof value === 'string') {
         return value;
@@ -70869,6 +72385,7 @@ function jsExtras(Prism) {
         alias: 'class-name'
       }]
     });
+
     /**
      * Replaces the `<ID>` placeholder in the given pattern with a pattern for general JS identifiers.
      *
@@ -70876,7 +72393,6 @@ function jsExtras(Prism) {
      * @param {string} [flags]
      * @returns {RegExp}
      */
-
     function withId(source, flags) {
       return RegExp(source.replace(/<ID>/g, function () {
         return /(?!\s)[_$a-zA-Z\xA0-\uFFFF](?:(?!\s)[$\w\xA0-\uFFFF])*/.source;
@@ -70937,18 +72453,22 @@ function jsExtras(Prism) {
         pattern: /\bconsole(?=\s*\.)/,
         alias: 'class-name'
       }
-    }); // add 'maybe-class-name' to tokens which might be a class name
+    });
 
+    // add 'maybe-class-name' to tokens which might be a class name
     var maybeClassNameTokens = ['function', 'function-variable', 'method', 'method-variable', 'property-access'];
     for (var i = 0; i < maybeClassNameTokens.length; i++) {
       var token = maybeClassNameTokens[i];
-      var value = Prism.languages.javascript[token]; // convert regex to object
+      var value = Prism.languages.javascript[token];
 
+      // convert regex to object
       if (Prism.util.type(value) === 'RegExp') {
         value = Prism.languages.javascript[token] = {
           pattern: value
         };
-      } // keep in mind that we don't support arrays
+      }
+
+      // keep in mind that we don't support arrays
 
       var inside = value.inside || {};
       value.inside = inside;
@@ -71208,6 +72728,7 @@ function kumir(Prism) {
      * @type {string}
      */
     var nonId = /\s\x00-\x1f\x22-\x2f\x3a-\x3f\x5b-\x5e\x60\x7b-\x7e/.source;
+
     /**
      * Surround a regular expression for IDs with patterns for non-ID sequences.
      *
@@ -71215,7 +72736,6 @@ function kumir(Prism) {
      * @param {string} [flags] The regular expression flags.
      * @returns {RegExp} A wrapped regular expression for identifiers.
      */
-
     function wrapId(pattern, flags) {
       return RegExp(pattern.replace(/<nonId>/g, nonId), flags);
     }
@@ -71576,20 +73096,20 @@ function scheme(Prism) {
       },
       punctuation: /[()\[\]']/
     };
+
     /**
      * Given a topologically sorted BNF grammar, this will return the RegExp source of last rule of the grammar.
      *
      * @param {Record<string, string>} grammar
      * @returns {string}
      */
-
     function SortedBNF(grammar) {
       for (var key in grammar) {
         grammar[key] = grammar[key].replace(/<[\w\s]+>/g, function (key) {
           return '(?:' + grammar[key].trim() + ')';
         });
-      } // return the last item
-
+      }
+      // return the last item
       return grammar[key];
     }
   })(Prism);
@@ -71604,9 +73124,9 @@ lilypond.aliases = ['ly'];
 function lilypond(Prism) {
   Prism.register(scheme);
   (function (Prism) {
-    var schemeExpression = /\((?:[^();"#\\]|\\[\s\S]|;.*(?!.)|"(?:[^"\\]|\\.)*"|#(?:\{(?:(?!#\})[\s\S])*#\}|[^{])|<expr>)*\)/.source; // allow for up to pow(2, recursivenessLog2) many levels of recursive brace expressions
+    var schemeExpression = /\((?:[^();"#\\]|\\[\s\S]|;.*(?!.)|"(?:[^"\\]|\\.)*"|#(?:\{(?:(?!#\})[\s\S])*#\}|[^{])|<expr>)*\)/.source;
+    // allow for up to pow(2, recursivenessLog2) many levels of recursive brace expressions
     // For some reason, this can't be 4
-
     var recursivenessLog2 = 5;
     for (var i = 0; i < recursivenessLog2; i++) {
       schemeExpression = schemeExpression.replace(/<expr>/g, function () {
@@ -71766,20 +73286,21 @@ function lisp(Prism) {
      * @param {string} pattern
      * @returns {RegExp}
      */
-
     function primitive(pattern) {
       return RegExp(/([\s([])/.source + '(?:' + pattern + ')' + /(?=[\s)])/.source);
-    } // Patterns in regular expressions
+    }
+
+    // Patterns in regular expressions
+
     // Symbol name. See https://www.gnu.org/software/emacs/manual/html_node/elisp/Symbol-Type.html
     // & and : are excluded as they are usually used for special purposes
-
-    var symbol = /(?!\d)[-+*/~!@$%^=<>{}\w]+/.source; // symbol starting with & used in function arguments
-
-    var marker = '&' + symbol; // Open parenthesis for look-behind
-
+    var symbol = /(?!\d)[-+*/~!@$%^=<>{}\w]+/.source;
+    // symbol starting with & used in function arguments
+    var marker = '&' + symbol;
+    // Open parenthesis for look-behind
     var par = '(\\()';
-    var endpar = '(?=\\))'; // End the pattern with look-ahead space
-
+    var endpar = '(?=\\))';
+    // End the pattern with look-ahead space
     var space = '(?=\\s)';
     var nestedPar = /(?:[^()]|\((?:[^()]|\((?:[^()]|\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\))*\))*\))*/.source;
     var language = {
@@ -71963,7 +73484,8 @@ function livescript(Prism) {
             'interpolation-punctuation': {
               pattern: /^#\{|\}$/,
               alias: 'variable'
-            } // See rest below
+            }
+            // See rest below
           }
         },
 
@@ -72084,6 +73606,7 @@ function log(Prism) {
   // Since there is no one log format, this language definition has to support all formats to some degree.
   //
   // Based on https://github.com/MTDL9/vim-log-highlighting
+
   Prism.languages.log = {
     string: {
       // Single-quoted strings must not be confused with plain text. E.g. Can't isn't Susan's Chris' toy
@@ -72275,6 +73798,7 @@ mata.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function mata(Prism) {
   // https://www.stata.com/manuals/m.pdf
+
   ;
   (function (Prism) {
     var orgType = /\b(?:(?:col|row)?vector|matrix|scalar)\b/.source;
@@ -72825,6 +74349,7 @@ n1ql.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function n1ql(Prism) {
   // https://docs.couchbase.com/server/current/n1ql/n1ql-language-reference/index.html
+
   Prism.languages.n1ql = {
     comment: {
       pattern: /\/\*[\s\S]*?(?:$|\*\/)|--.*/,
@@ -72979,13 +74504,13 @@ function naniscript(Prism) {
       }
     };
     Prism.languages.nani = Prism.languages['naniscript'];
+
     /** @typedef {InstanceType<import("./prism-core")["Token"]>} Token */
 
     /**
      * This hook is used to validate generic-text tokens for balanced brackets.
      * Mark token as bad-line when contains not balanced brackets: {},[]
      */
-
     Prism.hooks.add('after-tokenize', function (env) {
       /** @type {(Token | string)[]} */
       var tokens = env.tokens;
@@ -72999,11 +74524,11 @@ function naniscript(Prism) {
         }
       });
     });
+
     /**
      * @param {string} input
      * @returns {boolean}
      */
-
     function isBracketsBalanced(input) {
       var brackets = '[]{}';
       var stack = [];
@@ -73020,11 +74545,11 @@ function naniscript(Prism) {
       }
       return stack.length === 0;
     }
+
     /**
      * @param {string | Token | (string | Token)[]} token
      * @returns {string}
      */
-
     function getTextContent(token) {
       if (typeof token === 'string') {
         return token;
@@ -73275,6 +74800,7 @@ function nginx(Prism) {
             greedy: true
           },
           // other patterns
+
           "boolean": {
             pattern: /(\s)(?:off|on)(?!\S)/,
             lookbehind: true
@@ -73428,6 +74954,7 @@ ocaml.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function ocaml(Prism) {
   // https://ocaml.org/manual/lex.html
+
   Prism.languages.ocaml = {
     comment: {
       pattern: /\(\*[\s\S]*?\*\)/,
@@ -73619,10 +75146,11 @@ function opencl(Prism) {
         alias: 'function'
       }
     };
+
     /* OpenCL host API */
+    Prism.languages.insertBefore('c', 'keyword', attributes);
 
-    Prism.languages.insertBefore('c', 'keyword', attributes); // C++ includes everything from the OpenCL C host API plus the classes defined in cl2.h
-
+    // C++ includes everything from the OpenCL C host API plus the classes defined in cl2.h
     if (Prism.languages.cpp) {
       // Extracted from doxygen class list http://github.khronos.org/OpenCL-CLHPP/annotated.html
       attributes['type-opencl-host-cpp'] = {
@@ -73641,6 +75169,7 @@ openqasm.aliases = ['qasm'];
 /** @type {import('../core.js').Syntax} */
 function openqasm(Prism) {
   // https://qiskit.github.io/openqasm/grammar/index.html
+
   Prism.languages.openqasm = {
     comment: /\/\*[\s\S]*?\*\/|\/\/.*/,
     string: {
@@ -73817,6 +75346,7 @@ function pascal(Prism) {
   /* TODO
   Support inline asm ?
   */
+
   Prism.languages.pascal = {
     directive: {
       pattern: /\{\$[\s\S]*?\}/,
@@ -73883,6 +75413,7 @@ function pascaligo(Prism) {
   ;
   (function (Prism) {
     // Pascaligo is a layer 2 smart contract language for the tezos blockchain
+
     var braces = /\((?:[^()]|\((?:[^()]|\([^()]*\))*\))*\)/.source;
     var type = /(?:\b\w+(?:<braces>)?|<braces>)/.source.replace(/<braces>/g, function () {
       return braces;
@@ -74272,6 +75803,7 @@ powerquery.aliases = ['mscript', 'pq'];
 /** @type {import('../core.js').Syntax} */
 function powerquery(Prism) {
   // https://docs.microsoft.com/en-us/powerquery-m/power-query-m-language-specification
+
   Prism.languages.powerquery = {
     comment: {
       pattern: /(^|[^\\])(?:\/\*[\s\S]*?\*\/|\/\/.*)/,
@@ -74348,8 +75880,9 @@ function powershell(Prism) {
         lookbehind: true
       },
       punctuation: /[|{}[\];(),.]/
-    }; // Variable interpolation inside strings, and nested expressions
+    };
 
+    // Variable interpolation inside strings, and nested expressions
     powershell.string[0].inside = {
       "function": {
         // Allow for one level of nesting
@@ -74422,16 +75955,19 @@ promql.aliases = [];
 function promql(Prism) {
   // Thanks to: https://github.com/prometheus-community/monaco-promql/blob/master/src/promql/promql.ts
   // As well as: https://kausal.co/blog/slate-prism-add-new-syntax-promql/
+
   ;
   (function (Prism) {
     // PromQL Aggregation Operators
     // (https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators)
-    var aggregations = ['sum', 'min', 'max', 'avg', 'group', 'stddev', 'stdvar', 'count', 'count_values', 'bottomk', 'topk', 'quantile']; // PromQL vector matching + the by and without clauses
+    var aggregations = ['sum', 'min', 'max', 'avg', 'group', 'stddev', 'stdvar', 'count', 'count_values', 'bottomk', 'topk', 'quantile'];
+
+    // PromQL vector matching + the by and without clauses
     // (https://prometheus.io/docs/prometheus/latest/querying/operators/#vector-matching)
+    var vectorMatching = ['on', 'ignoring', 'group_right', 'group_left', 'by', 'without'];
 
-    var vectorMatching = ['on', 'ignoring', 'group_right', 'group_left', 'by', 'without']; // PromQL offset modifier
+    // PromQL offset modifier
     // (https://prometheus.io/docs/prometheus/latest/querying/basics/#offset-modifier)
-
     var offsetModifier = ['offset'];
     var keywords = aggregations.concat(vectorMatching, offsetModifier);
     Prism.languages.promql = {
@@ -74574,8 +76110,8 @@ function stylus(Prism) {
     var unit = {
       pattern: /(\b\d+)(?:%|[a-z]+)/,
       lookbehind: true
-    }; // 123 -123 .123 -.123 12.3 -12.3
-
+    };
+    // 123 -123 .123 -.123 12.3 -12.3
     var number = {
       pattern: /(^|[^\w.-])-?(?:\d+(?:\.\d+)?|\.\d+)/,
       lookbehind: true
@@ -74769,8 +76305,10 @@ function pug(Prism) {
     // - Add support for tag interpolation #[]
     // - Add explicit support for plain text using |
     // - Add support for markup embedded in plain text
+
     Prism.languages.pug = {
       // Multiline stuff should appear before the rest
+
       // This handles both single-line and multi-line comments
       comment: {
         pattern: /(^([\t ]*))\/\/.*(?:(?:\r?\n|\r)\2[\t ].+)*/m,
@@ -74894,8 +76432,9 @@ function pug(Prism) {
       }],
       punctuation: /[.\-!=|]+/
     };
-    var filter_pattern = /(^([\t ]*)):<filter_name>(?:(?:\r?\n|\r(?!\n))(?:\2[\t ].+|\s*?(?=\r?\n|\r)))+/.source; // Non exhaustive list of available filters and associated languages
+    var filter_pattern = /(^([\t ]*)):<filter_name>(?:(?:\r?\n|\r(?!\n))(?:\2[\t ].+|\s*?(?=\r?\n|\r)))+/.source;
 
+    // Non exhaustive list of available filters and associated languages
     var filters = [{
       filter: 'atpl',
       language: 'twig'
@@ -74954,7 +76493,8 @@ function puppet(Prism) {
         alias: 'string',
         inside: {
           // Matches the end tag
-          punctuation: /(?=\S).*\S(?= *$)/ // See interpolation below
+          punctuation: /(?=\S).*\S(?= *$)/
+          // See interpolation below
         }
       },
       // Matches the content of an unquoted heredoc string (no interpolation)
@@ -75082,6 +76622,7 @@ function pure(Prism) {
   ;
   (function (Prism) {
     // https://agraef.github.io/pure-docs/pure.html#lexical-matters
+
     Prism.languages.pure = {
       comment: [{
         pattern: /(^|[^\\])\/\*[\s\S]*?\*\//,
@@ -75146,8 +76687,9 @@ function pure(Prism) {
         o['inline-lang-' + alias].inside.rest = Prism.util.clone(Prism.languages[alias]);
         Prism.languages.insertBefore('pure', 'inline-lang', o);
       }
-    }); // C is the default inline language
+    });
 
+    // C is the default inline language
     if (Prism.languages.c) {
       Prism.languages.pure['inline-lang'].inside.rest = Prism.util.clone(Prism.languages.c);
     }
@@ -75168,6 +76710,7 @@ function purebasic(Prism) {
   ==> https://codepen.io/ImagineProgramming/details/JYydBy/
   slightly changed to pass all tests
   */
+
   // PureBasic support, steal stuff from ansi-c
   Prism.languages.purebasic = Prism.languages.extend('clike', {
     comment: /;.*/,
@@ -75292,10 +76835,10 @@ function qsharp(Prism) {
      * @param {string} [flags]
      * @returns {RegExp}
      */
-
     function re(pattern, replacements, flags) {
       return RegExp(replace(pattern, replacements), flags || '');
     }
+
     /**
      * Creates a nested pattern where all occurrences of the string `<<self>>` are replaced with the pattern itself.
      *
@@ -75303,7 +76846,6 @@ function qsharp(Prism) {
      * @param {number} depthLog2
      * @returns {string}
      */
-
     function nested(pattern, depthLog2) {
       for (var i = 0; i < depthLog2; i++) {
         pattern = pattern.replace(/<<self>>/g, function () {
@@ -75311,28 +76853,31 @@ function qsharp(Prism) {
         });
       }
       return pattern.replace(/<<self>>/g, '[^\\s\\S]');
-    } // https://docs.microsoft.com/en-us/azure/quantum/user-guide/language/typesystem/
-    // https://github.com/microsoft/qsharp-language/tree/main/Specifications/Language/5_Grammar
+    }
 
+    // https://docs.microsoft.com/en-us/azure/quantum/user-guide/language/typesystem/
+    // https://github.com/microsoft/qsharp-language/tree/main/Specifications/Language/5_Grammar
     var keywordKinds = {
       // keywords which represent a return or variable type
       type: 'Adj BigInt Bool Ctl Double false Int One Pauli PauliI PauliX PauliY PauliZ Qubit Range Result String true Unit Zero',
       // all other keywords
       other: 'Adjoint adjoint apply as auto body borrow borrowing Controlled controlled distribute elif else fail fixup for function if in internal intrinsic invert is let mutable namespace new newtype open operation repeat return self set until use using while within'
-    }; // keywords
-
+    };
+    // keywords
     function keywordsToPattern(words) {
       return '\\b(?:' + words.trim().replace(/ /g, '|') + ')\\b';
     }
-    var keywords = RegExp(keywordsToPattern(keywordKinds.type + ' ' + keywordKinds.other)); // types
+    var keywords = RegExp(keywordsToPattern(keywordKinds.type + ' ' + keywordKinds.other));
 
+    // types
     var identifier = /\b[A-Za-z_]\w*\b/.source;
     var qualifiedName = replace(/<<0>>(?:\s*\.\s*<<0>>)*/.source, [identifier]);
     var typeInside = {
       keyword: keywords,
       punctuation: /[<>()?,.:[\]]/
-    }; // strings
+    };
 
+    // strings
     var regularString = /"(?:\\.|[^\\"])*"/.source;
     Prism.languages.qsharp = Prism.languages.extend('clike', {
       comment: /\/\/.*/,
@@ -75363,8 +76908,9 @@ function qsharp(Prism) {
         pattern: /\.\./,
         alias: 'operator'
       }
-    }); // single line
+    });
 
+    // single line
     var interpolationExpr = nested(replace(/\{(?:[^"{}]|<<0>>|<<self>>)*\}/.source, [regularString]), 2);
     Prism.languages.insertBefore('qsharp', 'string', {
       'interpolation-string': {
@@ -75462,8 +77008,9 @@ function qml(Prism) {
       return jsString;
     }).replace(/<comment>/g, function () {
       return jsComment;
-    }); // the pattern will blow up, so only a few iterations
+    });
 
+    // the pattern will blow up, so only a few iterations
     for (var i = 0; i < 2; i++) {
       jsExpr = jsExpr.replace(/<expr>/g, function () {
         return jsExpr;
@@ -75588,9 +77135,11 @@ function cshtml(Prism) {
   // https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-5.0&tabs=visual-studio
   // https://docs.microsoft.com/en-us/aspnet/core/mvc/views/razor?view=aspnetcore-5.0
   ;
+
   (function (Prism) {
     var commentLike = /\/(?![/*])|\/\/.*[\r\n]|\/\*[^*]*(?:\*(?!\/)[^*]*)*\*\//.source;
     var stringLike = /@(?!")|"(?:[^\r\n\\"]|\\.)*"|@"(?:[^\\"]|""|\\[\s\S])*"(?!")/.source + '|' + /'(?:(?:[^\r\n'\\]|\\.|\\[Uux][\da-fA-F]{1,8})'|(?=[^\\](?!')))/.source;
+
     /**
      * Creates a nested pattern where all occurrences of the string `<<self>>` are replaced with the pattern itself.
      *
@@ -75598,7 +77147,6 @@ function cshtml(Prism) {
      * @param {number} depthLog2
      * @returns {string}
      */
-
     function nested(pattern, depthLog2) {
       for (var i = 0; i < depthLog2; i++) {
         pattern = pattern.replace(/<self>/g, function () {
@@ -75611,7 +77159,9 @@ function cshtml(Prism) {
     var square = nested(/\[(?:[^\[\]'"@/]|<str>|<comment>|<self>)*\]/.source, 1);
     var curly = nested(/\{(?:[^{}'"@/]|<str>|<comment>|<self>)*\}/.source, 2);
     var angle = nested(/<(?:[^<>'"@/]|<comment>|<self>)*>/.source, 1);
-    var inlineCs = /@/.source + /(?:await\b\s*)?/.source + '(?:' + /(?!await\b)\w+\b/.source + '|' + round + ')' + '(?:' + /[?!]?\.\w+\b/.source + '|' + '(?:' + angle + ')?' + round + '|' + square + ')*' + /(?![?!\.(\[]|<(?!\/))/.source; // Note about the above bracket patterns:
+    var inlineCs = /@/.source + /(?:await\b\s*)?/.source + '(?:' + /(?!await\b)\w+\b/.source + '|' + round + ')' + '(?:' + /[?!]?\.\w+\b/.source + '|' + '(?:' + angle + ')?' + round + '|' + square + ')*' + /(?![?!\.(\[]|<(?!\/))/.source;
+
+    // Note about the above bracket patterns:
     // They all ignore HTML expressions that might be in the C# code. This is a problem because HTML (like strings and
     // comments) is parsed differently. This is a huge problem because HTML might contain brackets and quotes which
     // messes up the bracket and string counting implemented by the above patterns.
@@ -75641,7 +77191,9 @@ function cshtml(Prism) {
     // eslint-disable-next-line regexp/strict
     /<\/\1\s*>/.source, 2)) + ')*' +
     // eslint-disable-next-line regexp/strict
-    /<\/\1\s*>/.source + '|' + /</.source + tagContent + ')'; // Now for the actual language definition(s):
+    /<\/\1\s*>/.source + '|' + /</.source + tagContent + ')';
+
+    // Now for the actual language definition(s):
     //
     // Razor as a language has 2 parts:
     //  1) CSHTML: A markup-like language that has been extended with inline C# code expressions and blocks.
@@ -75744,11 +77296,11 @@ function jsx(Prism) {
     var space = /(?:\s|\/\/.*(?!.)|\/\*(?:[^*]|\*(?!\/))\*\/)/.source;
     var braces = /(?:\{(?:\{(?:\{[^{}]*\}|[^{}])*\}|[^{}])*\})/.source;
     var spread = /(?:\{<S>*\.{3}(?:[^{}]|<BRACES>)*\})/.source;
+
     /**
      * @param {string} source
      * @param {string} [flags]
      */
-
     function re(source, flags) {
       source = source.replace(/<S>/g, function () {
         return space;
@@ -75785,8 +77337,9 @@ function jsx(Prism) {
           rest: Prism.languages.jsx
         }
       }
-    }, Prism.languages.jsx.tag); // The following will handle plain text inside tags
+    }, Prism.languages.jsx.tag);
 
+    // The following will handle plain text inside tags
     var stringifyToken = function stringifyToken(token) {
       if (!token) {
         return '';
@@ -75807,6 +77360,7 @@ function jsx(Prism) {
         if (typeof token !== 'string') {
           if (token.type === 'tag' && token.content[0] && token.content[0].type === 'tag') {
             // We found a tag, now find its kind
+
             if (token.content[0].content[0].content === '</') {
               // Closing tag
               if (openedTags.length > 0 && openedTags[openedTags.length - 1].tagName === stringifyToken(token.content[0].content[1])) {
@@ -75838,8 +77392,9 @@ function jsx(Prism) {
           if (openedTags.length > 0 && openedTags[openedTags.length - 1].openedBraces === 0) {
             // Here we are inside a tag, and not inside a JSX context.
             // That's plain text: drop any tokens matched.
-            var plainText = stringifyToken(token); // And merge text with adjacent text
+            var plainText = stringifyToken(token);
 
+            // And merge text with adjacent text
             if (i < tokens.length - 1 && (typeof tokens[i + 1] === 'string' || tokens[i + 1].type === 'plain-text')) {
               plainText += stringifyToken(tokens[i + 1]);
               tokens.splice(i + 1, 1);
@@ -75878,13 +77433,15 @@ function tsx(Prism) {
   Prism.register(typescript);
   (function (Prism) {
     var typescript = Prism.util.clone(Prism.languages.typescript);
-    Prism.languages.tsx = Prism.languages.extend('jsx', typescript); // doesn't work with TS because TS is too complex
+    Prism.languages.tsx = Prism.languages.extend('jsx', typescript);
 
+    // doesn't work with TS because TS is too complex
     delete Prism.languages.tsx['parameter'];
-    delete Prism.languages.tsx['literal-property']; // This will prevent collisions between TSX tags and TS generic types.
+    delete Prism.languages.tsx['literal-property'];
+
+    // This will prevent collisions between TSX tags and TS generic types.
     // Idea by https://github.com/karlhorky
     // Discussion: https://github.com/PrismJS/prism/issues/2594#issuecomment-710666928
-
     var tag = Prism.languages.tsx.tag;
     tag.pattern = RegExp(/(^|[^\w$]|(?=<\/))/.source + '(?:' + tag.pattern.source + ')', tag.pattern.flags);
     tag.lookbehind = true;
@@ -75920,8 +77477,9 @@ function reason(Prism) {
       pattern: /\b[a-z]\w*(?=::)/,
       alias: 'symbol'
     }
-  }); // We can't match functions property, so let's not even try.
+  });
 
+  // We can't match functions property, so let's not even try.
   delete Prism.languages.reason["function"];
 }
 ;// CONCATENATED MODULE: ../../node_modules/refractor/lang/rego.js
@@ -75932,6 +77490,7 @@ rego.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function rego(Prism) {
   // https://www.openpolicyagent.org/docs/latest/policy-reference/
+
   Prism.languages.rego = {
     comment: /#.*/,
     property: {
@@ -76076,6 +77635,7 @@ function rest(Prism) {
       }
     }],
     // Directive-like patterns
+
     'substitution-def': {
       pattern: /(^[\t ]*\.\. )\|(?:[^|\s](?:[^|]*[^|\s])?)\| [^:]+::/m,
       lookbehind: true,
@@ -76346,8 +77906,9 @@ function robotframework(Prism) {
       extendecInside['section-header'] = {
         pattern: /^ ?\*{3}.+?\*{3}/,
         alias: 'keyword'
-      }; // copy inside tokens
+      };
 
+      // copy inside tokens
       for (var token in inside) {
         extendecInside[token] = inside[token];
       }
@@ -76752,6 +78313,7 @@ function shellSession(Prism) {
   (function (Prism) {
     // CAREFUL!
     // The following patterns are concatenated, so the group referenced by a back reference is non-obvious!
+
     var strings = [
     // normal string
     /"(?:\\[\s\S]|\$\([^)]+\)|\$(?!\()|`[^`]+`|[^"\\`$])*"/.source, /'[^']*'/.source, /\$'(?:[^'\\]|\\[\s\S])*'/.source,
@@ -76815,6 +78377,7 @@ smali.aliases = [];
 function smali(Prism) {
   // Test files for the parser itself:
   // https://github.com/JesusFreke/smali/tree/master/smali/src/test/resources/LexerTest
+
   Prism.languages.smali = {
     comment: /#.*/,
     string: {
@@ -77024,8 +78587,9 @@ function smarty(Prism) {
     // smarty blocks
     /\{(?:[^{}"']|<str>|\{(?:[^{}"']|<str>|\{(?:[^{}"']|<str>)*\})*\})*\}/.source.replace(/<str>/g, function () {
       return string.source;
-    }), 'g'); // Tokenize all inline Smarty expressions
+    }), 'g');
 
+    // Tokenize all inline Smarty expressions
     Prism.hooks.add('before-tokenize', function (env) {
       var smartyLiteralStart = '{literal}';
       var smartyLiteralEnd = '{/literal}';
@@ -77043,8 +78607,9 @@ function smarty(Prism) {
         }
         return false;
       });
-    }); // Re-insert the tokens after tokenizing
+    });
 
+    // Re-insert the tokens after tokenizing
     Prism.hooks.add('after-tokenize', function (env) {
       Prism.languages['markup-templating'].tokenizePlaceholders(env, 'smarty');
     });
@@ -77262,8 +78827,9 @@ function soy(Prism) {
       number: numberPattern,
       operator: /\?:?|<=?|>=?|==?|!=|[+*/%-]|\b(?:and|not|or)\b/,
       punctuation: /[{}()\[\]|.,:]/
-    }; // Tokenize all inline Soy expressions
+    };
 
+    // Tokenize all inline Soy expressions
     Prism.hooks.add('before-tokenize', function (env) {
       var soyPattern = /\{\{.+?\}\}|\{.+?\}|\s\/\/.*|\/\*[\s\S]*?\*\//g;
       var soyLitteralStart = '{literal}';
@@ -77282,8 +78848,9 @@ function soy(Prism) {
         }
         return false;
       });
-    }); // Re-insert the tokens after tokenizing
+    });
 
+    // Re-insert the tokens after tokenizing
     Prism.hooks.add('after-tokenize', function (env) {
       Prism.languages['markup-templating'].tokenizePlaceholders(env, 'soy');
     });
@@ -77503,6 +79070,7 @@ function stan(Prism) {
   ;
   (function (Prism) {
     // https://mc-stan.org/docs/2_28/reference-manual/bnf-grammars.html
+
     var higherOrderFunctions = /\b(?:algebra_solver|algebra_solver_newton|integrate_1d|integrate_ode|integrate_ode_bdf|integrate_ode_rk45|map_rect|ode_(?:adams|bdf|ckrk|rk45)(?:_tol)?|ode_adjoint_tol_ctl|reduce_sum|reduce_sum_static)\b/;
     Prism.languages.stan = {
       comment: /\/\/.*|\/\*[\s\S]*?\*\/|#(?!include).*/,
@@ -77567,6 +79135,7 @@ function stata(Prism) {
   Prism.register(python);
   // https://www.stata.com/manuals/u.pdf
   // https://www.stata.com/manuals/p.pdf
+
   Prism.languages.stata = {
     comment: [{
       pattern: /(^[ \t]*)\*.*/m,
@@ -77713,6 +79282,7 @@ systemd.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function systemd(Prism) {
   // https://www.freedesktop.org/software/systemd/man/systemd.syntax.html
+
   ;
   (function (Prism) {
     var comment = {
@@ -77865,6 +79435,7 @@ tap.aliases = [];
 function tap(Prism) {
   Prism.register(yaml);
   // https://en.wikipedia.org/wiki/Test_Anything_Protocol
+
   Prism.languages.tap = {
     fail: /not ok[^#{\n\r]*/,
     pass: /ok[^#{\n\r]*/,
@@ -77978,8 +79549,9 @@ function tt2(Prism) {
           }
         }
       }
-    }); // The different types of TT2 strings "replace" the C-like standard string
+    });
 
+    // The different types of TT2 strings "replace" the C-like standard string
     delete Prism.languages.tt2.string;
     Prism.hooks.add('before-tokenize', function (env) {
       var tt2Pattern = /\[%[\s\S]+?%\]/g;
@@ -78000,10 +79572,10 @@ function toml(Prism) {
   ;
   (function (Prism) {
     var key = /(?:[\w-]+|'[^'\n\r]*'|"(?:\\.|[^\\"\r\n])*")/.source;
+
     /**
      * @param {string} pattern
      */
-
     function insertKey(pattern) {
       return pattern.replace(/__/g, function () {
         return key;
@@ -78985,8 +80557,9 @@ wolfram.aliases = ['mathematica', 'nb', 'wl'];
 /** @type {import('../core.js').Syntax} */
 function wolfram(Prism) {
   Prism.languages.wolfram = {
+    comment:
     // Allow one level of nesting - note: regex taken from applescipt
-    comment: /\(\*(?:\(\*(?:[^*]|\*(?!\)))*\*\)|(?!\(\*)[\s\S])*?\*\)/,
+    /\(\*(?:\(\*(?:[^*]|\*(?!\)))*\*\)|(?!\(\*)[\s\S])*?\*\)/,
     string: {
       pattern: /"(?:\\.|[^"\\\r\n])*"/,
       greedy: true
@@ -79021,6 +80594,7 @@ wren.aliases = [];
 /** @type {import('../core.js').Syntax} */
 function wren(Prism) {
   // https://wren.io/
+
   Prism.languages.wren = {
     // Multiline comments in Wren can have nested multiline comments
     // Comments: // and /* */
@@ -79367,8 +80941,9 @@ function xquery(Prism) {
       pattern: /\{(?!\{)(?:\{(?:\{[^{}]*\}|[^{}])*\}|[^{}])+\}/,
       inside: Prism.languages.xquery,
       alias: 'language-xquery'
-    }; // The following will handle plain text inside tags
+    };
 
+    // The following will handle plain text inside tags
     var stringifyToken = function stringifyToken(token) {
       if (typeof token === 'string') {
         return token;
@@ -79386,6 +80961,7 @@ function xquery(Prism) {
         if (typeof token !== 'string') {
           if (token.type === 'tag' && token.content[0] && token.content[0].type === 'tag') {
             // We found a tag, now find its kind
+
             if (token.content[0].content[0].content === '</') {
               // Closing tag
               if (openedTags.length > 0 && openedTags[openedTags.length - 1].tagName === stringifyToken(token.content[0].content[1])) {
@@ -79419,8 +80995,9 @@ function xquery(Prism) {
           if (openedTags.length > 0 && openedTags[openedTags.length - 1].openedBraces === 0) {
             // Here we are inside a tag, and not inside an XQuery expression.
             // That's plain text: drop any tokens matched.
-            var plainText = stringifyToken(token); // And merge text with adjacent text
+            var plainText = stringifyToken(token);
 
+            // And merge text with adjacent text
             if (i < tokens.length - 1 && (typeof tokens[i + 1] === 'string' || tokens[i + 1].type === 'plain-text')) {
               plainText += stringifyToken(tokens[i + 1]);
               tokens.splice(i + 1, 1);
@@ -79498,6 +81075,7 @@ function zig(Prism) {
     var PREFIX_TYPE_OP = /(?:\?|\bpromise->|(?:\[[^[\]]*\]|\*(?!\*)|\*\*)(?:\s*<ALIGN>|\s*const\b|\s*volatile\b|\s*allowzero\b)*)/.source.replace(/<ALIGN>/g, literal(ALIGN));
     var SUFFIX_EXPR = /(?:\bpromise\b|(?:\berror\.)?<ID>(?:\.<ID>)*(?!\s+<ID>))/.source.replace(/<ID>/g, literal(IDENTIFIER));
     var TYPE = '(?!\\s)(?:!?\\s*(?:' + PREFIX_TYPE_OP + '\\s*)*' + SUFFIX_EXPR + ')+';
+
     /*
      * A simplified grammar for Zig compile time type literals:
      *
@@ -80240,11 +81818,9 @@ function a(e, r) {
     return e.__proto__ = r, e;
   }, a(e, r);
 }
-function rehype_prism_plus_es_u(e, r) {
+function u(e, r) {
   (null == r || r > e.length) && (r = e.length);
-  for (var t = 0, n = new Array(r); t < r; t++) {
-    n[t] = e[t];
-  }
+  for (var t = 0, n = new Array(r); t < r; t++) n[t] = e[t];
   return n;
 }
 function rehype_prism_plus_es_c(e, r) {
@@ -80252,9 +81828,9 @@ function rehype_prism_plus_es_c(e, r) {
   if (t) return (t = t.call(e)).next.bind(t);
   if (Array.isArray(e) || (t = function (e, r) {
     if (e) {
-      if ("string" == typeof e) return rehype_prism_plus_es_u(e, r);
+      if ("string" == typeof e) return u(e, r);
       var t = Object.prototype.toString.call(e).slice(8, -1);
-      return "Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t ? Array.from(e) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? rehype_prism_plus_es_u(e, r) : void 0;
+      return "Object" === t && e.constructor && (t = e.constructor.name), "Map" === t || "Set" === t ? Array.from(e) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? u(e, r) : void 0;
     }
   }(e)) || r && e && "number" == typeof e.length) {
     t && (e = t);
@@ -80389,16 +81965,14 @@ var rehype_prism_plus_es_p = function p(i) {
               }
               return 1;
             }(u), v = function (e) {
-              for (var r = new Array(e), t = 0; t < e; t++) {
-                r[t] = {
-                  type: "element",
-                  tagName: "span",
-                  properties: {
-                    className: []
-                  },
-                  children: []
-                };
-              }
+              for (var r = new Array(e), t = 0; t < e; t++) r[t] = {
+                type: "element",
+                tagName: "span",
+                properties: {
+                  className: []
+                },
+                children: []
+              };
               return r;
             }(p.position.end.line), b = ["showlinenumbers=false", 'showlinenumbers="false"', "showlinenumbers={false}"], w = function w() {
               var e = d.value,
@@ -80411,9 +81985,7 @@ var rehype_prism_plus_es_p = function p(i) {
               i.children = l.children, !u.toLowerCase().includes("showLineNumbers".toLowerCase()) && !o.showLineNumbers || b.some(function (e) {
                 return u.toLowerCase().includes(e);
               }) || (i.properties.line = [(n + y).toString()], i.properties.className.push("line-number")), g(n) && i.properties.className.push("highlight-line"), ("diff" === m || null != m && m.includes("diff-")) && "-" === hast_util_to_string_toString(i).substring(0, 1) ? i.properties.className.push("deleted") : ("diff" === m || null != m && m.includes("diff-")) && "+" === hast_util_to_string_toString(i).substring(0, 1) && i.properties.className.push("inserted");
-            }, N = rehype_prism_plus_es_c(v.entries()); !(d = N()).done;) {
-            w();
-          }
+            }, N = rehype_prism_plus_es_c(v.entries()); !(d = N()).done;) w();
           v.length > 0 && "" === hast_util_to_string_toString(v[v.length - 1]).trim() && v.pop(), e.children = v;
         }
       }
@@ -80691,18 +82263,24 @@ function rehypeDocument() {
 function rehype_document_cast(value) {
   return value === null || value === undefined ? [] : typeof value === 'string' || !Array.isArray(value) ? [value] : value;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-heading-rank/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-heading-rank/lib/index.js
 /**
- * @typedef {import('hast').Parent} Parent
  * @typedef {import('hast').Root} Root
- * @typedef {Root|Parent['children'][number]} Node
+ * @typedef {import('hast').Content} Content
  */
 
 /**
- * Rank of a heading: H1 -> 1, H2 -> 2, etc.
+ * @typedef {Root | Content} Node
+ */
+
+// To do next major: return `undefined`.
+/**
+ * Get the rank (`1` to `6`) of headings (`h1` to `h6`).
  *
  * @param {Node} node
- * @returns {number|null}
+ *   Node to check.
+ * @returns {number | null}
+ *   Rank of the heading or `null` if not a heading.
  */
 function headingRank(node) {
   var name = node && node.type === 'element' && node.tagName.toLowerCase() || '';
@@ -95616,19 +97194,26 @@ function remarkGemoji() {
 }
 // EXTERNAL MODULE: ../../node_modules/rehype-urls/index.js
 var rehype_urls = __webpack_require__(4248);
-;// CONCATENATED MODULE: ../../node_modules/hast-util-embedded/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-embedded/lib/index.js
 /**
- * @typedef {import('hast').Element & {tagName: 'audio'|'canvas'|'embed'|'iframe'|'img'|'math'|'object'|'picture'|'svg'|'video'}} Embedded
- * @typedef {import('hast-util-is-element').AssertPredicate<Embedded>} AssertEmbedded
+ * @typedef {import('hast').Element} Element
  */
 
 
 
 /**
- * Check if a node is an embedded element.
- * @type {AssertEmbedded}
+ * Check if a node is a *embedded content*.
+ *
+ * @type {import('hast-util-is-element').AssertPredicate<Element & {tagName: 'audio' | 'canvas' | 'embed' | 'iframe' | 'img' | 'math' | 'object' | 'picture' | 'svg' | 'video'}>}
+ * @param value
+ *   Thing to check (typically `Node`).
+ * @returns
+ *   Whether `value` is an element considered embedded content.
+ *
+ *   The elements `audio`, `canvas`, `embed`, `iframe`, `img`, `math`,
+ *   `object`, `picture`, `svg`, and `video` are embedded content.
  */
-// @ts-ignore Sure, the assertion matches.
+// @ts-expect-error Sure, the assertion matches.
 var embedded = convertElement(['audio', 'canvas', 'embed', 'iframe', 'img', 'math', 'object', 'picture', 'svg', 'video']);
 ;// CONCATENATED MODULE: ../../node_modules/rehype-minify-whitespace/block.js
 // See: <https://html.spec.whatwg.org/#the-css-user-agent-style-sheet-and-presentational-hints>
@@ -96155,12 +97740,21 @@ function isBodyOkLink(node) {
   }
   return true;
 }
-;// CONCATENATED MODULE: ../../node_modules/hast-util-phrasing/index.js
+;// CONCATENATED MODULE: ../../node_modules/hast-util-phrasing/lib/index.js
+/**
+ * @typedef {import('hast').Root} Root
+ * @typedef {import('hast').Content} Content
+ */
+
+/**
+ * @typedef {Root | Content} Node
+ */
 
 
 
 
-var hast_util_phrasing_basic = convertElement(['a', 'abbr',
+
+var lib_basic = convertElement(['a', 'abbr',
 // `area` is in fact only phrasing if it is inside a `map` element.
 // However, since `area`s are required to be inside a `map` element, and it’s
 // a rather involved check, it’s ignored here for now.
@@ -96168,15 +97762,24 @@ var hast_util_phrasing_basic = convertElement(['a', 'abbr',
 var meta = convertElement('meta');
 
 /**
- * @param {unknown} node
+ * Check if the given value is *phrasing* content.
+ *
+ * @param {unknown} value
+ *   Thing to check, typically `Node`.
  * @returns {boolean}
+ *   Whether `value` is phrasing content.
  */
-function phrasing(node) {
-  return Boolean(
-  // @ts-expect-error Looks like a node.
-  node && node.type === 'text' || hast_util_phrasing_basic(node) || embedded(node) ||
-  // @ts-expect-error Looks like a node.
-  isBodyOkLink(node) || meta(node) && hasProperty(node, 'itemProp'));
+function phrasing(value) {
+  return Boolean(lib_node(value) && (value.type === 'text' || lib_basic(value) || embedded(value) || isBodyOkLink(value) || meta(value) && hasProperty(value, 'itemProp')));
+}
+
+/**
+ * @param {unknown} value
+ * @returns {value is Node}
+ */
+function lib_node(value) {
+  // @ts-expect-error: looks like an object.
+  return value && typeof value === 'object' && 'type' in value;
 }
 ;// CONCATENATED MODULE: ../../node_modules/html-whitespace-sensitive-tag-names/index.js
 /**
@@ -96821,7 +98424,7 @@ function run() {
 var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
 var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style=./style.css\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style='body { color: red; }'\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
-;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=18;break;}_context.next=15;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 15:options.markdown=_context.sent.toString();_context.next=19;break;case 18:options.markdown=markdown;case 19:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;if(corners){_context.next=32;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=32;break;}_context.next=28;return external_fs_default().promises.readFile(projectPkg);case 28:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 32:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=53;break;case 49:_context.prev=49;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 53:case"end":return _context.stop();}}},_callee,null,[[0,49]]);}))();
+;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=18;break;}_context.next=15;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 15:options.markdown=_context.sent.toString();_context.next=19;break;case 18:options.markdown=markdown;case 19:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;if(corners){_context.next=32;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=32;break;}_context.next=28;return external_fs_default().promises.readFile(projectPkg);case 28:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 32:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=53;break;case 49:_context.prev=49;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 53:case"end":return _context.stop();}},_callee,null,[[0,49]]);}))();
 })();
 
 module.exports = __webpack_exports__;
