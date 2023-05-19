@@ -155,7 +155,7 @@ class MarkdownStyle extends HTMLElement {
         }
     }
 }
-customElements.define('markdown-style', MarkdownStyle);</script><markdown-style style="max-width: 960px; margin: 0 auto 60px auto; padding: 8px" class="markdown-style">
+customElements.define('markdown-style', MarkdownStyle);</script><markdown-style style="max-width: 960px; margin: 0 auto 60px auto; padding: 8px;max-width: 960px;" class="markdown-style">
     <h1 style="display: flex; height: 230px; align-items: center; justify-content: center; font-size: 38px;" id="markdown-to-html-cli"><a class="anchor" aria-hidden="true" tabindex="-1" href="#markdown-to-html-cli"><span class="octicon octicon-link"></span></a>markdown-to-html-cli</h1><!--rehype:style=display: flex; height: 230px; align-items: center; justify-content: center; font-size: 38px;-->
     <p>
       <a href="https://www.npmjs.com/package/markdown-to-html-cli"><img src="https://img.shields.io/npm/dm/markdown-to-html-cli.svg?style=flat" alt="Downloads"></a>
@@ -328,26 +328,27 @@ const html = create({
 </span><span class="code-line line-number" line="13">  <span class="token parameter variable">--markdown</span>              Markdown string.
 </span><span class="code-line line-number" line="14">  <span class="token parameter variable">--style</span>                 Override default styles. css <span class="token function">file</span> path or css string.
 </span><span class="code-line line-number" line="15">  --markdown-style-theme  Setting markdown-style light/dark theme.
-</span><span class="code-line line-number" line="16">  --output, <span class="token parameter variable">-o</span>            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
-</span><span class="code-line line-number" line="17">  --source, <span class="token parameter variable">-s</span>            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
-</span><span class="code-line line-number" line="18">  <span class="token parameter variable">--title</span>                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
-</span><span class="code-line line-number" line="19">  --version, <span class="token parameter variable">-v</span>           Show version number
-</span><span class="code-line line-number" line="20">  --help, <span class="token parameter variable">-h</span>              Displays <span class="token builtin class-name">help</span> information.
-</span><span class="code-line line-number" line="21">
-</span><span class="code-line line-number" line="22">Example:
-</span><span class="code-line line-number" line="23">
-</span><span class="code-line line-number" line="24">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
-</span><span class="code-line line-number" line="25">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
-</span><span class="code-line line-number" line="26">  npx markdown-to-html-cli
-</span><span class="code-line line-number" line="27">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
-</span><span class="code-line line-number" line="28">  npx markdown-to-html-cli --no-dark-mode
-</span><span class="code-line line-number" line="29">  npx markdown-to-html-cli --markdown-style-theme dark
-</span><span class="code-line line-number" line="30">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
-</span><span class="code-line line-number" line="31">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
-</span><span class="code-line line-number" line="32">  npx markdown-to-html-cli <span class="token parameter variable">--output</span> coverage/index.html
-</span><span class="code-line line-number" line="33">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md
-</span><span class="code-line line-number" line="34">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span>./style.css
-</span><span class="code-line line-number" line="35">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span><span class="token string">'body { color: red; }'</span>
+</span><span class="code-line line-number" line="16">  --markdown-style        Markdown wrapper style
+</span><span class="code-line line-number" line="17">  --output, <span class="token parameter variable">-o</span>            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
+</span><span class="code-line line-number" line="18">  --source, <span class="token parameter variable">-s</span>            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
+</span><span class="code-line line-number" line="19">  <span class="token parameter variable">--title</span>                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
+</span><span class="code-line line-number" line="20">  --version, <span class="token parameter variable">-v</span>           Show version number
+</span><span class="code-line line-number" line="21">  --help, <span class="token parameter variable">-h</span>              Displays <span class="token builtin class-name">help</span> information.
+</span><span class="code-line line-number" line="22">
+</span><span class="code-line line-number" line="23">Example:
+</span><span class="code-line line-number" line="24">
+</span><span class="code-line line-number" line="25">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line line-number" line="26">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
+</span><span class="code-line line-number" line="27">  npx markdown-to-html-cli
+</span><span class="code-line line-number" line="28">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line line-number" line="29">  npx markdown-to-html-cli --no-dark-mode
+</span><span class="code-line line-number" line="30">  npx markdown-to-html-cli --markdown-style-theme dark
+</span><span class="code-line line-number" line="31">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
+</span><span class="code-line line-number" line="32">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
+</span><span class="code-line line-number" line="33">  npx markdown-to-html-cli <span class="token parameter variable">--output</span> coverage/index.html
+</span><span class="code-line line-number" line="34">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md
+</span><span class="code-line line-number" line="35">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span>./style.css
+</span><span class="code-line line-number" line="36">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span><span class="token string">'body { color: red; }'</span>
 </span></code><div onclick="copied(this)" data-code="Usage: markdown-to-html [options] [--help|h]
 
 Options:
@@ -363,6 +364,7 @@ Options:
   --markdown              Markdown string.
   --style                 Override default styles. css file path or css string.
   --markdown-style-theme  Setting markdown-style light/dark theme.
+  --markdown-style        Markdown wrapper style
   --output, -o            Output static pages to the specified directory. Default: &#x22;index.html&#x22;
   --source, -s            The path of the target file &#x22;README.md&#x22;. Default: &#x22;README.md&#x22;
   --title                 The &#x60;<title>&#x60; tag is required in HTML documents!
@@ -435,32 +437,40 @@ import &#x27;markdown-to-html-cli/github.css&#x27;;
 </span><span class="code-line line-number" line="10">  <span class="token string">'github-corners'</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="11">  <span class="token comment">/** Github corners style. */</span>
 </span><span class="code-line line-number" line="12">  <span class="token string">'github-corners-fork'</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="13">  <span class="token comment">/** Markdown string. */</span>
-</span><span class="code-line line-number" line="14">  markdown<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="15">  <span class="token comment">/** The `&#x3C;title>` tag is required in HTML documents! */</span>
-</span><span class="code-line line-number" line="16">  title<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="17">  <span class="token comment">/** Specify the configuration file. Default: `&#x3C;process.cwd()>/package.json` */</span>
-</span><span class="code-line line-number" line="18">  config<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="19">  <span class="token comment">/** Define a description of your web page */</span>
-</span><span class="code-line line-number" line="20">  description<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="21">  <span class="token comment">/** Define keywords for search engines */</span>
-</span><span class="code-line line-number" line="22">  keywords<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="23">  <span class="token comment">/** Add a Favicon to your Site */</span>
-</span><span class="code-line line-number" line="24">  favicon<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="25">  <span class="token comment">/** Define the author of a page */</span>
-</span><span class="code-line line-number" line="26">  author<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="27"><span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="28"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">MDToHTMLOptions</span> <span class="token keyword">extends</span> <span class="token class-name">RunArgvs</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="29">  <span class="token comment">/** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */</span>
-</span><span class="code-line line-number" line="30">  document<span class="token operator">?</span><span class="token operator">:</span> Options<span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="31">  <span class="token comment">/** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */</span>
-</span><span class="code-line line-number" line="32">  rewrite<span class="token operator">?</span><span class="token operator">:</span> RehypeRewriteOptions<span class="token punctuation">[</span><span class="token string">'rewrite'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="33">  <span class="token comment">/** rewrite URLs of href and src attributes. */</span>
-</span><span class="code-line line-number" line="34">  reurls<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&#x3C;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">></span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="13">  <span class="token comment">/** Disable light and dark theme styles button. */</span>
+</span><span class="code-line line-number" line="14">  <span class="token string">'dark-mode'</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">boolean</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="15">  <span class="token comment">/** Setting markdown-style light/dark theme. */</span>
+</span><span class="code-line line-number" line="16">  <span class="token string">'markdown-style-theme'</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token string">'dark'</span> <span class="token operator">|</span> <span class="token string">'light'</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="17">  <span class="token comment">/** Markdown string. */</span>
+</span><span class="code-line line-number" line="18">  markdown<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="19">  <span class="token comment">/** Markdown wrapper style */</span>
+</span><span class="code-line line-number" line="20">  <span class="token string">'markdown-style'</span><span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="21">  <span class="token comment">/** The `&#x3C;title>` tag is required in HTML documents! */</span>
+</span><span class="code-line line-number" line="22">  title<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="23">  <span class="token comment">/** Specify the configuration file. Default: `&#x3C;process.cwd()>/package.json` */</span>
+</span><span class="code-line line-number" line="24">  config<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="25">  <span class="token comment">/** Define a description of your web page */</span>
+</span><span class="code-line line-number" line="26">  description<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="27">  <span class="token comment">/** Define keywords for search engines */</span>
+</span><span class="code-line line-number" line="28">  keywords<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="29">  <span class="token comment">/** Add a Favicon to your Site */</span>
+</span><span class="code-line line-number" line="30">  favicon<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="31">  <span class="token comment">/** Define the author of a page */</span>
+</span><span class="code-line line-number" line="32">  author<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="33">  <span class="token comment">/** Override default styles */</span>
+</span><span class="code-line line-number" line="34">  style<span class="token operator">?</span><span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="35"><span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="36"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span>opts<span class="token operator">?</span><span class="token operator">:</span> Omit<span class="token operator">&#x3C;</span>RunArgvs<span class="token punctuation">,</span> <span class="token string">"_"</span><span class="token operator">></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="37"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> cliHelp<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="38"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> exampleHelp<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="36"><span class="token keyword">export</span> <span class="token keyword">interface</span> <span class="token class-name">MDToHTMLOptions</span> <span class="token keyword">extends</span> <span class="token class-name">RunArgvs</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="37">  <span class="token comment">/** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */</span>
+</span><span class="code-line line-number" line="38">  document<span class="token operator">?</span><span class="token operator">:</span> Options<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="39">  <span class="token comment">/** Rewrite Element. [rehype-rewrite](https://github.com/jaywcjlove/rehype-rewrite#rewritenode-index-parent-void) */</span>
+</span><span class="code-line line-number" line="40">  rewrite<span class="token operator">?</span><span class="token operator">:</span> RehypeRewriteOptions<span class="token punctuation">[</span><span class="token string">'rewrite'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="41">  <span class="token comment">/** rewrite URLs of href and src attributes. */</span>
+</span><span class="code-line line-number" line="42">  reurls<span class="token operator">?</span><span class="token operator">:</span> Record<span class="token operator">&#x3C;</span><span class="token builtin">string</span><span class="token punctuation">,</span> <span class="token builtin">string</span><span class="token operator">></span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="43"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="44"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">function</span> <span class="token function">run</span><span class="token punctuation">(</span>opts<span class="token operator">?</span><span class="token operator">:</span> Omit<span class="token operator">&#x3C;</span>RunArgvs<span class="token punctuation">,</span> <span class="token string">"_"</span><span class="token operator">></span><span class="token punctuation">)</span><span class="token operator">:</span> <span class="token builtin">any</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="45"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> cliHelp<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="46"><span class="token keyword">export</span> <span class="token keyword">declare</span> <span class="token keyword">const</span> exampleHelp<span class="token operator">:</span> <span class="token builtin">string</span><span class="token punctuation">;</span>
 </span></code><div onclick="copied(this)" data-code="import { ParsedArgs } from &#x27;minimist&#x27;;
 import { Options } from &#x27;rehype-document&#x27;;
 export interface CreateOptions extends MDToHTMLOptions { }
@@ -473,8 +483,14 @@ export interface RunArgvs extends Omit<ParsedArgs, &#x27;_&#x27;> {
   &#x27;github-corners&#x27;?: string;
   /** Github corners style. */
   &#x27;github-corners-fork&#x27;?: boolean;
+  /** Disable light and dark theme styles button. */
+  &#x27;dark-mode&#x27;?: boolean;
+  /** Setting markdown-style light/dark theme. */
+  &#x27;markdown-style-theme&#x27;?: &#x27;dark&#x27; | &#x27;light&#x27;;
   /** Markdown string. */
   markdown?: string;
+  /** Markdown wrapper style */
+  &#x27;markdown-style&#x27;?: string;
   /** The &#x60;<title>&#x60; tag is required in HTML documents! */
   title?: string;
   /** Specify the configuration file. Default: &#x60;<process.cwd()>/package.json&#x60; */
@@ -487,6 +503,8 @@ export interface RunArgvs extends Omit<ParsedArgs, &#x27;_&#x27;> {
   favicon?: string;
   /** Define the author of a page */
   author?: string;
+  /** Override default styles */
+  style?: string;
 }
 export interface MDToHTMLOptions extends RunArgvs {
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */
