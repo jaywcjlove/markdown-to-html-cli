@@ -139,6 +139,7 @@ Options:
   --markdown              Markdown string.
   --style                 Override default styles. css file path or css string.
   --markdown-style-theme  Setting markdown-style light/dark theme.
+  --markdown-style        Markdown wrapper style
   --output, -o            Output static pages to the specified directory. Default: "index.html"
   --source, -s            The path of the target file "README.md". Default: "README.md"
   --title                 The `<title>` tag is required in HTML documents!
@@ -218,8 +219,14 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'> {
   'github-corners'?: string;
   /** Github corners style. */
   'github-corners-fork'?: boolean;
+  /** Disable light and dark theme styles button. */
+  'dark-mode'?: boolean;
+  /** Setting markdown-style light/dark theme. */
+  'markdown-style-theme'?: 'dark' | 'light';
   /** Markdown string. */
   markdown?: string;
+  /** Markdown wrapper style */
+  'markdown-style'?: string;
   /** The `<title>` tag is required in HTML documents! */
   title?: string;
   /** Specify the configuration file. Default: `<process.cwd()>/package.json` */
@@ -232,6 +239,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'> {
   favicon?: string;
   /** Define the author of a page */
   author?: string;
+  /** Override default styles */
+  style?: string;
 }
 export interface MDToHTMLOptions extends RunArgvs {
   /** [rehype-document](https://github.com/rehypejs/rehype-document#options) options */

@@ -23,6 +23,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   'markdown-style-theme'?: 'dark' | 'light';
   /** Markdown string. */
   markdown?: string;
+  /** Markdown wrapper style */
+  'markdown-style'?: string;
   /** The `<title>` tag is required in HTML documents! */
   title?: string;
   /** Specify the configuration file. Default: `<process.cwd()>/package.json` */
@@ -62,6 +64,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
       help: opts.h || opts.help || false,
       source: opts.s || opts.source || 'README.md',
       markdown: opts.markdown || '',
+      'markdown-style': 'max-width: 960px;',
       description: opts.description || '',
       output: opts.o || opts.output || 'index.html',
     },
@@ -114,6 +117,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --markdown              Markdown string.
     --style                 Override default styles. css file path or css string.
     --markdown-style-theme  Setting markdown-style light/dark theme.
+    --markdown-style        Markdown wrapper style.
     --output, -o            Output static pages to the specified directory. Default: "index.html"
     --source, -s            The path of the target file "README.md". Default: "README.md"
     --title                 The \`<title>\` tag is required in HTML documents!

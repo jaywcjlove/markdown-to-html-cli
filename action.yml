@@ -47,6 +47,11 @@ inputs:
     default: ''
     required: false
 
+  markdown-style:
+    description: Markdown wrapper style
+    default: ''
+    required: false
+
 outputs:
   output:
     description: Output static pages to the specified directory
