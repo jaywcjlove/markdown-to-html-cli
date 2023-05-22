@@ -86,7 +86,7 @@ it('github-corners test case', async () => {
     'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
     document: {},
   });
-  expect(html.indexOf('<dark-mode permanent="true" style=') > 0).toBeTruthy();
+  expect(html.indexOf('<dark-mode style=') > 0).toBeTruthy();
   expect(html.indexOf('<github-corners target="__blank"') > 0).toBeTruthy();
   expect(html.indexOf('<markdown-style') > 0).toBeTruthy();
   expect(html.indexOf('max-width: 960px; margin: 0 auto 60px auto; padding: 8px') > 0).toBeTruthy();

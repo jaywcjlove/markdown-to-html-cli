@@ -19,9 +19,18 @@ it('copyElement test case', async () => {
 });
 
 it('markdownStyle test case', async () => {
+  console.log(`markdownStyle([], 'light')[1].properties::::`, markdownStyle([], 'light')[1].properties)
   expect(markdownStyle([], undefined).length).toEqual(2);
-  expect(markdownStyle([], 'light')[1].properties).toEqual(expect.objectContaining({ "theme": "light" }));
-  expect(markdownStyle([], 'dark')[1].properties).toEqual(expect.objectContaining({ "theme": "dark" }));
+  expect(markdownStyle([], 'light')[1].properties).toEqual(expect.objectContaining({
+    "className": "markdown-style",
+    "mode": "light",
+    "style": "max-width: 960px; margin: 0 auto 60px auto; padding: 8px;",
+  }));
+  expect(markdownStyle([], 'dark')[1].properties).toEqual(expect.objectContaining({
+    "className": "markdown-style",
+    "mode": "dark",
+    "style": "max-width: 960px; margin: 0 auto 60px auto; padding: 8px;",
+  }));
 });
 
 it('exampleHelp test case', async () => {
