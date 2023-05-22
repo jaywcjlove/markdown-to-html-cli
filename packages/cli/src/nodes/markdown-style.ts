@@ -80,7 +80,8 @@ export function markdownStyle(child: ElementContent[], markdownStyleTheme?: 'dar
     className: 'markdown-style',
   }
   if (markdownStyleTheme) {
-    properties.theme = markdownStyleTheme;
+    // properties.theme = markdownStyleTheme;
+    properties.mode = markdownStyleTheme;
   }
   return [{
     type: 'element',

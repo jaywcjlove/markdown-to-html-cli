@@ -18,7 +18,7 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   /** Github corners style. */
   'github-corners-fork'?: boolean;
   /** Disable light and dark theme styles button. */
-  'dark-mode'?: boolean;
+  'dark-mode'?: boolean | 'auto';
   /** Setting markdown-style light/dark theme. */
   'markdown-style-theme'?: 'dark' | 'light';
   /** Markdown string. */

@@ -40,10 +40,16 @@ export function create(options: MDToHTMLOptions = {}) {
       [rehypeFormat],
     ],
     rewrite: (node, index, parent) => {
+      if (node.type == 'element' && node.tagName === 'html') {
+        if (markdownStyleTheme) {
+          node.properties = node.properties || {};
+          node.properties['data-color-mode'] = markdownStyleTheme;
+        }
+      }
       if ((node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root')) {
         node.children = markdownStyle(node.children as any, markdownStyleTheme, wrapperStyle);
+        darkMode(darkModeTheme).forEach(item => node.children.unshift(item));
         if (darkModeTheme) {
-          darkMode().forEach(item => node.children.unshift(item));
         }
       }
       if (options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {

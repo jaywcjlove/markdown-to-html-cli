@@ -153,6 +153,9 @@ Example:
   npx markdown-to-html-cli
   npx markdown-to-html-cli --markdown="Hello World!"
   npx markdown-to-html-cli --no-dark-mode
+  npx markdown-to-html-cli --dark-mode auto
+  npx markdown-to-html-cli --dark-mode auto --markdown-style-theme dark
+  npx markdown-to-html-cli --no-dark-mode --markdown-style-theme dark
   npx markdown-to-html-cli --markdown-style-theme dark
   npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
   npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
