@@ -6,18 +6,22 @@ const scriptString = `const t=document;const e="_dark_mode_theme_";const s="perm
  * @wcj/dark-mode@1.0.14
  * https://github.com/jaywcjlove/dark-mode
  */
-export function darkMode(mode?: boolean | 'auto'): Element[] {
+export function darkMode(permanent?: boolean | 'auto', mode?: string): Element[] {
   const properties: Properties = {
     style: 'position: fixed; top: 8px; left: 10px; z-index: 999;',
     dark: 'Dark',
     light: 'Light',
   }
-  if (mode && mode !== 'auto') {
+  if (mode) {
+    properties.mode = mode;
+  }
+  if (permanent && permanent !== 'auto') {
     properties.permanent = 'true';
   }
-  if (mode === false || mode === 'false' as unknown as boolean) {
-    properties.style = properties.style + 'display: none;';
+  if (permanent === false || permanent === 'false' as unknown as boolean) {
+    properties.style = properties.style + ';display: none;';
   }
+  console.log('properties:', properties)
   return [{
     type: 'element',
     tagName: 'script',

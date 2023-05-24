@@ -24,7 +24,6 @@ export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options: MDToHTMLOptions = {}) {
   const { markdown: string, document, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
-  
   const mdOptions: Options = {
     hastNode: false,
     remarkPlugins: [remarkGemoji],
@@ -48,7 +47,7 @@ export function create(options: MDToHTMLOptions = {}) {
       }
       if ((node.type === 'element' && node.tagName === 'body') || (!document && node.type === 'root')) {
         node.children = markdownStyle(node.children as any, markdownStyleTheme, wrapperStyle);
-        darkMode(darkModeTheme).forEach(item => node.children.unshift(item));
+        darkMode(darkModeTheme, markdownStyleTheme).forEach(item => node.children.unshift(item));
         if (darkModeTheme) {
         }
       }

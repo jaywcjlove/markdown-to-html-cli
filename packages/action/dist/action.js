@@ -98166,18 +98166,22 @@ var dark_mode_scriptString = "const t=document;const e=\"_dark_mode_theme_\";con
  * @wcj/dark-mode@1.0.14
  * https://github.com/jaywcjlove/dark-mode
  */
-function darkMode(mode) {
+function darkMode(permanent, mode) {
   var properties = {
     style: 'position: fixed; top: 8px; left: 10px; z-index: 999;',
     dark: 'Dark',
     light: 'Light'
   };
-  if (mode && mode !== 'auto') {
+  if (mode) {
+    properties.mode = mode;
+  }
+  if (permanent && permanent !== 'auto') {
     properties.permanent = 'true';
   }
-  if (mode === false || mode === 'false') {
-    properties.style = properties.style + 'display: none;';
+  if (permanent === false || permanent === 'false') {
+    properties.style = properties.style + ';display: none;';
   }
+  console.log('properties:', properties);
   return [{
     type: 'element',
     tagName: 'script',
@@ -98243,7 +98247,7 @@ function lib_create_create() {
       }
       if (node.type === 'element' && node.tagName === 'body' || !document && node.type === 'root') {
         node.children = markdownStyle(node.children, markdownStyleTheme, wrapperStyle);
-        darkMode(darkModeTheme).forEach(function (item) {
+        darkMode(darkModeTheme, markdownStyleTheme).forEach(function (item) {
           return node.children.unshift(item);
         });
         if (darkModeTheme) {}
