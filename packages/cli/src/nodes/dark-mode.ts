@@ -21,7 +21,6 @@ export function darkMode(permanent?: boolean | 'auto', mode?: string): Element[]
   if (permanent === false || permanent === 'false' as unknown as boolean) {
     properties.style = properties.style + ';display: none;';
   }
-  console.log('properties:', properties)
   return [{
     type: 'element',
     tagName: 'script',

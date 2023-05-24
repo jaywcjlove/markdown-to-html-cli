@@ -98181,7 +98181,6 @@ function darkMode(permanent, mode) {
   if (permanent === false || permanent === 'false') {
     properties.style = properties.style + ';display: none;';
   }
-  console.log('properties:', properties);
   return [{
     type: 'element',
     tagName: 'script',
