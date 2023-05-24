@@ -257,7 +257,10 @@ const html = create({
       <li><code>markdown</code> - Markdown string</li>
       <li><code>favicon</code> - Add a Favicon to your Site.</li>
       <li><code>github-corners</code> - Add a Github corner to your project page.</li>
+      <li><code>corners</code> - Show corners. (default: <code>true</code>)</li>
       <li><code>dark-mode</code> - Disable light and dark theme styles button. (default: <code>true</code>)</li>
+      <li><code>markdown-style</code> - Markdown wrapper style.</li>
+      <li><code>markdown-style-theme</code> - Setting markdown-style light/dark theme. (<code>dark | light</code>)</li>
     </ul>
     <h3 id="output-parameters"><a class="anchor" aria-hidden="true" tabindex="-1" href="#output-parameters"><span class="octicon octicon-link"></span></a>Output Parameters</h3>
     <ul>
@@ -321,37 +324,38 @@ const html = create({
 </span><span class="code-line line-number" line="6">  --config, <span class="token parameter variable">-o</span>            Specify the configuration file. Default: <span class="token string">"&#x3C;process.cwd()>/package.json"</span><span class="token builtin class-name">.</span>
 </span><span class="code-line line-number" line="7">  <span class="token parameter variable">--description</span>           Define a description of your web page.
 </span><span class="code-line line-number" line="8">  <span class="token parameter variable">--favicon</span>               Add a Favicon to your Site.
-</span><span class="code-line line-number" line="9">  --github-corners        Add a Github corner to your project page.
-</span><span class="code-line line-number" line="10">  --github-corners-fork   Github corners style.
-</span><span class="code-line line-number" line="11">  <span class="token parameter variable">--keywords</span>              Define keywords <span class="token keyword">for</span> search engines.
-</span><span class="code-line line-number" line="12">  --no-dark-mode          Disable light and dark theme styles button.
-</span><span class="code-line line-number" line="13">  <span class="token parameter variable">--markdown</span>              Markdown string.
-</span><span class="code-line line-number" line="14">  <span class="token parameter variable">--style</span>                 Override default styles. css <span class="token function">file</span> path or css string.
-</span><span class="code-line line-number" line="15">  --markdown-style-theme  Setting markdown-style light/dark theme.
-</span><span class="code-line line-number" line="16">  --markdown-style        Markdown wrapper style
-</span><span class="code-line line-number" line="17">  --output, <span class="token parameter variable">-o</span>            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
-</span><span class="code-line line-number" line="18">  --source, <span class="token parameter variable">-s</span>            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
-</span><span class="code-line line-number" line="19">  <span class="token parameter variable">--title</span>                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
-</span><span class="code-line line-number" line="20">  --version, <span class="token parameter variable">-v</span>           Show version number
-</span><span class="code-line line-number" line="21">  --help, <span class="token parameter variable">-h</span>              Displays <span class="token builtin class-name">help</span> information.
-</span><span class="code-line line-number" line="22">
-</span><span class="code-line line-number" line="23">Example:
-</span><span class="code-line line-number" line="24">
-</span><span class="code-line line-number" line="25">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
-</span><span class="code-line line-number" line="26">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
-</span><span class="code-line line-number" line="27">  npx markdown-to-html-cli
-</span><span class="code-line line-number" line="28">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
-</span><span class="code-line line-number" line="29">  npx markdown-to-html-cli --no-dark-mode
-</span><span class="code-line line-number" line="30">  npx markdown-to-html-cli --dark-mode auto
-</span><span class="code-line line-number" line="31">  npx markdown-to-html-cli --dark-mode auto --markdown-style-theme dark
-</span><span class="code-line line-number" line="32">  npx markdown-to-html-cli --no-dark-mode --markdown-style-theme dark
-</span><span class="code-line line-number" line="33">  npx markdown-to-html-cli --markdown-style-theme dark
-</span><span class="code-line line-number" line="34">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
-</span><span class="code-line line-number" line="35">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
-</span><span class="code-line line-number" line="36">  npx markdown-to-html-cli <span class="token parameter variable">--output</span> coverage/index.html
-</span><span class="code-line line-number" line="37">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md
-</span><span class="code-line line-number" line="38">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span>./style.css
-</span><span class="code-line line-number" line="39">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span><span class="token string">'body { color: red; }'</span>
+</span><span class="code-line line-number" line="9">  --no-corners            Hide Github corner from your project page.
+</span><span class="code-line line-number" line="10">  --github-corners        Add a Github corner to your project page.
+</span><span class="code-line line-number" line="11">  --github-corners-fork   Github corners style.
+</span><span class="code-line line-number" line="12">  <span class="token parameter variable">--keywords</span>              Define keywords <span class="token keyword">for</span> search engines.
+</span><span class="code-line line-number" line="13">  --no-dark-mode          Disable light and dark theme styles button.
+</span><span class="code-line line-number" line="14">  <span class="token parameter variable">--markdown</span>              Markdown string.
+</span><span class="code-line line-number" line="15">  <span class="token parameter variable">--style</span>                 Override default styles. css <span class="token function">file</span> path or css string.
+</span><span class="code-line line-number" line="16">  --markdown-style-theme  Setting markdown-style light/dark theme.
+</span><span class="code-line line-number" line="17">  --markdown-style        Markdown wrapper style
+</span><span class="code-line line-number" line="18">  --output, <span class="token parameter variable">-o</span>            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
+</span><span class="code-line line-number" line="19">  --source, <span class="token parameter variable">-s</span>            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
+</span><span class="code-line line-number" line="20">  <span class="token parameter variable">--title</span>                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
+</span><span class="code-line line-number" line="21">  --version, <span class="token parameter variable">-v</span>           Show version number
+</span><span class="code-line line-number" line="22">  --help, <span class="token parameter variable">-h</span>              Displays <span class="token builtin class-name">help</span> information.
+</span><span class="code-line line-number" line="23">
+</span><span class="code-line line-number" line="24">Example:
+</span><span class="code-line line-number" line="25">
+</span><span class="code-line line-number" line="26">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line line-number" line="27">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
+</span><span class="code-line line-number" line="28">  npx markdown-to-html-cli
+</span><span class="code-line line-number" line="29">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line line-number" line="30">  npx markdown-to-html-cli --no-dark-mode
+</span><span class="code-line line-number" line="31">  npx markdown-to-html-cli --dark-mode auto
+</span><span class="code-line line-number" line="32">  npx markdown-to-html-cli --dark-mode auto --markdown-style-theme dark
+</span><span class="code-line line-number" line="33">  npx markdown-to-html-cli --no-dark-mode --markdown-style-theme dark
+</span><span class="code-line line-number" line="34">  npx markdown-to-html-cli --markdown-style-theme dark
+</span><span class="code-line line-number" line="35">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
+</span><span class="code-line line-number" line="36">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
+</span><span class="code-line line-number" line="37">  npx markdown-to-html-cli <span class="token parameter variable">--output</span> coverage/index.html
+</span><span class="code-line line-number" line="38">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md
+</span><span class="code-line line-number" line="39">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span>./style.css
+</span><span class="code-line line-number" line="40">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span><span class="token string">'body { color: red; }'</span>
 </span></code><div onclick="copied(this)" data-code="Usage: markdown-to-html [options] [--help|h]
 
 Options:
@@ -360,6 +364,7 @@ Options:
   --config, -o            Specify the configuration file. Default: &#x22;<process.cwd()>/package.json&#x22;.
   --description           Define a description of your web page.
   --favicon               Add a Favicon to your Site.
+  --no-corners            Hide Github corner from your project page.
   --github-corners        Add a Github corner to your project page.
   --github-corners-fork   Github corners style.
   --keywords              Define keywords for search engines.
