@@ -4,7 +4,7 @@
   "description": "Converts markdown text to HTML.",
   "scripts": {
     "prepare": "husky install",
-    "package": "lerna exec \"ncc build src/action.ts -o dist\" --scope action",
+    "package": "npm run build && lerna exec \"ncc build src/action.ts -o dist\" --scope action",
     "start": "node packages/cli/lib/cli.js --github-corners-fork --github-corners 'https://jaywcjlove.github.io'",
     "watch": "lerna exec \"tsbb watch src/*.ts\" --scope markdown-to-html-cli",
     "build": "lerna exec \"tsbb build src/*.ts\" --scope markdown-to-html-cli && npm run fix",
