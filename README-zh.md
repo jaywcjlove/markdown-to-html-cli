@@ -82,7 +82,10 @@ $ npm i markdown-to-html-cli
 - `markdown` - Markdown 字符串。
 - `favicon` - 将 Favicon 添加到您的站点。
 - `github-corners` - 将 Github 角添加到您的项目页面。
+- `corners` - 展示 Github 角。 (default: `true`)
 - `dark-mode` - 禁用浅色和深色主题样式按钮。 (default: `true`)
+- `markdown-style` - Markdown 包裹样式修改. 
+- `markdown-style-theme` - 设置 Markdown 风格的浅色/深色主题。
 
 ### Output Parameters
 

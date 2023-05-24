@@ -23,7 +23,7 @@ import { MDToHTMLOptions } from './index';
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options: MDToHTMLOptions = {}) {
-  const { markdown: string, document, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
+  const { markdown: string, document, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
   
   const mdOptions: Options = {
     hastNode: false,
@@ -52,7 +52,7 @@ export function create(options: MDToHTMLOptions = {}) {
         if (darkModeTheme) {
         }
       }
-      if (options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
+      if (corners && options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
         node.children = Array.isArray(node.children) ? node.children : [];
         if (options['github-corners-fork']) {
           node.children.unshift(githubCornersFork({ href: options['github-corners'] }));

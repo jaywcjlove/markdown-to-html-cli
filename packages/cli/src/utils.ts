@@ -25,7 +25,7 @@ export function formatConfig(opts: Options) {
       }
     }
   }
-  if (opts['github-corners']) {
+  if (opts['github-corners'] && typeof opts['github-corners'] === 'string') {
     opts['github-corners'] = opts['github-corners'].replace(/^git[+]/, '')
   }
   if (Array.isArray(options.document.link) && options.favicon) {

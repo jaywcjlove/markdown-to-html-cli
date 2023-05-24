@@ -17,6 +17,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   'github-corners'?: string;
   /** Github corners style. */
   'github-corners-fork'?: boolean;
+  /** Show corners. @default true */
+  'corners'?: boolean;
   /** Disable light and dark theme styles button. */
   'dark-mode'?: boolean | 'auto';
   /** Setting markdown-style light/dark theme. */
@@ -66,6 +68,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
       markdown: opts.markdown || '',
       'markdown-style': 'max-width: 960px;',
       description: opts.description || '',
+      corners: opts.corners || true,
       output: opts.o || opts.output || 'index.html',
     },
   });
@@ -85,7 +88,6 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   }
   const options = formatConfig({ ...opts, ...argvs });
   const output = path.resolve(argvs.output);
-
 
   if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
   if (options.style) {
@@ -110,6 +112,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --config, -o            Specify the configuration file. Default: "<process.cwd()>/package.json".
     --description           Define a description of your web page.
     --favicon               Add a Favicon to your Site.
+    --no-corners            Hide Github corner from your project page.
     --github-corners        Add a Github corner to your project page.
     --github-corners-fork   Github corners style.
     --keywords              Define keywords for search engines.

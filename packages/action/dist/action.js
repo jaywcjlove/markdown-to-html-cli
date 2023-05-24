@@ -98216,6 +98216,8 @@ function lib_create_create() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var string = options.markdown,
     document = options.document,
+    _options$corners = options.corners,
+    corners = _options$corners === void 0 ? true : _options$corners,
     _rewrite = options.rewrite,
     _options$reurls = options.reurls,
     reurls = _options$reurls === void 0 ? {} : _options$reurls,
@@ -98233,20 +98235,20 @@ function lib_create_create() {
       }
     }], [rehypeSlug], [rehypeAutolinkHeadings], [rehypeFormat]],
     rewrite: function rewrite(node, index, parent) {
-      if (node.type == 'element' && node.tagName === 'html') {
+      if (node.type === 'element' && node.tagName === 'html') {
         if (markdownStyleTheme) {
           node.properties = node.properties || {};
           node.properties['data-color-mode'] = markdownStyleTheme;
         }
       }
-      if (node.type == 'element' && node.tagName === 'body' || !document && node.type === 'root') {
+      if (node.type === 'element' && node.tagName === 'body' || !document && node.type === 'root') {
         node.children = markdownStyle(node.children, markdownStyleTheme, wrapperStyle);
         darkMode(darkModeTheme).forEach(function (item) {
           return node.children.unshift(item);
         });
         if (darkModeTheme) {}
       }
-      if (options['github-corners'] && (document && node.type == 'element' && node.tagName === 'body' || !document && node.type === 'root')) {
+      if (corners && options['github-corners'] && (document && node.type == 'element' && node.tagName === 'body' || !document && node.type === 'root')) {
         node.children = Array.isArray(node.children) ? node.children : [];
         if (options['github-corners-fork']) {
           node.children.unshift(githubCornersFork({
@@ -98342,7 +98344,7 @@ function utils_formatConfig(opts) {
       }
     }
   }
-  if (opts['github-corners']) {
+  if (opts['github-corners'] && typeof opts['github-corners'] === 'string') {
     opts['github-corners'] = opts['github-corners'].replace(/^git[+]/, '');
   }
   if (Array.isArray(options.document.link) && options.favicon) {
@@ -98405,6 +98407,7 @@ function run() {
       markdown: opts.markdown || '',
       'markdown-style': 'max-width: 960px;',
       description: opts.description || '',
+      corners: opts.corners || true,
       output: opts.o || opts.output || 'index.html'
     }
   });
@@ -98437,7 +98440,7 @@ function run() {
   fs.writeFileSync(output, strMarkdown);
   console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));
 }
-var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --markdown-style        Markdown wrapper style.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
+var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --no-corners            Hide Github corner from your project page.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --markdown-style        Markdown wrapper style.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
 var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style=./style.css\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style='body { color: red; }'\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
 ;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyle,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyle=(0,lib_core.getInput)('markdown-style');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=19;break;}_context.next=16;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 16:options.markdown=_context.sent.toString();_context.next=20;break;case 19:options.markdown=markdown;case 20:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;options['markdown-style']=markdownStyle;if(corners){_context.next=34;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=34;break;}_context.next=30;return external_fs_default().promises.readFile(projectPkg);case 30:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 34:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=55;break;case 51:_context.prev=51;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 55:case"end":return _context.stop();}},_callee,null,[[0,51]]);}))();

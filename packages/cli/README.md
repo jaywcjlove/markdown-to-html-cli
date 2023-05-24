@@ -82,7 +82,10 @@ $ npm i markdown-to-html-cli
 - `markdown` - Markdown string 
 - `favicon` - Add a Favicon to your Site. 
 - `github-corners` - Add a Github corner to your project page. 
+- `corners` - Show corners. (default: `true`)
 - `dark-mode` - Disable light and dark theme styles button. (default: `true`)
+- `markdown-style` - Markdown wrapper style. 
+- `markdown-style-theme` - Setting markdown-style light/dark theme. (`dark | light`)
 
 ### Output Parameters
 
@@ -132,6 +135,7 @@ Options:
   --config, -o            Specify the configuration file. Default: "<process.cwd()>/package.json".
   --description           Define a description of your web page.
   --favicon               Add a Favicon to your Site.
+  --no-corners            Hide Github corner from your project page.
   --github-corners        Add a Github corner to your project page.
   --github-corners-fork   Github corners style.
   --keywords              Define keywords for search engines.
