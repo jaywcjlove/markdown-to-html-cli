@@ -51,6 +51,11 @@ inputs:
     description: Markdown wrapper style
     default: ''
     required: false
+  
+  style:
+    description: Override default styles. css file path or css string
+    default: ''
+    required: false
 
 outputs:
   output:

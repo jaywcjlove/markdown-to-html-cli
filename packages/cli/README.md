@@ -86,6 +86,7 @@ $ npm i markdown-to-html-cli
 - `dark-mode` - Disable light and dark theme styles button. (default: `true`)
 - `markdown-style` - Markdown wrapper style. 
 - `markdown-style-theme` - Setting markdown-style light/dark theme. (`dark | light`)
+- `style` - Override default styles. css file path or css string
 
 ### Output Parameters
 

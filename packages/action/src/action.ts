@@ -14,6 +14,7 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     const corners = getInput('github-corners');
     const darkMode = getInput('dark-mode');
     const markdownStyle = getInput('markdown-style');
+    const style = getInput('style');
     const markdownStyleTheme = getInput('markdown-style-theme');
     const options: RunArgvs = {}
     info(`source: ${path.resolve(source)}`);
@@ -27,6 +28,7 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     options.description = description;
     options['github-corners'] = corners;
     options['markdown-style'] = markdownStyle;
+    options['style'] = style;
 
     if (!corners) {
       const projectPkg = path.resolve(process.cwd(), config || 'package.json');
