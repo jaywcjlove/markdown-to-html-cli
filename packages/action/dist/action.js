@@ -109585,7 +109585,7 @@ function run() {
   }
   if (mdFilesPath.length > 0) {
     mdFilesPath.forEach(function (mdFile) {
-      argvs.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
+      options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
       opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
       var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
       fs.writeFileSync(opts.output, strMarkdown);

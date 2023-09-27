@@ -119,7 +119,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   }
   if (mdFilesPath.length > 0) {
     mdFilesPath.forEach((mdFile) => {
-      argvs.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
+      options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
       opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
       const strMarkdown = create({ ...argvs, ...options });
       fs.writeFileSync(opts.output, strMarkdown);
