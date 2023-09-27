@@ -43,6 +43,7 @@
     "@wcj/markdown-style": "~1.0.9",
     "@wcj/markdown-to-html": "~2.2.0",
     "fs-extra": "~11.1.0",
+    "glob": "^10.3.10",
     "minimist": "~1.2.5",
     "rehype-autolink-headings": "~6.1.0",
     "rehype-document": "~6.1.0",

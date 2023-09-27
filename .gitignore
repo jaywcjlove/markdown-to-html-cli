@@ -5,7 +5,7 @@ demo
 esm
 cjs
 lib
-index.html
+*.html
 package-lock.json
 __snapshots__
 

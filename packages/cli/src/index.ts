@@ -1,8 +1,9 @@
 import fs from 'fs-extra';
 import path from 'path';
-import minimist, { ParsedArgs } from 'minimist';
-import { Options } from 'rehype-document';
-import { RehypeRewriteOptions } from 'rehype-rewrite';
+import minimist, { type ParsedArgs } from 'minimist';
+import { type Options } from 'rehype-document';
+import { type RehypeRewriteOptions } from 'rehype-rewrite';
+import { globSync } from "glob";
 import { create } from './create';
 import { formatConfig } from './utils';
 
@@ -41,6 +42,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   author?: string;
   /** Override default styles */
   style?: string;
+  /** @example `(node_modules)` */
+  ignoreFile?: string;
 }
 
 export interface MDToHTMLOptions extends RunArgvs {
@@ -64,6 +67,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     default: {
       version: opts.v || opts.version || false,
       help: opts.h || opts.help || false,
+      ignoreFile: opts.ignoreFile || '(node_modules)',
       source: opts.s || opts.source || 'README.md',
       markdown: opts.markdown || '',
       'markdown-style': 'max-width: 960px;',
@@ -77,14 +81,18 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     return;
   }
 
+  const mdFilesPath = globSync([...argvs._], {
+    ignore: {
+      ignored: p => {
+        return (new RegExp(argvs.ignoreFile, 'i')).test(p.fullpath()) || !/\.md$/i.test(p.fullpath())
+      },
+    },
+  });
   const pkgPath = path.resolve(new URL('../package.json', import.meta.url).pathname);
   if ((argvs.v || argvs.version) && fs.existsSync(pkgPath)) {
     const pkg = fs.readJSONSync(pkgPath);
     console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);
     return pkg.version;
-  }
-  if (argvs.source && !argvs.markdown) {
-    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
   const options = formatConfig({ ...opts, ...argvs });
   const output = path.resolve(argvs.output);
@@ -99,10 +107,24 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
       options.document.style.push(options.style);
     }
   }
-
-  const strMarkdown = create({ ...argvs, ...options });
-  fs.writeFileSync(output, strMarkdown);
-  console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
+  // One File
+  if (argvs.source && !argvs.markdown) {
+    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
+  } 
+  if (mdFilesPath.length === 0) {
+    const strMarkdown = create({ ...argvs, ...options });
+    fs.writeFileSync(output, strMarkdown);
+    console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
+  }
+  if (mdFilesPath.length > 0) {
+    mdFilesPath.forEach((mdFile) => {
+      argvs.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
+      opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
+      const strMarkdown = create({ ...argvs, ...options });
+      fs.writeFileSync(opts.output, strMarkdown);
+      console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), opts.output)}\x1b[0m\n`);
+    });
+  }
 }
 
 export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
@@ -124,6 +146,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --output, -o            Output static pages to the specified directory. Default: "index.html"
     --source, -s            The path of the target file "README.md". Default: "README.md"
     --title                 The \`<title>\` tag is required in HTML documents!
+    --ignore-file           Ignore markdown files under certain paths. Default: "(node_modules)"
     --version, -v           Show version number
     --help, -h              Displays help information.
 `;
@@ -131,6 +154,8 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
 export const exampleHelp: string =`\n  Example:
 
     \x1b[35mnpm\x1b[0m markdown-to-html-cli
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli **/*.md
+    \x1b[35mnpm\x1b[0m markdown-to-html-cli **/*.md --ignore-file="(test)"
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"
     \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--config\x1b[0m="config/conf.json"
     \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"

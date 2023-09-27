@@ -145,6 +145,7 @@ Options:
   --style                 Override default styles. css file path or css string.
   --markdown-style-theme  Setting markdown-style light/dark theme.
   --markdown-style        Markdown wrapper style
+  --ignore-file           Ignore markdown files under certain paths. Default: "(node_modules)"
   --output, -o            Output static pages to the specified directory. Default: "index.html"
   --source, -s            The path of the target file "README.md". Default: "README.md"
   --title                 The `<title>` tag is required in HTML documents!
@@ -156,6 +157,8 @@ Example:
   markdown-to-html     --title="Hello World!"
   markdown-to-html     --config="config/conf.json"
   npx markdown-to-html-cli
+  npm markdown-to-html-cli **/*.md
+  npm markdown-to-html-cli **/*.md --ignore-file="(test)"
   npx markdown-to-html-cli --markdown="Hello World!"
   npx markdown-to-html-cli --no-dark-mode
   npx markdown-to-html-cli --dark-mode auto

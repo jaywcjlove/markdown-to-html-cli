@@ -1,4 +1,5 @@
 import FS from 'fs-extra';
+import { execSync } from 'child_process';
 import { copyElement } from '../packages/cli/src/nodes/copy';
 import { githubCorners } from '../packages/cli/src/nodes/github-corners';
 import { markdownStyle } from '../packages/cli/src/nodes/markdown-style';
@@ -123,4 +124,10 @@ it('github-corners-fork test case', async () => {
   expect(htmlStr.indexOf('data-ribbon="Fork me on GitHub"') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('https://github.com/jaywcjlove/markdown-to-html-cli.git') > 0).toBeTruthy();
   await FS.remove('test/demo');
+});
+
+
+it(' test case', async () => {
+  const output = execSync(`node ./packages/cli/lib/cli.js "**/*.md"`).toString().trim();
+  expect(output).toBe(`markdown-to-html: \x1b[32;1mindex.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mindex-zh.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mpackages/cli/index.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mpackages/action/index.html\x1b[0m`);
 });

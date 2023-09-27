@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { RunArgvs, MDToHTMLOptions } from './index';
+import { type RunArgvs, type MDToHTMLOptions } from './index';
 
 export type Options = Omit<RunArgvs, '_'>
 

@@ -2505,6 +2505,66 @@ function isLoopbackAddress(host) {
 
 /***/ }),
 
+/***/ 5240:
+/***/ ((module) => {
+
+"use strict";
+
+
+module.exports = balanced;
+function balanced(a, b, str) {
+  if (a instanceof RegExp) a = maybeMatch(a, str);
+  if (b instanceof RegExp) b = maybeMatch(b, str);
+  var r = range(a, b, str);
+  return r && {
+    start: r[0],
+    end: r[1],
+    pre: str.slice(0, r[0]),
+    body: str.slice(r[0] + a.length, r[1]),
+    post: str.slice(r[1] + b.length)
+  };
+}
+function maybeMatch(reg, str) {
+  var m = str.match(reg);
+  return m ? m[0] : null;
+}
+balanced.range = range;
+function range(a, b, str) {
+  var begs, beg, left, right, result;
+  var ai = str.indexOf(a);
+  var bi = str.indexOf(b, ai + 1);
+  var i = ai;
+  if (ai >= 0 && bi > 0) {
+    if (a === b) {
+      return [ai, bi];
+    }
+    begs = [];
+    left = str.length;
+    while (i >= 0 && !result) {
+      if (i == ai) {
+        begs.push(i);
+        ai = str.indexOf(a, i + 1);
+      } else if (begs.length == 1) {
+        result = [begs.pop(), bi];
+      } else {
+        beg = begs.pop();
+        if (beg < left) {
+          left = beg;
+          right = bi;
+        }
+        bi = str.indexOf(b, i + 1);
+      }
+      i = ai < bi && ai >= 0 ? ai : bi;
+    }
+    if (begs.length) {
+      result = [left, right];
+    }
+  }
+  return result;
+}
+
+/***/ }),
+
 /***/ 1552:
 /***/ ((module) => {
 
@@ -12451,6 +12511,166 @@ function version(uuid) {
 
 /***/ }),
 
+/***/ 4037:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var balanced = __webpack_require__(5240);
+module.exports = expandTop;
+var escSlash = '\0SLASH' + Math.random() + '\0';
+var escOpen = '\0OPEN' + Math.random() + '\0';
+var escClose = '\0CLOSE' + Math.random() + '\0';
+var escComma = '\0COMMA' + Math.random() + '\0';
+var escPeriod = '\0PERIOD' + Math.random() + '\0';
+function numeric(str) {
+  return parseInt(str, 10) == str ? parseInt(str, 10) : str.charCodeAt(0);
+}
+function escapeBraces(str) {
+  return str.split('\\\\').join(escSlash).split('\\{').join(escOpen).split('\\}').join(escClose).split('\\,').join(escComma).split('\\.').join(escPeriod);
+}
+function unescapeBraces(str) {
+  return str.split(escSlash).join('\\').split(escOpen).join('{').split(escClose).join('}').split(escComma).join(',').split(escPeriod).join('.');
+}
+
+// Basically just str.split(","), but handling cases
+// where we have nested braced sections, which should be
+// treated as individual members, like {a,{b,c},d}
+function parseCommaParts(str) {
+  if (!str) return [''];
+  var parts = [];
+  var m = balanced('{', '}', str);
+  if (!m) return str.split(',');
+  var pre = m.pre;
+  var body = m.body;
+  var post = m.post;
+  var p = pre.split(',');
+  p[p.length - 1] += '{' + body + '}';
+  var postParts = parseCommaParts(post);
+  if (post.length) {
+    p[p.length - 1] += postParts.shift();
+    p.push.apply(p, postParts);
+  }
+  parts.push.apply(parts, p);
+  return parts;
+}
+function expandTop(str) {
+  if (!str) return [];
+
+  // I don't know why Bash 4.3 does this, but it does.
+  // Anything starting with {} will have the first two bytes preserved
+  // but *only* at the top level, so {},a}b will not expand to anything,
+  // but a{},b}c will be expanded to [a}c,abc].
+  // One could argue that this is a bug in Bash, but since the goal of
+  // this module is to match Bash's rules, we escape a leading {}
+  if (str.substr(0, 2) === '{}') {
+    str = '\\{\\}' + str.substr(2);
+  }
+  return expand(escapeBraces(str), true).map(unescapeBraces);
+}
+function embrace(str) {
+  return '{' + str + '}';
+}
+function isPadded(el) {
+  return /^-?0\d/.test(el);
+}
+function lte(i, y) {
+  return i <= y;
+}
+function gte(i, y) {
+  return i >= y;
+}
+function expand(str, isTop) {
+  var expansions = [];
+  var m = balanced('{', '}', str);
+  if (!m) return [str];
+
+  // no need to expand pre, since it is guaranteed to be free of brace-sets
+  var pre = m.pre;
+  var post = m.post.length ? expand(m.post, false) : [''];
+  if (/\$$/.test(m.pre)) {
+    for (var k = 0; k < post.length; k++) {
+      var expansion = pre + '{' + m.body + '}' + post[k];
+      expansions.push(expansion);
+    }
+  } else {
+    var isNumericSequence = /^-?\d+\.\.-?\d+(?:\.\.-?\d+)?$/.test(m.body);
+    var isAlphaSequence = /^[a-zA-Z]\.\.[a-zA-Z](?:\.\.-?\d+)?$/.test(m.body);
+    var isSequence = isNumericSequence || isAlphaSequence;
+    var isOptions = m.body.indexOf(',') >= 0;
+    if (!isSequence && !isOptions) {
+      // {a},b}
+      if (m.post.match(/,.*\}/)) {
+        str = m.pre + '{' + m.body + escClose + m.post;
+        return expand(str);
+      }
+      return [str];
+    }
+    var n;
+    if (isSequence) {
+      n = m.body.split(/\.\./);
+    } else {
+      n = parseCommaParts(m.body);
+      if (n.length === 1) {
+        // x{{a,b}}y ==> x{a}y x{b}y
+        n = expand(n[0], false).map(embrace);
+        if (n.length === 1) {
+          return post.map(function (p) {
+            return m.pre + n[0] + p;
+          });
+        }
+      }
+    }
+
+    // at this point, n is the parts, and we know it's not a comma set
+    // with a single entry.
+    var N;
+    if (isSequence) {
+      var x = numeric(n[0]);
+      var y = numeric(n[1]);
+      var width = Math.max(n[0].length, n[1].length);
+      var incr = n.length == 3 ? Math.abs(numeric(n[2])) : 1;
+      var test = lte;
+      var reverse = y < x;
+      if (reverse) {
+        incr *= -1;
+        test = gte;
+      }
+      var pad = n.some(isPadded);
+      N = [];
+      for (var i = x; test(i, y); i += incr) {
+        var c;
+        if (isAlphaSequence) {
+          c = String.fromCharCode(i);
+          if (c === '\\') c = '';
+        } else {
+          c = String(i);
+          if (pad) {
+            var need = width - c.length;
+            if (need > 0) {
+              var z = new Array(need + 1).join('0');
+              if (i < 0) c = '-' + z + c.slice(1);else c = z + c;
+            }
+          }
+        }
+        N.push(c);
+      }
+    } else {
+      N = [];
+      for (var j = 0; j < n.length; j++) {
+        N.push.apply(N, expand(n[j], false));
+      }
+    }
+    for (var j = 0; j < N.length; j++) {
+      for (var k = 0; k < post.length; k++) {
+        var expansion = pre + N[j] + post[k];
+        if (!isTop || isSequence || expansion) expansions.push(expansion);
+      }
+    }
+  }
+  return expansions;
+}
+
+/***/ }),
+
 /***/ 6125:
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
@@ -15085,6 +15305,36 @@ module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.expo
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	(() => {
+/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
+/******/ 			}
+/******/ 			def['default'] = () => (value);
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -15554,6 +15804,7 @@ function _asyncToGenerator(fn) {
 }
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __webpack_require__(7147);
+var external_fs_namespaceObject = /*#__PURE__*/__webpack_require__.t(external_fs_, 2);
 var external_fs_default = /*#__PURE__*/__webpack_require__.n(external_fs_);
 // EXTERNAL MODULE: external "path"
 var external_path_ = __webpack_require__(1017);
@@ -15596,8 +15847,61 @@ function _nonIterableSpread() {
 
 
 
-function _toConsumableArray(arr) {
+function toConsumableArray_toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+  if (!it) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+      var F = function F() {};
+      return {
+        s: F,
+        n: function n() {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function e(_e) {
+          throw _e;
+        },
+        f: F
+      };
+    }
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  var normalCompletion = true,
+    didErr = false,
+    err;
+  return {
+    s: function s() {
+      it = it.call(o);
+    },
+    n: function n() {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function e(_e2) {
+      didErr = true;
+      err = _e2;
+    },
+    f: function f() {
+      try {
+        if (!normalCompletion && it["return"] != null) it["return"]();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
 }
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
 function _classCallCheck(instance, Constructor) {
@@ -15624,8 +15928,6 @@ function _createClass(Constructor, protoProps, staticProps) {
   });
   return Constructor;
 }
-// EXTERNAL MODULE: ../../node_modules/is-buffer/index.js
-var is_buffer = __webpack_require__(5352);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
 function _setPrototypeOf(o, p) {
   _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
@@ -15707,6 +16009,2148 @@ function _createSuper(Derived) {
     return _possibleConstructorReturn(this, result);
   };
 }
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+
+
+
+
+function _slicedToArray(arr, i) {
+  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+}
+// EXTERNAL MODULE: ../cli/node_modules/brace-expansion/index.js
+var brace_expansion = __webpack_require__(4037);
+;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/assert-valid-pattern.js
+var MAX_PATTERN_LENGTH = 1024 * 64;
+var assertValidPattern = function assertValidPattern(pattern) {
+  if (typeof pattern !== 'string') {
+    throw new TypeError('invalid pattern');
+  }
+  if (pattern.length > MAX_PATTERN_LENGTH) {
+    throw new TypeError('pattern is too long');
+  }
+};
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/checkPrivateRedeclaration.js
+function _checkPrivateRedeclaration(obj, privateCollection) {
+  if (privateCollection.has(obj)) {
+    throw new TypeError("Cannot initialize the same private elements twice on an object");
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateMethodInitSpec.js
+
+function _classPrivateMethodInitSpec(obj, privateSet) {
+  _checkPrivateRedeclaration(obj, privateSet);
+  privateSet.add(obj);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldInitSpec.js
+
+function _classPrivateFieldInitSpec(obj, privateMap, value) {
+  _checkPrivateRedeclaration(obj, privateMap);
+  privateMap.set(obj, value);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateMethodGet.js
+function _classPrivateMethodGet(receiver, privateSet, fn) {
+  if (!privateSet.has(receiver)) {
+    throw new TypeError("attempted to get private field on non-instance");
+  }
+  return fn;
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCheckPrivateStaticAccess.js
+function _classCheckPrivateStaticAccess(receiver, classConstructor) {
+  if (receiver !== classConstructor) {
+    throw new TypeError("Private static access of wrong provenance");
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classStaticPrivateMethodGet.js
+
+function _classStaticPrivateMethodGet(receiver, classConstructor, method) {
+  _classCheckPrivateStaticAccess(receiver, classConstructor);
+  return method;
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classApplyDescriptorGet.js
+function _classApplyDescriptorGet(receiver, descriptor) {
+  if (descriptor.get) {
+    return descriptor.get.call(receiver);
+  }
+  return descriptor.value;
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classExtractFieldDescriptor.js
+function _classExtractFieldDescriptor(receiver, privateMap, action) {
+  if (!privateMap.has(receiver)) {
+    throw new TypeError("attempted to " + action + " private field on non-instance");
+  }
+  return privateMap.get(receiver);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldGet.js
+
+
+function _classPrivateFieldGet(receiver, privateMap) {
+  var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "get");
+  return _classApplyDescriptorGet(receiver, descriptor);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classApplyDescriptorSet.js
+function _classApplyDescriptorSet(receiver, descriptor, value) {
+  if (descriptor.set) {
+    descriptor.set.call(receiver, value);
+  } else {
+    if (!descriptor.writable) {
+      throw new TypeError("attempted to set read only private field");
+    }
+    descriptor.value = value;
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldSet.js
+
+
+function _classPrivateFieldSet(receiver, privateMap, value) {
+  var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "set");
+  _classApplyDescriptorSet(receiver, descriptor, value);
+  return value;
+}
+;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/brace-expressions.js
+
+// translate the various posix character classes into unicode properties
+// this works across all unicode locales
+// { <posix class>: [<translation>, /u flag required, negated]
+var posixClasses = {
+  '[:alnum:]': ['\\p{L}\\p{Nl}\\p{Nd}', true],
+  '[:alpha:]': ['\\p{L}\\p{Nl}', true],
+  '[:ascii:]': ['\\x' + '00-\\x' + '7f', false],
+  '[:blank:]': ['\\p{Zs}\\t', true],
+  '[:cntrl:]': ['\\p{Cc}', true],
+  '[:digit:]': ['\\p{Nd}', true],
+  '[:graph:]': ['\\p{Z}\\p{C}', true, true],
+  '[:lower:]': ['\\p{Ll}', true],
+  '[:print:]': ['\\p{C}', true],
+  '[:punct:]': ['\\p{P}', true],
+  '[:space:]': ['\\p{Z}\\t\\r\\n\\v\\f', true],
+  '[:upper:]': ['\\p{Lu}', true],
+  '[:word:]': ['\\p{L}\\p{Nl}\\p{Nd}\\p{Pc}', true],
+  '[:xdigit:]': ['A-Fa-f0-9', false]
+};
+// only need to escape a few things inside of brace expressions
+// escapes: [ \ ] -
+var braceEscape = function braceEscape(s) {
+  return s.replace(/[[\]\\-]/g, '\\$&');
+};
+// escape all regexp magic characters
+var regexpEscape = function regexpEscape(s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
+// everything has already been escaped, we just have to join
+var rangesToString = function rangesToString(ranges) {
+  return ranges.join('');
+};
+// takes a glob string at a posix brace expression, and returns
+// an equivalent regular expression source, and boolean indicating
+// whether the /u flag needs to be applied, and the number of chars
+// consumed to parse the character class.
+// This also removes out of order ranges, and returns ($.) if the
+// entire class just no good.
+var parseClass = function parseClass(glob, position) {
+  var pos = position;
+  /* c8 ignore start */
+  if (glob.charAt(pos) !== '[') {
+    throw new Error('not in a brace expression');
+  }
+  /* c8 ignore stop */
+  var ranges = [];
+  var negs = [];
+  var i = pos + 1;
+  var sawStart = false;
+  var uflag = false;
+  var escaping = false;
+  var negate = false;
+  var endPos = pos;
+  var rangeStart = '';
+  WHILE: while (i < glob.length) {
+    var c = glob.charAt(i);
+    if ((c === '!' || c === '^') && i === pos + 1) {
+      negate = true;
+      i++;
+      continue;
+    }
+    if (c === ']' && sawStart && !escaping) {
+      endPos = i + 1;
+      break;
+    }
+    sawStart = true;
+    if (c === '\\') {
+      if (!escaping) {
+        escaping = true;
+        i++;
+        continue;
+      }
+      // escaped \ char, fall through and treat like normal char
+    }
+
+    if (c === '[' && !escaping) {
+      // either a posix class, a collation equivalent, or just a [
+      for (var _i = 0, _Object$entries = Object.entries(posixClasses); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          cls = _Object$entries$_i[0],
+          _Object$entries$_i$ = _slicedToArray(_Object$entries$_i[1], 3),
+          unip = _Object$entries$_i$[0],
+          u = _Object$entries$_i$[1],
+          neg = _Object$entries$_i$[2];
+        if (glob.startsWith(cls, i)) {
+          // invalid, [a-[] is fine, but not [a-[:alpha]]
+          if (rangeStart) {
+            return ['$.', false, glob.length - pos, true];
+          }
+          i += cls.length;
+          if (neg) negs.push(unip);else ranges.push(unip);
+          uflag = uflag || u;
+          continue WHILE;
+        }
+      }
+    }
+    // now it's just a normal character, effectively
+    escaping = false;
+    if (rangeStart) {
+      // throw this range away if it's not valid, but others
+      // can still match.
+      if (c > rangeStart) {
+        ranges.push(braceEscape(rangeStart) + '-' + braceEscape(c));
+      } else if (c === rangeStart) {
+        ranges.push(braceEscape(c));
+      }
+      rangeStart = '';
+      i++;
+      continue;
+    }
+    // now might be the start of a range.
+    // can be either c-d or c-] or c<more...>] or c] at this point
+    if (glob.startsWith('-]', i + 1)) {
+      ranges.push(braceEscape(c + '-'));
+      i += 2;
+      continue;
+    }
+    if (glob.startsWith('-', i + 1)) {
+      rangeStart = c;
+      i += 2;
+      continue;
+    }
+    // not the start of a range, just a single character
+    ranges.push(braceEscape(c));
+    i++;
+  }
+  if (endPos < i) {
+    // didn't see the end of the class, not a valid class,
+    // but might still be valid as a literal match.
+    return ['', false, 0, false];
+  }
+  // if we got no ranges and no negates, then we have a range that
+  // cannot possibly match anything, and that poisons the whole glob
+  if (!ranges.length && !negs.length) {
+    return ['$.', false, glob.length - pos, true];
+  }
+  // if we got one positive range, and it's a single character, then that's
+  // not actually a magic pattern, it's just that one literal character.
+  // we should not treat that as "magic", we should just return the literal
+  // character. [_] is a perfectly valid way to escape glob magic chars.
+  if (negs.length === 0 && ranges.length === 1 && /^\\?.$/.test(ranges[0]) && !negate) {
+    var r = ranges[0].length === 2 ? ranges[0].slice(-1) : ranges[0];
+    return [regexpEscape(r), false, endPos - pos, false];
+  }
+  var sranges = '[' + (negate ? '^' : '') + rangesToString(ranges) + ']';
+  var snegs = '[' + (negate ? '' : '^') + rangesToString(negs) + ']';
+  var comb = ranges.length && negs.length ? '(' + sranges + '|' + snegs + ')' : ranges.length ? sranges : snegs;
+  return [comb, uflag, endPos - pos, true];
+};
+;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/unescape.js
+/**
+ * Un-escape a string that has been escaped with {@link escape}.
+ *
+ * If the {@link windowsPathsNoEscape} option is used, then square-brace
+ * escapes are removed, but not backslash escapes.  For example, it will turn
+ * the string `'[*]'` into `*`, but it will not turn `'\\*'` into `'*'`,
+ * becuase `\` is a path separator in `windowsPathsNoEscape` mode.
+ *
+ * When `windowsPathsNoEscape` is not set, then both brace escapes and
+ * backslash escapes are removed.
+ *
+ * Slashes (and backslashes in `windowsPathsNoEscape` mode) cannot be escaped
+ * or unescaped.
+ */
+var unescape_unescape = function unescape(s) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+    _ref$windowsPathsNoEs = _ref.windowsPathsNoEscape,
+    windowsPathsNoEscape = _ref$windowsPathsNoEs === void 0 ? false : _ref$windowsPathsNoEs;
+  return windowsPathsNoEscape ? s.replace(/\[([^\/\\])\]/g, '$1') : s.replace(/((?!\\).|^)\[([^\/\\])\]/g, '$1$2').replace(/\\([^\/])/g, '$1');
+};
+;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/ast.js
+
+
+
+
+
+
+
+
+
+
+
+
+// parse a single path portion
+
+
+var types = new Set(['!', '?', '+', '*', '@']);
+var isExtglobType = function isExtglobType(c) {
+  return types.has(c);
+};
+// Patterns that get prepended to bind to the start of either the
+// entire string, or just a single path portion, to prevent dots
+// and/or traversal patterns, when needed.
+// Exts don't need the ^ or / bit, because the root binds that already.
+var startNoTraversal = '(?!(?:^|/)\\.\\.?(?:$|/))';
+var startNoDot = '(?!\\.)';
+// characters that indicate a start of pattern needs the "no dots" bit,
+// because a dot *might* be matched. ( is not in the list, because in
+// the case of a child extglob, it will handle the prevention itself.
+var addPatternStart = new Set(['[', '.']);
+// cases where traversal is A-OK, no dot prevention needed
+var justDots = new Set(['..', '.']);
+var reSpecials = new Set('().*{}+?[]^$\\!');
+var regExpEscape = function regExpEscape(s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
+// any single thing other than /
+var qmark = '[^/]';
+// * => any number of characters
+var star = qmark + '*?';
+// use + when we need to ensure that *something* matches, because the * is
+// the only thing in the path portion.
+var starNoEmpty = qmark + '+?';
+// remove the \ chars that we added if we end up doing a nonmagic compare
+// const deslash = (s: string) => s.replace(/\\(.)/g, '$1')
+var _root = /*#__PURE__*/new WeakMap();
+var _hasMagic2 = /*#__PURE__*/new WeakMap();
+var _uflag = /*#__PURE__*/new WeakMap();
+var _parts = /*#__PURE__*/new WeakMap();
+var _parent = /*#__PURE__*/new WeakMap();
+var _parentIndex = /*#__PURE__*/new WeakMap();
+var _negs = /*#__PURE__*/new WeakMap();
+var _filledNegs = /*#__PURE__*/new WeakMap();
+var _options = /*#__PURE__*/new WeakMap();
+var _toString = /*#__PURE__*/new WeakMap();
+var _emptyExt = /*#__PURE__*/new WeakMap();
+var _fillNegs = /*#__PURE__*/new WeakSet();
+var _partsToRegExp = /*#__PURE__*/new WeakSet();
+var AST = /*#__PURE__*/function () {
+  // set to true if it's an extglob with no children
+  // (which really means one child of '')
+
+  function AST(type, parent) {
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    _classCallCheck(this, AST);
+    _classPrivateMethodInitSpec(this, _partsToRegExp);
+    _classPrivateMethodInitSpec(this, _fillNegs);
+    _defineProperty(this, "type", void 0);
+    _classPrivateFieldInitSpec(this, _root, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _hasMagic2, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _uflag, {
+      writable: true,
+      value: false
+    });
+    _classPrivateFieldInitSpec(this, _parts, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _parent, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _parentIndex, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _negs, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _filledNegs, {
+      writable: true,
+      value: false
+    });
+    _classPrivateFieldInitSpec(this, _options, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _toString, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _emptyExt, {
+      writable: true,
+      value: false
+    });
+    this.type = type;
+    // extglobs are inherently magical
+    if (type) _classPrivateFieldSet(this, _hasMagic2, true);
+    _classPrivateFieldSet(this, _parent, parent);
+    _classPrivateFieldSet(this, _root, _classPrivateFieldGet(this, _parent) ? _classPrivateFieldGet(_classPrivateFieldGet(this, _parent), _root) : this);
+    _classPrivateFieldSet(this, _options, _classPrivateFieldGet(this, _root) === this ? options : _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _options));
+    _classPrivateFieldSet(this, _negs, _classPrivateFieldGet(this, _root) === this ? [] : _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _negs));
+    if (type === '!' && !_classPrivateFieldGet(_classPrivateFieldGet(this, _root), _filledNegs)) _classPrivateFieldGet(this, _negs).push(this);
+    _classPrivateFieldSet(this, _parentIndex, _classPrivateFieldGet(this, _parent) ? _classPrivateFieldGet(_classPrivateFieldGet(this, _parent), _parts).length : 0);
+  }
+  _createClass(AST, [{
+    key: "hasMagic",
+    get: function get() {
+      /* c8 ignore start */
+      if (_classPrivateFieldGet(this, _hasMagic2) !== undefined) return _classPrivateFieldGet(this, _hasMagic2);
+      /* c8 ignore stop */
+      var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _parts)),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var p = _step.value;
+          if (typeof p === 'string') continue;
+          if (p.type || p.hasMagic) return _classPrivateFieldSet(this, _hasMagic2, true);
+        }
+        // note: will be undefined until we generate the regexp src and find out
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return _classPrivateFieldGet(this, _hasMagic2);
+    }
+    // reconstructs the pattern
+  }, {
+    key: "toString",
+    value: function toString() {
+      if (_classPrivateFieldGet(this, _toString) !== undefined) return _classPrivateFieldGet(this, _toString);
+      if (!this.type) {
+        return _classPrivateFieldSet(this, _toString, _classPrivateFieldGet(this, _parts).map(function (p) {
+          return String(p);
+        }).join(''));
+      } else {
+        return _classPrivateFieldSet(this, _toString, this.type + '(' + _classPrivateFieldGet(this, _parts).map(function (p) {
+          return String(p);
+        }).join('|') + ')');
+      }
+    }
+  }, {
+    key: "push",
+    value: function push() {
+      for (var _len = arguments.length, parts = new Array(_len), _key = 0; _key < _len; _key++) {
+        parts[_key] = arguments[_key];
+      }
+      for (var _i = 0, _parts2 = parts; _i < _parts2.length; _i++) {
+        var p = _parts2[_i];
+        if (p === '') continue;
+        /* c8 ignore start */
+        if (typeof p !== 'string' && !(p instanceof AST && _classPrivateFieldGet(p, _parent) === this)) {
+          throw new Error('invalid part: ' + p);
+        }
+        /* c8 ignore stop */
+        _classPrivateFieldGet(this, _parts).push(p);
+      }
+    }
+  }, {
+    key: "toJSON",
+    value: function toJSON() {
+      var _classPrivateFieldGet2;
+      var ret = this.type === null ? _classPrivateFieldGet(this, _parts).slice().map(function (p) {
+        return typeof p === 'string' ? p : p.toJSON();
+      }) : [this.type].concat(toConsumableArray_toConsumableArray(_classPrivateFieldGet(this, _parts).map(function (p) {
+        return p.toJSON();
+      })));
+      if (this.isStart() && !this.type) ret.unshift([]);
+      if (this.isEnd() && (this === _classPrivateFieldGet(this, _root) || _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _filledNegs) && ((_classPrivateFieldGet2 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.type) === '!')) {
+        ret.push({});
+      }
+      return ret;
+    }
+  }, {
+    key: "isStart",
+    value: function isStart() {
+      var _classPrivateFieldGet3;
+      if (_classPrivateFieldGet(this, _root) === this) return true;
+      // if (this.type) return !!this.#parent?.isStart()
+      if (!((_classPrivateFieldGet3 = _classPrivateFieldGet(this, _parent)) !== null && _classPrivateFieldGet3 !== void 0 && _classPrivateFieldGet3.isStart())) return false;
+      if (_classPrivateFieldGet(this, _parentIndex) === 0) return true;
+      // if everything AHEAD of this is a negation, then it's still the "start"
+      var p = _classPrivateFieldGet(this, _parent);
+      for (var i = 0; i < _classPrivateFieldGet(this, _parentIndex); i++) {
+        var pp = _classPrivateFieldGet(p, _parts)[i];
+        if (!(pp instanceof AST && pp.type === '!')) {
+          return false;
+        }
+      }
+      return true;
+    }
+  }, {
+    key: "isEnd",
+    value: function isEnd() {
+      var _classPrivateFieldGet4, _classPrivateFieldGet5, _classPrivateFieldGet6;
+      if (_classPrivateFieldGet(this, _root) === this) return true;
+      if (((_classPrivateFieldGet4 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.type) === '!') return true;
+      if (!((_classPrivateFieldGet5 = _classPrivateFieldGet(this, _parent)) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.isEnd())) return false;
+      if (!this.type) return (_classPrivateFieldGet6 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.isEnd();
+      // if not root, it'll always have a parent
+      /* c8 ignore start */
+      var pl = _classPrivateFieldGet(this, _parent) ? _classPrivateFieldGet(_classPrivateFieldGet(this, _parent), _parts).length : 0;
+      /* c8 ignore stop */
+      return _classPrivateFieldGet(this, _parentIndex) === pl - 1;
+    }
+  }, {
+    key: "copyIn",
+    value: function copyIn(part) {
+      if (typeof part === 'string') this.push(part);else this.push(part.clone(this));
+    }
+  }, {
+    key: "clone",
+    value: function clone(parent) {
+      var c = new AST(this.type, parent);
+      var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _parts)),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var p = _step2.value;
+          c.copyIn(p);
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      return c;
+    }
+  }, {
+    key: "toMMPattern",
+    value:
+    // returns the regular expression if there's magic, or the unescaped
+    // string if not.
+    function toMMPattern() {
+      // should only be called on root
+      /* c8 ignore start */
+      if (this !== _classPrivateFieldGet(this, _root)) return _classPrivateFieldGet(this, _root).toMMPattern();
+      /* c8 ignore stop */
+      var glob = this.toString();
+      var _this$toRegExpSource = this.toRegExpSource(),
+        _this$toRegExpSource2 = _slicedToArray(_this$toRegExpSource, 4),
+        re = _this$toRegExpSource2[0],
+        body = _this$toRegExpSource2[1],
+        hasMagic = _this$toRegExpSource2[2],
+        uflag = _this$toRegExpSource2[3];
+      // if we're in nocase mode, and not nocaseMagicOnly, then we do
+      // still need a regular expression if we have to case-insensitively
+      // match capital/lowercase characters.
+      var anyMagic = hasMagic || _classPrivateFieldGet(this, _hasMagic2) || _classPrivateFieldGet(this, _options).nocase && !_classPrivateFieldGet(this, _options).nocaseMagicOnly && glob.toUpperCase() !== glob.toLowerCase();
+      if (!anyMagic) {
+        return body;
+      }
+      var flags = (_classPrivateFieldGet(this, _options).nocase ? 'i' : '') + (uflag ? 'u' : '');
+      return Object.assign(new RegExp("^".concat(re, "$"), flags), {
+        _src: re,
+        _glob: glob
+      });
+    }
+    // returns the string match, the regexp source, whether there's magic
+    // in the regexp (so a regular expression is required) and whether or
+    // not the uflag is needed for the regular expression (for posix classes)
+    // TODO: instead of injecting the start/end at this point, just return
+    // the BODY of the regexp, along with the start/end portions suitable
+    // for binding the start/end in either a joined full-path makeRe context
+    // (where we bind to (^|/), or a standalone matchPart context (where
+    // we bind to ^, and not /).  Otherwise slashes get duped!
+    //
+    // In part-matching mode, the start is:
+    // - if not isStart: nothing
+    // - if traversal possible, but not allowed: ^(?!\.\.?$)
+    // - if dots allowed or not possible: ^
+    // - if dots possible and not allowed: ^(?!\.)
+    // end is:
+    // - if not isEnd(): nothing
+    // - else: $
+    //
+    // In full-path matching mode, we put the slash at the START of the
+    // pattern, so start is:
+    // - if first pattern: same as part-matching mode
+    // - if not isStart(): nothing
+    // - if traversal possible, but not allowed: /(?!\.\.?(?:$|/))
+    // - if dots allowed or not possible: /
+    // - if dots possible and not allowed: /(?!\.)
+    // end is:
+    // - if last pattern, same as part-matching mode
+    // - else nothing
+    //
+    // Always put the (?:$|/) on negated tails, though, because that has to be
+    // there to bind the end of the negated pattern portion, and it's easier to
+    // just stick it in now rather than try to inject it later in the middle of
+    // the pattern.
+    //
+    // We can just always return the same end, and leave it up to the caller
+    // to know whether it's going to be used joined or in parts.
+    // And, if the start is adjusted slightly, can do the same there:
+    // - if not isStart: nothing
+    // - if traversal possible, but not allowed: (?:/|^)(?!\.\.?$)
+    // - if dots allowed or not possible: (?:/|^)
+    // - if dots possible and not allowed: (?:/|^)(?!\.)
+    //
+    // But it's better to have a simpler binding without a conditional, for
+    // performance, so probably better to return both start options.
+    //
+    // Then the caller just ignores the end if it's not the first pattern,
+    // and the start always gets applied.
+    //
+    // But that's always going to be $ if it's the ending pattern, or nothing,
+    // so the caller can just attach $ at the end of the pattern when building.
+    //
+    // So the todo is:
+    // - better detect what kind of start is needed
+    // - return both flavors of starting pattern
+    // - attach $ at the end of the pattern when creating the actual RegExp
+    //
+    // Ah, but wait, no, that all only applies to the root when the first pattern
+    // is not an extglob. If the first pattern IS an extglob, then we need all
+    // that dot prevention biz to live in the extglob portions, because eg
+    // +(*|.x*) can match .xy but not .yx.
+    //
+    // So, return the two flavors if it's #root and the first child is not an
+    // AST, otherwise leave it to the child AST to handle it, and there,
+    // use the (?:^|/) style of start binding.
+    //
+    // Even simplified further:
+    // - Since the start for a join is eg /(?!\.) and the start for a part
+    // is ^(?!\.), we can just prepend (?!\.) to the pattern (either root
+    // or start or whatever) and prepend ^ or / at the Regexp construction.
+  }, {
+    key: "toRegExpSource",
+    value: function toRegExpSource(allowDot) {
+      var _this = this;
+      var dot = allowDot !== null && allowDot !== void 0 ? allowDot : !!_classPrivateFieldGet(this, _options).dot;
+      if (_classPrivateFieldGet(this, _root) === this) _classPrivateMethodGet(this, _fillNegs, _fillNegs2).call(this);
+      if (!this.type) {
+        var _classPrivateFieldGet7;
+        var noEmpty = this.isStart() && this.isEnd();
+        var src = _classPrivateFieldGet(this, _parts).map(function (p) {
+          var _ref = typeof p === 'string' ? _classStaticPrivateMethodGet(AST, AST, _parseGlob).call(AST, p, _classPrivateFieldGet(_this, _hasMagic2), noEmpty) : p.toRegExpSource(allowDot),
+            _ref2 = _slicedToArray(_ref, 4),
+            re = _ref2[0],
+            _ = _ref2[1],
+            hasMagic = _ref2[2],
+            uflag = _ref2[3];
+          _classPrivateFieldSet(_this, _hasMagic2, _classPrivateFieldGet(_this, _hasMagic2) || hasMagic);
+          _classPrivateFieldSet(_this, _uflag, _classPrivateFieldGet(_this, _uflag) || uflag);
+          return re;
+        }).join('');
+        var _start = '';
+        if (this.isStart()) {
+          if (typeof _classPrivateFieldGet(this, _parts)[0] === 'string') {
+            // this is the string that will match the start of the pattern,
+            // so we need to protect against dots and such.
+            // '.' and '..' cannot match unless the pattern is that exactly,
+            // even if it starts with . or dot:true is set.
+            var dotTravAllowed = _classPrivateFieldGet(this, _parts).length === 1 && justDots.has(_classPrivateFieldGet(this, _parts)[0]);
+            if (!dotTravAllowed) {
+              var aps = addPatternStart;
+              // check if we have a possibility of matching . or ..,
+              // and prevent that.
+              var needNoTrav =
+              // dots are allowed, and the pattern starts with [ or .
+              dot && aps.has(src.charAt(0)) ||
+              // the pattern starts with \., and then [ or .
+              src.startsWith('\\.') && aps.has(src.charAt(2)) ||
+              // the pattern starts with \.\., and then [ or .
+              src.startsWith('\\.\\.') && aps.has(src.charAt(4));
+              // no need to prevent dots if it can't match a dot, or if a
+              // sub-pattern will be preventing it anyway.
+              var needNoDot = !dot && !allowDot && aps.has(src.charAt(0));
+              _start = needNoTrav ? startNoTraversal : needNoDot ? startNoDot : '';
+            }
+          }
+        }
+        // append the "end of path portion" pattern to negation tails
+        var end = '';
+        if (this.isEnd() && _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _filledNegs) && ((_classPrivateFieldGet7 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet7 === void 0 ? void 0 : _classPrivateFieldGet7.type) === '!') {
+          end = '(?:$|\\/)';
+        }
+        var _final = _start + src + end;
+        return [_final, unescape_unescape(src), _classPrivateFieldSet(this, _hasMagic2, !!_classPrivateFieldGet(this, _hasMagic2)), _classPrivateFieldGet(this, _uflag)];
+      }
+      // We need to calculate the body *twice* if it's a repeat pattern
+      // at the start, once in nodot mode, then again in dot mode, so a
+      // pattern like *(?) can match 'x.y'
+      var repeated = this.type === '*' || this.type === '+';
+      // some kind of extglob
+      var start = this.type === '!' ? '(?:(?!(?:' : '(?:';
+      var body = _classPrivateMethodGet(this, _partsToRegExp, _partsToRegExp2).call(this, dot);
+      if (this.isStart() && this.isEnd() && !body && this.type !== '!') {
+        // invalid extglob, has to at least be *something* present, if it's
+        // the entire path portion.
+        var s = this.toString();
+        _classPrivateFieldSet(this, _parts, [s]);
+        this.type = null;
+        _classPrivateFieldSet(this, _hasMagic2, undefined);
+        return [s, unescape_unescape(this.toString()), false, false];
+      }
+      // XXX abstract out this map method
+      var bodyDotAllowed = !repeated || allowDot || dot || !startNoDot ? '' : _classPrivateMethodGet(this, _partsToRegExp, _partsToRegExp2).call(this, true);
+      if (bodyDotAllowed === body) {
+        bodyDotAllowed = '';
+      }
+      if (bodyDotAllowed) {
+        body = "(?:".concat(body, ")(?:").concat(bodyDotAllowed, ")*?");
+      }
+      // an empty !() is exactly equivalent to a starNoEmpty
+      var _final2 = '';
+      if (this.type === '!' && _classPrivateFieldGet(this, _emptyExt)) {
+        _final2 = (this.isStart() && !dot ? startNoDot : '') + starNoEmpty;
+      } else {
+        var close = this.type === '!' ?
+        // !() must match something,but !(x) can match ''
+        '))' + (this.isStart() && !dot && !allowDot ? startNoDot : '') + star + ')' : this.type === '@' ? ')' : this.type === '?' ? ')?' : this.type === '+' && bodyDotAllowed ? ')' : this.type === '*' && bodyDotAllowed ? ")?" : ")".concat(this.type);
+        _final2 = start + body + close;
+      }
+      return [_final2, unescape_unescape(body), _classPrivateFieldSet(this, _hasMagic2, !!_classPrivateFieldGet(this, _hasMagic2)), _classPrivateFieldGet(this, _uflag)];
+    }
+  }], [{
+    key: "fromGlob",
+    value: function fromGlob(pattern) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var ast = new AST(null, undefined, options);
+      _classStaticPrivateMethodGet(AST, AST, _parseAST).call(AST, pattern, ast, 0, options);
+      return ast;
+    }
+  }]);
+  return AST;
+}();
+function _fillNegs2() {
+  /* c8 ignore start */
+  if (this !== _classPrivateFieldGet(this, _root)) throw new Error('should only call on root');
+  if (_classPrivateFieldGet(this, _filledNegs)) return this;
+  /* c8 ignore stop */
+  // call toString() once to fill this out
+  this.toString();
+  _classPrivateFieldSet(this, _filledNegs, true);
+  var n;
+  while (n = _classPrivateFieldGet(this, _negs).pop()) {
+    if (n.type !== '!') continue;
+    // walk up the tree, appending everthing that comes AFTER parentIndex
+    var p = n;
+    var pp = _classPrivateFieldGet(p, _parent);
+    while (pp) {
+      for (var i = _classPrivateFieldGet(p, _parentIndex) + 1; !pp.type && i < _classPrivateFieldGet(pp, _parts).length; i++) {
+        var _iterator3 = _createForOfIteratorHelper(_classPrivateFieldGet(n, _parts)),
+          _step3;
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var part = _step3.value;
+            /* c8 ignore start */
+            if (typeof part === 'string') {
+              throw new Error('string part in extglob AST??');
+            }
+            /* c8 ignore stop */
+            part.copyIn(_classPrivateFieldGet(pp, _parts)[i]);
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      }
+      p = pp;
+      pp = _classPrivateFieldGet(p, _parent);
+    }
+  }
+  return this;
+}
+function _parseAST(str, ast, pos, opt) {
+  var escaping = false;
+  var inBrace = false;
+  var braceStart = -1;
+  var braceNeg = false;
+  if (ast.type === null) {
+    // outside of a extglob, append until we find a start
+    var _i2 = pos;
+    var _acc = '';
+    while (_i2 < str.length) {
+      var c = str.charAt(_i2++);
+      // still accumulate escapes at this point, but we do ignore
+      // starts that are escaped
+      if (escaping || c === '\\') {
+        escaping = !escaping;
+        _acc += c;
+        continue;
+      }
+      if (inBrace) {
+        if (_i2 === braceStart + 1) {
+          if (c === '^' || c === '!') {
+            braceNeg = true;
+          }
+        } else if (c === ']' && !(_i2 === braceStart + 2 && braceNeg)) {
+          inBrace = false;
+        }
+        _acc += c;
+        continue;
+      } else if (c === '[') {
+        inBrace = true;
+        braceStart = _i2;
+        braceNeg = false;
+        _acc += c;
+        continue;
+      }
+      if (!opt.noext && isExtglobType(c) && str.charAt(_i2) === '(') {
+        ast.push(_acc);
+        _acc = '';
+        var ext = new AST(c, ast);
+        _i2 = _classStaticPrivateMethodGet(AST, AST, _parseAST).call(AST, str, ext, _i2, opt);
+        ast.push(ext);
+        continue;
+      }
+      _acc += c;
+    }
+    ast.push(_acc);
+    return _i2;
+  }
+  // some kind of extglob, pos is at the (
+  // find the next | or )
+  var i = pos + 1;
+  var part = new AST(null, ast);
+  var parts = [];
+  var acc = '';
+  while (i < str.length) {
+    var _c = str.charAt(i++);
+    // still accumulate escapes at this point, but we do ignore
+    // starts that are escaped
+    if (escaping || _c === '\\') {
+      escaping = !escaping;
+      acc += _c;
+      continue;
+    }
+    if (inBrace) {
+      if (i === braceStart + 1) {
+        if (_c === '^' || _c === '!') {
+          braceNeg = true;
+        }
+      } else if (_c === ']' && !(i === braceStart + 2 && braceNeg)) {
+        inBrace = false;
+      }
+      acc += _c;
+      continue;
+    } else if (_c === '[') {
+      inBrace = true;
+      braceStart = i;
+      braceNeg = false;
+      acc += _c;
+      continue;
+    }
+    if (isExtglobType(_c) && str.charAt(i) === '(') {
+      part.push(acc);
+      acc = '';
+      var _ext = new AST(_c, part);
+      part.push(_ext);
+      i = _classStaticPrivateMethodGet(AST, AST, _parseAST).call(AST, str, _ext, i, opt);
+      continue;
+    }
+    if (_c === '|') {
+      part.push(acc);
+      acc = '';
+      parts.push(part);
+      part = new AST(null, ast);
+      continue;
+    }
+    if (_c === ')') {
+      if (acc === '' && _classPrivateFieldGet(ast, _parts).length === 0) {
+        _classPrivateFieldSet(ast, _emptyExt, true);
+      }
+      part.push(acc);
+      acc = '';
+      ast.push.apply(ast, parts.concat([part]));
+      return i;
+    }
+    acc += _c;
+  }
+  // unfinished extglob
+  // if we got here, it was a malformed extglob! not an extglob, but
+  // maybe something else in there.
+  ast.type = null;
+  _classPrivateFieldSet(ast, _hasMagic2, undefined);
+  _classPrivateFieldSet(ast, _parts, [str.substring(pos - 1)]);
+  return i;
+}
+function _partsToRegExp2(dot) {
+  var _this2 = this;
+  return _classPrivateFieldGet(this, _parts).map(function (p) {
+    // extglob ASTs should only contain parent ASTs
+    /* c8 ignore start */
+    if (typeof p === 'string') {
+      throw new Error('string type in extglob ast??');
+    }
+    /* c8 ignore stop */
+    // can ignore hasMagic, because extglobs are already always magic
+    var _p$toRegExpSource = p.toRegExpSource(dot),
+      _p$toRegExpSource2 = _slicedToArray(_p$toRegExpSource, 4),
+      re = _p$toRegExpSource2[0],
+      _ = _p$toRegExpSource2[1],
+      _hasMagic = _p$toRegExpSource2[2],
+      uflag = _p$toRegExpSource2[3];
+    _classPrivateFieldSet(_this2, _uflag, _classPrivateFieldGet(_this2, _uflag) || uflag);
+    return re;
+  }).filter(function (p) {
+    return !(_this2.isStart() && _this2.isEnd()) || !!p;
+  }).join('|');
+}
+function _parseGlob(glob, hasMagic) {
+  var noEmpty = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var escaping = false;
+  var re = '';
+  var uflag = false;
+  for (var i = 0; i < glob.length; i++) {
+    var c = glob.charAt(i);
+    if (escaping) {
+      escaping = false;
+      re += (reSpecials.has(c) ? '\\' : '') + c;
+      continue;
+    }
+    if (c === '\\') {
+      if (i === glob.length - 1) {
+        re += '\\\\';
+      } else {
+        escaping = true;
+      }
+      continue;
+    }
+    if (c === '[') {
+      var _parseClass = parseClass(glob, i),
+        _parseClass2 = _slicedToArray(_parseClass, 4),
+        src = _parseClass2[0],
+        needUflag = _parseClass2[1],
+        consumed = _parseClass2[2],
+        magic = _parseClass2[3];
+      if (consumed) {
+        re += src;
+        uflag = uflag || needUflag;
+        i += consumed - 1;
+        hasMagic = hasMagic || magic;
+        continue;
+      }
+    }
+    if (c === '*') {
+      if (noEmpty && glob === '*') re += starNoEmpty;else re += star;
+      hasMagic = true;
+      continue;
+    }
+    if (c === '?') {
+      re += qmark;
+      hasMagic = true;
+      continue;
+    }
+    re += regExpEscape(c);
+  }
+  return [re, unescape_unescape(glob), !!hasMagic, uflag];
+}
+;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/escape.js
+/**
+ * Escape all magic characters in a glob pattern.
+ *
+ * If the {@link windowsPathsNoEscape | GlobOptions.windowsPathsNoEscape}
+ * option is used, then characters are escaped by wrapping in `[]`, because
+ * a magic character wrapped in a character class can only be satisfied by
+ * that exact character.  In this mode, `\` is _not_ escaped, because it is
+ * not interpreted as a magic character, but instead as a path separator.
+ */
+var escape_escape = function escape(s) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+    _ref$windowsPathsNoEs = _ref.windowsPathsNoEscape,
+    windowsPathsNoEscape = _ref$windowsPathsNoEs === void 0 ? false : _ref$windowsPathsNoEs;
+  // don't need to escape +@! because we escape the parens
+  // that make those magic, and escaping ! as [!] isn't valid,
+  // because [!]] is a valid glob class meaning not ']'.
+  return windowsPathsNoEscape ? s.replace(/[?*()[\]]/g, '[$&]') : s.replace(/[?*()[\]\\]/g, '\\$&');
+};
+;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+var minimatch = function minimatch(p, pattern) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  assertValidPattern(pattern);
+  // shortcut: comments match nothing.
+  if (!options.nocomment && pattern.charAt(0) === '#') {
+    return false;
+  }
+  return new Minimatch(pattern, options).match(p);
+};
+// Optimized checking for the most common glob patterns.
+var starDotExtRE = /^\*+([^+@!?\*\[\(]*)$/;
+var starDotExtTest = function starDotExtTest(ext) {
+  return function (f) {
+    return !f.startsWith('.') && f.endsWith(ext);
+  };
+};
+var starDotExtTestDot = function starDotExtTestDot(ext) {
+  return function (f) {
+    return f.endsWith(ext);
+  };
+};
+var starDotExtTestNocase = function starDotExtTestNocase(ext) {
+  ext = ext.toLowerCase();
+  return function (f) {
+    return !f.startsWith('.') && f.toLowerCase().endsWith(ext);
+  };
+};
+var starDotExtTestNocaseDot = function starDotExtTestNocaseDot(ext) {
+  ext = ext.toLowerCase();
+  return function (f) {
+    return f.toLowerCase().endsWith(ext);
+  };
+};
+var starDotStarRE = /^\*+\.\*+$/;
+var starDotStarTest = function starDotStarTest(f) {
+  return !f.startsWith('.') && f.includes('.');
+};
+var starDotStarTestDot = function starDotStarTestDot(f) {
+  return f !== '.' && f !== '..' && f.includes('.');
+};
+var dotStarRE = /^\.\*+$/;
+var dotStarTest = function dotStarTest(f) {
+  return f !== '.' && f !== '..' && f.startsWith('.');
+};
+var starRE = /^\*+$/;
+var starTest = function starTest(f) {
+  return f.length !== 0 && !f.startsWith('.');
+};
+var starTestDot = function starTestDot(f) {
+  return f.length !== 0 && f !== '.' && f !== '..';
+};
+var qmarksRE = /^\?+([^+@!?\*\[\(]*)?$/;
+var qmarksTestNocase = function qmarksTestNocase(_ref) {
+  var _ref2 = _slicedToArray(_ref, 2),
+    $0 = _ref2[0],
+    _ref2$ = _ref2[1],
+    ext = _ref2$ === void 0 ? '' : _ref2$;
+  var noext = qmarksTestNoExt([$0]);
+  if (!ext) return noext;
+  ext = ext.toLowerCase();
+  return function (f) {
+    return noext(f) && f.toLowerCase().endsWith(ext);
+  };
+};
+var qmarksTestNocaseDot = function qmarksTestNocaseDot(_ref3) {
+  var _ref4 = _slicedToArray(_ref3, 2),
+    $0 = _ref4[0],
+    _ref4$ = _ref4[1],
+    ext = _ref4$ === void 0 ? '' : _ref4$;
+  var noext = qmarksTestNoExtDot([$0]);
+  if (!ext) return noext;
+  ext = ext.toLowerCase();
+  return function (f) {
+    return noext(f) && f.toLowerCase().endsWith(ext);
+  };
+};
+var qmarksTestDot = function qmarksTestDot(_ref5) {
+  var _ref6 = _slicedToArray(_ref5, 2),
+    $0 = _ref6[0],
+    _ref6$ = _ref6[1],
+    ext = _ref6$ === void 0 ? '' : _ref6$;
+  var noext = qmarksTestNoExtDot([$0]);
+  return !ext ? noext : function (f) {
+    return noext(f) && f.endsWith(ext);
+  };
+};
+var qmarksTest = function qmarksTest(_ref7) {
+  var _ref8 = _slicedToArray(_ref7, 2),
+    $0 = _ref8[0],
+    _ref8$ = _ref8[1],
+    ext = _ref8$ === void 0 ? '' : _ref8$;
+  var noext = qmarksTestNoExt([$0]);
+  return !ext ? noext : function (f) {
+    return noext(f) && f.endsWith(ext);
+  };
+};
+var qmarksTestNoExt = function qmarksTestNoExt(_ref9) {
+  var _ref10 = _slicedToArray(_ref9, 1),
+    $0 = _ref10[0];
+  var len = $0.length;
+  return function (f) {
+    return f.length === len && !f.startsWith('.');
+  };
+};
+var qmarksTestNoExtDot = function qmarksTestNoExtDot(_ref11) {
+  var _ref12 = _slicedToArray(_ref11, 1),
+    $0 = _ref12[0];
+  var len = $0.length;
+  return function (f) {
+    return f.length === len && f !== '.' && f !== '..';
+  };
+};
+/* c8 ignore start */
+var defaultPlatform = typeof process === 'object' && process ? typeof process.env === 'object' && process.env && process.env.__MINIMATCH_TESTING_PLATFORM__ || process.platform : 'posix';
+var mjs_path = {
+  win32: {
+    sep: '\\'
+  },
+  posix: {
+    sep: '/'
+  }
+};
+/* c8 ignore stop */
+var sep = defaultPlatform === 'win32' ? mjs_path.win32.sep : mjs_path.posix.sep;
+minimatch.sep = sep;
+var GLOBSTAR = Symbol('globstar **');
+minimatch.GLOBSTAR = GLOBSTAR;
+// any single thing other than /
+// don't need to escape / when using new RegExp()
+var mjs_qmark = '[^/]';
+// * => any number of characters
+var mjs_star = mjs_qmark + '*?';
+// ** when dots are allowed.  Anything goes, except .. and .
+// not (^ or / followed by one or two dots followed by $ or /),
+// followed by anything, any number of times.
+var twoStarDot = '(?:(?!(?:\\/|^)(?:\\.{1,2})($|\\/)).)*?';
+// not a ^ or / followed by a dot,
+// followed by anything, any number of times.
+var twoStarNoDot = '(?:(?!(?:\\/|^)\\.).)*?';
+var filter = function filter(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return function (p) {
+    return minimatch(p, pattern, options);
+  };
+};
+minimatch.filter = filter;
+var ext = function ext(a) {
+  var b = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return Object.assign({}, a, b);
+};
+var defaults = function defaults(def) {
+  if (!def || typeof def !== 'object' || !Object.keys(def).length) {
+    return minimatch;
+  }
+  var orig = minimatch;
+  var m = function m(p, pattern) {
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    return orig(p, pattern, ext(def, options));
+  };
+  return Object.assign(m, {
+    Minimatch: /*#__PURE__*/function (_orig$Minimatch) {
+      _inherits(Minimatch, _orig$Minimatch);
+      var _super = _createSuper(Minimatch);
+      function Minimatch(pattern) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        _classCallCheck(this, Minimatch);
+        return _super.call(this, pattern, ext(def, options));
+      }
+      _createClass(Minimatch, null, [{
+        key: "defaults",
+        value: function defaults(options) {
+          return orig.defaults(ext(def, options)).Minimatch;
+        }
+      }]);
+      return Minimatch;
+    }(orig.Minimatch),
+    AST: /*#__PURE__*/function (_orig$AST) {
+      _inherits(AST, _orig$AST);
+      var _super2 = _createSuper(AST);
+      /* c8 ignore start */
+      function AST(type, parent) {
+        var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+        _classCallCheck(this, AST);
+        return _super2.call(this, type, parent, ext(def, options));
+      }
+      /* c8 ignore stop */
+      _createClass(AST, null, [{
+        key: "fromGlob",
+        value: function fromGlob(pattern) {
+          var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          return orig.AST.fromGlob(pattern, ext(def, options));
+        }
+      }]);
+      return AST;
+    }(orig.AST),
+    unescape: function unescape(s) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return orig.unescape(s, ext(def, options));
+    },
+    escape: function escape(s) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return orig.escape(s, ext(def, options));
+    },
+    filter: function filter(pattern) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return orig.filter(pattern, ext(def, options));
+    },
+    defaults: function defaults(options) {
+      return orig.defaults(ext(def, options));
+    },
+    makeRe: function makeRe(pattern) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return orig.makeRe(pattern, ext(def, options));
+    },
+    braceExpand: function braceExpand(pattern) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return orig.braceExpand(pattern, ext(def, options));
+    },
+    match: function match(list, pattern) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return orig.match(list, pattern, ext(def, options));
+    },
+    sep: orig.sep,
+    GLOBSTAR: GLOBSTAR
+  });
+};
+minimatch.defaults = defaults;
+// Brace expansion:
+// a{b,c}d -> abd acd
+// a{b,}c -> abc ac
+// a{0..3}d -> a0d a1d a2d a3d
+// a{b,c{d,e}f}g -> abg acdfg acefg
+// a{b,c}d{e,f}g -> abdeg acdeg abdeg abdfg
+//
+// Invalid sets are not expanded.
+// a{2..}b -> a{2..}b
+// a{b}c -> a{b}c
+var _braceExpand = function braceExpand(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  assertValidPattern(pattern);
+  // Thanks to Yeting Li <https://github.com/yetingli> for
+  // improving this regexp to avoid a ReDOS vulnerability.
+  if (options.nobrace || !/\{(?:(?!\{).)*\}/.test(pattern)) {
+    // shortcut. no need to expand.
+    return [pattern];
+  }
+  return brace_expansion(pattern);
+};
+
+minimatch.braceExpand = _braceExpand;
+// parse a component of the expanded set.
+// At this point, no pattern may contain "/" in it
+// so we're going to return a 2d array, where each entry is the full
+// pattern, split on '/', and then turned into a regular expression.
+// A regexp is made at the end which joins each array with an
+// escaped /, and another full one which joins each regexp with |.
+//
+// Following the lead of Bash 4.1, note that "**" only has special meaning
+// when it is the *only* thing in a path portion.  Otherwise, any series
+// of * is equivalent to a single *.  Globstar behavior is enabled by
+// default, and can be disabled by setting options.noglobstar.
+var makeRe = function makeRe(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Minimatch(pattern, options).makeRe();
+};
+minimatch.makeRe = makeRe;
+var match = function match(list, pattern) {
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var mm = new Minimatch(pattern, options);
+  list = list.filter(function (f) {
+    return mm.match(f);
+  });
+  if (mm.options.nonull && !list.length) {
+    list.push(pattern);
+  }
+  return list;
+};
+minimatch.match = match;
+// replace stuff like \* with *
+var globMagic = /[?*]|[+@!]\(.*?\)|\[|\]/;
+var mjs_regExpEscape = function regExpEscape(s) {
+  return s.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+};
+var Minimatch = /*#__PURE__*/function () {
+  function Minimatch(pattern) {
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    _classCallCheck(this, Minimatch);
+    _defineProperty(this, "options", void 0);
+    _defineProperty(this, "set", void 0);
+    _defineProperty(this, "pattern", void 0);
+    _defineProperty(this, "windowsPathsNoEscape", void 0);
+    _defineProperty(this, "nonegate", void 0);
+    _defineProperty(this, "negate", void 0);
+    _defineProperty(this, "comment", void 0);
+    _defineProperty(this, "empty", void 0);
+    _defineProperty(this, "preserveMultipleSlashes", void 0);
+    _defineProperty(this, "partial", void 0);
+    _defineProperty(this, "globSet", void 0);
+    _defineProperty(this, "globParts", void 0);
+    _defineProperty(this, "nocase", void 0);
+    _defineProperty(this, "isWindows", void 0);
+    _defineProperty(this, "platform", void 0);
+    _defineProperty(this, "windowsNoMagicRoot", void 0);
+    _defineProperty(this, "regexp", void 0);
+    assertValidPattern(pattern);
+    options = options || {};
+    this.options = options;
+    this.pattern = pattern;
+    this.platform = options.platform || defaultPlatform;
+    this.isWindows = this.platform === 'win32';
+    this.windowsPathsNoEscape = !!options.windowsPathsNoEscape || options.allowWindowsEscape === false;
+    if (this.windowsPathsNoEscape) {
+      this.pattern = this.pattern.replace(/\\/g, '/');
+    }
+    this.preserveMultipleSlashes = !!options.preserveMultipleSlashes;
+    this.regexp = null;
+    this.negate = false;
+    this.nonegate = !!options.nonegate;
+    this.comment = false;
+    this.empty = false;
+    this.partial = !!options.partial;
+    this.nocase = !!this.options.nocase;
+    this.windowsNoMagicRoot = options.windowsNoMagicRoot !== undefined ? options.windowsNoMagicRoot : !!(this.isWindows && this.nocase);
+    this.globSet = [];
+    this.globParts = [];
+    this.set = [];
+    // make the set of regexps etc.
+    this.make();
+  }
+  _createClass(Minimatch, [{
+    key: "hasMagic",
+    value: function hasMagic() {
+      if (this.options.magicalBraces && this.set.length > 1) {
+        return true;
+      }
+      var _iterator = _createForOfIteratorHelper(this.set),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var pattern = _step.value;
+          var _iterator2 = _createForOfIteratorHelper(pattern),
+            _step2;
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var part = _step2.value;
+              if (typeof part !== 'string') return true;
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return false;
+    }
+  }, {
+    key: "debug",
+    value: function debug() {}
+  }, {
+    key: "make",
+    value: function make() {
+      var _this = this;
+      var pattern = this.pattern;
+      var options = this.options;
+      // empty patterns and comments match nothing.
+      if (!options.nocomment && pattern.charAt(0) === '#') {
+        this.comment = true;
+        return;
+      }
+      if (!pattern) {
+        this.empty = true;
+        return;
+      }
+      // step 1: figure out negation, etc.
+      this.parseNegate();
+      // step 2: expand braces
+      this.globSet = toConsumableArray_toConsumableArray(new Set(this.braceExpand()));
+      if (options.debug) {
+        this.debug = function () {
+          var _console;
+          return (_console = console).error.apply(_console, arguments);
+        };
+      }
+      this.debug(this.pattern, this.globSet);
+      // step 3: now we have a set, so turn each one into a series of
+      // path-portion matching patterns.
+      // These will be regexps, except in the case of "**", which is
+      // set to the GLOBSTAR object for globstar behavior,
+      // and will not contain any / characters
+      //
+      // First, we preprocess to make the glob pattern sets a bit simpler
+      // and deduped.  There are some perf-killing patterns that can cause
+      // problems with a glob walk, but we can simplify them down a bit.
+      var rawGlobParts = this.globSet.map(function (s) {
+        return _this.slashSplit(s);
+      });
+      this.globParts = this.preprocess(rawGlobParts);
+      this.debug(this.pattern, this.globParts);
+      // glob --> regexps
+      var set = this.globParts.map(function (s, _, __) {
+        if (_this.isWindows && _this.windowsNoMagicRoot) {
+          // check if it's a drive or unc path.
+          var isUNC = s[0] === '' && s[1] === '' && (s[2] === '?' || !globMagic.test(s[2])) && !globMagic.test(s[3]);
+          var isDrive = /^[a-z]:/i.test(s[0]);
+          if (isUNC) {
+            return [].concat(toConsumableArray_toConsumableArray(s.slice(0, 4)), toConsumableArray_toConsumableArray(s.slice(4).map(function (ss) {
+              return _this.parse(ss);
+            })));
+          } else if (isDrive) {
+            return [s[0]].concat(toConsumableArray_toConsumableArray(s.slice(1).map(function (ss) {
+              return _this.parse(ss);
+            })));
+          }
+        }
+        return s.map(function (ss) {
+          return _this.parse(ss);
+        });
+      });
+      this.debug(this.pattern, set);
+      // filter out everything that didn't compile properly.
+      this.set = set.filter(function (s) {
+        return s.indexOf(false) === -1;
+      });
+      // do not treat the ? in UNC paths as magic
+      if (this.isWindows) {
+        for (var i = 0; i < this.set.length; i++) {
+          var p = this.set[i];
+          if (p[0] === '' && p[1] === '' && this.globParts[i][2] === '?' && typeof p[3] === 'string' && /^[a-z]:$/i.test(p[3])) {
+            p[2] = '?';
+          }
+        }
+      }
+      this.debug(this.pattern, this.set);
+    }
+    // various transforms to equivalent pattern sets that are
+    // faster to process in a filesystem walk.  The goal is to
+    // eliminate what we can, and push all ** patterns as far
+    // to the right as possible, even if it increases the number
+    // of patterns that we have to process.
+  }, {
+    key: "preprocess",
+    value: function preprocess(globParts) {
+      // if we're not in globstar mode, then turn all ** into *
+      if (this.options.noglobstar) {
+        for (var i = 0; i < globParts.length; i++) {
+          for (var j = 0; j < globParts[i].length; j++) {
+            if (globParts[i][j] === '**') {
+              globParts[i][j] = '*';
+            }
+          }
+        }
+      }
+      var _this$options$optimiz = this.options.optimizationLevel,
+        optimizationLevel = _this$options$optimiz === void 0 ? 1 : _this$options$optimiz;
+      if (optimizationLevel >= 2) {
+        // aggressive optimization for the purpose of fs walking
+        globParts = this.firstPhasePreProcess(globParts);
+        globParts = this.secondPhasePreProcess(globParts);
+      } else if (optimizationLevel >= 1) {
+        // just basic optimizations to remove some .. parts
+        globParts = this.levelOneOptimize(globParts);
+      } else {
+        globParts = this.adjascentGlobstarOptimize(globParts);
+      }
+      return globParts;
+    }
+    // just get rid of adjascent ** portions
+  }, {
+    key: "adjascentGlobstarOptimize",
+    value: function adjascentGlobstarOptimize(globParts) {
+      return globParts.map(function (parts) {
+        var gs = -1;
+        while (-1 !== (gs = parts.indexOf('**', gs + 1))) {
+          var i = gs;
+          while (parts[i + 1] === '**') {
+            i++;
+          }
+          if (i !== gs) {
+            parts.splice(gs, i - gs);
+          }
+        }
+        return parts;
+      });
+    }
+    // get rid of adjascent ** and resolve .. portions
+  }, {
+    key: "levelOneOptimize",
+    value: function levelOneOptimize(globParts) {
+      return globParts.map(function (parts) {
+        parts = parts.reduce(function (set, part) {
+          var prev = set[set.length - 1];
+          if (part === '**' && prev === '**') {
+            return set;
+          }
+          if (part === '..') {
+            if (prev && prev !== '..' && prev !== '.' && prev !== '**') {
+              set.pop();
+              return set;
+            }
+          }
+          set.push(part);
+          return set;
+        }, []);
+        return parts.length === 0 ? [''] : parts;
+      });
+    }
+  }, {
+    key: "levelTwoFileOptimize",
+    value: function levelTwoFileOptimize(parts) {
+      if (!Array.isArray(parts)) {
+        parts = this.slashSplit(parts);
+      }
+      var didSomething = false;
+      do {
+        didSomething = false;
+        // <pre>/<e>/<rest> -> <pre>/<rest>
+        if (!this.preserveMultipleSlashes) {
+          for (var i = 1; i < parts.length - 1; i++) {
+            var p = parts[i];
+            // don't squeeze out UNC patterns
+            if (i === 1 && p === '' && parts[0] === '') continue;
+            if (p === '.' || p === '') {
+              didSomething = true;
+              parts.splice(i, 1);
+              i--;
+            }
+          }
+          if (parts[0] === '.' && parts.length === 2 && (parts[1] === '.' || parts[1] === '')) {
+            didSomething = true;
+            parts.pop();
+          }
+        }
+        // <pre>/<p>/../<rest> -> <pre>/<rest>
+        var dd = 0;
+        while (-1 !== (dd = parts.indexOf('..', dd + 1))) {
+          var _p = parts[dd - 1];
+          if (_p && _p !== '.' && _p !== '..' && _p !== '**') {
+            didSomething = true;
+            parts.splice(dd - 1, 2);
+            dd -= 2;
+          }
+        }
+      } while (didSomething);
+      return parts.length === 0 ? [''] : parts;
+    }
+    // First phase: single-pattern processing
+    // <pre> is 1 or more portions
+    // <rest> is 1 or more portions
+    // <p> is any portion other than ., .., '', or **
+    // <e> is . or ''
+    //
+    // **/.. is *brutal* for filesystem walking performance, because
+    // it effectively resets the recursive walk each time it occurs,
+    // and ** cannot be reduced out by a .. pattern part like a regexp
+    // or most strings (other than .., ., and '') can be.
+    //
+    // <pre>/**/../<p>/<p>/<rest> -> {<pre>/../<p>/<p>/<rest>,<pre>/**/<p>/<p>/<rest>}
+    // <pre>/<e>/<rest> -> <pre>/<rest>
+    // <pre>/<p>/../<rest> -> <pre>/<rest>
+    // **/**/<rest> -> **/<rest>
+    //
+    // **/*/<rest> -> */**/<rest> <== not valid because ** doesn't follow
+    // this WOULD be allowed if ** did follow symlinks, or * didn't
+  }, {
+    key: "firstPhasePreProcess",
+    value: function firstPhasePreProcess(globParts) {
+      var didSomething = false;
+      do {
+        didSomething = false;
+        // <pre>/**/../<p>/<p>/<rest> -> {<pre>/../<p>/<p>/<rest>,<pre>/**/<p>/<p>/<rest>}
+        var _iterator3 = _createForOfIteratorHelper(globParts),
+          _step3;
+        try {
+          for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+            var parts = _step3.value;
+            var gs = -1;
+            while (-1 !== (gs = parts.indexOf('**', gs + 1))) {
+              var gss = gs;
+              while (parts[gss + 1] === '**') {
+                // <pre>/**/**/<rest> -> <pre>/**/<rest>
+                gss++;
+              }
+              // eg, if gs is 2 and gss is 4, that means we have 3 **
+              // parts, and can remove 2 of them.
+              if (gss > gs) {
+                parts.splice(gs + 1, gss - gs);
+              }
+              var next = parts[gs + 1];
+              var p = parts[gs + 2];
+              var p2 = parts[gs + 3];
+              if (next !== '..') continue;
+              if (!p || p === '.' || p === '..' || !p2 || p2 === '.' || p2 === '..') {
+                continue;
+              }
+              didSomething = true;
+              // edit parts in place, and push the new one
+              parts.splice(gs, 1);
+              var other = parts.slice(0);
+              other[gs] = '**';
+              globParts.push(other);
+              gs--;
+            }
+            // <pre>/<e>/<rest> -> <pre>/<rest>
+            if (!this.preserveMultipleSlashes) {
+              for (var i = 1; i < parts.length - 1; i++) {
+                var _p2 = parts[i];
+                // don't squeeze out UNC patterns
+                if (i === 1 && _p2 === '' && parts[0] === '') continue;
+                if (_p2 === '.' || _p2 === '') {
+                  didSomething = true;
+                  parts.splice(i, 1);
+                  i--;
+                }
+              }
+              if (parts[0] === '.' && parts.length === 2 && (parts[1] === '.' || parts[1] === '')) {
+                didSomething = true;
+                parts.pop();
+              }
+            }
+            // <pre>/<p>/../<rest> -> <pre>/<rest>
+            var dd = 0;
+            while (-1 !== (dd = parts.indexOf('..', dd + 1))) {
+              var _p3 = parts[dd - 1];
+              if (_p3 && _p3 !== '.' && _p3 !== '..' && _p3 !== '**') {
+                didSomething = true;
+                var needDot = dd === 1 && parts[dd + 1] === '**';
+                var splin = needDot ? ['.'] : [];
+                parts.splice.apply(parts, [dd - 1, 2].concat(splin));
+                if (parts.length === 0) parts.push('');
+                dd -= 2;
+              }
+            }
+          }
+        } catch (err) {
+          _iterator3.e(err);
+        } finally {
+          _iterator3.f();
+        }
+      } while (didSomething);
+      return globParts;
+    }
+    // second phase: multi-pattern dedupes
+    // {<pre>/*/<rest>,<pre>/<p>/<rest>} -> <pre>/*/<rest>
+    // {<pre>/<rest>,<pre>/<rest>} -> <pre>/<rest>
+    // {<pre>/**/<rest>,<pre>/<rest>} -> <pre>/**/<rest>
+    //
+    // {<pre>/**/<rest>,<pre>/**/<p>/<rest>} -> <pre>/**/<rest>
+    // ^-- not valid because ** doens't follow symlinks
+  }, {
+    key: "secondPhasePreProcess",
+    value: function secondPhasePreProcess(globParts) {
+      for (var i = 0; i < globParts.length - 1; i++) {
+        for (var j = i + 1; j < globParts.length; j++) {
+          var matched = this.partsMatch(globParts[i], globParts[j], !this.preserveMultipleSlashes);
+          if (!matched) continue;
+          globParts[i] = matched;
+          globParts[j] = [];
+        }
+      }
+      return globParts.filter(function (gs) {
+        return gs.length;
+      });
+    }
+  }, {
+    key: "partsMatch",
+    value: function partsMatch(a, b) {
+      var emptyGSMatch = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var ai = 0;
+      var bi = 0;
+      var result = [];
+      var which = '';
+      while (ai < a.length && bi < b.length) {
+        if (a[ai] === b[bi]) {
+          result.push(which === 'b' ? b[bi] : a[ai]);
+          ai++;
+          bi++;
+        } else if (emptyGSMatch && a[ai] === '**' && b[bi] === a[ai + 1]) {
+          result.push(a[ai]);
+          ai++;
+        } else if (emptyGSMatch && b[bi] === '**' && a[ai] === b[bi + 1]) {
+          result.push(b[bi]);
+          bi++;
+        } else if (a[ai] === '*' && b[bi] && (this.options.dot || !b[bi].startsWith('.')) && b[bi] !== '**') {
+          if (which === 'b') return false;
+          which = 'a';
+          result.push(a[ai]);
+          ai++;
+          bi++;
+        } else if (b[bi] === '*' && a[ai] && (this.options.dot || !a[ai].startsWith('.')) && a[ai] !== '**') {
+          if (which === 'a') return false;
+          which = 'b';
+          result.push(b[bi]);
+          ai++;
+          bi++;
+        } else {
+          return false;
+        }
+      }
+      // if we fall out of the loop, it means they two are identical
+      // as long as their lengths match
+      return a.length === b.length && result;
+    }
+  }, {
+    key: "parseNegate",
+    value: function parseNegate() {
+      if (this.nonegate) return;
+      var pattern = this.pattern;
+      var negate = false;
+      var negateOffset = 0;
+      for (var i = 0; i < pattern.length && pattern.charAt(i) === '!'; i++) {
+        negate = !negate;
+        negateOffset++;
+      }
+      if (negateOffset) this.pattern = pattern.slice(negateOffset);
+      this.negate = negate;
+    }
+    // set partial to true to test if, for example,
+    // "/a/b" matches the start of "/*/b/*/d"
+    // Partial means, if you run out of file before you run
+    // out of pattern, then that's fine, as long as all
+    // the parts match.
+  }, {
+    key: "matchOne",
+    value: function matchOne(file, pattern) {
+      var partial = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+      var options = this.options;
+      // UNC paths like //?/X:/... can match X:/... and vice versa
+      // Drive letters in absolute drive or unc paths are always compared
+      // case-insensitively.
+      if (this.isWindows) {
+        var fileDrive = typeof file[0] === 'string' && /^[a-z]:$/i.test(file[0]);
+        var fileUNC = !fileDrive && file[0] === '' && file[1] === '' && file[2] === '?' && /^[a-z]:$/i.test(file[3]);
+        var patternDrive = typeof pattern[0] === 'string' && /^[a-z]:$/i.test(pattern[0]);
+        var patternUNC = !patternDrive && pattern[0] === '' && pattern[1] === '' && pattern[2] === '?' && typeof pattern[3] === 'string' && /^[a-z]:$/i.test(pattern[3]);
+        var fdi = fileUNC ? 3 : fileDrive ? 0 : undefined;
+        var pdi = patternUNC ? 3 : patternDrive ? 0 : undefined;
+        if (typeof fdi === 'number' && typeof pdi === 'number') {
+          var _ref13 = [file[fdi], pattern[pdi]],
+            fd = _ref13[0],
+            pd = _ref13[1];
+          if (fd.toLowerCase() === pd.toLowerCase()) {
+            pattern[pdi] = fd;
+            if (pdi > fdi) {
+              pattern = pattern.slice(pdi);
+            } else if (fdi > pdi) {
+              file = file.slice(fdi);
+            }
+          }
+        }
+      }
+      // resolve and reduce . and .. portions in the file as well.
+      // dont' need to do the second phase, because it's only one string[]
+      var _this$options$optimiz2 = this.options.optimizationLevel,
+        optimizationLevel = _this$options$optimiz2 === void 0 ? 1 : _this$options$optimiz2;
+      if (optimizationLevel >= 2) {
+        file = this.levelTwoFileOptimize(file);
+      }
+      this.debug('matchOne', this, {
+        file: file,
+        pattern: pattern
+      });
+      this.debug('matchOne', file.length, pattern.length);
+      for (var fi = 0, pi = 0, fl = file.length, pl = pattern.length; fi < fl && pi < pl; fi++, pi++) {
+        this.debug('matchOne loop');
+        var p = pattern[pi];
+        var f = file[fi];
+        this.debug(pattern, p, f);
+        // should be impossible.
+        // some invalid regexp stuff in the set.
+        /* c8 ignore start */
+        if (p === false) {
+          return false;
+        }
+        /* c8 ignore stop */
+        if (p === GLOBSTAR) {
+          this.debug('GLOBSTAR', [pattern, p, f]);
+          // "**"
+          // a/**/b/**/c would match the following:
+          // a/b/x/y/z/c
+          // a/x/y/z/b/c
+          // a/b/x/b/x/c
+          // a/b/c
+          // To do this, take the rest of the pattern after
+          // the **, and see if it would match the file remainder.
+          // If so, return success.
+          // If not, the ** "swallows" a segment, and try again.
+          // This is recursively awful.
+          //
+          // a/**/b/**/c matching a/b/x/y/z/c
+          // - a matches a
+          // - doublestar
+          //   - matchOne(b/x/y/z/c, b/**/c)
+          //     - b matches b
+          //     - doublestar
+          //       - matchOne(x/y/z/c, c) -> no
+          //       - matchOne(y/z/c, c) -> no
+          //       - matchOne(z/c, c) -> no
+          //       - matchOne(c, c) yes, hit
+          var fr = fi;
+          var pr = pi + 1;
+          if (pr === pl) {
+            this.debug('** at the end');
+            // a ** at the end will just swallow the rest.
+            // We have found a match.
+            // however, it will not swallow /.x, unless
+            // options.dot is set.
+            // . and .. are *never* matched by **, for explosively
+            // exponential reasons.
+            for (; fi < fl; fi++) {
+              if (file[fi] === '.' || file[fi] === '..' || !options.dot && file[fi].charAt(0) === '.') return false;
+            }
+            return true;
+          }
+          // ok, let's see if we can swallow whatever we can.
+          while (fr < fl) {
+            var swallowee = file[fr];
+            this.debug('\nglobstar while', file, fr, pattern, pr, swallowee);
+            // XXX remove this slice.  Just pass the start index.
+            if (this.matchOne(file.slice(fr), pattern.slice(pr), partial)) {
+              this.debug('globstar found match!', fr, fl, swallowee);
+              // found a match.
+              return true;
+            } else {
+              // can't swallow "." or ".." ever.
+              // can only swallow ".foo" when explicitly asked.
+              if (swallowee === '.' || swallowee === '..' || !options.dot && swallowee.charAt(0) === '.') {
+                this.debug('dot detected!', file, fr, pattern, pr);
+                break;
+              }
+              // ** swallows a segment, and continue.
+              this.debug('globstar swallow a segment, and continue');
+              fr++;
+            }
+          }
+          // no match was found.
+          // However, in partial mode, we can't say this is necessarily over.
+          /* c8 ignore start */
+          if (partial) {
+            // ran out of file
+            this.debug('\n>>> no match, partial?', file, fr, pattern, pr);
+            if (fr === fl) {
+              return true;
+            }
+          }
+          /* c8 ignore stop */
+          return false;
+        }
+        // something other than **
+        // non-magic patterns just have to match exactly
+        // patterns with magic have been turned into regexps.
+        var hit = void 0;
+        if (typeof p === 'string') {
+          hit = f === p;
+          this.debug('string match', p, f, hit);
+        } else {
+          hit = p.test(f);
+          this.debug('pattern match', p, f, hit);
+        }
+        if (!hit) return false;
+      }
+      // Note: ending in / means that we'll get a final ""
+      // at the end of the pattern.  This can only match a
+      // corresponding "" at the end of the file.
+      // If the file ends in /, then it can only match a
+      // a pattern that ends in /, unless the pattern just
+      // doesn't have any more for it. But, a/b/ should *not*
+      // match "a/b/*", even though "" matches against the
+      // [^/]*? pattern, except in partial mode, where it might
+      // simply not be reached yet.
+      // However, a/b/ should still satisfy a/*
+      // now either we fell off the end of the pattern, or we're done.
+      if (fi === fl && pi === pl) {
+        // ran out of pattern and filename at the same time.
+        // an exact hit!
+        return true;
+      } else if (fi === fl) {
+        // ran out of file, but still had pattern left.
+        // this is ok if we're doing the match as part of
+        // a glob fs traversal.
+        return partial;
+      } else if (pi === pl) {
+        // ran out of pattern, still have file left.
+        // this is only acceptable if we're on the very last
+        // empty segment of a file with a trailing slash.
+        // a/* should match a/b/
+        return fi === fl - 1 && file[fi] === '';
+        /* c8 ignore start */
+      } else {
+        // should be unreachable.
+        throw new Error('wtf?');
+      }
+      /* c8 ignore stop */
+    }
+  }, {
+    key: "braceExpand",
+    value: function braceExpand() {
+      return _braceExpand(this.pattern, this.options);
+    }
+  }, {
+    key: "parse",
+    value: function parse(pattern) {
+      assertValidPattern(pattern);
+      var options = this.options;
+      // shortcuts
+      if (pattern === '**') return GLOBSTAR;
+      if (pattern === '') return '';
+      // far and away, the most common glob pattern parts are
+      // *, *.*, and *.<ext>  Add a fast check method for those.
+      var m;
+      var fastTest = null;
+      if (m = pattern.match(starRE)) {
+        fastTest = options.dot ? starTestDot : starTest;
+      } else if (m = pattern.match(starDotExtRE)) {
+        fastTest = (options.nocase ? options.dot ? starDotExtTestNocaseDot : starDotExtTestNocase : options.dot ? starDotExtTestDot : starDotExtTest)(m[1]);
+      } else if (m = pattern.match(qmarksRE)) {
+        fastTest = (options.nocase ? options.dot ? qmarksTestNocaseDot : qmarksTestNocase : options.dot ? qmarksTestDot : qmarksTest)(m);
+      } else if (m = pattern.match(starDotStarRE)) {
+        fastTest = options.dot ? starDotStarTestDot : starDotStarTest;
+      } else if (m = pattern.match(dotStarRE)) {
+        fastTest = dotStarTest;
+      }
+      var re = AST.fromGlob(pattern, this.options).toMMPattern();
+      return fastTest ? Object.assign(re, {
+        test: fastTest
+      }) : re;
+    }
+  }, {
+    key: "makeRe",
+    value: function makeRe() {
+      if (this.regexp || this.regexp === false) return this.regexp;
+      // at this point, this.set is a 2d array of partial
+      // pattern strings, or "**".
+      //
+      // It's better to use .match().  This function shouldn't
+      // be used, really, but it's pretty convenient sometimes,
+      // when you just want to work with a regex.
+      var set = this.set;
+      if (!set.length) {
+        this.regexp = false;
+        return this.regexp;
+      }
+      var options = this.options;
+      var twoStar = options.noglobstar ? mjs_star : options.dot ? twoStarDot : twoStarNoDot;
+      var flags = new Set(options.nocase ? ['i'] : []);
+      // regexpify non-globstar patterns
+      // if ** is only item, then we just do one twoStar
+      // if ** is first, and there are more, prepend (\/|twoStar\/)? to next
+      // if ** is last, append (\/twoStar|) to previous
+      // if ** is in the middle, append (\/|\/twoStar\/) to previous
+      // then filter out GLOBSTAR symbols
+      var re = set.map(function (pattern) {
+        var pp = pattern.map(function (p) {
+          if (p instanceof RegExp) {
+            var _iterator4 = _createForOfIteratorHelper(p.flags.split('')),
+              _step4;
+            try {
+              for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+                var f = _step4.value;
+                flags.add(f);
+              }
+            } catch (err) {
+              _iterator4.e(err);
+            } finally {
+              _iterator4.f();
+            }
+          }
+          return typeof p === 'string' ? mjs_regExpEscape(p) : p === GLOBSTAR ? GLOBSTAR : p._src;
+        });
+        pp.forEach(function (p, i) {
+          var next = pp[i + 1];
+          var prev = pp[i - 1];
+          if (p !== GLOBSTAR || prev === GLOBSTAR) {
+            return;
+          }
+          if (prev === undefined) {
+            if (next !== undefined && next !== GLOBSTAR) {
+              pp[i + 1] = '(?:\\/|' + twoStar + '\\/)?' + next;
+            } else {
+              pp[i] = twoStar;
+            }
+          } else if (next === undefined) {
+            pp[i - 1] = prev + '(?:\\/|' + twoStar + ')?';
+          } else if (next !== GLOBSTAR) {
+            pp[i - 1] = prev + '(?:\\/|\\/' + twoStar + '\\/)' + next;
+            pp[i + 1] = GLOBSTAR;
+          }
+        });
+        return pp.filter(function (p) {
+          return p !== GLOBSTAR;
+        }).join('/');
+      }).join('|');
+      // need to wrap in parens if we had more than one thing with |,
+      // otherwise only the first will be anchored to ^ and the last to $
+      var _ref14 = set.length > 1 ? ['(?:', ')'] : ['', ''],
+        _ref15 = _slicedToArray(_ref14, 2),
+        open = _ref15[0],
+        close = _ref15[1];
+      // must match entire pattern
+      // ending in a * or ** will make it less strict.
+      re = '^' + open + re + close + '$';
+      // can match anything, as long as it's not this.
+      if (this.negate) re = '^(?!' + re + ').+$';
+      try {
+        this.regexp = new RegExp(re, toConsumableArray_toConsumableArray(flags).join(''));
+        /* c8 ignore start */
+      } catch (ex) {
+        // should be impossible
+        this.regexp = false;
+      }
+      /* c8 ignore stop */
+      return this.regexp;
+    }
+  }, {
+    key: "slashSplit",
+    value: function slashSplit(p) {
+      // if p starts with // on windows, we preserve that
+      // so that UNC paths aren't broken.  Otherwise, any number of
+      // / characters are coalesced into one, unless
+      // preserveMultipleSlashes is set to true.
+      if (this.preserveMultipleSlashes) {
+        return p.split('/');
+      } else if (this.isWindows && /^\/\/[^\/]+/.test(p)) {
+        // add an extra '' for the one we lose
+        return [''].concat(toConsumableArray_toConsumableArray(p.split(/\/+/)));
+      } else {
+        return p.split(/\/+/);
+      }
+    }
+  }, {
+    key: "match",
+    value: function match(f) {
+      var partial = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.partial;
+      this.debug('match', f, this.pattern);
+      // short-circuit in the case of busted things.
+      // comments, etc.
+      if (this.comment) {
+        return false;
+      }
+      if (this.empty) {
+        return f === '';
+      }
+      if (f === '/' && partial) {
+        return true;
+      }
+      var options = this.options;
+      // windows: need to use /, not \
+      if (this.isWindows) {
+        f = f.split('\\').join('/');
+      }
+      // treat the test path as a set of pathparts.
+      var ff = this.slashSplit(f);
+      this.debug(this.pattern, 'split', ff);
+      // just ONE of the pattern sets in this.set needs to match
+      // in order for it to be valid.  If negating, then just one
+      // match means that we have failed.
+      // Either way, return on the first hit.
+      var set = this.set;
+      this.debug(this.pattern, 'set', set);
+      // Find the basename of the path by looking for the last non-empty segment
+      var filename = ff[ff.length - 1];
+      if (!filename) {
+        for (var i = ff.length - 2; !filename && i >= 0; i--) {
+          filename = ff[i];
+        }
+      }
+      for (var _i = 0; _i < set.length; _i++) {
+        var pattern = set[_i];
+        var file = ff;
+        if (options.matchBase && pattern.length === 1) {
+          file = [filename];
+        }
+        var hit = this.matchOne(file, pattern, partial);
+        if (hit) {
+          if (options.flipNegate) {
+            return true;
+          }
+          return !this.negate;
+        }
+      }
+      // didn't get any hits.  this is success if it's a negative
+      // pattern, failure otherwise.
+      if (options.flipNegate) {
+        return false;
+      }
+      return this.negate;
+    }
+  }], [{
+    key: "defaults",
+    value: function defaults(def) {
+      return minimatch.defaults(def).Minimatch;
+    }
+  }]);
+  return Minimatch;
+}();
+/* c8 ignore start */
+
+
+
+/* c8 ignore stop */
+minimatch.AST = AST;
+minimatch.Minimatch = Minimatch;
+minimatch.escape = escape_escape;
+minimatch.unescape = unescape_unescape;
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCheckPrivateStaticFieldDescriptor.js
+function _classCheckPrivateStaticFieldDescriptor(descriptor, action) {
+  if (descriptor === undefined) {
+    throw new TypeError("attempted to " + action + " private static field before its declaration");
+  }
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classStaticPrivateFieldSpecGet.js
+
+
+
+function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) {
+  _classCheckPrivateStaticAccess(receiver, classConstructor);
+  _classCheckPrivateStaticFieldDescriptor(descriptor, "get");
+  return _classApplyDescriptorGet(receiver, descriptor);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classStaticPrivateFieldSpecSet.js
+
+
+
+function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor, value) {
+  _classCheckPrivateStaticAccess(receiver, classConstructor);
+  _classCheckPrivateStaticFieldDescriptor(descriptor, "set");
+  _classApplyDescriptorSet(receiver, descriptor, value);
+  return value;
+}
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/isNativeFunction.js
 function _isNativeFunction(fn) {
   return Function.toString.call(fn).indexOf("[native code]") !== -1;
@@ -15760,6 +18204,8743 @@ function _wrapNativeSuper(Class) {
   };
   return _wrapNativeSuper(Class);
 }
+;// CONCATENATED MODULE: ../../node_modules/path-scurry/node_modules/lru-cache/dist/mjs/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _Symbol$iterator;
+/**
+ * @module LRUCache
+ */
+var perf = typeof performance === 'object' && performance && typeof performance.now === 'function' ? performance : Date;
+var warned = new Set();
+/* c8 ignore start */
+var PROCESS = typeof process === 'object' && !!process ? process : {};
+/* c8 ignore start */
+var emitWarning = function emitWarning(msg, type, code, fn) {
+  typeof PROCESS.emitWarning === 'function' ? PROCESS.emitWarning(msg, type, code, fn) : console.error("[".concat(code, "] ").concat(type, ": ").concat(msg));
+};
+var AC = globalThis.AbortController;
+var AS = globalThis.AbortSignal;
+/* c8 ignore start */
+if (typeof AC === 'undefined') {
+  var _PROCESS$env;
+  //@ts-ignore
+  AS = /*#__PURE__*/function () {
+    function AbortSignal() {
+      _classCallCheck(this, AbortSignal);
+      _defineProperty(this, "onabort", void 0);
+      _defineProperty(this, "_onabort", []);
+      _defineProperty(this, "reason", void 0);
+      _defineProperty(this, "aborted", false);
+    }
+    _createClass(AbortSignal, [{
+      key: "addEventListener",
+      value: function addEventListener(_, fn) {
+        this._onabort.push(fn);
+      }
+    }]);
+    return AbortSignal;
+  }();
+  //@ts-ignore
+  AC = /*#__PURE__*/function () {
+    function AbortController() {
+      _classCallCheck(this, AbortController);
+      _defineProperty(this, "signal", new AS());
+      warnACPolyfill();
+    }
+    _createClass(AbortController, [{
+      key: "abort",
+      value: function abort(reason) {
+        var _this$signal$onabort, _this$signal;
+        if (this.signal.aborted) return;
+        //@ts-ignore
+        this.signal.reason = reason;
+        //@ts-ignore
+        this.signal.aborted = true;
+        //@ts-ignore
+        var _iterator = _createForOfIteratorHelper(this.signal._onabort),
+          _step;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var fn = _step.value;
+            fn(reason);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        (_this$signal$onabort = (_this$signal = this.signal).onabort) === null || _this$signal$onabort === void 0 ? void 0 : _this$signal$onabort.call(_this$signal, reason);
+      }
+    }]);
+    return AbortController;
+  }();
+  var printACPolyfillWarning = ((_PROCESS$env = PROCESS.env) === null || _PROCESS$env === void 0 ? void 0 : _PROCESS$env.LRU_CACHE_IGNORE_AC_WARNING) !== '1';
+  var warnACPolyfill = function warnACPolyfill() {
+    if (!printACPolyfillWarning) return;
+    printACPolyfillWarning = false;
+    emitWarning('AbortController is not defined. If using lru-cache in ' + 'node 14, load an AbortController polyfill from the ' + '`node-abort-controller` package. A minimal polyfill is ' + 'provided for use by LRUCache.fetch(), but it should not be ' + 'relied upon in other contexts (eg, passing it to other APIs that ' + 'use AbortController/AbortSignal might have undesirable effects). ' + 'You may disable this with LRU_CACHE_IGNORE_AC_WARNING=1 in the env.', 'NO_ABORT_CONTROLLER', 'ENOTSUP', warnACPolyfill);
+  };
+}
+/* c8 ignore stop */
+var shouldWarn = function shouldWarn(code) {
+  return !warned.has(code);
+};
+var TYPE = Symbol('type');
+var isPosInt = function isPosInt(n) {
+  return n && n === Math.floor(n) && n > 0 && isFinite(n);
+};
+/* c8 ignore start */
+// This is a little bit ridiculous, tbh.
+// The maximum array length is 2^32-1 or thereabouts on most JS impls.
+// And well before that point, you're caching the entire world, I mean,
+// that's ~32GB of just integers for the next/prev links, plus whatever
+// else to hold that many keys and values.  Just filling the memory with
+// zeroes at init time is brutal when you get that big.
+// But why not be complete?
+// Maybe in the future, these limits will have expanded.
+var getUintArray = function getUintArray(max) {
+  return !isPosInt(max) ? null : max <= Math.pow(2, 8) ? Uint8Array : max <= Math.pow(2, 16) ? Uint16Array : max <= Math.pow(2, 32) ? Uint32Array : max <= Number.MAX_SAFE_INTEGER ? ZeroArray : null;
+};
+/* c8 ignore stop */
+var ZeroArray = /*#__PURE__*/function (_Array) {
+  _inherits(ZeroArray, _Array);
+  var _super = _createSuper(ZeroArray);
+  function ZeroArray(size) {
+    var _this;
+    _classCallCheck(this, ZeroArray);
+    _this = _super.call(this, size);
+    _this.fill(0);
+    return _this;
+  }
+  return _createClass(ZeroArray);
+}( /*#__PURE__*/_wrapNativeSuper(Array));
+var Stack = /*#__PURE__*/function () {
+  function Stack(max, HeapCls) {
+    _classCallCheck(this, Stack);
+    _defineProperty(this, "heap", void 0);
+    _defineProperty(this, "length", void 0);
+    /* c8 ignore start */
+    if (!_classStaticPrivateFieldSpecGet(Stack, Stack, _constructing)) {
+      throw new TypeError('instantiate Stack using Stack.create(n)');
+    }
+    /* c8 ignore stop */
+    this.heap = new HeapCls(max);
+    this.length = 0;
+  }
+  _createClass(Stack, [{
+    key: "push",
+    value: function push(n) {
+      this.heap[this.length++] = n;
+    }
+  }, {
+    key: "pop",
+    value: function pop() {
+      return this.heap[--this.length];
+    }
+  }], [{
+    key: "create",
+    value:
+    // private constructor
+
+    function create(max) {
+      var HeapCls = getUintArray(max);
+      if (!HeapCls) return [];
+      _classStaticPrivateFieldSpecSet(Stack, Stack, _constructing, true);
+      var s = new Stack(max, HeapCls);
+      _classStaticPrivateFieldSpecSet(Stack, Stack, _constructing, false);
+      return s;
+    }
+  }]);
+  return Stack;
+}();
+/**
+ * Default export, the thing you're using this module to get.
+ *
+ * All properties from the options object (with the exception of
+ * {@link OptionsBase.max} and {@link OptionsBase.maxSize}) are added as
+ * normal public members. (`max` and `maxBase` are read-only getters.)
+ * Changing any of these will alter the defaults for subsequent method calls,
+ * but is otherwise safe.
+ */
+var _constructing = {
+  writable: true,
+  value: false
+};
+var _max = /*#__PURE__*/new WeakMap();
+var _maxSize = /*#__PURE__*/new WeakMap();
+var _dispose = /*#__PURE__*/new WeakMap();
+var _disposeAfter = /*#__PURE__*/new WeakMap();
+var _fetchMethod = /*#__PURE__*/new WeakMap();
+var _size = /*#__PURE__*/new WeakMap();
+var _calculatedSize = /*#__PURE__*/new WeakMap();
+var _keyMap = /*#__PURE__*/new WeakMap();
+var _keyList = /*#__PURE__*/new WeakMap();
+var _valList = /*#__PURE__*/new WeakMap();
+var _next = /*#__PURE__*/new WeakMap();
+var _prev = /*#__PURE__*/new WeakMap();
+var _head = /*#__PURE__*/new WeakMap();
+var _tail = /*#__PURE__*/new WeakMap();
+var _free = /*#__PURE__*/new WeakMap();
+var _disposed = /*#__PURE__*/new WeakMap();
+var _sizes = /*#__PURE__*/new WeakMap();
+var _starts = /*#__PURE__*/new WeakMap();
+var _ttls = /*#__PURE__*/new WeakMap();
+var _hasDispose = /*#__PURE__*/new WeakMap();
+var _hasFetchMethod = /*#__PURE__*/new WeakMap();
+var _hasDisposeAfter = /*#__PURE__*/new WeakMap();
+var _initializeTTLTracking = /*#__PURE__*/new WeakSet();
+var _updateItemAge = /*#__PURE__*/new WeakMap();
+var _statusTTL = /*#__PURE__*/new WeakMap();
+var _setItemTTL = /*#__PURE__*/new WeakMap();
+var _isStale = /*#__PURE__*/new WeakMap();
+var _initializeSizeTracking = /*#__PURE__*/new WeakSet();
+var _removeItemSize = /*#__PURE__*/new WeakMap();
+var _addItemSize = /*#__PURE__*/new WeakMap();
+var _requireSize = /*#__PURE__*/new WeakMap();
+var _indexes = /*#__PURE__*/new WeakSet();
+var _rindexes = /*#__PURE__*/new WeakSet();
+var _isValidIndex = /*#__PURE__*/new WeakSet();
+var _evict = /*#__PURE__*/new WeakSet();
+var _backgroundFetch = /*#__PURE__*/new WeakSet();
+var _isBackgroundFetch = /*#__PURE__*/new WeakSet();
+var _connect = /*#__PURE__*/new WeakSet();
+var _moveToTail = /*#__PURE__*/new WeakSet();
+_Symbol$iterator = Symbol.iterator;
+var LRUCache = /*#__PURE__*/function () {
+  function LRUCache(_options) {
+    _classCallCheck(this, LRUCache);
+    _classPrivateMethodInitSpec(this, _moveToTail);
+    _classPrivateMethodInitSpec(this, _connect);
+    _classPrivateMethodInitSpec(this, _isBackgroundFetch);
+    _classPrivateMethodInitSpec(this, _backgroundFetch);
+    _classPrivateMethodInitSpec(this, _evict);
+    _classPrivateMethodInitSpec(this, _isValidIndex);
+    _classPrivateMethodInitSpec(this, _rindexes);
+    _classPrivateMethodInitSpec(this, _indexes);
+    _classPrivateMethodInitSpec(this, _initializeSizeTracking);
+    _classPrivateMethodInitSpec(this, _initializeTTLTracking);
+    // properties coming in from the options of these, only max and maxSize
+    // really *need* to be protected. The rest can be modified, as they just
+    // set defaults for various methods.
+    _classPrivateFieldInitSpec(this, _max, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _maxSize, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _dispose, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _disposeAfter, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _fetchMethod, {
+      writable: true,
+      value: void 0
+    });
+    /**
+     * {@link LRUCache.OptionsBase.ttl}
+     */
+    _defineProperty(this, "ttl", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.ttlResolution}
+     */
+    _defineProperty(this, "ttlResolution", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.ttlAutopurge}
+     */
+    _defineProperty(this, "ttlAutopurge", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.updateAgeOnGet}
+     */
+    _defineProperty(this, "updateAgeOnGet", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.updateAgeOnHas}
+     */
+    _defineProperty(this, "updateAgeOnHas", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.allowStale}
+     */
+    _defineProperty(this, "allowStale", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.noDisposeOnSet}
+     */
+    _defineProperty(this, "noDisposeOnSet", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.noUpdateTTL}
+     */
+    _defineProperty(this, "noUpdateTTL", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.maxEntrySize}
+     */
+    _defineProperty(this, "maxEntrySize", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.sizeCalculation}
+     */
+    _defineProperty(this, "sizeCalculation", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.noDeleteOnFetchRejection}
+     */
+    _defineProperty(this, "noDeleteOnFetchRejection", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.noDeleteOnStaleGet}
+     */
+    _defineProperty(this, "noDeleteOnStaleGet", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.allowStaleOnFetchAbort}
+     */
+    _defineProperty(this, "allowStaleOnFetchAbort", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.allowStaleOnFetchRejection}
+     */
+    _defineProperty(this, "allowStaleOnFetchRejection", void 0);
+    /**
+     * {@link LRUCache.OptionsBase.ignoreFetchAbort}
+     */
+    _defineProperty(this, "ignoreFetchAbort", void 0);
+    // computed properties
+    _classPrivateFieldInitSpec(this, _size, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _calculatedSize, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _keyMap, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _keyList, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _valList, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _next, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _prev, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _head, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _tail, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _free, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _disposed, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _sizes, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _starts, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _ttls, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _hasDispose, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _hasFetchMethod, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _hasDisposeAfter, {
+      writable: true,
+      value: void 0
+    });
+    // conditionally set private methods related to TTL
+    _classPrivateFieldInitSpec(this, _updateItemAge, {
+      writable: true,
+      value: function value() {}
+    });
+    _classPrivateFieldInitSpec(this, _statusTTL, {
+      writable: true,
+      value: function value() {}
+    });
+    _classPrivateFieldInitSpec(this, _setItemTTL, {
+      writable: true,
+      value: function value() {}
+    });
+    /* c8 ignore stop */
+    _classPrivateFieldInitSpec(this, _isStale, {
+      writable: true,
+      value: function value() {
+        return false;
+      }
+    });
+    _classPrivateFieldInitSpec(this, _removeItemSize, {
+      writable: true,
+      value: function value(_i) {}
+    });
+    _classPrivateFieldInitSpec(this, _addItemSize, {
+      writable: true,
+      value: function value(_i, _s, _st) {}
+    });
+    _classPrivateFieldInitSpec(this, _requireSize, {
+      writable: true,
+      value: function value(_k, _v, size, sizeCalculation) {
+        if (size || sizeCalculation) {
+          throw new TypeError('cannot set size without setting maxSize or maxEntrySize on cache');
+        }
+        return 0;
+      }
+    });
+    var _options$max = _options.max,
+      max = _options$max === void 0 ? 0 : _options$max,
+      _ttl = _options.ttl,
+      _options$ttlResolutio = _options.ttlResolution,
+      ttlResolution = _options$ttlResolutio === void 0 ? 1 : _options$ttlResolutio,
+      ttlAutopurge = _options.ttlAutopurge,
+      updateAgeOnGet = _options.updateAgeOnGet,
+      updateAgeOnHas = _options.updateAgeOnHas,
+      _allowStale = _options.allowStale,
+      dispose = _options.dispose,
+      disposeAfter = _options.disposeAfter,
+      noDisposeOnSet = _options.noDisposeOnSet,
+      noUpdateTTL = _options.noUpdateTTL,
+      _options$maxSize = _options.maxSize,
+      _maxSize2 = _options$maxSize === void 0 ? 0 : _options$maxSize,
+      _options$maxEntrySize = _options.maxEntrySize,
+      maxEntrySize = _options$maxEntrySize === void 0 ? 0 : _options$maxEntrySize,
+      _sizeCalculation = _options.sizeCalculation,
+      fetchMethod = _options.fetchMethod,
+      noDeleteOnFetchRejection = _options.noDeleteOnFetchRejection,
+      noDeleteOnStaleGet = _options.noDeleteOnStaleGet,
+      allowStaleOnFetchRejection = _options.allowStaleOnFetchRejection,
+      allowStaleOnFetchAbort = _options.allowStaleOnFetchAbort,
+      ignoreFetchAbort = _options.ignoreFetchAbort;
+    if (max !== 0 && !isPosInt(max)) {
+      throw new TypeError('max option must be a nonnegative integer');
+    }
+    var UintArray = max ? getUintArray(max) : Array;
+    if (!UintArray) {
+      throw new Error('invalid max value: ' + max);
+    }
+    _classPrivateFieldSet(this, _max, max);
+    _classPrivateFieldSet(this, _maxSize, _maxSize2);
+    this.maxEntrySize = maxEntrySize || _classPrivateFieldGet(this, _maxSize);
+    this.sizeCalculation = _sizeCalculation;
+    if (this.sizeCalculation) {
+      if (!_classPrivateFieldGet(this, _maxSize) && !this.maxEntrySize) {
+        throw new TypeError('cannot set sizeCalculation without setting maxSize or maxEntrySize');
+      }
+      if (typeof this.sizeCalculation !== 'function') {
+        throw new TypeError('sizeCalculation set to non-function');
+      }
+    }
+    if (fetchMethod !== undefined && typeof fetchMethod !== 'function') {
+      throw new TypeError('fetchMethod must be a function if specified');
+    }
+    _classPrivateFieldSet(this, _fetchMethod, fetchMethod);
+    _classPrivateFieldSet(this, _hasFetchMethod, !!fetchMethod);
+    _classPrivateFieldSet(this, _keyMap, new Map());
+    _classPrivateFieldSet(this, _keyList, new Array(max).fill(undefined));
+    _classPrivateFieldSet(this, _valList, new Array(max).fill(undefined));
+    _classPrivateFieldSet(this, _next, new UintArray(max));
+    _classPrivateFieldSet(this, _prev, new UintArray(max));
+    _classPrivateFieldSet(this, _head, 0);
+    _classPrivateFieldSet(this, _tail, 0);
+    _classPrivateFieldSet(this, _free, Stack.create(max));
+    _classPrivateFieldSet(this, _size, 0);
+    _classPrivateFieldSet(this, _calculatedSize, 0);
+    if (typeof dispose === 'function') {
+      _classPrivateFieldSet(this, _dispose, dispose);
+    }
+    if (typeof disposeAfter === 'function') {
+      _classPrivateFieldSet(this, _disposeAfter, disposeAfter);
+      _classPrivateFieldSet(this, _disposed, []);
+    } else {
+      _classPrivateFieldSet(this, _disposeAfter, undefined);
+      _classPrivateFieldSet(this, _disposed, undefined);
+    }
+    _classPrivateFieldSet(this, _hasDispose, !!_classPrivateFieldGet(this, _dispose));
+    _classPrivateFieldSet(this, _hasDisposeAfter, !!_classPrivateFieldGet(this, _disposeAfter));
+    this.noDisposeOnSet = !!noDisposeOnSet;
+    this.noUpdateTTL = !!noUpdateTTL;
+    this.noDeleteOnFetchRejection = !!noDeleteOnFetchRejection;
+    this.allowStaleOnFetchRejection = !!allowStaleOnFetchRejection;
+    this.allowStaleOnFetchAbort = !!allowStaleOnFetchAbort;
+    this.ignoreFetchAbort = !!ignoreFetchAbort;
+    // NB: maxEntrySize is set to maxSize if it's set
+    if (this.maxEntrySize !== 0) {
+      if (_classPrivateFieldGet(this, _maxSize) !== 0) {
+        if (!isPosInt(_classPrivateFieldGet(this, _maxSize))) {
+          throw new TypeError('maxSize must be a positive integer if specified');
+        }
+      }
+      if (!isPosInt(this.maxEntrySize)) {
+        throw new TypeError('maxEntrySize must be a positive integer if specified');
+      }
+      _classPrivateMethodGet(this, _initializeSizeTracking, _initializeSizeTracking2).call(this);
+    }
+    this.allowStale = !!_allowStale;
+    this.noDeleteOnStaleGet = !!noDeleteOnStaleGet;
+    this.updateAgeOnGet = !!updateAgeOnGet;
+    this.updateAgeOnHas = !!updateAgeOnHas;
+    this.ttlResolution = isPosInt(ttlResolution) || ttlResolution === 0 ? ttlResolution : 1;
+    this.ttlAutopurge = !!ttlAutopurge;
+    this.ttl = _ttl || 0;
+    if (this.ttl) {
+      if (!isPosInt(this.ttl)) {
+        throw new TypeError('ttl must be a positive integer if specified');
+      }
+      _classPrivateMethodGet(this, _initializeTTLTracking, _initializeTTLTracking2).call(this);
+    }
+    // do not allow completely unbounded caches
+    if (_classPrivateFieldGet(this, _max) === 0 && this.ttl === 0 && _classPrivateFieldGet(this, _maxSize) === 0) {
+      throw new TypeError('At least one of max, maxSize, or ttl is required');
+    }
+    if (!this.ttlAutopurge && !_classPrivateFieldGet(this, _max) && !_classPrivateFieldGet(this, _maxSize)) {
+      var code = 'LRU_CACHE_UNBOUNDED';
+      if (shouldWarn(code)) {
+        warned.add(code);
+        var msg = 'TTL caching without ttlAutopurge, max, or maxSize can ' + 'result in unbounded memory consumption.';
+        emitWarning(msg, 'UnboundedCacheWarning', code, LRUCache);
+      }
+    }
+  }
+  /**
+   * Return the remaining TTL time for a given entry key
+   */
+  _createClass(LRUCache, [{
+    key: "max",
+    get:
+    // Protected read-only members
+    /**
+     * {@link LRUCache.OptionsBase.max} (read-only)
+     */
+    function get() {
+      return _classPrivateFieldGet(this, _max);
+    }
+    /**
+     * {@link LRUCache.OptionsBase.maxSize} (read-only)
+     */
+  }, {
+    key: "maxSize",
+    get: function get() {
+      return _classPrivateFieldGet(this, _maxSize);
+    }
+    /**
+     * The total computed size of items in the cache (read-only)
+     */
+  }, {
+    key: "calculatedSize",
+    get: function get() {
+      return _classPrivateFieldGet(this, _calculatedSize);
+    }
+    /**
+     * The number of items stored in the cache (read-only)
+     */
+  }, {
+    key: "size",
+    get: function get() {
+      return _classPrivateFieldGet(this, _size);
+    }
+    /**
+     * {@link LRUCache.OptionsBase.fetchMethod} (read-only)
+     */
+  }, {
+    key: "fetchMethod",
+    get: function get() {
+      return _classPrivateFieldGet(this, _fetchMethod);
+    }
+    /**
+     * {@link LRUCache.OptionsBase.dispose} (read-only)
+     */
+  }, {
+    key: "dispose",
+    get: function get() {
+      return _classPrivateFieldGet(this, _dispose);
+    }
+    /**
+     * {@link LRUCache.OptionsBase.disposeAfter} (read-only)
+     */
+  }, {
+    key: "disposeAfter",
+    get: function get() {
+      return _classPrivateFieldGet(this, _disposeAfter);
+    }
+  }, {
+    key: "getRemainingTTL",
+    value: function getRemainingTTL(key) {
+      return _classPrivateFieldGet(this, _keyMap).has(key) ? Infinity : 0;
+    }
+  }, {
+    key: "entries",
+    value:
+    /*#__PURE__*/
+    /**
+     * Return a generator yielding `[key, value]` pairs,
+     * in order from most recently used to least recently used.
+     */
+    _regeneratorRuntime().mark(function entries() {
+      var _iterator2, _step2, i;
+      return _regeneratorRuntime().wrap(function entries$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _iterator2 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
+            _context.prev = 1;
+            _iterator2.s();
+          case 3:
+            if ((_step2 = _iterator2.n()).done) {
+              _context.next = 10;
+              break;
+            }
+            i = _step2.value;
+            if (!(_classPrivateFieldGet(this, _valList)[i] !== undefined && _classPrivateFieldGet(this, _keyList)[i] !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+              _context.next = 8;
+              break;
+            }
+            _context.next = 8;
+            return [_classPrivateFieldGet(this, _keyList)[i], _classPrivateFieldGet(this, _valList)[i]];
+          case 8:
+            _context.next = 3;
+            break;
+          case 10:
+            _context.next = 15;
+            break;
+          case 12:
+            _context.prev = 12;
+            _context.t0 = _context["catch"](1);
+            _iterator2.e(_context.t0);
+          case 15:
+            _context.prev = 15;
+            _iterator2.f();
+            return _context.finish(15);
+          case 18:
+          case "end":
+            return _context.stop();
+        }
+      }, entries, this, [[1, 12, 15, 18]]);
+    })
+    /**
+     * Inverse order version of {@link LRUCache.entries}
+     *
+     * Return a generator yielding `[key, value]` pairs,
+     * in order from least recently used to most recently used.
+     */
+  }, {
+    key: "rentries",
+    value:
+    /*#__PURE__*/
+    _regeneratorRuntime().mark(function rentries() {
+      var _iterator3, _step3, i;
+      return _regeneratorRuntime().wrap(function rentries$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _iterator3 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
+            _context2.prev = 1;
+            _iterator3.s();
+          case 3:
+            if ((_step3 = _iterator3.n()).done) {
+              _context2.next = 10;
+              break;
+            }
+            i = _step3.value;
+            if (!(_classPrivateFieldGet(this, _valList)[i] !== undefined && _classPrivateFieldGet(this, _keyList)[i] !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+              _context2.next = 8;
+              break;
+            }
+            _context2.next = 8;
+            return [_classPrivateFieldGet(this, _keyList)[i], _classPrivateFieldGet(this, _valList)[i]];
+          case 8:
+            _context2.next = 3;
+            break;
+          case 10:
+            _context2.next = 15;
+            break;
+          case 12:
+            _context2.prev = 12;
+            _context2.t0 = _context2["catch"](1);
+            _iterator3.e(_context2.t0);
+          case 15:
+            _context2.prev = 15;
+            _iterator3.f();
+            return _context2.finish(15);
+          case 18:
+          case "end":
+            return _context2.stop();
+        }
+      }, rentries, this, [[1, 12, 15, 18]]);
+    })
+    /**
+     * Return a generator yielding the keys in the cache,
+     * in order from most recently used to least recently used.
+     */
+  }, {
+    key: "keys",
+    value:
+    /*#__PURE__*/
+    _regeneratorRuntime().mark(function keys() {
+      var _iterator4, _step4, i, k;
+      return _regeneratorRuntime().wrap(function keys$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _iterator4 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
+            _context3.prev = 1;
+            _iterator4.s();
+          case 3:
+            if ((_step4 = _iterator4.n()).done) {
+              _context3.next = 11;
+              break;
+            }
+            i = _step4.value;
+            k = _classPrivateFieldGet(this, _keyList)[i];
+            if (!(k !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+              _context3.next = 9;
+              break;
+            }
+            _context3.next = 9;
+            return k;
+          case 9:
+            _context3.next = 3;
+            break;
+          case 11:
+            _context3.next = 16;
+            break;
+          case 13:
+            _context3.prev = 13;
+            _context3.t0 = _context3["catch"](1);
+            _iterator4.e(_context3.t0);
+          case 16:
+            _context3.prev = 16;
+            _iterator4.f();
+            return _context3.finish(16);
+          case 19:
+          case "end":
+            return _context3.stop();
+        }
+      }, keys, this, [[1, 13, 16, 19]]);
+    })
+    /**
+     * Inverse order version of {@link LRUCache.keys}
+     *
+     * Return a generator yielding the keys in the cache,
+     * in order from least recently used to most recently used.
+     */
+  }, {
+    key: "rkeys",
+    value:
+    /*#__PURE__*/
+    _regeneratorRuntime().mark(function rkeys() {
+      var _iterator5, _step5, i, k;
+      return _regeneratorRuntime().wrap(function rkeys$(_context4) {
+        while (1) switch (_context4.prev = _context4.next) {
+          case 0:
+            _iterator5 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
+            _context4.prev = 1;
+            _iterator5.s();
+          case 3:
+            if ((_step5 = _iterator5.n()).done) {
+              _context4.next = 11;
+              break;
+            }
+            i = _step5.value;
+            k = _classPrivateFieldGet(this, _keyList)[i];
+            if (!(k !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+              _context4.next = 9;
+              break;
+            }
+            _context4.next = 9;
+            return k;
+          case 9:
+            _context4.next = 3;
+            break;
+          case 11:
+            _context4.next = 16;
+            break;
+          case 13:
+            _context4.prev = 13;
+            _context4.t0 = _context4["catch"](1);
+            _iterator5.e(_context4.t0);
+          case 16:
+            _context4.prev = 16;
+            _iterator5.f();
+            return _context4.finish(16);
+          case 19:
+          case "end":
+            return _context4.stop();
+        }
+      }, rkeys, this, [[1, 13, 16, 19]]);
+    })
+    /**
+     * Return a generator yielding the values in the cache,
+     * in order from most recently used to least recently used.
+     */
+  }, {
+    key: "values",
+    value:
+    /*#__PURE__*/
+    _regeneratorRuntime().mark(function values() {
+      var _iterator6, _step6, i, v;
+      return _regeneratorRuntime().wrap(function values$(_context5) {
+        while (1) switch (_context5.prev = _context5.next) {
+          case 0:
+            _iterator6 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
+            _context5.prev = 1;
+            _iterator6.s();
+          case 3:
+            if ((_step6 = _iterator6.n()).done) {
+              _context5.next = 11;
+              break;
+            }
+            i = _step6.value;
+            v = _classPrivateFieldGet(this, _valList)[i];
+            if (!(v !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+              _context5.next = 9;
+              break;
+            }
+            _context5.next = 9;
+            return _classPrivateFieldGet(this, _valList)[i];
+          case 9:
+            _context5.next = 3;
+            break;
+          case 11:
+            _context5.next = 16;
+            break;
+          case 13:
+            _context5.prev = 13;
+            _context5.t0 = _context5["catch"](1);
+            _iterator6.e(_context5.t0);
+          case 16:
+            _context5.prev = 16;
+            _iterator6.f();
+            return _context5.finish(16);
+          case 19:
+          case "end":
+            return _context5.stop();
+        }
+      }, values, this, [[1, 13, 16, 19]]);
+    })
+    /**
+     * Inverse order version of {@link LRUCache.values}
+     *
+     * Return a generator yielding the values in the cache,
+     * in order from least recently used to most recently used.
+     */
+  }, {
+    key: "rvalues",
+    value:
+    /*#__PURE__*/
+    _regeneratorRuntime().mark(function rvalues() {
+      var _iterator7, _step7, i, v;
+      return _regeneratorRuntime().wrap(function rvalues$(_context6) {
+        while (1) switch (_context6.prev = _context6.next) {
+          case 0:
+            _iterator7 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
+            _context6.prev = 1;
+            _iterator7.s();
+          case 3:
+            if ((_step7 = _iterator7.n()).done) {
+              _context6.next = 11;
+              break;
+            }
+            i = _step7.value;
+            v = _classPrivateFieldGet(this, _valList)[i];
+            if (!(v !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+              _context6.next = 9;
+              break;
+            }
+            _context6.next = 9;
+            return _classPrivateFieldGet(this, _valList)[i];
+          case 9:
+            _context6.next = 3;
+            break;
+          case 11:
+            _context6.next = 16;
+            break;
+          case 13:
+            _context6.prev = 13;
+            _context6.t0 = _context6["catch"](1);
+            _iterator7.e(_context6.t0);
+          case 16:
+            _context6.prev = 16;
+            _iterator7.f();
+            return _context6.finish(16);
+          case 19:
+          case "end":
+            return _context6.stop();
+        }
+      }, rvalues, this, [[1, 13, 16, 19]]);
+    })
+    /**
+     * Iterating over the cache itself yields the same results as
+     * {@link LRUCache.entries}
+     */
+  }, {
+    key: _Symbol$iterator,
+    value: function value() {
+      return this.entries();
+    }
+    /**
+     * Find a value for which the supplied fn method returns a truthy value,
+     * similar to Array.find().  fn is called as fn(value, key, cache).
+     */
+  }, {
+    key: "find",
+    value: function find(fn) {
+      var getOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var _iterator8 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this)),
+        _step8;
+      try {
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var i = _step8.value;
+          var v = _classPrivateFieldGet(this, _valList)[i];
+          var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
+          if (value === undefined) continue;
+          if (fn(value, _classPrivateFieldGet(this, _keyList)[i], this)) {
+            return this.get(_classPrivateFieldGet(this, _keyList)[i], getOptions);
+          }
+        }
+      } catch (err) {
+        _iterator8.e(err);
+      } finally {
+        _iterator8.f();
+      }
+    }
+    /**
+     * Call the supplied function on each item in the cache, in order from
+     * most recently used to least recently used.  fn is called as
+     * fn(value, key, cache).  Does not update age or recenty of use.
+     * Does not iterate over stale values.
+     */
+  }, {
+    key: "forEach",
+    value: function forEach(fn) {
+      var thisp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
+      var _iterator9 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this)),
+        _step9;
+      try {
+        for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
+          var i = _step9.value;
+          var v = _classPrivateFieldGet(this, _valList)[i];
+          var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
+          if (value === undefined) continue;
+          fn.call(thisp, value, _classPrivateFieldGet(this, _keyList)[i], this);
+        }
+      } catch (err) {
+        _iterator9.e(err);
+      } finally {
+        _iterator9.f();
+      }
+    }
+    /**
+     * The same as {@link LRUCache.forEach} but items are iterated over in
+     * reverse order.  (ie, less recently used items are iterated over first.)
+     */
+  }, {
+    key: "rforEach",
+    value: function rforEach(fn) {
+      var thisp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
+      var _iterator10 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this)),
+        _step10;
+      try {
+        for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+          var i = _step10.value;
+          var v = _classPrivateFieldGet(this, _valList)[i];
+          var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
+          if (value === undefined) continue;
+          fn.call(thisp, value, _classPrivateFieldGet(this, _keyList)[i], this);
+        }
+      } catch (err) {
+        _iterator10.e(err);
+      } finally {
+        _iterator10.f();
+      }
+    }
+    /**
+     * Delete any stale entries. Returns true if anything was removed,
+     * false otherwise.
+     */
+  }, {
+    key: "purgeStale",
+    value: function purgeStale() {
+      var deleted = false;
+      var _iterator11 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this, {
+          allowStale: true
+        })),
+        _step11;
+      try {
+        for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+          var i = _step11.value;
+          if (_classPrivateFieldGet(this, _isStale).call(this, i)) {
+            this["delete"](_classPrivateFieldGet(this, _keyList)[i]);
+            deleted = true;
+          }
+        }
+      } catch (err) {
+        _iterator11.e(err);
+      } finally {
+        _iterator11.f();
+      }
+      return deleted;
+    }
+    /**
+     * Return an array of [key, {@link LRUCache.Entry}] tuples which can be
+     * passed to cache.load()
+     */
+  }, {
+    key: "dump",
+    value: function dump() {
+      var arr = [];
+      var _iterator12 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this, {
+          allowStale: true
+        })),
+        _step12;
+      try {
+        for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+          var i = _step12.value;
+          var key = _classPrivateFieldGet(this, _keyList)[i];
+          var v = _classPrivateFieldGet(this, _valList)[i];
+          var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
+          if (value === undefined || key === undefined) continue;
+          var entry = {
+            value: value
+          };
+          if (_classPrivateFieldGet(this, _ttls) && _classPrivateFieldGet(this, _starts)) {
+            entry.ttl = _classPrivateFieldGet(this, _ttls)[i];
+            // always dump the start relative to a portable timestamp
+            // it's ok for this to be a bit slow, it's a rare operation.
+            var age = perf.now() - _classPrivateFieldGet(this, _starts)[i];
+            entry.start = Math.floor(Date.now() - age);
+          }
+          if (_classPrivateFieldGet(this, _sizes)) {
+            entry.size = _classPrivateFieldGet(this, _sizes)[i];
+          }
+          arr.unshift([key, entry]);
+        }
+      } catch (err) {
+        _iterator12.e(err);
+      } finally {
+        _iterator12.f();
+      }
+      return arr;
+    }
+    /**
+     * Reset the cache and load in the items in entries in the order listed.
+     * Note that the shape of the resulting cache may be different if the
+     * same options are not used in both caches.
+     */
+  }, {
+    key: "load",
+    value: function load(arr) {
+      this.clear();
+      var _iterator13 = _createForOfIteratorHelper(arr),
+        _step13;
+      try {
+        for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+          var _step13$value = _slicedToArray(_step13.value, 2),
+            key = _step13$value[0],
+            entry = _step13$value[1];
+          if (entry.start) {
+            // entry.start is a portable timestamp, but we may be using
+            // node's performance.now(), so calculate the offset, so that
+            // we get the intended remaining TTL, no matter how long it's
+            // been on ice.
+            //
+            // it's ok for this to be a bit slow, it's a rare operation.
+            var age = Date.now() - entry.start;
+            entry.start = perf.now() - age;
+          }
+          this.set(key, entry.value, entry);
+        }
+      } catch (err) {
+        _iterator13.e(err);
+      } finally {
+        _iterator13.f();
+      }
+    }
+    /**
+     * Add a value to the cache.
+     *
+     * Note: if `undefined` is specified as a value, this is an alias for
+     * {@link LRUCache#delete}
+     */
+  }, {
+    key: "set",
+    value: function set(k, v) {
+      var setOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      if (v === undefined) {
+        this["delete"](k);
+        return this;
+      }
+      var _setOptions$ttl = setOptions.ttl,
+        ttl = _setOptions$ttl === void 0 ? this.ttl : _setOptions$ttl,
+        start = setOptions.start,
+        _setOptions$noDispose = setOptions.noDisposeOnSet,
+        noDisposeOnSet = _setOptions$noDispose === void 0 ? this.noDisposeOnSet : _setOptions$noDispose,
+        _setOptions$sizeCalcu = setOptions.sizeCalculation,
+        sizeCalculation = _setOptions$sizeCalcu === void 0 ? this.sizeCalculation : _setOptions$sizeCalcu,
+        status = setOptions.status;
+      var _setOptions$noUpdateT = setOptions.noUpdateTTL,
+        noUpdateTTL = _setOptions$noUpdateT === void 0 ? this.noUpdateTTL : _setOptions$noUpdateT;
+      var size = _classPrivateFieldGet(this, _requireSize).call(this, k, v, setOptions.size || 0, sizeCalculation);
+      // if the item doesn't fit, don't do anything
+      // NB: maxEntrySize set to maxSize by default
+      if (this.maxEntrySize && size > this.maxEntrySize) {
+        if (status) {
+          status.set = 'miss';
+          status.maxEntrySizeExceeded = true;
+        }
+        // have to delete, in case something is there already.
+        this["delete"](k);
+        return this;
+      }
+      var index = _classPrivateFieldGet(this, _size) === 0 ? undefined : _classPrivateFieldGet(this, _keyMap).get(k);
+      if (index === undefined) {
+        var _this$size, _this$size2;
+        // addition
+        index = _classPrivateFieldGet(this, _size) === 0 ? _classPrivateFieldGet(this, _tail) : _classPrivateFieldGet(this, _free).length !== 0 ? _classPrivateFieldGet(this, _free).pop() : _classPrivateFieldGet(this, _size) === _classPrivateFieldGet(this, _max) ? _classPrivateMethodGet(this, _evict, _evict2).call(this, false) : _classPrivateFieldGet(this, _size);
+        _classPrivateFieldGet(this, _keyList)[index] = k;
+        _classPrivateFieldGet(this, _valList)[index] = v;
+        _classPrivateFieldGet(this, _keyMap).set(k, index);
+        _classPrivateFieldGet(this, _next)[_classPrivateFieldGet(this, _tail)] = index;
+        _classPrivateFieldGet(this, _prev)[index] = _classPrivateFieldGet(this, _tail);
+        _classPrivateFieldSet(this, _tail, index);
+        _classPrivateFieldSet(this, _size, (_this$size = _classPrivateFieldGet(this, _size), _this$size2 = _this$size++, _this$size)), _this$size2;
+        _classPrivateFieldGet(this, _addItemSize).call(this, index, size, status);
+        if (status) status.set = 'add';
+        noUpdateTTL = false;
+      } else {
+        // update
+        _classPrivateMethodGet(this, _moveToTail, _moveToTail2).call(this, index);
+        var oldVal = _classPrivateFieldGet(this, _valList)[index];
+        if (v !== oldVal) {
+          if (_classPrivateFieldGet(this, _hasFetchMethod) && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, oldVal)) {
+            oldVal.__abortController.abort(new Error('replaced'));
+          } else if (!noDisposeOnSet) {
+            if (_classPrivateFieldGet(this, _hasDispose)) {
+              var _classPrivateFieldGet2;
+              (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.call(this, oldVal, k, 'set');
+            }
+            if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+              var _classPrivateFieldGet3;
+              (_classPrivateFieldGet3 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.push([oldVal, k, 'set']);
+            }
+          }
+          _classPrivateFieldGet(this, _removeItemSize).call(this, index);
+          _classPrivateFieldGet(this, _addItemSize).call(this, index, size, status);
+          _classPrivateFieldGet(this, _valList)[index] = v;
+          if (status) {
+            status.set = 'replace';
+            var oldValue = oldVal && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, oldVal) ? oldVal.__staleWhileFetching : oldVal;
+            if (oldValue !== undefined) status.oldValue = oldValue;
+          }
+        } else if (status) {
+          status.set = 'update';
+        }
+      }
+      if (ttl !== 0 && !_classPrivateFieldGet(this, _ttls)) {
+        _classPrivateMethodGet(this, _initializeTTLTracking, _initializeTTLTracking2).call(this);
+      }
+      if (_classPrivateFieldGet(this, _ttls)) {
+        if (!noUpdateTTL) {
+          _classPrivateFieldGet(this, _setItemTTL).call(this, index, ttl, start);
+        }
+        if (status) _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+      }
+      if (!noDisposeOnSet && _classPrivateFieldGet(this, _hasDisposeAfter) && _classPrivateFieldGet(this, _disposed)) {
+        var dt = _classPrivateFieldGet(this, _disposed);
+        var task;
+        while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
+          var _classPrivateFieldGet4, _classPrivateFieldGet5;
+          (_classPrivateFieldGet4 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : (_classPrivateFieldGet5 = _classPrivateFieldGet4).call.apply(_classPrivateFieldGet5, [this].concat(toConsumableArray_toConsumableArray(task)));
+        }
+      }
+      return this;
+    }
+    /**
+     * Evict the least recently used item, returning its value or
+     * `undefined` if cache is empty.
+     */
+  }, {
+    key: "pop",
+    value: function pop() {
+      try {
+        while (_classPrivateFieldGet(this, _size)) {
+          var val = _classPrivateFieldGet(this, _valList)[_classPrivateFieldGet(this, _head)];
+          _classPrivateMethodGet(this, _evict, _evict2).call(this, true);
+          if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, val)) {
+            if (val.__staleWhileFetching) {
+              return val.__staleWhileFetching;
+            }
+          } else if (val !== undefined) {
+            return val;
+          }
+        }
+      } finally {
+        if (_classPrivateFieldGet(this, _hasDisposeAfter) && _classPrivateFieldGet(this, _disposed)) {
+          var dt = _classPrivateFieldGet(this, _disposed);
+          var task;
+          while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
+            var _classPrivateFieldGet6, _classPrivateFieldGet7;
+            (_classPrivateFieldGet6 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : (_classPrivateFieldGet7 = _classPrivateFieldGet6).call.apply(_classPrivateFieldGet7, [this].concat(toConsumableArray_toConsumableArray(task)));
+          }
+        }
+      }
+    }
+  }, {
+    key: "has",
+    value:
+    /**
+     * Check if a key is in the cache, without updating the recency of use.
+     * Will return false if the item is stale, even though it is technically
+     * in the cache.
+     *
+     * Will not update item age unless
+     * {@link LRUCache.OptionsBase.updateAgeOnHas} is set.
+     */
+    function has(k) {
+      var hasOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var _hasOptions$updateAge = hasOptions.updateAgeOnHas,
+        updateAgeOnHas = _hasOptions$updateAge === void 0 ? this.updateAgeOnHas : _hasOptions$updateAge,
+        status = hasOptions.status;
+      var index = _classPrivateFieldGet(this, _keyMap).get(k);
+      if (index !== undefined) {
+        var v = _classPrivateFieldGet(this, _valList)[index];
+        if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) && v.__staleWhileFetching === undefined) {
+          return false;
+        }
+        if (!_classPrivateFieldGet(this, _isStale).call(this, index)) {
+          if (updateAgeOnHas) {
+            _classPrivateFieldGet(this, _updateItemAge).call(this, index);
+          }
+          if (status) {
+            status.has = 'hit';
+            _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+          }
+          return true;
+        } else if (status) {
+          status.has = 'stale';
+          _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+        }
+      } else if (status) {
+        status.has = 'miss';
+      }
+      return false;
+    }
+    /**
+     * Like {@link LRUCache#get} but doesn't update recency or delete stale
+     * items.
+     *
+     * Returns `undefined` if the item is stale, unless
+     * {@link LRUCache.OptionsBase.allowStale} is set.
+     */
+  }, {
+    key: "peek",
+    value: function peek(k) {
+      var peekOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var _peekOptions$allowSta = peekOptions.allowStale,
+        allowStale = _peekOptions$allowSta === void 0 ? this.allowStale : _peekOptions$allowSta;
+      var index = _classPrivateFieldGet(this, _keyMap).get(k);
+      if (index !== undefined && (allowStale || !_classPrivateFieldGet(this, _isStale).call(this, index))) {
+        var v = _classPrivateFieldGet(this, _valList)[index];
+        // either stale and allowed, or forcing a refresh of non-stale value
+        return _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
+      }
+    }
+  }, {
+    key: "fetch",
+    value: function () {
+      var _fetch = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(k) {
+        var fetchOptions,
+          _fetchOptions$allowSt,
+          allowStale,
+          _fetchOptions$updateA,
+          updateAgeOnGet,
+          _fetchOptions$noDelet,
+          noDeleteOnStaleGet,
+          _fetchOptions$ttl,
+          ttl,
+          _fetchOptions$noDispo,
+          noDisposeOnSet,
+          _fetchOptions$size,
+          size,
+          _fetchOptions$sizeCal,
+          sizeCalculation,
+          _fetchOptions$noUpdat,
+          noUpdateTTL,
+          _fetchOptions$noDelet2,
+          noDeleteOnFetchRejection,
+          _fetchOptions$allowSt2,
+          allowStaleOnFetchRejection,
+          _fetchOptions$ignoreF,
+          ignoreFetchAbort,
+          _fetchOptions$allowSt3,
+          allowStaleOnFetchAbort,
+          context,
+          _fetchOptions$forceRe,
+          forceRefresh,
+          status,
+          signal,
+          options,
+          index,
+          p,
+          v,
+          stale,
+          isStale,
+          _p,
+          hasStale,
+          staleVal,
+          _args7 = arguments;
+        return _regeneratorRuntime().wrap(function _callee$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
+            case 0:
+              fetchOptions = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : {};
+              _fetchOptions$allowSt = fetchOptions.allowStale, allowStale = _fetchOptions$allowSt === void 0 ? this.allowStale : _fetchOptions$allowSt, _fetchOptions$updateA = fetchOptions.updateAgeOnGet, updateAgeOnGet = _fetchOptions$updateA === void 0 ? this.updateAgeOnGet : _fetchOptions$updateA, _fetchOptions$noDelet = fetchOptions.noDeleteOnStaleGet, noDeleteOnStaleGet = _fetchOptions$noDelet === void 0 ? this.noDeleteOnStaleGet : _fetchOptions$noDelet, _fetchOptions$ttl = fetchOptions.ttl, ttl = _fetchOptions$ttl === void 0 ? this.ttl : _fetchOptions$ttl, _fetchOptions$noDispo = fetchOptions.noDisposeOnSet, noDisposeOnSet = _fetchOptions$noDispo === void 0 ? this.noDisposeOnSet : _fetchOptions$noDispo, _fetchOptions$size = fetchOptions.size, size = _fetchOptions$size === void 0 ? 0 : _fetchOptions$size, _fetchOptions$sizeCal = fetchOptions.sizeCalculation, sizeCalculation = _fetchOptions$sizeCal === void 0 ? this.sizeCalculation : _fetchOptions$sizeCal, _fetchOptions$noUpdat = fetchOptions.noUpdateTTL, noUpdateTTL = _fetchOptions$noUpdat === void 0 ? this.noUpdateTTL : _fetchOptions$noUpdat, _fetchOptions$noDelet2 = fetchOptions.noDeleteOnFetchRejection, noDeleteOnFetchRejection = _fetchOptions$noDelet2 === void 0 ? this.noDeleteOnFetchRejection : _fetchOptions$noDelet2, _fetchOptions$allowSt2 = fetchOptions.allowStaleOnFetchRejection, allowStaleOnFetchRejection = _fetchOptions$allowSt2 === void 0 ? this.allowStaleOnFetchRejection : _fetchOptions$allowSt2, _fetchOptions$ignoreF = fetchOptions.ignoreFetchAbort, ignoreFetchAbort = _fetchOptions$ignoreF === void 0 ? this.ignoreFetchAbort : _fetchOptions$ignoreF, _fetchOptions$allowSt3 = fetchOptions.allowStaleOnFetchAbort, allowStaleOnFetchAbort = _fetchOptions$allowSt3 === void 0 ? this.allowStaleOnFetchAbort : _fetchOptions$allowSt3, context = fetchOptions.context, _fetchOptions$forceRe = fetchOptions.forceRefresh, forceRefresh = _fetchOptions$forceRe === void 0 ? false : _fetchOptions$forceRe, status = fetchOptions.status, signal = fetchOptions.signal;
+              if (_classPrivateFieldGet(this, _hasFetchMethod)) {
+                _context7.next = 5;
+                break;
+              }
+              if (status) status.fetch = 'get';
+              return _context7.abrupt("return", this.get(k, {
+                allowStale: allowStale,
+                updateAgeOnGet: updateAgeOnGet,
+                noDeleteOnStaleGet: noDeleteOnStaleGet,
+                status: status
+              }));
+            case 5:
+              options = {
+                allowStale: allowStale,
+                updateAgeOnGet: updateAgeOnGet,
+                noDeleteOnStaleGet: noDeleteOnStaleGet,
+                ttl: ttl,
+                noDisposeOnSet: noDisposeOnSet,
+                size: size,
+                sizeCalculation: sizeCalculation,
+                noUpdateTTL: noUpdateTTL,
+                noDeleteOnFetchRejection: noDeleteOnFetchRejection,
+                allowStaleOnFetchRejection: allowStaleOnFetchRejection,
+                allowStaleOnFetchAbort: allowStaleOnFetchAbort,
+                ignoreFetchAbort: ignoreFetchAbort,
+                status: status,
+                signal: signal
+              };
+              index = _classPrivateFieldGet(this, _keyMap).get(k);
+              if (!(index === undefined)) {
+                _context7.next = 13;
+                break;
+              }
+              if (status) status.fetch = 'miss';
+              p = _classPrivateMethodGet(this, _backgroundFetch, _backgroundFetch2).call(this, k, index, options, context);
+              return _context7.abrupt("return", p.__returned = p);
+            case 13:
+              // in cache, maybe already fetching
+              v = _classPrivateFieldGet(this, _valList)[index];
+              if (!_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
+                _context7.next = 18;
+                break;
+              }
+              stale = allowStale && v.__staleWhileFetching !== undefined;
+              if (status) {
+                status.fetch = 'inflight';
+                if (stale) status.returnedStale = true;
+              }
+              return _context7.abrupt("return", stale ? v.__staleWhileFetching : v.__returned = v);
+            case 18:
+              // if we force a refresh, that means do NOT serve the cached value,
+              // unless we are already in the process of refreshing the cache.
+              isStale = _classPrivateFieldGet(this, _isStale).call(this, index);
+              if (!(!forceRefresh && !isStale)) {
+                _context7.next = 25;
+                break;
+              }
+              if (status) status.fetch = 'hit';
+              _classPrivateMethodGet(this, _moveToTail, _moveToTail2).call(this, index);
+              if (updateAgeOnGet) {
+                _classPrivateFieldGet(this, _updateItemAge).call(this, index);
+              }
+              if (status) _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+              return _context7.abrupt("return", v);
+            case 25:
+              // ok, it is stale or a forced refresh, and not already fetching.
+              // refresh the cache.
+              _p = _classPrivateMethodGet(this, _backgroundFetch, _backgroundFetch2).call(this, k, index, options, context);
+              hasStale = _p.__staleWhileFetching !== undefined;
+              staleVal = hasStale && allowStale;
+              if (status) {
+                status.fetch = isStale ? 'stale' : 'refresh';
+                if (staleVal && isStale) status.returnedStale = true;
+              }
+              return _context7.abrupt("return", staleVal ? _p.__staleWhileFetching : _p.__returned = _p);
+            case 30:
+            case "end":
+              return _context7.stop();
+          }
+        }, _callee, this);
+      }));
+      function fetch(_x) {
+        return _fetch.apply(this, arguments);
+      }
+      return fetch;
+    }()
+    /**
+     * Return a value from the cache. Will update the recency of the cache
+     * entry found.
+     *
+     * If the key is not found, get() will return `undefined`.
+     */
+  }, {
+    key: "get",
+    value: function get(k) {
+      var getOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var _getOptions$allowStal = getOptions.allowStale,
+        allowStale = _getOptions$allowStal === void 0 ? this.allowStale : _getOptions$allowStal,
+        _getOptions$updateAge = getOptions.updateAgeOnGet,
+        updateAgeOnGet = _getOptions$updateAge === void 0 ? this.updateAgeOnGet : _getOptions$updateAge,
+        _getOptions$noDeleteO = getOptions.noDeleteOnStaleGet,
+        noDeleteOnStaleGet = _getOptions$noDeleteO === void 0 ? this.noDeleteOnStaleGet : _getOptions$noDeleteO,
+        status = getOptions.status;
+      var index = _classPrivateFieldGet(this, _keyMap).get(k);
+      if (index !== undefined) {
+        var value = _classPrivateFieldGet(this, _valList)[index];
+        var fetching = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, value);
+        if (status) _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+        if (_classPrivateFieldGet(this, _isStale).call(this, index)) {
+          if (status) status.get = 'stale';
+          // delete only if not an in-flight background fetch
+          if (!fetching) {
+            if (!noDeleteOnStaleGet) {
+              this["delete"](k);
+            }
+            if (status && allowStale) status.returnedStale = true;
+            return allowStale ? value : undefined;
+          } else {
+            if (status && allowStale && value.__staleWhileFetching !== undefined) {
+              status.returnedStale = true;
+            }
+            return allowStale ? value.__staleWhileFetching : undefined;
+          }
+        } else {
+          if (status) status.get = 'hit';
+          // if we're currently fetching it, we don't actually have it yet
+          // it's not stale, which means this isn't a staleWhileRefetching.
+          // If it's not stale, and fetching, AND has a __staleWhileFetching
+          // value, then that means the user fetched with {forceRefresh:true},
+          // so it's safe to return that value.
+          if (fetching) {
+            return value.__staleWhileFetching;
+          }
+          _classPrivateMethodGet(this, _moveToTail, _moveToTail2).call(this, index);
+          if (updateAgeOnGet) {
+            _classPrivateFieldGet(this, _updateItemAge).call(this, index);
+          }
+          return value;
+        }
+      } else if (status) {
+        status.get = 'miss';
+      }
+    }
+  }, {
+    key: "delete",
+    value:
+    /**
+     * Deletes a key out of the cache.
+     * Returns true if the key was deleted, false otherwise.
+     */
+    function _delete(k) {
+      var _classPrivateFieldGet10;
+      var deleted = false;
+      if (_classPrivateFieldGet(this, _size) !== 0) {
+        var index = _classPrivateFieldGet(this, _keyMap).get(k);
+        if (index !== undefined) {
+          deleted = true;
+          if (_classPrivateFieldGet(this, _size) === 1) {
+            this.clear();
+          } else {
+            var _this$size5, _this$size6;
+            _classPrivateFieldGet(this, _removeItemSize).call(this, index);
+            var v = _classPrivateFieldGet(this, _valList)[index];
+            if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
+              v.__abortController.abort(new Error('deleted'));
+            } else if (_classPrivateFieldGet(this, _hasDispose) || _classPrivateFieldGet(this, _hasDisposeAfter)) {
+              if (_classPrivateFieldGet(this, _hasDispose)) {
+                var _classPrivateFieldGet8;
+                (_classPrivateFieldGet8 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.call(this, v, k, 'delete');
+              }
+              if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+                var _classPrivateFieldGet9;
+                (_classPrivateFieldGet9 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.push([v, k, 'delete']);
+              }
+            }
+            _classPrivateFieldGet(this, _keyMap)["delete"](k);
+            _classPrivateFieldGet(this, _keyList)[index] = undefined;
+            _classPrivateFieldGet(this, _valList)[index] = undefined;
+            if (index === _classPrivateFieldGet(this, _tail)) {
+              _classPrivateFieldSet(this, _tail, _classPrivateFieldGet(this, _prev)[index]);
+            } else if (index === _classPrivateFieldGet(this, _head)) {
+              _classPrivateFieldSet(this, _head, _classPrivateFieldGet(this, _next)[index]);
+            } else {
+              _classPrivateFieldGet(this, _next)[_classPrivateFieldGet(this, _prev)[index]] = _classPrivateFieldGet(this, _next)[index];
+              _classPrivateFieldGet(this, _prev)[_classPrivateFieldGet(this, _next)[index]] = _classPrivateFieldGet(this, _prev)[index];
+            }
+            _classPrivateFieldSet(this, _size, (_this$size5 = _classPrivateFieldGet(this, _size), _this$size6 = _this$size5--, _this$size5)), _this$size6;
+            _classPrivateFieldGet(this, _free).push(index);
+          }
+        }
+      }
+      if (_classPrivateFieldGet(this, _hasDisposeAfter) && (_classPrivateFieldGet10 = _classPrivateFieldGet(this, _disposed)) !== null && _classPrivateFieldGet10 !== void 0 && _classPrivateFieldGet10.length) {
+        var dt = _classPrivateFieldGet(this, _disposed);
+        var task;
+        while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
+          var _classPrivateFieldGet11, _classPrivateFieldGet12;
+          (_classPrivateFieldGet11 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet11 === void 0 ? void 0 : (_classPrivateFieldGet12 = _classPrivateFieldGet11).call.apply(_classPrivateFieldGet12, [this].concat(toConsumableArray_toConsumableArray(task)));
+        }
+      }
+      return deleted;
+    }
+    /**
+     * Clear the cache entirely, throwing away all values.
+     */
+  }, {
+    key: "clear",
+    value: function clear() {
+      var _iterator14 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this, {
+          allowStale: true
+        })),
+        _step14;
+      try {
+        for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+          var index = _step14.value;
+          var v = _classPrivateFieldGet(this, _valList)[index];
+          if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
+            v.__abortController.abort(new Error('deleted'));
+          } else {
+            var k = _classPrivateFieldGet(this, _keyList)[index];
+            if (_classPrivateFieldGet(this, _hasDispose)) {
+              var _classPrivateFieldGet15;
+              (_classPrivateFieldGet15 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet15 === void 0 ? void 0 : _classPrivateFieldGet15.call(this, v, k, 'delete');
+            }
+            if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+              var _classPrivateFieldGet16;
+              (_classPrivateFieldGet16 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet16 === void 0 ? void 0 : _classPrivateFieldGet16.push([v, k, 'delete']);
+            }
+          }
+        }
+      } catch (err) {
+        _iterator14.e(err);
+      } finally {
+        _iterator14.f();
+      }
+      _classPrivateFieldGet(this, _keyMap).clear();
+      _classPrivateFieldGet(this, _valList).fill(undefined);
+      _classPrivateFieldGet(this, _keyList).fill(undefined);
+      if (_classPrivateFieldGet(this, _ttls) && _classPrivateFieldGet(this, _starts)) {
+        _classPrivateFieldGet(this, _ttls).fill(0);
+        _classPrivateFieldGet(this, _starts).fill(0);
+      }
+      if (_classPrivateFieldGet(this, _sizes)) {
+        _classPrivateFieldGet(this, _sizes).fill(0);
+      }
+      _classPrivateFieldSet(this, _head, 0);
+      _classPrivateFieldSet(this, _tail, 0);
+      _classPrivateFieldGet(this, _free).length = 0;
+      _classPrivateFieldSet(this, _calculatedSize, 0);
+      _classPrivateFieldSet(this, _size, 0);
+      if (_classPrivateFieldGet(this, _hasDisposeAfter) && _classPrivateFieldGet(this, _disposed)) {
+        var dt = _classPrivateFieldGet(this, _disposed);
+        var task;
+        while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
+          var _classPrivateFieldGet13, _classPrivateFieldGet14;
+          (_classPrivateFieldGet13 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet13 === void 0 ? void 0 : (_classPrivateFieldGet14 = _classPrivateFieldGet13).call.apply(_classPrivateFieldGet14, [this].concat(toConsumableArray_toConsumableArray(task)));
+        }
+      }
+    }
+  }], [{
+    key: "unsafeExposeInternals",
+    value:
+    /**
+     * Do not call this method unless you need to inspect the
+     * inner workings of the cache.  If anything returned by this
+     * object is modified in any way, strange breakage may occur.
+     *
+     * These fields are private for a reason!
+     *
+     * @internal
+     */
+    function unsafeExposeInternals(c) {
+      return {
+        // properties
+        starts: _classPrivateFieldGet(c, _starts),
+        ttls: _classPrivateFieldGet(c, _ttls),
+        sizes: _classPrivateFieldGet(c, _sizes),
+        keyMap: _classPrivateFieldGet(c, _keyMap),
+        keyList: _classPrivateFieldGet(c, _keyList),
+        valList: _classPrivateFieldGet(c, _valList),
+        next: _classPrivateFieldGet(c, _next),
+        prev: _classPrivateFieldGet(c, _prev),
+        get head() {
+          return _classPrivateFieldGet(c, _head);
+        },
+        get tail() {
+          return _classPrivateFieldGet(c, _tail);
+        },
+        free: _classPrivateFieldGet(c, _free),
+        // methods
+        isBackgroundFetch: function isBackgroundFetch(p) {
+          return _classPrivateMethodGet(c, _isBackgroundFetch, _isBackgroundFetch2).call(c, p);
+        },
+        backgroundFetch: function backgroundFetch(k, index, options, context) {
+          return _classPrivateMethodGet(c, _backgroundFetch, _backgroundFetch2).call(c, k, index, options, context);
+        },
+        moveToTail: function moveToTail(index) {
+          return _classPrivateMethodGet(c, _moveToTail, _moveToTail2).call(c, index);
+        },
+        indexes: function indexes(options) {
+          return _classPrivateMethodGet(c, _indexes, _indexes2).call(c, options);
+        },
+        rindexes: function rindexes(options) {
+          return _classPrivateMethodGet(c, _rindexes, _rindexes2).call(c, options);
+        },
+        isStale: function isStale(index) {
+          return _classPrivateFieldGet(c, _isStale).call(c, index);
+        }
+      };
+    }
+  }]);
+  return LRUCache;
+}();
+function _initializeTTLTracking2() {
+  var _this2 = this;
+  var ttls = new ZeroArray(_classPrivateFieldGet(this, _max));
+  var starts = new ZeroArray(_classPrivateFieldGet(this, _max));
+  _classPrivateFieldSet(this, _ttls, ttls);
+  _classPrivateFieldSet(this, _starts, starts);
+  _classPrivateFieldSet(this, _setItemTTL, function (index, ttl) {
+    var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : perf.now();
+    starts[index] = ttl !== 0 ? start : 0;
+    ttls[index] = ttl;
+    if (ttl !== 0 && _this2.ttlAutopurge) {
+      var t = setTimeout(function () {
+        if (_classPrivateFieldGet(_this2, _isStale).call(_this2, index)) {
+          _this2["delete"](_classPrivateFieldGet(_this2, _keyList)[index]);
+        }
+      }, ttl + 1);
+      // unref() not supported on all platforms
+      /* c8 ignore start */
+      if (t.unref) {
+        t.unref();
+      }
+      /* c8 ignore stop */
+    }
+  });
+
+  _classPrivateFieldSet(this, _updateItemAge, function (index) {
+    starts[index] = ttls[index] !== 0 ? perf.now() : 0;
+  });
+  _classPrivateFieldSet(this, _statusTTL, function (status, index) {
+    if (ttls[index]) {
+      var ttl = ttls[index];
+      var start = starts[index];
+      status.ttl = ttl;
+      status.start = start;
+      status.now = cachedNow || getNow();
+      var age = status.now - start;
+      status.remainingTTL = ttl - age;
+    }
+  });
+  // debounce calls to perf.now() to 1s so we're not hitting
+  // that costly call repeatedly.
+  var cachedNow = 0;
+  var getNow = function getNow() {
+    var n = perf.now();
+    if (_this2.ttlResolution > 0) {
+      cachedNow = n;
+      var t = setTimeout(function () {
+        return cachedNow = 0;
+      }, _this2.ttlResolution);
+      // not available on all platforms
+      /* c8 ignore start */
+      if (t.unref) {
+        t.unref();
+      }
+      /* c8 ignore stop */
+    }
+
+    return n;
+  };
+  this.getRemainingTTL = function (key) {
+    var index = _classPrivateFieldGet(_this2, _keyMap).get(key);
+    if (index === undefined) {
+      return 0;
+    }
+    var ttl = ttls[index];
+    var start = starts[index];
+    if (ttl === 0 || start === 0) {
+      return Infinity;
+    }
+    var age = (cachedNow || getNow()) - start;
+    return ttl - age;
+  };
+  _classPrivateFieldSet(this, _isStale, function (index) {
+    return ttls[index] !== 0 && starts[index] !== 0 && (cachedNow || getNow()) - starts[index] > ttls[index];
+  });
+}
+function _initializeSizeTracking2() {
+  var _this3 = this;
+  var sizes = new ZeroArray(_classPrivateFieldGet(this, _max));
+  _classPrivateFieldSet(this, _calculatedSize, 0);
+  _classPrivateFieldSet(this, _sizes, sizes);
+  _classPrivateFieldSet(this, _removeItemSize, function (index) {
+    _classPrivateFieldSet(_this3, _calculatedSize, _classPrivateFieldGet(_this3, _calculatedSize) - sizes[index]);
+    sizes[index] = 0;
+  });
+  _classPrivateFieldSet(this, _requireSize, function (k, v, size, sizeCalculation) {
+    // provisionally accept background fetches.
+    // actual value size will be checked when they return.
+    if (_classPrivateMethodGet(_this3, _isBackgroundFetch, _isBackgroundFetch2).call(_this3, v)) {
+      return 0;
+    }
+    if (!isPosInt(size)) {
+      if (sizeCalculation) {
+        if (typeof sizeCalculation !== 'function') {
+          throw new TypeError('sizeCalculation must be a function');
+        }
+        size = sizeCalculation(v, k);
+        if (!isPosInt(size)) {
+          throw new TypeError('sizeCalculation return invalid (expect positive integer)');
+        }
+      } else {
+        throw new TypeError('invalid size value (must be positive integer). ' + 'When maxSize or maxEntrySize is used, sizeCalculation ' + 'or size must be set.');
+      }
+    }
+    return size;
+  });
+  _classPrivateFieldSet(this, _addItemSize, function (index, size, status) {
+    sizes[index] = size;
+    if (_classPrivateFieldGet(_this3, _maxSize)) {
+      var maxSize = _classPrivateFieldGet(_this3, _maxSize) - sizes[index];
+      while (_classPrivateFieldGet(_this3, _calculatedSize) > maxSize) {
+        _classPrivateMethodGet(_this3, _evict, _evict2).call(_this3, true);
+      }
+    }
+    _classPrivateFieldSet(_this3, _calculatedSize, _classPrivateFieldGet(_this3, _calculatedSize) + sizes[index]);
+    if (status) {
+      status.entrySize = size;
+      status.totalCalculatedSize = _classPrivateFieldGet(_this3, _calculatedSize);
+    }
+  });
+}
+function _indexes2() {
+  var _this4 = this;
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+    _ref$allowStale = _ref.allowStale,
+    allowStale = _ref$allowStale === void 0 ? this.allowStale : _ref$allowStale;
+  return /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+    var i;
+    return _regeneratorRuntime().wrap(function _callee2$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          if (!_classPrivateFieldGet(_this4, _size)) {
+            _context8.next = 15;
+            break;
+          }
+          i = _classPrivateFieldGet(_this4, _tail);
+        case 2:
+          if (false) {}
+          if (_classPrivateMethodGet(_this4, _isValidIndex, _isValidIndex2).call(_this4, i)) {
+            _context8.next = 5;
+            break;
+          }
+          return _context8.abrupt("break", 15);
+        case 5:
+          if (!(allowStale || !_classPrivateFieldGet(_this4, _isStale).call(_this4, i))) {
+            _context8.next = 8;
+            break;
+          }
+          _context8.next = 8;
+          return i;
+        case 8:
+          if (!(i === _classPrivateFieldGet(_this4, _head))) {
+            _context8.next = 12;
+            break;
+          }
+          return _context8.abrupt("break", 15);
+        case 12:
+          i = _classPrivateFieldGet(_this4, _prev)[i];
+        case 13:
+          _context8.next = 2;
+          break;
+        case 15:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee2);
+  })();
+}
+function _rindexes2() {
+  var _this5 = this;
+  var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+    _ref2$allowStale = _ref2.allowStale,
+    allowStale = _ref2$allowStale === void 0 ? this.allowStale : _ref2$allowStale;
+  return /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+    var i;
+    return _regeneratorRuntime().wrap(function _callee3$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          if (!_classPrivateFieldGet(_this5, _size)) {
+            _context9.next = 15;
+            break;
+          }
+          i = _classPrivateFieldGet(_this5, _head);
+        case 2:
+          if (false) {}
+          if (_classPrivateMethodGet(_this5, _isValidIndex, _isValidIndex2).call(_this5, i)) {
+            _context9.next = 5;
+            break;
+          }
+          return _context9.abrupt("break", 15);
+        case 5:
+          if (!(allowStale || !_classPrivateFieldGet(_this5, _isStale).call(_this5, i))) {
+            _context9.next = 8;
+            break;
+          }
+          _context9.next = 8;
+          return i;
+        case 8:
+          if (!(i === _classPrivateFieldGet(_this5, _tail))) {
+            _context9.next = 12;
+            break;
+          }
+          return _context9.abrupt("break", 15);
+        case 12:
+          i = _classPrivateFieldGet(_this5, _next)[i];
+        case 13:
+          _context9.next = 2;
+          break;
+        case 15:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee3);
+  })();
+}
+function _isValidIndex2(index) {
+  return index !== undefined && _classPrivateFieldGet(this, _keyMap).get(_classPrivateFieldGet(this, _keyList)[index]) === index;
+}
+function _evict2(free) {
+  var _this$size3, _this$size4;
+  var head = _classPrivateFieldGet(this, _head);
+  var k = _classPrivateFieldGet(this, _keyList)[head];
+  var v = _classPrivateFieldGet(this, _valList)[head];
+  if (_classPrivateFieldGet(this, _hasFetchMethod) && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
+    v.__abortController.abort(new Error('evicted'));
+  } else if (_classPrivateFieldGet(this, _hasDispose) || _classPrivateFieldGet(this, _hasDisposeAfter)) {
+    if (_classPrivateFieldGet(this, _hasDispose)) {
+      var _classPrivateFieldGet17;
+      (_classPrivateFieldGet17 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet17 === void 0 ? void 0 : _classPrivateFieldGet17.call(this, v, k, 'evict');
+    }
+    if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+      var _classPrivateFieldGet18;
+      (_classPrivateFieldGet18 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet18 === void 0 ? void 0 : _classPrivateFieldGet18.push([v, k, 'evict']);
+    }
+  }
+  _classPrivateFieldGet(this, _removeItemSize).call(this, head);
+  // if we aren't about to use the index, then null these out
+  if (free) {
+    _classPrivateFieldGet(this, _keyList)[head] = undefined;
+    _classPrivateFieldGet(this, _valList)[head] = undefined;
+    _classPrivateFieldGet(this, _free).push(head);
+  }
+  if (_classPrivateFieldGet(this, _size) === 1) {
+    _classPrivateFieldSet(this, _head, _classPrivateFieldSet(this, _tail, 0));
+    _classPrivateFieldGet(this, _free).length = 0;
+  } else {
+    _classPrivateFieldSet(this, _head, _classPrivateFieldGet(this, _next)[head]);
+  }
+  _classPrivateFieldGet(this, _keyMap)["delete"](k);
+  _classPrivateFieldSet(this, _size, (_this$size3 = _classPrivateFieldGet(this, _size), _this$size4 = _this$size3--, _this$size3)), _this$size4;
+  return head;
+}
+function _backgroundFetch2(k, index, options, context) {
+  var _this6 = this;
+  var v = index === undefined ? undefined : _classPrivateFieldGet(this, _valList)[index];
+  if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
+    return v;
+  }
+  var ac = new AC();
+  var signal = options.signal;
+  // when/if our AC signals, then stop listening to theirs.
+  signal === null || signal === void 0 ? void 0 : signal.addEventListener('abort', function () {
+    return ac.abort(signal.reason);
+  }, {
+    signal: ac.signal
+  });
+  var fetchOpts = {
+    signal: ac.signal,
+    options: options,
+    context: context
+  };
+  var cb = function cb(v) {
+    var updateCache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var aborted = ac.signal.aborted;
+    var ignoreAbort = options.ignoreFetchAbort && v !== undefined;
+    if (options.status) {
+      if (aborted && !updateCache) {
+        options.status.fetchAborted = true;
+        options.status.fetchError = ac.signal.reason;
+        if (ignoreAbort) options.status.fetchAbortIgnored = true;
+      } else {
+        options.status.fetchResolved = true;
+      }
+    }
+    if (aborted && !ignoreAbort && !updateCache) {
+      return fetchFail(ac.signal.reason);
+    }
+    // either we didn't abort, and are still here, or we did, and ignored
+    var bf = p;
+    if (_classPrivateFieldGet(_this6, _valList)[index] === p) {
+      if (v === undefined) {
+        if (bf.__staleWhileFetching) {
+          _classPrivateFieldGet(_this6, _valList)[index] = bf.__staleWhileFetching;
+        } else {
+          _this6["delete"](k);
+        }
+      } else {
+        if (options.status) options.status.fetchUpdated = true;
+        _this6.set(k, v, fetchOpts.options);
+      }
+    }
+    return v;
+  };
+  var eb = function eb(er) {
+    if (options.status) {
+      options.status.fetchRejected = true;
+      options.status.fetchError = er;
+    }
+    return fetchFail(er);
+  };
+  var fetchFail = function fetchFail(er) {
+    var aborted = ac.signal.aborted;
+    var allowStaleAborted = aborted && options.allowStaleOnFetchAbort;
+    var allowStale = allowStaleAborted || options.allowStaleOnFetchRejection;
+    var noDelete = allowStale || options.noDeleteOnFetchRejection;
+    var bf = p;
+    if (_classPrivateFieldGet(_this6, _valList)[index] === p) {
+      // if we allow stale on fetch rejections, then we need to ensure that
+      // the stale value is not removed from the cache when the fetch fails.
+      var del = !noDelete || bf.__staleWhileFetching === undefined;
+      if (del) {
+        _this6["delete"](k);
+      } else if (!allowStaleAborted) {
+        // still replace the *promise* with the stale value,
+        // since we are done with the promise at this point.
+        // leave it untouched if we're still waiting for an
+        // aborted background fetch that hasn't yet returned.
+        _classPrivateFieldGet(_this6, _valList)[index] = bf.__staleWhileFetching;
+      }
+    }
+    if (allowStale) {
+      if (options.status && bf.__staleWhileFetching !== undefined) {
+        options.status.returnedStale = true;
+      }
+      return bf.__staleWhileFetching;
+    } else if (bf.__returned === bf) {
+      throw er;
+    }
+  };
+  var pcall = function pcall(res, rej) {
+    var _classPrivateFieldGet19;
+    var fmp = (_classPrivateFieldGet19 = _classPrivateFieldGet(_this6, _fetchMethod)) === null || _classPrivateFieldGet19 === void 0 ? void 0 : _classPrivateFieldGet19.call(_this6, k, v, fetchOpts);
+    if (fmp && fmp instanceof Promise) {
+      fmp.then(function (v) {
+        return res(v);
+      }, rej);
+    }
+    // ignored, we go until we finish, regardless.
+    // defer check until we are actually aborting,
+    // so fetchMethod can override.
+    ac.signal.addEventListener('abort', function () {
+      if (!options.ignoreFetchAbort || options.allowStaleOnFetchAbort) {
+        res();
+        // when it eventually resolves, update the cache.
+        if (options.allowStaleOnFetchAbort) {
+          res = function res(v) {
+            return cb(v, true);
+          };
+        }
+      }
+    });
+  };
+  if (options.status) options.status.fetchDispatched = true;
+  var p = new Promise(pcall).then(cb, eb);
+  var bf = Object.assign(p, {
+    __abortController: ac,
+    __staleWhileFetching: v,
+    __returned: undefined
+  });
+  if (index === undefined) {
+    // internal, don't expose status.
+    this.set(k, bf, _objectSpread2(_objectSpread2({}, fetchOpts.options), {}, {
+      status: undefined
+    }));
+    index = _classPrivateFieldGet(this, _keyMap).get(k);
+  } else {
+    _classPrivateFieldGet(this, _valList)[index] = bf;
+  }
+  return bf;
+}
+function _isBackgroundFetch2(p) {
+  if (!_classPrivateFieldGet(this, _hasFetchMethod)) return false;
+  var b = p;
+  return !!b && b instanceof Promise && b.hasOwnProperty('__staleWhileFetching') && b.__abortController instanceof AC;
+}
+function _connect2(p, n) {
+  _classPrivateFieldGet(this, _prev)[n] = p;
+  _classPrivateFieldGet(this, _next)[p] = n;
+}
+function _moveToTail2(index) {
+  // if tail already, nothing to do
+  // if head, move head to next[index]
+  // else
+  //   move next[prev[index]] to next[index] (head has no prev)
+  //   move prev[next[index]] to prev[index]
+  // prev[index] = tail
+  // next[tail] = index
+  // tail = index
+  if (index !== _classPrivateFieldGet(this, _tail)) {
+    if (index === _classPrivateFieldGet(this, _head)) {
+      _classPrivateFieldSet(this, _head, _classPrivateFieldGet(this, _next)[index]);
+    } else {
+      _classPrivateMethodGet(this, _connect, _connect2).call(this, _classPrivateFieldGet(this, _prev)[index], _classPrivateFieldGet(this, _next)[index]);
+    }
+    _classPrivateMethodGet(this, _connect, _connect2).call(this, _classPrivateFieldGet(this, _tail), index);
+    _classPrivateFieldSet(this, _tail, index);
+  }
+}
+// EXTERNAL MODULE: external "url"
+var external_url_ = __webpack_require__(7310);
+;// CONCATENATED MODULE: external "fs/promises"
+const promises_namespaceObject = require("fs/promises");
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/superPropBase.js
+
+function _superPropBase(object, property) {
+  while (!Object.prototype.hasOwnProperty.call(object, property)) {
+    object = _getPrototypeOf(object);
+    if (object === null) break;
+  }
+  return object;
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/get.js
+
+function _get() {
+  if (typeof Reflect !== "undefined" && Reflect.get) {
+    _get = Reflect.get.bind();
+  } else {
+    _get = function _get(target, property, receiver) {
+      var base = _superPropBase(target, property);
+      if (!base) return;
+      var desc = Object.getOwnPropertyDescriptor(base, property);
+      if (desc.get) {
+        return desc.get.call(arguments.length < 3 ? target : receiver);
+      }
+      return desc.value;
+    };
+  }
+  return _get.apply(this, arguments);
+}
+// EXTERNAL MODULE: external "events"
+var external_events_ = __webpack_require__(2361);
+// EXTERNAL MODULE: external "stream"
+var external_stream_ = __webpack_require__(2781);
+;// CONCATENATED MODULE: external "string_decoder"
+const external_string_decoder_namespaceObject = require("string_decoder");
+;// CONCATENATED MODULE: ../../node_modules/path-scurry/node_modules/minipass/index.mjs
+
+
+
+
+
+
+
+
+
+
+
+var proc = typeof process === 'object' && process ? process : {
+  stdout: null,
+  stderr: null
+};
+
+
+
+var SD = external_string_decoder_namespaceObject.StringDecoder;
+var EOF = Symbol('EOF');
+var MAYBE_EMIT_END = Symbol('maybeEmitEnd');
+var EMITTED_END = Symbol('emittedEnd');
+var EMITTING_END = Symbol('emittingEnd');
+var EMITTED_ERROR = Symbol('emittedError');
+var CLOSED = Symbol('closed');
+var READ = Symbol('read');
+var FLUSH = Symbol('flush');
+var FLUSHCHUNK = Symbol('flushChunk');
+var ENCODING = Symbol('encoding');
+var DECODER = Symbol('decoder');
+var FLOWING = Symbol('flowing');
+var PAUSED = Symbol('paused');
+var RESUME = Symbol('resume');
+var BUFFER = Symbol('buffer');
+var PIPES = Symbol('pipes');
+var BUFFERLENGTH = Symbol('bufferLength');
+var BUFFERPUSH = Symbol('bufferPush');
+var BUFFERSHIFT = Symbol('bufferShift');
+var OBJECTMODE = Symbol('objectMode');
+// internal event when stream is destroyed
+var DESTROYED = Symbol('destroyed');
+// internal event when stream has an error
+var ERROR = Symbol('error');
+var EMITDATA = Symbol('emitData');
+var EMITEND = Symbol('emitEnd');
+var EMITEND2 = Symbol('emitEnd2');
+var ASYNC = Symbol('async');
+var ABORT = Symbol('abort');
+var ABORTED = Symbol('aborted');
+var SIGNAL = Symbol('signal');
+var defer = function defer(fn) {
+  return Promise.resolve().then(fn);
+};
+
+// TODO remove when Node v8 support drops
+var doIter = global._MP_NO_ITERATOR_SYMBOLS_ !== '1';
+var ASYNCITERATOR = doIter && Symbol.asyncIterator || Symbol('asyncIterator not implemented');
+var ITERATOR = doIter && Symbol.iterator || Symbol('iterator not implemented');
+
+// events that mean 'the stream is over'
+// these are treated specially, and re-emitted
+// if they are listened for after emitting.
+var isEndish = function isEndish(ev) {
+  return ev === 'end' || ev === 'finish' || ev === 'prefinish';
+};
+var isArrayBuffer = function isArrayBuffer(b) {
+  return b instanceof ArrayBuffer || typeof b === 'object' && b.constructor && b.constructor.name === 'ArrayBuffer' && b.byteLength >= 0;
+};
+var isArrayBufferView = function isArrayBufferView(b) {
+  return !Buffer.isBuffer(b) && ArrayBuffer.isView(b);
+};
+var Pipe = /*#__PURE__*/function () {
+  function Pipe(src, dest, opts) {
+    _classCallCheck(this, Pipe);
+    this.src = src;
+    this.dest = dest;
+    this.opts = opts;
+    this.ondrain = function () {
+      return src[RESUME]();
+    };
+    dest.on('drain', this.ondrain);
+  }
+  _createClass(Pipe, [{
+    key: "unpipe",
+    value: function unpipe() {
+      this.dest.removeListener('drain', this.ondrain);
+    }
+    // istanbul ignore next - only here for the prototype
+  }, {
+    key: "proxyErrors",
+    value: function proxyErrors() {}
+  }, {
+    key: "end",
+    value: function end() {
+      this.unpipe();
+      if (this.opts.end) this.dest.end();
+    }
+  }]);
+  return Pipe;
+}();
+var PipeProxyErrors = /*#__PURE__*/function (_Pipe) {
+  _inherits(PipeProxyErrors, _Pipe);
+  var _super = _createSuper(PipeProxyErrors);
+  function PipeProxyErrors(src, dest, opts) {
+    var _this;
+    _classCallCheck(this, PipeProxyErrors);
+    _this = _super.call(this, src, dest, opts);
+    _this.proxyErrors = function (er) {
+      return dest.emit('error', er);
+    };
+    src.on('error', _this.proxyErrors);
+    return _this;
+  }
+  _createClass(PipeProxyErrors, [{
+    key: "unpipe",
+    value: function unpipe() {
+      this.src.removeListener('error', this.proxyErrors);
+      _get(_getPrototypeOf(PipeProxyErrors.prototype), "unpipe", this).call(this);
+    }
+  }]);
+  return PipeProxyErrors;
+}(Pipe);
+var Minipass = /*#__PURE__*/function (_Stream) {
+  _inherits(Minipass, _Stream);
+  var _super2 = _createSuper(Minipass);
+  function Minipass(options) {
+    var _this2;
+    _classCallCheck(this, Minipass);
+    _this2 = _super2.call(this);
+    _this2[FLOWING] = false;
+    // whether we're explicitly paused
+    _this2[PAUSED] = false;
+    _this2[PIPES] = [];
+    _this2[BUFFER] = [];
+    _this2[OBJECTMODE] = options && options.objectMode || false;
+    if (_this2[OBJECTMODE]) _this2[ENCODING] = null;else _this2[ENCODING] = options && options.encoding || null;
+    if (_this2[ENCODING] === 'buffer') _this2[ENCODING] = null;
+    _this2[ASYNC] = options && !!options.async || false;
+    _this2[DECODER] = _this2[ENCODING] ? new SD(_this2[ENCODING]) : null;
+    _this2[EOF] = false;
+    _this2[EMITTED_END] = false;
+    _this2[EMITTING_END] = false;
+    _this2[CLOSED] = false;
+    _this2[EMITTED_ERROR] = null;
+    _this2.writable = true;
+    _this2.readable = true;
+    _this2[BUFFERLENGTH] = 0;
+    _this2[DESTROYED] = false;
+    if (options && options.debugExposeBuffer === true) {
+      Object.defineProperty(_assertThisInitialized(_this2), 'buffer', {
+        get: function get() {
+          return _this2[BUFFER];
+        }
+      });
+    }
+    if (options && options.debugExposePipes === true) {
+      Object.defineProperty(_assertThisInitialized(_this2), 'pipes', {
+        get: function get() {
+          return _this2[PIPES];
+        }
+      });
+    }
+    _this2[SIGNAL] = options && options.signal;
+    _this2[ABORTED] = false;
+    if (_this2[SIGNAL]) {
+      _this2[SIGNAL].addEventListener('abort', function () {
+        return _this2[ABORT]();
+      });
+      if (_this2[SIGNAL].aborted) {
+        _this2[ABORT]();
+      }
+    }
+    return _this2;
+  }
+  _createClass(Minipass, [{
+    key: "bufferLength",
+    get: function get() {
+      return this[BUFFERLENGTH];
+    }
+  }, {
+    key: "encoding",
+    get: function get() {
+      return this[ENCODING];
+    },
+    set: function set(enc) {
+      var _this3 = this;
+      if (this[OBJECTMODE]) throw new Error('cannot set encoding in objectMode');
+      if (this[ENCODING] && enc !== this[ENCODING] && (this[DECODER] && this[DECODER].lastNeed || this[BUFFERLENGTH])) throw new Error('cannot change encoding');
+      if (this[ENCODING] !== enc) {
+        this[DECODER] = enc ? new SD(enc) : null;
+        if (this[BUFFER].length) this[BUFFER] = this[BUFFER].map(function (chunk) {
+          return _this3[DECODER].write(chunk);
+        });
+      }
+      this[ENCODING] = enc;
+    }
+  }, {
+    key: "setEncoding",
+    value: function setEncoding(enc) {
+      this.encoding = enc;
+    }
+  }, {
+    key: "objectMode",
+    get: function get() {
+      return this[OBJECTMODE];
+    },
+    set: function set(om) {
+      this[OBJECTMODE] = this[OBJECTMODE] || !!om;
+    }
+  }, {
+    key: 'async',
+    get: function get() {
+      return this[ASYNC];
+    },
+    set: function set(a) {
+      this[ASYNC] = this[ASYNC] || !!a;
+    }
+
+    // drop everything and get out of the flow completely
+  }, {
+    key: ABORT,
+    value: function value() {
+      this[ABORTED] = true;
+      this.emit('abort', this[SIGNAL].reason);
+      this.destroy(this[SIGNAL].reason);
+    }
+  }, {
+    key: "aborted",
+    get: function get() {
+      return this[ABORTED];
+    }
+  }, {
+    key: "aborted",
+    set: function set(_) {}
+  }, {
+    key: "write",
+    value: function write(chunk, encoding, cb) {
+      if (this[ABORTED]) return false;
+      if (this[EOF]) throw new Error('write after end');
+      if (this[DESTROYED]) {
+        this.emit('error', Object.assign(new Error('Cannot call write after a stream was destroyed'), {
+          code: 'ERR_STREAM_DESTROYED'
+        }));
+        return true;
+      }
+      if (typeof encoding === 'function') cb = encoding, encoding = 'utf8';
+      if (!encoding) encoding = 'utf8';
+      var fn = this[ASYNC] ? defer : function (f) {
+        return f();
+      };
+
+      // convert array buffers and typed array views into buffers
+      // at some point in the future, we may want to do the opposite!
+      // leave strings and buffers as-is
+      // anything else switches us into object mode
+      if (!this[OBJECTMODE] && !Buffer.isBuffer(chunk)) {
+        if (isArrayBufferView(chunk)) chunk = Buffer.from(chunk.buffer, chunk.byteOffset, chunk.byteLength);else if (isArrayBuffer(chunk)) chunk = Buffer.from(chunk);else if (typeof chunk !== 'string')
+          // use the setter so we throw if we have encoding set
+          this.objectMode = true;
+      }
+
+      // handle object mode up front, since it's simpler
+      // this yields better performance, fewer checks later.
+      if (this[OBJECTMODE]) {
+        /* istanbul ignore if - maybe impossible? */
+        if (this.flowing && this[BUFFERLENGTH] !== 0) this[FLUSH](true);
+        if (this.flowing) this.emit('data', chunk);else this[BUFFERPUSH](chunk);
+        if (this[BUFFERLENGTH] !== 0) this.emit('readable');
+        if (cb) fn(cb);
+        return this.flowing;
+      }
+
+      // at this point the chunk is a buffer or string
+      // don't buffer it up or send it to the decoder
+      if (!chunk.length) {
+        if (this[BUFFERLENGTH] !== 0) this.emit('readable');
+        if (cb) fn(cb);
+        return this.flowing;
+      }
+
+      // fast-path writing strings of same encoding to a stream with
+      // an empty buffer, skipping the buffer/decoder dance
+      if (typeof chunk === 'string' &&
+      // unless it is a string already ready for us to use
+      !(encoding === this[ENCODING] && !this[DECODER].lastNeed)) {
+        chunk = Buffer.from(chunk, encoding);
+      }
+      if (Buffer.isBuffer(chunk) && this[ENCODING]) chunk = this[DECODER].write(chunk);
+
+      // Note: flushing CAN potentially switch us into not-flowing mode
+      if (this.flowing && this[BUFFERLENGTH] !== 0) this[FLUSH](true);
+      if (this.flowing) this.emit('data', chunk);else this[BUFFERPUSH](chunk);
+      if (this[BUFFERLENGTH] !== 0) this.emit('readable');
+      if (cb) fn(cb);
+      return this.flowing;
+    }
+  }, {
+    key: "read",
+    value: function read(n) {
+      if (this[DESTROYED]) return null;
+      if (this[BUFFERLENGTH] === 0 || n === 0 || n > this[BUFFERLENGTH]) {
+        this[MAYBE_EMIT_END]();
+        return null;
+      }
+      if (this[OBJECTMODE]) n = null;
+      if (this[BUFFER].length > 1 && !this[OBJECTMODE]) {
+        if (this.encoding) this[BUFFER] = [this[BUFFER].join('')];else this[BUFFER] = [Buffer.concat(this[BUFFER], this[BUFFERLENGTH])];
+      }
+      var ret = this[READ](n || null, this[BUFFER][0]);
+      this[MAYBE_EMIT_END]();
+      return ret;
+    }
+  }, {
+    key: READ,
+    value: function value(n, chunk) {
+      if (n === chunk.length || n === null) this[BUFFERSHIFT]();else {
+        this[BUFFER][0] = chunk.slice(n);
+        chunk = chunk.slice(0, n);
+        this[BUFFERLENGTH] -= n;
+      }
+      this.emit('data', chunk);
+      if (!this[BUFFER].length && !this[EOF]) this.emit('drain');
+      return chunk;
+    }
+  }, {
+    key: "end",
+    value: function end(chunk, encoding, cb) {
+      if (typeof chunk === 'function') cb = chunk, chunk = null;
+      if (typeof encoding === 'function') cb = encoding, encoding = 'utf8';
+      if (chunk) this.write(chunk, encoding);
+      if (cb) this.once('end', cb);
+      this[EOF] = true;
+      this.writable = false;
+
+      // if we haven't written anything, then go ahead and emit,
+      // even if we're not reading.
+      // we'll re-emit if a new 'end' listener is added anyway.
+      // This makes MP more suitable to write-only use cases.
+      if (this.flowing || !this[PAUSED]) this[MAYBE_EMIT_END]();
+      return this;
+    }
+
+    // don't let the internal resume be overwritten
+  }, {
+    key: RESUME,
+    value: function value() {
+      if (this[DESTROYED]) return;
+      this[PAUSED] = false;
+      this[FLOWING] = true;
+      this.emit('resume');
+      if (this[BUFFER].length) this[FLUSH]();else if (this[EOF]) this[MAYBE_EMIT_END]();else this.emit('drain');
+    }
+  }, {
+    key: "resume",
+    value: function resume() {
+      return this[RESUME]();
+    }
+  }, {
+    key: "pause",
+    value: function pause() {
+      this[FLOWING] = false;
+      this[PAUSED] = true;
+    }
+  }, {
+    key: "destroyed",
+    get: function get() {
+      return this[DESTROYED];
+    }
+  }, {
+    key: "flowing",
+    get: function get() {
+      return this[FLOWING];
+    }
+  }, {
+    key: "paused",
+    get: function get() {
+      return this[PAUSED];
+    }
+  }, {
+    key: BUFFERPUSH,
+    value: function value(chunk) {
+      if (this[OBJECTMODE]) this[BUFFERLENGTH] += 1;else this[BUFFERLENGTH] += chunk.length;
+      this[BUFFER].push(chunk);
+    }
+  }, {
+    key: BUFFERSHIFT,
+    value: function value() {
+      if (this[OBJECTMODE]) this[BUFFERLENGTH] -= 1;else this[BUFFERLENGTH] -= this[BUFFER][0].length;
+      return this[BUFFER].shift();
+    }
+  }, {
+    key: FLUSH,
+    value: function value(noDrain) {
+      do {} while (this[FLUSHCHUNK](this[BUFFERSHIFT]()) && this[BUFFER].length);
+      if (!noDrain && !this[BUFFER].length && !this[EOF]) this.emit('drain');
+    }
+  }, {
+    key: FLUSHCHUNK,
+    value: function value(chunk) {
+      this.emit('data', chunk);
+      return this.flowing;
+    }
+  }, {
+    key: "pipe",
+    value: function pipe(dest, opts) {
+      var _this4 = this;
+      if (this[DESTROYED]) return;
+      var ended = this[EMITTED_END];
+      opts = opts || {};
+      if (dest === proc.stdout || dest === proc.stderr) opts.end = false;else opts.end = opts.end !== false;
+      opts.proxyErrors = !!opts.proxyErrors;
+
+      // piping an ended stream ends immediately
+      if (ended) {
+        if (opts.end) dest.end();
+      } else {
+        this[PIPES].push(!opts.proxyErrors ? new Pipe(this, dest, opts) : new PipeProxyErrors(this, dest, opts));
+        if (this[ASYNC]) defer(function () {
+          return _this4[RESUME]();
+        });else this[RESUME]();
+      }
+      return dest;
+    }
+  }, {
+    key: "unpipe",
+    value: function unpipe(dest) {
+      var p = this[PIPES].find(function (p) {
+        return p.dest === dest;
+      });
+      if (p) {
+        this[PIPES].splice(this[PIPES].indexOf(p), 1);
+        p.unpipe();
+      }
+    }
+  }, {
+    key: "addListener",
+    value: function addListener(ev, fn) {
+      return this.on(ev, fn);
+    }
+  }, {
+    key: "on",
+    value: function on(ev, fn) {
+      var _this5 = this;
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "on", this).call(this, ev, fn);
+      if (ev === 'data' && !this[PIPES].length && !this.flowing) this[RESUME]();else if (ev === 'readable' && this[BUFFERLENGTH] !== 0) _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'readable');else if (isEndish(ev) && this[EMITTED_END]) {
+        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        this.removeAllListeners(ev);
+      } else if (ev === 'error' && this[EMITTED_ERROR]) {
+        if (this[ASYNC]) defer(function () {
+          return fn.call(_this5, _this5[EMITTED_ERROR]);
+        });else fn.call(this, this[EMITTED_ERROR]);
+      }
+      return ret;
+    }
+  }, {
+    key: "emittedEnd",
+    get: function get() {
+      return this[EMITTED_END];
+    }
+  }, {
+    key: MAYBE_EMIT_END,
+    value: function value() {
+      if (!this[EMITTING_END] && !this[EMITTED_END] && !this[DESTROYED] && this[BUFFER].length === 0 && this[EOF]) {
+        this[EMITTING_END] = true;
+        this.emit('end');
+        this.emit('prefinish');
+        this.emit('finish');
+        if (this[CLOSED]) this.emit('close');
+        this[EMITTING_END] = false;
+      }
+    }
+  }, {
+    key: "emit",
+    value: function emit(ev, data) {
+      var _this6 = this,
+        _get2;
+      // error and close are only events allowed after calling destroy()
+      if (ev !== 'error' && ev !== 'close' && ev !== DESTROYED && this[DESTROYED]) return;else if (ev === 'data') {
+        return !this[OBJECTMODE] && !data ? false : this[ASYNC] ? defer(function () {
+          return _this6[EMITDATA](data);
+        }) : this[EMITDATA](data);
+      } else if (ev === 'end') {
+        return this[EMITEND]();
+      } else if (ev === 'close') {
+        this[CLOSED] = true;
+        // don't emit close before 'end' and 'finish'
+        if (!this[EMITTED_END] && !this[DESTROYED]) return;
+        var _ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'close');
+        this.removeAllListeners('close');
+        return _ret;
+      } else if (ev === 'error') {
+        this[EMITTED_ERROR] = data;
+        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ERROR, data);
+        var _ret2 = !this[SIGNAL] || this.listeners('error').length ? _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'error', data) : false;
+        this[MAYBE_EMIT_END]();
+        return _ret2;
+      } else if (ev === 'resume') {
+        var _ret3 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'resume');
+        this[MAYBE_EMIT_END]();
+        return _ret3;
+      } else if (ev === 'finish' || ev === 'prefinish') {
+        var _ret4 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        this.removeAllListeners(ev);
+        return _ret4;
+      }
+
+      // Some other unknown event
+      for (var _len = arguments.length, extra = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
+        extra[_key - 2] = arguments[_key];
+      }
+      var ret = (_get2 = _get(_getPrototypeOf(Minipass.prototype), "emit", this)).call.apply(_get2, [this, ev, data].concat(extra));
+      this[MAYBE_EMIT_END]();
+      return ret;
+    }
+  }, {
+    key: EMITDATA,
+    value: function value(data) {
+      var _iterator = _createForOfIteratorHelper(this[PIPES]),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var p = _step.value;
+          if (p.dest.write(data) === false) this.pause();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+      this[MAYBE_EMIT_END]();
+      return ret;
+    }
+  }, {
+    key: EMITEND,
+    value: function value() {
+      var _this7 = this;
+      if (this[EMITTED_END]) return;
+      this[EMITTED_END] = true;
+      this.readable = false;
+      if (this[ASYNC]) defer(function () {
+        return _this7[EMITEND2]();
+      });else this[EMITEND2]();
+    }
+  }, {
+    key: EMITEND2,
+    value: function value() {
+      if (this[DECODER]) {
+        var data = this[DECODER].end();
+        if (data) {
+          var _iterator2 = _createForOfIteratorHelper(this[PIPES]),
+            _step2;
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var p = _step2.value;
+              p.dest.write(data);
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+          _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+        }
+      }
+      var _iterator3 = _createForOfIteratorHelper(this[PIPES]),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _p = _step3.value;
+          _p.end();
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'end');
+      this.removeAllListeners('end');
+      return ret;
+    }
+
+    // const all = await stream.collect()
+  }, {
+    key: "collect",
+    value: function collect() {
+      var _this8 = this;
+      var buf = [];
+      if (!this[OBJECTMODE]) buf.dataLength = 0;
+      // set the promise first, in case an error is raised
+      // by triggering the flow here.
+      var p = this.promise();
+      this.on('data', function (c) {
+        buf.push(c);
+        if (!_this8[OBJECTMODE]) buf.dataLength += c.length;
+      });
+      return p.then(function () {
+        return buf;
+      });
+    }
+
+    // const data = await stream.concat()
+  }, {
+    key: "concat",
+    value: function concat() {
+      var _this9 = this;
+      return this[OBJECTMODE] ? Promise.reject(new Error('cannot concat in objectMode')) : this.collect().then(function (buf) {
+        return _this9[OBJECTMODE] ? Promise.reject(new Error('cannot concat in objectMode')) : _this9[ENCODING] ? buf.join('') : Buffer.concat(buf, buf.dataLength);
+      });
+    }
+
+    // stream.promise().then(() => done, er => emitted error)
+  }, {
+    key: "promise",
+    value: function promise() {
+      var _this10 = this;
+      return new Promise(function (resolve, reject) {
+        _this10.on(DESTROYED, function () {
+          return reject(new Error('stream destroyed'));
+        });
+        _this10.on('error', function (er) {
+          return reject(er);
+        });
+        _this10.on('end', function () {
+          return resolve();
+        });
+      });
+    }
+
+    // for await (let chunk of stream)
+  }, {
+    key: ASYNCITERATOR,
+    value: function value() {
+      var _this11 = this;
+      var stopped = false;
+      var stop = function stop() {
+        _this11.pause();
+        stopped = true;
+        return Promise.resolve({
+          done: true
+        });
+      };
+      var next = function next() {
+        if (stopped) return stop();
+        var res = _this11.read();
+        if (res !== null) return Promise.resolve({
+          done: false,
+          value: res
+        });
+        if (_this11[EOF]) return stop();
+        var resolve = null;
+        var reject = null;
+        var onerr = function onerr(er) {
+          _this11.removeListener('data', ondata);
+          _this11.removeListener('end', onend);
+          _this11.removeListener(DESTROYED, ondestroy);
+          stop();
+          reject(er);
+        };
+        var ondata = function ondata(value) {
+          _this11.removeListener('error', onerr);
+          _this11.removeListener('end', onend);
+          _this11.removeListener(DESTROYED, ondestroy);
+          _this11.pause();
+          resolve({
+            value: value,
+            done: !!_this11[EOF]
+          });
+        };
+        var onend = function onend() {
+          _this11.removeListener('error', onerr);
+          _this11.removeListener('data', ondata);
+          _this11.removeListener(DESTROYED, ondestroy);
+          stop();
+          resolve({
+            done: true
+          });
+        };
+        var ondestroy = function ondestroy() {
+          return onerr(new Error('stream destroyed'));
+        };
+        return new Promise(function (res, rej) {
+          reject = rej;
+          resolve = res;
+          _this11.once(DESTROYED, ondestroy);
+          _this11.once('error', onerr);
+          _this11.once('end', onend);
+          _this11.once('data', ondata);
+        });
+      };
+      return _defineProperty({
+        next: next,
+        "throw": stop,
+        "return": stop
+      }, ASYNCITERATOR, function () {
+        return this;
+      });
+    }
+
+    // for (let chunk of stream)
+  }, {
+    key: ITERATOR,
+    value: function value() {
+      var _this12 = this;
+      var stopped = false;
+      var stop = function stop() {
+        _this12.pause();
+        _this12.removeListener(ERROR, stop);
+        _this12.removeListener(DESTROYED, stop);
+        _this12.removeListener('end', stop);
+        stopped = true;
+        return {
+          done: true
+        };
+      };
+      var next = function next() {
+        if (stopped) return stop();
+        var value = _this12.read();
+        return value === null ? stop() : {
+          value: value
+        };
+      };
+      this.once('end', stop);
+      this.once(ERROR, stop);
+      this.once(DESTROYED, stop);
+      return _defineProperty({
+        next: next,
+        "throw": stop,
+        "return": stop
+      }, ITERATOR, function () {
+        return this;
+      });
+    }
+  }, {
+    key: "destroy",
+    value: function destroy(er) {
+      if (this[DESTROYED]) {
+        if (er) this.emit('error', er);else this.emit(DESTROYED);
+        return this;
+      }
+      this[DESTROYED] = true;
+
+      // throw away all buffered data, it's never coming out
+      this[BUFFER].length = 0;
+      this[BUFFERLENGTH] = 0;
+      if (typeof this.close === 'function' && !this[CLOSED]) this.close();
+      if (er) this.emit('error', er);
+      // if no error to emit, still reject pending promises
+      else this.emit(DESTROYED);
+      return this;
+    }
+  }], [{
+    key: "isStream",
+    value: function isStream(s) {
+      return !!s && (s instanceof Minipass || s instanceof external_stream_ || s instanceof external_events_ && (
+      // readable
+      typeof s.pipe === 'function' ||
+      // writable
+      typeof s.write === 'function' && typeof s.end === 'function'));
+    }
+  }]);
+  return Minipass;
+}(external_stream_);
+;// CONCATENATED MODULE: ../../node_modules/path-scurry/dist/mjs/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _Symbol$asyncIterator, mjs_Symbol$iterator;
+
+
+
+
+
+var realpathSync = external_fs_.realpathSync.native;
+// TODO: test perf of fs/promises realpath vs realpathCB,
+// since the promises one uses realpath.native
+
+
+var defaultFS = {
+  lstatSync: external_fs_.lstatSync,
+  readdir: external_fs_.readdir,
+  readdirSync: external_fs_.readdirSync,
+  readlinkSync: external_fs_.readlinkSync,
+  realpathSync: realpathSync,
+  promises: {
+    lstat: promises_namespaceObject.lstat,
+    readdir: promises_namespaceObject.readdir,
+    readlink: promises_namespaceObject.readlink,
+    realpath: promises_namespaceObject.realpath
+  }
+};
+// if they just gave us require('fs') then use our default
+var fsFromOption = function fsFromOption(fsOption) {
+  return !fsOption || fsOption === defaultFS || fsOption === external_fs_namespaceObject ? defaultFS : _objectSpread2(_objectSpread2(_objectSpread2({}, defaultFS), fsOption), {}, {
+    promises: _objectSpread2(_objectSpread2({}, defaultFS.promises), fsOption.promises || {})
+  });
+};
+// turn something like //?/c:/ into c:\
+var uncDriveRegexp = /^\\\\\?\\([a-z]:)\\?$/i;
+var uncToDrive = function uncToDrive(rootPath) {
+  return rootPath.replace(/\//g, '\\').replace(uncDriveRegexp, '$1\\');
+};
+// windows paths are separated by either / or \
+var eitherSep = /[\\\/]/;
+var UNKNOWN = 0; // may not even exist, for all we know
+var IFIFO = 1;
+var IFCHR = 2;
+var IFDIR = 4;
+var IFBLK = 6;
+var IFREG = 8;
+var IFLNK = 10;
+var IFSOCK = 12;
+var IFMT = 15;
+// mask to unset low 4 bits
+var IFMT_UNKNOWN = ~IFMT;
+// set after successfully calling readdir() and getting entries.
+var READDIR_CALLED = 16;
+// set after a successful lstat()
+var LSTAT_CALLED = 32;
+// set if an entry (or one of its parents) is definitely not a dir
+var ENOTDIR = 64;
+// set if an entry (or one of its parents) does not exist
+// (can also be set on lstat errors like EACCES or ENAMETOOLONG)
+var ENOENT = 128;
+// cannot have child entries -- also verify &IFMT is either IFDIR or IFLNK
+// set if we fail to readlink
+var ENOREADLINK = 256;
+// set if we know realpath() will fail
+var ENOREALPATH = 512;
+var ENOCHILD = ENOTDIR | ENOENT | ENOREALPATH;
+var TYPEMASK = 1023;
+var entToType = function entToType(s) {
+  return s.isFile() ? IFREG : s.isDirectory() ? IFDIR : s.isSymbolicLink() ? IFLNK : s.isCharacterDevice() ? IFCHR : s.isBlockDevice() ? IFBLK : s.isSocket() ? IFSOCK : s.isFIFO() ? IFIFO : UNKNOWN;
+};
+// normalize unicode path names
+var normalizeCache = new Map();
+var normalize = function normalize(s) {
+  var c = normalizeCache.get(s);
+  if (c) return c;
+  var n = s.normalize('NFKD');
+  normalizeCache.set(s, n);
+  return n;
+};
+var normalizeNocaseCache = new Map();
+var normalizeNocase = function normalizeNocase(s) {
+  var c = normalizeNocaseCache.get(s);
+  if (c) return c;
+  var n = normalize(s.toLowerCase());
+  normalizeNocaseCache.set(s, n);
+  return n;
+};
+/**
+ * An LRUCache for storing resolved path strings or Path objects.
+ * @internal
+ */
+var ResolveCache = /*#__PURE__*/function (_LRUCache) {
+  _inherits(ResolveCache, _LRUCache);
+  var _super = _createSuper(ResolveCache);
+  function ResolveCache() {
+    _classCallCheck(this, ResolveCache);
+    return _super.call(this, {
+      max: 256
+    });
+  }
+  return _createClass(ResolveCache);
+}(LRUCache);
+// In order to prevent blowing out the js heap by allocating hundreds of
+// thousands of Path entries when walking extremely large trees, the "children"
+// in this tree are represented by storing an array of Path entries in an
+// LRUCache, indexed by the parent.  At any time, Path.children() may return an
+// empty array, indicating that it doesn't know about any of its children, and
+// thus has to rebuild that cache.  This is fine, it just means that we don't
+// benefit as much from having the cached entries, but huge directory walks
+// don't blow out the stack, and smaller ones are still as fast as possible.
+//
+//It does impose some complexity when building up the readdir data, because we
+//need to pass a reference to the children array that we started with.
+/**
+ * an LRUCache for storing child entries.
+ * @internal
+ */
+var ChildrenCache = /*#__PURE__*/function (_LRUCache2) {
+  _inherits(ChildrenCache, _LRUCache2);
+  var _super2 = _createSuper(ChildrenCache);
+  function ChildrenCache() {
+    var maxSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 16 * 1024;
+    _classCallCheck(this, ChildrenCache);
+    return _super2.call(this, {
+      maxSize: maxSize,
+      // parent + children
+      sizeCalculation: function sizeCalculation(a) {
+        return a.length + 1;
+      }
+    });
+  }
+  return _createClass(ChildrenCache);
+}(LRUCache);
+var setAsCwd = Symbol('PathScurry setAsCwd');
+/**
+ * Path objects are sort of like a super-powered
+ * {@link https://nodejs.org/docs/latest/api/fs.html#class-fsdirent fs.Dirent}
+ *
+ * Each one represents a single filesystem entry on disk, which may or may not
+ * exist. It includes methods for reading various types of information via
+ * lstat, readlink, and readdir, and caches all information to the greatest
+ * degree possible.
+ *
+ * Note that fs operations that would normally throw will instead return an
+ * "empty" value. This is in order to prevent excessive overhead from error
+ * stack traces.
+ */
+var _fs = /*#__PURE__*/new WeakMap();
+var _dev = /*#__PURE__*/new WeakMap();
+var _mode = /*#__PURE__*/new WeakMap();
+var _nlink = /*#__PURE__*/new WeakMap();
+var _uid = /*#__PURE__*/new WeakMap();
+var _gid = /*#__PURE__*/new WeakMap();
+var _rdev = /*#__PURE__*/new WeakMap();
+var _blksize = /*#__PURE__*/new WeakMap();
+var _ino = /*#__PURE__*/new WeakMap();
+var mjs_size = /*#__PURE__*/new WeakMap();
+var _blocks = /*#__PURE__*/new WeakMap();
+var _atimeMs = /*#__PURE__*/new WeakMap();
+var _mtimeMs = /*#__PURE__*/new WeakMap();
+var _ctimeMs = /*#__PURE__*/new WeakMap();
+var _birthtimeMs = /*#__PURE__*/new WeakMap();
+var _atime = /*#__PURE__*/new WeakMap();
+var _mtime = /*#__PURE__*/new WeakMap();
+var _ctime = /*#__PURE__*/new WeakMap();
+var _birthtime = /*#__PURE__*/new WeakMap();
+var _matchName = /*#__PURE__*/new WeakMap();
+var _depth = /*#__PURE__*/new WeakMap();
+var _fullpath = /*#__PURE__*/new WeakMap();
+var _fullpathPosix = /*#__PURE__*/new WeakMap();
+var _relative = /*#__PURE__*/new WeakMap();
+var _relativePosix = /*#__PURE__*/new WeakMap();
+var _type = /*#__PURE__*/new WeakMap();
+var _children = /*#__PURE__*/new WeakMap();
+var _linkTarget = /*#__PURE__*/new WeakMap();
+var _realpath = /*#__PURE__*/new WeakMap();
+var _resolveParts = /*#__PURE__*/new WeakSet();
+var _readdirSuccess = /*#__PURE__*/new WeakSet();
+var _markENOENT = /*#__PURE__*/new WeakSet();
+var _markChildrenENOENT = /*#__PURE__*/new WeakSet();
+var _markENOREALPATH = /*#__PURE__*/new WeakSet();
+var _markENOTDIR = /*#__PURE__*/new WeakSet();
+var _readdirFail = /*#__PURE__*/new WeakSet();
+var _lstatFail = /*#__PURE__*/new WeakSet();
+var _readlinkFail = /*#__PURE__*/new WeakSet();
+var _readdirAddChild = /*#__PURE__*/new WeakSet();
+var _readdirAddNewChild = /*#__PURE__*/new WeakSet();
+var _readdirMaybePromoteChild = /*#__PURE__*/new WeakSet();
+var _readdirPromoteChild = /*#__PURE__*/new WeakSet();
+var _applyStat = /*#__PURE__*/new WeakSet();
+var _onReaddirCB = /*#__PURE__*/new WeakMap();
+var _readdirCBInFlight = /*#__PURE__*/new WeakMap();
+var _callOnReaddirCB = /*#__PURE__*/new WeakSet();
+var _asyncReaddirInFlight = /*#__PURE__*/new WeakMap();
+var PathBase = /*#__PURE__*/function () {
+  /**
+   * Do not create new Path objects directly.  They should always be accessed
+   * via the PathScurry class or other methods on the Path class.
+   *
+   * @internal
+   */
+  function PathBase(_name) {
+    var _type2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UNKNOWN;
+    var root = arguments.length > 2 ? arguments[2] : undefined;
+    var roots = arguments.length > 3 ? arguments[3] : undefined;
+    var nocase = arguments.length > 4 ? arguments[4] : undefined;
+    var _children2 = arguments.length > 5 ? arguments[5] : undefined;
+    var opts = arguments.length > 6 ? arguments[6] : undefined;
+    _classCallCheck(this, PathBase);
+    _classPrivateMethodInitSpec(this, _callOnReaddirCB);
+    _classPrivateMethodInitSpec(this, _applyStat);
+    _classPrivateMethodInitSpec(this, _readdirPromoteChild);
+    _classPrivateMethodInitSpec(this, _readdirMaybePromoteChild);
+    _classPrivateMethodInitSpec(this, _readdirAddNewChild);
+    _classPrivateMethodInitSpec(this, _readdirAddChild);
+    _classPrivateMethodInitSpec(this, _readlinkFail);
+    _classPrivateMethodInitSpec(this, _lstatFail);
+    _classPrivateMethodInitSpec(this, _readdirFail);
+    // save the information when we know the entry is not a dir
+    _classPrivateMethodInitSpec(this, _markENOTDIR);
+    _classPrivateMethodInitSpec(this, _markENOREALPATH);
+    _classPrivateMethodInitSpec(this, _markChildrenENOENT);
+    _classPrivateMethodInitSpec(this, _markENOENT);
+    _classPrivateMethodInitSpec(this, _readdirSuccess);
+    _classPrivateMethodInitSpec(this, _resolveParts);
+    /**
+     * the basename of this path
+     *
+     * **Important**: *always* test the path name against any test string
+     * usingthe {@link isNamed} method, and not by directly comparing this
+     * string. Otherwise, unicode path strings that the system sees as identical
+     * will not be properly treated as the same path, leading to incorrect
+     * behavior and possible security issues.
+     */
+    _defineProperty(this, "name", void 0);
+    /**
+     * the Path entry corresponding to the path root.
+     *
+     * @internal
+     */
+    _defineProperty(this, "root", void 0);
+    /**
+     * All roots found within the current PathScurry family
+     *
+     * @internal
+     */
+    _defineProperty(this, "roots", void 0);
+    /**
+     * a reference to the parent path, or undefined in the case of root entries
+     *
+     * @internal
+     */
+    _defineProperty(this, "parent", void 0);
+    /**
+     * boolean indicating whether paths are compared case-insensitively
+     * @internal
+     */
+    _defineProperty(this, "nocase", void 0);
+    // potential default fs override
+    _classPrivateFieldInitSpec(this, _fs, {
+      writable: true,
+      value: void 0
+    });
+    // Stats fields
+    _classPrivateFieldInitSpec(this, _dev, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _mode, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _nlink, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _uid, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _gid, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _rdev, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _blksize, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _ino, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, mjs_size, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _blocks, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _atimeMs, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _mtimeMs, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _ctimeMs, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _birthtimeMs, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _atime, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _mtime, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _ctime, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _birthtime, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _matchName, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _depth, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _fullpath, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _fullpathPosix, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _relative, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _relativePosix, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _type, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _children, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _linkTarget, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _realpath, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _onReaddirCB, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _readdirCBInFlight, {
+      writable: true,
+      value: false
+    });
+    _classPrivateFieldInitSpec(this, _asyncReaddirInFlight, {
+      writable: true,
+      value: void 0
+    });
+    this.name = _name;
+    _classPrivateFieldSet(this, _matchName, nocase ? normalizeNocase(_name) : normalize(_name));
+    _classPrivateFieldSet(this, _type, _type2 & TYPEMASK);
+    this.nocase = nocase;
+    this.roots = roots;
+    this.root = root || this;
+    _classPrivateFieldSet(this, _children, _children2);
+    _classPrivateFieldSet(this, _fullpath, opts.fullpath);
+    _classPrivateFieldSet(this, _relative, opts.relative);
+    _classPrivateFieldSet(this, _relativePosix, opts.relativePosix);
+    this.parent = opts.parent;
+    if (this.parent) {
+      _classPrivateFieldSet(this, _fs, _classPrivateFieldGet(this.parent, _fs));
+    } else {
+      _classPrivateFieldSet(this, _fs, fsFromOption(opts.fs));
+    }
+  }
+  /**
+   * Returns the depth of the Path object from its root.
+   *
+   * For example, a path at `/foo/bar` would have a depth of 2.
+   */
+  _createClass(PathBase, [{
+    key: "dev",
+    get: function get() {
+      return _classPrivateFieldGet(this, _dev);
+    }
+  }, {
+    key: "mode",
+    get: function get() {
+      return _classPrivateFieldGet(this, _mode);
+    }
+  }, {
+    key: "nlink",
+    get: function get() {
+      return _classPrivateFieldGet(this, _nlink);
+    }
+  }, {
+    key: "uid",
+    get: function get() {
+      return _classPrivateFieldGet(this, _uid);
+    }
+  }, {
+    key: "gid",
+    get: function get() {
+      return _classPrivateFieldGet(this, _gid);
+    }
+  }, {
+    key: "rdev",
+    get: function get() {
+      return _classPrivateFieldGet(this, _rdev);
+    }
+  }, {
+    key: "blksize",
+    get: function get() {
+      return _classPrivateFieldGet(this, _blksize);
+    }
+  }, {
+    key: "ino",
+    get: function get() {
+      return _classPrivateFieldGet(this, _ino);
+    }
+  }, {
+    key: "size",
+    get: function get() {
+      return _classPrivateFieldGet(this, mjs_size);
+    }
+  }, {
+    key: "blocks",
+    get: function get() {
+      return _classPrivateFieldGet(this, _blocks);
+    }
+  }, {
+    key: "atimeMs",
+    get: function get() {
+      return _classPrivateFieldGet(this, _atimeMs);
+    }
+  }, {
+    key: "mtimeMs",
+    get: function get() {
+      return _classPrivateFieldGet(this, _mtimeMs);
+    }
+  }, {
+    key: "ctimeMs",
+    get: function get() {
+      return _classPrivateFieldGet(this, _ctimeMs);
+    }
+  }, {
+    key: "birthtimeMs",
+    get: function get() {
+      return _classPrivateFieldGet(this, _birthtimeMs);
+    }
+  }, {
+    key: "atime",
+    get: function get() {
+      return _classPrivateFieldGet(this, _atime);
+    }
+  }, {
+    key: "mtime",
+    get: function get() {
+      return _classPrivateFieldGet(this, _mtime);
+    }
+  }, {
+    key: "ctime",
+    get: function get() {
+      return _classPrivateFieldGet(this, _ctime);
+    }
+  }, {
+    key: "birthtime",
+    get: function get() {
+      return _classPrivateFieldGet(this, _birthtime);
+    }
+  }, {
+    key: "path",
+    get:
+    /**
+     * This property is for compatibility with the Dirent class as of
+     * Node v20, where Dirent['path'] refers to the path of the directory
+     * that was passed to readdir.  So, somewhat counterintuitively, this
+     * property refers to the *parent* path, not the path object itself.
+     * For root entries, it's the path to the entry itself.
+     */
+    function get() {
+      return (this.parent || this).fullpath();
+    }
+  }, {
+    key: "depth",
+    value: function depth() {
+      if (_classPrivateFieldGet(this, _depth) !== undefined) return _classPrivateFieldGet(this, _depth);
+      if (!this.parent) return _classPrivateFieldSet(this, _depth, 0);
+      return _classPrivateFieldSet(this, _depth, this.parent.depth() + 1);
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "childrenCache",
+    value: function childrenCache() {
+      return _classPrivateFieldGet(this, _children);
+    }
+    /**
+     * Get the Path object referenced by the string path, resolved from this Path
+     */
+  }, {
+    key: "resolve",
+    value: function resolve(path) {
+      var _this$getRoot;
+      if (!path) {
+        return this;
+      }
+      var rootPath = this.getRootString(path);
+      var dir = path.substring(rootPath.length);
+      var dirParts = dir.split(this.splitSep);
+      var result = rootPath ? _classPrivateMethodGet(_this$getRoot = this.getRoot(rootPath), _resolveParts, _resolveParts2).call(_this$getRoot, dirParts) : _classPrivateMethodGet(this, _resolveParts, _resolveParts2).call(this, dirParts);
+      return result;
+    }
+  }, {
+    key: "children",
+    value:
+    /**
+     * Returns the cached children Path objects, if still available.  If they
+     * have fallen out of the cache, then returns an empty array, and resets the
+     * READDIR_CALLED bit, so that future calls to readdir() will require an fs
+     * lookup.
+     *
+     * @internal
+     */
+    function children() {
+      var cached = _classPrivateFieldGet(this, _children).get(this);
+      if (cached) {
+        return cached;
+      }
+      var children = Object.assign([], {
+        provisional: 0
+      });
+      _classPrivateFieldGet(this, _children).set(this, children);
+      _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) & ~READDIR_CALLED);
+      return children;
+    }
+    /**
+     * Resolves a path portion and returns or creates the child Path.
+     *
+     * Returns `this` if pathPart is `''` or `'.'`, or `parent` if pathPart is
+     * `'..'`.
+     *
+     * This should not be called directly.  If `pathPart` contains any path
+     * separators, it will lead to unsafe undefined behavior.
+     *
+     * Use `Path.resolve()` instead.
+     *
+     * @internal
+     */
+  }, {
+    key: "child",
+    value: function child(pathPart, opts) {
+      if (pathPart === '' || pathPart === '.') {
+        return this;
+      }
+      if (pathPart === '..') {
+        return this.parent || this;
+      }
+      // find the child
+      var children = this.children();
+      var name = this.nocase ? normalizeNocase(pathPart) : normalize(pathPart);
+      var _iterator = _createForOfIteratorHelper(children),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var p = _step.value;
+          if (_classPrivateFieldGet(p, _matchName) === name) {
+            return p;
+          }
+        }
+        // didn't find it, create provisional child, since it might not
+        // actually exist.  If we know the parent isn't a dir, then
+        // in fact it CAN'T exist.
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      var s = this.parent ? this.sep : '';
+      var fullpath = _classPrivateFieldGet(this, _fullpath) ? _classPrivateFieldGet(this, _fullpath) + s + pathPart : undefined;
+      var pchild = this.newChild(pathPart, UNKNOWN, _objectSpread2(_objectSpread2({}, opts), {}, {
+        parent: this,
+        fullpath: fullpath
+      }));
+      if (!this.canReaddir()) {
+        _classPrivateFieldSet(pchild, _type, _classPrivateFieldGet(pchild, _type) | ENOENT);
+      }
+      // don't have to update provisional, because if we have real children,
+      // then provisional is set to children.length, otherwise a lower number
+      children.push(pchild);
+      return pchild;
+    }
+    /**
+     * The relative path from the cwd. If it does not share an ancestor with
+     * the cwd, then this ends up being equivalent to the fullpath()
+     */
+  }, {
+    key: "relative",
+    value: function relative() {
+      if (_classPrivateFieldGet(this, _relative) !== undefined) {
+        return _classPrivateFieldGet(this, _relative);
+      }
+      var name = this.name;
+      var p = this.parent;
+      if (!p) {
+        return _classPrivateFieldSet(this, _relative, this.name);
+      }
+      var pv = p.relative();
+      return pv + (!pv || !p.parent ? '' : this.sep) + name;
+    }
+    /**
+     * The relative path from the cwd, using / as the path separator.
+     * If it does not share an ancestor with
+     * the cwd, then this ends up being equivalent to the fullpathPosix()
+     * On posix systems, this is identical to relative().
+     */
+  }, {
+    key: "relativePosix",
+    value: function relativePosix() {
+      if (this.sep === '/') return this.relative();
+      if (_classPrivateFieldGet(this, _relativePosix) !== undefined) return _classPrivateFieldGet(this, _relativePosix);
+      var name = this.name;
+      var p = this.parent;
+      if (!p) {
+        return _classPrivateFieldSet(this, _relativePosix, this.fullpathPosix());
+      }
+      var pv = p.relativePosix();
+      return pv + (!pv || !p.parent ? '' : '/') + name;
+    }
+    /**
+     * The fully resolved path string for this Path entry
+     */
+  }, {
+    key: "fullpath",
+    value: function fullpath() {
+      if (_classPrivateFieldGet(this, _fullpath) !== undefined) {
+        return _classPrivateFieldGet(this, _fullpath);
+      }
+      var name = this.name;
+      var p = this.parent;
+      if (!p) {
+        return _classPrivateFieldSet(this, _fullpath, this.name);
+      }
+      var pv = p.fullpath();
+      var fp = pv + (!p.parent ? '' : this.sep) + name;
+      return _classPrivateFieldSet(this, _fullpath, fp);
+    }
+    /**
+     * On platforms other than windows, this is identical to fullpath.
+     *
+     * On windows, this is overridden to return the forward-slash form of the
+     * full UNC path.
+     */
+  }, {
+    key: "fullpathPosix",
+    value: function fullpathPosix() {
+      if (_classPrivateFieldGet(this, _fullpathPosix) !== undefined) return _classPrivateFieldGet(this, _fullpathPosix);
+      if (this.sep === '/') return _classPrivateFieldSet(this, _fullpathPosix, this.fullpath());
+      if (!this.parent) {
+        var _p = this.fullpath().replace(/\\/g, '/');
+        if (/^[a-z]:\//i.test(_p)) {
+          return _classPrivateFieldSet(this, _fullpathPosix, "//?/".concat(_p));
+        } else {
+          return _classPrivateFieldSet(this, _fullpathPosix, _p);
+        }
+      }
+      var p = this.parent;
+      var pfpp = p.fullpathPosix();
+      var fpp = pfpp + (!pfpp || !p.parent ? '' : '/') + this.name;
+      return _classPrivateFieldSet(this, _fullpathPosix, fpp);
+    }
+    /**
+     * Is the Path of an unknown type?
+     *
+     * Note that we might know *something* about it if there has been a previous
+     * filesystem operation, for example that it does not exist, or is not a
+     * link, or whether it has child entries.
+     */
+  }, {
+    key: "isUnknown",
+    value: function isUnknown() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === UNKNOWN;
+    }
+  }, {
+    key: "isType",
+    value: function isType(type) {
+      return this["is".concat(type)]();
+    }
+  }, {
+    key: "getType",
+    value: function getType() {
+      return this.isUnknown() ? 'Unknown' : this.isDirectory() ? 'Directory' : this.isFile() ? 'File' : this.isSymbolicLink() ? 'SymbolicLink' : this.isFIFO() ? 'FIFO' : this.isCharacterDevice() ? 'CharacterDevice' : this.isBlockDevice() ? 'BlockDevice' : /* c8 ignore start */this.isSocket() ? 'Socket' : 'Unknown';
+      /* c8 ignore stop */
+    }
+    /**
+     * Is the Path a regular file?
+     */
+  }, {
+    key: "isFile",
+    value: function isFile() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === IFREG;
+    }
+    /**
+     * Is the Path a directory?
+     */
+  }, {
+    key: "isDirectory",
+    value: function isDirectory() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === IFDIR;
+    }
+    /**
+     * Is the path a character device?
+     */
+  }, {
+    key: "isCharacterDevice",
+    value: function isCharacterDevice() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === IFCHR;
+    }
+    /**
+     * Is the path a block device?
+     */
+  }, {
+    key: "isBlockDevice",
+    value: function isBlockDevice() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === IFBLK;
+    }
+    /**
+     * Is the path a FIFO pipe?
+     */
+  }, {
+    key: "isFIFO",
+    value: function isFIFO() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === IFIFO;
+    }
+    /**
+     * Is the path a socket?
+     */
+  }, {
+    key: "isSocket",
+    value: function isSocket() {
+      return (_classPrivateFieldGet(this, _type) & IFMT) === IFSOCK;
+    }
+    /**
+     * Is the path a symbolic link?
+     */
+  }, {
+    key: "isSymbolicLink",
+    value: function isSymbolicLink() {
+      return (_classPrivateFieldGet(this, _type) & IFLNK) === IFLNK;
+    }
+    /**
+     * Return the entry if it has been subject of a successful lstat, or
+     * undefined otherwise.
+     *
+     * Does not read the filesystem, so an undefined result *could* simply
+     * mean that we haven't called lstat on it.
+     */
+  }, {
+    key: "lstatCached",
+    value: function lstatCached() {
+      return _classPrivateFieldGet(this, _type) & LSTAT_CALLED ? this : undefined;
+    }
+    /**
+     * Return the cached link target if the entry has been the subject of a
+     * successful readlink, or undefined otherwise.
+     *
+     * Does not read the filesystem, so an undefined result *could* just mean we
+     * don't have any cached data. Only use it if you are very sure that a
+     * readlink() has been called at some point.
+     */
+  }, {
+    key: "readlinkCached",
+    value: function readlinkCached() {
+      return _classPrivateFieldGet(this, _linkTarget);
+    }
+    /**
+     * Returns the cached realpath target if the entry has been the subject
+     * of a successful realpath, or undefined otherwise.
+     *
+     * Does not read the filesystem, so an undefined result *could* just mean we
+     * don't have any cached data. Only use it if you are very sure that a
+     * realpath() has been called at some point.
+     */
+  }, {
+    key: "realpathCached",
+    value: function realpathCached() {
+      return _classPrivateFieldGet(this, _realpath);
+    }
+    /**
+     * Returns the cached child Path entries array if the entry has been the
+     * subject of a successful readdir(), or [] otherwise.
+     *
+     * Does not read the filesystem, so an empty array *could* just mean we
+     * don't have any cached data. Only use it if you are very sure that a
+     * readdir() has been called recently enough to still be valid.
+     */
+  }, {
+    key: "readdirCached",
+    value: function readdirCached() {
+      var children = this.children();
+      return children.slice(0, children.provisional);
+    }
+    /**
+     * Return true if it's worth trying to readlink.  Ie, we don't (yet) have
+     * any indication that readlink will definitely fail.
+     *
+     * Returns false if the path is known to not be a symlink, if a previous
+     * readlink failed, or if the entry does not exist.
+     */
+  }, {
+    key: "canReadlink",
+    value: function canReadlink() {
+      if (_classPrivateFieldGet(this, _linkTarget)) return true;
+      if (!this.parent) return false;
+      // cases where it cannot possibly succeed
+      var ifmt = _classPrivateFieldGet(this, _type) & IFMT;
+      return !(ifmt !== UNKNOWN && ifmt !== IFLNK || _classPrivateFieldGet(this, _type) & ENOREADLINK || _classPrivateFieldGet(this, _type) & ENOENT);
+    }
+    /**
+     * Return true if readdir has previously been successfully called on this
+     * path, indicating that cachedReaddir() is likely valid.
+     */
+  }, {
+    key: "calledReaddir",
+    value: function calledReaddir() {
+      return !!(_classPrivateFieldGet(this, _type) & READDIR_CALLED);
+    }
+    /**
+     * Returns true if the path is known to not exist. That is, a previous lstat
+     * or readdir failed to verify its existence when that would have been
+     * expected, or a parent entry was marked either enoent or enotdir.
+     */
+  }, {
+    key: "isENOENT",
+    value: function isENOENT() {
+      return !!(_classPrivateFieldGet(this, _type) & ENOENT);
+    }
+    /**
+     * Return true if the path is a match for the given path name.  This handles
+     * case sensitivity and unicode normalization.
+     *
+     * Note: even on case-sensitive systems, it is **not** safe to test the
+     * equality of the `.name` property to determine whether a given pathname
+     * matches, due to unicode normalization mismatches.
+     *
+     * Always use this method instead of testing the `path.name` property
+     * directly.
+     */
+  }, {
+    key: "isNamed",
+    value: function isNamed(n) {
+      return !this.nocase ? _classPrivateFieldGet(this, _matchName) === normalize(n) : _classPrivateFieldGet(this, _matchName) === normalizeNocase(n);
+    }
+    /**
+     * Return the Path object corresponding to the target of a symbolic link.
+     *
+     * If the Path is not a symbolic link, or if the readlink call fails for any
+     * reason, `undefined` is returned.
+     *
+     * Result is cached, and thus may be outdated if the filesystem is mutated.
+     */
+  }, {
+    key: "readlink",
+    value: function () {
+      var _readlink = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var target, read, linkTarget;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              target = _classPrivateFieldGet(this, _linkTarget);
+              if (!target) {
+                _context.next = 3;
+                break;
+              }
+              return _context.abrupt("return", target);
+            case 3:
+              if (this.canReadlink()) {
+                _context.next = 5;
+                break;
+              }
+              return _context.abrupt("return", undefined);
+            case 5:
+              if (this.parent) {
+                _context.next = 7;
+                break;
+              }
+              return _context.abrupt("return", undefined);
+            case 7:
+              _context.prev = 7;
+              _context.next = 10;
+              return _classPrivateFieldGet(this, _fs).promises.readlink(this.fullpath());
+            case 10:
+              read = _context.sent;
+              linkTarget = this.parent.resolve(read);
+              if (!linkTarget) {
+                _context.next = 14;
+                break;
+              }
+              return _context.abrupt("return", _classPrivateFieldSet(this, _linkTarget, linkTarget));
+            case 14:
+              _context.next = 20;
+              break;
+            case 16:
+              _context.prev = 16;
+              _context.t0 = _context["catch"](7);
+              _classPrivateMethodGet(this, _readlinkFail, _readlinkFail2).call(this, _context.t0.code);
+              return _context.abrupt("return", undefined);
+            case 20:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this, [[7, 16]]);
+      }));
+      function readlink() {
+        return _readlink.apply(this, arguments);
+      }
+      return readlink;
+    }()
+    /**
+     * Synchronous {@link PathBase.readlink}
+     */
+  }, {
+    key: "readlinkSync",
+    value: function readlinkSync() {
+      var target = _classPrivateFieldGet(this, _linkTarget);
+      if (target) {
+        return target;
+      }
+      if (!this.canReadlink()) {
+        return undefined;
+      }
+      /* c8 ignore start */
+      // already covered by the canReadlink test, here for ts grumples
+      if (!this.parent) {
+        return undefined;
+      }
+      /* c8 ignore stop */
+      try {
+        var read = _classPrivateFieldGet(this, _fs).readlinkSync(this.fullpath());
+        var linkTarget = this.parent.resolve(read);
+        if (linkTarget) {
+          return _classPrivateFieldSet(this, _linkTarget, linkTarget);
+        }
+      } catch (er) {
+        _classPrivateMethodGet(this, _readlinkFail, _readlinkFail2).call(this, er.code);
+        return undefined;
+      }
+    }
+  }, {
+    key: "lstat",
+    value:
+    /**
+     * Call lstat() on this Path, and update all known information that can be
+     * determined.
+     *
+     * Note that unlike `fs.lstat()`, the returned value does not contain some
+     * information, such as `mode`, `dev`, `nlink`, and `ino`.  If that
+     * information is required, you will need to call `fs.lstat` yourself.
+     *
+     * If the Path refers to a nonexistent file, or if the lstat call fails for
+     * any reason, `undefined` is returned.  Otherwise the updated Path object is
+     * returned.
+     *
+     * Results are cached, and thus may be out of date if the filesystem is
+     * mutated.
+     */
+    function () {
+      var _lstat = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!((_classPrivateFieldGet(this, _type) & ENOENT) === 0)) {
+                _context2.next = 14;
+                break;
+              }
+              _context2.prev = 1;
+              _context2.t0 = _classPrivateMethodGet(this, _applyStat, _applyStat2);
+              _context2.t1 = this;
+              _context2.next = 6;
+              return _classPrivateFieldGet(this, _fs).promises.lstat(this.fullpath());
+            case 6:
+              _context2.t2 = _context2.sent;
+              _context2.t0.call.call(_context2.t0, _context2.t1, _context2.t2);
+              return _context2.abrupt("return", this);
+            case 11:
+              _context2.prev = 11;
+              _context2.t3 = _context2["catch"](1);
+              _classPrivateMethodGet(this, _lstatFail, _lstatFail2).call(this, _context2.t3.code);
+            case 14:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this, [[1, 11]]);
+      }));
+      function lstat() {
+        return _lstat.apply(this, arguments);
+      }
+      return lstat;
+    }()
+    /**
+     * synchronous {@link PathBase.lstat}
+     */
+  }, {
+    key: "lstatSync",
+    value: function lstatSync() {
+      if ((_classPrivateFieldGet(this, _type) & ENOENT) === 0) {
+        try {
+          _classPrivateMethodGet(this, _applyStat, _applyStat2).call(this, _classPrivateFieldGet(this, _fs).lstatSync(this.fullpath()));
+          return this;
+        } catch (er) {
+          _classPrivateMethodGet(this, _lstatFail, _lstatFail2).call(this, er.code);
+        }
+      }
+    }
+  }, {
+    key: "readdirCB",
+    value:
+    /**
+     * Standard node-style callback interface to get list of directory entries.
+     *
+     * If the Path cannot or does not contain any children, then an empty array
+     * is returned.
+     *
+     * Results are cached, and thus may be out of date if the filesystem is
+     * mutated.
+     *
+     * @param cb The callback called with (er, entries).  Note that the `er`
+     * param is somewhat extraneous, as all readdir() errors are handled and
+     * simply result in an empty set of entries being returned.
+     * @param allowZalgo Boolean indicating that immediately known results should
+     * *not* be deferred with `queueMicrotask`. Defaults to `false`. Release
+     * zalgo at your peril, the dark pony lord is devious and unforgiving.
+     */
+    function readdirCB(cb) {
+      var _this = this;
+      var allowZalgo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+      if (!this.canReaddir()) {
+        if (allowZalgo) cb(null, []);else queueMicrotask(function () {
+          return cb(null, []);
+        });
+        return;
+      }
+      var children = this.children();
+      if (this.calledReaddir()) {
+        var c = children.slice(0, children.provisional);
+        if (allowZalgo) cb(null, c);else queueMicrotask(function () {
+          return cb(null, c);
+        });
+        return;
+      }
+      // don't have to worry about zalgo at this point.
+      _classPrivateFieldGet(this, _onReaddirCB).push(cb);
+      if (_classPrivateFieldGet(this, _readdirCBInFlight)) {
+        return;
+      }
+      _classPrivateFieldSet(this, _readdirCBInFlight, true);
+      // else read the directory, fill up children
+      // de-provisionalize any provisional children.
+      var fullpath = this.fullpath();
+      _classPrivateFieldGet(this, _fs).readdir(fullpath, {
+        withFileTypes: true
+      }, function (er, entries) {
+        if (er) {
+          _classPrivateMethodGet(_this, _readdirFail, _readdirFail2).call(_this, er.code);
+          children.provisional = 0;
+        } else {
+          // if we didn't get an error, we always get entries.
+          //@ts-ignore
+          var _iterator2 = _createForOfIteratorHelper(entries),
+            _step2;
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var e = _step2.value;
+              _classPrivateMethodGet(_this, _readdirAddChild, _readdirAddChild2).call(_this, e, children);
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+          _classPrivateMethodGet(_this, _readdirSuccess, _readdirSuccess2).call(_this, children);
+        }
+        _classPrivateMethodGet(_this, _callOnReaddirCB, _callOnReaddirCB2).call(_this, children.slice(0, children.provisional));
+        return;
+      });
+    }
+  }, {
+    key: "readdir",
+    value:
+    /**
+     * Return an array of known child entries.
+     *
+     * If the Path cannot or does not contain any children, then an empty array
+     * is returned.
+     *
+     * Results are cached, and thus may be out of date if the filesystem is
+     * mutated.
+     */
+    function () {
+      var _readdir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var children, fullpath, resolve, _iterator3, _step3, e;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              if (this.canReaddir()) {
+                _context3.next = 2;
+                break;
+              }
+              return _context3.abrupt("return", []);
+            case 2:
+              children = this.children();
+              if (!this.calledReaddir()) {
+                _context3.next = 5;
+                break;
+              }
+              return _context3.abrupt("return", children.slice(0, children.provisional));
+            case 5:
+              // else read the directory, fill up children
+              // de-provisionalize any provisional children.
+              fullpath = this.fullpath();
+              if (!_classPrivateFieldGet(this, _asyncReaddirInFlight)) {
+                _context3.next = 11;
+                break;
+              }
+              _context3.next = 9;
+              return _classPrivateFieldGet(this, _asyncReaddirInFlight);
+            case 9:
+              _context3.next = 29;
+              break;
+            case 11:
+              /* c8 ignore start */
+              resolve = function resolve() {};
+              /* c8 ignore stop */
+              _classPrivateFieldSet(this, _asyncReaddirInFlight, new Promise(function (res) {
+                return resolve = res;
+              }));
+              _context3.prev = 13;
+              _context3.t0 = _createForOfIteratorHelper;
+              _context3.next = 17;
+              return _classPrivateFieldGet(this, _fs).promises.readdir(fullpath, {
+                withFileTypes: true
+              });
+            case 17:
+              _context3.t1 = _context3.sent;
+              _iterator3 = (0, _context3.t0)(_context3.t1);
+              try {
+                for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+                  e = _step3.value;
+                  _classPrivateMethodGet(this, _readdirAddChild, _readdirAddChild2).call(this, e, children);
+                }
+              } catch (err) {
+                _iterator3.e(err);
+              } finally {
+                _iterator3.f();
+              }
+              _classPrivateMethodGet(this, _readdirSuccess, _readdirSuccess2).call(this, children);
+              _context3.next = 27;
+              break;
+            case 23:
+              _context3.prev = 23;
+              _context3.t2 = _context3["catch"](13);
+              _classPrivateMethodGet(this, _readdirFail, _readdirFail2).call(this, _context3.t2.code);
+              children.provisional = 0;
+            case 27:
+              _classPrivateFieldSet(this, _asyncReaddirInFlight, undefined);
+              resolve();
+            case 29:
+              return _context3.abrupt("return", children.slice(0, children.provisional));
+            case 30:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, this, [[13, 23]]);
+      }));
+      function readdir() {
+        return _readdir.apply(this, arguments);
+      }
+      return readdir;
+    }()
+    /**
+     * synchronous {@link PathBase.readdir}
+     */
+  }, {
+    key: "readdirSync",
+    value: function readdirSync() {
+      if (!this.canReaddir()) {
+        return [];
+      }
+      var children = this.children();
+      if (this.calledReaddir()) {
+        return children.slice(0, children.provisional);
+      }
+      // else read the directory, fill up children
+      // de-provisionalize any provisional children.
+      var fullpath = this.fullpath();
+      try {
+        var _iterator4 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _fs).readdirSync(fullpath, {
+            withFileTypes: true
+          })),
+          _step4;
+        try {
+          for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+            var e = _step4.value;
+            _classPrivateMethodGet(this, _readdirAddChild, _readdirAddChild2).call(this, e, children);
+          }
+        } catch (err) {
+          _iterator4.e(err);
+        } finally {
+          _iterator4.f();
+        }
+        _classPrivateMethodGet(this, _readdirSuccess, _readdirSuccess2).call(this, children);
+      } catch (er) {
+        _classPrivateMethodGet(this, _readdirFail, _readdirFail2).call(this, er.code);
+        children.provisional = 0;
+      }
+      return children.slice(0, children.provisional);
+    }
+  }, {
+    key: "canReaddir",
+    value: function canReaddir() {
+      if (_classPrivateFieldGet(this, _type) & ENOCHILD) return false;
+      var ifmt = IFMT & _classPrivateFieldGet(this, _type);
+      // we always set ENOTDIR when setting IFMT, so should be impossible
+      /* c8 ignore start */
+      if (!(ifmt === UNKNOWN || ifmt === IFDIR || ifmt === IFLNK)) {
+        return false;
+      }
+      /* c8 ignore stop */
+      return true;
+    }
+  }, {
+    key: "shouldWalk",
+    value: function shouldWalk(dirs, walkFilter) {
+      return (_classPrivateFieldGet(this, _type) & IFDIR) === IFDIR && !(_classPrivateFieldGet(this, _type) & ENOCHILD) && !dirs.has(this) && (!walkFilter || walkFilter(this));
+    }
+    /**
+     * Return the Path object corresponding to path as resolved
+     * by realpath(3).
+     *
+     * If the realpath call fails for any reason, `undefined` is returned.
+     *
+     * Result is cached, and thus may be outdated if the filesystem is mutated.
+     * On success, returns a Path object.
+     */
+  }, {
+    key: "realpath",
+    value: function () {
+      var _realpath2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+        var rp;
+        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              if (!_classPrivateFieldGet(this, _realpath)) {
+                _context4.next = 2;
+                break;
+              }
+              return _context4.abrupt("return", _classPrivateFieldGet(this, _realpath));
+            case 2:
+              if (!((ENOREALPATH | ENOREADLINK | ENOENT) & _classPrivateFieldGet(this, _type))) {
+                _context4.next = 4;
+                break;
+              }
+              return _context4.abrupt("return", undefined);
+            case 4:
+              _context4.prev = 4;
+              _context4.next = 7;
+              return _classPrivateFieldGet(this, _fs).promises.realpath(this.fullpath());
+            case 7:
+              rp = _context4.sent;
+              return _context4.abrupt("return", _classPrivateFieldSet(this, _realpath, this.resolve(rp)));
+            case 11:
+              _context4.prev = 11;
+              _context4.t0 = _context4["catch"](4);
+              _classPrivateMethodGet(this, _markENOREALPATH, _markENOREALPATH2).call(this);
+            case 14:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, this, [[4, 11]]);
+      }));
+      function realpath() {
+        return _realpath2.apply(this, arguments);
+      }
+      return realpath;
+    }()
+    /**
+     * Synchronous {@link realpath}
+     */
+  }, {
+    key: "realpathSync",
+    value: function realpathSync() {
+      if (_classPrivateFieldGet(this, _realpath)) return _classPrivateFieldGet(this, _realpath);
+      if ((ENOREALPATH | ENOREADLINK | ENOENT) & _classPrivateFieldGet(this, _type)) return undefined;
+      try {
+        var rp = _classPrivateFieldGet(this, _fs).realpathSync(this.fullpath());
+        return _classPrivateFieldSet(this, _realpath, this.resolve(rp));
+      } catch (_) {
+        _classPrivateMethodGet(this, _markENOREALPATH, _markENOREALPATH2).call(this);
+      }
+    }
+    /**
+     * Internal method to mark this Path object as the scurry cwd,
+     * called by {@link PathScurry#chdir}
+     *
+     * @internal
+     */
+  }, {
+    key: setAsCwd,
+    value: function value(oldCwd) {
+      if (oldCwd === this) return;
+      var changed = new Set([]);
+      var rp = [];
+      var p = this;
+      while (p && p.parent) {
+        changed.add(p);
+        _classPrivateFieldSet(p, _relative, rp.join(this.sep));
+        _classPrivateFieldSet(p, _relativePosix, rp.join('/'));
+        p = p.parent;
+        rp.push('..');
+      }
+      // now un-memoize parents of old cwd
+      p = oldCwd;
+      while (p && p.parent && !changed.has(p)) {
+        _classPrivateFieldSet(p, _relative, undefined);
+        _classPrivateFieldSet(p, _relativePosix, undefined);
+        p = p.parent;
+      }
+    }
+  }]);
+  return PathBase;
+}();
+/**
+ * Path class used on win32 systems
+ *
+ * Uses `'\\'` as the path separator for returned paths, either `'\\'` or `'/'`
+ * as the path separator for parsing paths.
+ */
+function _resolveParts2(dirParts) {
+  var p = this;
+  var _iterator16 = _createForOfIteratorHelper(dirParts),
+    _step16;
+  try {
+    for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
+      var part = _step16.value;
+      p = p.child(part);
+    }
+  } catch (err) {
+    _iterator16.e(err);
+  } finally {
+    _iterator16.f();
+  }
+  return p;
+}
+function _readdirSuccess2(children) {
+  // succeeded, mark readdir called bit
+  _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) | READDIR_CALLED);
+  // mark all remaining provisional children as ENOENT
+  for (var p = children.provisional; p < children.length; p++) {
+    var _children$p;
+    _classPrivateMethodGet(_children$p = children[p], _markENOENT, _markENOENT2).call(_children$p);
+  }
+}
+function _markENOENT2() {
+  // mark as UNKNOWN and ENOENT
+  if (_classPrivateFieldGet(this, _type) & ENOENT) return;
+  _classPrivateFieldSet(this, _type, (_classPrivateFieldGet(this, _type) | ENOENT) & IFMT_UNKNOWN);
+  _classPrivateMethodGet(this, _markChildrenENOENT, _markChildrenENOENT2).call(this);
+}
+function _markChildrenENOENT2() {
+  // all children are provisional and do not exist
+  var children = this.children();
+  children.provisional = 0;
+  var _iterator17 = _createForOfIteratorHelper(children),
+    _step17;
+  try {
+    for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
+      var p = _step17.value;
+      _classPrivateMethodGet(p, _markENOENT, _markENOENT2).call(p);
+    }
+  } catch (err) {
+    _iterator17.e(err);
+  } finally {
+    _iterator17.f();
+  }
+}
+function _markENOREALPATH2() {
+  _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) | ENOREALPATH);
+  _classPrivateMethodGet(this, _markENOTDIR, _markENOTDIR2).call(this);
+}
+function _markENOTDIR2() {
+  // entry is not a directory, so any children can't exist.
+  // this *should* be impossible, since any children created
+  // after it's been marked ENOTDIR should be marked ENOENT,
+  // so it won't even get to this point.
+  /* c8 ignore start */
+  if (_classPrivateFieldGet(this, _type) & ENOTDIR) return;
+  /* c8 ignore stop */
+  var t = _classPrivateFieldGet(this, _type);
+  // this could happen if we stat a dir, then delete it,
+  // then try to read it or one of its children.
+  if ((t & IFMT) === IFDIR) t &= IFMT_UNKNOWN;
+  _classPrivateFieldSet(this, _type, t | ENOTDIR);
+  _classPrivateMethodGet(this, _markChildrenENOENT, _markChildrenENOENT2).call(this);
+}
+function _readdirFail2() {
+  var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  // markENOTDIR and markENOENT also set provisional=0
+  if (code === 'ENOTDIR' || code === 'EPERM') {
+    _classPrivateMethodGet(this, _markENOTDIR, _markENOTDIR2).call(this);
+  } else if (code === 'ENOENT') {
+    _classPrivateMethodGet(this, _markENOENT, _markENOENT2).call(this);
+  } else {
+    this.children().provisional = 0;
+  }
+}
+function _lstatFail2() {
+  var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  // Windows just raises ENOENT in this case, disable for win CI
+  /* c8 ignore start */
+  if (code === 'ENOTDIR') {
+    // already know it has a parent by this point
+    var p = this.parent;
+    _classPrivateMethodGet(p, _markENOTDIR, _markENOTDIR2).call(p);
+  } else if (code === 'ENOENT') {
+    /* c8 ignore stop */
+    _classPrivateMethodGet(this, _markENOENT, _markENOENT2).call(this);
+  }
+}
+function _readlinkFail2() {
+  var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var ter = _classPrivateFieldGet(this, _type);
+  ter |= ENOREADLINK;
+  if (code === 'ENOENT') ter |= ENOENT;
+  // windows gets a weird error when you try to readlink a file
+  if (code === 'EINVAL' || code === 'UNKNOWN') {
+    // exists, but not a symlink, we don't know WHAT it is, so remove
+    // all IFMT bits.
+    ter &= IFMT_UNKNOWN;
+  }
+  _classPrivateFieldSet(this, _type, ter);
+  // windows just gets ENOENT in this case.  We do cover the case,
+  // just disabled because it's impossible on Windows CI
+  /* c8 ignore start */
+  if (code === 'ENOTDIR' && this.parent) {
+    var _this$parent;
+    _classPrivateMethodGet(_this$parent = this.parent, _markENOTDIR, _markENOTDIR2).call(_this$parent);
+  }
+  /* c8 ignore stop */
+}
+function _readdirAddChild2(e, c) {
+  return _classPrivateMethodGet(this, _readdirMaybePromoteChild, _readdirMaybePromoteChild2).call(this, e, c) || _classPrivateMethodGet(this, _readdirAddNewChild, _readdirAddNewChild2).call(this, e, c);
+}
+function _readdirAddNewChild2(e, c) {
+  // alloc new entry at head, so it's never provisional
+  var type = entToType(e);
+  var child = this.newChild(e.name, type, {
+    parent: this
+  });
+  var ifmt = _classPrivateFieldGet(child, _type) & IFMT;
+  if (ifmt !== IFDIR && ifmt !== IFLNK && ifmt !== UNKNOWN) {
+    _classPrivateFieldSet(child, _type, _classPrivateFieldGet(child, _type) | ENOTDIR);
+  }
+  c.unshift(child);
+  c.provisional++;
+  return child;
+}
+function _readdirMaybePromoteChild2(e, c) {
+  for (var p = c.provisional; p < c.length; p++) {
+    var pchild = c[p];
+    var name = this.nocase ? normalizeNocase(e.name) : normalize(e.name);
+    if (name !== _classPrivateFieldGet(pchild, _matchName)) {
+      continue;
+    }
+    return _classPrivateMethodGet(this, _readdirPromoteChild, _readdirPromoteChild2).call(this, e, pchild, p, c);
+  }
+}
+function _readdirPromoteChild2(e, p, index, c) {
+  var v = p.name;
+  // retain any other flags, but set ifmt from dirent
+  _classPrivateFieldSet(p, _type, _classPrivateFieldGet(p, _type) & IFMT_UNKNOWN | entToType(e));
+  // case sensitivity fixing when we learn the true name.
+  if (v !== e.name) p.name = e.name;
+  // just advance provisional index (potentially off the list),
+  // otherwise we have to splice/pop it out and re-insert at head
+  if (index !== c.provisional) {
+    if (index === c.length - 1) c.pop();else c.splice(index, 1);
+    c.unshift(p);
+  }
+  c.provisional++;
+  return p;
+}
+function _applyStat2(st) {
+  var atime = st.atime,
+    atimeMs = st.atimeMs,
+    birthtime = st.birthtime,
+    birthtimeMs = st.birthtimeMs,
+    blksize = st.blksize,
+    blocks = st.blocks,
+    ctime = st.ctime,
+    ctimeMs = st.ctimeMs,
+    dev = st.dev,
+    gid = st.gid,
+    ino = st.ino,
+    mode = st.mode,
+    mtime = st.mtime,
+    mtimeMs = st.mtimeMs,
+    nlink = st.nlink,
+    rdev = st.rdev,
+    size = st.size,
+    uid = st.uid;
+  _classPrivateFieldSet(this, _atime, atime);
+  _classPrivateFieldSet(this, _atimeMs, atimeMs);
+  _classPrivateFieldSet(this, _birthtime, birthtime);
+  _classPrivateFieldSet(this, _birthtimeMs, birthtimeMs);
+  _classPrivateFieldSet(this, _blksize, blksize);
+  _classPrivateFieldSet(this, _blocks, blocks);
+  _classPrivateFieldSet(this, _ctime, ctime);
+  _classPrivateFieldSet(this, _ctimeMs, ctimeMs);
+  _classPrivateFieldSet(this, _dev, dev);
+  _classPrivateFieldSet(this, _gid, gid);
+  _classPrivateFieldSet(this, _ino, ino);
+  _classPrivateFieldSet(this, _mode, mode);
+  _classPrivateFieldSet(this, _mtime, mtime);
+  _classPrivateFieldSet(this, _mtimeMs, mtimeMs);
+  _classPrivateFieldSet(this, _nlink, nlink);
+  _classPrivateFieldSet(this, _rdev, rdev);
+  _classPrivateFieldSet(this, mjs_size, size);
+  _classPrivateFieldSet(this, _uid, uid);
+  var ifmt = entToType(st);
+  // retain any other flags, but set the ifmt
+  _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) & IFMT_UNKNOWN | ifmt | LSTAT_CALLED);
+  if (ifmt !== UNKNOWN && ifmt !== IFDIR && ifmt !== IFLNK) {
+    _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) | ENOTDIR);
+  }
+}
+function _callOnReaddirCB2(children) {
+  _classPrivateFieldSet(this, _readdirCBInFlight, false);
+  var cbs = _classPrivateFieldGet(this, _onReaddirCB).slice();
+  _classPrivateFieldGet(this, _onReaddirCB).length = 0;
+  cbs.forEach(function (cb) {
+    return cb(null, children);
+  });
+}
+var PathWin32 = /*#__PURE__*/function (_PathBase) {
+  _inherits(PathWin32, _PathBase);
+  var _super3 = _createSuper(PathWin32);
+  /**
+   * Separator for generating path strings.
+   */
+
+  /**
+   * Separator for parsing path strings.
+   */
+
+  /**
+   * Do not create new Path objects directly.  They should always be accessed
+   * via the PathScurry class or other methods on the Path class.
+   *
+   * @internal
+   */
+  function PathWin32(name) {
+    var _this2;
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UNKNOWN;
+    var root = arguments.length > 2 ? arguments[2] : undefined;
+    var roots = arguments.length > 3 ? arguments[3] : undefined;
+    var nocase = arguments.length > 4 ? arguments[4] : undefined;
+    var children = arguments.length > 5 ? arguments[5] : undefined;
+    var opts = arguments.length > 6 ? arguments[6] : undefined;
+    _classCallCheck(this, PathWin32);
+    _this2 = _super3.call(this, name, type, root, roots, nocase, children, opts);
+    _defineProperty(_assertThisInitialized(_this2), "sep", '\\');
+    _defineProperty(_assertThisInitialized(_this2), "splitSep", eitherSep);
+    return _this2;
+  }
+  /**
+   * @internal
+   */
+  _createClass(PathWin32, [{
+    key: "newChild",
+    value: function newChild(name) {
+      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UNKNOWN;
+      var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return new PathWin32(name, type, this.root, this.roots, this.nocase, this.childrenCache(), opts);
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "getRootString",
+    value: function getRootString(path) {
+      return external_path_.win32.parse(path).root;
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "getRoot",
+    value: function getRoot(rootPath) {
+      rootPath = uncToDrive(rootPath.toUpperCase());
+      if (rootPath === this.root.name) {
+        return this.root;
+      }
+      // ok, not that one, check if it matches another we know about
+      for (var _i = 0, _Object$entries = Object.entries(this.roots); _i < _Object$entries.length; _i++) {
+        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+          compare = _Object$entries$_i[0],
+          root = _Object$entries$_i[1];
+        if (this.sameRoot(rootPath, compare)) {
+          return this.roots[rootPath] = root;
+        }
+      }
+      // otherwise, have to create a new one.
+      return this.roots[rootPath] = new PathScurryWin32(rootPath, this).root;
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "sameRoot",
+    value: function sameRoot(rootPath) {
+      var compare = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.root.name;
+      // windows can (rarely) have case-sensitive filesystem, but
+      // UNC and drive letters are always case-insensitive, and canonically
+      // represented uppercase.
+      rootPath = rootPath.toUpperCase().replace(/\//g, '\\').replace(uncDriveRegexp, '$1\\');
+      return rootPath === compare;
+    }
+  }]);
+  return PathWin32;
+}(PathBase);
+/**
+ * Path class used on all posix systems.
+ *
+ * Uses `'/'` as the path separator.
+ */
+var PathPosix = /*#__PURE__*/function (_PathBase2) {
+  _inherits(PathPosix, _PathBase2);
+  var _super4 = _createSuper(PathPosix);
+  /**
+   * separator for parsing path strings
+   */
+
+  /**
+   * separator for generating path strings
+   */
+
+  /**
+   * Do not create new Path objects directly.  They should always be accessed
+   * via the PathScurry class or other methods on the Path class.
+   *
+   * @internal
+   */
+  function PathPosix(name) {
+    var _this3;
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UNKNOWN;
+    var root = arguments.length > 2 ? arguments[2] : undefined;
+    var roots = arguments.length > 3 ? arguments[3] : undefined;
+    var nocase = arguments.length > 4 ? arguments[4] : undefined;
+    var children = arguments.length > 5 ? arguments[5] : undefined;
+    var opts = arguments.length > 6 ? arguments[6] : undefined;
+    _classCallCheck(this, PathPosix);
+    _this3 = _super4.call(this, name, type, root, roots, nocase, children, opts);
+    _defineProperty(_assertThisInitialized(_this3), "splitSep", '/');
+    _defineProperty(_assertThisInitialized(_this3), "sep", '/');
+    return _this3;
+  }
+  /**
+   * @internal
+   */
+  _createClass(PathPosix, [{
+    key: "getRootString",
+    value: function getRootString(path) {
+      return path.startsWith('/') ? '/' : '';
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "getRoot",
+    value: function getRoot(_rootPath) {
+      return this.root;
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "newChild",
+    value: function newChild(name) {
+      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UNKNOWN;
+      var opts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return new PathPosix(name, type, this.root, this.roots, this.nocase, this.childrenCache(), opts);
+    }
+  }]);
+  return PathPosix;
+}(PathBase);
+/**
+ * The base class for all PathScurry classes, providing the interface for path
+ * resolution and filesystem operations.
+ *
+ * Typically, you should *not* instantiate this class directly, but rather one
+ * of the platform-specific classes, or the exported {@link PathScurry} which
+ * defaults to the current platform.
+ */
+var _resolveCache = /*#__PURE__*/new WeakMap();
+var _resolvePosixCache = /*#__PURE__*/new WeakMap();
+var _children3 = /*#__PURE__*/new WeakMap();
+var _fs2 = /*#__PURE__*/new WeakMap();
+_Symbol$asyncIterator = Symbol.asyncIterator;
+mjs_Symbol$iterator = Symbol.iterator;
+var PathScurryBase = /*#__PURE__*/function () {
+  /**
+   * The root Path entry for the current working directory of this Scurry
+   */
+
+  /**
+   * The string path for the root of this Scurry's current working directory
+   */
+
+  /**
+   * A collection of all roots encountered, referenced by rootPath
+   */
+
+  /**
+   * The Path entry corresponding to this PathScurry's current working directory.
+   */
+
+  /**
+   * Perform path comparisons case-insensitively.
+   *
+   * Defaults true on Darwin and Windows systems, false elsewhere.
+   */
+
+  /**
+   * This class should not be instantiated directly.
+   *
+   * Use PathScurryWin32, PathScurryDarwin, PathScurryPosix, or PathScurry
+   *
+   * @internal
+   */
+  function PathScurryBase() {
+    var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
+    var pathImpl = arguments.length > 1 ? arguments[1] : undefined;
+    var sep = arguments.length > 2 ? arguments[2] : undefined;
+    var _ref = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {},
+      nocase = _ref.nocase,
+      _ref$childrenCacheSiz = _ref.childrenCacheSize,
+      childrenCacheSize = _ref$childrenCacheSiz === void 0 ? 16 * 1024 : _ref$childrenCacheSiz,
+      _ref$fs = _ref.fs,
+      fs = _ref$fs === void 0 ? defaultFS : _ref$fs;
+    _classCallCheck(this, PathScurryBase);
+    _defineProperty(this, "root", void 0);
+    _defineProperty(this, "rootPath", void 0);
+    _defineProperty(this, "roots", void 0);
+    _defineProperty(this, "cwd", void 0);
+    _classPrivateFieldInitSpec(this, _resolveCache, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _resolvePosixCache, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _children3, {
+      writable: true,
+      value: void 0
+    });
+    _defineProperty(this, "nocase", void 0);
+    _classPrivateFieldInitSpec(this, _fs2, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldSet(this, _fs2, fsFromOption(fs));
+    if (cwd instanceof URL || cwd.startsWith('file://')) {
+      cwd = (0,external_url_.fileURLToPath)(cwd);
+    }
+    // resolve and split root, and then add to the store.
+    // this is the only time we call path.resolve()
+    var cwdPath = pathImpl.resolve(cwd);
+    this.roots = Object.create(null);
+    this.rootPath = this.parseRootPath(cwdPath);
+    _classPrivateFieldSet(this, _resolveCache, new ResolveCache());
+    _classPrivateFieldSet(this, _resolvePosixCache, new ResolveCache());
+    _classPrivateFieldSet(this, _children3, new ChildrenCache(childrenCacheSize));
+    var split = cwdPath.substring(this.rootPath.length).split(sep);
+    // resolve('/') leaves '', splits to [''], we don't want that.
+    if (split.length === 1 && !split[0]) {
+      split.pop();
+    }
+    /* c8 ignore start */
+    if (nocase === undefined) {
+      throw new TypeError('must provide nocase setting to PathScurryBase ctor');
+    }
+    /* c8 ignore stop */
+    this.nocase = nocase;
+    this.root = this.newRoot(_classPrivateFieldGet(this, _fs2));
+    this.roots[this.rootPath] = this.root;
+    var prev = this.root;
+    var len = split.length - 1;
+    var joinSep = pathImpl.sep;
+    var abs = this.rootPath;
+    var sawFirst = false;
+    var _iterator5 = _createForOfIteratorHelper(split),
+      _step5;
+    try {
+      for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+        var part = _step5.value;
+        var l = len--;
+        prev = prev.child(part, {
+          relative: new Array(l).fill('..').join(joinSep),
+          relativePosix: new Array(l).fill('..').join('/'),
+          fullpath: abs += (sawFirst ? '' : joinSep) + part
+        });
+        sawFirst = true;
+      }
+    } catch (err) {
+      _iterator5.e(err);
+    } finally {
+      _iterator5.f();
+    }
+    this.cwd = prev;
+  }
+  /**
+   * Get the depth of a provided path, string, or the cwd
+   */
+  _createClass(PathScurryBase, [{
+    key: "depth",
+    value: function depth() {
+      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      if (typeof path === 'string') {
+        path = this.cwd.resolve(path);
+      }
+      return path.depth();
+    }
+    /**
+     * Return the cache of child entries.  Exposed so subclasses can create
+     * child Path objects in a platform-specific way.
+     *
+     * @internal
+     */
+  }, {
+    key: "childrenCache",
+    value: function childrenCache() {
+      return _classPrivateFieldGet(this, _children3);
+    }
+    /**
+     * Resolve one or more path strings to a resolved string
+     *
+     * Same interface as require('path').resolve.
+     *
+     * Much faster than path.resolve() when called multiple times for the same
+     * path, because the resolved Path objects are cached.  Much slower
+     * otherwise.
+     */
+  }, {
+    key: "resolve",
+    value: function resolve() {
+      // first figure out the minimum number of paths we have to test
+      // we always start at cwd, but any absolutes will bump the start
+      var r = '';
+      for (var i = arguments.length - 1; i >= 0; i--) {
+        var p = i < 0 || arguments.length <= i ? undefined : arguments[i];
+        if (!p || p === '.') continue;
+        r = r ? "".concat(p, "/").concat(r) : p;
+        if (this.isAbsolute(p)) {
+          break;
+        }
+      }
+      var cached = _classPrivateFieldGet(this, _resolveCache).get(r);
+      if (cached !== undefined) {
+        return cached;
+      }
+      var result = this.cwd.resolve(r).fullpath();
+      _classPrivateFieldGet(this, _resolveCache).set(r, result);
+      return result;
+    }
+    /**
+     * Resolve one or more path strings to a resolved string, returning
+     * the posix path.  Identical to .resolve() on posix systems, but on
+     * windows will return a forward-slash separated UNC path.
+     *
+     * Same interface as require('path').resolve.
+     *
+     * Much faster than path.resolve() when called multiple times for the same
+     * path, because the resolved Path objects are cached.  Much slower
+     * otherwise.
+     */
+  }, {
+    key: "resolvePosix",
+    value: function resolvePosix() {
+      // first figure out the minimum number of paths we have to test
+      // we always start at cwd, but any absolutes will bump the start
+      var r = '';
+      for (var i = arguments.length - 1; i >= 0; i--) {
+        var p = i < 0 || arguments.length <= i ? undefined : arguments[i];
+        if (!p || p === '.') continue;
+        r = r ? "".concat(p, "/").concat(r) : p;
+        if (this.isAbsolute(p)) {
+          break;
+        }
+      }
+      var cached = _classPrivateFieldGet(this, _resolvePosixCache).get(r);
+      if (cached !== undefined) {
+        return cached;
+      }
+      var result = this.cwd.resolve(r).fullpathPosix();
+      _classPrivateFieldGet(this, _resolvePosixCache).set(r, result);
+      return result;
+    }
+    /**
+     * find the relative path from the cwd to the supplied path string or entry
+     */
+  }, {
+    key: "relative",
+    value: function relative() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      }
+      return entry.relative();
+    }
+    /**
+     * find the relative path from the cwd to the supplied path string or
+     * entry, using / as the path delimiter, even on Windows.
+     */
+  }, {
+    key: "relativePosix",
+    value: function relativePosix() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      }
+      return entry.relativePosix();
+    }
+    /**
+     * Return the basename for the provided string or Path object
+     */
+  }, {
+    key: "basename",
+    value: function basename() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      }
+      return entry.name;
+    }
+    /**
+     * Return the dirname for the provided string or Path object
+     */
+  }, {
+    key: "dirname",
+    value: function dirname() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      }
+      return (entry.parent || entry).fullpath();
+    }
+  }, {
+    key: "readdir",
+    value: function () {
+      var _readdir2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+        var entry,
+          opts,
+          _opts,
+          withFileTypes,
+          p,
+          _args5 = arguments;
+        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              entry = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : this.cwd;
+              opts = _args5.length > 1 && _args5[1] !== undefined ? _args5[1] : {
+                withFileTypes: true
+              };
+              if (typeof entry === 'string') {
+                entry = this.cwd.resolve(entry);
+              } else if (!(entry instanceof PathBase)) {
+                opts = entry;
+                entry = this.cwd;
+              }
+              _opts = opts, withFileTypes = _opts.withFileTypes;
+              if (entry.canReaddir()) {
+                _context5.next = 8;
+                break;
+              }
+              return _context5.abrupt("return", []);
+            case 8:
+              _context5.next = 10;
+              return entry.readdir();
+            case 10:
+              p = _context5.sent;
+              return _context5.abrupt("return", withFileTypes ? p : p.map(function (e) {
+                return e.name;
+              }));
+            case 12:
+            case "end":
+              return _context5.stop();
+          }
+        }, _callee5, this);
+      }));
+      function readdir() {
+        return _readdir2.apply(this, arguments);
+      }
+      return readdir;
+    }()
+  }, {
+    key: "readdirSync",
+    value: function readdirSync() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+        withFileTypes: true
+      };
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        opts = entry;
+        entry = this.cwd;
+      }
+      var _opts2 = opts,
+        _opts2$withFileTypes = _opts2.withFileTypes,
+        withFileTypes = _opts2$withFileTypes === void 0 ? true : _opts2$withFileTypes;
+      if (!entry.canReaddir()) {
+        return [];
+      } else if (withFileTypes) {
+        return entry.readdirSync();
+      } else {
+        return entry.readdirSync().map(function (e) {
+          return e.name;
+        });
+      }
+    }
+    /**
+     * Call lstat() on the string or Path object, and update all known
+     * information that can be determined.
+     *
+     * Note that unlike `fs.lstat()`, the returned value does not contain some
+     * information, such as `mode`, `dev`, `nlink`, and `ino`.  If that
+     * information is required, you will need to call `fs.lstat` yourself.
+     *
+     * If the Path refers to a nonexistent file, or if the lstat call fails for
+     * any reason, `undefined` is returned.  Otherwise the updated Path object is
+     * returned.
+     *
+     * Results are cached, and thus may be out of date if the filesystem is
+     * mutated.
+     */
+  }, {
+    key: "lstat",
+    value: function () {
+      var _lstat2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+        var entry,
+          _args6 = arguments;
+        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+          while (1) switch (_context6.prev = _context6.next) {
+            case 0:
+              entry = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : this.cwd;
+              if (typeof entry === 'string') {
+                entry = this.cwd.resolve(entry);
+              }
+              return _context6.abrupt("return", entry.lstat());
+            case 3:
+            case "end":
+              return _context6.stop();
+          }
+        }, _callee6, this);
+      }));
+      function lstat() {
+        return _lstat2.apply(this, arguments);
+      }
+      return lstat;
+    }()
+    /**
+     * synchronous {@link PathScurryBase.lstat}
+     */
+  }, {
+    key: "lstatSync",
+    value: function lstatSync() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      }
+      return entry.lstatSync();
+    }
+  }, {
+    key: "readlink",
+    value: function () {
+      var _readlink2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+        var entry,
+          _ref2,
+          withFileTypes,
+          e,
+          _args7 = arguments;
+        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+          while (1) switch (_context7.prev = _context7.next) {
+            case 0:
+              entry = _args7.length > 0 && _args7[0] !== undefined ? _args7[0] : this.cwd;
+              _ref2 = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : {
+                withFileTypes: false
+              }, withFileTypes = _ref2.withFileTypes;
+              if (typeof entry === 'string') {
+                entry = this.cwd.resolve(entry);
+              } else if (!(entry instanceof PathBase)) {
+                withFileTypes = entry.withFileTypes;
+                entry = this.cwd;
+              }
+              _context7.next = 5;
+              return entry.readlink();
+            case 5:
+              e = _context7.sent;
+              return _context7.abrupt("return", withFileTypes ? e : e === null || e === void 0 ? void 0 : e.fullpath());
+            case 7:
+            case "end":
+              return _context7.stop();
+          }
+        }, _callee7, this);
+      }));
+      function readlink() {
+        return _readlink2.apply(this, arguments);
+      }
+      return readlink;
+    }()
+  }, {
+    key: "readlinkSync",
+    value: function readlinkSync() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var _ref3 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+          withFileTypes: false
+        },
+        withFileTypes = _ref3.withFileTypes;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        withFileTypes = entry.withFileTypes;
+        entry = this.cwd;
+      }
+      var e = entry.readlinkSync();
+      return withFileTypes ? e : e === null || e === void 0 ? void 0 : e.fullpath();
+    }
+  }, {
+    key: "realpath",
+    value: function () {
+      var _realpath3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+        var entry,
+          _ref4,
+          withFileTypes,
+          e,
+          _args8 = arguments;
+        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+          while (1) switch (_context8.prev = _context8.next) {
+            case 0:
+              entry = _args8.length > 0 && _args8[0] !== undefined ? _args8[0] : this.cwd;
+              _ref4 = _args8.length > 1 && _args8[1] !== undefined ? _args8[1] : {
+                withFileTypes: false
+              }, withFileTypes = _ref4.withFileTypes;
+              if (typeof entry === 'string') {
+                entry = this.cwd.resolve(entry);
+              } else if (!(entry instanceof PathBase)) {
+                withFileTypes = entry.withFileTypes;
+                entry = this.cwd;
+              }
+              _context8.next = 5;
+              return entry.realpath();
+            case 5:
+              e = _context8.sent;
+              return _context8.abrupt("return", withFileTypes ? e : e === null || e === void 0 ? void 0 : e.fullpath());
+            case 7:
+            case "end":
+              return _context8.stop();
+          }
+        }, _callee8, this);
+      }));
+      function realpath() {
+        return _realpath3.apply(this, arguments);
+      }
+      return realpath;
+    }()
+  }, {
+    key: "realpathSync",
+    value: function realpathSync() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {
+          withFileTypes: false
+        },
+        withFileTypes = _ref5.withFileTypes;
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        withFileTypes = entry.withFileTypes;
+        entry = this.cwd;
+      }
+      var e = entry.realpathSync();
+      return withFileTypes ? e : e === null || e === void 0 ? void 0 : e.fullpath();
+    }
+  }, {
+    key: "walk",
+    value: function () {
+      var _walk = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+        var entry,
+          opts,
+          _opts3,
+          _opts3$withFileTypes,
+          withFileTypes,
+          _opts3$follow,
+          follow,
+          filter,
+          walkFilter,
+          results,
+          dirs,
+          walk,
+          start,
+          _args9 = arguments;
+        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+          while (1) switch (_context9.prev = _context9.next) {
+            case 0:
+              entry = _args9.length > 0 && _args9[0] !== undefined ? _args9[0] : this.cwd;
+              opts = _args9.length > 1 && _args9[1] !== undefined ? _args9[1] : {};
+              if (typeof entry === 'string') {
+                entry = this.cwd.resolve(entry);
+              } else if (!(entry instanceof PathBase)) {
+                opts = entry;
+                entry = this.cwd;
+              }
+              _opts3 = opts, _opts3$withFileTypes = _opts3.withFileTypes, withFileTypes = _opts3$withFileTypes === void 0 ? true : _opts3$withFileTypes, _opts3$follow = _opts3.follow, follow = _opts3$follow === void 0 ? false : _opts3$follow, filter = _opts3.filter, walkFilter = _opts3.walkFilter;
+              results = [];
+              if (!filter || filter(entry)) {
+                results.push(withFileTypes ? entry : entry.fullpath());
+              }
+              dirs = new Set();
+              walk = function walk(dir, cb) {
+                dirs.add(dir);
+                dir.readdirCB(function (er, entries) {
+                  /* c8 ignore start */
+                  if (er) {
+                    return cb(er);
+                  }
+                  /* c8 ignore stop */
+                  var len = entries.length;
+                  if (!len) return cb();
+                  var next = function next() {
+                    if (--len === 0) {
+                      cb();
+                    }
+                  };
+                  var _iterator6 = _createForOfIteratorHelper(entries),
+                    _step6;
+                  try {
+                    for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+                      var e = _step6.value;
+                      if (!filter || filter(e)) {
+                        results.push(withFileTypes ? e : e.fullpath());
+                      }
+                      if (follow && e.isSymbolicLink()) {
+                        e.realpath().then(function (r) {
+                          return r !== null && r !== void 0 && r.isUnknown() ? r.lstat() : r;
+                        }).then(function (r) {
+                          return r !== null && r !== void 0 && r.shouldWalk(dirs, walkFilter) ? walk(r, next) : next();
+                        });
+                      } else {
+                        if (e.shouldWalk(dirs, walkFilter)) {
+                          walk(e, next);
+                        } else {
+                          next();
+                        }
+                      }
+                    }
+                  } catch (err) {
+                    _iterator6.e(err);
+                  } finally {
+                    _iterator6.f();
+                  }
+                }, true); // zalgooooooo
+              };
+              start = entry;
+              return _context9.abrupt("return", new Promise(function (res, rej) {
+                walk(start, function (er) {
+                  /* c8 ignore start */
+                  if (er) return rej(er);
+                  /* c8 ignore stop */
+                  res(results);
+                });
+              }));
+            case 10:
+            case "end":
+              return _context9.stop();
+          }
+        }, _callee9, this);
+      }));
+      function walk() {
+        return _walk.apply(this, arguments);
+      }
+      return walk;
+    }()
+  }, {
+    key: "walkSync",
+    value: function walkSync() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        opts = entry;
+        entry = this.cwd;
+      }
+      var _opts4 = opts,
+        _opts4$withFileTypes = _opts4.withFileTypes,
+        withFileTypes = _opts4$withFileTypes === void 0 ? true : _opts4$withFileTypes,
+        _opts4$follow = _opts4.follow,
+        follow = _opts4$follow === void 0 ? false : _opts4$follow,
+        filter = _opts4.filter,
+        walkFilter = _opts4.walkFilter;
+      var results = [];
+      if (!filter || filter(entry)) {
+        results.push(withFileTypes ? entry : entry.fullpath());
+      }
+      var dirs = new Set([entry]);
+      var _iterator7 = _createForOfIteratorHelper(dirs),
+        _step7;
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var dir = _step7.value;
+          var entries = dir.readdirSync();
+          var _iterator8 = _createForOfIteratorHelper(entries),
+            _step8;
+          try {
+            for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+              var e = _step8.value;
+              if (!filter || filter(e)) {
+                results.push(withFileTypes ? e : e.fullpath());
+              }
+              var r = e;
+              if (e.isSymbolicLink()) {
+                if (!(follow && (r = e.realpathSync()))) continue;
+                if (r.isUnknown()) r.lstatSync();
+              }
+              if (r.shouldWalk(dirs, walkFilter)) {
+                dirs.add(r);
+              }
+            }
+          } catch (err) {
+            _iterator8.e(err);
+          } finally {
+            _iterator8.f();
+          }
+        }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
+      return results;
+    }
+    /**
+     * Support for `for await`
+     *
+     * Alias for {@link PathScurryBase.iterate}
+     *
+     * Note: As of Node 19, this is very slow, compared to other methods of
+     * walking.  Consider using {@link PathScurryBase.stream} if memory overhead
+     * and backpressure are concerns, or {@link PathScurryBase.walk} if not.
+     */
+  }, {
+    key: _Symbol$asyncIterator,
+    value: function value() {
+      return this.iterate();
+    }
+  }, {
+    key: "iterate",
+    value: function iterate() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      // iterating async over the stream is significantly more performant,
+      // especially in the warm-cache scenario, because it buffers up directory
+      // entries in the background instead of waiting for a yield for each one.
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        options = entry;
+        entry = this.cwd;
+      }
+      return this.stream(entry, options)[Symbol.asyncIterator]();
+    }
+    /**
+     * Iterating over a PathScurry performs a synchronous walk.
+     *
+     * Alias for {@link PathScurryBase.iterateSync}
+     */
+  }, {
+    key: mjs_Symbol$iterator,
+    value: function value() {
+      return this.iterateSync();
+    }
+  }, {
+    key: "iterateSync",
+    value: function iterateSync() {
+      var _this4 = this;
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+        var _opts5, _opts5$withFileTypes, withFileTypes, _opts5$follow, follow, filter, walkFilter, dirs, _iterator9, _step9, dir, entries, _iterator10, _step10, e, r;
+        return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+          while (1) switch (_context10.prev = _context10.next) {
+            case 0:
+              if (typeof entry === 'string') {
+                entry = _this4.cwd.resolve(entry);
+              } else if (!(entry instanceof PathBase)) {
+                opts = entry;
+                entry = _this4.cwd;
+              }
+              _opts5 = opts, _opts5$withFileTypes = _opts5.withFileTypes, withFileTypes = _opts5$withFileTypes === void 0 ? true : _opts5$withFileTypes, _opts5$follow = _opts5.follow, follow = _opts5$follow === void 0 ? false : _opts5$follow, filter = _opts5.filter, walkFilter = _opts5.walkFilter;
+              if (!(!filter || filter(entry))) {
+                _context10.next = 5;
+                break;
+              }
+              _context10.next = 5;
+              return withFileTypes ? entry : entry.fullpath();
+            case 5:
+              dirs = new Set([entry]);
+              _iterator9 = _createForOfIteratorHelper(dirs);
+              _context10.prev = 7;
+              _iterator9.s();
+            case 9:
+              if ((_step9 = _iterator9.n()).done) {
+                _context10.next = 38;
+                break;
+              }
+              dir = _step9.value;
+              entries = dir.readdirSync();
+              _iterator10 = _createForOfIteratorHelper(entries);
+              _context10.prev = 13;
+              _iterator10.s();
+            case 15:
+              if ((_step10 = _iterator10.n()).done) {
+                _context10.next = 28;
+                break;
+              }
+              e = _step10.value;
+              if (!(!filter || filter(e))) {
+                _context10.next = 20;
+                break;
+              }
+              _context10.next = 20;
+              return withFileTypes ? e : e.fullpath();
+            case 20:
+              r = e;
+              if (!e.isSymbolicLink()) {
+                _context10.next = 25;
+                break;
+              }
+              if (follow && (r = e.realpathSync())) {
+                _context10.next = 24;
+                break;
+              }
+              return _context10.abrupt("continue", 26);
+            case 24:
+              if (r.isUnknown()) r.lstatSync();
+            case 25:
+              if (r.shouldWalk(dirs, walkFilter)) {
+                dirs.add(r);
+              }
+            case 26:
+              _context10.next = 15;
+              break;
+            case 28:
+              _context10.next = 33;
+              break;
+            case 30:
+              _context10.prev = 30;
+              _context10.t0 = _context10["catch"](13);
+              _iterator10.e(_context10.t0);
+            case 33:
+              _context10.prev = 33;
+              _iterator10.f();
+              return _context10.finish(33);
+            case 36:
+              _context10.next = 9;
+              break;
+            case 38:
+              _context10.next = 43;
+              break;
+            case 40:
+              _context10.prev = 40;
+              _context10.t1 = _context10["catch"](7);
+              _iterator9.e(_context10.t1);
+            case 43:
+              _context10.prev = 43;
+              _iterator9.f();
+              return _context10.finish(43);
+            case 46:
+            case "end":
+              return _context10.stop();
+          }
+        }, _callee10, null, [[7, 40, 43, 46], [13, 30, 33, 36]]);
+      })();
+    }
+  }, {
+    key: "stream",
+    value: function stream() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        opts = entry;
+        entry = this.cwd;
+      }
+      var _opts6 = opts,
+        _opts6$withFileTypes = _opts6.withFileTypes,
+        withFileTypes = _opts6$withFileTypes === void 0 ? true : _opts6$withFileTypes,
+        _opts6$follow = _opts6.follow,
+        follow = _opts6$follow === void 0 ? false : _opts6$follow,
+        filter = _opts6.filter,
+        walkFilter = _opts6.walkFilter;
+      var results = new Minipass({
+        objectMode: true
+      });
+      if (!filter || filter(entry)) {
+        results.write(withFileTypes ? entry : entry.fullpath());
+      }
+      var dirs = new Set();
+      var queue = [entry];
+      var processing = 0;
+      var process = function process() {
+        var paused = false;
+        var _loop = function _loop() {
+          var dir = queue.shift();
+          if (!dir) {
+            if (processing === 0) results.end();
+            return {
+              v: void 0
+            };
+          }
+          processing++;
+          dirs.add(dir);
+          var onReaddir = function onReaddir(er, entries) {
+            var didRealpaths = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+            /* c8 ignore start */
+            if (er) return results.emit('error', er);
+            /* c8 ignore stop */
+            if (follow && !didRealpaths) {
+              var promises = [];
+              var _iterator11 = _createForOfIteratorHelper(entries),
+                _step11;
+              try {
+                for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
+                  var e = _step11.value;
+                  if (e.isSymbolicLink()) {
+                    promises.push(e.realpath().then(function (r) {
+                      return r !== null && r !== void 0 && r.isUnknown() ? r.lstat() : r;
+                    }));
+                  }
+                }
+              } catch (err) {
+                _iterator11.e(err);
+              } finally {
+                _iterator11.f();
+              }
+              if (promises.length) {
+                Promise.all(promises).then(function () {
+                  return onReaddir(null, entries, true);
+                });
+                return;
+              }
+            }
+            var _iterator12 = _createForOfIteratorHelper(entries),
+              _step12;
+            try {
+              for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
+                var _e = _step12.value;
+                if (_e && (!filter || filter(_e))) {
+                  if (!results.write(withFileTypes ? _e : _e.fullpath())) {
+                    paused = true;
+                  }
+                }
+              }
+            } catch (err) {
+              _iterator12.e(err);
+            } finally {
+              _iterator12.f();
+            }
+            processing--;
+            var _iterator13 = _createForOfIteratorHelper(entries),
+              _step13;
+            try {
+              for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
+                var _e2 = _step13.value;
+                var r = _e2.realpathCached() || _e2;
+                if (r.shouldWalk(dirs, walkFilter)) {
+                  queue.push(r);
+                }
+              }
+            } catch (err) {
+              _iterator13.e(err);
+            } finally {
+              _iterator13.f();
+            }
+            if (paused && !results.flowing) {
+              results.once('drain', process);
+            } else if (!sync) {
+              process();
+            }
+          };
+          // zalgo containment
+          var sync = true;
+          dir.readdirCB(onReaddir, true);
+          sync = false;
+        };
+        while (!paused) {
+          var _ret = _loop();
+          if (typeof _ret === "object") return _ret.v;
+        }
+      };
+      process();
+      return results;
+    }
+  }, {
+    key: "streamSync",
+    value: function streamSync() {
+      var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      if (typeof entry === 'string') {
+        entry = this.cwd.resolve(entry);
+      } else if (!(entry instanceof PathBase)) {
+        opts = entry;
+        entry = this.cwd;
+      }
+      var _opts7 = opts,
+        _opts7$withFileTypes = _opts7.withFileTypes,
+        withFileTypes = _opts7$withFileTypes === void 0 ? true : _opts7$withFileTypes,
+        _opts7$follow = _opts7.follow,
+        follow = _opts7$follow === void 0 ? false : _opts7$follow,
+        filter = _opts7.filter,
+        walkFilter = _opts7.walkFilter;
+      var results = new Minipass({
+        objectMode: true
+      });
+      var dirs = new Set();
+      if (!filter || filter(entry)) {
+        results.write(withFileTypes ? entry : entry.fullpath());
+      }
+      var queue = [entry];
+      var processing = 0;
+      var process = function process() {
+        var paused = false;
+        while (!paused) {
+          var dir = queue.shift();
+          if (!dir) {
+            if (processing === 0) results.end();
+            return;
+          }
+          processing++;
+          dirs.add(dir);
+          var entries = dir.readdirSync();
+          var _iterator14 = _createForOfIteratorHelper(entries),
+            _step14;
+          try {
+            for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
+              var e = _step14.value;
+              if (!filter || filter(e)) {
+                if (!results.write(withFileTypes ? e : e.fullpath())) {
+                  paused = true;
+                }
+              }
+            }
+          } catch (err) {
+            _iterator14.e(err);
+          } finally {
+            _iterator14.f();
+          }
+          processing--;
+          var _iterator15 = _createForOfIteratorHelper(entries),
+            _step15;
+          try {
+            for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
+              var _e3 = _step15.value;
+              var r = _e3;
+              if (_e3.isSymbolicLink()) {
+                if (!(follow && (r = _e3.realpathSync()))) continue;
+                if (r.isUnknown()) r.lstatSync();
+              }
+              if (r.shouldWalk(dirs, walkFilter)) {
+                queue.push(r);
+              }
+            }
+          } catch (err) {
+            _iterator15.e(err);
+          } finally {
+            _iterator15.f();
+          }
+        }
+        if (paused && !results.flowing) results.once('drain', process);
+      };
+      process();
+      return results;
+    }
+  }, {
+    key: "chdir",
+    value: function chdir() {
+      var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
+      var oldCwd = this.cwd;
+      this.cwd = typeof path === 'string' ? this.cwd.resolve(path) : path;
+      this.cwd[setAsCwd](oldCwd);
+    }
+  }]);
+  return PathScurryBase;
+}();
+/**
+ * Windows implementation of {@link PathScurryBase}
+ *
+ * Defaults to case insensitve, uses `'\\'` to generate path strings.  Uses
+ * {@link PathWin32} for Path objects.
+ */
+var PathScurryWin32 = /*#__PURE__*/function (_PathScurryBase) {
+  _inherits(PathScurryWin32, _PathScurryBase);
+  var _super5 = _createSuper(PathScurryWin32);
+  /**
+   * separator for generating path strings
+   */
+
+  function PathScurryWin32() {
+    var _this5;
+    var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    _classCallCheck(this, PathScurryWin32);
+    var _opts$nocase = opts.nocase,
+      nocase = _opts$nocase === void 0 ? true : _opts$nocase;
+    _this5 = _super5.call(this, cwd, external_path_.win32, '\\', _objectSpread2(_objectSpread2({}, opts), {}, {
+      nocase: nocase
+    }));
+    _defineProperty(_assertThisInitialized(_this5), "sep", '\\');
+    _this5.nocase = nocase;
+    for (var p = _this5.cwd; p; p = p.parent) {
+      p.nocase = _this5.nocase;
+    }
+    return _this5;
+  }
+  /**
+   * @internal
+   */
+  _createClass(PathScurryWin32, [{
+    key: "parseRootPath",
+    value: function parseRootPath(dir) {
+      // if the path starts with a single separator, it's not a UNC, and we'll
+      // just get separator as the root, and driveFromUNC will return \
+      // In that case, mount \ on the root from the cwd.
+      return external_path_.win32.parse(dir).root.toUpperCase();
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "newRoot",
+    value: function newRoot(fs) {
+      return new PathWin32(this.rootPath, IFDIR, undefined, this.roots, this.nocase, this.childrenCache(), {
+        fs: fs
+      });
+    }
+    /**
+     * Return true if the provided path string is an absolute path
+     */
+  }, {
+    key: "isAbsolute",
+    value: function isAbsolute(p) {
+      return p.startsWith('/') || p.startsWith('\\') || /^[a-z]:(\/|\\)/i.test(p);
+    }
+  }]);
+  return PathScurryWin32;
+}(PathScurryBase);
+/**
+ * {@link PathScurryBase} implementation for all posix systems other than Darwin.
+ *
+ * Defaults to case-sensitive matching, uses `'/'` to generate path strings.
+ *
+ * Uses {@link PathPosix} for Path objects.
+ */
+var PathScurryPosix = /*#__PURE__*/function (_PathScurryBase2) {
+  _inherits(PathScurryPosix, _PathScurryBase2);
+  var _super6 = _createSuper(PathScurryPosix);
+  /**
+   * separator for generating path strings
+   */
+
+  function PathScurryPosix() {
+    var _this6;
+    var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    _classCallCheck(this, PathScurryPosix);
+    var _opts$nocase2 = opts.nocase,
+      nocase = _opts$nocase2 === void 0 ? false : _opts$nocase2;
+    _this6 = _super6.call(this, cwd, external_path_.posix, '/', _objectSpread2(_objectSpread2({}, opts), {}, {
+      nocase: nocase
+    }));
+    _defineProperty(_assertThisInitialized(_this6), "sep", '/');
+    _this6.nocase = nocase;
+    return _this6;
+  }
+  /**
+   * @internal
+   */
+  _createClass(PathScurryPosix, [{
+    key: "parseRootPath",
+    value: function parseRootPath(_dir) {
+      return '/';
+    }
+    /**
+     * @internal
+     */
+  }, {
+    key: "newRoot",
+    value: function newRoot(fs) {
+      return new PathPosix(this.rootPath, IFDIR, undefined, this.roots, this.nocase, this.childrenCache(), {
+        fs: fs
+      });
+    }
+    /**
+     * Return true if the provided path string is an absolute path
+     */
+  }, {
+    key: "isAbsolute",
+    value: function isAbsolute(p) {
+      return p.startsWith('/');
+    }
+  }]);
+  return PathScurryPosix;
+}(PathScurryBase);
+/**
+ * {@link PathScurryBase} implementation for Darwin (macOS) systems.
+ *
+ * Defaults to case-insensitive matching, uses `'/'` for generating path
+ * strings.
+ *
+ * Uses {@link PathPosix} for Path objects.
+ */
+var PathScurryDarwin = /*#__PURE__*/function (_PathScurryPosix) {
+  _inherits(PathScurryDarwin, _PathScurryPosix);
+  var _super7 = _createSuper(PathScurryDarwin);
+  function PathScurryDarwin() {
+    var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
+    var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    _classCallCheck(this, PathScurryDarwin);
+    var _opts$nocase3 = opts.nocase,
+      nocase = _opts$nocase3 === void 0 ? true : _opts$nocase3;
+    return _super7.call(this, cwd, _objectSpread2(_objectSpread2({}, opts), {}, {
+      nocase: nocase
+    }));
+  }
+  return _createClass(PathScurryDarwin);
+}(PathScurryPosix);
+/**
+ * Default {@link PathBase} implementation for the current platform.
+ *
+ * {@link PathWin32} on Windows systems, {@link PathPosix} on all others.
+ */
+var Path = process.platform === 'win32' ? PathWin32 : PathPosix;
+/**
+ * Default {@link PathScurryBase} implementation for the current platform.
+ *
+ * {@link PathScurryWin32} on Windows systems, {@link PathScurryDarwin} on
+ * Darwin (macOS) systems, {@link PathScurryPosix} on all others.
+ */
+var PathScurry = process.platform === 'win32' ? PathScurryWin32 : process.platform === 'darwin' ? PathScurryDarwin : PathScurryPosix;
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/toArray.js
+
+
+
+
+function _toArray(arr) {
+  return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
+}
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/pattern.js
+
+
+
+
+
+
+
+
+// this is just a very light wrapper around 2 arrays with an offset index
+
+var isPatternList = function isPatternList(pl) {
+  return pl.length >= 1;
+};
+var isGlobList = function isGlobList(gl) {
+  return gl.length >= 1;
+};
+/**
+ * An immutable-ish view on an array of glob parts and their parsed
+ * results
+ */
+var _patternList = /*#__PURE__*/new WeakMap();
+var _globList = /*#__PURE__*/new WeakMap();
+var _index = /*#__PURE__*/new WeakMap();
+var _platform = /*#__PURE__*/new WeakMap();
+var _rest = /*#__PURE__*/new WeakMap();
+var _globString = /*#__PURE__*/new WeakMap();
+var _isDrive = /*#__PURE__*/new WeakMap();
+var _isUNC = /*#__PURE__*/new WeakMap();
+var _isAbsolute = /*#__PURE__*/new WeakMap();
+var _followGlobstar = /*#__PURE__*/new WeakMap();
+var Pattern = /*#__PURE__*/function () {
+  function Pattern(patternList, globList, index, platform) {
+    _classCallCheck(this, Pattern);
+    _classPrivateFieldInitSpec(this, _patternList, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _globList, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _index, {
+      writable: true,
+      value: void 0
+    });
+    _defineProperty(this, "length", void 0);
+    _classPrivateFieldInitSpec(this, _platform, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _rest, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _globString, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _isDrive, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _isUNC, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _isAbsolute, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _followGlobstar, {
+      writable: true,
+      value: true
+    });
+    if (!isPatternList(patternList)) {
+      throw new TypeError('empty pattern list');
+    }
+    if (!isGlobList(globList)) {
+      throw new TypeError('empty glob list');
+    }
+    if (globList.length !== patternList.length) {
+      throw new TypeError('mismatched pattern list and glob list lengths');
+    }
+    this.length = patternList.length;
+    if (index < 0 || index >= this.length) {
+      throw new TypeError('index out of range');
+    }
+    _classPrivateFieldSet(this, _patternList, patternList);
+    _classPrivateFieldSet(this, _globList, globList);
+    _classPrivateFieldSet(this, _index, index);
+    _classPrivateFieldSet(this, _platform, platform);
+    // normalize root entries of absolute patterns on initial creation.
+    if (_classPrivateFieldGet(this, _index) === 0) {
+      // c: => ['c:/']
+      // C:/ => ['C:/']
+      // C:/x => ['C:/', 'x']
+      // //host/share => ['//host/share/']
+      // //host/share/ => ['//host/share/']
+      // //host/share/x => ['//host/share/', 'x']
+      // /etc => ['/', 'etc']
+      // / => ['/']
+      if (this.isUNC()) {
+        // '' / '' / 'host' / 'share'
+        var _classPrivateFieldGet2 = _classPrivateFieldGet(this, _patternList),
+          _classPrivateFieldGet3 = _toArray(_classPrivateFieldGet2),
+          p0 = _classPrivateFieldGet3[0],
+          p1 = _classPrivateFieldGet3[1],
+          p2 = _classPrivateFieldGet3[2],
+          p3 = _classPrivateFieldGet3[3],
+          prest = _classPrivateFieldGet3.slice(4);
+        var _classPrivateFieldGet4 = _classPrivateFieldGet(this, _globList),
+          _classPrivateFieldGet5 = _toArray(_classPrivateFieldGet4),
+          g0 = _classPrivateFieldGet5[0],
+          g1 = _classPrivateFieldGet5[1],
+          g2 = _classPrivateFieldGet5[2],
+          g3 = _classPrivateFieldGet5[3],
+          grest = _classPrivateFieldGet5.slice(4);
+        if (prest[0] === '') {
+          // ends in /
+          prest.shift();
+          grest.shift();
+        }
+        var p = [p0, p1, p2, p3, ''].join('/');
+        var g = [g0, g1, g2, g3, ''].join('/');
+        _classPrivateFieldSet(this, _patternList, [p].concat(toConsumableArray_toConsumableArray(prest)));
+        _classPrivateFieldSet(this, _globList, [g].concat(toConsumableArray_toConsumableArray(grest)));
+        this.length = _classPrivateFieldGet(this, _patternList).length;
+      } else if (this.isDrive() || this.isAbsolute()) {
+        var _classPrivateFieldGet6 = _classPrivateFieldGet(this, _patternList),
+          _classPrivateFieldGet7 = _toArray(_classPrivateFieldGet6),
+          _p = _classPrivateFieldGet7[0],
+          _prest = _classPrivateFieldGet7.slice(1);
+        var _classPrivateFieldGet8 = _classPrivateFieldGet(this, _globList),
+          _classPrivateFieldGet9 = _toArray(_classPrivateFieldGet8),
+          _g = _classPrivateFieldGet9[0],
+          _grest = _classPrivateFieldGet9.slice(1);
+        if (_prest[0] === '') {
+          // ends in /
+          _prest.shift();
+          _grest.shift();
+        }
+        var _p2 = _p + '/';
+        var _g2 = _g + '/';
+        _classPrivateFieldSet(this, _patternList, [_p2].concat(toConsumableArray_toConsumableArray(_prest)));
+        _classPrivateFieldSet(this, _globList, [_g2].concat(toConsumableArray_toConsumableArray(_grest)));
+        this.length = _classPrivateFieldGet(this, _patternList).length;
+      }
+    }
+  }
+  /**
+   * The first entry in the parsed list of patterns
+   */
+  _createClass(Pattern, [{
+    key: "pattern",
+    value: function pattern() {
+      return _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)];
+    }
+    /**
+     * true of if pattern() returns a string
+     */
+  }, {
+    key: "isString",
+    value: function isString() {
+      return typeof _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)] === 'string';
+    }
+    /**
+     * true of if pattern() returns GLOBSTAR
+     */
+  }, {
+    key: "isGlobstar",
+    value: function isGlobstar() {
+      return _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)] === GLOBSTAR;
+    }
+    /**
+     * true if pattern() returns a regexp
+     */
+  }, {
+    key: "isRegExp",
+    value: function isRegExp() {
+      return _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)] instanceof RegExp;
+    }
+    /**
+     * The /-joined set of glob parts that make up this pattern
+     */
+  }, {
+    key: "globString",
+    value: function globString() {
+      return _classPrivateFieldSet(this, _globString, _classPrivateFieldGet(this, _globString) || (_classPrivateFieldGet(this, _index) === 0 ? this.isAbsolute() ? _classPrivateFieldGet(this, _globList)[0] + _classPrivateFieldGet(this, _globList).slice(1).join('/') : _classPrivateFieldGet(this, _globList).join('/') : _classPrivateFieldGet(this, _globList).slice(_classPrivateFieldGet(this, _index)).join('/')));
+    }
+    /**
+     * true if there are more pattern parts after this one
+     */
+  }, {
+    key: "hasMore",
+    value: function hasMore() {
+      return this.length > _classPrivateFieldGet(this, _index) + 1;
+    }
+    /**
+     * The rest of the pattern after this part, or null if this is the end
+     */
+  }, {
+    key: "rest",
+    value: function rest() {
+      if (_classPrivateFieldGet(this, _rest) !== undefined) return _classPrivateFieldGet(this, _rest);
+      if (!this.hasMore()) return _classPrivateFieldSet(this, _rest, null);
+      _classPrivateFieldSet(this, _rest, new Pattern(_classPrivateFieldGet(this, _patternList), _classPrivateFieldGet(this, _globList), _classPrivateFieldGet(this, _index) + 1, _classPrivateFieldGet(this, _platform)));
+      _classPrivateFieldSet(_classPrivateFieldGet(this, _rest), _isAbsolute, _classPrivateFieldGet(this, _isAbsolute));
+      _classPrivateFieldSet(_classPrivateFieldGet(this, _rest), _isUNC, _classPrivateFieldGet(this, _isUNC));
+      _classPrivateFieldSet(_classPrivateFieldGet(this, _rest), _isDrive, _classPrivateFieldGet(this, _isDrive));
+      return _classPrivateFieldGet(this, _rest);
+    }
+    /**
+     * true if the pattern represents a //unc/path/ on windows
+     */
+  }, {
+    key: "isUNC",
+    value: function isUNC() {
+      var pl = _classPrivateFieldGet(this, _patternList);
+      return _classPrivateFieldGet(this, _isUNC) !== undefined ? _classPrivateFieldGet(this, _isUNC) : _classPrivateFieldSet(this, _isUNC, _classPrivateFieldGet(this, _platform) === 'win32' && _classPrivateFieldGet(this, _index) === 0 && pl[0] === '' && pl[1] === '' && typeof pl[2] === 'string' && !!pl[2] && typeof pl[3] === 'string' && !!pl[3]);
+    }
+    // pattern like C:/...
+    // split = ['C:', ...]
+    // XXX: would be nice to handle patterns like `c:*` to test the cwd
+    // in c: for *, but I don't know of a way to even figure out what that
+    // cwd is without actually chdir'ing into it?
+    /**
+     * True if the pattern starts with a drive letter on Windows
+     */
+  }, {
+    key: "isDrive",
+    value: function isDrive() {
+      var pl = _classPrivateFieldGet(this, _patternList);
+      return _classPrivateFieldGet(this, _isDrive) !== undefined ? _classPrivateFieldGet(this, _isDrive) : _classPrivateFieldSet(this, _isDrive, _classPrivateFieldGet(this, _platform) === 'win32' && _classPrivateFieldGet(this, _index) === 0 && this.length > 1 && typeof pl[0] === 'string' && /^[a-z]:$/i.test(pl[0]));
+    }
+    // pattern = '/' or '/...' or '/x/...'
+    // split = ['', ''] or ['', ...] or ['', 'x', ...]
+    // Drive and UNC both considered absolute on windows
+    /**
+     * True if the pattern is rooted on an absolute path
+     */
+  }, {
+    key: "isAbsolute",
+    value: function isAbsolute() {
+      var pl = _classPrivateFieldGet(this, _patternList);
+      return _classPrivateFieldGet(this, _isAbsolute) !== undefined ? _classPrivateFieldGet(this, _isAbsolute) : _classPrivateFieldSet(this, _isAbsolute, pl[0] === '' && pl.length > 1 || this.isDrive() || this.isUNC());
+    }
+    /**
+     * consume the root of the pattern, and return it
+     */
+  }, {
+    key: "root",
+    value: function root() {
+      var p = _classPrivateFieldGet(this, _patternList)[0];
+      return typeof p === 'string' && this.isAbsolute() && _classPrivateFieldGet(this, _index) === 0 ? p : '';
+    }
+    /**
+     * Check to see if the current globstar pattern is allowed to follow
+     * a symbolic link.
+     */
+  }, {
+    key: "checkFollowGlobstar",
+    value: function checkFollowGlobstar() {
+      return !(_classPrivateFieldGet(this, _index) === 0 || !this.isGlobstar() || !_classPrivateFieldGet(this, _followGlobstar));
+    }
+    /**
+     * Mark that the current globstar pattern is following a symbolic link
+     */
+  }, {
+    key: "markFollowGlobstar",
+    value: function markFollowGlobstar() {
+      if (_classPrivateFieldGet(this, _index) === 0 || !this.isGlobstar() || !_classPrivateFieldGet(this, _followGlobstar)) return false;
+      _classPrivateFieldSet(this, _followGlobstar, false);
+      return true;
+    }
+  }]);
+  return Pattern;
+}();
+;// CONCATENATED MODULE: ../cli/node_modules/minipass/dist/mjs/index.js
+
+
+
+
+
+
+
+
+
+
+
+var mjs_Symbol$asyncIterator, dist_mjs_Symbol$iterator;
+var mjs_proc = typeof process === 'object' && process ? process : {
+  stdout: null,
+  stderr: null
+};
+
+
+
+/**
+ * Return true if the argument is a Minipass stream, Node stream, or something
+ * else that Minipass can interact with.
+ */
+var isStream = function isStream(s) {
+  return !!s && typeof s === 'object' && (s instanceof mjs_Minipass || s instanceof external_stream_ || isReadable(s) || isWritable(s));
+};
+/**
+ * Return true if the argument is a valid {@link Minipass.Readable}
+ */
+var isReadable = function isReadable(s) {
+  return !!s && typeof s === 'object' && s instanceof external_events_.EventEmitter && typeof s.pipe === 'function' &&
+  // node core Writable streams have a pipe() method, but it throws
+  s.pipe !== external_stream_.Writable.prototype.pipe;
+};
+/**
+ * Return true if the argument is a valid {@link Minipass.Writable}
+ */
+var isWritable = function isWritable(s) {
+  return !!s && typeof s === 'object' && s instanceof external_events_.EventEmitter && typeof s.write === 'function' && typeof s.end === 'function';
+};
+var mjs_EOF = Symbol('EOF');
+var mjs_MAYBE_EMIT_END = Symbol('maybeEmitEnd');
+var mjs_EMITTED_END = Symbol('emittedEnd');
+var mjs_EMITTING_END = Symbol('emittingEnd');
+var mjs_EMITTED_ERROR = Symbol('emittedError');
+var mjs_CLOSED = Symbol('closed');
+var mjs_READ = Symbol('read');
+var mjs_FLUSH = Symbol('flush');
+var mjs_FLUSHCHUNK = Symbol('flushChunk');
+var mjs_ENCODING = Symbol('encoding');
+var mjs_DECODER = Symbol('decoder');
+var mjs_FLOWING = Symbol('flowing');
+var mjs_PAUSED = Symbol('paused');
+var mjs_RESUME = Symbol('resume');
+var mjs_BUFFER = Symbol('buffer');
+var mjs_PIPES = Symbol('pipes');
+var mjs_BUFFERLENGTH = Symbol('bufferLength');
+var mjs_BUFFERPUSH = Symbol('bufferPush');
+var mjs_BUFFERSHIFT = Symbol('bufferShift');
+var mjs_OBJECTMODE = Symbol('objectMode');
+// internal event when stream is destroyed
+var mjs_DESTROYED = Symbol('destroyed');
+// internal event when stream has an error
+var mjs_ERROR = Symbol('error');
+var mjs_EMITDATA = Symbol('emitData');
+var mjs_EMITEND = Symbol('emitEnd');
+var mjs_EMITEND2 = Symbol('emitEnd2');
+var mjs_ASYNC = Symbol('async');
+var mjs_ABORT = Symbol('abort');
+var mjs_ABORTED = Symbol('aborted');
+var mjs_SIGNAL = Symbol('signal');
+var DATALISTENERS = Symbol('dataListeners');
+var DISCARDED = Symbol('discarded');
+var mjs_defer = function defer(fn) {
+  return Promise.resolve().then(fn);
+};
+var nodefer = function nodefer(fn) {
+  return fn();
+};
+var mjs_isEndish = function isEndish(ev) {
+  return ev === 'end' || ev === 'finish' || ev === 'prefinish';
+};
+var isArrayBufferLike = function isArrayBufferLike(b) {
+  return b instanceof ArrayBuffer || !!b && typeof b === 'object' && b.constructor && b.constructor.name === 'ArrayBuffer' && b.byteLength >= 0;
+};
+var mjs_isArrayBufferView = function isArrayBufferView(b) {
+  return !Buffer.isBuffer(b) && ArrayBuffer.isView(b);
+};
+/**
+ * Internal class representing a pipe to a destination stream.
+ *
+ * @internal
+ */
+var mjs_Pipe = /*#__PURE__*/function () {
+  function Pipe(src, dest, opts) {
+    _classCallCheck(this, Pipe);
+    _defineProperty(this, "src", void 0);
+    _defineProperty(this, "dest", void 0);
+    _defineProperty(this, "opts", void 0);
+    _defineProperty(this, "ondrain", void 0);
+    this.src = src;
+    this.dest = dest;
+    this.opts = opts;
+    this.ondrain = function () {
+      return src[mjs_RESUME]();
+    };
+    this.dest.on('drain', this.ondrain);
+  }
+  _createClass(Pipe, [{
+    key: "unpipe",
+    value: function unpipe() {
+      this.dest.removeListener('drain', this.ondrain);
+    }
+    // only here for the prototype
+    /* c8 ignore start */
+  }, {
+    key: "proxyErrors",
+    value: function proxyErrors(_er) {}
+    /* c8 ignore stop */
+  }, {
+    key: "end",
+    value: function end() {
+      this.unpipe();
+      if (this.opts.end) this.dest.end();
+    }
+  }]);
+  return Pipe;
+}();
+/**
+ * Internal class representing a pipe to a destination stream where
+ * errors are proxied.
+ *
+ * @internal
+ */
+var mjs_PipeProxyErrors = /*#__PURE__*/function (_Pipe) {
+  _inherits(PipeProxyErrors, _Pipe);
+  var _super = _createSuper(PipeProxyErrors);
+  function PipeProxyErrors(src, dest, opts) {
+    var _this;
+    _classCallCheck(this, PipeProxyErrors);
+    _this = _super.call(this, src, dest, opts);
+    _this.proxyErrors = function (er) {
+      return dest.emit('error', er);
+    };
+    src.on('error', _this.proxyErrors);
+    return _this;
+  }
+  _createClass(PipeProxyErrors, [{
+    key: "unpipe",
+    value: function unpipe() {
+      this.src.removeListener('error', this.proxyErrors);
+      _get(_getPrototypeOf(PipeProxyErrors.prototype), "unpipe", this).call(this);
+    }
+  }]);
+  return PipeProxyErrors;
+}(mjs_Pipe);
+var isObjectModeOptions = function isObjectModeOptions(o) {
+  return !!o.objectMode;
+};
+var isEncodingOptions = function isEncodingOptions(o) {
+  return !o.objectMode && !!o.encoding && o.encoding !== 'buffer';
+};
+/**
+ * Main export, the Minipass class
+ *
+ * `RType` is the type of data emitted, defaults to Buffer
+ *
+ * `WType` is the type of data to be written, if RType is buffer or string,
+ * then any {@link Minipass.ContiguousData} is allowed.
+ *
+ * `Events` is the set of event handler signatures that this object
+ * will emit, see {@link Minipass.Events}
+ */
+mjs_Symbol$asyncIterator = Symbol.asyncIterator;
+dist_mjs_Symbol$iterator = Symbol.iterator;
+var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
+  _inherits(Minipass, _EventEmitter);
+  var _super2 = _createSuper(Minipass);
+  /**
+   * true if the stream can be written
+   */
+
+  /**
+   * true if the stream can be read
+   */
+
+  /**
+   * If `RType` is Buffer, then options do not need to be provided.
+   * Otherwise, an options object must be provided to specify either
+   * {@link Minipass.SharedOptions.objectMode} or
+   * {@link Minipass.SharedOptions.encoding}, as appropriate.
+   */
+  function Minipass() {
+    var _this2;
+    _classCallCheck(this, Minipass);
+    var options = (arguments.length <= 0 ? undefined : arguments[0]) || {};
+    _this2 = _super2.call(this);
+    _defineProperty(_assertThisInitialized(_this2), mjs_FLOWING, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_PAUSED, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_PIPES, []);
+    _defineProperty(_assertThisInitialized(_this2), mjs_BUFFER, []);
+    _defineProperty(_assertThisInitialized(_this2), mjs_OBJECTMODE, void 0);
+    _defineProperty(_assertThisInitialized(_this2), mjs_ENCODING, void 0);
+    _defineProperty(_assertThisInitialized(_this2), mjs_ASYNC, void 0);
+    _defineProperty(_assertThisInitialized(_this2), mjs_DECODER, void 0);
+    _defineProperty(_assertThisInitialized(_this2), mjs_EOF, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_EMITTED_END, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_EMITTING_END, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_CLOSED, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_EMITTED_ERROR, null);
+    _defineProperty(_assertThisInitialized(_this2), mjs_BUFFERLENGTH, 0);
+    _defineProperty(_assertThisInitialized(_this2), mjs_DESTROYED, false);
+    _defineProperty(_assertThisInitialized(_this2), mjs_SIGNAL, void 0);
+    _defineProperty(_assertThisInitialized(_this2), mjs_ABORTED, false);
+    _defineProperty(_assertThisInitialized(_this2), DATALISTENERS, 0);
+    _defineProperty(_assertThisInitialized(_this2), DISCARDED, false);
+    _defineProperty(_assertThisInitialized(_this2), "writable", true);
+    _defineProperty(_assertThisInitialized(_this2), "readable", true);
+    if (options.objectMode && typeof options.encoding === 'string') {
+      throw new TypeError('Encoding and objectMode may not be used together');
+    }
+    if (isObjectModeOptions(options)) {
+      _this2[mjs_OBJECTMODE] = true;
+      _this2[mjs_ENCODING] = null;
+    } else if (isEncodingOptions(options)) {
+      _this2[mjs_ENCODING] = options.encoding;
+      _this2[mjs_OBJECTMODE] = false;
+    } else {
+      _this2[mjs_OBJECTMODE] = false;
+      _this2[mjs_ENCODING] = null;
+    }
+    _this2[mjs_ASYNC] = !!options.async;
+    _this2[mjs_DECODER] = _this2[mjs_ENCODING] ? new external_string_decoder_namespaceObject.StringDecoder(_this2[mjs_ENCODING]) : null;
+    //@ts-ignore - private option for debugging and testing
+    if (options && options.debugExposeBuffer === true) {
+      Object.defineProperty(_assertThisInitialized(_this2), 'buffer', {
+        get: function get() {
+          return _this2[mjs_BUFFER];
+        }
+      });
+    }
+    //@ts-ignore - private option for debugging and testing
+    if (options && options.debugExposePipes === true) {
+      Object.defineProperty(_assertThisInitialized(_this2), 'pipes', {
+        get: function get() {
+          return _this2[mjs_PIPES];
+        }
+      });
+    }
+    var signal = options.signal;
+    if (signal) {
+      _this2[mjs_SIGNAL] = signal;
+      if (signal.aborted) {
+        _this2[mjs_ABORT]();
+      } else {
+        signal.addEventListener('abort', function () {
+          return _this2[mjs_ABORT]();
+        });
+      }
+    }
+    return _this2;
+  }
+  /**
+   * The amount of data stored in the buffer waiting to be read.
+   *
+   * For Buffer strings, this will be the total byte length.
+   * For string encoding streams, this will be the string character length,
+   * according to JavaScript's `string.length` logic.
+   * For objectMode streams, this is a count of the items waiting to be
+   * emitted.
+   */
+  _createClass(Minipass, [{
+    key: "bufferLength",
+    get: function get() {
+      return this[mjs_BUFFERLENGTH];
+    }
+    /**
+     * The `BufferEncoding` currently in use, or `null`
+     */
+  }, {
+    key: "encoding",
+    get: function get() {
+      return this[mjs_ENCODING];
+    }
+    /**
+     * @deprecated - This is a read only property
+     */,
+    set: function set(_enc) {
+      throw new Error('Encoding must be set at instantiation time');
+    }
+    /**
+     * @deprecated - Encoding may only be set at instantiation time
+     */
+  }, {
+    key: "setEncoding",
+    value: function setEncoding(_enc) {
+      throw new Error('Encoding must be set at instantiation time');
+    }
+    /**
+     * True if this is an objectMode stream
+     */
+  }, {
+    key: "objectMode",
+    get: function get() {
+      return this[mjs_OBJECTMODE];
+    }
+    /**
+     * @deprecated - This is a read-only property
+     */,
+    set: function set(_om) {
+      throw new Error('objectMode must be set at instantiation time');
+    }
+    /**
+     * true if this is an async stream
+     */
+  }, {
+    key: 'async',
+    get: function get() {
+      return this[mjs_ASYNC];
+    }
+    /**
+     * Set to true to make this stream async.
+     *
+     * Once set, it cannot be unset, as this would potentially cause incorrect
+     * behavior.  Ie, a sync stream can be made async, but an async stream
+     * cannot be safely made sync.
+     */,
+    set: function set(a) {
+      this[mjs_ASYNC] = this[mjs_ASYNC] || !!a;
+    }
+    // drop everything and get out of the flow completely
+  }, {
+    key: mjs_ABORT,
+    value: function value() {
+      var _this$SIGNAL, _this$SIGNAL2;
+      this[mjs_ABORTED] = true;
+      this.emit('abort', (_this$SIGNAL = this[mjs_SIGNAL]) === null || _this$SIGNAL === void 0 ? void 0 : _this$SIGNAL.reason);
+      this.destroy((_this$SIGNAL2 = this[mjs_SIGNAL]) === null || _this$SIGNAL2 === void 0 ? void 0 : _this$SIGNAL2.reason);
+    }
+    /**
+     * True if the stream has been aborted.
+     */
+  }, {
+    key: "aborted",
+    get: function get() {
+      return this[mjs_ABORTED];
+    }
+    /**
+     * No-op setter. Stream aborted status is set via the AbortSignal provided
+     * in the constructor options.
+     */
+  }, {
+    key: "aborted",
+    set: function set(_) {}
+  }, {
+    key: "write",
+    value: function write(chunk, encoding, cb) {
+      var _this$DECODER;
+      if (this[mjs_ABORTED]) return false;
+      if (this[mjs_EOF]) throw new Error('write after end');
+      if (this[mjs_DESTROYED]) {
+        this.emit('error', Object.assign(new Error('Cannot call write after a stream was destroyed'), {
+          code: 'ERR_STREAM_DESTROYED'
+        }));
+        return true;
+      }
+      if (typeof encoding === 'function') {
+        cb = encoding;
+        encoding = 'utf8';
+      }
+      if (!encoding) encoding = 'utf8';
+      var fn = this[mjs_ASYNC] ? mjs_defer : nodefer;
+      // convert array buffers and typed array views into buffers
+      // at some point in the future, we may want to do the opposite!
+      // leave strings and buffers as-is
+      // anything is only allowed if in object mode, so throw
+      if (!this[mjs_OBJECTMODE] && !Buffer.isBuffer(chunk)) {
+        if (mjs_isArrayBufferView(chunk)) {
+          //@ts-ignore - sinful unsafe type changing
+          chunk = Buffer.from(chunk.buffer, chunk.byteOffset, chunk.byteLength);
+        } else if (isArrayBufferLike(chunk)) {
+          //@ts-ignore - sinful unsafe type changing
+          chunk = Buffer.from(chunk);
+        } else if (typeof chunk !== 'string') {
+          throw new Error('Non-contiguous data written to non-objectMode stream');
+        }
+      }
+      // handle object mode up front, since it's simpler
+      // this yields better performance, fewer checks later.
+      if (this[mjs_OBJECTMODE]) {
+        // maybe impossible?
+        /* c8 ignore start */
+        if (this[mjs_FLOWING] && this[mjs_BUFFERLENGTH] !== 0) this[mjs_FLUSH](true);
+        /* c8 ignore stop */
+        if (this[mjs_FLOWING]) this.emit('data', chunk);else this[mjs_BUFFERPUSH](chunk);
+        if (this[mjs_BUFFERLENGTH] !== 0) this.emit('readable');
+        if (cb) fn(cb);
+        return this[mjs_FLOWING];
+      }
+      // at this point the chunk is a buffer or string
+      // don't buffer it up or send it to the decoder
+      if (!chunk.length) {
+        if (this[mjs_BUFFERLENGTH] !== 0) this.emit('readable');
+        if (cb) fn(cb);
+        return this[mjs_FLOWING];
+      }
+      // fast-path writing strings of same encoding to a stream with
+      // an empty buffer, skipping the buffer/decoder dance
+      if (typeof chunk === 'string' &&
+      // unless it is a string already ready for us to use
+      !(encoding === this[mjs_ENCODING] && !((_this$DECODER = this[mjs_DECODER]) !== null && _this$DECODER !== void 0 && _this$DECODER.lastNeed))) {
+        //@ts-ignore - sinful unsafe type change
+        chunk = Buffer.from(chunk, encoding);
+      }
+      if (Buffer.isBuffer(chunk) && this[mjs_ENCODING]) {
+        //@ts-ignore - sinful unsafe type change
+        chunk = this[mjs_DECODER].write(chunk);
+      }
+      // Note: flushing CAN potentially switch us into not-flowing mode
+      if (this[mjs_FLOWING] && this[mjs_BUFFERLENGTH] !== 0) this[mjs_FLUSH](true);
+      if (this[mjs_FLOWING]) this.emit('data', chunk);else this[mjs_BUFFERPUSH](chunk);
+      if (this[mjs_BUFFERLENGTH] !== 0) this.emit('readable');
+      if (cb) fn(cb);
+      return this[mjs_FLOWING];
+    }
+    /**
+     * Low-level explicit read method.
+     *
+     * In objectMode, the argument is ignored, and one item is returned if
+     * available.
+     *
+     * `n` is the number of bytes (or in the case of encoding streams,
+     * characters) to consume. If `n` is not provided, then the entire buffer
+     * is returned, or `null` is returned if no data is available.
+     *
+     * If `n` is greater that the amount of data in the internal buffer,
+     * then `null` is returned.
+     */
+  }, {
+    key: "read",
+    value: function read(n) {
+      if (this[mjs_DESTROYED]) return null;
+      this[DISCARDED] = false;
+      if (this[mjs_BUFFERLENGTH] === 0 || n === 0 || n && n > this[mjs_BUFFERLENGTH]) {
+        this[mjs_MAYBE_EMIT_END]();
+        return null;
+      }
+      if (this[mjs_OBJECTMODE]) n = null;
+      if (this[mjs_BUFFER].length > 1 && !this[mjs_OBJECTMODE]) {
+        // not object mode, so if we have an encoding, then RType is string
+        // otherwise, must be Buffer
+        this[mjs_BUFFER] = [this[mjs_ENCODING] ? this[mjs_BUFFER].join('') : Buffer.concat(this[mjs_BUFFER], this[mjs_BUFFERLENGTH])];
+      }
+      var ret = this[mjs_READ](n || null, this[mjs_BUFFER][0]);
+      this[mjs_MAYBE_EMIT_END]();
+      return ret;
+    }
+  }, {
+    key: mjs_READ,
+    value: function value(n, chunk) {
+      if (this[mjs_OBJECTMODE]) this[mjs_BUFFERSHIFT]();else {
+        var c = chunk;
+        if (n === c.length || n === null) this[mjs_BUFFERSHIFT]();else if (typeof c === 'string') {
+          this[mjs_BUFFER][0] = c.slice(n);
+          chunk = c.slice(0, n);
+          this[mjs_BUFFERLENGTH] -= n;
+        } else {
+          this[mjs_BUFFER][0] = c.subarray(n);
+          chunk = c.subarray(0, n);
+          this[mjs_BUFFERLENGTH] -= n;
+        }
+      }
+      this.emit('data', chunk);
+      if (!this[mjs_BUFFER].length && !this[mjs_EOF]) this.emit('drain');
+      return chunk;
+    }
+  }, {
+    key: "end",
+    value: function end(chunk, encoding, cb) {
+      if (typeof chunk === 'function') {
+        cb = chunk;
+        chunk = undefined;
+      }
+      if (typeof encoding === 'function') {
+        cb = encoding;
+        encoding = 'utf8';
+      }
+      if (chunk !== undefined) this.write(chunk, encoding);
+      if (cb) this.once('end', cb);
+      this[mjs_EOF] = true;
+      this.writable = false;
+      // if we haven't written anything, then go ahead and emit,
+      // even if we're not reading.
+      // we'll re-emit if a new 'end' listener is added anyway.
+      // This makes MP more suitable to write-only use cases.
+      if (this[mjs_FLOWING] || !this[mjs_PAUSED]) this[mjs_MAYBE_EMIT_END]();
+      return this;
+    }
+    // don't let the internal resume be overwritten
+  }, {
+    key: mjs_RESUME,
+    value: function value() {
+      if (this[mjs_DESTROYED]) return;
+      if (!this[DATALISTENERS] && !this[mjs_PIPES].length) {
+        this[DISCARDED] = true;
+      }
+      this[mjs_PAUSED] = false;
+      this[mjs_FLOWING] = true;
+      this.emit('resume');
+      if (this[mjs_BUFFER].length) this[mjs_FLUSH]();else if (this[mjs_EOF]) this[mjs_MAYBE_EMIT_END]();else this.emit('drain');
+    }
+    /**
+     * Resume the stream if it is currently in a paused state
+     *
+     * If called when there are no pipe destinations or `data` event listeners,
+     * this will place the stream in a "discarded" state, where all data will
+     * be thrown away. The discarded state is removed if a pipe destination or
+     * data handler is added, if pause() is called, or if any synchronous or
+     * asynchronous iteration is started.
+     */
+  }, {
+    key: "resume",
+    value: function resume() {
+      return this[mjs_RESUME]();
+    }
+    /**
+     * Pause the stream
+     */
+  }, {
+    key: "pause",
+    value: function pause() {
+      this[mjs_FLOWING] = false;
+      this[mjs_PAUSED] = true;
+      this[DISCARDED] = false;
+    }
+    /**
+     * true if the stream has been forcibly destroyed
+     */
+  }, {
+    key: "destroyed",
+    get: function get() {
+      return this[mjs_DESTROYED];
+    }
+    /**
+     * true if the stream is currently in a flowing state, meaning that
+     * any writes will be immediately emitted.
+     */
+  }, {
+    key: "flowing",
+    get: function get() {
+      return this[mjs_FLOWING];
+    }
+    /**
+     * true if the stream is currently in a paused state
+     */
+  }, {
+    key: "paused",
+    get: function get() {
+      return this[mjs_PAUSED];
+    }
+  }, {
+    key: mjs_BUFFERPUSH,
+    value: function value(chunk) {
+      if (this[mjs_OBJECTMODE]) this[mjs_BUFFERLENGTH] += 1;else this[mjs_BUFFERLENGTH] += chunk.length;
+      this[mjs_BUFFER].push(chunk);
+    }
+  }, {
+    key: mjs_BUFFERSHIFT,
+    value: function value() {
+      if (this[mjs_OBJECTMODE]) this[mjs_BUFFERLENGTH] -= 1;else this[mjs_BUFFERLENGTH] -= this[mjs_BUFFER][0].length;
+      return this[mjs_BUFFER].shift();
+    }
+  }, {
+    key: mjs_FLUSH,
+    value: function value() {
+      var noDrain = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      do {} while (this[mjs_FLUSHCHUNK](this[mjs_BUFFERSHIFT]()) && this[mjs_BUFFER].length);
+      if (!noDrain && !this[mjs_BUFFER].length && !this[mjs_EOF]) this.emit('drain');
+    }
+  }, {
+    key: mjs_FLUSHCHUNK,
+    value: function value(chunk) {
+      this.emit('data', chunk);
+      return this[mjs_FLOWING];
+    }
+    /**
+     * Pipe all data emitted by this stream into the destination provided.
+     *
+     * Triggers the flow of data.
+     */
+  }, {
+    key: "pipe",
+    value: function pipe(dest, opts) {
+      var _this3 = this;
+      if (this[mjs_DESTROYED]) return dest;
+      this[DISCARDED] = false;
+      var ended = this[mjs_EMITTED_END];
+      opts = opts || {};
+      if (dest === mjs_proc.stdout || dest === mjs_proc.stderr) opts.end = false;else opts.end = opts.end !== false;
+      opts.proxyErrors = !!opts.proxyErrors;
+      // piping an ended stream ends immediately
+      if (ended) {
+        if (opts.end) dest.end();
+      } else {
+        // "as" here just ignores the WType, which pipes don't care about,
+        // since they're only consuming from us, and writing to the dest
+        this[mjs_PIPES].push(!opts.proxyErrors ? new mjs_Pipe(this, dest, opts) : new mjs_PipeProxyErrors(this, dest, opts));
+        if (this[mjs_ASYNC]) mjs_defer(function () {
+          return _this3[mjs_RESUME]();
+        });else this[mjs_RESUME]();
+      }
+      return dest;
+    }
+    /**
+     * Fully unhook a piped destination stream.
+     *
+     * If the destination stream was the only consumer of this stream (ie,
+     * there are no other piped destinations or `'data'` event listeners)
+     * then the flow of data will stop until there is another consumer or
+     * {@link Minipass#resume} is explicitly called.
+     */
+  }, {
+    key: "unpipe",
+    value: function unpipe(dest) {
+      var p = this[mjs_PIPES].find(function (p) {
+        return p.dest === dest;
+      });
+      if (p) {
+        if (this[mjs_PIPES].length === 1) {
+          if (this[mjs_FLOWING] && this[DATALISTENERS] === 0) {
+            this[mjs_FLOWING] = false;
+          }
+          this[mjs_PIPES] = [];
+        } else this[mjs_PIPES].splice(this[mjs_PIPES].indexOf(p), 1);
+        p.unpipe();
+      }
+    }
+    /**
+     * Alias for {@link Minipass#on}
+     */
+  }, {
+    key: "addListener",
+    value: function addListener(ev, handler) {
+      return this.on(ev, handler);
+    }
+    /**
+     * Mostly identical to `EventEmitter.on`, with the following
+     * behavior differences to prevent data loss and unnecessary hangs:
+     *
+     * - Adding a 'data' event handler will trigger the flow of data
+     *
+     * - Adding a 'readable' event handler when there is data waiting to be read
+     *   will cause 'readable' to be emitted immediately.
+     *
+     * - Adding an 'endish' event handler ('end', 'finish', etc.) which has
+     *   already passed will cause the event to be emitted immediately and all
+     *   handlers removed.
+     *
+     * - Adding an 'error' event handler after an error has been emitted will
+     *   cause the event to be re-emitted immediately with the error previously
+     *   raised.
+     */
+  }, {
+    key: "on",
+    value: function on(ev, handler) {
+      var _this4 = this;
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "on", this).call(this, ev, handler);
+      if (ev === 'data') {
+        this[DISCARDED] = false;
+        this[DATALISTENERS]++;
+        if (!this[mjs_PIPES].length && !this[mjs_FLOWING]) {
+          this[mjs_RESUME]();
+        }
+      } else if (ev === 'readable' && this[mjs_BUFFERLENGTH] !== 0) {
+        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'readable');
+      } else if (mjs_isEndish(ev) && this[mjs_EMITTED_END]) {
+        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        this.removeAllListeners(ev);
+      } else if (ev === 'error' && this[mjs_EMITTED_ERROR]) {
+        var h = handler;
+        if (this[mjs_ASYNC]) mjs_defer(function () {
+          return h.call(_this4, _this4[mjs_EMITTED_ERROR]);
+        });else h.call(this, this[mjs_EMITTED_ERROR]);
+      }
+      return ret;
+    }
+    /**
+     * Alias for {@link Minipass#off}
+     */
+  }, {
+    key: "removeListener",
+    value: function removeListener(ev, handler) {
+      return this.off(ev, handler);
+    }
+    /**
+     * Mostly identical to `EventEmitter.off`
+     *
+     * If a 'data' event handler is removed, and it was the last consumer
+     * (ie, there are no pipe destinations or other 'data' event listeners),
+     * then the flow of data will stop until there is another consumer or
+     * {@link Minipass#resume} is explicitly called.
+     */
+  }, {
+    key: "off",
+    value: function off(ev, handler) {
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "off", this).call(this, ev, handler);
+      // if we previously had listeners, and now we don't, and we don't
+      // have any pipes, then stop the flow, unless it's been explicitly
+      // put in a discarded flowing state via stream.resume().
+      if (ev === 'data') {
+        this[DATALISTENERS] = this.listeners('data').length;
+        if (this[DATALISTENERS] === 0 && !this[DISCARDED] && !this[mjs_PIPES].length) {
+          this[mjs_FLOWING] = false;
+        }
+      }
+      return ret;
+    }
+    /**
+     * Mostly identical to `EventEmitter.removeAllListeners`
+     *
+     * If all 'data' event handlers are removed, and they were the last consumer
+     * (ie, there are no pipe destinations), then the flow of data will stop
+     * until there is another consumer or {@link Minipass#resume} is explicitly
+     * called.
+     */
+  }, {
+    key: "removeAllListeners",
+    value: function removeAllListeners(ev) {
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "removeAllListeners", this).call(this, ev);
+      if (ev === 'data' || ev === undefined) {
+        this[DATALISTENERS] = 0;
+        if (!this[DISCARDED] && !this[mjs_PIPES].length) {
+          this[mjs_FLOWING] = false;
+        }
+      }
+      return ret;
+    }
+    /**
+     * true if the 'end' event has been emitted
+     */
+  }, {
+    key: "emittedEnd",
+    get: function get() {
+      return this[mjs_EMITTED_END];
+    }
+  }, {
+    key: mjs_MAYBE_EMIT_END,
+    value: function value() {
+      if (!this[mjs_EMITTING_END] && !this[mjs_EMITTED_END] && !this[mjs_DESTROYED] && this[mjs_BUFFER].length === 0 && this[mjs_EOF]) {
+        this[mjs_EMITTING_END] = true;
+        this.emit('end');
+        this.emit('prefinish');
+        this.emit('finish');
+        if (this[mjs_CLOSED]) this.emit('close');
+        this[mjs_EMITTING_END] = false;
+      }
+    }
+    /**
+     * Mostly identical to `EventEmitter.emit`, with the following
+     * behavior differences to prevent data loss and unnecessary hangs:
+     *
+     * If the stream has been destroyed, and the event is something other
+     * than 'close' or 'error', then `false` is returned and no handlers
+     * are called.
+     *
+     * If the event is 'end', and has already been emitted, then the event
+     * is ignored. If the stream is in a paused or non-flowing state, then
+     * the event will be deferred until data flow resumes. If the stream is
+     * async, then handlers will be called on the next tick rather than
+     * immediately.
+     *
+     * If the event is 'close', and 'end' has not yet been emitted, then
+     * the event will be deferred until after 'end' is emitted.
+     *
+     * If the event is 'error', and an AbortSignal was provided for the stream,
+     * and there are no listeners, then the event is ignored, matching the
+     * behavior of node core streams in the presense of an AbortSignal.
+     *
+     * If the event is 'finish' or 'prefinish', then all listeners will be
+     * removed after emitting the event, to prevent double-firing.
+     */
+  }, {
+    key: "emit",
+    value: function emit(ev) {
+      var _this5 = this,
+        _get2;
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+      var data = args[0];
+      // error and close are only events allowed after calling destroy()
+      if (ev !== 'error' && ev !== 'close' && ev !== mjs_DESTROYED && this[mjs_DESTROYED]) {
+        return false;
+      } else if (ev === 'data') {
+        return !this[mjs_OBJECTMODE] && !data ? false : this[mjs_ASYNC] ? (mjs_defer(function () {
+          return _this5[mjs_EMITDATA](data);
+        }), true) : this[mjs_EMITDATA](data);
+      } else if (ev === 'end') {
+        return this[mjs_EMITEND]();
+      } else if (ev === 'close') {
+        this[mjs_CLOSED] = true;
+        // don't emit close before 'end' and 'finish'
+        if (!this[mjs_EMITTED_END] && !this[mjs_DESTROYED]) return false;
+        var _ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'close');
+        this.removeAllListeners('close');
+        return _ret;
+      } else if (ev === 'error') {
+        this[mjs_EMITTED_ERROR] = data;
+        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, mjs_ERROR, data);
+        var _ret2 = !this[mjs_SIGNAL] || this.listeners('error').length ? _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'error', data) : false;
+        this[mjs_MAYBE_EMIT_END]();
+        return _ret2;
+      } else if (ev === 'resume') {
+        var _ret3 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'resume');
+        this[mjs_MAYBE_EMIT_END]();
+        return _ret3;
+      } else if (ev === 'finish' || ev === 'prefinish') {
+        var _ret4 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        this.removeAllListeners(ev);
+        return _ret4;
+      }
+      // Some other unknown event
+      var ret = (_get2 = _get(_getPrototypeOf(Minipass.prototype), "emit", this)).call.apply(_get2, [this, ev].concat(args));
+      this[mjs_MAYBE_EMIT_END]();
+      return ret;
+    }
+  }, {
+    key: mjs_EMITDATA,
+    value: function value(data) {
+      var _iterator = _createForOfIteratorHelper(this[mjs_PIPES]),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var p = _step.value;
+          if (p.dest.write(data) === false) this.pause();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      var ret = this[DISCARDED] ? false : _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+      this[mjs_MAYBE_EMIT_END]();
+      return ret;
+    }
+  }, {
+    key: mjs_EMITEND,
+    value: function value() {
+      var _this6 = this;
+      if (this[mjs_EMITTED_END]) return false;
+      this[mjs_EMITTED_END] = true;
+      this.readable = false;
+      return this[mjs_ASYNC] ? (mjs_defer(function () {
+        return _this6[mjs_EMITEND2]();
+      }), true) : this[mjs_EMITEND2]();
+    }
+  }, {
+    key: mjs_EMITEND2,
+    value: function value() {
+      if (this[mjs_DECODER]) {
+        var data = this[mjs_DECODER].end();
+        if (data) {
+          var _iterator2 = _createForOfIteratorHelper(this[mjs_PIPES]),
+            _step2;
+          try {
+            for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+              var p = _step2.value;
+              p.dest.write(data);
+            }
+          } catch (err) {
+            _iterator2.e(err);
+          } finally {
+            _iterator2.f();
+          }
+          if (!this[DISCARDED]) _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+        }
+      }
+      var _iterator3 = _createForOfIteratorHelper(this[mjs_PIPES]),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _p = _step3.value;
+          _p.end();
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+      var ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'end');
+      this.removeAllListeners('end');
+      return ret;
+    }
+    /**
+     * Return a Promise that resolves to an array of all emitted data once
+     * the stream ends.
+     */
+  }, {
+    key: "collect",
+    value: function () {
+      var _collect = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var _this7 = this;
+        var buf, p;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              buf = Object.assign([], {
+                dataLength: 0
+              });
+              if (!this[mjs_OBJECTMODE]) buf.dataLength = 0;
+              // set the promise first, in case an error is raised
+              // by triggering the flow here.
+              p = this.promise();
+              this.on('data', function (c) {
+                buf.push(c);
+                if (!_this7[mjs_OBJECTMODE]) buf.dataLength += c.length;
+              });
+              _context.next = 6;
+              return p;
+            case 6:
+              return _context.abrupt("return", buf);
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function collect() {
+        return _collect.apply(this, arguments);
+      }
+      return collect;
+    }()
+    /**
+     * Return a Promise that resolves to the concatenation of all emitted data
+     * once the stream ends.
+     *
+     * Not allowed on objectMode streams.
+     */
+  }, {
+    key: "concat",
+    value: function () {
+      var _concat = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+        var buf;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              if (!this[mjs_OBJECTMODE]) {
+                _context2.next = 2;
+                break;
+              }
+              throw new Error('cannot concat in objectMode');
+            case 2:
+              _context2.next = 4;
+              return this.collect();
+            case 4:
+              buf = _context2.sent;
+              return _context2.abrupt("return", this[mjs_ENCODING] ? buf.join('') : Buffer.concat(buf, buf.dataLength));
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this);
+      }));
+      function concat() {
+        return _concat.apply(this, arguments);
+      }
+      return concat;
+    }()
+    /**
+     * Return a void Promise that resolves once the stream ends.
+     */
+  }, {
+    key: "promise",
+    value: function () {
+      var _promise = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var _this8 = this;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              return _context3.abrupt("return", new Promise(function (resolve, reject) {
+                _this8.on(mjs_DESTROYED, function () {
+                  return reject(new Error('stream destroyed'));
+                });
+                _this8.on('error', function (er) {
+                  return reject(er);
+                });
+                _this8.on('end', function () {
+                  return resolve();
+                });
+              }));
+            case 1:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3);
+      }));
+      function promise() {
+        return _promise.apply(this, arguments);
+      }
+      return promise;
+    }()
+    /**
+     * Asynchronous `for await of` iteration.
+     *
+     * This will continue emitting all chunks until the stream terminates.
+     */
+  }, {
+    key: mjs_Symbol$asyncIterator,
+    value: function value() {
+      var _this9 = this;
+      // set this up front, in case the consumer doesn't call next()
+      // right away.
+      this[DISCARDED] = false;
+      var stopped = false;
+      var stop = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+          return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+            while (1) switch (_context4.prev = _context4.next) {
+              case 0:
+                _this9.pause();
+                stopped = true;
+                return _context4.abrupt("return", {
+                  value: undefined,
+                  done: true
+                });
+              case 3:
+              case "end":
+                return _context4.stop();
+            }
+          }, _callee4);
+        }));
+        return function stop() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+      var next = function next() {
+        if (stopped) return stop();
+        var res = _this9.read();
+        if (res !== null) return Promise.resolve({
+          done: false,
+          value: res
+        });
+        if (_this9[mjs_EOF]) return stop();
+        var resolve;
+        var reject;
+        var onerr = function onerr(er) {
+          _this9.off('data', ondata);
+          _this9.off('end', onend);
+          _this9.off(mjs_DESTROYED, ondestroy);
+          stop();
+          reject(er);
+        };
+        var ondata = function ondata(value) {
+          _this9.off('error', onerr);
+          _this9.off('end', onend);
+          _this9.off(mjs_DESTROYED, ondestroy);
+          _this9.pause();
+          resolve({
+            value: value,
+            done: !!_this9[mjs_EOF]
+          });
+        };
+        var onend = function onend() {
+          _this9.off('error', onerr);
+          _this9.off('data', ondata);
+          _this9.off(mjs_DESTROYED, ondestroy);
+          stop();
+          resolve({
+            done: true,
+            value: undefined
+          });
+        };
+        var ondestroy = function ondestroy() {
+          return onerr(new Error('stream destroyed'));
+        };
+        return new Promise(function (res, rej) {
+          reject = rej;
+          resolve = res;
+          _this9.once(mjs_DESTROYED, ondestroy);
+          _this9.once('error', onerr);
+          _this9.once('end', onend);
+          _this9.once('data', ondata);
+        });
+      };
+      return _defineProperty({
+        next: next,
+        "throw": stop,
+        "return": stop
+      }, Symbol.asyncIterator, function () {
+        return this;
+      });
+    }
+    /**
+     * Synchronous `for of` iteration.
+     *
+     * The iteration will terminate when the internal buffer runs out, even
+     * if the stream has not yet terminated.
+     */
+  }, {
+    key: dist_mjs_Symbol$iterator,
+    value: function value() {
+      var _this10 = this;
+      // set this up front, in case the consumer doesn't call next()
+      // right away.
+      this[DISCARDED] = false;
+      var stopped = false;
+      var stop = function stop() {
+        _this10.pause();
+        _this10.off(mjs_ERROR, stop);
+        _this10.off(mjs_DESTROYED, stop);
+        _this10.off('end', stop);
+        stopped = true;
+        return {
+          done: true,
+          value: undefined
+        };
+      };
+      var next = function next() {
+        if (stopped) return stop();
+        var value = _this10.read();
+        return value === null ? stop() : {
+          done: false,
+          value: value
+        };
+      };
+      this.once('end', stop);
+      this.once(mjs_ERROR, stop);
+      this.once(mjs_DESTROYED, stop);
+      return _defineProperty({
+        next: next,
+        "throw": stop,
+        "return": stop
+      }, Symbol.iterator, function () {
+        return this;
+      });
+    }
+    /**
+     * Destroy a stream, preventing it from being used for any further purpose.
+     *
+     * If the stream has a `close()` method, then it will be called on
+     * destruction.
+     *
+     * After destruction, any attempt to write data, read data, or emit most
+     * events will be ignored.
+     *
+     * If an error argument is provided, then it will be emitted in an
+     * 'error' event.
+     */
+  }, {
+    key: "destroy",
+    value: function destroy(er) {
+      if (this[mjs_DESTROYED]) {
+        if (er) this.emit('error', er);else this.emit(mjs_DESTROYED);
+        return this;
+      }
+      this[mjs_DESTROYED] = true;
+      this[DISCARDED] = true;
+      // throw away all buffered data, it's never coming out
+      this[mjs_BUFFER].length = 0;
+      this[mjs_BUFFERLENGTH] = 0;
+      var wc = this;
+      if (typeof wc.close === 'function' && !this[mjs_CLOSED]) wc.close();
+      if (er) this.emit('error', er);
+      // if no error to emit, still reject pending promises
+      else this.emit(mjs_DESTROYED);
+      return this;
+    }
+    /**
+     * Alias for {@link isStream}
+     *
+     * Former export location, maintained for backwards compatibility.
+     *
+     * @deprecated
+     */
+  }], [{
+    key: "isStream",
+    get: function get() {
+      return isStream;
+    }
+  }]);
+  return Minipass;
+}(external_events_.EventEmitter);
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/ignore.js
+
+
+
+
+// give it a pattern, and it'll be able to tell you if
+// a given path should be ignored.
+// Ignoring a path ignores its children if the pattern ends in /**
+// Ignores are always parsed in dot:true mode
+
+
+var ignore_defaultPlatform = typeof process === 'object' && process && typeof process.platform === 'string' ? process.platform : 'linux';
+/**
+ * Class used to process ignored patterns
+ */
+var Ignore = /*#__PURE__*/function () {
+  function Ignore(ignored, _ref) {
+    var nobrace = _ref.nobrace,
+      nocase = _ref.nocase,
+      noext = _ref.noext,
+      noglobstar = _ref.noglobstar,
+      _ref$platform = _ref.platform,
+      platform = _ref$platform === void 0 ? ignore_defaultPlatform : _ref$platform;
+    _classCallCheck(this, Ignore);
+    _defineProperty(this, "relative", void 0);
+    _defineProperty(this, "relativeChildren", void 0);
+    _defineProperty(this, "absolute", void 0);
+    _defineProperty(this, "absoluteChildren", void 0);
+    this.relative = [];
+    this.absolute = [];
+    this.relativeChildren = [];
+    this.absoluteChildren = [];
+    var mmopts = {
+      dot: true,
+      nobrace: nobrace,
+      nocase: nocase,
+      noext: noext,
+      noglobstar: noglobstar,
+      optimizationLevel: 2,
+      platform: platform,
+      nocomment: true,
+      nonegate: true
+    };
+    // this is a little weird, but it gives us a clean set of optimized
+    // minimatch matchers, without getting tripped up if one of them
+    // ends in /** inside a brace section, and it's only inefficient at
+    // the start of the walk, not along it.
+    // It'd be nice if the Pattern class just had a .test() method, but
+    // handling globstars is a bit of a pita, and that code already lives
+    // in minimatch anyway.
+    // Another way would be if maybe Minimatch could take its set/globParts
+    // as an option, and then we could at least just use Pattern to test
+    // for absolute-ness.
+    // Yet another way, Minimatch could take an array of glob strings, and
+    // a cwd option, and do the right thing.
+    var _iterator = _createForOfIteratorHelper(ignored),
+      _step;
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var ign = _step.value;
+        var mm = new Minimatch(ign, mmopts);
+        for (var i = 0; i < mm.set.length; i++) {
+          var parsed = mm.set[i];
+          var globParts = mm.globParts[i];
+          /* c8 ignore start */
+          if (!parsed || !globParts) {
+            throw new Error('invalid pattern object');
+          }
+          /* c8 ignore stop */
+          var p = new Pattern(parsed, globParts, 0, platform);
+          var m = new Minimatch(p.globString(), mmopts);
+          var children = globParts[globParts.length - 1] === '**';
+          var absolute = p.isAbsolute();
+          if (absolute) this.absolute.push(m);else this.relative.push(m);
+          if (children) {
+            if (absolute) this.absoluteChildren.push(m);else this.relativeChildren.push(m);
+          }
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+  }
+  _createClass(Ignore, [{
+    key: "ignored",
+    value: function ignored(p) {
+      var fullpath = p.fullpath();
+      var fullpaths = "".concat(fullpath, "/");
+      var relative = p.relative() || '.';
+      var relatives = "".concat(relative, "/");
+      var _iterator2 = _createForOfIteratorHelper(this.relative),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var m = _step2.value;
+          if (m.match(relative) || m.match(relatives)) return true;
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      var _iterator3 = _createForOfIteratorHelper(this.absolute),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _m = _step3.value;
+          if (_m.match(fullpath) || _m.match(fullpaths)) return true;
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+      return false;
+    }
+  }, {
+    key: "childrenIgnored",
+    value: function childrenIgnored(p) {
+      var fullpath = p.fullpath() + '/';
+      var relative = (p.relative() || '.') + '/';
+      var _iterator4 = _createForOfIteratorHelper(this.relativeChildren),
+        _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var m = _step4.value;
+          if (m.match(relative)) return true;
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+      var _iterator5 = _createForOfIteratorHelper(this.absoluteChildren),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _m2 = _step5.value;
+          if (_m2.match(fullpath)) return true;
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      return false;
+    }
+  }]);
+  return Ignore;
+}();
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/processor.js
+
+
+
+
+
+
+// synchronous utility for filtering entries and calculating subwalks
+
+/**
+ * A cache of which patterns have been processed for a given Path
+ */
+var HasWalkedCache = /*#__PURE__*/function () {
+  function HasWalkedCache() {
+    var store = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Map();
+    _classCallCheck(this, HasWalkedCache);
+    _defineProperty(this, "store", void 0);
+    this.store = store;
+  }
+  _createClass(HasWalkedCache, [{
+    key: "copy",
+    value: function copy() {
+      return new HasWalkedCache(new Map(this.store));
+    }
+  }, {
+    key: "hasWalked",
+    value: function hasWalked(target, pattern) {
+      var _this$store$get;
+      return (_this$store$get = this.store.get(target.fullpath())) === null || _this$store$get === void 0 ? void 0 : _this$store$get.has(pattern.globString());
+    }
+  }, {
+    key: "storeWalked",
+    value: function storeWalked(target, pattern) {
+      var fullpath = target.fullpath();
+      var cached = this.store.get(fullpath);
+      if (cached) cached.add(pattern.globString());else this.store.set(fullpath, new Set([pattern.globString()]));
+    }
+  }]);
+  return HasWalkedCache;
+}();
+/**
+ * A record of which paths have been matched in a given walk step,
+ * and whether they only are considered a match if they are a directory,
+ * and whether their absolute or relative path should be returned.
+ */
+var MatchRecord = /*#__PURE__*/function () {
+  function MatchRecord() {
+    _classCallCheck(this, MatchRecord);
+    _defineProperty(this, "store", new Map());
+  }
+  _createClass(MatchRecord, [{
+    key: "add",
+    value: function add(target, absolute, ifDir) {
+      var n = (absolute ? 2 : 0) | (ifDir ? 1 : 0);
+      var current = this.store.get(target);
+      this.store.set(target, current === undefined ? n : n & current);
+    }
+    // match, absolute, ifdir
+  }, {
+    key: "entries",
+    value: function entries() {
+      return toConsumableArray_toConsumableArray(this.store.entries()).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+          path = _ref2[0],
+          n = _ref2[1];
+        return [path, !!(n & 2), !!(n & 1)];
+      });
+    }
+  }]);
+  return MatchRecord;
+}();
+/**
+ * A collection of patterns that must be processed in a subsequent step
+ * for a given path.
+ */
+var SubWalks = /*#__PURE__*/function () {
+  function SubWalks() {
+    _classCallCheck(this, SubWalks);
+    _defineProperty(this, "store", new Map());
+  }
+  _createClass(SubWalks, [{
+    key: "add",
+    value: function add(target, pattern) {
+      if (!target.canReaddir()) {
+        return;
+      }
+      var subs = this.store.get(target);
+      if (subs) {
+        if (!subs.find(function (p) {
+          return p.globString() === pattern.globString();
+        })) {
+          subs.push(pattern);
+        }
+      } else this.store.set(target, [pattern]);
+    }
+  }, {
+    key: "get",
+    value: function get(target) {
+      var subs = this.store.get(target);
+      /* c8 ignore start */
+      if (!subs) {
+        throw new Error('attempting to walk unknown path');
+      }
+      /* c8 ignore stop */
+      return subs;
+    }
+  }, {
+    key: "entries",
+    value: function entries() {
+      var _this = this;
+      return this.keys().map(function (k) {
+        return [k, _this.store.get(k)];
+      });
+    }
+  }, {
+    key: "keys",
+    value: function keys() {
+      return toConsumableArray_toConsumableArray(this.store.keys()).filter(function (t) {
+        return t.canReaddir();
+      });
+    }
+  }]);
+  return SubWalks;
+}();
+/**
+ * The class that processes patterns for a given path.
+ *
+ * Handles child entry filtering, and determining whether a path's
+ * directory contents must be read.
+ */
+var Processor = /*#__PURE__*/function () {
+  function Processor(opts, hasWalkedCache) {
+    _classCallCheck(this, Processor);
+    _defineProperty(this, "hasWalkedCache", void 0);
+    _defineProperty(this, "matches", new MatchRecord());
+    _defineProperty(this, "subwalks", new SubWalks());
+    _defineProperty(this, "patterns", void 0);
+    _defineProperty(this, "follow", void 0);
+    _defineProperty(this, "dot", void 0);
+    _defineProperty(this, "opts", void 0);
+    this.opts = opts;
+    this.follow = !!opts.follow;
+    this.dot = !!opts.dot;
+    this.hasWalkedCache = hasWalkedCache ? hasWalkedCache.copy() : new HasWalkedCache();
+  }
+  _createClass(Processor, [{
+    key: "processPatterns",
+    value: function processPatterns(target, patterns) {
+      this.patterns = patterns;
+      var processingSet = patterns.map(function (p) {
+        return [target, p];
+      });
+      // map of paths to the magic-starting subwalks they need to walk
+      // first item in patterns is the filter
+      var _iterator = _createForOfIteratorHelper(processingSet),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _step$value = _slicedToArray(_step.value, 2),
+            t = _step$value[0],
+            pattern = _step$value[1];
+          this.hasWalkedCache.storeWalked(t, pattern);
+          var root = pattern.root();
+          var absolute = pattern.isAbsolute() && this.opts.absolute !== false;
+          // start absolute patterns at root
+          if (root) {
+            t = t.resolve(root === '/' && this.opts.root !== undefined ? this.opts.root : root);
+            var _rest = pattern.rest();
+            if (!_rest) {
+              this.matches.add(t, true, false);
+              continue;
+            } else {
+              pattern = _rest;
+            }
+          }
+          if (t.isENOENT()) continue;
+          var p = void 0;
+          var rest = void 0;
+          var changed = false;
+          while (typeof (p = pattern.pattern()) === 'string' && (rest = pattern.rest())) {
+            var c = t.resolve(p);
+            t = c;
+            pattern = rest;
+            changed = true;
+          }
+          p = pattern.pattern();
+          rest = pattern.rest();
+          if (changed) {
+            if (this.hasWalkedCache.hasWalked(t, pattern)) continue;
+            this.hasWalkedCache.storeWalked(t, pattern);
+          }
+          // now we have either a final string for a known entry,
+          // more strings for an unknown entry,
+          // or a pattern starting with magic, mounted on t.
+          if (typeof p === 'string') {
+            // must not be final entry, otherwise we would have
+            // concatenated it earlier.
+            var ifDir = p === '..' || p === '' || p === '.';
+            this.matches.add(t.resolve(p), absolute, ifDir);
+            continue;
+          } else if (p === GLOBSTAR) {
+            var _rest2, _rest3;
+            // if no rest, match and subwalk pattern
+            // if rest, process rest and subwalk pattern
+            // if it's a symlink, but we didn't get here by way of a
+            // globstar match (meaning it's the first time THIS globstar
+            // has traversed a symlink), then we follow it. Otherwise, stop.
+            if (!t.isSymbolicLink() || this.follow || pattern.checkFollowGlobstar()) {
+              this.subwalks.add(t, pattern);
+            }
+            var rp = (_rest2 = rest) === null || _rest2 === void 0 ? void 0 : _rest2.pattern();
+            var rrest = (_rest3 = rest) === null || _rest3 === void 0 ? void 0 : _rest3.rest();
+            if (!rest || (rp === '' || rp === '.') && !rrest) {
+              // only HAS to be a dir if it ends in **/ or **/.
+              // but ending in ** will match files as well.
+              this.matches.add(t, absolute, rp === '' || rp === '.');
+            } else {
+              if (rp === '..') {
+                // this would mean you're matching **/.. at the fs root,
+                // and no thanks, I'm not gonna test that specific case.
+                /* c8 ignore start */
+                var tp = t.parent || t;
+                /* c8 ignore stop */
+                if (!rrest) this.matches.add(tp, absolute, true);else if (!this.hasWalkedCache.hasWalked(tp, rrest)) {
+                  this.subwalks.add(tp, rrest);
+                }
+              }
+            }
+          } else if (p instanceof RegExp) {
+            this.subwalks.add(t, pattern);
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      return this;
+    }
+  }, {
+    key: "subwalkTargets",
+    value: function subwalkTargets() {
+      return this.subwalks.keys();
+    }
+  }, {
+    key: "child",
+    value: function child() {
+      return new Processor(this.opts, this.hasWalkedCache);
+    }
+    // return a new Processor containing the subwalks for each
+    // child entry, and a set of matches, and
+    // a hasWalkedCache that's a copy of this one
+    // then we're going to call
+  }, {
+    key: "filterEntries",
+    value: function filterEntries(parent, entries) {
+      var patterns = this.subwalks.get(parent);
+      // put matches and entry walks into the results processor
+      var results = this.child();
+      var _iterator2 = _createForOfIteratorHelper(entries),
+        _step2;
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var e = _step2.value;
+          var _iterator3 = _createForOfIteratorHelper(patterns),
+            _step3;
+          try {
+            for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+              var pattern = _step3.value;
+              var absolute = pattern.isAbsolute();
+              var p = pattern.pattern();
+              var rest = pattern.rest();
+              if (p === GLOBSTAR) {
+                results.testGlobstar(e, pattern, rest, absolute);
+              } else if (p instanceof RegExp) {
+                results.testRegExp(e, p, rest, absolute);
+              } else {
+                results.testString(e, p, rest, absolute);
+              }
+            }
+          } catch (err) {
+            _iterator3.e(err);
+          } finally {
+            _iterator3.f();
+          }
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      return results;
+    }
+  }, {
+    key: "testGlobstar",
+    value: function testGlobstar(e, pattern, rest, absolute) {
+      if (this.dot || !e.name.startsWith('.')) {
+        if (!pattern.hasMore()) {
+          this.matches.add(e, absolute, false);
+        }
+        if (e.canReaddir()) {
+          // if we're in follow mode or it's not a symlink, just keep
+          // testing the same pattern. If there's more after the globstar,
+          // then this symlink consumes the globstar. If not, then we can
+          // follow at most ONE symlink along the way, so we mark it, which
+          // also checks to ensure that it wasn't already marked.
+          if (this.follow || !e.isSymbolicLink()) {
+            this.subwalks.add(e, pattern);
+          } else if (e.isSymbolicLink()) {
+            if (rest && pattern.checkFollowGlobstar()) {
+              this.subwalks.add(e, rest);
+            } else if (pattern.markFollowGlobstar()) {
+              this.subwalks.add(e, pattern);
+            }
+          }
+        }
+      }
+      // if the NEXT thing matches this entry, then also add
+      // the rest.
+      if (rest) {
+        var rp = rest.pattern();
+        if (typeof rp === 'string' &&
+        // dots and empty were handled already
+        rp !== '..' && rp !== '' && rp !== '.') {
+          this.testString(e, rp, rest.rest(), absolute);
+        } else if (rp === '..') {
+          /* c8 ignore start */
+          var ep = e.parent || e;
+          /* c8 ignore stop */
+          this.subwalks.add(ep, rest);
+        } else if (rp instanceof RegExp) {
+          this.testRegExp(e, rp, rest.rest(), absolute);
+        }
+      }
+    }
+  }, {
+    key: "testRegExp",
+    value: function testRegExp(e, p, rest, absolute) {
+      if (!p.test(e.name)) return;
+      if (!rest) {
+        this.matches.add(e, absolute, false);
+      } else {
+        this.subwalks.add(e, rest);
+      }
+    }
+  }, {
+    key: "testString",
+    value: function testString(e, p, rest, absolute) {
+      // should never happen?
+      if (!e.isNamed(p)) return;
+      if (!rest) {
+        this.matches.add(e, absolute, false);
+      } else {
+        this.subwalks.add(e, rest);
+      }
+    }
+  }]);
+  return Processor;
+}();
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/walker.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Single-use utility classes to provide functionality to the {@link Glob}
+ * methods.
+ *
+ * @module
+ */
+
+
+
+var makeIgnore = function makeIgnore(ignore, opts) {
+  return typeof ignore === 'string' ? new Ignore([ignore], opts) : Array.isArray(ignore) ? new Ignore(ignore, opts) : ignore;
+};
+/**
+ * basic walking utilities that all the glob walker types use
+ */
+var _onResume = /*#__PURE__*/new WeakMap();
+var _ignore = /*#__PURE__*/new WeakMap();
+var _sep = /*#__PURE__*/new WeakMap();
+var _ignored = /*#__PURE__*/new WeakSet();
+var _childrenIgnored = /*#__PURE__*/new WeakSet();
+var GlobUtil = /*#__PURE__*/function () {
+  function GlobUtil(patterns, _path, opts) {
+    var _this = this;
+    _classCallCheck(this, GlobUtil);
+    _classPrivateMethodInitSpec(this, _childrenIgnored);
+    _classPrivateMethodInitSpec(this, _ignored);
+    _defineProperty(this, "path", void 0);
+    _defineProperty(this, "patterns", void 0);
+    _defineProperty(this, "opts", void 0);
+    _defineProperty(this, "seen", new Set());
+    _defineProperty(this, "paused", false);
+    _defineProperty(this, "aborted", false);
+    _classPrivateFieldInitSpec(this, _onResume, {
+      writable: true,
+      value: []
+    });
+    _classPrivateFieldInitSpec(this, _ignore, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _sep, {
+      writable: true,
+      value: void 0
+    });
+    _defineProperty(this, "signal", void 0);
+    _defineProperty(this, "maxDepth", void 0);
+    this.patterns = patterns;
+    this.path = _path;
+    this.opts = opts;
+    _classPrivateFieldSet(this, _sep, !opts.posix && opts.platform === 'win32' ? '\\' : '/');
+    if (opts.ignore) {
+      _classPrivateFieldSet(this, _ignore, makeIgnore(opts.ignore, opts));
+    }
+    // ignore, always set with maxDepth, but it's optional on the
+    // GlobOptions type
+    /* c8 ignore start */
+    this.maxDepth = opts.maxDepth || Infinity;
+    /* c8 ignore stop */
+    if (opts.signal) {
+      this.signal = opts.signal;
+      this.signal.addEventListener('abort', function () {
+        _classPrivateFieldGet(_this, _onResume).length = 0;
+      });
+    }
+  }
+  _createClass(GlobUtil, [{
+    key: "pause",
+    value:
+    // backpressure mechanism
+    function pause() {
+      this.paused = true;
+    }
+  }, {
+    key: "resume",
+    value: function resume() {
+      var _this$signal;
+      /* c8 ignore start */
+      if ((_this$signal = this.signal) !== null && _this$signal !== void 0 && _this$signal.aborted) return;
+      /* c8 ignore stop */
+      this.paused = false;
+      var fn = undefined;
+      while (!this.paused && (fn = _classPrivateFieldGet(this, _onResume).shift())) {
+        fn();
+      }
+    }
+  }, {
+    key: "onResume",
+    value: function onResume(fn) {
+      var _this$signal2;
+      if ((_this$signal2 = this.signal) !== null && _this$signal2 !== void 0 && _this$signal2.aborted) return;
+      /* c8 ignore start */
+      if (!this.paused) {
+        fn();
+      } else {
+        /* c8 ignore stop */
+        _classPrivateFieldGet(this, _onResume).push(fn);
+      }
+    }
+    // do the requisite realpath/stat checking, and return the path
+    // to add or undefined to filter it out.
+  }, {
+    key: "matchCheck",
+    value: function () {
+      var _matchCheck = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e, ifDir) {
+        var rpc, needStat;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              if (!(ifDir && this.opts.nodir)) {
+                _context.next = 2;
+                break;
+              }
+              return _context.abrupt("return", undefined);
+            case 2:
+              if (!this.opts.realpath) {
+                _context.next = 12;
+                break;
+              }
+              _context.t0 = e.realpathCached();
+              if (_context.t0) {
+                _context.next = 8;
+                break;
+              }
+              _context.next = 7;
+              return e.realpath();
+            case 7:
+              _context.t0 = _context.sent;
+            case 8:
+              rpc = _context.t0;
+              if (rpc) {
+                _context.next = 11;
+                break;
+              }
+              return _context.abrupt("return", undefined);
+            case 11:
+              e = rpc;
+            case 12:
+              needStat = e.isUnknown() || this.opts.stat;
+              _context.t1 = this;
+              if (!needStat) {
+                _context.next = 20;
+                break;
+              }
+              _context.next = 17;
+              return e.lstat();
+            case 17:
+              _context.t2 = _context.sent;
+              _context.next = 21;
+              break;
+            case 20:
+              _context.t2 = e;
+            case 21:
+              _context.t3 = _context.t2;
+              _context.t4 = ifDir;
+              return _context.abrupt("return", _context.t1.matchCheckTest.call(_context.t1, _context.t3, _context.t4));
+            case 24:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function matchCheck(_x, _x2) {
+        return _matchCheck.apply(this, arguments);
+      }
+      return matchCheck;
+    }()
+  }, {
+    key: "matchCheckTest",
+    value: function matchCheckTest(e, ifDir) {
+      return e && (this.maxDepth === Infinity || e.depth() <= this.maxDepth) && (!ifDir || e.canReaddir()) && (!this.opts.nodir || !e.isDirectory()) && !_classPrivateMethodGet(this, _ignored, _ignored2).call(this, e) ? e : undefined;
+    }
+  }, {
+    key: "matchCheckSync",
+    value: function matchCheckSync(e, ifDir) {
+      if (ifDir && this.opts.nodir) return undefined;
+      var rpc;
+      if (this.opts.realpath) {
+        rpc = e.realpathCached() || e.realpathSync();
+        if (!rpc) return undefined;
+        e = rpc;
+      }
+      var needStat = e.isUnknown() || this.opts.stat;
+      return this.matchCheckTest(needStat ? e.lstatSync() : e, ifDir);
+    }
+  }, {
+    key: "matchFinish",
+    value: function matchFinish(e, absolute) {
+      if (_classPrivateMethodGet(this, _ignored, _ignored2).call(this, e)) return;
+      var abs = this.opts.absolute === undefined ? absolute : this.opts.absolute;
+      this.seen.add(e);
+      var mark = this.opts.mark && e.isDirectory() ? _classPrivateFieldGet(this, _sep) : '';
+      // ok, we have what we need!
+      if (this.opts.withFileTypes) {
+        this.matchEmit(e);
+      } else if (abs) {
+        var _abs = this.opts.posix ? e.fullpathPosix() : e.fullpath();
+        this.matchEmit(_abs + mark);
+      } else {
+        var rel = this.opts.posix ? e.relativePosix() : e.relative();
+        var pre = this.opts.dotRelative && !rel.startsWith('..' + _classPrivateFieldGet(this, _sep)) ? '.' + _classPrivateFieldGet(this, _sep) : '';
+        this.matchEmit(!rel ? '.' + mark : pre + rel + mark);
+      }
+    }
+  }, {
+    key: "match",
+    value: function () {
+      var _match = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e, absolute, ifDir) {
+        var p;
+        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return this.matchCheck(e, ifDir);
+            case 2:
+              p = _context2.sent;
+              if (p) this.matchFinish(p, absolute);
+            case 4:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this);
+      }));
+      function match(_x3, _x4, _x5) {
+        return _match.apply(this, arguments);
+      }
+      return match;
+    }()
+  }, {
+    key: "matchSync",
+    value: function matchSync(e, absolute, ifDir) {
+      var p = this.matchCheckSync(e, ifDir);
+      if (p) this.matchFinish(p, absolute);
+    }
+  }, {
+    key: "walkCB",
+    value: function walkCB(target, patterns, cb) {
+      var _this$signal3;
+      /* c8 ignore start */
+      if ((_this$signal3 = this.signal) !== null && _this$signal3 !== void 0 && _this$signal3.aborted) cb();
+      /* c8 ignore stop */
+      this.walkCB2(target, patterns, new Processor(this.opts), cb);
+    }
+  }, {
+    key: "walkCB2",
+    value: function walkCB2(target, patterns, processor, cb) {
+      var _this$signal4,
+        _this2 = this;
+      if (_classPrivateMethodGet(this, _childrenIgnored, _childrenIgnored2).call(this, target)) return cb();
+      if ((_this$signal4 = this.signal) !== null && _this$signal4 !== void 0 && _this$signal4.aborted) cb();
+      if (this.paused) {
+        this.onResume(function () {
+          return _this2.walkCB2(target, patterns, processor, cb);
+        });
+        return;
+      }
+      processor.processPatterns(target, patterns);
+      // done processing.  all of the above is sync, can be abstracted out.
+      // subwalks is a map of paths to the entry filters they need
+      // matches is a map of paths to [absolute, ifDir] tuples.
+      var tasks = 1;
+      var next = function next() {
+        if (--tasks === 0) cb();
+      };
+      var _iterator = _createForOfIteratorHelper(processor.matches.entries()),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _step$value = _slicedToArray(_step.value, 3),
+            m = _step$value[0],
+            absolute = _step$value[1],
+            ifDir = _step$value[2];
+          if (_classPrivateMethodGet(this, _ignored, _ignored2).call(this, m)) continue;
+          tasks++;
+          this.match(m, absolute, ifDir).then(function () {
+            return next();
+          });
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+      var _iterator2 = _createForOfIteratorHelper(processor.subwalkTargets()),
+        _step2;
+      try {
+        var _loop = function _loop() {
+          var t = _step2.value;
+          if (_this2.maxDepth !== Infinity && t.depth() >= _this2.maxDepth) {
+            return "continue";
+          }
+          tasks++;
+          var childrenCached = t.readdirCached();
+          if (t.calledReaddir()) _this2.walkCB3(t, childrenCached, processor, next);else {
+            t.readdirCB(function (_, entries) {
+              return _this2.walkCB3(t, entries, processor, next);
+            }, true);
+          }
+        };
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var _ret = _loop();
+          if (_ret === "continue") continue;
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+      next();
+    }
+  }, {
+    key: "walkCB3",
+    value: function walkCB3(target, entries, processor, cb) {
+      processor = processor.filterEntries(target, entries);
+      var tasks = 1;
+      var next = function next() {
+        if (--tasks === 0) cb();
+      };
+      var _iterator3 = _createForOfIteratorHelper(processor.matches.entries()),
+        _step3;
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var _step3$value = _slicedToArray(_step3.value, 3),
+            m = _step3$value[0],
+            absolute = _step3$value[1],
+            ifDir = _step3$value[2];
+          if (_classPrivateMethodGet(this, _ignored, _ignored2).call(this, m)) continue;
+          tasks++;
+          this.match(m, absolute, ifDir).then(function () {
+            return next();
+          });
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+      var _iterator4 = _createForOfIteratorHelper(processor.subwalks.entries()),
+        _step4;
+      try {
+        for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+          var _step4$value = _slicedToArray(_step4.value, 2),
+            _target = _step4$value[0],
+            patterns = _step4$value[1];
+          tasks++;
+          this.walkCB2(_target, patterns, processor.child(), next);
+        }
+      } catch (err) {
+        _iterator4.e(err);
+      } finally {
+        _iterator4.f();
+      }
+      next();
+    }
+  }, {
+    key: "walkCBSync",
+    value: function walkCBSync(target, patterns, cb) {
+      var _this$signal5;
+      /* c8 ignore start */
+      if ((_this$signal5 = this.signal) !== null && _this$signal5 !== void 0 && _this$signal5.aborted) cb();
+      /* c8 ignore stop */
+      this.walkCB2Sync(target, patterns, new Processor(this.opts), cb);
+    }
+  }, {
+    key: "walkCB2Sync",
+    value: function walkCB2Sync(target, patterns, processor, cb) {
+      var _this$signal6,
+        _this3 = this;
+      if (_classPrivateMethodGet(this, _childrenIgnored, _childrenIgnored2).call(this, target)) return cb();
+      if ((_this$signal6 = this.signal) !== null && _this$signal6 !== void 0 && _this$signal6.aborted) cb();
+      if (this.paused) {
+        this.onResume(function () {
+          return _this3.walkCB2Sync(target, patterns, processor, cb);
+        });
+        return;
+      }
+      processor.processPatterns(target, patterns);
+      // done processing.  all of the above is sync, can be abstracted out.
+      // subwalks is a map of paths to the entry filters they need
+      // matches is a map of paths to [absolute, ifDir] tuples.
+      var tasks = 1;
+      var next = function next() {
+        if (--tasks === 0) cb();
+      };
+      var _iterator5 = _createForOfIteratorHelper(processor.matches.entries()),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var _step5$value = _slicedToArray(_step5.value, 3),
+            m = _step5$value[0],
+            absolute = _step5$value[1],
+            ifDir = _step5$value[2];
+          if (_classPrivateMethodGet(this, _ignored, _ignored2).call(this, m)) continue;
+          this.matchSync(m, absolute, ifDir);
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      var _iterator6 = _createForOfIteratorHelper(processor.subwalkTargets()),
+        _step6;
+      try {
+        for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+          var t = _step6.value;
+          if (this.maxDepth !== Infinity && t.depth() >= this.maxDepth) {
+            continue;
+          }
+          tasks++;
+          var children = t.readdirSync();
+          this.walkCB3Sync(t, children, processor, next);
+        }
+      } catch (err) {
+        _iterator6.e(err);
+      } finally {
+        _iterator6.f();
+      }
+      next();
+    }
+  }, {
+    key: "walkCB3Sync",
+    value: function walkCB3Sync(target, entries, processor, cb) {
+      processor = processor.filterEntries(target, entries);
+      var tasks = 1;
+      var next = function next() {
+        if (--tasks === 0) cb();
+      };
+      var _iterator7 = _createForOfIteratorHelper(processor.matches.entries()),
+        _step7;
+      try {
+        for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+          var _step7$value = _slicedToArray(_step7.value, 3),
+            m = _step7$value[0],
+            absolute = _step7$value[1],
+            ifDir = _step7$value[2];
+          if (_classPrivateMethodGet(this, _ignored, _ignored2).call(this, m)) continue;
+          this.matchSync(m, absolute, ifDir);
+        }
+      } catch (err) {
+        _iterator7.e(err);
+      } finally {
+        _iterator7.f();
+      }
+      var _iterator8 = _createForOfIteratorHelper(processor.subwalks.entries()),
+        _step8;
+      try {
+        for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+          var _step8$value = _slicedToArray(_step8.value, 2),
+            _target2 = _step8$value[0],
+            patterns = _step8$value[1];
+          tasks++;
+          this.walkCB2Sync(_target2, patterns, processor.child(), next);
+        }
+      } catch (err) {
+        _iterator8.e(err);
+      } finally {
+        _iterator8.f();
+      }
+      next();
+    }
+  }]);
+  return GlobUtil;
+}();
+function _ignored2(path) {
+  var _classPrivateFieldGet2, _classPrivateFieldGet3;
+  return this.seen.has(path) || !!((_classPrivateFieldGet2 = _classPrivateFieldGet(this, _ignore)) !== null && _classPrivateFieldGet2 !== void 0 && (_classPrivateFieldGet3 = _classPrivateFieldGet2.ignored) !== null && _classPrivateFieldGet3 !== void 0 && _classPrivateFieldGet3.call(_classPrivateFieldGet2, path));
+}
+function _childrenIgnored2(path) {
+  var _classPrivateFieldGet4, _classPrivateFieldGet5;
+  return !!((_classPrivateFieldGet4 = _classPrivateFieldGet(this, _ignore)) !== null && _classPrivateFieldGet4 !== void 0 && (_classPrivateFieldGet5 = _classPrivateFieldGet4.childrenIgnored) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.call(_classPrivateFieldGet4, path));
+}
+var GlobWalker = /*#__PURE__*/function (_GlobUtil) {
+  _inherits(GlobWalker, _GlobUtil);
+  var _super = _createSuper(GlobWalker);
+  function GlobWalker(patterns, path, opts) {
+    var _this4;
+    _classCallCheck(this, GlobWalker);
+    _this4 = _super.call(this, patterns, path, opts);
+    _defineProperty(_assertThisInitialized(_this4), "matches", void 0);
+    _this4.matches = new Set();
+    return _this4;
+  }
+  _createClass(GlobWalker, [{
+    key: "matchEmit",
+    value: function matchEmit(e) {
+      this.matches.add(e);
+    }
+  }, {
+    key: "walk",
+    value: function () {
+      var _walk = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+        var _this$signal7,
+          _this5 = this;
+        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              if (!((_this$signal7 = this.signal) !== null && _this$signal7 !== void 0 && _this$signal7.aborted)) {
+                _context3.next = 2;
+                break;
+              }
+              throw this.signal.reason;
+            case 2:
+              if (!this.path.isUnknown()) {
+                _context3.next = 5;
+                break;
+              }
+              _context3.next = 5;
+              return this.path.lstat();
+            case 5:
+              _context3.next = 7;
+              return new Promise(function (res, rej) {
+                _this5.walkCB(_this5.path, _this5.patterns, function () {
+                  var _this5$signal;
+                  if ((_this5$signal = _this5.signal) !== null && _this5$signal !== void 0 && _this5$signal.aborted) {
+                    rej(_this5.signal.reason);
+                  } else {
+                    res(_this5.matches);
+                  }
+                });
+              });
+            case 7:
+              return _context3.abrupt("return", this.matches);
+            case 8:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, this);
+      }));
+      function walk() {
+        return _walk.apply(this, arguments);
+      }
+      return walk;
+    }()
+  }, {
+    key: "walkSync",
+    value: function walkSync() {
+      var _this$signal8,
+        _this6 = this;
+      if ((_this$signal8 = this.signal) !== null && _this$signal8 !== void 0 && _this$signal8.aborted) throw this.signal.reason;
+      if (this.path.isUnknown()) {
+        this.path.lstatSync();
+      }
+      // nothing for the callback to do, because this never pauses
+      this.walkCBSync(this.path, this.patterns, function () {
+        var _this6$signal;
+        if ((_this6$signal = _this6.signal) !== null && _this6$signal !== void 0 && _this6$signal.aborted) throw _this6.signal.reason;
+      });
+      return this.matches;
+    }
+  }]);
+  return GlobWalker;
+}(GlobUtil);
+var GlobStream = /*#__PURE__*/function (_GlobUtil2) {
+  _inherits(GlobStream, _GlobUtil2);
+  var _super2 = _createSuper(GlobStream);
+  function GlobStream(patterns, path, opts) {
+    var _this7;
+    _classCallCheck(this, GlobStream);
+    _this7 = _super2.call(this, patterns, path, opts);
+    _defineProperty(_assertThisInitialized(_this7), "results", void 0);
+    _this7.results = new mjs_Minipass({
+      signal: _this7.signal,
+      objectMode: true
+    });
+    _this7.results.on('drain', function () {
+      return _this7.resume();
+    });
+    _this7.results.on('resume', function () {
+      return _this7.resume();
+    });
+    return _this7;
+  }
+  _createClass(GlobStream, [{
+    key: "matchEmit",
+    value: function matchEmit(e) {
+      this.results.write(e);
+      if (!this.results.flowing) this.pause();
+    }
+  }, {
+    key: "stream",
+    value: function stream() {
+      var _this8 = this;
+      var target = this.path;
+      if (target.isUnknown()) {
+        target.lstat().then(function () {
+          _this8.walkCB(target, _this8.patterns, function () {
+            return _this8.results.end();
+          });
+        });
+      } else {
+        this.walkCB(target, this.patterns, function () {
+          return _this8.results.end();
+        });
+      }
+      return this.results;
+    }
+  }, {
+    key: "streamSync",
+    value: function streamSync() {
+      var _this9 = this;
+      if (this.path.isUnknown()) {
+        this.path.lstatSync();
+      }
+      this.walkCBSync(this.path, this.patterns, function () {
+        return _this9.results.end();
+      });
+      return this.results;
+    }
+  }]);
+  return GlobStream;
+}(GlobUtil);
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/glob.js
+
+
+
+
+
+
+
+
+var glob_Symbol$iterator, glob_Symbol$asyncIterator;
+
+
+
+
+
+// if no process global, just call it linux.
+// so we default to case-sensitive, / separators
+var glob_defaultPlatform = typeof process === 'object' && process && typeof process.platform === 'string' ? process.platform : 'linux';
+/**
+ * An object that can perform glob pattern traversals.
+ */
+glob_Symbol$iterator = Symbol.iterator;
+glob_Symbol$asyncIterator = Symbol.asyncIterator;
+var Glob = /*#__PURE__*/function () {
+  /**
+   * The options provided to the constructor.
+   */
+
+  /**
+   * An array of parsed immutable {@link Pattern} objects.
+   */
+
+  /**
+   * All options are stored as properties on the `Glob` object.
+   *
+   * See {@link GlobOptions} for full options descriptions.
+   *
+   * Note that a previous `Glob` object can be passed as the
+   * `GlobOptions` to another `Glob` instantiation to re-use settings
+   * and caches with a new pattern.
+   *
+   * Traversal functions can be called multiple times to run the walk
+   * again.
+   */
+  function Glob(pattern, opts) {
+    var _this = this;
+    _classCallCheck(this, Glob);
+    _defineProperty(this, "absolute", void 0);
+    _defineProperty(this, "cwd", void 0);
+    _defineProperty(this, "root", void 0);
+    _defineProperty(this, "dot", void 0);
+    _defineProperty(this, "dotRelative", void 0);
+    _defineProperty(this, "follow", void 0);
+    _defineProperty(this, "ignore", void 0);
+    _defineProperty(this, "magicalBraces", void 0);
+    _defineProperty(this, "mark", void 0);
+    _defineProperty(this, "matchBase", void 0);
+    _defineProperty(this, "maxDepth", void 0);
+    _defineProperty(this, "nobrace", void 0);
+    _defineProperty(this, "nocase", void 0);
+    _defineProperty(this, "nodir", void 0);
+    _defineProperty(this, "noext", void 0);
+    _defineProperty(this, "noglobstar", void 0);
+    _defineProperty(this, "pattern", void 0);
+    _defineProperty(this, "platform", void 0);
+    _defineProperty(this, "realpath", void 0);
+    _defineProperty(this, "scurry", void 0);
+    _defineProperty(this, "stat", void 0);
+    _defineProperty(this, "signal", void 0);
+    _defineProperty(this, "windowsPathsNoEscape", void 0);
+    _defineProperty(this, "withFileTypes", void 0);
+    _defineProperty(this, "opts", void 0);
+    _defineProperty(this, "patterns", void 0);
+    /* c8 ignore start */
+    if (!opts) throw new TypeError('glob options required');
+    /* c8 ignore stop */
+    this.withFileTypes = !!opts.withFileTypes;
+    this.signal = opts.signal;
+    this.follow = !!opts.follow;
+    this.dot = !!opts.dot;
+    this.dotRelative = !!opts.dotRelative;
+    this.nodir = !!opts.nodir;
+    this.mark = !!opts.mark;
+    if (!opts.cwd) {
+      this.cwd = '';
+    } else if (opts.cwd instanceof URL || opts.cwd.startsWith('file://')) {
+      opts.cwd = (0,external_url_.fileURLToPath)(opts.cwd);
+    }
+    this.cwd = opts.cwd || '';
+    this.root = opts.root;
+    this.magicalBraces = !!opts.magicalBraces;
+    this.nobrace = !!opts.nobrace;
+    this.noext = !!opts.noext;
+    this.realpath = !!opts.realpath;
+    this.absolute = opts.absolute;
+    this.noglobstar = !!opts.noglobstar;
+    this.matchBase = !!opts.matchBase;
+    this.maxDepth = typeof opts.maxDepth === 'number' ? opts.maxDepth : Infinity;
+    this.stat = !!opts.stat;
+    this.ignore = opts.ignore;
+    if (this.withFileTypes && this.absolute !== undefined) {
+      throw new Error('cannot set absolute and withFileTypes:true');
+    }
+    if (typeof pattern === 'string') {
+      pattern = [pattern];
+    }
+    this.windowsPathsNoEscape = !!opts.windowsPathsNoEscape || opts.allowWindowsEscape === false;
+    if (this.windowsPathsNoEscape) {
+      pattern = pattern.map(function (p) {
+        return p.replace(/\\/g, '/');
+      });
+    }
+    if (this.matchBase) {
+      if (opts.noglobstar) {
+        throw new TypeError('base matching requires globstar');
+      }
+      pattern = pattern.map(function (p) {
+        return p.includes('/') ? p : "./**/".concat(p);
+      });
+    }
+    this.pattern = pattern;
+    this.platform = opts.platform || glob_defaultPlatform;
+    this.opts = _objectSpread2(_objectSpread2({}, opts), {}, {
+      platform: this.platform
+    });
+    if (opts.scurry) {
+      this.scurry = opts.scurry;
+      if (opts.nocase !== undefined && opts.nocase !== opts.scurry.nocase) {
+        throw new Error('nocase option contradicts provided scurry option');
+      }
+    } else {
+      var Scurry = opts.platform === 'win32' ? PathScurryWin32 : opts.platform === 'darwin' ? PathScurryDarwin : opts.platform ? PathScurryPosix : PathScurry;
+      this.scurry = new Scurry(this.cwd, {
+        nocase: opts.nocase,
+        fs: opts.fs
+      });
+    }
+    this.nocase = this.scurry.nocase;
+    // If you do nocase:true on a case-sensitive file system, then
+    // we need to use regexps instead of strings for non-magic
+    // path portions, because statting `aBc` won't return results
+    // for the file `AbC` for example.
+    var nocaseMagicOnly = this.platform === 'darwin' || this.platform === 'win32';
+    var mmo = _objectSpread2(_objectSpread2({}, opts), {}, {
+      dot: this.dot,
+      matchBase: this.matchBase,
+      nobrace: this.nobrace,
+      nocase: this.nocase,
+      nocaseMagicOnly: nocaseMagicOnly,
+      nocomment: true,
+      noext: this.noext,
+      nonegate: true,
+      optimizationLevel: 2,
+      platform: this.platform,
+      windowsPathsNoEscape: this.windowsPathsNoEscape,
+      debug: !!this.opts.debug
+    });
+    var mms = this.pattern.map(function (p) {
+      return new Minimatch(p, mmo);
+    });
+    var _mms$reduce = mms.reduce(function (set, m) {
+        var _set$, _set$2;
+        (_set$ = set[0]).push.apply(_set$, toConsumableArray_toConsumableArray(m.set));
+        (_set$2 = set[1]).push.apply(_set$2, toConsumableArray_toConsumableArray(m.globParts));
+        return set;
+      }, [[], []]),
+      _mms$reduce2 = _slicedToArray(_mms$reduce, 2),
+      matchSet = _mms$reduce2[0],
+      globParts = _mms$reduce2[1];
+    this.patterns = matchSet.map(function (set, i) {
+      var g = globParts[i];
+      /* c8 ignore start */
+      if (!g) throw new Error('invalid pattern object');
+      /* c8 ignore stop */
+      return new Pattern(set, g, 0, _this.platform);
+    });
+  }
+  _createClass(Glob, [{
+    key: "walk",
+    value: function () {
+      var _walk = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.t0 = toConsumableArray_toConsumableArray;
+              _context.next = 3;
+              return new GlobWalker(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
+                maxDepth: this.maxDepth !== Infinity ? this.maxDepth + this.scurry.cwd.depth() : Infinity,
+                platform: this.platform,
+                nocase: this.nocase
+              })).walk();
+            case 3:
+              _context.t1 = _context.sent;
+              return _context.abrupt("return", (0, _context.t0)(_context.t1));
+            case 5:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function walk() {
+        return _walk.apply(this, arguments);
+      }
+      return walk;
+    }()
+  }, {
+    key: "walkSync",
+    value: function walkSync() {
+      return toConsumableArray_toConsumableArray(new GlobWalker(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
+        maxDepth: this.maxDepth !== Infinity ? this.maxDepth + this.scurry.cwd.depth() : Infinity,
+        platform: this.platform,
+        nocase: this.nocase
+      })).walkSync());
+    }
+  }, {
+    key: "stream",
+    value: function stream() {
+      return new GlobStream(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
+        maxDepth: this.maxDepth !== Infinity ? this.maxDepth + this.scurry.cwd.depth() : Infinity,
+        platform: this.platform,
+        nocase: this.nocase
+      })).stream();
+    }
+  }, {
+    key: "streamSync",
+    value: function streamSync() {
+      return new GlobStream(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
+        maxDepth: this.maxDepth !== Infinity ? this.maxDepth + this.scurry.cwd.depth() : Infinity,
+        platform: this.platform,
+        nocase: this.nocase
+      })).streamSync();
+    }
+    /**
+     * Default sync iteration function. Returns a Generator that
+     * iterates over the results.
+     */
+  }, {
+    key: "iterateSync",
+    value: function iterateSync() {
+      return this.streamSync()[Symbol.iterator]();
+    }
+  }, {
+    key: glob_Symbol$iterator,
+    value: function value() {
+      return this.iterateSync();
+    }
+    /**
+     * Default async iteration function. Returns an AsyncGenerator that
+     * iterates over the results.
+     */
+  }, {
+    key: "iterate",
+    value: function iterate() {
+      return this.stream()[Symbol.asyncIterator]();
+    }
+  }, {
+    key: glob_Symbol$asyncIterator,
+    value: function value() {
+      return this.iterate();
+    }
+  }]);
+  return Glob;
+}();
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/has-magic.js
+
+
+/**
+ * Return true if the patterns provided contain any magic glob characters,
+ * given the options provided.
+ *
+ * Brace expansion is not considered "magic" unless the `magicalBraces` option
+ * is set, as brace expansion just turns one string into an array of strings.
+ * So a pattern like `'x{a,b}y'` would return `false`, because `'xay'` and
+ * `'xby'` both do not contain any magic glob characters, and it's treated the
+ * same as if you had called it on `['xay', 'xby']`. When `magicalBraces:true`
+ * is in the options, brace expansion _is_ treated as a pattern having magic.
+ */
+var hasMagic = function hasMagic(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  if (!Array.isArray(pattern)) {
+    pattern = [pattern];
+  }
+  var _iterator = _createForOfIteratorHelper(pattern),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var p = _step.value;
+      if (new Minimatch(p, options).hasMagic()) return true;
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+  return false;
+};
+;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/index.js
+
+
+
+
+
+function globStreamSync(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Glob(pattern, options).streamSync();
+}
+function globStream(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Glob(pattern, options).stream();
+}
+function esm_globSync(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Glob(pattern, options).walkSync();
+}
+function glob_(_x) {
+  return _glob_.apply(this, arguments);
+}
+function _glob_() {
+  _glob_ = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(pattern) {
+    var options,
+      _args = arguments;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+          return _context.abrupt("return", new Glob(pattern, options).walk());
+        case 2:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return _glob_.apply(this, arguments);
+}
+function globIterateSync(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Glob(pattern, options).iterateSync();
+}
+function globIterate(pattern) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  return new Glob(pattern, options).iterate();
+}
+// aliases: glob.sync.stream() glob.stream.sync() glob.sync() etc
+var streamSync = globStreamSync;
+var stream = Object.assign(globStream, {
+  sync: globStreamSync
+});
+var iterateSync = globIterateSync;
+var iterate = Object.assign(globIterate, {
+  sync: globIterateSync
+});
+var sync = Object.assign(esm_globSync, {
+  stream: globStreamSync,
+  iterate: globIterateSync
+});
+/* c8 ignore start */
+
+
+
+/* c8 ignore stop */
+var glob = Object.assign(glob_, {
+  glob: glob_,
+  globSync: esm_globSync,
+  sync: sync,
+  globStream: globStream,
+  stream: stream,
+  globStreamSync: globStreamSync,
+  streamSync: streamSync,
+  globIterate: globIterate,
+  iterate: iterate,
+  globIterateSync: globIterateSync,
+  iterateSync: iterateSync,
+  Glob: Glob,
+  hasMagic: hasMagic,
+  escape: escape_escape,
+  unescape: unescape_unescape
+});
+glob.glob = glob;
+// EXTERNAL MODULE: ../../node_modules/is-buffer/index.js
+var is_buffer = __webpack_require__(5352);
 ;// CONCATENATED MODULE: ../../node_modules/unist-util-stringify-position/lib/index.js
 /**
  * @typedef {import('unist').Node} Node
@@ -16118,8 +27299,6 @@ function isUrl(fileUrlOrPath) {
   // @ts-expect-error: indexable.
   fileUrlOrPath.origin;
 }
-// EXTERNAL MODULE: external "url"
-var external_url_ = __webpack_require__(7310);
 ;// CONCATENATED MODULE: ../../node_modules/vfile/lib/index.js
 
 
@@ -16347,7 +27526,7 @@ var VFile = /*#__PURE__*/function () {
       // `vfile`s too.
       if (_prop in options && options[_prop] !== undefined && options[_prop] !== null) {
         // @ts-expect-error: TS doesn’t understand basic reality.
-        this[_prop] = _prop === 'history' ? _toConsumableArray(options[_prop]) : options[_prop];
+        this[_prop] = _prop === 'history' ? toConsumableArray_toConsumableArray(options[_prop]) : options[_prop];
       }
     }
 
@@ -16645,22 +27824,6 @@ function assertPath(path, name) {
 function buffer(value) {
   return is_buffer(value);
 }
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/toArray.js
-
-
-
-
-function _toArray(arr) {
-  return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
-}
 ;// CONCATENATED MODULE: ../../node_modules/bail/index.js
 /**
  * Throw a given error.
@@ -16724,7 +27887,7 @@ function trough() {
     if (typeof callback !== 'function') {
       throw new TypeError('Expected function as last argument, not ' + callback);
     }
-    next.apply(void 0, [null].concat(_toConsumableArray(values)));
+    next.apply(void 0, [null].concat(toConsumableArray_toConsumableArray(values)));
 
     /**
      * Run the next `fn`, or we’re done.
@@ -16930,7 +28093,7 @@ function base() {
     var destination = base();
     var index = -1;
     while (++index < attachers.length) {
-      destination.use.apply(destination, _toConsumableArray(attachers[index]));
+      destination.use.apply(destination, toConsumableArray_toConsumableArray(attachers[index]));
     }
     destination.data(extend(true, {}, namespace));
     return destination;
@@ -16982,7 +28145,7 @@ function base() {
       }
 
       /** @type {Transformer|void} */
-      var transformer = attacher.call.apply(attacher, [processor].concat(_toConsumableArray(options)));
+      var transformer = attacher.call.apply(attacher, [processor].concat(toConsumableArray_toConsumableArray(options)));
       if (typeof transformer === 'function') {
         transformers.use(transformer);
       }
@@ -17034,7 +28197,7 @@ function base() {
           var _value = _toArray(value),
             plugin = _value[0],
             _options = _value.slice(1);
-          addPlugin.apply(void 0, [plugin].concat(_toConsumableArray(_options)));
+          addPlugin.apply(void 0, [plugin].concat(toConsumableArray_toConsumableArray(_options)));
         } else {
           addPreset(value);
         }
@@ -20301,9 +31464,9 @@ function findAndReplace(tree, find, replace, options) {
         index: match.index,
         input: match.input,
         // @ts-expect-error: stack is fine.
-        stack: [].concat(_toConsumableArray(parents), [node])
+        stack: [].concat(toConsumableArray_toConsumableArray(parents), [node])
       };
-      var value = replace.apply(void 0, _toConsumableArray(match).concat([matchObject]));
+      var value = replace.apply(void 0, toConsumableArray_toConsumableArray(match).concat([matchObject]));
       if (typeof value === 'string') {
         value = value.length > 0 ? {
           type: 'text',
@@ -20321,7 +31484,7 @@ function findAndReplace(tree, find, replace, options) {
         }
         if (Array.isArray(value)) {
           var _nodes;
-          (_nodes = nodes).push.apply(_nodes, _toConsumableArray(value));
+          (_nodes = nodes).push.apply(_nodes, toConsumableArray_toConsumableArray(value));
         } else if (value) {
           nodes.push(value);
         }
@@ -20341,7 +31504,7 @@ function findAndReplace(tree, find, replace, options) {
           value: node.value.slice(start)
         });
       }
-      (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(_toConsumableArray(nodes)));
+      (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(toConsumableArray_toConsumableArray(nodes)));
     } else {
       nodes = [node];
     }
@@ -26327,7 +37490,7 @@ function createTokenizer(parser, initialize, from) {
         function start(code) {
           var def = code !== null && map[code];
           var all = code !== null && map["null"];
-          var list = [].concat(_toConsumableArray(Array.isArray(def) ? def : def ? [def] : []), _toConsumableArray(Array.isArray(all) ? all : all ? [all] : []));
+          var list = [].concat(toConsumableArray_toConsumableArray(Array.isArray(def) ? def : def ? [def] : []), toConsumableArray_toConsumableArray(Array.isArray(all) ? all : all ? [all] : []));
           return handleListOfConstructs(list)(code);
         }
       }
@@ -31250,13 +42413,13 @@ function extension(combined, extension) {
         var right = extension[key];
         if (right) {
           var _combined$key;
-          (_combined$key = combined[key]).push.apply(_combined$key, _toConsumableArray(right));
+          (_combined$key = combined[key]).push.apply(_combined$key, toConsumableArray_toConsumableArray(right));
         }
       } else if (key === 'transforms') {
         var _right = extension[key];
         if (_right) {
           var _combined$key2;
-          (_combined$key2 = combined[key]).push.apply(_combined$key2, _toConsumableArray(_right));
+          (_combined$key2 = combined[key]).push.apply(_combined$key2, toConsumableArray_toConsumableArray(_right));
         }
       } else if (key === 'enter' || key === 'exit') {
         var _right2 = extension[key];
@@ -32422,7 +43585,7 @@ function list_item_listItem(state, node, parent) {
       });
     }
     if (child.type === 'element' && child.tagName === 'p' && !loose) {
-      children.push.apply(children, _toConsumableArray(child.children));
+      children.push.apply(children, toConsumableArray_toConsumableArray(child.children));
     } else {
       children.push(child);
     }
@@ -33435,7 +44598,7 @@ function state_all(state, parent) {
           }
         }
         if (Array.isArray(result)) {
-          values.push.apply(values, _toConsumableArray(result));
+          values.push.apply(values, toConsumableArray_toConsumableArray(result));
         } else {
           values.push(result);
         }
@@ -33694,42 +44857,6 @@ function mutate(options) {
     return toHast(node, options);
   };
 }
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
-function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/slicedToArray.js
-
-
-
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
 ;// CONCATENATED MODULE: ../../node_modules/rehype-video/lib/detailsNode.js
 function detailsNode(title) {
   return {
@@ -33796,7 +44923,7 @@ var properties = {
   style: 'max-height:640px;'
 };
 var queryStringToObject = function queryStringToObject(url) {
-  return _toConsumableArray(new URLSearchParams(url.split('?!#')[1])).reduce(function (a, _ref) {
+  return toConsumableArray_toConsumableArray(new URLSearchParams(url.split('?!#')[1])).reduce(function (a, _ref) {
     var _ref2 = _slicedToArray(_ref, 2),
       k = _ref2[0],
       v = _ref2[1];
@@ -34551,7 +45678,7 @@ function scriptFromCodepoint(codepoint) {
 var allBlocks = [];
 scriptData.forEach(function (s) {
   return s.blocks.forEach(function (b) {
-    return allBlocks.push.apply(allBlocks, _toConsumableArray(b));
+    return allBlocks.push.apply(allBlocks, toConsumableArray_toConsumableArray(b));
   });
 });
 /**
@@ -39917,7 +51044,7 @@ var buildExpression$1 = function buildExpression(expression, options, isRealGrou
     var output = buildGroup$1(expression[i], options);
     if (output instanceof DocumentFragment) {
       var children = output.children;
-      groups.push.apply(groups, _toConsumableArray(children));
+      groups.push.apply(groups, toConsumableArray_toConsumableArray(children));
     } else {
       groups.push(output);
     }
@@ -40538,17 +51665,17 @@ var buildExpression = function buildExpression(expression, options, isOrdgroup) 
       // Concatenate adjacent <mtext>s
       if (_group.type === 'mtext' && lastGroup.type === 'mtext' && _group.getAttribute('mathvariant') === lastGroup.getAttribute('mathvariant')) {
         var _lastGroup$children;
-        (_lastGroup$children = lastGroup.children).push.apply(_lastGroup$children, _toConsumableArray(_group.children));
+        (_lastGroup$children = lastGroup.children).push.apply(_lastGroup$children, toConsumableArray_toConsumableArray(_group.children));
         continue; // Concatenate adjacent <mn>s
       } else if (_group.type === 'mn' && lastGroup.type === 'mn') {
         var _lastGroup$children2;
-        (_lastGroup$children2 = lastGroup.children).push.apply(_lastGroup$children2, _toConsumableArray(_group.children));
+        (_lastGroup$children2 = lastGroup.children).push.apply(_lastGroup$children2, toConsumableArray_toConsumableArray(_group.children));
         continue; // Concatenate <mn>...</mn> followed by <mi>.</mi>
       } else if (_group.type === 'mi' && _group.children.length === 1 && lastGroup.type === 'mn') {
         var child = _group.children[0];
         if (child instanceof TextNode && child.text === '.') {
           var _lastGroup$children3;
-          (_lastGroup$children3 = lastGroup.children).push.apply(_lastGroup$children3, _toConsumableArray(_group.children));
+          (_lastGroup$children3 = lastGroup.children).push.apply(_lastGroup$children3, toConsumableArray_toConsumableArray(_group.children));
           continue;
         }
       } else if (lastGroup.type === 'mi' && lastGroup.children.length === 1) {
@@ -44102,7 +55229,7 @@ defineEnvironment({
     }
     var res = parseArray(context.parser, payload, dCellStyle(context.envName)); // Populate cols with the correct number of column alignment specs.
 
-    var numCols = Math.max.apply(Math, [0].concat(_toConsumableArray(res.body.map(function (row) {
+    var numCols = Math.max.apply(Math, [0].concat(toConsumableArray_toConsumableArray(res.body.map(function (row) {
       return row.length;
     }))));
     res.cols = new Array(numCols).fill({
@@ -45392,7 +56519,7 @@ defineFunction({
     var elements = buildExpression$1(group.body, options, false);
     var classes = ["enclosing"];
     if (group.attributes["class"]) {
-      classes.push.apply(classes, _toConsumableArray(group.attributes["class"].trim().split(/\s+/)));
+      classes.push.apply(classes, toConsumableArray_toConsumableArray(group.attributes["class"].trim().split(/\s+/)));
     }
     var span = buildCommon.makeSpan(classes, elements, options);
     for (var attr in group.attributes) {
@@ -48541,7 +59668,7 @@ var braketHelper = function braketHelper(one) {
       context.macros.set("\\|", midMacro(true));
     }
     var arg = context.consumeArg().tokens;
-    var expanded = context.expandTokens([].concat(_toConsumableArray(right), _toConsumableArray(arg), _toConsumableArray(left)));
+    var expanded = context.expandTokens([].concat(toConsumableArray_toConsumableArray(right), toConsumableArray_toConsumableArray(arg), toConsumableArray_toConsumableArray(left)));
     context.macros.endGroup();
     return {
       tokens: expanded.reverse(),
@@ -48728,7 +59855,7 @@ var MacroExpander = /*#__PURE__*/function () {
     key: "pushTokens",
     value: function pushTokens(tokens) {
       var _this$stack;
-      (_this$stack = this.stack).push.apply(_this$stack, _toConsumableArray(tokens));
+      (_this$stack = this.stack).push.apply(_this$stack, toConsumableArray_toConsumableArray(tokens));
     }
     /**
      * Find an macro argument without expanding tokens and append the array of
@@ -48923,7 +60050,7 @@ var MacroExpander = /*#__PURE__*/function () {
             } else if (/^[1-9]$/.test(tok.text)) {
               var _tokens;
               // replace the placeholder with the indicated argument
-              (_tokens = tokens).splice.apply(_tokens, [i, 2].concat(_toConsumableArray(args[+tok.text - 1])));
+              (_tokens = tokens).splice.apply(_tokens, [i, 2].concat(toConsumableArray_toConsumableArray(args[+tok.text - 1])));
             } else {
               throw new ParseError("Not a valid argument number", tok);
             }
@@ -51348,7 +62475,7 @@ function toText(tree) {
   // Nodes without children are treated as a void element, so `doctype` is thus
   // ignored.
   if (tree.type === 'text' || tree.type === 'comment') {
-    results.push.apply(results, _toConsumableArray(collectText(tree, {
+    results.push.apply(results, toConsumableArray_toConsumableArray(collectText(tree, {
       whitespace: whitespace,
       breakBefore: true,
       breakAfter: true
@@ -51375,7 +62502,7 @@ function toText(tree) {
     //      Each item in results will either be a JavaScript string or a
     //      positive integer (a required line break count).
     // 3.2. For each item item in current, append item to results.
-    results.push.apply(results, _toConsumableArray(innerTextCollection(children[index], tree, {
+    results.push.apply(results, toConsumableArray_toConsumableArray(innerTextCollection(children[index], tree, {
       whitespace: whitespace,
       breakBefore: index ? undefined : block,
       breakAfter: index < children.length - 1 ? br(children[index + 1]) : block
@@ -51801,7 +62928,7 @@ function merge(definitions, space) {
  * @param {string} value
  * @returns {string}
  */
-function normalize(value) {
+function normalize_normalize(value) {
   return value.toLowerCase();
 }
 ;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/info.js
@@ -51935,8 +63062,8 @@ function create_create(definition) {
         info.mustUseProperty = true;
       }
       property[prop] = info;
-      normal[normalize(prop)] = prop;
-      normal[normalize(info.attribute)] = prop;
+      normal[normalize_normalize(prop)] = prop;
+      normal[normalize_normalize(info.attribute)] = prop;
     }
   }
   return new Schema(property, normal, definition.space);
@@ -53018,7 +64145,7 @@ var cap = /[A-Z]/g;
  * @returns {Info}
  */
 function find(schema, value) {
-  var normal = normalize(value);
+  var normal = normalize_normalize(value);
   var prop = value;
   var Type = Info;
   if (normal in schema.normal) {
@@ -53211,7 +64338,7 @@ function comma_separated_tokens_stringify(values, options) {
   var settings = options || {};
 
   // Ensure the last empty entry is seen.
-  var input = values[values.length - 1] === '' ? [].concat(_toConsumableArray(values), ['']) : values;
+  var input = values[values.length - 1] === '' ? [].concat(toConsumableArray_toConsumableArray(values), ['']) : values;
   return input.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
 }
 ;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/core.js
@@ -53457,7 +64584,7 @@ function parsePrimitive(info, name, value) {
     if (info.number && value && !Number.isNaN(Number(value))) {
       return Number(value);
     }
-    if ((info["boolean"] || info.overloadedBoolean) && (value === '' || normalize(value) === normalize(name))) {
+    if ((info["boolean"] || info.overloadedBoolean) && (value === '' || normalize_normalize(value) === normalize_normalize(name))) {
       return true;
     }
   }
@@ -57323,7 +68450,7 @@ function applySelectors(state, rules, node, index, parent) {
  * @returns {Array<RuleSet>}
  */
 function combine(left, right) {
-  return left && right && left.length > 0 && right.length > 0 ? [].concat(_toConsumableArray(left), _toConsumableArray(right)) : left && left.length > 0 ? left : right && right.length > 0 ? right : walk_empty;
+  return left && right && left.length > 0 && right.length > 0 ? [].concat(toConsumableArray_toConsumableArray(left), toConsumableArray_toConsumableArray(right)) : left && left.length > 0 ? left : right && right.length > 0 ? right : walk_empty;
 }
 
 /**
@@ -59085,7 +70212,7 @@ var unist_util_filter_lib_own = {}.hasOwnProperty;
  *   `null` is returned if `tree` itself didn’t pass the test, or is cascaded
  *   away.
  */
-var filter =
+var lib_filter =
 /**
  * @type {(
  *  (<Tree extends Node, Check extends Test>(node: Tree, options: Options | null | undefined, test: Check | null | undefined) => import('./complex-types.js').Matches<Tree, Check>) &
@@ -64243,7 +75370,7 @@ function core_stringify(value, language) {
   };
   if (value.alias) {
     var _env$classes;
-    (_env$classes = env.classes).push.apply(_env$classes, _toConsumableArray(typeof value.alias === 'string' ? [value.alias] : value.alias));
+    (_env$classes = env.classes).push.apply(_env$classes, toConsumableArray_toConsumableArray(typeof value.alias === 'string' ? [value.alias] : value.alias));
   }
 
   // @ts-expect-error Prism.
@@ -81979,7 +93106,7 @@ var rehype_prism_plus_es_p = function p(i) {
                 n = e[0],
                 i = e[1];
               i.properties.className = ["code-line"];
-              var l = filter(p, function (e) {
+              var l = lib_filter(p, function (e) {
                 return e.position.start.line <= n + 1 && e.position.end.line >= n + 1;
               });
               i.children = l.children, !u.toLowerCase().includes("showLineNumbers".toLowerCase()) && !o.showLineNumbers || b.some(function (e) {
@@ -82022,14 +93149,14 @@ function lib_markdown() {
     showLineNumbers = _options$showLineNumb === void 0 ? true : _options$showLineNumb,
     _options$katexOptions = options.katexOptions,
     katexOptions = _options$katexOptions === void 0 ? {} : _options$katexOptions;
-  var remarkPlugins = [remarkGfm].concat(_toConsumableArray(options.remarkPlugins || []));
+  var remarkPlugins = [remarkGfm].concat(toConsumableArray_toConsumableArray(options.remarkPlugins || []));
   var rehypePlugins = [rehype_video_lib, [m, {
     ignoreMissing: true,
     showLineNumbers: showLineNumbers
   }], [lib, {
     properties: 'attr',
     codeBlockParames: false
-  }], rehype_ignore_lib].concat(_toConsumableArray(options.rehypePlugins || []), [[rehype_rewrite_lib, {
+  }], rehype_ignore_lib].concat(toConsumableArray_toConsumableArray(options.rehypePlugins || []), [[rehype_rewrite_lib, {
     rewrite: function rewrite(node, index, parent) {
       if (node.type == 'element' && node.tagName === 'code') {
         var _ref = node.properties || {},
@@ -82399,7 +93526,7 @@ function rehypeAutolinkHeadings() {
         nodes = [grouping];
       }
     }
-    (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(_toConsumableArray(nodes)));
+    (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(toConsumableArray_toConsumableArray(nodes)));
     return [SKIP, index + nodes.length];
   }
 
@@ -98393,6 +109520,8 @@ function utils_formatConfig(opts) {
 
 
 
+
+
 function run() {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var argvs = minimist(process.argv.slice(2), {
@@ -98406,6 +109535,7 @@ function run() {
     "default": {
       version: opts.v || opts.version || false,
       help: opts.h || opts.help || false,
+      ignoreFile: opts.ignoreFile || '(node_modules)',
       source: opts.s || opts.source || 'README.md',
       markdown: opts.markdown || '',
       'markdown-style': 'max-width: 960px;',
@@ -98418,14 +109548,18 @@ function run() {
     console.log("".concat(cliHelp).concat(exampleHelp));
     return;
   }
+  var mdFilesPath = globSync(_toConsumableArray(argvs._), {
+    ignore: {
+      ignored: function ignored(p) {
+        return new RegExp(argvs.ignoreFile, 'i').test(p.fullpath()) || !/\.md$/i.test(p.fullpath());
+      }
+    }
+  });
   var pkgPath = path.resolve(/* unused asset import */ undefined.pathname);
   if ((argvs.v || argvs.version) && fs.existsSync(pkgPath)) {
     var pkg = fs.readJSONSync(pkgPath);
     console.log("\n \x1B[35mmarkdown-to-html-cli\x1B[0m v".concat(pkg.version, "\n"));
     return pkg.version;
-  }
-  if (argvs.source && !argvs.markdown) {
-    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
   var options = formatConfig(_objectSpread(_objectSpread({}, opts), argvs));
   var output = path.resolve(argvs.output);
@@ -98439,12 +109573,27 @@ function run() {
       options.document.style.push(options.style);
     }
   }
-  var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
-  fs.writeFileSync(output, strMarkdown);
-  console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));
+  // One File
+  if (argvs.source && !argvs.markdown) {
+    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
+  }
+  if (mdFilesPath.length === 0) {
+    var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
+    fs.writeFileSync(output, strMarkdown);
+    console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));
+  }
+  if (mdFilesPath.length > 0) {
+    mdFilesPath.forEach(function (mdFile) {
+      argvs.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
+      opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
+      var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
+      fs.writeFileSync(opts.output, strMarkdown);
+      console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), opts.output), "\x1B[0m\n"));
+    });
+  }
 }
-var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --no-corners            Hide Github corner from your project page.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --markdown-style        Markdown wrapper style.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
-var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style=./style.css\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style='body { color: red; }'\n  \n";
+var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --no-corners            Hide Github corner from your project page.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --markdown-style        Markdown wrapper style.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --ignore-file           Ignore markdown files under certain paths. Default: \"(node_modules)\"\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
+var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli **/*.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli **/*.md --ignore-file=\"(test)\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style=./style.css\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style='body { color: red; }'\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
 ;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyle,style,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyle=(0,lib_core.getInput)('markdown-style');style=(0,lib_core.getInput)('style');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=20;break;}_context.next=17;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 17:options.markdown=_context.sent.toString();_context.next=21;break;case 20:options.markdown=markdown;case 21:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;options['markdown-style']=markdownStyle;options['style']=style;if(corners){_context.next=36;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=36;break;}_context.next=32;return external_fs_default().promises.readFile(projectPkg);case 32:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 36:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=57;break;case 53:_context.prev=53;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 57:case"end":return _context.stop();}},_callee,null,[[0,53]]);}))();
 })();
