@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">69.44% </span>
+                <span class="strong">64.1% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>25/36</span>
+                <span class='fraction'>25/39</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.5% </span>
+                <span class="strong">84.31% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>42/48</span>
+                <span class='fraction'>43/51</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">68.57% </span>
+                <span class="strong">63.15% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>24/35</span>
+                <span class='fraction'>24/38</span>
             </div>
         
             
@@ -239,7 +239,14 @@
 <a name='L174'></a><a href='#L174'>174</a>
 <a name='L175'></a><a href='#L175'>175</a>
 <a name='L176'></a><a href='#L176'>176</a>
-<a name='L177'></a><a href='#L177'>177</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L177'></a><a href='#L177'>177</a>
+<a name='L178'></a><a href='#L178'>178</a>
+<a name='L179'></a><a href='#L179'>179</a>
+<a name='L180'></a><a href='#L180'>180</a>
+<a name='L181'></a><a href='#L181'>181</a>
+<a name='L182'></a><a href='#L182'>182</a>
+<a name='L183'></a><a href='#L183'>183</a>
+<a name='L184'></a><a href='#L184'>184</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -363,6 +370,13 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -493,7 +507,7 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
       'markdown-style': 'max-width: 960px;',
       description: opts.description || '',
       corners: opts.corners || true,
-      output: opts.o || opts.output || 'index.html',
+      output: opts.o || opts.output,
     },
   });
   if (argvs.h || argvs.help) {
@@ -519,7 +533,7 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   } 
   const options = formatConfig({ ...opts, ...argvs });
-  const output = path.resolve(argvs.output);
+  const output = path.resolve(argvs.output  || 'index.html');
 &nbsp;
   <span class="missing-if-branch" title="else path not taken" >E</span>if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
   <span class="missing-if-branch" title="if path not taken" >I</span>if (options.style) {
@@ -540,10 +554,17 @@ export function run(opts = {} as Omit&lt;RunArgvs, '_'&gt;) {
   <span class="missing-if-branch" title="if path not taken" >I</span>if (mdFilesPath.length &gt; 0) {
 <span class="cstat-no" title="statement not covered" >    mdFilesPath.forEach(<span class="fstat-no" title="function not covered" >(m</span>dFile) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >      options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();</span>
-<span class="cstat-no" title="statement not covered" >      opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));</span>
+&nbsp;
+      const htmlPath = <span class="cstat-no" title="statement not covered" >path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));</span>
+      const mdFilePath = <span class="cstat-no" title="statement not covered" >path.resolve(</span>
+        process.cwd(),
+        (argvs.output || 'dist') + htmlPath.replace(process.cwd(), '')
+      );
+<span class="cstat-no" title="statement not covered" >      options.output = mdFilePath;</span>
       const strMarkdown = <span class="cstat-no" title="statement not covered" >create({ ...argvs, ...options });</span>
-<span class="cstat-no" title="statement not covered" >      fs.writeFileSync(opts.output, strMarkdown);</span>
-<span class="cstat-no" title="statement not covered" >      console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), opts.output)}\x1b[0m\n`);</span>
+<span class="cstat-no" title="statement not covered" >      fs.ensureDirSync(path.dirname(options.output));</span>
+<span class="cstat-no" title="statement not covered" >      fs.writeFileSync(options.output, strMarkdown);</span>
+<span class="cstat-no" title="statement not covered" >      console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), options.output)}\x1b[0m\n`);</span>
     });
   }
 }
@@ -598,7 +619,7 @@ export const exampleHelp: string =`\n  Example:
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-09-27T16:07:12.694Z
+                at 2023-09-27T17:10:42.815Z
             </div>
         <script src="../prettify.js"></script>
         <script>
