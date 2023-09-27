@@ -142,6 +142,7 @@ Options:
   --keywords              Define keywords for search engines.
   --no-dark-mode          Disable light and dark theme styles button.
   --markdown              Markdown string.
+  --img-base64            Convert images in HTML to base64.
   --style                 Override default styles. css file path or css string.
   --markdown-style-theme  Setting markdown-style light/dark theme.
   --markdown-style        Markdown wrapper style

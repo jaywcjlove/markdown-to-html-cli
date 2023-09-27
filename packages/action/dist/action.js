@@ -4558,6 +4558,26 @@ module.exports = function (args, opts) {
 
 /***/ }),
 
+/***/ 3780:
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+/*! node-domexception. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
+
+if (!globalThis.DOMException) {
+  try {
+    var _require = __webpack_require__(1267),
+      MessageChannel = _require.MessageChannel,
+      port = new MessageChannel().port1,
+      ab = new ArrayBuffer();
+    port.postMessage(ab, [ab, ab]);
+  } catch (err) {
+    err.constructor.name === 'DOMException' && (globalThis.DOMException = err.constructor);
+  }
+}
+module.exports = globalThis.DOMException;
+
+/***/ }),
+
 /***/ 1871:
 /***/ ((module, exports, __webpack_require__) => {
 
@@ -14396,6 +14416,14 @@ module.exports = require("util");
 
 /***/ }),
 
+/***/ 1267:
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("worker_threads");
+
+/***/ }),
+
 /***/ 5748:
 /***/ ((module) => {
 
@@ -15264,152 +15292,537 @@ function _wrapNativeSuper(Class) {
 }
 module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
-/***/ })
+/***/ }),
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			// no module.id needed
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/create fake namespace object */
-/******/ 	(() => {
-/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
-/******/ 		var leafPrototypes;
-/******/ 		// create a fake namespace object
-/******/ 		// mode & 1: value is a module id, require it
-/******/ 		// mode & 2: merge all properties of value into the ns
-/******/ 		// mode & 4: return value when already ns object
-/******/ 		// mode & 16: return value when it's Promise-like
-/******/ 		// mode & 8|1: behave like require
-/******/ 		__webpack_require__.t = function(value, mode) {
-/******/ 			if(mode & 1) value = this(value);
-/******/ 			if(mode & 8) return value;
-/******/ 			if(typeof value === 'object' && value) {
-/******/ 				if((mode & 4) && value.__esModule) return value;
-/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
-/******/ 			}
-/******/ 			var ns = Object.create(null);
-/******/ 			__webpack_require__.r(ns);
-/******/ 			var def = {};
-/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
-/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
-/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
-/******/ 			}
-/******/ 			def['default'] = () => (value);
-/******/ 			__webpack_require__.d(ns, def);
-/******/ 			return ns;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
+/***/ 5693:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
 "use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// NAMESPACE OBJECT: ../../node_modules/micromark/lib/constructs.js
-var constructs_namespaceObject = {};
-__webpack_require__.r(constructs_namespaceObject);
-__webpack_require__.d(constructs_namespaceObject, {
-  "attentionMarkers": () => (attentionMarkers),
-  "contentInitial": () => (contentInitial),
-  "disable": () => (disable),
-  "document": () => (constructs_document),
-  "flow": () => (constructs_flow),
-  "flowInitial": () => (flowInitial),
-  "insideSpan": () => (insideSpan),
-  "string": () => (constructs_string),
-  "text": () => (constructs_text)
-});
-
-// NAMESPACE OBJECT: ../../node_modules/property-information/lib/util/types.js
-var types_namespaceObject = {};
-__webpack_require__.r(types_namespaceObject);
-__webpack_require__.d(types_namespaceObject, {
-  "boolean": () => (_boolean),
-  "booleanish": () => (booleanish),
-  "commaOrSpaceSeparated": () => (commaOrSpaceSeparated),
-  "commaSeparated": () => (commaSeparated),
-  "number": () => (number),
-  "overloadedBoolean": () => (overloadedBoolean),
-  "spaceSeparated": () => (spaceSeparated)
-});
-
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/typeof.js
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
-    return typeof obj;
-  } : function (obj) {
-    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-  }, _typeof(obj);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _OverloadYield)
+/* harmony export */ });
+function _OverloadYield(value, kind) {
+  this.v = value, this.k = kind;
 }
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js
+
+/***/ }),
+
+/***/ 926:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _arrayLikeToArray)
+/* harmony export */ });
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+  return arr2;
+}
+
+/***/ }),
+
+/***/ 9868:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _arrayWithHoles)
+/* harmony export */ });
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+/***/ }),
+
+/***/ 753:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _assertThisInitialized)
+/* harmony export */ });
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+  return self;
+}
+
+/***/ }),
+
+/***/ 9621:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _asyncIterator)
+/* harmony export */ });
+function _asyncIterator(iterable) {
+  var method,
+    async,
+    sync,
+    retry = 2;
+  for ("undefined" != typeof Symbol && (async = Symbol.asyncIterator, sync = Symbol.iterator); retry--;) {
+    if (async && null != (method = iterable[async])) return method.call(iterable);
+    if (sync && null != (method = iterable[sync])) return new AsyncFromSyncIterator(method.call(iterable));
+    async = "@@asyncIterator", sync = "@@iterator";
+  }
+  throw new TypeError("Object is not async iterable");
+}
+function AsyncFromSyncIterator(s) {
+  function AsyncFromSyncIteratorContinuation(r) {
+    if (Object(r) !== r) return Promise.reject(new TypeError(r + " is not an object."));
+    var done = r.done;
+    return Promise.resolve(r.value).then(function (value) {
+      return {
+        value: value,
+        done: done
+      };
+    });
+  }
+  return AsyncFromSyncIterator = function AsyncFromSyncIterator(s) {
+    this.s = s, this.n = s.next;
+  }, AsyncFromSyncIterator.prototype = {
+    s: null,
+    n: null,
+    next: function next() {
+      return AsyncFromSyncIteratorContinuation(this.n.apply(this.s, arguments));
+    },
+    "return": function _return(value) {
+      var ret = this.s["return"];
+      return void 0 === ret ? Promise.resolve({
+        value: value,
+        done: !0
+      }) : AsyncFromSyncIteratorContinuation(ret.apply(this.s, arguments));
+    },
+    "throw": function _throw(value) {
+      var thr = this.s["return"];
+      return void 0 === thr ? Promise.reject(value) : AsyncFromSyncIteratorContinuation(thr.apply(this.s, arguments));
+    }
+  }, new AsyncFromSyncIterator(s);
+}
+
+/***/ }),
+
+/***/ 4795:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _asyncToGenerator)
+/* harmony export */ });
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+      args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+      _next(undefined);
+    });
+  };
+}
+
+/***/ }),
+
+/***/ 5863:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _checkPrivateRedeclaration)
+/* harmony export */ });
+function _checkPrivateRedeclaration(obj, privateCollection) {
+  if (privateCollection.has(obj)) {
+    throw new TypeError("Cannot initialize the same private elements twice on an object");
+  }
+}
+
+/***/ }),
+
+/***/ 1909:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classApplyDescriptorGet)
+/* harmony export */ });
+function _classApplyDescriptorGet(receiver, descriptor) {
+  if (descriptor.get) {
+    return descriptor.get.call(receiver);
+  }
+  return descriptor.value;
+}
+
+/***/ }),
+
+/***/ 8390:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classApplyDescriptorSet)
+/* harmony export */ });
+function _classApplyDescriptorSet(receiver, descriptor, value) {
+  if (descriptor.set) {
+    descriptor.set.call(receiver, value);
+  } else {
+    if (!descriptor.writable) {
+      throw new TypeError("attempted to set read only private field");
+    }
+    descriptor.value = value;
+  }
+}
+
+/***/ }),
+
+/***/ 9249:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classCallCheck)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+/***/ }),
+
+/***/ 175:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classExtractFieldDescriptor)
+/* harmony export */ });
+function _classExtractFieldDescriptor(receiver, privateMap, action) {
+  if (!privateMap.has(receiver)) {
+    throw new TypeError("attempted to " + action + " private field on non-instance");
+  }
+  return privateMap.get(receiver);
+}
+
+/***/ }),
+
+/***/ 3426:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classPrivateFieldGet)
+/* harmony export */ });
+/* harmony import */ var _classApplyDescriptorGet_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(1909);
+/* harmony import */ var _classExtractFieldDescriptor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(175);
+
+
+function _classPrivateFieldGet(receiver, privateMap) {
+  var descriptor = (0,_classExtractFieldDescriptor_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(receiver, privateMap, "get");
+  return (0,_classApplyDescriptorGet_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(receiver, descriptor);
+}
+
+/***/ }),
+
+/***/ 3395:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classPrivateFieldInitSpec)
+/* harmony export */ });
+/* harmony import */ var _checkPrivateRedeclaration_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5863);
+
+function _classPrivateFieldInitSpec(obj, privateMap, value) {
+  (0,_checkPrivateRedeclaration_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(obj, privateMap);
+  privateMap.set(obj, value);
+}
+
+/***/ }),
+
+/***/ 5177:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _classPrivateFieldSet)
+/* harmony export */ });
+/* harmony import */ var _classApplyDescriptorSet_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8390);
+/* harmony import */ var _classExtractFieldDescriptor_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(175);
+
+
+function _classPrivateFieldSet(receiver, privateMap, value) {
+  var descriptor = (0,_classExtractFieldDescriptor_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(receiver, privateMap, "set");
+  (0,_classApplyDescriptorSet_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(receiver, descriptor, value);
+  return value;
+}
+
+/***/ }),
+
+/***/ 7371:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _createClass)
+/* harmony export */ });
+/* harmony import */ var _toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(5850);
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, (0,_toPropertyKey_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(descriptor.key), descriptor);
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  Object.defineProperty(Constructor, "prototype", {
+    writable: false
+  });
+  return Constructor;
+}
+
+/***/ }),
+
+/***/ 1361:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _createForOfIteratorHelper)
+/* harmony export */ });
+/* harmony import */ var _unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(9147);
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+  if (!it) {
+    if (Array.isArray(o) || (it = (0,_unsupportedIterableToArray_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+      var F = function F() {};
+      return {
+        s: F,
+        n: function n() {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function e(_e) {
+          throw _e;
+        },
+        f: F
+      };
+    }
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+  var normalCompletion = true,
+    didErr = false,
+    err;
+  return {
+    s: function s() {
+      it = it.call(o);
+    },
+    n: function n() {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function e(_e2) {
+      didErr = true;
+      err = _e2;
+    },
+    f: function f() {
+      try {
+        if (!normalCompletion && it["return"] != null) it["return"]();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
+
+/***/ }),
+
+/***/ 6906:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _createSuper)
+/* harmony export */ });
+/* harmony import */ var _getPrototypeOf_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5058);
+/* harmony import */ var _isNativeReflectConstruct_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(352);
+/* harmony import */ var _possibleConstructorReturn_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(1987);
+
+
+
+function _createSuper(Derived) {
+  var hasNativeReflectConstruct = (0,_isNativeReflectConstruct_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)();
+  return function _createSuperInternal() {
+    var Super = (0,_getPrototypeOf_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(Derived),
+      result;
+    if (hasNativeReflectConstruct) {
+      var NewTarget = (0,_getPrototypeOf_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(this).constructor;
+      result = Reflect.construct(Super, arguments, NewTarget);
+    } else {
+      result = Super.apply(this, arguments);
+    }
+    return (0,_possibleConstructorReturn_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(this, result);
+  };
+}
+
+/***/ }),
+
+/***/ 5058:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _getPrototypeOf)
+/* harmony export */ });
+function _getPrototypeOf(o) {
+  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+/***/ }),
+
+/***/ 5754:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _inherits)
+/* harmony export */ });
+/* harmony import */ var _setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(8960);
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  Object.defineProperty(subClass, "prototype", {
+    writable: false
+  });
+  if (superClass) (0,_setPrototypeOf_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(subClass, superClass);
+}
+
+/***/ }),
+
+/***/ 352:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _isNativeReflectConstruct)
+/* harmony export */ });
+function _isNativeReflectConstruct() {
+  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+  if (Reflect.construct.sham) return false;
+  if (typeof Proxy === "function") return true;
+  try {
+    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+/***/ }),
+
+/***/ 1079:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _iterableToArray)
+/* harmony export */ });
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+/***/ }),
+
+/***/ 4434:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _nonIterableRest)
+/* harmony export */ });
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+/***/ }),
+
+/***/ 1987:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _possibleConstructorReturn)
+/* harmony export */ });
+/* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6522);
+/* harmony import */ var _assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(753);
+
+
+function _possibleConstructorReturn(self, call) {
+  if (call && ((0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(call) === "object" || typeof call === "function")) {
+    return call;
+  } else if (call !== void 0) {
+    throw new TypeError("Derived constructors may only return object or undefined");
+  }
+  return (0,_assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(self);
+}
+
+/***/ }),
+
+/***/ 2723:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _regeneratorRuntime)
+/* harmony export */ });
+/* harmony import */ var _typeof_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6522);
 
 function _regeneratorRuntime() {
   "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
@@ -15488,7 +15901,7 @@ function _regeneratorRuntime() {
       if ("throw" !== record.type) {
         var result = record.arg,
           value = result.value;
-        return value && "object" == _typeof(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
+        return value && "object" == (0,_typeof_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(value) && hasOwn.call(value, "__await") ? PromiseImpl.resolve(value.__await).then(function (value) {
           invoke("next", value, resolve, reject);
         }, function (err) {
           invoke("throw", err, resolve, reject);
@@ -15713,14 +16126,137 @@ function _regeneratorRuntime() {
     }
   }, exports;
 }
+
+/***/ }),
+
+/***/ 8960:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _setPrototypeOf)
+/* harmony export */ });
+function _setPrototypeOf(o, p) {
+  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+  return _setPrototypeOf(o, p);
+}
+
+/***/ }),
+
+/***/ 6234:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ _slicedToArray)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+var arrayWithHoles = __webpack_require__(9868);
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
+function _iterableToArrayLimit(arr, i) {
+  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
+  if (null != _i) {
+    var _s,
+      _e,
+      _x,
+      _r,
+      _arr = [],
+      _n = !0,
+      _d = !1;
+    try {
+      if (_x = (_i = _i.call(arr)).next, 0 === i) {
+        if (Object(_i) !== _i) return;
+        _n = !1;
+      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
+    } catch (err) {
+      _d = !0, _e = err;
+    } finally {
+      try {
+        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+    return _arr;
+  }
+}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+var unsupportedIterableToArray = __webpack_require__(9147);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+var nonIterableRest = __webpack_require__(4434);
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/slicedToArray.js
+
+
+
+
+function _slicedToArray(arr, i) {
+  return (0,arrayWithHoles/* default */.Z)(arr) || _iterableToArrayLimit(arr, i) || (0,unsupportedIterableToArray/* default */.Z)(arr, i) || (0,nonIterableRest/* default */.Z)();
+}
+
+/***/ }),
+
+/***/ 8079:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ _toConsumableArray)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+var arrayLikeToArray = __webpack_require__(926);
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return (0,arrayLikeToArray/* default */.Z)(arr);
+}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArray.js
+var iterableToArray = __webpack_require__(1079);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+var unsupportedIterableToArray = __webpack_require__(9147);
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/toConsumableArray.js
+
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || (0,iterableToArray/* default */.Z)(arr) || (0,unsupportedIterableToArray/* default */.Z)(arr) || _nonIterableSpread();
+}
+
+/***/ }),
+
+/***/ 5850:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ _toPropertyKey)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/typeof.js
+var esm_typeof = __webpack_require__(6522);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/toPrimitive.js
 
 function _toPrimitive(input, hint) {
-  if (_typeof(input) !== "object" || input === null) return input;
+  if ((0,esm_typeof/* default */.Z)(input) !== "object" || input === null) return input;
   var prim = input[Symbol.toPrimitive];
   if (prim !== undefined) {
     var res = prim.call(input, hint || "default");
-    if (_typeof(res) !== "object") return res;
+    if ((0,esm_typeof/* default */.Z)(res) !== "object") return res;
     throw new TypeError("@@toPrimitive must return a primitive value.");
   }
   return (hint === "string" ? String : Number)(input);
@@ -15730,12 +16266,1488 @@ function _toPrimitive(input, hint) {
 
 function _toPropertyKey(arg) {
   var key = _toPrimitive(arg, "string");
-  return _typeof(key) === "symbol" ? key : String(key);
+  return (0,esm_typeof/* default */.Z)(key) === "symbol" ? key : String(key);
 }
+
+/***/ }),
+
+/***/ 6522:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _typeof)
+/* harmony export */ });
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) {
+    return typeof obj;
+  } : function (obj) {
+    return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+  }, _typeof(obj);
+}
+
+/***/ }),
+
+/***/ 9147:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (/* binding */ _unsupportedIterableToArray)
+/* harmony export */ });
+/* harmony import */ var _arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(926);
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return (0,_arrayLikeToArray_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z)(o, minLen);
+}
+
+/***/ }),
+
+/***/ 8288:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ _wrapAsyncGenerator)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/OverloadYield.js
+var OverloadYield = __webpack_require__(5693);
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/AsyncGenerator.js
+
+function AsyncGenerator(gen) {
+  var front, back;
+  function resume(key, arg) {
+    try {
+      var result = gen[key](arg),
+        value = result.value,
+        overloaded = value instanceof OverloadYield/* default */.Z;
+      Promise.resolve(overloaded ? value.v : value).then(function (arg) {
+        if (overloaded) {
+          var nextKey = "return" === key ? "return" : "next";
+          if (!value.k || arg.done) return resume(nextKey, arg);
+          arg = gen[nextKey](arg).value;
+        }
+        settle(result.done ? "return" : "normal", arg);
+      }, function (err) {
+        resume("throw", err);
+      });
+    } catch (err) {
+      settle("throw", err);
+    }
+  }
+  function settle(type, value) {
+    switch (type) {
+      case "return":
+        front.resolve({
+          value: value,
+          done: !0
+        });
+        break;
+      case "throw":
+        front.reject(value);
+        break;
+      default:
+        front.resolve({
+          value: value,
+          done: !1
+        });
+    }
+    (front = front.next) ? resume(front.key, front.arg) : back = null;
+  }
+  this._invoke = function (key, arg) {
+    return new Promise(function (resolve, reject) {
+      var request = {
+        key: key,
+        arg: arg,
+        resolve: resolve,
+        reject: reject,
+        next: null
+      };
+      back ? back = back.next = request : (front = back = request, resume(key, arg));
+    });
+  }, "function" != typeof gen["return"] && (this["return"] = void 0);
+}
+AsyncGenerator.prototype["function" == typeof Symbol && Symbol.asyncIterator || "@@asyncIterator"] = function () {
+  return this;
+}, AsyncGenerator.prototype.next = function (arg) {
+  return this._invoke("next", arg);
+}, AsyncGenerator.prototype["throw"] = function (arg) {
+  return this._invoke("throw", arg);
+}, AsyncGenerator.prototype["return"] = function (arg) {
+  return this._invoke("return", arg);
+};
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/wrapAsyncGenerator.js
+
+function _wrapAsyncGenerator(fn) {
+  return function () {
+    return new AsyncGenerator(fn.apply(this, arguments));
+  };
+}
+
+/***/ }),
+
+/***/ 2379:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* unused harmony export File */
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(9249);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(7371);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(753);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_inherits_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5754);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createSuper_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(6906);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldInitSpec_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3395);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(3426);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldSet_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5177);
+/* harmony import */ var _index_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7674);
+
+
+
+
+
+
+
+
+var _lastModified, _name;
+var _Symbol$toStringTag, _Symbol$hasInstance;
+
+var _File = (_lastModified = /*#__PURE__*/new WeakMap(), _name = /*#__PURE__*/new WeakMap(), _Symbol$toStringTag = Symbol.toStringTag, _Symbol$hasInstance = Symbol.hasInstance, /*#__PURE__*/function (_Blob) {
+  (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_inherits_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z)(File, _Blob);
+  var _super = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createSuper_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(File);
+  /**
+   * @param {*[]} fileBits
+   * @param {string} fileName
+   * @param {{lastModified?: number, type?: string}} options
+   */ // @ts-ignore
+  function File(fileBits, fileName) {
+    var _this;
+    var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(this, File);
+    if (arguments.length < 2) {
+      throw new TypeError("Failed to construct 'File': 2 arguments required, but only ".concat(arguments.length, " present."));
+    }
+    _this = _super.call(this, fileBits, options);
+    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldInitSpec_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)((0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(_this), _lastModified, {
+      writable: true,
+      value: 0
+    });
+    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldInitSpec_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)((0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(_this), _name, {
+      writable: true,
+      value: ''
+    });
+    if (options === null) options = {};
+
+    // Simulate WebIDL type casting for NaN value in lastModified option.
+    var lastModified = options.lastModified === undefined ? Date.now() : Number(options.lastModified);
+    if (!Number.isNaN(lastModified)) {
+      (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldSet_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)((0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(_this), _lastModified, lastModified);
+    }
+    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldSet_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)((0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_assertThisInitialized_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(_this), _name, String(fileName));
+    return _this;
+  }
+  (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(File, [{
+    key: "name",
+    get: function get() {
+      return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(this, _name);
+    }
+  }, {
+    key: "lastModified",
+    get: function get() {
+      return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(this, _lastModified);
+    }
+  }, {
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return 'File';
+    }
+  }], [{
+    key: _Symbol$hasInstance,
+    value: function value(object) {
+      return !!object && object instanceof _index_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z && /^(File)$/.test(object[Symbol.toStringTag]);
+    }
+  }]);
+  return File;
+}(_index_js__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z));
+
+/** @type {typeof globalThis.File} */ // @ts-ignore
+var File = _File;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (File);
+
+/***/ }),
+
+/***/ 6002:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "$B": () => (/* reexport */ file/* default */.Z)
+});
+
+// UNUSED EXPORTS: Blob, blobFrom, blobFromSync, default, fileFrom, fileFromSync
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/wrapAsyncGenerator.js + 1 modules
+var wrapAsyncGenerator = __webpack_require__(8288);
+;// CONCATENATED MODULE: external "node:fs"
+const external_node_fs_namespaceObject = require("node:fs");
+;// CONCATENATED MODULE: external "node:path"
+const external_node_path_namespaceObject = require("node:path");
+// EXTERNAL MODULE: ../../node_modules/node-domexception/index.js
+var node_domexception = __webpack_require__(3780);
+// EXTERNAL MODULE: ../../node_modules/fetch-blob/file.js
+var file = __webpack_require__(2379);
+// EXTERNAL MODULE: ../../node_modules/fetch-blob/index.js + 3 modules
+var fetch_blob = __webpack_require__(7674);
+;// CONCATENATED MODULE: ../../node_modules/fetch-blob/from.js
+
+
+
+
+
+
+
+
+
+
+var _Symbol$toStringTag;
+
+
+
+
+
+var stat = external_node_fs_namespaceObject.promises.stat;
+
+/**
+ * @param {string} path filepath on the disk
+ * @param {string} [type] mimetype to use
+ */
+var blobFromSync = function blobFromSync(path, type) {
+  return fromBlob(statSync(path), path, type);
+};
+
+/**
+ * @param {string} path filepath on the disk
+ * @param {string} [type] mimetype to use
+ * @returns {Promise<Blob>}
+ */
+var blobFrom = function blobFrom(path, type) {
+  return stat(path).then(function (stat) {
+    return fromBlob(stat, path, type);
+  });
+};
+
+/**
+ * @param {string} path filepath on the disk
+ * @param {string} [type] mimetype to use
+ * @returns {Promise<File>}
+ */
+var fileFrom = function fileFrom(path, type) {
+  return stat(path).then(function (stat) {
+    return fromFile(stat, path, type);
+  });
+};
+
+/**
+ * @param {string} path filepath on the disk
+ * @param {string} [type] mimetype to use
+ */
+var fileFromSync = function fileFromSync(path, type) {
+  return fromFile(statSync(path), path, type);
+};
+
+// @ts-ignore
+var fromBlob = function fromBlob(stat, path) {
+  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  return new Blob([new BlobDataItem({
+    path: path,
+    size: stat.size,
+    lastModified: stat.mtimeMs,
+    start: 0
+  })], {
+    type: type
+  });
+};
+
+// @ts-ignore
+var fromFile = function fromFile(stat, path) {
+  var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+  return new File([new BlobDataItem({
+    path: path,
+    size: stat.size,
+    lastModified: stat.mtimeMs,
+    start: 0
+  })], basename(path), {
+    type: type,
+    lastModified: stat.mtimeMs
+  });
+};
+
+/**
+ * This is a blob backed up by a file on the disk
+ * with minium requirement. Its wrapped around a Blob as a blobPart
+ * so you have no direct access to this.
+ *
+ * @private
+ */
+var _path = /*#__PURE__*/new WeakMap();
+var _start = /*#__PURE__*/new WeakMap();
+_Symbol$toStringTag = Symbol.toStringTag;
+var BlobDataItem = /*#__PURE__*/(/* unused pure expression or super */ null && (function () {
+  function BlobDataItem(options) {
+    _classCallCheck(this, BlobDataItem);
+    _classPrivateFieldInitSpec(this, _path, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldInitSpec(this, _start, {
+      writable: true,
+      value: void 0
+    });
+    _classPrivateFieldSet(this, _path, options.path);
+    _classPrivateFieldSet(this, _start, options.start);
+    this.size = options.size;
+    this.lastModified = options.lastModified;
+  }
+
+  /**
+   * Slicing arguments is first validated and formatted
+   * to not be out of range by Blob.prototype.slice
+   */
+  _createClass(BlobDataItem, [{
+    key: "slice",
+    value: function slice(start, end) {
+      return new BlobDataItem({
+        path: _classPrivateFieldGet(this, _path),
+        lastModified: this.lastModified,
+        size: end - start,
+        start: _classPrivateFieldGet(this, _start) + start
+      });
+    }
+  }, {
+    key: "stream",
+    value: function stream() {
+      var _this = this;
+      return _wrapAsyncGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+        var _yield$_awaitAsyncGen, mtimeMs;
+        return _regeneratorRuntime().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return _awaitAsyncGenerator(stat(_classPrivateFieldGet(_this, _path)));
+            case 2:
+              _yield$_awaitAsyncGen = _context.sent;
+              mtimeMs = _yield$_awaitAsyncGen.mtimeMs;
+              if (!(mtimeMs > _this.lastModified)) {
+                _context.next = 6;
+                break;
+              }
+              throw new DOMException('The requested file could not be read, typically due to permission problems that have occurred after a reference to a file was acquired.', 'NotReadableError');
+            case 6:
+              return _context.delegateYield(_asyncGeneratorDelegate(_asyncIterator(createReadStream(_classPrivateFieldGet(_this, _path), {
+                start: _classPrivateFieldGet(_this, _start),
+                end: _classPrivateFieldGet(_this, _start) + _this.size - 1
+              })), _awaitAsyncGenerator), "t0", 7);
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee);
+      }))();
+    }
+  }, {
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return 'Blob';
+    }
+  }]);
+  return BlobDataItem;
+}()));
+/* harmony default export */ const from = ((/* unused pure expression or super */ null && (blobFromSync)));
+
+
+/***/ }),
+
+/***/ 7674:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, {
+  "Z": () => (/* binding */ fetch_blob)
+});
+
+// UNUSED EXPORTS: Blob
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__(4795);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
+var classCallCheck = __webpack_require__(9249);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/createClass.js
+var createClass = __webpack_require__(7371);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldInitSpec.js
+var classPrivateFieldInitSpec = __webpack_require__(3395);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldSet.js
+var classPrivateFieldSet = __webpack_require__(5177);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldGet.js
+var classPrivateFieldGet = __webpack_require__(3426);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js
+var regeneratorRuntime = __webpack_require__(2723);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
+var createForOfIteratorHelper = __webpack_require__(1361);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/wrapAsyncGenerator.js + 1 modules
+var wrapAsyncGenerator = __webpack_require__(8288);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/OverloadYield.js
+var OverloadYield = __webpack_require__(5693);
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/awaitAsyncGenerator.js
+
+function _awaitAsyncGenerator(value) {
+  return new OverloadYield/* default */.Z(value, 0);
+}
+;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/asyncGeneratorDelegate.js
+
+function _asyncGeneratorDelegate(inner) {
+  var iter = {},
+    waiting = !1;
+  function pump(key, value) {
+    return waiting = !0, value = new Promise(function (resolve) {
+      resolve(inner[key](value));
+    }), {
+      done: !1,
+      value: new OverloadYield/* default */.Z(value, 1)
+    };
+  }
+  return iter["undefined" != typeof Symbol && Symbol.iterator || "@@iterator"] = function () {
+    return this;
+  }, iter.next = function (value) {
+    return waiting ? (waiting = !1, value) : pump("next", value);
+  }, "function" == typeof inner["throw"] && (iter["throw"] = function (value) {
+    if (waiting) throw waiting = !1, value;
+    return pump("throw", value);
+  }), "function" == typeof inner["return"] && (iter["return"] = function (value) {
+    return waiting ? (waiting = !1, value) : pump("return", value);
+  }), iter;
+}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/asyncIterator.js
+var asyncIterator = __webpack_require__(9621);
+;// CONCATENATED MODULE: ../../node_modules/fetch-blob/streams.cjs
+const streams_namespaceObject = __webpack_require__.p + "1cd5a4c231e165c7e668.cjs";
+;// CONCATENATED MODULE: ../../node_modules/fetch-blob/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+var _parts, _type, _size, _endings;
+var _Symbol$toStringTag, _Symbol$hasInstance;
+/*! fetch-blob. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
+
+// TODO (jimmywarting): in the feature use conditional loading with top level await (requires 14.x)
+// Node has recently added whatwg stream into core
+
+
+
+// 64 KiB (same size chrome slice theirs blob into Uint8array's)
+var POOL_SIZE = 65536;
+
+/** @param {(Blob | Uint8Array)[]} parts */
+function toIterator(_x) {
+  return _toIterator.apply(this, arguments);
+}
+function _toIterator() {
+  _toIterator = (0,wrapAsyncGenerator/* default */.Z)(function (parts) {
+    var clone = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+    return /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee() {
+      var _iterator3, _step3, part, position, end, size, chunk, _position, b, _chunk, buffer;
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(parts);
+            _context.prev = 1;
+            _iterator3.s();
+          case 3:
+            if ((_step3 = _iterator3.n()).done) {
+              _context.next = 40;
+              break;
+            }
+            part = _step3.value;
+            if (!('stream' in part)) {
+              _context.next = 9;
+              break;
+            }
+            return _context.delegateYield(_asyncGeneratorDelegate((0,asyncIterator/* default */.Z)( /** @type {AsyncIterableIterator<Uint8Array>} */part.stream()), _awaitAsyncGenerator), "t0", 7);
+          case 7:
+            _context.next = 38;
+            break;
+          case 9:
+            if (!ArrayBuffer.isView(part)) {
+              _context.next = 27;
+              break;
+            }
+            if (!clone) {
+              _context.next = 23;
+              break;
+            }
+            position = part.byteOffset;
+            end = part.byteOffset + part.byteLength;
+          case 13:
+            if (!(position !== end)) {
+              _context.next = 21;
+              break;
+            }
+            size = Math.min(end - position, POOL_SIZE);
+            chunk = part.buffer.slice(position, position + size);
+            position += chunk.byteLength;
+            _context.next = 19;
+            return new Uint8Array(chunk);
+          case 19:
+            _context.next = 13;
+            break;
+          case 21:
+            _context.next = 25;
+            break;
+          case 23:
+            _context.next = 25;
+            return part;
+          case 25:
+            _context.next = 38;
+            break;
+          case 27:
+            // For blobs that have arrayBuffer but no stream method (nodes buffer.Blob)
+            _position = 0, b = /** @type {Blob} */part;
+          case 28:
+            if (!(_position !== b.size)) {
+              _context.next = 38;
+              break;
+            }
+            _chunk = b.slice(_position, Math.min(b.size, _position + POOL_SIZE));
+            _context.next = 32;
+            return _awaitAsyncGenerator(_chunk.arrayBuffer());
+          case 32:
+            buffer = _context.sent;
+            _position += buffer.byteLength;
+            _context.next = 36;
+            return new Uint8Array(buffer);
+          case 36:
+            _context.next = 28;
+            break;
+          case 38:
+            _context.next = 3;
+            break;
+          case 40:
+            _context.next = 45;
+            break;
+          case 42:
+            _context.prev = 42;
+            _context.t1 = _context["catch"](1);
+            _iterator3.e(_context.t1);
+          case 45:
+            _context.prev = 45;
+            _iterator3.f();
+            return _context.finish(45);
+          case 48:
+          case "end":
+            return _context.stop();
+        }
+      }, _callee, null, [[1, 42, 45, 48]]);
+    })();
+  });
+  return _toIterator.apply(this, arguments);
+}
+var _Blob = (_parts = /*#__PURE__*/new WeakMap(), _type = /*#__PURE__*/new WeakMap(), _size = /*#__PURE__*/new WeakMap(), _endings = /*#__PURE__*/new WeakMap(), _Symbol$toStringTag = Symbol.toStringTag, _Symbol$hasInstance = Symbol.hasInstance, /*#__PURE__*/function () {
+  /** @type {Array.<(Blob|Uint8Array)>} */
+
+  /**
+   * The Blob() constructor returns a new Blob object. The content
+   * of the blob consists of the concatenation of the values given
+   * in the parameter array.
+   *
+   * @param {*} blobParts
+   * @param {{ type?: string, endings?: string }} [options]
+   */
+  function Blob() {
+    var blobParts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    (0,classCallCheck/* default */.Z)(this, Blob);
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _parts, {
+      writable: true,
+      value: []
+    });
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _type, {
+      writable: true,
+      value: ''
+    });
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _size, {
+      writable: true,
+      value: 0
+    });
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _endings, {
+      writable: true,
+      value: 'transparent'
+    });
+    if (typeof blobParts !== 'object' || blobParts === null) {
+      throw new TypeError('Failed to construct \'Blob\': The provided value cannot be converted to a sequence.');
+    }
+    if (typeof blobParts[Symbol.iterator] !== 'function') {
+      throw new TypeError('Failed to construct \'Blob\': The object must have a callable @@iterator property.');
+    }
+    if (typeof options !== 'object' && typeof options !== 'function') {
+      throw new TypeError('Failed to construct \'Blob\': parameter 2 cannot convert to dictionary.');
+    }
+    if (options === null) options = {};
+    var encoder = new TextEncoder();
+    var _iterator4 = (0,createForOfIteratorHelper/* default */.Z)(blobParts),
+      _step4;
+    try {
+      for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
+        var element = _step4.value;
+        var part = void 0;
+        if (ArrayBuffer.isView(element)) {
+          part = new Uint8Array(element.buffer.slice(element.byteOffset, element.byteOffset + element.byteLength));
+        } else if (element instanceof ArrayBuffer) {
+          part = new Uint8Array(element.slice(0));
+        } else if (element instanceof Blob) {
+          part = element;
+        } else {
+          part = encoder.encode("".concat(element));
+        }
+        (0,classPrivateFieldSet/* default */.Z)(this, _size, (0,classPrivateFieldGet/* default */.Z)(this, _size) + (ArrayBuffer.isView(part) ? part.byteLength : part.size));
+        (0,classPrivateFieldGet/* default */.Z)(this, _parts).push(part);
+      }
+    } catch (err) {
+      _iterator4.e(err);
+    } finally {
+      _iterator4.f();
+    }
+    (0,classPrivateFieldSet/* default */.Z)(this, _endings, "".concat(options.endings === undefined ? 'transparent' : options.endings));
+    var type = options.type === undefined ? '' : String(options.type);
+    (0,classPrivateFieldSet/* default */.Z)(this, _type, /^[\x20-\x7E]*$/.test(type) ? type : '');
+  }
+
+  /**
+   * The Blob interface's size property returns the
+   * size of the Blob in bytes.
+   */
+  (0,createClass/* default */.Z)(Blob, [{
+    key: "size",
+    get: function get() {
+      return (0,classPrivateFieldGet/* default */.Z)(this, _size);
+    }
+
+    /**
+     * The type property of a Blob object returns the MIME type of the file.
+     */
+  }, {
+    key: "type",
+    get: function get() {
+      return (0,classPrivateFieldGet/* default */.Z)(this, _type);
+    }
+
+    /**
+     * The text() method in the Blob interface returns a Promise
+     * that resolves with a string containing the contents of
+     * the blob, interpreted as UTF-8.
+     *
+     * @return {Promise<string>}
+     */
+  }, {
+    key: "text",
+    value: function () {
+      var _text = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2() {
+        var decoder, str, _iteratorAbruptCompletion, _didIteratorError, _iteratorError, _iterator, _step, part;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              // More optimized than using this.arrayBuffer()
+              // that requires twice as much ram
+              decoder = new TextDecoder();
+              str = '';
+              _iteratorAbruptCompletion = false;
+              _didIteratorError = false;
+              _context2.prev = 4;
+              _iterator = (0,asyncIterator/* default */.Z)(toIterator((0,classPrivateFieldGet/* default */.Z)(this, _parts), false));
+            case 6:
+              _context2.next = 8;
+              return _iterator.next();
+            case 8:
+              if (!(_iteratorAbruptCompletion = !(_step = _context2.sent).done)) {
+                _context2.next = 14;
+                break;
+              }
+              part = _step.value;
+              str += decoder.decode(part, {
+                stream: true
+              });
+            case 11:
+              _iteratorAbruptCompletion = false;
+              _context2.next = 6;
+              break;
+            case 14:
+              _context2.next = 20;
+              break;
+            case 16:
+              _context2.prev = 16;
+              _context2.t0 = _context2["catch"](4);
+              _didIteratorError = true;
+              _iteratorError = _context2.t0;
+            case 20:
+              _context2.prev = 20;
+              _context2.prev = 21;
+              if (!(_iteratorAbruptCompletion && _iterator["return"] != null)) {
+                _context2.next = 25;
+                break;
+              }
+              _context2.next = 25;
+              return _iterator["return"]();
+            case 25:
+              _context2.prev = 25;
+              if (!_didIteratorError) {
+                _context2.next = 28;
+                break;
+              }
+              throw _iteratorError;
+            case 28:
+              return _context2.finish(25);
+            case 29:
+              return _context2.finish(20);
+            case 30:
+              // Remaining
+              str += decoder.decode();
+              return _context2.abrupt("return", str);
+            case 32:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this, [[4, 16, 20, 30], [21,, 25, 29]]);
+      }));
+      function text() {
+        return _text.apply(this, arguments);
+      }
+      return text;
+    }()
+    /**
+     * The arrayBuffer() method in the Blob interface returns a
+     * Promise that resolves with the contents of the blob as
+     * binary data contained in an ArrayBuffer.
+     *
+     * @return {Promise<ArrayBuffer>}
+     */
+  }, {
+    key: "arrayBuffer",
+    value: function () {
+      var _arrayBuffer = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3() {
+        var data, offset, _iteratorAbruptCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, chunk;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              // Easier way... Just a unnecessary overhead
+              // const view = new Uint8Array(this.size);
+              // await this.stream().getReader({mode: 'byob'}).read(view);
+              // return view.buffer;
+              data = new Uint8Array(this.size);
+              offset = 0;
+              _iteratorAbruptCompletion2 = false;
+              _didIteratorError2 = false;
+              _context3.prev = 4;
+              _iterator2 = (0,asyncIterator/* default */.Z)(toIterator((0,classPrivateFieldGet/* default */.Z)(this, _parts), false));
+            case 6:
+              _context3.next = 8;
+              return _iterator2.next();
+            case 8:
+              if (!(_iteratorAbruptCompletion2 = !(_step2 = _context3.sent).done)) {
+                _context3.next = 15;
+                break;
+              }
+              chunk = _step2.value;
+              data.set(chunk, offset);
+              offset += chunk.length;
+            case 12:
+              _iteratorAbruptCompletion2 = false;
+              _context3.next = 6;
+              break;
+            case 15:
+              _context3.next = 21;
+              break;
+            case 17:
+              _context3.prev = 17;
+              _context3.t0 = _context3["catch"](4);
+              _didIteratorError2 = true;
+              _iteratorError2 = _context3.t0;
+            case 21:
+              _context3.prev = 21;
+              _context3.prev = 22;
+              if (!(_iteratorAbruptCompletion2 && _iterator2["return"] != null)) {
+                _context3.next = 26;
+                break;
+              }
+              _context3.next = 26;
+              return _iterator2["return"]();
+            case 26:
+              _context3.prev = 26;
+              if (!_didIteratorError2) {
+                _context3.next = 29;
+                break;
+              }
+              throw _iteratorError2;
+            case 29:
+              return _context3.finish(26);
+            case 30:
+              return _context3.finish(21);
+            case 31:
+              return _context3.abrupt("return", data.buffer);
+            case 32:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, this, [[4, 17, 21, 31], [22,, 26, 30]]);
+      }));
+      function arrayBuffer() {
+        return _arrayBuffer.apply(this, arguments);
+      }
+      return arrayBuffer;
+    }()
+  }, {
+    key: "stream",
+    value: function stream() {
+      var it = toIterator((0,classPrivateFieldGet/* default */.Z)(this, _parts), true);
+      return new globalThis.ReadableStream({
+        // @ts-ignore
+        type: 'bytes',
+        pull: function pull(ctrl) {
+          return (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee4() {
+            var chunk;
+            return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee4$(_context4) {
+              while (1) switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.next = 2;
+                  return it.next();
+                case 2:
+                  chunk = _context4.sent;
+                  chunk.done ? ctrl.close() : ctrl.enqueue(chunk.value);
+                case 4:
+                case "end":
+                  return _context4.stop();
+              }
+            }, _callee4);
+          }))();
+        },
+        cancel: function cancel() {
+          return (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee5() {
+            return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee5$(_context5) {
+              while (1) switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.next = 2;
+                  return it["return"]();
+                case 2:
+                case "end":
+                  return _context5.stop();
+              }
+            }, _callee5);
+          }))();
+        }
+      });
+    }
+
+    /**
+     * The Blob interface's slice() method creates and returns a
+     * new Blob object which contains data from a subset of the
+     * blob on which it's called.
+     *
+     * @param {number} [start]
+     * @param {number} [end]
+     * @param {string} [type]
+     */
+  }, {
+    key: "slice",
+    value: function slice() {
+      var start = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var end = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.size;
+      var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var size = this.size;
+      var relativeStart = start < 0 ? Math.max(size + start, 0) : Math.min(start, size);
+      var relativeEnd = end < 0 ? Math.max(size + end, 0) : Math.min(end, size);
+      var span = Math.max(relativeEnd - relativeStart, 0);
+      var parts = (0,classPrivateFieldGet/* default */.Z)(this, _parts);
+      var blobParts = [];
+      var added = 0;
+      var _iterator5 = (0,createForOfIteratorHelper/* default */.Z)(parts),
+        _step5;
+      try {
+        for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
+          var part = _step5.value;
+          // don't add the overflow to new blobParts
+          if (added >= span) {
+            break;
+          }
+          var _size2 = ArrayBuffer.isView(part) ? part.byteLength : part.size;
+          if (relativeStart && _size2 <= relativeStart) {
+            // Skip the beginning and change the relative
+            // start & end position as we skip the unwanted parts
+            relativeStart -= _size2;
+            relativeEnd -= _size2;
+          } else {
+            var chunk = void 0;
+            if (ArrayBuffer.isView(part)) {
+              chunk = part.subarray(relativeStart, Math.min(_size2, relativeEnd));
+              added += chunk.byteLength;
+            } else {
+              chunk = part.slice(relativeStart, Math.min(_size2, relativeEnd));
+              added += chunk.size;
+            }
+            relativeEnd -= _size2;
+            blobParts.push(chunk);
+            relativeStart = 0; // All next sequential parts should start at 0
+          }
+        }
+      } catch (err) {
+        _iterator5.e(err);
+      } finally {
+        _iterator5.f();
+      }
+      var blob = new Blob([], {
+        type: String(type).toLowerCase()
+      });
+      (0,classPrivateFieldSet/* default */.Z)(blob, _size, span);
+      (0,classPrivateFieldSet/* default */.Z)(blob, _parts, blobParts);
+      return blob;
+    }
+  }, {
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return 'Blob';
+    }
+  }], [{
+    key: _Symbol$hasInstance,
+    value: function value(object) {
+      return object && typeof object === 'object' && typeof object.constructor === 'function' && (typeof object.stream === 'function' || typeof object.arrayBuffer === 'function') && /^(Blob|File)$/.test(object[Symbol.toStringTag]);
+    }
+  }]);
+  return Blob;
+}());
+Object.defineProperties(_Blob.prototype, {
+  size: {
+    enumerable: true
+  },
+  type: {
+    enumerable: true
+  },
+  slice: {
+    enumerable: true
+  }
+});
+
+/** @type {typeof globalThis.Blob} */
+var Blob = _Blob;
+/* harmony default export */ const fetch_blob = (Blob);
+
+/***/ }),
+
+/***/ 7409:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Ct": () => (/* binding */ FormData),
+/* harmony export */   "au": () => (/* binding */ formDataToBlob)
+/* harmony export */ });
+/* unused harmony export File */
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(2723);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(8079);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(1361);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(6234);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(9249);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(7371);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldInitSpec_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(3395);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldSet_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(5177);
+/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(3426);
+/* harmony import */ var fetch_blob__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(7674);
+/* harmony import */ var fetch_blob_file_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(2379);
+
+
+
+
+
+
+
+
+
+var _d;
+/*! formdata-polyfill. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
+
+
+
+var t = Symbol.toStringTag,
+  i = Symbol.iterator,
+  h = Symbol.hasInstance,
+  r = Math.random,
+  m = 'append,set,get,getAll,delete,keys,values,entries,forEach,constructor'.split(','),
+  f = function f(a, b, c) {
+    return a += '', /^(Blob|File)$/.test(b && b[t]) ? [(c = c !== void 0 ? c + '' : b[t] == 'File' ? b.name : 'blob', a), b.name !== c || b[t] == 'blob' ? new fetch_blob_file_js__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z([b], c, b) : b] : [a, b + ''];
+  },
+  e = function e(c, f) {
+    return (f ? c : c.replace(/\r?\n|\r/g, '\r\n')).replace(/\n/g, '%0A').replace(/\r/g, '%0D').replace(/"/g, '%22');
+  },
+  x = function x(n, a, e) {
+    if (a.length < e) {
+      throw new TypeError("Failed to execute '".concat(n, "' on 'FormData': ").concat(e, " arguments required, but only ").concat(a.length, " present."));
+    }
+  };
+var File = (/* unused pure expression or super */ null && (F));
+
+/** @type {typeof globalThis.FormData} */
+var FormData = (_d = /*#__PURE__*/new WeakMap(), /*#__PURE__*/function () {
+  function FormData() {
+    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .Z)(this, FormData);
+    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldInitSpec_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z)(this, _d, {
+      writable: true,
+      value: []
+    });
+    if (arguments.length) throw new TypeError("Failed to construct 'FormData': parameter 1 is not of type 'HTMLFormElement'.");
+  }
+  (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .Z)(FormData, [{
+    key: t,
+    get: function get() {
+      return 'FormData';
+    }
+  }, {
+    key: i,
+    value: function value() {
+      return this.entries();
+    }
+  }, {
+    key: "append",
+    value: function append() {
+      for (var _len = arguments.length, a = new Array(_len), _key = 0; _key < _len; _key++) {
+        a[_key] = arguments[_key];
+      }
+      x('append', arguments, 2);
+      (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d).push(f.apply(void 0, a));
+    }
+  }, {
+    key: "delete",
+    value: function _delete(a) {
+      x('delete', arguments, 1);
+      a += '';
+      (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldSet_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)(this, _d, (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d).filter(function (_ref) {
+        var _ref2 = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(_ref, 1),
+          b = _ref2[0];
+        return b !== a;
+      }));
+    }
+  }, {
+    key: "get",
+    value: function get(a) {
+      x('get', arguments, 1);
+      a += '';
+      for (var b = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d), l = b.length, c = 0; c < l; c++) if (b[c][0] === a) return b[c][1];
+      return null;
+    }
+  }, {
+    key: "getAll",
+    value: function getAll(a, b) {
+      x('getAll', arguments, 1);
+      b = [];
+      a += '';
+      (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d).forEach(function (c) {
+        return c[0] === a && b.push(c[1]);
+      });
+      return b;
+    }
+  }, {
+    key: "has",
+    value: function has(a) {
+      x('has', arguments, 1);
+      a += '';
+      return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d).some(function (b) {
+        return b[0] === a;
+      });
+    }
+  }, {
+    key: "forEach",
+    value: function forEach(a, b) {
+      x('forEach', arguments, 1);
+      var _iterator = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper_js__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(this),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var _step$value = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(_step.value, 2),
+            c = _step$value[0],
+            d = _step$value[1];
+          a.call(b, d, c, this);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }, {
+    key: "set",
+    value: function set() {
+      for (var _len2 = arguments.length, a = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        a[_key2] = arguments[_key2];
+      }
+      x('set', arguments, 2);
+      var b = [],
+        c = !0;
+      a = f.apply(void 0, (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_toConsumableArray_js__WEBPACK_IMPORTED_MODULE_9__/* ["default"] */ .Z)(a));
+      (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d).forEach(function (d) {
+        d[0] === a[0] ? c && (c = !b.push(a)) : b.push(d);
+      });
+      c && b.push(a);
+      (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldSet_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .Z)(this, _d, b);
+    }
+  }, {
+    key: "entries",
+    value: /*#__PURE__*/(0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)().mark(function entries() {
+      return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)().wrap(function entries$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            return _context.delegateYield((0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classPrivateFieldGet_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z)(this, _d), "t0", 1);
+          case 1:
+          case "end":
+            return _context.stop();
+        }
+      }, entries, this);
+    })
+  }, {
+    key: "keys",
+    value: /*#__PURE__*/(0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)().mark(function keys() {
+      var _iterator2, _step2, _step2$value, a;
+      return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)().wrap(function keys$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _iterator2 = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper_js__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(this);
+            _context2.prev = 1;
+            _iterator2.s();
+          case 3:
+            if ((_step2 = _iterator2.n()).done) {
+              _context2.next = 9;
+              break;
+            }
+            _step2$value = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(_step2.value, 1), a = _step2$value[0];
+            _context2.next = 7;
+            return a;
+          case 7:
+            _context2.next = 3;
+            break;
+          case 9:
+            _context2.next = 14;
+            break;
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](1);
+            _iterator2.e(_context2.t0);
+          case 14:
+            _context2.prev = 14;
+            _iterator2.f();
+            return _context2.finish(14);
+          case 17:
+          case "end":
+            return _context2.stop();
+        }
+      }, keys, this, [[1, 11, 14, 17]]);
+    })
+  }, {
+    key: "values",
+    value: /*#__PURE__*/(0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)().mark(function values() {
+      var _iterator3, _step3, _step3$value, a;
+      return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_10__/* ["default"] */ .Z)().wrap(function values$(_context3) {
+        while (1) switch (_context3.prev = _context3.next) {
+          case 0:
+            _iterator3 = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createForOfIteratorHelper_js__WEBPACK_IMPORTED_MODULE_8__/* ["default"] */ .Z)(this);
+            _context3.prev = 1;
+            _iterator3.s();
+          case 3:
+            if ((_step3 = _iterator3.n()).done) {
+              _context3.next = 9;
+              break;
+            }
+            _step3$value = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_slicedToArray_js__WEBPACK_IMPORTED_MODULE_7__/* ["default"] */ .Z)(_step3.value, 2), a = _step3$value[1];
+            _context3.next = 7;
+            return a;
+          case 7:
+            _context3.next = 3;
+            break;
+          case 9:
+            _context3.next = 14;
+            break;
+          case 11:
+            _context3.prev = 11;
+            _context3.t0 = _context3["catch"](1);
+            _iterator3.e(_context3.t0);
+          case 14:
+            _context3.prev = 14;
+            _iterator3.f();
+            return _context3.finish(14);
+          case 17:
+          case "end":
+            return _context3.stop();
+        }
+      }, values, this, [[1, 11, 14, 17]]);
+    })
+  }], [{
+    key: h,
+    value: function value(o) {
+      return o && typeof o === 'object' && o[t] === 'FormData' && !m.some(function (m) {
+        return typeof o[m] != 'function';
+      });
+    }
+  }]);
+  return FormData;
+}());
+
+/** @param {FormData} F */
+function formDataToBlob(F) {
+  var B = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : fetch_blob__WEBPACK_IMPORTED_MODULE_0__/* ["default"] */ .Z;
+  var b = "".concat(r()).concat(r()).replace(/\./g, '').slice(-28).padStart(32, '-'),
+    c = [],
+    p = "--".concat(b, "\r\nContent-Disposition: form-data; name=\"");
+  F.forEach(function (v, n) {
+    return typeof v == 'string' ? c.push(p + e(n) + "\"\r\n\r\n".concat(v.replace(/\r(?!\n)|(?<!\r)\n/g, '\r\n'), "\r\n")) : c.push(p + e(n) + "\"; filename=\"".concat(e(v.name, 1), "\"\r\nContent-Type: ").concat(v.type || "application/octet-stream", "\r\n\r\n"), v, '\r\n');
+  });
+  c.push("--".concat(b, "--"));
+  return new B(c, {
+    type: "multipart/form-data; boundary=" + b
+  });
+}
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/create fake namespace object */
+/******/ 	(() => {
+/******/ 		var getProto = Object.getPrototypeOf ? (obj) => (Object.getPrototypeOf(obj)) : (obj) => (obj.__proto__);
+/******/ 		var leafPrototypes;
+/******/ 		// create a fake namespace object
+/******/ 		// mode & 1: value is a module id, require it
+/******/ 		// mode & 2: merge all properties of value into the ns
+/******/ 		// mode & 4: return value when already ns object
+/******/ 		// mode & 16: return value when it's Promise-like
+/******/ 		// mode & 8|1: behave like require
+/******/ 		__webpack_require__.t = function(value, mode) {
+/******/ 			if(mode & 1) value = this(value);
+/******/ 			if(mode & 8) return value;
+/******/ 			if(typeof value === 'object' && value) {
+/******/ 				if((mode & 4) && value.__esModule) return value;
+/******/ 				if((mode & 16) && typeof value.then === 'function') return value;
+/******/ 			}
+/******/ 			var ns = Object.create(null);
+/******/ 			__webpack_require__.r(ns);
+/******/ 			var def = {};
+/******/ 			leafPrototypes = leafPrototypes || [null, getProto({}), getProto([]), getProto(getProto)];
+/******/ 			for(var current = mode & 2 && value; typeof current == 'object' && !~leafPrototypes.indexOf(current); current = getProto(current)) {
+/******/ 				Object.getOwnPropertyNames(current).forEach((key) => (def[key] = () => (value[key])));
+/******/ 			}
+/******/ 			def['default'] = () => (value);
+/******/ 			__webpack_require__.d(ns, def);
+/******/ 			return ns;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/ensure chunk */
+/******/ 	(() => {
+/******/ 		__webpack_require__.f = {};
+/******/ 		// This file contains only the entry chunk.
+/******/ 		// The chunk loading function for additional chunks
+/******/ 		__webpack_require__.e = (chunkId) => {
+/******/ 			return Promise.all(Object.keys(__webpack_require__.f).reduce((promises, key) => {
+/******/ 				__webpack_require__.f[key](chunkId, promises);
+/******/ 				return promises;
+/******/ 			}, []));
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference async chunks
+/******/ 		__webpack_require__.u = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".action.js";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		__webpack_require__.p = "";
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/require chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded chunks
+/******/ 		// "1" means "loaded", otherwise not loaded yet
+/******/ 		var installedChunks = {
+/******/ 			179: 1
+/******/ 		};
+/******/ 		
+/******/ 		// no on chunks loaded
+/******/ 		
+/******/ 		var installChunk = (chunk) => {
+/******/ 			var moreModules = chunk.modules, chunkIds = chunk.ids, runtime = chunk.runtime;
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) runtime(__webpack_require__);
+/******/ 			for(var i = 0; i < chunkIds.length; i++)
+/******/ 				installedChunks[chunkIds[i]] = 1;
+/******/ 		
+/******/ 		};
+/******/ 		
+/******/ 		// require() chunk loading for javascript
+/******/ 		__webpack_require__.f.require = (chunkId, promises) => {
+/******/ 			// "1" is the signal for "already loaded"
+/******/ 			if(!installedChunks[chunkId]) {
+/******/ 				if(true) { // all chunks have JS
+/******/ 					installChunk(require("./" + __webpack_require__.u(chunkId)));
+/******/ 				} else installedChunks[chunkId] = 1;
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		// no external install chunk
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// NAMESPACE OBJECT: ../../node_modules/micromark/lib/constructs.js
+var constructs_namespaceObject = {};
+__webpack_require__.r(constructs_namespaceObject);
+__webpack_require__.d(constructs_namespaceObject, {
+  "attentionMarkers": () => (attentionMarkers),
+  "contentInitial": () => (contentInitial),
+  "disable": () => (disable),
+  "document": () => (constructs_document),
+  "flow": () => (constructs_flow),
+  "flowInitial": () => (flowInitial),
+  "insideSpan": () => (insideSpan),
+  "string": () => (constructs_string),
+  "text": () => (constructs_text)
+});
+
+// NAMESPACE OBJECT: ../../node_modules/property-information/lib/util/types.js
+var types_namespaceObject = {};
+__webpack_require__.r(types_namespaceObject);
+__webpack_require__.d(types_namespaceObject, {
+  "boolean": () => (_boolean),
+  "booleanish": () => (booleanish),
+  "commaOrSpaceSeparated": () => (commaOrSpaceSeparated),
+  "commaSeparated": () => (commaSeparated),
+  "number": () => (number),
+  "overloadedBoolean": () => (overloadedBoolean),
+  "spaceSeparated": () => (spaceSeparated)
+});
+
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/regeneratorRuntime.js
+var regeneratorRuntime = __webpack_require__(2723);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/toPropertyKey.js + 1 modules
+var toPropertyKey = __webpack_require__(5850);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/defineProperty.js
 
 function _defineProperty(obj, key, value) {
-  key = _toPropertyKey(key);
+  key = (0,toPropertyKey/* default */.Z)(key);
   if (key in obj) {
     Object.defineProperty(obj, key, {
       value: value,
@@ -15771,37 +17783,8 @@ function _objectSpread2(target) {
   }
   return target;
 }
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
-  try {
-    var info = gen[key](arg);
-    var value = info.value;
-  } catch (error) {
-    reject(error);
-    return;
-  }
-  if (info.done) {
-    resolve(value);
-  } else {
-    Promise.resolve(value).then(_next, _throw);
-  }
-}
-function _asyncToGenerator(fn) {
-  return function () {
-    var self = this,
-      args = arguments;
-    return new Promise(function (resolve, reject) {
-      var gen = fn.apply(self, args);
-      function _next(value) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
-      }
-      function _throw(err) {
-        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
-      }
-      _next(undefined);
-    });
-  };
-}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__(4795);
 // EXTERNAL MODULE: external "fs"
 var external_fs_ = __webpack_require__(7147);
 var external_fs_namespaceObject = /*#__PURE__*/__webpack_require__.t(external_fs_, 2);
@@ -15813,246 +17796,20 @@ var external_path_default = /*#__PURE__*/__webpack_require__.n(external_path_);
 var lib_core = __webpack_require__(2898);
 // EXTERNAL MODULE: ../../node_modules/minimist/index.js
 var node_modules_minimist = __webpack_require__(2748);
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-  return arr2;
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArray.js
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/toConsumableArray.js
-
-
-
-
-function toConsumableArray_toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
-
-function _createForOfIteratorHelper(o, allowArrayLike) {
-  var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
-  if (!it) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-      if (it) o = it;
-      var i = 0;
-      var F = function F() {};
-      return {
-        s: F,
-        n: function n() {
-          if (i >= o.length) return {
-            done: true
-          };
-          return {
-            done: false,
-            value: o[i++]
-          };
-        },
-        e: function e(_e) {
-          throw _e;
-        },
-        f: F
-      };
-    }
-    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-  var normalCompletion = true,
-    didErr = false,
-    err;
-  return {
-    s: function s() {
-      it = it.call(o);
-    },
-    n: function n() {
-      var step = it.next();
-      normalCompletion = step.done;
-      return step;
-    },
-    e: function e(_e2) {
-      didErr = true;
-      err = _e2;
-    },
-    f: function f() {
-      try {
-        if (!normalCompletion && it["return"] != null) it["return"]();
-      } finally {
-        if (didErr) throw err;
-      }
-    }
-  };
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
-function _classCallCheck(instance, Constructor) {
-  if (!(instance instanceof Constructor)) {
-    throw new TypeError("Cannot call a class as a function");
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/createClass.js
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor);
-  }
-}
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  Object.defineProperty(Constructor, "prototype", {
-    writable: false
-  });
-  return Constructor;
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-  return _setPrototypeOf(o, p);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/inherits.js
-
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  Object.defineProperty(subClass, "prototype", {
-    writable: false
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/isNativeReflectConstruct.js
-function _isNativeReflectConstruct() {
-  if (typeof Reflect === "undefined" || !Reflect.construct) return false;
-  if (Reflect.construct.sham) return false;
-  if (typeof Proxy === "function") return true;
-  try {
-    Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-  return self;
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js
-
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  } else if (call !== void 0) {
-    throw new TypeError("Derived constructors may only return object or undefined");
-  }
-  return _assertThisInitialized(self);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/createSuper.js
-
-
-
-function _createSuper(Derived) {
-  var hasNativeReflectConstruct = _isNativeReflectConstruct();
-  return function _createSuperInternal() {
-    var Super = _getPrototypeOf(Derived),
-      result;
-    if (hasNativeReflectConstruct) {
-      var NewTarget = _getPrototypeOf(this).constructor;
-      result = Reflect.construct(Super, arguments, NewTarget);
-    } else {
-      result = Super.apply(this, arguments);
-    }
-    return _possibleConstructorReturn(this, result);
-  };
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArrayLimit.js
-function _iterableToArrayLimit(arr, i) {
-  var _i = null == arr ? null : "undefined" != typeof Symbol && arr[Symbol.iterator] || arr["@@iterator"];
-  if (null != _i) {
-    var _s,
-      _e,
-      _x,
-      _r,
-      _arr = [],
-      _n = !0,
-      _d = !1;
-    try {
-      if (_x = (_i = _i.call(arr)).next, 0 === i) {
-        if (Object(_i) !== _i) return;
-        _n = !1;
-      } else for (; !(_n = (_s = _x.call(_i)).done) && (_arr.push(_s.value), _arr.length !== i); _n = !0);
-    } catch (err) {
-      _d = !0, _e = err;
-    } finally {
-      try {
-        if (!_n && null != _i["return"] && (_r = _i["return"](), Object(_r) !== _r)) return;
-      } finally {
-        if (_d) throw _e;
-      }
-    }
-    return _arr;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/slicedToArray.js
-
-
-
-
-function _slicedToArray(arr, i) {
-  return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
-}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 2 modules
+var toConsumableArray = __webpack_require__(8079);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
+var createForOfIteratorHelper = __webpack_require__(1361);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCallCheck.js
+var classCallCheck = __webpack_require__(9249);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/createClass.js
+var createClass = __webpack_require__(7371);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/inherits.js
+var inherits = __webpack_require__(5754);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/createSuper.js
+var createSuper = __webpack_require__(6906);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/slicedToArray.js + 1 modules
+var slicedToArray = __webpack_require__(6234);
 // EXTERNAL MODULE: ../cli/node_modules/brace-expansion/index.js
 var brace_expansion = __webpack_require__(4037);
 ;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/assert-valid-pattern.js
@@ -16065,24 +17822,16 @@ var assertValidPattern = function assertValidPattern(pattern) {
     throw new TypeError('pattern is too long');
   }
 };
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/checkPrivateRedeclaration.js
-function _checkPrivateRedeclaration(obj, privateCollection) {
-  if (privateCollection.has(obj)) {
-    throw new TypeError("Cannot initialize the same private elements twice on an object");
-  }
-}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/checkPrivateRedeclaration.js
+var checkPrivateRedeclaration = __webpack_require__(5863);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateMethodInitSpec.js
 
 function _classPrivateMethodInitSpec(obj, privateSet) {
-  _checkPrivateRedeclaration(obj, privateSet);
+  (0,checkPrivateRedeclaration/* default */.Z)(obj, privateSet);
   privateSet.add(obj);
 }
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldInitSpec.js
-
-function _classPrivateFieldInitSpec(obj, privateMap, value) {
-  _checkPrivateRedeclaration(obj, privateMap);
-  privateMap.set(obj, value);
-}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldInitSpec.js
+var classPrivateFieldInitSpec = __webpack_require__(3395);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateMethodGet.js
 function _classPrivateMethodGet(receiver, privateSet, fn) {
   if (!privateSet.has(receiver)) {
@@ -16102,46 +17851,10 @@ function _classStaticPrivateMethodGet(receiver, classConstructor, method) {
   _classCheckPrivateStaticAccess(receiver, classConstructor);
   return method;
 }
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classApplyDescriptorGet.js
-function _classApplyDescriptorGet(receiver, descriptor) {
-  if (descriptor.get) {
-    return descriptor.get.call(receiver);
-  }
-  return descriptor.value;
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classExtractFieldDescriptor.js
-function _classExtractFieldDescriptor(receiver, privateMap, action) {
-  if (!privateMap.has(receiver)) {
-    throw new TypeError("attempted to " + action + " private field on non-instance");
-  }
-  return privateMap.get(receiver);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldGet.js
-
-
-function _classPrivateFieldGet(receiver, privateMap) {
-  var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "get");
-  return _classApplyDescriptorGet(receiver, descriptor);
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classApplyDescriptorSet.js
-function _classApplyDescriptorSet(receiver, descriptor, value) {
-  if (descriptor.set) {
-    descriptor.set.call(receiver, value);
-  } else {
-    if (!descriptor.writable) {
-      throw new TypeError("attempted to set read only private field");
-    }
-    descriptor.value = value;
-  }
-}
-;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldSet.js
-
-
-function _classPrivateFieldSet(receiver, privateMap, value) {
-  var descriptor = _classExtractFieldDescriptor(receiver, privateMap, "set");
-  _classApplyDescriptorSet(receiver, descriptor, value);
-  return value;
-}
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldGet.js
+var classPrivateFieldGet = __webpack_require__(3426);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classPrivateFieldSet.js
+var classPrivateFieldSet = __webpack_require__(5177);
 ;// CONCATENATED MODULE: ../cli/node_modules/minimatch/dist/mjs/brace-expressions.js
 
 // translate the various posix character classes into unicode properties
@@ -16222,9 +17935,9 @@ var parseClass = function parseClass(glob, position) {
     if (c === '[' && !escaping) {
       // either a posix class, a collation equivalent, or just a [
       for (var _i = 0, _Object$entries = Object.entries(posixClasses); _i < _Object$entries.length; _i++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        var _Object$entries$_i = (0,slicedToArray/* default */.Z)(_Object$entries[_i], 2),
           cls = _Object$entries$_i[0],
-          _Object$entries$_i$ = _slicedToArray(_Object$entries$_i[1], 3),
+          _Object$entries$_i$ = (0,slicedToArray/* default */.Z)(_Object$entries$_i[1], 3),
           unip = _Object$entries$_i$[0],
           u = _Object$entries$_i$[1],
           neg = _Object$entries$_i$[2];
@@ -16378,77 +18091,77 @@ var AST = /*#__PURE__*/function () {
 
   function AST(type, parent) {
     var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-    _classCallCheck(this, AST);
+    (0,classCallCheck/* default */.Z)(this, AST);
     _classPrivateMethodInitSpec(this, _partsToRegExp);
     _classPrivateMethodInitSpec(this, _fillNegs);
     _defineProperty(this, "type", void 0);
-    _classPrivateFieldInitSpec(this, _root, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _root, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _hasMagic2, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _hasMagic2, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _uflag, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _uflag, {
       writable: true,
       value: false
     });
-    _classPrivateFieldInitSpec(this, _parts, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _parts, {
       writable: true,
       value: []
     });
-    _classPrivateFieldInitSpec(this, _parent, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _parent, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _parentIndex, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _parentIndex, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _negs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _negs, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _filledNegs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _filledNegs, {
       writable: true,
       value: false
     });
-    _classPrivateFieldInitSpec(this, _options, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _options, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _toString, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _toString, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _emptyExt, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _emptyExt, {
       writable: true,
       value: false
     });
     this.type = type;
     // extglobs are inherently magical
-    if (type) _classPrivateFieldSet(this, _hasMagic2, true);
-    _classPrivateFieldSet(this, _parent, parent);
-    _classPrivateFieldSet(this, _root, _classPrivateFieldGet(this, _parent) ? _classPrivateFieldGet(_classPrivateFieldGet(this, _parent), _root) : this);
-    _classPrivateFieldSet(this, _options, _classPrivateFieldGet(this, _root) === this ? options : _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _options));
-    _classPrivateFieldSet(this, _negs, _classPrivateFieldGet(this, _root) === this ? [] : _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _negs));
-    if (type === '!' && !_classPrivateFieldGet(_classPrivateFieldGet(this, _root), _filledNegs)) _classPrivateFieldGet(this, _negs).push(this);
-    _classPrivateFieldSet(this, _parentIndex, _classPrivateFieldGet(this, _parent) ? _classPrivateFieldGet(_classPrivateFieldGet(this, _parent), _parts).length : 0);
+    if (type) (0,classPrivateFieldSet/* default */.Z)(this, _hasMagic2, true);
+    (0,classPrivateFieldSet/* default */.Z)(this, _parent, parent);
+    (0,classPrivateFieldSet/* default */.Z)(this, _root, (0,classPrivateFieldGet/* default */.Z)(this, _parent) ? (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _parent), _root) : this);
+    (0,classPrivateFieldSet/* default */.Z)(this, _options, (0,classPrivateFieldGet/* default */.Z)(this, _root) === this ? options : (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _root), _options));
+    (0,classPrivateFieldSet/* default */.Z)(this, _negs, (0,classPrivateFieldGet/* default */.Z)(this, _root) === this ? [] : (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _root), _negs));
+    if (type === '!' && !(0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _root), _filledNegs)) (0,classPrivateFieldGet/* default */.Z)(this, _negs).push(this);
+    (0,classPrivateFieldSet/* default */.Z)(this, _parentIndex, (0,classPrivateFieldGet/* default */.Z)(this, _parent) ? (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _parent), _parts).length : 0);
   }
-  _createClass(AST, [{
+  (0,createClass/* default */.Z)(AST, [{
     key: "hasMagic",
     get: function get() {
       /* c8 ignore start */
-      if (_classPrivateFieldGet(this, _hasMagic2) !== undefined) return _classPrivateFieldGet(this, _hasMagic2);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _hasMagic2) !== undefined) return (0,classPrivateFieldGet/* default */.Z)(this, _hasMagic2);
       /* c8 ignore stop */
-      var _iterator = _createForOfIteratorHelper(_classPrivateFieldGet(this, _parts)),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _parts)),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var p = _step.value;
           if (typeof p === 'string') continue;
-          if (p.type || p.hasMagic) return _classPrivateFieldSet(this, _hasMagic2, true);
+          if (p.type || p.hasMagic) return (0,classPrivateFieldSet/* default */.Z)(this, _hasMagic2, true);
         }
         // note: will be undefined until we generate the regexp src and find out
       } catch (err) {
@@ -16456,19 +18169,19 @@ var AST = /*#__PURE__*/function () {
       } finally {
         _iterator.f();
       }
-      return _classPrivateFieldGet(this, _hasMagic2);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _hasMagic2);
     }
     // reconstructs the pattern
   }, {
     key: "toString",
     value: function toString() {
-      if (_classPrivateFieldGet(this, _toString) !== undefined) return _classPrivateFieldGet(this, _toString);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _toString) !== undefined) return (0,classPrivateFieldGet/* default */.Z)(this, _toString);
       if (!this.type) {
-        return _classPrivateFieldSet(this, _toString, _classPrivateFieldGet(this, _parts).map(function (p) {
+        return (0,classPrivateFieldSet/* default */.Z)(this, _toString, (0,classPrivateFieldGet/* default */.Z)(this, _parts).map(function (p) {
           return String(p);
         }).join(''));
       } else {
-        return _classPrivateFieldSet(this, _toString, this.type + '(' + _classPrivateFieldGet(this, _parts).map(function (p) {
+        return (0,classPrivateFieldSet/* default */.Z)(this, _toString, this.type + '(' + (0,classPrivateFieldGet/* default */.Z)(this, _parts).map(function (p) {
           return String(p);
         }).join('|') + ')');
       }
@@ -16483,24 +18196,24 @@ var AST = /*#__PURE__*/function () {
         var p = _parts2[_i];
         if (p === '') continue;
         /* c8 ignore start */
-        if (typeof p !== 'string' && !(p instanceof AST && _classPrivateFieldGet(p, _parent) === this)) {
+        if (typeof p !== 'string' && !(p instanceof AST && (0,classPrivateFieldGet/* default */.Z)(p, _parent) === this)) {
           throw new Error('invalid part: ' + p);
         }
         /* c8 ignore stop */
-        _classPrivateFieldGet(this, _parts).push(p);
+        (0,classPrivateFieldGet/* default */.Z)(this, _parts).push(p);
       }
     }
   }, {
     key: "toJSON",
     value: function toJSON() {
       var _classPrivateFieldGet2;
-      var ret = this.type === null ? _classPrivateFieldGet(this, _parts).slice().map(function (p) {
+      var ret = this.type === null ? (0,classPrivateFieldGet/* default */.Z)(this, _parts).slice().map(function (p) {
         return typeof p === 'string' ? p : p.toJSON();
-      }) : [this.type].concat(toConsumableArray_toConsumableArray(_classPrivateFieldGet(this, _parts).map(function (p) {
+      }) : [this.type].concat((0,toConsumableArray/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _parts).map(function (p) {
         return p.toJSON();
       })));
       if (this.isStart() && !this.type) ret.unshift([]);
-      if (this.isEnd() && (this === _classPrivateFieldGet(this, _root) || _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _filledNegs) && ((_classPrivateFieldGet2 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.type) === '!')) {
+      if (this.isEnd() && (this === (0,classPrivateFieldGet/* default */.Z)(this, _root) || (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _root), _filledNegs) && ((_classPrivateFieldGet2 = (0,classPrivateFieldGet/* default */.Z)(this, _parent)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.type) === '!')) {
         ret.push({});
       }
       return ret;
@@ -16509,14 +18222,14 @@ var AST = /*#__PURE__*/function () {
     key: "isStart",
     value: function isStart() {
       var _classPrivateFieldGet3;
-      if (_classPrivateFieldGet(this, _root) === this) return true;
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _root) === this) return true;
       // if (this.type) return !!this.#parent?.isStart()
-      if (!((_classPrivateFieldGet3 = _classPrivateFieldGet(this, _parent)) !== null && _classPrivateFieldGet3 !== void 0 && _classPrivateFieldGet3.isStart())) return false;
-      if (_classPrivateFieldGet(this, _parentIndex) === 0) return true;
+      if (!((_classPrivateFieldGet3 = (0,classPrivateFieldGet/* default */.Z)(this, _parent)) !== null && _classPrivateFieldGet3 !== void 0 && _classPrivateFieldGet3.isStart())) return false;
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _parentIndex) === 0) return true;
       // if everything AHEAD of this is a negation, then it's still the "start"
-      var p = _classPrivateFieldGet(this, _parent);
-      for (var i = 0; i < _classPrivateFieldGet(this, _parentIndex); i++) {
-        var pp = _classPrivateFieldGet(p, _parts)[i];
+      var p = (0,classPrivateFieldGet/* default */.Z)(this, _parent);
+      for (var i = 0; i < (0,classPrivateFieldGet/* default */.Z)(this, _parentIndex); i++) {
+        var pp = (0,classPrivateFieldGet/* default */.Z)(p, _parts)[i];
         if (!(pp instanceof AST && pp.type === '!')) {
           return false;
         }
@@ -16527,15 +18240,15 @@ var AST = /*#__PURE__*/function () {
     key: "isEnd",
     value: function isEnd() {
       var _classPrivateFieldGet4, _classPrivateFieldGet5, _classPrivateFieldGet6;
-      if (_classPrivateFieldGet(this, _root) === this) return true;
-      if (((_classPrivateFieldGet4 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.type) === '!') return true;
-      if (!((_classPrivateFieldGet5 = _classPrivateFieldGet(this, _parent)) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.isEnd())) return false;
-      if (!this.type) return (_classPrivateFieldGet6 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.isEnd();
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _root) === this) return true;
+      if (((_classPrivateFieldGet4 = (0,classPrivateFieldGet/* default */.Z)(this, _parent)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : _classPrivateFieldGet4.type) === '!') return true;
+      if (!((_classPrivateFieldGet5 = (0,classPrivateFieldGet/* default */.Z)(this, _parent)) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.isEnd())) return false;
+      if (!this.type) return (_classPrivateFieldGet6 = (0,classPrivateFieldGet/* default */.Z)(this, _parent)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : _classPrivateFieldGet6.isEnd();
       // if not root, it'll always have a parent
       /* c8 ignore start */
-      var pl = _classPrivateFieldGet(this, _parent) ? _classPrivateFieldGet(_classPrivateFieldGet(this, _parent), _parts).length : 0;
+      var pl = (0,classPrivateFieldGet/* default */.Z)(this, _parent) ? (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _parent), _parts).length : 0;
       /* c8 ignore stop */
-      return _classPrivateFieldGet(this, _parentIndex) === pl - 1;
+      return (0,classPrivateFieldGet/* default */.Z)(this, _parentIndex) === pl - 1;
     }
   }, {
     key: "copyIn",
@@ -16546,7 +18259,7 @@ var AST = /*#__PURE__*/function () {
     key: "clone",
     value: function clone(parent) {
       var c = new AST(this.type, parent);
-      var _iterator2 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _parts)),
+      var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _parts)),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -16568,11 +18281,11 @@ var AST = /*#__PURE__*/function () {
     function toMMPattern() {
       // should only be called on root
       /* c8 ignore start */
-      if (this !== _classPrivateFieldGet(this, _root)) return _classPrivateFieldGet(this, _root).toMMPattern();
+      if (this !== (0,classPrivateFieldGet/* default */.Z)(this, _root)) return (0,classPrivateFieldGet/* default */.Z)(this, _root).toMMPattern();
       /* c8 ignore stop */
       var glob = this.toString();
       var _this$toRegExpSource = this.toRegExpSource(),
-        _this$toRegExpSource2 = _slicedToArray(_this$toRegExpSource, 4),
+        _this$toRegExpSource2 = (0,slicedToArray/* default */.Z)(_this$toRegExpSource, 4),
         re = _this$toRegExpSource2[0],
         body = _this$toRegExpSource2[1],
         hasMagic = _this$toRegExpSource2[2],
@@ -16580,11 +18293,11 @@ var AST = /*#__PURE__*/function () {
       // if we're in nocase mode, and not nocaseMagicOnly, then we do
       // still need a regular expression if we have to case-insensitively
       // match capital/lowercase characters.
-      var anyMagic = hasMagic || _classPrivateFieldGet(this, _hasMagic2) || _classPrivateFieldGet(this, _options).nocase && !_classPrivateFieldGet(this, _options).nocaseMagicOnly && glob.toUpperCase() !== glob.toLowerCase();
+      var anyMagic = hasMagic || (0,classPrivateFieldGet/* default */.Z)(this, _hasMagic2) || (0,classPrivateFieldGet/* default */.Z)(this, _options).nocase && !(0,classPrivateFieldGet/* default */.Z)(this, _options).nocaseMagicOnly && glob.toUpperCase() !== glob.toLowerCase();
       if (!anyMagic) {
         return body;
       }
-      var flags = (_classPrivateFieldGet(this, _options).nocase ? 'i' : '') + (uflag ? 'u' : '');
+      var flags = ((0,classPrivateFieldGet/* default */.Z)(this, _options).nocase ? 'i' : '') + (uflag ? 'u' : '');
       return Object.assign(new RegExp("^".concat(re, "$"), flags), {
         _src: re,
         _glob: glob
@@ -16663,30 +18376,30 @@ var AST = /*#__PURE__*/function () {
     key: "toRegExpSource",
     value: function toRegExpSource(allowDot) {
       var _this = this;
-      var dot = allowDot !== null && allowDot !== void 0 ? allowDot : !!_classPrivateFieldGet(this, _options).dot;
-      if (_classPrivateFieldGet(this, _root) === this) _classPrivateMethodGet(this, _fillNegs, _fillNegs2).call(this);
+      var dot = allowDot !== null && allowDot !== void 0 ? allowDot : !!(0,classPrivateFieldGet/* default */.Z)(this, _options).dot;
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _root) === this) _classPrivateMethodGet(this, _fillNegs, _fillNegs2).call(this);
       if (!this.type) {
         var _classPrivateFieldGet7;
         var noEmpty = this.isStart() && this.isEnd();
-        var src = _classPrivateFieldGet(this, _parts).map(function (p) {
-          var _ref = typeof p === 'string' ? _classStaticPrivateMethodGet(AST, AST, _parseGlob).call(AST, p, _classPrivateFieldGet(_this, _hasMagic2), noEmpty) : p.toRegExpSource(allowDot),
-            _ref2 = _slicedToArray(_ref, 4),
+        var src = (0,classPrivateFieldGet/* default */.Z)(this, _parts).map(function (p) {
+          var _ref = typeof p === 'string' ? _classStaticPrivateMethodGet(AST, AST, _parseGlob).call(AST, p, (0,classPrivateFieldGet/* default */.Z)(_this, _hasMagic2), noEmpty) : p.toRegExpSource(allowDot),
+            _ref2 = (0,slicedToArray/* default */.Z)(_ref, 4),
             re = _ref2[0],
             _ = _ref2[1],
             hasMagic = _ref2[2],
             uflag = _ref2[3];
-          _classPrivateFieldSet(_this, _hasMagic2, _classPrivateFieldGet(_this, _hasMagic2) || hasMagic);
-          _classPrivateFieldSet(_this, _uflag, _classPrivateFieldGet(_this, _uflag) || uflag);
+          (0,classPrivateFieldSet/* default */.Z)(_this, _hasMagic2, (0,classPrivateFieldGet/* default */.Z)(_this, _hasMagic2) || hasMagic);
+          (0,classPrivateFieldSet/* default */.Z)(_this, _uflag, (0,classPrivateFieldGet/* default */.Z)(_this, _uflag) || uflag);
           return re;
         }).join('');
         var _start = '';
         if (this.isStart()) {
-          if (typeof _classPrivateFieldGet(this, _parts)[0] === 'string') {
+          if (typeof (0,classPrivateFieldGet/* default */.Z)(this, _parts)[0] === 'string') {
             // this is the string that will match the start of the pattern,
             // so we need to protect against dots and such.
             // '.' and '..' cannot match unless the pattern is that exactly,
             // even if it starts with . or dot:true is set.
-            var dotTravAllowed = _classPrivateFieldGet(this, _parts).length === 1 && justDots.has(_classPrivateFieldGet(this, _parts)[0]);
+            var dotTravAllowed = (0,classPrivateFieldGet/* default */.Z)(this, _parts).length === 1 && justDots.has((0,classPrivateFieldGet/* default */.Z)(this, _parts)[0]);
             if (!dotTravAllowed) {
               var aps = addPatternStart;
               // check if we have a possibility of matching . or ..,
@@ -16707,11 +18420,11 @@ var AST = /*#__PURE__*/function () {
         }
         // append the "end of path portion" pattern to negation tails
         var end = '';
-        if (this.isEnd() && _classPrivateFieldGet(_classPrivateFieldGet(this, _root), _filledNegs) && ((_classPrivateFieldGet7 = _classPrivateFieldGet(this, _parent)) === null || _classPrivateFieldGet7 === void 0 ? void 0 : _classPrivateFieldGet7.type) === '!') {
+        if (this.isEnd() && (0,classPrivateFieldGet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _root), _filledNegs) && ((_classPrivateFieldGet7 = (0,classPrivateFieldGet/* default */.Z)(this, _parent)) === null || _classPrivateFieldGet7 === void 0 ? void 0 : _classPrivateFieldGet7.type) === '!') {
           end = '(?:$|\\/)';
         }
         var _final = _start + src + end;
-        return [_final, unescape_unescape(src), _classPrivateFieldSet(this, _hasMagic2, !!_classPrivateFieldGet(this, _hasMagic2)), _classPrivateFieldGet(this, _uflag)];
+        return [_final, unescape_unescape(src), (0,classPrivateFieldSet/* default */.Z)(this, _hasMagic2, !!(0,classPrivateFieldGet/* default */.Z)(this, _hasMagic2)), (0,classPrivateFieldGet/* default */.Z)(this, _uflag)];
       }
       // We need to calculate the body *twice* if it's a repeat pattern
       // at the start, once in nodot mode, then again in dot mode, so a
@@ -16724,9 +18437,9 @@ var AST = /*#__PURE__*/function () {
         // invalid extglob, has to at least be *something* present, if it's
         // the entire path portion.
         var s = this.toString();
-        _classPrivateFieldSet(this, _parts, [s]);
+        (0,classPrivateFieldSet/* default */.Z)(this, _parts, [s]);
         this.type = null;
-        _classPrivateFieldSet(this, _hasMagic2, undefined);
+        (0,classPrivateFieldSet/* default */.Z)(this, _hasMagic2, undefined);
         return [s, unescape_unescape(this.toString()), false, false];
       }
       // XXX abstract out this map method
@@ -16739,7 +18452,7 @@ var AST = /*#__PURE__*/function () {
       }
       // an empty !() is exactly equivalent to a starNoEmpty
       var _final2 = '';
-      if (this.type === '!' && _classPrivateFieldGet(this, _emptyExt)) {
+      if (this.type === '!' && (0,classPrivateFieldGet/* default */.Z)(this, _emptyExt)) {
         _final2 = (this.isStart() && !dot ? startNoDot : '') + starNoEmpty;
       } else {
         var close = this.type === '!' ?
@@ -16747,7 +18460,7 @@ var AST = /*#__PURE__*/function () {
         '))' + (this.isStart() && !dot && !allowDot ? startNoDot : '') + star + ')' : this.type === '@' ? ')' : this.type === '?' ? ')?' : this.type === '+' && bodyDotAllowed ? ')' : this.type === '*' && bodyDotAllowed ? ")?" : ")".concat(this.type);
         _final2 = start + body + close;
       }
-      return [_final2, unescape_unescape(body), _classPrivateFieldSet(this, _hasMagic2, !!_classPrivateFieldGet(this, _hasMagic2)), _classPrivateFieldGet(this, _uflag)];
+      return [_final2, unescape_unescape(body), (0,classPrivateFieldSet/* default */.Z)(this, _hasMagic2, !!(0,classPrivateFieldGet/* default */.Z)(this, _hasMagic2)), (0,classPrivateFieldGet/* default */.Z)(this, _uflag)];
     }
   }], [{
     key: "fromGlob",
@@ -16762,21 +18475,21 @@ var AST = /*#__PURE__*/function () {
 }();
 function _fillNegs2() {
   /* c8 ignore start */
-  if (this !== _classPrivateFieldGet(this, _root)) throw new Error('should only call on root');
-  if (_classPrivateFieldGet(this, _filledNegs)) return this;
+  if (this !== (0,classPrivateFieldGet/* default */.Z)(this, _root)) throw new Error('should only call on root');
+  if ((0,classPrivateFieldGet/* default */.Z)(this, _filledNegs)) return this;
   /* c8 ignore stop */
   // call toString() once to fill this out
   this.toString();
-  _classPrivateFieldSet(this, _filledNegs, true);
+  (0,classPrivateFieldSet/* default */.Z)(this, _filledNegs, true);
   var n;
-  while (n = _classPrivateFieldGet(this, _negs).pop()) {
+  while (n = (0,classPrivateFieldGet/* default */.Z)(this, _negs).pop()) {
     if (n.type !== '!') continue;
     // walk up the tree, appending everthing that comes AFTER parentIndex
     var p = n;
-    var pp = _classPrivateFieldGet(p, _parent);
+    var pp = (0,classPrivateFieldGet/* default */.Z)(p, _parent);
     while (pp) {
-      for (var i = _classPrivateFieldGet(p, _parentIndex) + 1; !pp.type && i < _classPrivateFieldGet(pp, _parts).length; i++) {
-        var _iterator3 = _createForOfIteratorHelper(_classPrivateFieldGet(n, _parts)),
+      for (var i = (0,classPrivateFieldGet/* default */.Z)(p, _parentIndex) + 1; !pp.type && i < (0,classPrivateFieldGet/* default */.Z)(pp, _parts).length; i++) {
+        var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(n, _parts)),
           _step3;
         try {
           for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -16786,7 +18499,7 @@ function _fillNegs2() {
               throw new Error('string part in extglob AST??');
             }
             /* c8 ignore stop */
-            part.copyIn(_classPrivateFieldGet(pp, _parts)[i]);
+            part.copyIn((0,classPrivateFieldGet/* default */.Z)(pp, _parts)[i]);
           }
         } catch (err) {
           _iterator3.e(err);
@@ -16795,7 +18508,7 @@ function _fillNegs2() {
         }
       }
       p = pp;
-      pp = _classPrivateFieldGet(p, _parent);
+      pp = (0,classPrivateFieldGet/* default */.Z)(p, _parent);
     }
   }
   return this;
@@ -16896,8 +18609,8 @@ function _parseAST(str, ast, pos, opt) {
       continue;
     }
     if (_c === ')') {
-      if (acc === '' && _classPrivateFieldGet(ast, _parts).length === 0) {
-        _classPrivateFieldSet(ast, _emptyExt, true);
+      if (acc === '' && (0,classPrivateFieldGet/* default */.Z)(ast, _parts).length === 0) {
+        (0,classPrivateFieldSet/* default */.Z)(ast, _emptyExt, true);
       }
       part.push(acc);
       acc = '';
@@ -16910,13 +18623,13 @@ function _parseAST(str, ast, pos, opt) {
   // if we got here, it was a malformed extglob! not an extglob, but
   // maybe something else in there.
   ast.type = null;
-  _classPrivateFieldSet(ast, _hasMagic2, undefined);
-  _classPrivateFieldSet(ast, _parts, [str.substring(pos - 1)]);
+  (0,classPrivateFieldSet/* default */.Z)(ast, _hasMagic2, undefined);
+  (0,classPrivateFieldSet/* default */.Z)(ast, _parts, [str.substring(pos - 1)]);
   return i;
 }
 function _partsToRegExp2(dot) {
   var _this2 = this;
-  return _classPrivateFieldGet(this, _parts).map(function (p) {
+  return (0,classPrivateFieldGet/* default */.Z)(this, _parts).map(function (p) {
     // extglob ASTs should only contain parent ASTs
     /* c8 ignore start */
     if (typeof p === 'string') {
@@ -16925,12 +18638,12 @@ function _partsToRegExp2(dot) {
     /* c8 ignore stop */
     // can ignore hasMagic, because extglobs are already always magic
     var _p$toRegExpSource = p.toRegExpSource(dot),
-      _p$toRegExpSource2 = _slicedToArray(_p$toRegExpSource, 4),
+      _p$toRegExpSource2 = (0,slicedToArray/* default */.Z)(_p$toRegExpSource, 4),
       re = _p$toRegExpSource2[0],
       _ = _p$toRegExpSource2[1],
       _hasMagic = _p$toRegExpSource2[2],
       uflag = _p$toRegExpSource2[3];
-    _classPrivateFieldSet(_this2, _uflag, _classPrivateFieldGet(_this2, _uflag) || uflag);
+    (0,classPrivateFieldSet/* default */.Z)(_this2, _uflag, (0,classPrivateFieldGet/* default */.Z)(_this2, _uflag) || uflag);
     return re;
   }).filter(function (p) {
     return !(_this2.isStart() && _this2.isEnd()) || !!p;
@@ -16958,7 +18671,7 @@ function _parseGlob(glob, hasMagic) {
     }
     if (c === '[') {
       var _parseClass = parseClass(glob, i),
-        _parseClass2 = _slicedToArray(_parseClass, 4),
+        _parseClass2 = (0,slicedToArray/* default */.Z)(_parseClass, 4),
         src = _parseClass2[0],
         needUflag = _parseClass2[1],
         consumed = _parseClass2[2],
@@ -17071,7 +18784,7 @@ var starTestDot = function starTestDot(f) {
 };
 var qmarksRE = /^\?+([^+@!?\*\[\(]*)?$/;
 var qmarksTestNocase = function qmarksTestNocase(_ref) {
-  var _ref2 = _slicedToArray(_ref, 2),
+  var _ref2 = (0,slicedToArray/* default */.Z)(_ref, 2),
     $0 = _ref2[0],
     _ref2$ = _ref2[1],
     ext = _ref2$ === void 0 ? '' : _ref2$;
@@ -17083,7 +18796,7 @@ var qmarksTestNocase = function qmarksTestNocase(_ref) {
   };
 };
 var qmarksTestNocaseDot = function qmarksTestNocaseDot(_ref3) {
-  var _ref4 = _slicedToArray(_ref3, 2),
+  var _ref4 = (0,slicedToArray/* default */.Z)(_ref3, 2),
     $0 = _ref4[0],
     _ref4$ = _ref4[1],
     ext = _ref4$ === void 0 ? '' : _ref4$;
@@ -17095,7 +18808,7 @@ var qmarksTestNocaseDot = function qmarksTestNocaseDot(_ref3) {
   };
 };
 var qmarksTestDot = function qmarksTestDot(_ref5) {
-  var _ref6 = _slicedToArray(_ref5, 2),
+  var _ref6 = (0,slicedToArray/* default */.Z)(_ref5, 2),
     $0 = _ref6[0],
     _ref6$ = _ref6[1],
     ext = _ref6$ === void 0 ? '' : _ref6$;
@@ -17105,7 +18818,7 @@ var qmarksTestDot = function qmarksTestDot(_ref5) {
   };
 };
 var qmarksTest = function qmarksTest(_ref7) {
-  var _ref8 = _slicedToArray(_ref7, 2),
+  var _ref8 = (0,slicedToArray/* default */.Z)(_ref7, 2),
     $0 = _ref8[0],
     _ref8$ = _ref8[1],
     ext = _ref8$ === void 0 ? '' : _ref8$;
@@ -17115,7 +18828,7 @@ var qmarksTest = function qmarksTest(_ref7) {
   };
 };
 var qmarksTestNoExt = function qmarksTestNoExt(_ref9) {
-  var _ref10 = _slicedToArray(_ref9, 1),
+  var _ref10 = (0,slicedToArray/* default */.Z)(_ref9, 1),
     $0 = _ref10[0];
   var len = $0.length;
   return function (f) {
@@ -17123,7 +18836,7 @@ var qmarksTestNoExt = function qmarksTestNoExt(_ref9) {
   };
 };
 var qmarksTestNoExtDot = function qmarksTestNoExtDot(_ref11) {
-  var _ref12 = _slicedToArray(_ref11, 1),
+  var _ref12 = (0,slicedToArray/* default */.Z)(_ref11, 1),
     $0 = _ref12[0];
   var len = $0.length;
   return function (f) {
@@ -17179,14 +18892,14 @@ var defaults = function defaults(def) {
   };
   return Object.assign(m, {
     Minimatch: /*#__PURE__*/function (_orig$Minimatch) {
-      _inherits(Minimatch, _orig$Minimatch);
-      var _super = _createSuper(Minimatch);
+      (0,inherits/* default */.Z)(Minimatch, _orig$Minimatch);
+      var _super = (0,createSuper/* default */.Z)(Minimatch);
       function Minimatch(pattern) {
         var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        _classCallCheck(this, Minimatch);
+        (0,classCallCheck/* default */.Z)(this, Minimatch);
         return _super.call(this, pattern, ext(def, options));
       }
-      _createClass(Minimatch, null, [{
+      (0,createClass/* default */.Z)(Minimatch, null, [{
         key: "defaults",
         value: function defaults(options) {
           return orig.defaults(ext(def, options)).Minimatch;
@@ -17195,16 +18908,16 @@ var defaults = function defaults(def) {
       return Minimatch;
     }(orig.Minimatch),
     AST: /*#__PURE__*/function (_orig$AST) {
-      _inherits(AST, _orig$AST);
-      var _super2 = _createSuper(AST);
+      (0,inherits/* default */.Z)(AST, _orig$AST);
+      var _super2 = (0,createSuper/* default */.Z)(AST);
       /* c8 ignore start */
       function AST(type, parent) {
         var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-        _classCallCheck(this, AST);
+        (0,classCallCheck/* default */.Z)(this, AST);
         return _super2.call(this, type, parent, ext(def, options));
       }
       /* c8 ignore stop */
-      _createClass(AST, null, [{
+      (0,createClass/* default */.Z)(AST, null, [{
         key: "fromGlob",
         value: function fromGlob(pattern) {
           var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -17304,7 +19017,7 @@ var mjs_regExpEscape = function regExpEscape(s) {
 var Minimatch = /*#__PURE__*/function () {
   function Minimatch(pattern) {
     var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    _classCallCheck(this, Minimatch);
+    (0,classCallCheck/* default */.Z)(this, Minimatch);
     _defineProperty(this, "options", void 0);
     _defineProperty(this, "set", void 0);
     _defineProperty(this, "pattern", void 0);
@@ -17347,18 +19060,18 @@ var Minimatch = /*#__PURE__*/function () {
     // make the set of regexps etc.
     this.make();
   }
-  _createClass(Minimatch, [{
+  (0,createClass/* default */.Z)(Minimatch, [{
     key: "hasMagic",
     value: function hasMagic() {
       if (this.options.magicalBraces && this.set.length > 1) {
         return true;
       }
-      var _iterator = _createForOfIteratorHelper(this.set),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(this.set),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var pattern = _step.value;
-          var _iterator2 = _createForOfIteratorHelper(pattern),
+          var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(pattern),
             _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -17399,7 +19112,7 @@ var Minimatch = /*#__PURE__*/function () {
       // step 1: figure out negation, etc.
       this.parseNegate();
       // step 2: expand braces
-      this.globSet = toConsumableArray_toConsumableArray(new Set(this.braceExpand()));
+      this.globSet = (0,toConsumableArray/* default */.Z)(new Set(this.braceExpand()));
       if (options.debug) {
         this.debug = function () {
           var _console;
@@ -17428,11 +19141,11 @@ var Minimatch = /*#__PURE__*/function () {
           var isUNC = s[0] === '' && s[1] === '' && (s[2] === '?' || !globMagic.test(s[2])) && !globMagic.test(s[3]);
           var isDrive = /^[a-z]:/i.test(s[0]);
           if (isUNC) {
-            return [].concat(toConsumableArray_toConsumableArray(s.slice(0, 4)), toConsumableArray_toConsumableArray(s.slice(4).map(function (ss) {
+            return [].concat((0,toConsumableArray/* default */.Z)(s.slice(0, 4)), (0,toConsumableArray/* default */.Z)(s.slice(4).map(function (ss) {
               return _this.parse(ss);
             })));
           } else if (isDrive) {
-            return [s[0]].concat(toConsumableArray_toConsumableArray(s.slice(1).map(function (ss) {
+            return [s[0]].concat((0,toConsumableArray/* default */.Z)(s.slice(1).map(function (ss) {
               return _this.parse(ss);
             })));
           }
@@ -17593,7 +19306,7 @@ var Minimatch = /*#__PURE__*/function () {
       do {
         didSomething = false;
         // <pre>/**/../<p>/<p>/<rest> -> {<pre>/../<p>/<p>/<rest>,<pre>/**/<p>/<p>/<rest>}
-        var _iterator3 = _createForOfIteratorHelper(globParts),
+        var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(globParts),
           _step3;
         try {
           for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -17976,7 +19689,7 @@ var Minimatch = /*#__PURE__*/function () {
       var re = set.map(function (pattern) {
         var pp = pattern.map(function (p) {
           if (p instanceof RegExp) {
-            var _iterator4 = _createForOfIteratorHelper(p.flags.split('')),
+            var _iterator4 = (0,createForOfIteratorHelper/* default */.Z)(p.flags.split('')),
               _step4;
             try {
               for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
@@ -18017,7 +19730,7 @@ var Minimatch = /*#__PURE__*/function () {
       // need to wrap in parens if we had more than one thing with |,
       // otherwise only the first will be anchored to ^ and the last to $
       var _ref14 = set.length > 1 ? ['(?:', ')'] : ['', ''],
-        _ref15 = _slicedToArray(_ref14, 2),
+        _ref15 = (0,slicedToArray/* default */.Z)(_ref14, 2),
         open = _ref15[0],
         close = _ref15[1];
       // must match entire pattern
@@ -18026,7 +19739,7 @@ var Minimatch = /*#__PURE__*/function () {
       // can match anything, as long as it's not this.
       if (this.negate) re = '^(?!' + re + ').+$';
       try {
-        this.regexp = new RegExp(re, toConsumableArray_toConsumableArray(flags).join(''));
+        this.regexp = new RegExp(re, (0,toConsumableArray/* default */.Z)(flags).join(''));
         /* c8 ignore start */
       } catch (ex) {
         // should be impossible
@@ -18046,7 +19759,7 @@ var Minimatch = /*#__PURE__*/function () {
         return p.split('/');
       } else if (this.isWindows && /^\/\/[^\/]+/.test(p)) {
         // add an extra '' for the one we lose
-        return [''].concat(toConsumableArray_toConsumableArray(p.split(/\/+/)));
+        return [''].concat((0,toConsumableArray/* default */.Z)(p.split(/\/+/)));
       } else {
         return p.split(/\/+/);
       }
@@ -18126,6 +19839,10 @@ minimatch.AST = AST;
 minimatch.Minimatch = Minimatch;
 minimatch.escape = escape_escape;
 minimatch.unescape = unescape_unescape;
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/assertThisInitialized.js
+var assertThisInitialized = __webpack_require__(753);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classApplyDescriptorGet.js
+var classApplyDescriptorGet = __webpack_require__(1909);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classCheckPrivateStaticFieldDescriptor.js
 function _classCheckPrivateStaticFieldDescriptor(descriptor, action) {
   if (descriptor === undefined) {
@@ -18139,8 +19856,10 @@ function _classCheckPrivateStaticFieldDescriptor(descriptor, action) {
 function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor) {
   _classCheckPrivateStaticAccess(receiver, classConstructor);
   _classCheckPrivateStaticFieldDescriptor(descriptor, "get");
-  return _classApplyDescriptorGet(receiver, descriptor);
+  return (0,classApplyDescriptorGet/* default */.Z)(receiver, descriptor);
 }
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/classApplyDescriptorSet.js
+var classApplyDescriptorSet = __webpack_require__(8390);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/classStaticPrivateFieldSpecSet.js
 
 
@@ -18148,18 +19867,24 @@ function _classStaticPrivateFieldSpecGet(receiver, classConstructor, descriptor)
 function _classStaticPrivateFieldSpecSet(receiver, classConstructor, descriptor, value) {
   _classCheckPrivateStaticAccess(receiver, classConstructor);
   _classCheckPrivateStaticFieldDescriptor(descriptor, "set");
-  _classApplyDescriptorSet(receiver, descriptor, value);
+  (0,classApplyDescriptorSet/* default */.Z)(receiver, descriptor, value);
   return value;
 }
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(5058);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/setPrototypeOf.js
+var setPrototypeOf = __webpack_require__(8960);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/isNativeFunction.js
 function _isNativeFunction(fn) {
   return Function.toString.call(fn).indexOf("[native code]") !== -1;
 }
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/isNativeReflectConstruct.js
+var isNativeReflectConstruct = __webpack_require__(352);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/construct.js
 
 
 function _construct(Parent, args, Class) {
-  if (_isNativeReflectConstruct()) {
+  if ((0,isNativeReflectConstruct/* default */.Z)()) {
     _construct = Reflect.construct.bind();
   } else {
     _construct = function _construct(Parent, args, Class) {
@@ -18167,7 +19892,7 @@ function _construct(Parent, args, Class) {
       a.push.apply(a, args);
       var Constructor = Function.bind.apply(Parent, a);
       var instance = new Constructor();
-      if (Class) _setPrototypeOf(instance, Class.prototype);
+      if (Class) (0,setPrototypeOf/* default */.Z)(instance, Class.prototype);
       return instance;
     };
   }
@@ -18190,7 +19915,7 @@ function _wrapNativeSuper(Class) {
       _cache.set(Class, Wrapper);
     }
     function Wrapper() {
-      return _construct(Class, arguments, _getPrototypeOf(this).constructor);
+      return _construct(Class, arguments, (0,getPrototypeOf/* default */.Z)(this).constructor);
     }
     Wrapper.prototype = Object.create(Class.prototype, {
       constructor: {
@@ -18200,7 +19925,7 @@ function _wrapNativeSuper(Class) {
         configurable: true
       }
     });
-    return _setPrototypeOf(Wrapper, Class);
+    return (0,setPrototypeOf/* default */.Z)(Wrapper, Class);
   };
   return _wrapNativeSuper(Class);
 }
@@ -18244,13 +19969,13 @@ if (typeof AC === 'undefined') {
   //@ts-ignore
   AS = /*#__PURE__*/function () {
     function AbortSignal() {
-      _classCallCheck(this, AbortSignal);
+      (0,classCallCheck/* default */.Z)(this, AbortSignal);
       _defineProperty(this, "onabort", void 0);
       _defineProperty(this, "_onabort", []);
       _defineProperty(this, "reason", void 0);
       _defineProperty(this, "aborted", false);
     }
-    _createClass(AbortSignal, [{
+    (0,createClass/* default */.Z)(AbortSignal, [{
       key: "addEventListener",
       value: function addEventListener(_, fn) {
         this._onabort.push(fn);
@@ -18261,11 +19986,11 @@ if (typeof AC === 'undefined') {
   //@ts-ignore
   AC = /*#__PURE__*/function () {
     function AbortController() {
-      _classCallCheck(this, AbortController);
+      (0,classCallCheck/* default */.Z)(this, AbortController);
       _defineProperty(this, "signal", new AS());
       warnACPolyfill();
     }
-    _createClass(AbortController, [{
+    (0,createClass/* default */.Z)(AbortController, [{
       key: "abort",
       value: function abort(reason) {
         var _this$signal$onabort, _this$signal;
@@ -18275,7 +20000,7 @@ if (typeof AC === 'undefined') {
         //@ts-ignore
         this.signal.aborted = true;
         //@ts-ignore
-        var _iterator = _createForOfIteratorHelper(this.signal._onabort),
+        var _iterator = (0,createForOfIteratorHelper/* default */.Z)(this.signal._onabort),
           _step;
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -18321,20 +20046,20 @@ var getUintArray = function getUintArray(max) {
 };
 /* c8 ignore stop */
 var ZeroArray = /*#__PURE__*/function (_Array) {
-  _inherits(ZeroArray, _Array);
-  var _super = _createSuper(ZeroArray);
+  (0,inherits/* default */.Z)(ZeroArray, _Array);
+  var _super = (0,createSuper/* default */.Z)(ZeroArray);
   function ZeroArray(size) {
     var _this;
-    _classCallCheck(this, ZeroArray);
+    (0,classCallCheck/* default */.Z)(this, ZeroArray);
     _this = _super.call(this, size);
     _this.fill(0);
     return _this;
   }
-  return _createClass(ZeroArray);
+  return (0,createClass/* default */.Z)(ZeroArray);
 }( /*#__PURE__*/_wrapNativeSuper(Array));
 var Stack = /*#__PURE__*/function () {
   function Stack(max, HeapCls) {
-    _classCallCheck(this, Stack);
+    (0,classCallCheck/* default */.Z)(this, Stack);
     _defineProperty(this, "heap", void 0);
     _defineProperty(this, "length", void 0);
     /* c8 ignore start */
@@ -18345,7 +20070,7 @@ var Stack = /*#__PURE__*/function () {
     this.heap = new HeapCls(max);
     this.length = 0;
   }
-  _createClass(Stack, [{
+  (0,createClass/* default */.Z)(Stack, [{
     key: "push",
     value: function push(n) {
       this.heap[this.length++] = n;
@@ -18426,7 +20151,7 @@ var _moveToTail = /*#__PURE__*/new WeakSet();
 _Symbol$iterator = Symbol.iterator;
 var LRUCache = /*#__PURE__*/function () {
   function LRUCache(_options) {
-    _classCallCheck(this, LRUCache);
+    (0,classCallCheck/* default */.Z)(this, LRUCache);
     _classPrivateMethodInitSpec(this, _moveToTail);
     _classPrivateMethodInitSpec(this, _connect);
     _classPrivateMethodInitSpec(this, _isBackgroundFetch);
@@ -18440,23 +20165,23 @@ var LRUCache = /*#__PURE__*/function () {
     // properties coming in from the options of these, only max and maxSize
     // really *need* to be protected. The rest can be modified, as they just
     // set defaults for various methods.
-    _classPrivateFieldInitSpec(this, _max, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _max, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _maxSize, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _maxSize, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _dispose, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _dispose, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _disposeAfter, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _disposeAfter, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _fetchMethod, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _fetchMethod, {
       writable: true,
       value: void 0
     });
@@ -18521,103 +20246,103 @@ var LRUCache = /*#__PURE__*/function () {
      */
     _defineProperty(this, "ignoreFetchAbort", void 0);
     // computed properties
-    _classPrivateFieldInitSpec(this, _size, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _size, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _calculatedSize, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _calculatedSize, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _keyMap, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _keyMap, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _keyList, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _keyList, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _valList, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _valList, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _next, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _next, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _prev, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _prev, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _head, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _head, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _tail, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _tail, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _free, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _free, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _disposed, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _disposed, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _sizes, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _sizes, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _starts, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _starts, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _ttls, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _ttls, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _hasDispose, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _hasDispose, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _hasFetchMethod, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _hasFetchMethod, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _hasDisposeAfter, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _hasDisposeAfter, {
       writable: true,
       value: void 0
     });
     // conditionally set private methods related to TTL
-    _classPrivateFieldInitSpec(this, _updateItemAge, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _updateItemAge, {
       writable: true,
       value: function value() {}
     });
-    _classPrivateFieldInitSpec(this, _statusTTL, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _statusTTL, {
       writable: true,
       value: function value() {}
     });
-    _classPrivateFieldInitSpec(this, _setItemTTL, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _setItemTTL, {
       writable: true,
       value: function value() {}
     });
     /* c8 ignore stop */
-    _classPrivateFieldInitSpec(this, _isStale, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _isStale, {
       writable: true,
       value: function value() {
         return false;
       }
     });
-    _classPrivateFieldInitSpec(this, _removeItemSize, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _removeItemSize, {
       writable: true,
       value: function value(_i) {}
     });
-    _classPrivateFieldInitSpec(this, _addItemSize, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _addItemSize, {
       writable: true,
       value: function value(_i, _s, _st) {}
     });
-    _classPrivateFieldInitSpec(this, _requireSize, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _requireSize, {
       writable: true,
       value: function value(_k, _v, size, sizeCalculation) {
         if (size || sizeCalculation) {
@@ -18657,12 +20382,12 @@ var LRUCache = /*#__PURE__*/function () {
     if (!UintArray) {
       throw new Error('invalid max value: ' + max);
     }
-    _classPrivateFieldSet(this, _max, max);
-    _classPrivateFieldSet(this, _maxSize, _maxSize2);
-    this.maxEntrySize = maxEntrySize || _classPrivateFieldGet(this, _maxSize);
+    (0,classPrivateFieldSet/* default */.Z)(this, _max, max);
+    (0,classPrivateFieldSet/* default */.Z)(this, _maxSize, _maxSize2);
+    this.maxEntrySize = maxEntrySize || (0,classPrivateFieldGet/* default */.Z)(this, _maxSize);
     this.sizeCalculation = _sizeCalculation;
     if (this.sizeCalculation) {
-      if (!_classPrivateFieldGet(this, _maxSize) && !this.maxEntrySize) {
+      if (!(0,classPrivateFieldGet/* default */.Z)(this, _maxSize) && !this.maxEntrySize) {
         throw new TypeError('cannot set sizeCalculation without setting maxSize or maxEntrySize');
       }
       if (typeof this.sizeCalculation !== 'function') {
@@ -18672,30 +20397,30 @@ var LRUCache = /*#__PURE__*/function () {
     if (fetchMethod !== undefined && typeof fetchMethod !== 'function') {
       throw new TypeError('fetchMethod must be a function if specified');
     }
-    _classPrivateFieldSet(this, _fetchMethod, fetchMethod);
-    _classPrivateFieldSet(this, _hasFetchMethod, !!fetchMethod);
-    _classPrivateFieldSet(this, _keyMap, new Map());
-    _classPrivateFieldSet(this, _keyList, new Array(max).fill(undefined));
-    _classPrivateFieldSet(this, _valList, new Array(max).fill(undefined));
-    _classPrivateFieldSet(this, _next, new UintArray(max));
-    _classPrivateFieldSet(this, _prev, new UintArray(max));
-    _classPrivateFieldSet(this, _head, 0);
-    _classPrivateFieldSet(this, _tail, 0);
-    _classPrivateFieldSet(this, _free, Stack.create(max));
-    _classPrivateFieldSet(this, _size, 0);
-    _classPrivateFieldSet(this, _calculatedSize, 0);
+    (0,classPrivateFieldSet/* default */.Z)(this, _fetchMethod, fetchMethod);
+    (0,classPrivateFieldSet/* default */.Z)(this, _hasFetchMethod, !!fetchMethod);
+    (0,classPrivateFieldSet/* default */.Z)(this, _keyMap, new Map());
+    (0,classPrivateFieldSet/* default */.Z)(this, _keyList, new Array(max).fill(undefined));
+    (0,classPrivateFieldSet/* default */.Z)(this, _valList, new Array(max).fill(undefined));
+    (0,classPrivateFieldSet/* default */.Z)(this, _next, new UintArray(max));
+    (0,classPrivateFieldSet/* default */.Z)(this, _prev, new UintArray(max));
+    (0,classPrivateFieldSet/* default */.Z)(this, _head, 0);
+    (0,classPrivateFieldSet/* default */.Z)(this, _tail, 0);
+    (0,classPrivateFieldSet/* default */.Z)(this, _free, Stack.create(max));
+    (0,classPrivateFieldSet/* default */.Z)(this, _size, 0);
+    (0,classPrivateFieldSet/* default */.Z)(this, _calculatedSize, 0);
     if (typeof dispose === 'function') {
-      _classPrivateFieldSet(this, _dispose, dispose);
+      (0,classPrivateFieldSet/* default */.Z)(this, _dispose, dispose);
     }
     if (typeof disposeAfter === 'function') {
-      _classPrivateFieldSet(this, _disposeAfter, disposeAfter);
-      _classPrivateFieldSet(this, _disposed, []);
+      (0,classPrivateFieldSet/* default */.Z)(this, _disposeAfter, disposeAfter);
+      (0,classPrivateFieldSet/* default */.Z)(this, _disposed, []);
     } else {
-      _classPrivateFieldSet(this, _disposeAfter, undefined);
-      _classPrivateFieldSet(this, _disposed, undefined);
+      (0,classPrivateFieldSet/* default */.Z)(this, _disposeAfter, undefined);
+      (0,classPrivateFieldSet/* default */.Z)(this, _disposed, undefined);
     }
-    _classPrivateFieldSet(this, _hasDispose, !!_classPrivateFieldGet(this, _dispose));
-    _classPrivateFieldSet(this, _hasDisposeAfter, !!_classPrivateFieldGet(this, _disposeAfter));
+    (0,classPrivateFieldSet/* default */.Z)(this, _hasDispose, !!(0,classPrivateFieldGet/* default */.Z)(this, _dispose));
+    (0,classPrivateFieldSet/* default */.Z)(this, _hasDisposeAfter, !!(0,classPrivateFieldGet/* default */.Z)(this, _disposeAfter));
     this.noDisposeOnSet = !!noDisposeOnSet;
     this.noUpdateTTL = !!noUpdateTTL;
     this.noDeleteOnFetchRejection = !!noDeleteOnFetchRejection;
@@ -18704,8 +20429,8 @@ var LRUCache = /*#__PURE__*/function () {
     this.ignoreFetchAbort = !!ignoreFetchAbort;
     // NB: maxEntrySize is set to maxSize if it's set
     if (this.maxEntrySize !== 0) {
-      if (_classPrivateFieldGet(this, _maxSize) !== 0) {
-        if (!isPosInt(_classPrivateFieldGet(this, _maxSize))) {
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _maxSize) !== 0) {
+        if (!isPosInt((0,classPrivateFieldGet/* default */.Z)(this, _maxSize))) {
           throw new TypeError('maxSize must be a positive integer if specified');
         }
       }
@@ -18728,10 +20453,10 @@ var LRUCache = /*#__PURE__*/function () {
       _classPrivateMethodGet(this, _initializeTTLTracking, _initializeTTLTracking2).call(this);
     }
     // do not allow completely unbounded caches
-    if (_classPrivateFieldGet(this, _max) === 0 && this.ttl === 0 && _classPrivateFieldGet(this, _maxSize) === 0) {
+    if ((0,classPrivateFieldGet/* default */.Z)(this, _max) === 0 && this.ttl === 0 && (0,classPrivateFieldGet/* default */.Z)(this, _maxSize) === 0) {
       throw new TypeError('At least one of max, maxSize, or ttl is required');
     }
-    if (!this.ttlAutopurge && !_classPrivateFieldGet(this, _max) && !_classPrivateFieldGet(this, _maxSize)) {
+    if (!this.ttlAutopurge && !(0,classPrivateFieldGet/* default */.Z)(this, _max) && !(0,classPrivateFieldGet/* default */.Z)(this, _maxSize)) {
       var code = 'LRU_CACHE_UNBOUNDED';
       if (shouldWarn(code)) {
         warned.add(code);
@@ -18743,7 +20468,7 @@ var LRUCache = /*#__PURE__*/function () {
   /**
    * Return the remaining TTL time for a given entry key
    */
-  _createClass(LRUCache, [{
+  (0,createClass/* default */.Z)(LRUCache, [{
     key: "max",
     get:
     // Protected read-only members
@@ -18751,7 +20476,7 @@ var LRUCache = /*#__PURE__*/function () {
      * {@link LRUCache.OptionsBase.max} (read-only)
      */
     function get() {
-      return _classPrivateFieldGet(this, _max);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _max);
     }
     /**
      * {@link LRUCache.OptionsBase.maxSize} (read-only)
@@ -18759,7 +20484,7 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "maxSize",
     get: function get() {
-      return _classPrivateFieldGet(this, _maxSize);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _maxSize);
     }
     /**
      * The total computed size of items in the cache (read-only)
@@ -18767,7 +20492,7 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "calculatedSize",
     get: function get() {
-      return _classPrivateFieldGet(this, _calculatedSize);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _calculatedSize);
     }
     /**
      * The number of items stored in the cache (read-only)
@@ -18775,7 +20500,7 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "size",
     get: function get() {
-      return _classPrivateFieldGet(this, _size);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _size);
     }
     /**
      * {@link LRUCache.OptionsBase.fetchMethod} (read-only)
@@ -18783,7 +20508,7 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "fetchMethod",
     get: function get() {
-      return _classPrivateFieldGet(this, _fetchMethod);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _fetchMethod);
     }
     /**
      * {@link LRUCache.OptionsBase.dispose} (read-only)
@@ -18791,7 +20516,7 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "dispose",
     get: function get() {
-      return _classPrivateFieldGet(this, _dispose);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _dispose);
     }
     /**
      * {@link LRUCache.OptionsBase.disposeAfter} (read-only)
@@ -18799,12 +20524,12 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "disposeAfter",
     get: function get() {
-      return _classPrivateFieldGet(this, _disposeAfter);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _disposeAfter);
     }
   }, {
     key: "getRemainingTTL",
     value: function getRemainingTTL(key) {
-      return _classPrivateFieldGet(this, _keyMap).has(key) ? Infinity : 0;
+      return (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).has(key) ? Infinity : 0;
     }
   }, {
     key: "entries",
@@ -18814,12 +20539,12 @@ var LRUCache = /*#__PURE__*/function () {
      * Return a generator yielding `[key, value]` pairs,
      * in order from most recently used to least recently used.
      */
-    _regeneratorRuntime().mark(function entries() {
+    (0,regeneratorRuntime/* default */.Z)().mark(function entries() {
       var _iterator2, _step2, i;
-      return _regeneratorRuntime().wrap(function entries$(_context) {
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function entries$(_context) {
         while (1) switch (_context.prev = _context.next) {
           case 0:
-            _iterator2 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
+            _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
             _context.prev = 1;
             _iterator2.s();
           case 3:
@@ -18828,12 +20553,12 @@ var LRUCache = /*#__PURE__*/function () {
               break;
             }
             i = _step2.value;
-            if (!(_classPrivateFieldGet(this, _valList)[i] !== undefined && _classPrivateFieldGet(this, _keyList)[i] !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+            if (!((0,classPrivateFieldGet/* default */.Z)(this, _valList)[i] !== undefined && (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i] !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]))) {
               _context.next = 8;
               break;
             }
             _context.next = 8;
-            return [_classPrivateFieldGet(this, _keyList)[i], _classPrivateFieldGet(this, _valList)[i]];
+            return [(0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i], (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]];
           case 8:
             _context.next = 3;
             break;
@@ -18864,12 +20589,12 @@ var LRUCache = /*#__PURE__*/function () {
     key: "rentries",
     value:
     /*#__PURE__*/
-    _regeneratorRuntime().mark(function rentries() {
+    (0,regeneratorRuntime/* default */.Z)().mark(function rentries() {
       var _iterator3, _step3, i;
-      return _regeneratorRuntime().wrap(function rentries$(_context2) {
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function rentries$(_context2) {
         while (1) switch (_context2.prev = _context2.next) {
           case 0:
-            _iterator3 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
+            _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
             _context2.prev = 1;
             _iterator3.s();
           case 3:
@@ -18878,12 +20603,12 @@ var LRUCache = /*#__PURE__*/function () {
               break;
             }
             i = _step3.value;
-            if (!(_classPrivateFieldGet(this, _valList)[i] !== undefined && _classPrivateFieldGet(this, _keyList)[i] !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+            if (!((0,classPrivateFieldGet/* default */.Z)(this, _valList)[i] !== undefined && (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i] !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]))) {
               _context2.next = 8;
               break;
             }
             _context2.next = 8;
-            return [_classPrivateFieldGet(this, _keyList)[i], _classPrivateFieldGet(this, _valList)[i]];
+            return [(0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i], (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]];
           case 8:
             _context2.next = 3;
             break;
@@ -18912,12 +20637,12 @@ var LRUCache = /*#__PURE__*/function () {
     key: "keys",
     value:
     /*#__PURE__*/
-    _regeneratorRuntime().mark(function keys() {
+    (0,regeneratorRuntime/* default */.Z)().mark(function keys() {
       var _iterator4, _step4, i, k;
-      return _regeneratorRuntime().wrap(function keys$(_context3) {
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function keys$(_context3) {
         while (1) switch (_context3.prev = _context3.next) {
           case 0:
-            _iterator4 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
+            _iterator4 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
             _context3.prev = 1;
             _iterator4.s();
           case 3:
@@ -18926,8 +20651,8 @@ var LRUCache = /*#__PURE__*/function () {
               break;
             }
             i = _step4.value;
-            k = _classPrivateFieldGet(this, _keyList)[i];
-            if (!(k !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+            k = (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i];
+            if (!(k !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]))) {
               _context3.next = 9;
               break;
             }
@@ -18963,12 +20688,12 @@ var LRUCache = /*#__PURE__*/function () {
     key: "rkeys",
     value:
     /*#__PURE__*/
-    _regeneratorRuntime().mark(function rkeys() {
+    (0,regeneratorRuntime/* default */.Z)().mark(function rkeys() {
       var _iterator5, _step5, i, k;
-      return _regeneratorRuntime().wrap(function rkeys$(_context4) {
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function rkeys$(_context4) {
         while (1) switch (_context4.prev = _context4.next) {
           case 0:
-            _iterator5 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
+            _iterator5 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
             _context4.prev = 1;
             _iterator5.s();
           case 3:
@@ -18977,8 +20702,8 @@ var LRUCache = /*#__PURE__*/function () {
               break;
             }
             i = _step5.value;
-            k = _classPrivateFieldGet(this, _keyList)[i];
-            if (!(k !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+            k = (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i];
+            if (!(k !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]))) {
               _context4.next = 9;
               break;
             }
@@ -19012,12 +20737,12 @@ var LRUCache = /*#__PURE__*/function () {
     key: "values",
     value:
     /*#__PURE__*/
-    _regeneratorRuntime().mark(function values() {
+    (0,regeneratorRuntime/* default */.Z)().mark(function values() {
       var _iterator6, _step6, i, v;
-      return _regeneratorRuntime().wrap(function values$(_context5) {
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function values$(_context5) {
         while (1) switch (_context5.prev = _context5.next) {
           case 0:
-            _iterator6 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
+            _iterator6 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _indexes, _indexes2).call(this));
             _context5.prev = 1;
             _iterator6.s();
           case 3:
@@ -19026,13 +20751,13 @@ var LRUCache = /*#__PURE__*/function () {
               break;
             }
             i = _step6.value;
-            v = _classPrivateFieldGet(this, _valList)[i];
-            if (!(v !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+            v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
+            if (!(v !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]))) {
               _context5.next = 9;
               break;
             }
             _context5.next = 9;
-            return _classPrivateFieldGet(this, _valList)[i];
+            return (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
           case 9:
             _context5.next = 3;
             break;
@@ -19063,12 +20788,12 @@ var LRUCache = /*#__PURE__*/function () {
     key: "rvalues",
     value:
     /*#__PURE__*/
-    _regeneratorRuntime().mark(function rvalues() {
+    (0,regeneratorRuntime/* default */.Z)().mark(function rvalues() {
       var _iterator7, _step7, i, v;
-      return _regeneratorRuntime().wrap(function rvalues$(_context6) {
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function rvalues$(_context6) {
         while (1) switch (_context6.prev = _context6.next) {
           case 0:
-            _iterator7 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
+            _iterator7 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this));
             _context6.prev = 1;
             _iterator7.s();
           case 3:
@@ -19077,13 +20802,13 @@ var LRUCache = /*#__PURE__*/function () {
               break;
             }
             i = _step7.value;
-            v = _classPrivateFieldGet(this, _valList)[i];
-            if (!(v !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, _classPrivateFieldGet(this, _valList)[i]))) {
+            v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
+            if (!(v !== undefined && !_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i]))) {
               _context6.next = 9;
               break;
             }
             _context6.next = 9;
-            return _classPrivateFieldGet(this, _valList)[i];
+            return (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
           case 9:
             _context6.next = 3;
             break;
@@ -19121,16 +20846,16 @@ var LRUCache = /*#__PURE__*/function () {
     key: "find",
     value: function find(fn) {
       var getOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var _iterator8 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this)),
+      var _iterator8 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _indexes, _indexes2).call(this)),
         _step8;
       try {
         for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
           var i = _step8.value;
-          var v = _classPrivateFieldGet(this, _valList)[i];
+          var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
           var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
           if (value === undefined) continue;
-          if (fn(value, _classPrivateFieldGet(this, _keyList)[i], this)) {
-            return this.get(_classPrivateFieldGet(this, _keyList)[i], getOptions);
+          if (fn(value, (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i], this)) {
+            return this.get((0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i], getOptions);
           }
         }
       } catch (err) {
@@ -19149,15 +20874,15 @@ var LRUCache = /*#__PURE__*/function () {
     key: "forEach",
     value: function forEach(fn) {
       var thisp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
-      var _iterator9 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this)),
+      var _iterator9 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _indexes, _indexes2).call(this)),
         _step9;
       try {
         for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
           var i = _step9.value;
-          var v = _classPrivateFieldGet(this, _valList)[i];
+          var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
           var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
           if (value === undefined) continue;
-          fn.call(thisp, value, _classPrivateFieldGet(this, _keyList)[i], this);
+          fn.call(thisp, value, (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i], this);
         }
       } catch (err) {
         _iterator9.e(err);
@@ -19173,15 +20898,15 @@ var LRUCache = /*#__PURE__*/function () {
     key: "rforEach",
     value: function rforEach(fn) {
       var thisp = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this;
-      var _iterator10 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this)),
+      var _iterator10 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this)),
         _step10;
       try {
         for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
           var i = _step10.value;
-          var v = _classPrivateFieldGet(this, _valList)[i];
+          var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
           var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
           if (value === undefined) continue;
-          fn.call(thisp, value, _classPrivateFieldGet(this, _keyList)[i], this);
+          fn.call(thisp, value, (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i], this);
         }
       } catch (err) {
         _iterator10.e(err);
@@ -19197,15 +20922,15 @@ var LRUCache = /*#__PURE__*/function () {
     key: "purgeStale",
     value: function purgeStale() {
       var deleted = false;
-      var _iterator11 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this, {
+      var _iterator11 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this, {
           allowStale: true
         })),
         _step11;
       try {
         for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
           var i = _step11.value;
-          if (_classPrivateFieldGet(this, _isStale).call(this, i)) {
-            this["delete"](_classPrivateFieldGet(this, _keyList)[i]);
+          if ((0,classPrivateFieldGet/* default */.Z)(this, _isStale).call(this, i)) {
+            this["delete"]((0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i]);
             deleted = true;
           }
         }
@@ -19224,29 +20949,29 @@ var LRUCache = /*#__PURE__*/function () {
     key: "dump",
     value: function dump() {
       var arr = [];
-      var _iterator12 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _indexes, _indexes2).call(this, {
+      var _iterator12 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _indexes, _indexes2).call(this, {
           allowStale: true
         })),
         _step12;
       try {
         for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
           var i = _step12.value;
-          var key = _classPrivateFieldGet(this, _keyList)[i];
-          var v = _classPrivateFieldGet(this, _valList)[i];
+          var key = (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[i];
+          var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[i];
           var value = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
           if (value === undefined || key === undefined) continue;
           var entry = {
             value: value
           };
-          if (_classPrivateFieldGet(this, _ttls) && _classPrivateFieldGet(this, _starts)) {
-            entry.ttl = _classPrivateFieldGet(this, _ttls)[i];
+          if ((0,classPrivateFieldGet/* default */.Z)(this, _ttls) && (0,classPrivateFieldGet/* default */.Z)(this, _starts)) {
+            entry.ttl = (0,classPrivateFieldGet/* default */.Z)(this, _ttls)[i];
             // always dump the start relative to a portable timestamp
             // it's ok for this to be a bit slow, it's a rare operation.
-            var age = perf.now() - _classPrivateFieldGet(this, _starts)[i];
+            var age = perf.now() - (0,classPrivateFieldGet/* default */.Z)(this, _starts)[i];
             entry.start = Math.floor(Date.now() - age);
           }
-          if (_classPrivateFieldGet(this, _sizes)) {
-            entry.size = _classPrivateFieldGet(this, _sizes)[i];
+          if ((0,classPrivateFieldGet/* default */.Z)(this, _sizes)) {
+            entry.size = (0,classPrivateFieldGet/* default */.Z)(this, _sizes)[i];
           }
           arr.unshift([key, entry]);
         }
@@ -19266,11 +20991,11 @@ var LRUCache = /*#__PURE__*/function () {
     key: "load",
     value: function load(arr) {
       this.clear();
-      var _iterator13 = _createForOfIteratorHelper(arr),
+      var _iterator13 = (0,createForOfIteratorHelper/* default */.Z)(arr),
         _step13;
       try {
         for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
-          var _step13$value = _slicedToArray(_step13.value, 2),
+          var _step13$value = (0,slicedToArray/* default */.Z)(_step13.value, 2),
             key = _step13$value[0],
             entry = _step13$value[1];
           if (entry.start) {
@@ -19315,7 +21040,7 @@ var LRUCache = /*#__PURE__*/function () {
         status = setOptions.status;
       var _setOptions$noUpdateT = setOptions.noUpdateTTL,
         noUpdateTTL = _setOptions$noUpdateT === void 0 ? this.noUpdateTTL : _setOptions$noUpdateT;
-      var size = _classPrivateFieldGet(this, _requireSize).call(this, k, v, setOptions.size || 0, sizeCalculation);
+      var size = (0,classPrivateFieldGet/* default */.Z)(this, _requireSize).call(this, k, v, setOptions.size || 0, sizeCalculation);
       // if the item doesn't fit, don't do anything
       // NB: maxEntrySize set to maxSize by default
       if (this.maxEntrySize && size > this.maxEntrySize) {
@@ -19327,41 +21052,41 @@ var LRUCache = /*#__PURE__*/function () {
         this["delete"](k);
         return this;
       }
-      var index = _classPrivateFieldGet(this, _size) === 0 ? undefined : _classPrivateFieldGet(this, _keyMap).get(k);
+      var index = (0,classPrivateFieldGet/* default */.Z)(this, _size) === 0 ? undefined : (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
       if (index === undefined) {
         var _this$size, _this$size2;
         // addition
-        index = _classPrivateFieldGet(this, _size) === 0 ? _classPrivateFieldGet(this, _tail) : _classPrivateFieldGet(this, _free).length !== 0 ? _classPrivateFieldGet(this, _free).pop() : _classPrivateFieldGet(this, _size) === _classPrivateFieldGet(this, _max) ? _classPrivateMethodGet(this, _evict, _evict2).call(this, false) : _classPrivateFieldGet(this, _size);
-        _classPrivateFieldGet(this, _keyList)[index] = k;
-        _classPrivateFieldGet(this, _valList)[index] = v;
-        _classPrivateFieldGet(this, _keyMap).set(k, index);
-        _classPrivateFieldGet(this, _next)[_classPrivateFieldGet(this, _tail)] = index;
-        _classPrivateFieldGet(this, _prev)[index] = _classPrivateFieldGet(this, _tail);
-        _classPrivateFieldSet(this, _tail, index);
-        _classPrivateFieldSet(this, _size, (_this$size = _classPrivateFieldGet(this, _size), _this$size2 = _this$size++, _this$size)), _this$size2;
-        _classPrivateFieldGet(this, _addItemSize).call(this, index, size, status);
+        index = (0,classPrivateFieldGet/* default */.Z)(this, _size) === 0 ? (0,classPrivateFieldGet/* default */.Z)(this, _tail) : (0,classPrivateFieldGet/* default */.Z)(this, _free).length !== 0 ? (0,classPrivateFieldGet/* default */.Z)(this, _free).pop() : (0,classPrivateFieldGet/* default */.Z)(this, _size) === (0,classPrivateFieldGet/* default */.Z)(this, _max) ? _classPrivateMethodGet(this, _evict, _evict2).call(this, false) : (0,classPrivateFieldGet/* default */.Z)(this, _size);
+        (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[index] = k;
+        (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index] = v;
+        (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).set(k, index);
+        (0,classPrivateFieldGet/* default */.Z)(this, _next)[(0,classPrivateFieldGet/* default */.Z)(this, _tail)] = index;
+        (0,classPrivateFieldGet/* default */.Z)(this, _prev)[index] = (0,classPrivateFieldGet/* default */.Z)(this, _tail);
+        (0,classPrivateFieldSet/* default */.Z)(this, _tail, index);
+        (0,classPrivateFieldSet/* default */.Z)(this, _size, (_this$size = (0,classPrivateFieldGet/* default */.Z)(this, _size), _this$size2 = _this$size++, _this$size)), _this$size2;
+        (0,classPrivateFieldGet/* default */.Z)(this, _addItemSize).call(this, index, size, status);
         if (status) status.set = 'add';
         noUpdateTTL = false;
       } else {
         // update
         _classPrivateMethodGet(this, _moveToTail, _moveToTail2).call(this, index);
-        var oldVal = _classPrivateFieldGet(this, _valList)[index];
+        var oldVal = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
         if (v !== oldVal) {
-          if (_classPrivateFieldGet(this, _hasFetchMethod) && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, oldVal)) {
+          if ((0,classPrivateFieldGet/* default */.Z)(this, _hasFetchMethod) && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, oldVal)) {
             oldVal.__abortController.abort(new Error('replaced'));
           } else if (!noDisposeOnSet) {
-            if (_classPrivateFieldGet(this, _hasDispose)) {
+            if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDispose)) {
               var _classPrivateFieldGet2;
-              (_classPrivateFieldGet2 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.call(this, oldVal, k, 'set');
+              (_classPrivateFieldGet2 = (0,classPrivateFieldGet/* default */.Z)(this, _dispose)) === null || _classPrivateFieldGet2 === void 0 ? void 0 : _classPrivateFieldGet2.call(this, oldVal, k, 'set');
             }
-            if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+            if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter)) {
               var _classPrivateFieldGet3;
-              (_classPrivateFieldGet3 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.push([oldVal, k, 'set']);
+              (_classPrivateFieldGet3 = (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) === null || _classPrivateFieldGet3 === void 0 ? void 0 : _classPrivateFieldGet3.push([oldVal, k, 'set']);
             }
           }
-          _classPrivateFieldGet(this, _removeItemSize).call(this, index);
-          _classPrivateFieldGet(this, _addItemSize).call(this, index, size, status);
-          _classPrivateFieldGet(this, _valList)[index] = v;
+          (0,classPrivateFieldGet/* default */.Z)(this, _removeItemSize).call(this, index);
+          (0,classPrivateFieldGet/* default */.Z)(this, _addItemSize).call(this, index, size, status);
+          (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index] = v;
           if (status) {
             status.set = 'replace';
             var oldValue = oldVal && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, oldVal) ? oldVal.__staleWhileFetching : oldVal;
@@ -19371,21 +21096,21 @@ var LRUCache = /*#__PURE__*/function () {
           status.set = 'update';
         }
       }
-      if (ttl !== 0 && !_classPrivateFieldGet(this, _ttls)) {
+      if (ttl !== 0 && !(0,classPrivateFieldGet/* default */.Z)(this, _ttls)) {
         _classPrivateMethodGet(this, _initializeTTLTracking, _initializeTTLTracking2).call(this);
       }
-      if (_classPrivateFieldGet(this, _ttls)) {
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _ttls)) {
         if (!noUpdateTTL) {
-          _classPrivateFieldGet(this, _setItemTTL).call(this, index, ttl, start);
+          (0,classPrivateFieldGet/* default */.Z)(this, _setItemTTL).call(this, index, ttl, start);
         }
-        if (status) _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+        if (status) (0,classPrivateFieldGet/* default */.Z)(this, _statusTTL).call(this, status, index);
       }
-      if (!noDisposeOnSet && _classPrivateFieldGet(this, _hasDisposeAfter) && _classPrivateFieldGet(this, _disposed)) {
-        var dt = _classPrivateFieldGet(this, _disposed);
+      if (!noDisposeOnSet && (0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter) && (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) {
+        var dt = (0,classPrivateFieldGet/* default */.Z)(this, _disposed);
         var task;
         while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
           var _classPrivateFieldGet4, _classPrivateFieldGet5;
-          (_classPrivateFieldGet4 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : (_classPrivateFieldGet5 = _classPrivateFieldGet4).call.apply(_classPrivateFieldGet5, [this].concat(toConsumableArray_toConsumableArray(task)));
+          (_classPrivateFieldGet4 = (0,classPrivateFieldGet/* default */.Z)(this, _disposeAfter)) === null || _classPrivateFieldGet4 === void 0 ? void 0 : (_classPrivateFieldGet5 = _classPrivateFieldGet4).call.apply(_classPrivateFieldGet5, [this].concat((0,toConsumableArray/* default */.Z)(task)));
         }
       }
       return this;
@@ -19398,8 +21123,8 @@ var LRUCache = /*#__PURE__*/function () {
     key: "pop",
     value: function pop() {
       try {
-        while (_classPrivateFieldGet(this, _size)) {
-          var val = _classPrivateFieldGet(this, _valList)[_classPrivateFieldGet(this, _head)];
+        while ((0,classPrivateFieldGet/* default */.Z)(this, _size)) {
+          var val = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[(0,classPrivateFieldGet/* default */.Z)(this, _head)];
           _classPrivateMethodGet(this, _evict, _evict2).call(this, true);
           if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, val)) {
             if (val.__staleWhileFetching) {
@@ -19410,12 +21135,12 @@ var LRUCache = /*#__PURE__*/function () {
           }
         }
       } finally {
-        if (_classPrivateFieldGet(this, _hasDisposeAfter) && _classPrivateFieldGet(this, _disposed)) {
-          var dt = _classPrivateFieldGet(this, _disposed);
+        if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter) && (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) {
+          var dt = (0,classPrivateFieldGet/* default */.Z)(this, _disposed);
           var task;
           while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
             var _classPrivateFieldGet6, _classPrivateFieldGet7;
-            (_classPrivateFieldGet6 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : (_classPrivateFieldGet7 = _classPrivateFieldGet6).call.apply(_classPrivateFieldGet7, [this].concat(toConsumableArray_toConsumableArray(task)));
+            (_classPrivateFieldGet6 = (0,classPrivateFieldGet/* default */.Z)(this, _disposeAfter)) === null || _classPrivateFieldGet6 === void 0 ? void 0 : (_classPrivateFieldGet7 = _classPrivateFieldGet6).call.apply(_classPrivateFieldGet7, [this].concat((0,toConsumableArray/* default */.Z)(task)));
           }
         }
       }
@@ -19436,24 +21161,24 @@ var LRUCache = /*#__PURE__*/function () {
       var _hasOptions$updateAge = hasOptions.updateAgeOnHas,
         updateAgeOnHas = _hasOptions$updateAge === void 0 ? this.updateAgeOnHas : _hasOptions$updateAge,
         status = hasOptions.status;
-      var index = _classPrivateFieldGet(this, _keyMap).get(k);
+      var index = (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
       if (index !== undefined) {
-        var v = _classPrivateFieldGet(this, _valList)[index];
+        var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
         if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) && v.__staleWhileFetching === undefined) {
           return false;
         }
-        if (!_classPrivateFieldGet(this, _isStale).call(this, index)) {
+        if (!(0,classPrivateFieldGet/* default */.Z)(this, _isStale).call(this, index)) {
           if (updateAgeOnHas) {
-            _classPrivateFieldGet(this, _updateItemAge).call(this, index);
+            (0,classPrivateFieldGet/* default */.Z)(this, _updateItemAge).call(this, index);
           }
           if (status) {
             status.has = 'hit';
-            _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+            (0,classPrivateFieldGet/* default */.Z)(this, _statusTTL).call(this, status, index);
           }
           return true;
         } else if (status) {
           status.has = 'stale';
-          _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+          (0,classPrivateFieldGet/* default */.Z)(this, _statusTTL).call(this, status, index);
         }
       } else if (status) {
         status.has = 'miss';
@@ -19473,9 +21198,9 @@ var LRUCache = /*#__PURE__*/function () {
       var peekOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var _peekOptions$allowSta = peekOptions.allowStale,
         allowStale = _peekOptions$allowSta === void 0 ? this.allowStale : _peekOptions$allowSta;
-      var index = _classPrivateFieldGet(this, _keyMap).get(k);
-      if (index !== undefined && (allowStale || !_classPrivateFieldGet(this, _isStale).call(this, index))) {
-        var v = _classPrivateFieldGet(this, _valList)[index];
+      var index = (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
+      if (index !== undefined && (allowStale || !(0,classPrivateFieldGet/* default */.Z)(this, _isStale).call(this, index))) {
+        var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
         // either stale and allowed, or forcing a refresh of non-stale value
         return _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v) ? v.__staleWhileFetching : v;
       }
@@ -19483,7 +21208,7 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "fetch",
     value: function () {
-      var _fetch = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(k) {
+      var _fetch = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(k) {
         var fetchOptions,
           _fetchOptions$allowSt,
           allowStale,
@@ -19524,12 +21249,12 @@ var LRUCache = /*#__PURE__*/function () {
           hasStale,
           staleVal,
           _args7 = arguments;
-        return _regeneratorRuntime().wrap(function _callee$(_context7) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
               fetchOptions = _args7.length > 1 && _args7[1] !== undefined ? _args7[1] : {};
               _fetchOptions$allowSt = fetchOptions.allowStale, allowStale = _fetchOptions$allowSt === void 0 ? this.allowStale : _fetchOptions$allowSt, _fetchOptions$updateA = fetchOptions.updateAgeOnGet, updateAgeOnGet = _fetchOptions$updateA === void 0 ? this.updateAgeOnGet : _fetchOptions$updateA, _fetchOptions$noDelet = fetchOptions.noDeleteOnStaleGet, noDeleteOnStaleGet = _fetchOptions$noDelet === void 0 ? this.noDeleteOnStaleGet : _fetchOptions$noDelet, _fetchOptions$ttl = fetchOptions.ttl, ttl = _fetchOptions$ttl === void 0 ? this.ttl : _fetchOptions$ttl, _fetchOptions$noDispo = fetchOptions.noDisposeOnSet, noDisposeOnSet = _fetchOptions$noDispo === void 0 ? this.noDisposeOnSet : _fetchOptions$noDispo, _fetchOptions$size = fetchOptions.size, size = _fetchOptions$size === void 0 ? 0 : _fetchOptions$size, _fetchOptions$sizeCal = fetchOptions.sizeCalculation, sizeCalculation = _fetchOptions$sizeCal === void 0 ? this.sizeCalculation : _fetchOptions$sizeCal, _fetchOptions$noUpdat = fetchOptions.noUpdateTTL, noUpdateTTL = _fetchOptions$noUpdat === void 0 ? this.noUpdateTTL : _fetchOptions$noUpdat, _fetchOptions$noDelet2 = fetchOptions.noDeleteOnFetchRejection, noDeleteOnFetchRejection = _fetchOptions$noDelet2 === void 0 ? this.noDeleteOnFetchRejection : _fetchOptions$noDelet2, _fetchOptions$allowSt2 = fetchOptions.allowStaleOnFetchRejection, allowStaleOnFetchRejection = _fetchOptions$allowSt2 === void 0 ? this.allowStaleOnFetchRejection : _fetchOptions$allowSt2, _fetchOptions$ignoreF = fetchOptions.ignoreFetchAbort, ignoreFetchAbort = _fetchOptions$ignoreF === void 0 ? this.ignoreFetchAbort : _fetchOptions$ignoreF, _fetchOptions$allowSt3 = fetchOptions.allowStaleOnFetchAbort, allowStaleOnFetchAbort = _fetchOptions$allowSt3 === void 0 ? this.allowStaleOnFetchAbort : _fetchOptions$allowSt3, context = fetchOptions.context, _fetchOptions$forceRe = fetchOptions.forceRefresh, forceRefresh = _fetchOptions$forceRe === void 0 ? false : _fetchOptions$forceRe, status = fetchOptions.status, signal = fetchOptions.signal;
-              if (_classPrivateFieldGet(this, _hasFetchMethod)) {
+              if ((0,classPrivateFieldGet/* default */.Z)(this, _hasFetchMethod)) {
                 _context7.next = 5;
                 break;
               }
@@ -19557,7 +21282,7 @@ var LRUCache = /*#__PURE__*/function () {
                 status: status,
                 signal: signal
               };
-              index = _classPrivateFieldGet(this, _keyMap).get(k);
+              index = (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
               if (!(index === undefined)) {
                 _context7.next = 13;
                 break;
@@ -19567,7 +21292,7 @@ var LRUCache = /*#__PURE__*/function () {
               return _context7.abrupt("return", p.__returned = p);
             case 13:
               // in cache, maybe already fetching
-              v = _classPrivateFieldGet(this, _valList)[index];
+              v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
               if (!_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
                 _context7.next = 18;
                 break;
@@ -19581,7 +21306,7 @@ var LRUCache = /*#__PURE__*/function () {
             case 18:
               // if we force a refresh, that means do NOT serve the cached value,
               // unless we are already in the process of refreshing the cache.
-              isStale = _classPrivateFieldGet(this, _isStale).call(this, index);
+              isStale = (0,classPrivateFieldGet/* default */.Z)(this, _isStale).call(this, index);
               if (!(!forceRefresh && !isStale)) {
                 _context7.next = 25;
                 break;
@@ -19589,9 +21314,9 @@ var LRUCache = /*#__PURE__*/function () {
               if (status) status.fetch = 'hit';
               _classPrivateMethodGet(this, _moveToTail, _moveToTail2).call(this, index);
               if (updateAgeOnGet) {
-                _classPrivateFieldGet(this, _updateItemAge).call(this, index);
+                (0,classPrivateFieldGet/* default */.Z)(this, _updateItemAge).call(this, index);
               }
-              if (status) _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
+              if (status) (0,classPrivateFieldGet/* default */.Z)(this, _statusTTL).call(this, status, index);
               return _context7.abrupt("return", v);
             case 25:
               // ok, it is stale or a forced refresh, and not already fetching.
@@ -19632,12 +21357,12 @@ var LRUCache = /*#__PURE__*/function () {
         _getOptions$noDeleteO = getOptions.noDeleteOnStaleGet,
         noDeleteOnStaleGet = _getOptions$noDeleteO === void 0 ? this.noDeleteOnStaleGet : _getOptions$noDeleteO,
         status = getOptions.status;
-      var index = _classPrivateFieldGet(this, _keyMap).get(k);
+      var index = (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
       if (index !== undefined) {
-        var value = _classPrivateFieldGet(this, _valList)[index];
+        var value = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
         var fetching = _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, value);
-        if (status) _classPrivateFieldGet(this, _statusTTL).call(this, status, index);
-        if (_classPrivateFieldGet(this, _isStale).call(this, index)) {
+        if (status) (0,classPrivateFieldGet/* default */.Z)(this, _statusTTL).call(this, status, index);
+        if ((0,classPrivateFieldGet/* default */.Z)(this, _isStale).call(this, index)) {
           if (status) status.get = 'stale';
           // delete only if not an in-flight background fetch
           if (!fetching) {
@@ -19664,7 +21389,7 @@ var LRUCache = /*#__PURE__*/function () {
           }
           _classPrivateMethodGet(this, _moveToTail, _moveToTail2).call(this, index);
           if (updateAgeOnGet) {
-            _classPrivateFieldGet(this, _updateItemAge).call(this, index);
+            (0,classPrivateFieldGet/* default */.Z)(this, _updateItemAge).call(this, index);
           }
           return value;
         }
@@ -19682,50 +21407,50 @@ var LRUCache = /*#__PURE__*/function () {
     function _delete(k) {
       var _classPrivateFieldGet10;
       var deleted = false;
-      if (_classPrivateFieldGet(this, _size) !== 0) {
-        var index = _classPrivateFieldGet(this, _keyMap).get(k);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _size) !== 0) {
+        var index = (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
         if (index !== undefined) {
           deleted = true;
-          if (_classPrivateFieldGet(this, _size) === 1) {
+          if ((0,classPrivateFieldGet/* default */.Z)(this, _size) === 1) {
             this.clear();
           } else {
             var _this$size5, _this$size6;
-            _classPrivateFieldGet(this, _removeItemSize).call(this, index);
-            var v = _classPrivateFieldGet(this, _valList)[index];
+            (0,classPrivateFieldGet/* default */.Z)(this, _removeItemSize).call(this, index);
+            var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
             if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
               v.__abortController.abort(new Error('deleted'));
-            } else if (_classPrivateFieldGet(this, _hasDispose) || _classPrivateFieldGet(this, _hasDisposeAfter)) {
-              if (_classPrivateFieldGet(this, _hasDispose)) {
+            } else if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDispose) || (0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter)) {
+              if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDispose)) {
                 var _classPrivateFieldGet8;
-                (_classPrivateFieldGet8 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.call(this, v, k, 'delete');
+                (_classPrivateFieldGet8 = (0,classPrivateFieldGet/* default */.Z)(this, _dispose)) === null || _classPrivateFieldGet8 === void 0 ? void 0 : _classPrivateFieldGet8.call(this, v, k, 'delete');
               }
-              if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+              if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter)) {
                 var _classPrivateFieldGet9;
-                (_classPrivateFieldGet9 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.push([v, k, 'delete']);
+                (_classPrivateFieldGet9 = (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) === null || _classPrivateFieldGet9 === void 0 ? void 0 : _classPrivateFieldGet9.push([v, k, 'delete']);
               }
             }
-            _classPrivateFieldGet(this, _keyMap)["delete"](k);
-            _classPrivateFieldGet(this, _keyList)[index] = undefined;
-            _classPrivateFieldGet(this, _valList)[index] = undefined;
-            if (index === _classPrivateFieldGet(this, _tail)) {
-              _classPrivateFieldSet(this, _tail, _classPrivateFieldGet(this, _prev)[index]);
-            } else if (index === _classPrivateFieldGet(this, _head)) {
-              _classPrivateFieldSet(this, _head, _classPrivateFieldGet(this, _next)[index]);
+            (0,classPrivateFieldGet/* default */.Z)(this, _keyMap)["delete"](k);
+            (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[index] = undefined;
+            (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index] = undefined;
+            if (index === (0,classPrivateFieldGet/* default */.Z)(this, _tail)) {
+              (0,classPrivateFieldSet/* default */.Z)(this, _tail, (0,classPrivateFieldGet/* default */.Z)(this, _prev)[index]);
+            } else if (index === (0,classPrivateFieldGet/* default */.Z)(this, _head)) {
+              (0,classPrivateFieldSet/* default */.Z)(this, _head, (0,classPrivateFieldGet/* default */.Z)(this, _next)[index]);
             } else {
-              _classPrivateFieldGet(this, _next)[_classPrivateFieldGet(this, _prev)[index]] = _classPrivateFieldGet(this, _next)[index];
-              _classPrivateFieldGet(this, _prev)[_classPrivateFieldGet(this, _next)[index]] = _classPrivateFieldGet(this, _prev)[index];
+              (0,classPrivateFieldGet/* default */.Z)(this, _next)[(0,classPrivateFieldGet/* default */.Z)(this, _prev)[index]] = (0,classPrivateFieldGet/* default */.Z)(this, _next)[index];
+              (0,classPrivateFieldGet/* default */.Z)(this, _prev)[(0,classPrivateFieldGet/* default */.Z)(this, _next)[index]] = (0,classPrivateFieldGet/* default */.Z)(this, _prev)[index];
             }
-            _classPrivateFieldSet(this, _size, (_this$size5 = _classPrivateFieldGet(this, _size), _this$size6 = _this$size5--, _this$size5)), _this$size6;
-            _classPrivateFieldGet(this, _free).push(index);
+            (0,classPrivateFieldSet/* default */.Z)(this, _size, (_this$size5 = (0,classPrivateFieldGet/* default */.Z)(this, _size), _this$size6 = _this$size5--, _this$size5)), _this$size6;
+            (0,classPrivateFieldGet/* default */.Z)(this, _free).push(index);
           }
         }
       }
-      if (_classPrivateFieldGet(this, _hasDisposeAfter) && (_classPrivateFieldGet10 = _classPrivateFieldGet(this, _disposed)) !== null && _classPrivateFieldGet10 !== void 0 && _classPrivateFieldGet10.length) {
-        var dt = _classPrivateFieldGet(this, _disposed);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter) && (_classPrivateFieldGet10 = (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) !== null && _classPrivateFieldGet10 !== void 0 && _classPrivateFieldGet10.length) {
+        var dt = (0,classPrivateFieldGet/* default */.Z)(this, _disposed);
         var task;
         while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
           var _classPrivateFieldGet11, _classPrivateFieldGet12;
-          (_classPrivateFieldGet11 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet11 === void 0 ? void 0 : (_classPrivateFieldGet12 = _classPrivateFieldGet11).call.apply(_classPrivateFieldGet12, [this].concat(toConsumableArray_toConsumableArray(task)));
+          (_classPrivateFieldGet11 = (0,classPrivateFieldGet/* default */.Z)(this, _disposeAfter)) === null || _classPrivateFieldGet11 === void 0 ? void 0 : (_classPrivateFieldGet12 = _classPrivateFieldGet11).call.apply(_classPrivateFieldGet12, [this].concat((0,toConsumableArray/* default */.Z)(task)));
         }
       }
       return deleted;
@@ -19736,25 +21461,25 @@ var LRUCache = /*#__PURE__*/function () {
   }, {
     key: "clear",
     value: function clear() {
-      var _iterator14 = _createForOfIteratorHelper(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this, {
+      var _iterator14 = (0,createForOfIteratorHelper/* default */.Z)(_classPrivateMethodGet(this, _rindexes, _rindexes2).call(this, {
           allowStale: true
         })),
         _step14;
       try {
         for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
           var index = _step14.value;
-          var v = _classPrivateFieldGet(this, _valList)[index];
+          var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
           if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
             v.__abortController.abort(new Error('deleted'));
           } else {
-            var k = _classPrivateFieldGet(this, _keyList)[index];
-            if (_classPrivateFieldGet(this, _hasDispose)) {
+            var k = (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[index];
+            if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDispose)) {
               var _classPrivateFieldGet15;
-              (_classPrivateFieldGet15 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet15 === void 0 ? void 0 : _classPrivateFieldGet15.call(this, v, k, 'delete');
+              (_classPrivateFieldGet15 = (0,classPrivateFieldGet/* default */.Z)(this, _dispose)) === null || _classPrivateFieldGet15 === void 0 ? void 0 : _classPrivateFieldGet15.call(this, v, k, 'delete');
             }
-            if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+            if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter)) {
               var _classPrivateFieldGet16;
-              (_classPrivateFieldGet16 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet16 === void 0 ? void 0 : _classPrivateFieldGet16.push([v, k, 'delete']);
+              (_classPrivateFieldGet16 = (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) === null || _classPrivateFieldGet16 === void 0 ? void 0 : _classPrivateFieldGet16.push([v, k, 'delete']);
             }
           }
         }
@@ -19763,27 +21488,27 @@ var LRUCache = /*#__PURE__*/function () {
       } finally {
         _iterator14.f();
       }
-      _classPrivateFieldGet(this, _keyMap).clear();
-      _classPrivateFieldGet(this, _valList).fill(undefined);
-      _classPrivateFieldGet(this, _keyList).fill(undefined);
-      if (_classPrivateFieldGet(this, _ttls) && _classPrivateFieldGet(this, _starts)) {
-        _classPrivateFieldGet(this, _ttls).fill(0);
-        _classPrivateFieldGet(this, _starts).fill(0);
+      (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).clear();
+      (0,classPrivateFieldGet/* default */.Z)(this, _valList).fill(undefined);
+      (0,classPrivateFieldGet/* default */.Z)(this, _keyList).fill(undefined);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _ttls) && (0,classPrivateFieldGet/* default */.Z)(this, _starts)) {
+        (0,classPrivateFieldGet/* default */.Z)(this, _ttls).fill(0);
+        (0,classPrivateFieldGet/* default */.Z)(this, _starts).fill(0);
       }
-      if (_classPrivateFieldGet(this, _sizes)) {
-        _classPrivateFieldGet(this, _sizes).fill(0);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _sizes)) {
+        (0,classPrivateFieldGet/* default */.Z)(this, _sizes).fill(0);
       }
-      _classPrivateFieldSet(this, _head, 0);
-      _classPrivateFieldSet(this, _tail, 0);
-      _classPrivateFieldGet(this, _free).length = 0;
-      _classPrivateFieldSet(this, _calculatedSize, 0);
-      _classPrivateFieldSet(this, _size, 0);
-      if (_classPrivateFieldGet(this, _hasDisposeAfter) && _classPrivateFieldGet(this, _disposed)) {
-        var dt = _classPrivateFieldGet(this, _disposed);
+      (0,classPrivateFieldSet/* default */.Z)(this, _head, 0);
+      (0,classPrivateFieldSet/* default */.Z)(this, _tail, 0);
+      (0,classPrivateFieldGet/* default */.Z)(this, _free).length = 0;
+      (0,classPrivateFieldSet/* default */.Z)(this, _calculatedSize, 0);
+      (0,classPrivateFieldSet/* default */.Z)(this, _size, 0);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter) && (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) {
+        var dt = (0,classPrivateFieldGet/* default */.Z)(this, _disposed);
         var task;
         while (task = dt === null || dt === void 0 ? void 0 : dt.shift()) {
           var _classPrivateFieldGet13, _classPrivateFieldGet14;
-          (_classPrivateFieldGet13 = _classPrivateFieldGet(this, _disposeAfter)) === null || _classPrivateFieldGet13 === void 0 ? void 0 : (_classPrivateFieldGet14 = _classPrivateFieldGet13).call.apply(_classPrivateFieldGet14, [this].concat(toConsumableArray_toConsumableArray(task)));
+          (_classPrivateFieldGet13 = (0,classPrivateFieldGet/* default */.Z)(this, _disposeAfter)) === null || _classPrivateFieldGet13 === void 0 ? void 0 : (_classPrivateFieldGet14 = _classPrivateFieldGet13).call.apply(_classPrivateFieldGet14, [this].concat((0,toConsumableArray/* default */.Z)(task)));
         }
       }
     }
@@ -19802,21 +21527,21 @@ var LRUCache = /*#__PURE__*/function () {
     function unsafeExposeInternals(c) {
       return {
         // properties
-        starts: _classPrivateFieldGet(c, _starts),
-        ttls: _classPrivateFieldGet(c, _ttls),
-        sizes: _classPrivateFieldGet(c, _sizes),
-        keyMap: _classPrivateFieldGet(c, _keyMap),
-        keyList: _classPrivateFieldGet(c, _keyList),
-        valList: _classPrivateFieldGet(c, _valList),
-        next: _classPrivateFieldGet(c, _next),
-        prev: _classPrivateFieldGet(c, _prev),
+        starts: (0,classPrivateFieldGet/* default */.Z)(c, _starts),
+        ttls: (0,classPrivateFieldGet/* default */.Z)(c, _ttls),
+        sizes: (0,classPrivateFieldGet/* default */.Z)(c, _sizes),
+        keyMap: (0,classPrivateFieldGet/* default */.Z)(c, _keyMap),
+        keyList: (0,classPrivateFieldGet/* default */.Z)(c, _keyList),
+        valList: (0,classPrivateFieldGet/* default */.Z)(c, _valList),
+        next: (0,classPrivateFieldGet/* default */.Z)(c, _next),
+        prev: (0,classPrivateFieldGet/* default */.Z)(c, _prev),
         get head() {
-          return _classPrivateFieldGet(c, _head);
+          return (0,classPrivateFieldGet/* default */.Z)(c, _head);
         },
         get tail() {
-          return _classPrivateFieldGet(c, _tail);
+          return (0,classPrivateFieldGet/* default */.Z)(c, _tail);
         },
-        free: _classPrivateFieldGet(c, _free),
+        free: (0,classPrivateFieldGet/* default */.Z)(c, _free),
         // methods
         isBackgroundFetch: function isBackgroundFetch(p) {
           return _classPrivateMethodGet(c, _isBackgroundFetch, _isBackgroundFetch2).call(c, p);
@@ -19834,7 +21559,7 @@ var LRUCache = /*#__PURE__*/function () {
           return _classPrivateMethodGet(c, _rindexes, _rindexes2).call(c, options);
         },
         isStale: function isStale(index) {
-          return _classPrivateFieldGet(c, _isStale).call(c, index);
+          return (0,classPrivateFieldGet/* default */.Z)(c, _isStale).call(c, index);
         }
       };
     }
@@ -19843,18 +21568,18 @@ var LRUCache = /*#__PURE__*/function () {
 }();
 function _initializeTTLTracking2() {
   var _this2 = this;
-  var ttls = new ZeroArray(_classPrivateFieldGet(this, _max));
-  var starts = new ZeroArray(_classPrivateFieldGet(this, _max));
-  _classPrivateFieldSet(this, _ttls, ttls);
-  _classPrivateFieldSet(this, _starts, starts);
-  _classPrivateFieldSet(this, _setItemTTL, function (index, ttl) {
+  var ttls = new ZeroArray((0,classPrivateFieldGet/* default */.Z)(this, _max));
+  var starts = new ZeroArray((0,classPrivateFieldGet/* default */.Z)(this, _max));
+  (0,classPrivateFieldSet/* default */.Z)(this, _ttls, ttls);
+  (0,classPrivateFieldSet/* default */.Z)(this, _starts, starts);
+  (0,classPrivateFieldSet/* default */.Z)(this, _setItemTTL, function (index, ttl) {
     var start = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : perf.now();
     starts[index] = ttl !== 0 ? start : 0;
     ttls[index] = ttl;
     if (ttl !== 0 && _this2.ttlAutopurge) {
       var t = setTimeout(function () {
-        if (_classPrivateFieldGet(_this2, _isStale).call(_this2, index)) {
-          _this2["delete"](_classPrivateFieldGet(_this2, _keyList)[index]);
+        if ((0,classPrivateFieldGet/* default */.Z)(_this2, _isStale).call(_this2, index)) {
+          _this2["delete"]((0,classPrivateFieldGet/* default */.Z)(_this2, _keyList)[index]);
         }
       }, ttl + 1);
       // unref() not supported on all platforms
@@ -19866,10 +21591,10 @@ function _initializeTTLTracking2() {
     }
   });
 
-  _classPrivateFieldSet(this, _updateItemAge, function (index) {
+  (0,classPrivateFieldSet/* default */.Z)(this, _updateItemAge, function (index) {
     starts[index] = ttls[index] !== 0 ? perf.now() : 0;
   });
-  _classPrivateFieldSet(this, _statusTTL, function (status, index) {
+  (0,classPrivateFieldSet/* default */.Z)(this, _statusTTL, function (status, index) {
     if (ttls[index]) {
       var ttl = ttls[index];
       var start = starts[index];
@@ -19901,7 +21626,7 @@ function _initializeTTLTracking2() {
     return n;
   };
   this.getRemainingTTL = function (key) {
-    var index = _classPrivateFieldGet(_this2, _keyMap).get(key);
+    var index = (0,classPrivateFieldGet/* default */.Z)(_this2, _keyMap).get(key);
     if (index === undefined) {
       return 0;
     }
@@ -19913,20 +21638,20 @@ function _initializeTTLTracking2() {
     var age = (cachedNow || getNow()) - start;
     return ttl - age;
   };
-  _classPrivateFieldSet(this, _isStale, function (index) {
+  (0,classPrivateFieldSet/* default */.Z)(this, _isStale, function (index) {
     return ttls[index] !== 0 && starts[index] !== 0 && (cachedNow || getNow()) - starts[index] > ttls[index];
   });
 }
 function _initializeSizeTracking2() {
   var _this3 = this;
-  var sizes = new ZeroArray(_classPrivateFieldGet(this, _max));
-  _classPrivateFieldSet(this, _calculatedSize, 0);
-  _classPrivateFieldSet(this, _sizes, sizes);
-  _classPrivateFieldSet(this, _removeItemSize, function (index) {
-    _classPrivateFieldSet(_this3, _calculatedSize, _classPrivateFieldGet(_this3, _calculatedSize) - sizes[index]);
+  var sizes = new ZeroArray((0,classPrivateFieldGet/* default */.Z)(this, _max));
+  (0,classPrivateFieldSet/* default */.Z)(this, _calculatedSize, 0);
+  (0,classPrivateFieldSet/* default */.Z)(this, _sizes, sizes);
+  (0,classPrivateFieldSet/* default */.Z)(this, _removeItemSize, function (index) {
+    (0,classPrivateFieldSet/* default */.Z)(_this3, _calculatedSize, (0,classPrivateFieldGet/* default */.Z)(_this3, _calculatedSize) - sizes[index]);
     sizes[index] = 0;
   });
-  _classPrivateFieldSet(this, _requireSize, function (k, v, size, sizeCalculation) {
+  (0,classPrivateFieldSet/* default */.Z)(this, _requireSize, function (k, v, size, sizeCalculation) {
     // provisionally accept background fetches.
     // actual value size will be checked when they return.
     if (_classPrivateMethodGet(_this3, _isBackgroundFetch, _isBackgroundFetch2).call(_this3, v)) {
@@ -19947,18 +21672,18 @@ function _initializeSizeTracking2() {
     }
     return size;
   });
-  _classPrivateFieldSet(this, _addItemSize, function (index, size, status) {
+  (0,classPrivateFieldSet/* default */.Z)(this, _addItemSize, function (index, size, status) {
     sizes[index] = size;
-    if (_classPrivateFieldGet(_this3, _maxSize)) {
-      var maxSize = _classPrivateFieldGet(_this3, _maxSize) - sizes[index];
-      while (_classPrivateFieldGet(_this3, _calculatedSize) > maxSize) {
+    if ((0,classPrivateFieldGet/* default */.Z)(_this3, _maxSize)) {
+      var maxSize = (0,classPrivateFieldGet/* default */.Z)(_this3, _maxSize) - sizes[index];
+      while ((0,classPrivateFieldGet/* default */.Z)(_this3, _calculatedSize) > maxSize) {
         _classPrivateMethodGet(_this3, _evict, _evict2).call(_this3, true);
       }
     }
-    _classPrivateFieldSet(_this3, _calculatedSize, _classPrivateFieldGet(_this3, _calculatedSize) + sizes[index]);
+    (0,classPrivateFieldSet/* default */.Z)(_this3, _calculatedSize, (0,classPrivateFieldGet/* default */.Z)(_this3, _calculatedSize) + sizes[index]);
     if (status) {
       status.entrySize = size;
-      status.totalCalculatedSize = _classPrivateFieldGet(_this3, _calculatedSize);
+      status.totalCalculatedSize = (0,classPrivateFieldGet/* default */.Z)(_this3, _calculatedSize);
     }
   });
 }
@@ -19967,16 +21692,16 @@ function _indexes2() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
     _ref$allowStale = _ref.allowStale,
     allowStale = _ref$allowStale === void 0 ? this.allowStale : _ref$allowStale;
-  return /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+  return /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2() {
     var i;
-    return _regeneratorRuntime().wrap(function _callee2$(_context8) {
+    return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context8) {
       while (1) switch (_context8.prev = _context8.next) {
         case 0:
-          if (!_classPrivateFieldGet(_this4, _size)) {
+          if (!(0,classPrivateFieldGet/* default */.Z)(_this4, _size)) {
             _context8.next = 15;
             break;
           }
-          i = _classPrivateFieldGet(_this4, _tail);
+          i = (0,classPrivateFieldGet/* default */.Z)(_this4, _tail);
         case 2:
           if (false) {}
           if (_classPrivateMethodGet(_this4, _isValidIndex, _isValidIndex2).call(_this4, i)) {
@@ -19985,20 +21710,20 @@ function _indexes2() {
           }
           return _context8.abrupt("break", 15);
         case 5:
-          if (!(allowStale || !_classPrivateFieldGet(_this4, _isStale).call(_this4, i))) {
+          if (!(allowStale || !(0,classPrivateFieldGet/* default */.Z)(_this4, _isStale).call(_this4, i))) {
             _context8.next = 8;
             break;
           }
           _context8.next = 8;
           return i;
         case 8:
-          if (!(i === _classPrivateFieldGet(_this4, _head))) {
+          if (!(i === (0,classPrivateFieldGet/* default */.Z)(_this4, _head))) {
             _context8.next = 12;
             break;
           }
           return _context8.abrupt("break", 15);
         case 12:
-          i = _classPrivateFieldGet(_this4, _prev)[i];
+          i = (0,classPrivateFieldGet/* default */.Z)(_this4, _prev)[i];
         case 13:
           _context8.next = 2;
           break;
@@ -20014,16 +21739,16 @@ function _rindexes2() {
   var _ref2 = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
     _ref2$allowStale = _ref2.allowStale,
     allowStale = _ref2$allowStale === void 0 ? this.allowStale : _ref2$allowStale;
-  return /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+  return /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3() {
     var i;
-    return _regeneratorRuntime().wrap(function _callee3$(_context9) {
+    return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context9) {
       while (1) switch (_context9.prev = _context9.next) {
         case 0:
-          if (!_classPrivateFieldGet(_this5, _size)) {
+          if (!(0,classPrivateFieldGet/* default */.Z)(_this5, _size)) {
             _context9.next = 15;
             break;
           }
-          i = _classPrivateFieldGet(_this5, _head);
+          i = (0,classPrivateFieldGet/* default */.Z)(_this5, _head);
         case 2:
           if (false) {}
           if (_classPrivateMethodGet(_this5, _isValidIndex, _isValidIndex2).call(_this5, i)) {
@@ -20032,20 +21757,20 @@ function _rindexes2() {
           }
           return _context9.abrupt("break", 15);
         case 5:
-          if (!(allowStale || !_classPrivateFieldGet(_this5, _isStale).call(_this5, i))) {
+          if (!(allowStale || !(0,classPrivateFieldGet/* default */.Z)(_this5, _isStale).call(_this5, i))) {
             _context9.next = 8;
             break;
           }
           _context9.next = 8;
           return i;
         case 8:
-          if (!(i === _classPrivateFieldGet(_this5, _tail))) {
+          if (!(i === (0,classPrivateFieldGet/* default */.Z)(_this5, _tail))) {
             _context9.next = 12;
             break;
           }
           return _context9.abrupt("break", 15);
         case 12:
-          i = _classPrivateFieldGet(_this5, _next)[i];
+          i = (0,classPrivateFieldGet/* default */.Z)(_this5, _next)[i];
         case 13:
           _context9.next = 2;
           break;
@@ -20057,45 +21782,45 @@ function _rindexes2() {
   })();
 }
 function _isValidIndex2(index) {
-  return index !== undefined && _classPrivateFieldGet(this, _keyMap).get(_classPrivateFieldGet(this, _keyList)[index]) === index;
+  return index !== undefined && (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get((0,classPrivateFieldGet/* default */.Z)(this, _keyList)[index]) === index;
 }
 function _evict2(free) {
   var _this$size3, _this$size4;
-  var head = _classPrivateFieldGet(this, _head);
-  var k = _classPrivateFieldGet(this, _keyList)[head];
-  var v = _classPrivateFieldGet(this, _valList)[head];
-  if (_classPrivateFieldGet(this, _hasFetchMethod) && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
+  var head = (0,classPrivateFieldGet/* default */.Z)(this, _head);
+  var k = (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[head];
+  var v = (0,classPrivateFieldGet/* default */.Z)(this, _valList)[head];
+  if ((0,classPrivateFieldGet/* default */.Z)(this, _hasFetchMethod) && _classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
     v.__abortController.abort(new Error('evicted'));
-  } else if (_classPrivateFieldGet(this, _hasDispose) || _classPrivateFieldGet(this, _hasDisposeAfter)) {
-    if (_classPrivateFieldGet(this, _hasDispose)) {
+  } else if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDispose) || (0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter)) {
+    if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDispose)) {
       var _classPrivateFieldGet17;
-      (_classPrivateFieldGet17 = _classPrivateFieldGet(this, _dispose)) === null || _classPrivateFieldGet17 === void 0 ? void 0 : _classPrivateFieldGet17.call(this, v, k, 'evict');
+      (_classPrivateFieldGet17 = (0,classPrivateFieldGet/* default */.Z)(this, _dispose)) === null || _classPrivateFieldGet17 === void 0 ? void 0 : _classPrivateFieldGet17.call(this, v, k, 'evict');
     }
-    if (_classPrivateFieldGet(this, _hasDisposeAfter)) {
+    if ((0,classPrivateFieldGet/* default */.Z)(this, _hasDisposeAfter)) {
       var _classPrivateFieldGet18;
-      (_classPrivateFieldGet18 = _classPrivateFieldGet(this, _disposed)) === null || _classPrivateFieldGet18 === void 0 ? void 0 : _classPrivateFieldGet18.push([v, k, 'evict']);
+      (_classPrivateFieldGet18 = (0,classPrivateFieldGet/* default */.Z)(this, _disposed)) === null || _classPrivateFieldGet18 === void 0 ? void 0 : _classPrivateFieldGet18.push([v, k, 'evict']);
     }
   }
-  _classPrivateFieldGet(this, _removeItemSize).call(this, head);
+  (0,classPrivateFieldGet/* default */.Z)(this, _removeItemSize).call(this, head);
   // if we aren't about to use the index, then null these out
   if (free) {
-    _classPrivateFieldGet(this, _keyList)[head] = undefined;
-    _classPrivateFieldGet(this, _valList)[head] = undefined;
-    _classPrivateFieldGet(this, _free).push(head);
+    (0,classPrivateFieldGet/* default */.Z)(this, _keyList)[head] = undefined;
+    (0,classPrivateFieldGet/* default */.Z)(this, _valList)[head] = undefined;
+    (0,classPrivateFieldGet/* default */.Z)(this, _free).push(head);
   }
-  if (_classPrivateFieldGet(this, _size) === 1) {
-    _classPrivateFieldSet(this, _head, _classPrivateFieldSet(this, _tail, 0));
-    _classPrivateFieldGet(this, _free).length = 0;
+  if ((0,classPrivateFieldGet/* default */.Z)(this, _size) === 1) {
+    (0,classPrivateFieldSet/* default */.Z)(this, _head, (0,classPrivateFieldSet/* default */.Z)(this, _tail, 0));
+    (0,classPrivateFieldGet/* default */.Z)(this, _free).length = 0;
   } else {
-    _classPrivateFieldSet(this, _head, _classPrivateFieldGet(this, _next)[head]);
+    (0,classPrivateFieldSet/* default */.Z)(this, _head, (0,classPrivateFieldGet/* default */.Z)(this, _next)[head]);
   }
-  _classPrivateFieldGet(this, _keyMap)["delete"](k);
-  _classPrivateFieldSet(this, _size, (_this$size3 = _classPrivateFieldGet(this, _size), _this$size4 = _this$size3--, _this$size3)), _this$size4;
+  (0,classPrivateFieldGet/* default */.Z)(this, _keyMap)["delete"](k);
+  (0,classPrivateFieldSet/* default */.Z)(this, _size, (_this$size3 = (0,classPrivateFieldGet/* default */.Z)(this, _size), _this$size4 = _this$size3--, _this$size3)), _this$size4;
   return head;
 }
 function _backgroundFetch2(k, index, options, context) {
   var _this6 = this;
-  var v = index === undefined ? undefined : _classPrivateFieldGet(this, _valList)[index];
+  var v = index === undefined ? undefined : (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index];
   if (_classPrivateMethodGet(this, _isBackgroundFetch, _isBackgroundFetch2).call(this, v)) {
     return v;
   }
@@ -20130,10 +21855,10 @@ function _backgroundFetch2(k, index, options, context) {
     }
     // either we didn't abort, and are still here, or we did, and ignored
     var bf = p;
-    if (_classPrivateFieldGet(_this6, _valList)[index] === p) {
+    if ((0,classPrivateFieldGet/* default */.Z)(_this6, _valList)[index] === p) {
       if (v === undefined) {
         if (bf.__staleWhileFetching) {
-          _classPrivateFieldGet(_this6, _valList)[index] = bf.__staleWhileFetching;
+          (0,classPrivateFieldGet/* default */.Z)(_this6, _valList)[index] = bf.__staleWhileFetching;
         } else {
           _this6["delete"](k);
         }
@@ -20157,7 +21882,7 @@ function _backgroundFetch2(k, index, options, context) {
     var allowStale = allowStaleAborted || options.allowStaleOnFetchRejection;
     var noDelete = allowStale || options.noDeleteOnFetchRejection;
     var bf = p;
-    if (_classPrivateFieldGet(_this6, _valList)[index] === p) {
+    if ((0,classPrivateFieldGet/* default */.Z)(_this6, _valList)[index] === p) {
       // if we allow stale on fetch rejections, then we need to ensure that
       // the stale value is not removed from the cache when the fetch fails.
       var del = !noDelete || bf.__staleWhileFetching === undefined;
@@ -20168,7 +21893,7 @@ function _backgroundFetch2(k, index, options, context) {
         // since we are done with the promise at this point.
         // leave it untouched if we're still waiting for an
         // aborted background fetch that hasn't yet returned.
-        _classPrivateFieldGet(_this6, _valList)[index] = bf.__staleWhileFetching;
+        (0,classPrivateFieldGet/* default */.Z)(_this6, _valList)[index] = bf.__staleWhileFetching;
       }
     }
     if (allowStale) {
@@ -20182,7 +21907,7 @@ function _backgroundFetch2(k, index, options, context) {
   };
   var pcall = function pcall(res, rej) {
     var _classPrivateFieldGet19;
-    var fmp = (_classPrivateFieldGet19 = _classPrivateFieldGet(_this6, _fetchMethod)) === null || _classPrivateFieldGet19 === void 0 ? void 0 : _classPrivateFieldGet19.call(_this6, k, v, fetchOpts);
+    var fmp = (_classPrivateFieldGet19 = (0,classPrivateFieldGet/* default */.Z)(_this6, _fetchMethod)) === null || _classPrivateFieldGet19 === void 0 ? void 0 : _classPrivateFieldGet19.call(_this6, k, v, fetchOpts);
     if (fmp && fmp instanceof Promise) {
       fmp.then(function (v) {
         return res(v);
@@ -20215,20 +21940,20 @@ function _backgroundFetch2(k, index, options, context) {
     this.set(k, bf, _objectSpread2(_objectSpread2({}, fetchOpts.options), {}, {
       status: undefined
     }));
-    index = _classPrivateFieldGet(this, _keyMap).get(k);
+    index = (0,classPrivateFieldGet/* default */.Z)(this, _keyMap).get(k);
   } else {
-    _classPrivateFieldGet(this, _valList)[index] = bf;
+    (0,classPrivateFieldGet/* default */.Z)(this, _valList)[index] = bf;
   }
   return bf;
 }
 function _isBackgroundFetch2(p) {
-  if (!_classPrivateFieldGet(this, _hasFetchMethod)) return false;
+  if (!(0,classPrivateFieldGet/* default */.Z)(this, _hasFetchMethod)) return false;
   var b = p;
   return !!b && b instanceof Promise && b.hasOwnProperty('__staleWhileFetching') && b.__abortController instanceof AC;
 }
 function _connect2(p, n) {
-  _classPrivateFieldGet(this, _prev)[n] = p;
-  _classPrivateFieldGet(this, _next)[p] = n;
+  (0,classPrivateFieldGet/* default */.Z)(this, _prev)[n] = p;
+  (0,classPrivateFieldGet/* default */.Z)(this, _next)[p] = n;
 }
 function _moveToTail2(index) {
   // if tail already, nothing to do
@@ -20239,14 +21964,14 @@ function _moveToTail2(index) {
   // prev[index] = tail
   // next[tail] = index
   // tail = index
-  if (index !== _classPrivateFieldGet(this, _tail)) {
-    if (index === _classPrivateFieldGet(this, _head)) {
-      _classPrivateFieldSet(this, _head, _classPrivateFieldGet(this, _next)[index]);
+  if (index !== (0,classPrivateFieldGet/* default */.Z)(this, _tail)) {
+    if (index === (0,classPrivateFieldGet/* default */.Z)(this, _head)) {
+      (0,classPrivateFieldSet/* default */.Z)(this, _head, (0,classPrivateFieldGet/* default */.Z)(this, _next)[index]);
     } else {
-      _classPrivateMethodGet(this, _connect, _connect2).call(this, _classPrivateFieldGet(this, _prev)[index], _classPrivateFieldGet(this, _next)[index]);
+      _classPrivateMethodGet(this, _connect, _connect2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _prev)[index], (0,classPrivateFieldGet/* default */.Z)(this, _next)[index]);
     }
-    _classPrivateMethodGet(this, _connect, _connect2).call(this, _classPrivateFieldGet(this, _tail), index);
-    _classPrivateFieldSet(this, _tail, index);
+    _classPrivateMethodGet(this, _connect, _connect2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _tail), index);
+    (0,classPrivateFieldSet/* default */.Z)(this, _tail, index);
   }
 }
 // EXTERNAL MODULE: external "url"
@@ -20257,7 +21982,7 @@ const promises_namespaceObject = require("fs/promises");
 
 function _superPropBase(object, property) {
   while (!Object.prototype.hasOwnProperty.call(object, property)) {
-    object = _getPrototypeOf(object);
+    object = (0,getPrototypeOf/* default */.Z)(object);
     if (object === null) break;
   }
   return object;
@@ -20360,7 +22085,7 @@ var isArrayBufferView = function isArrayBufferView(b) {
 };
 var Pipe = /*#__PURE__*/function () {
   function Pipe(src, dest, opts) {
-    _classCallCheck(this, Pipe);
+    (0,classCallCheck/* default */.Z)(this, Pipe);
     this.src = src;
     this.dest = dest;
     this.opts = opts;
@@ -20369,7 +22094,7 @@ var Pipe = /*#__PURE__*/function () {
     };
     dest.on('drain', this.ondrain);
   }
-  _createClass(Pipe, [{
+  (0,createClass/* default */.Z)(Pipe, [{
     key: "unpipe",
     value: function unpipe() {
       this.dest.removeListener('drain', this.ondrain);
@@ -20388,11 +22113,11 @@ var Pipe = /*#__PURE__*/function () {
   return Pipe;
 }();
 var PipeProxyErrors = /*#__PURE__*/function (_Pipe) {
-  _inherits(PipeProxyErrors, _Pipe);
-  var _super = _createSuper(PipeProxyErrors);
+  (0,inherits/* default */.Z)(PipeProxyErrors, _Pipe);
+  var _super = (0,createSuper/* default */.Z)(PipeProxyErrors);
   function PipeProxyErrors(src, dest, opts) {
     var _this;
-    _classCallCheck(this, PipeProxyErrors);
+    (0,classCallCheck/* default */.Z)(this, PipeProxyErrors);
     _this = _super.call(this, src, dest, opts);
     _this.proxyErrors = function (er) {
       return dest.emit('error', er);
@@ -20400,21 +22125,21 @@ var PipeProxyErrors = /*#__PURE__*/function (_Pipe) {
     src.on('error', _this.proxyErrors);
     return _this;
   }
-  _createClass(PipeProxyErrors, [{
+  (0,createClass/* default */.Z)(PipeProxyErrors, [{
     key: "unpipe",
     value: function unpipe() {
       this.src.removeListener('error', this.proxyErrors);
-      _get(_getPrototypeOf(PipeProxyErrors.prototype), "unpipe", this).call(this);
+      _get((0,getPrototypeOf/* default */.Z)(PipeProxyErrors.prototype), "unpipe", this).call(this);
     }
   }]);
   return PipeProxyErrors;
 }(Pipe);
 var Minipass = /*#__PURE__*/function (_Stream) {
-  _inherits(Minipass, _Stream);
-  var _super2 = _createSuper(Minipass);
+  (0,inherits/* default */.Z)(Minipass, _Stream);
+  var _super2 = (0,createSuper/* default */.Z)(Minipass);
   function Minipass(options) {
     var _this2;
-    _classCallCheck(this, Minipass);
+    (0,classCallCheck/* default */.Z)(this, Minipass);
     _this2 = _super2.call(this);
     _this2[FLOWING] = false;
     // whether we're explicitly paused
@@ -20436,14 +22161,14 @@ var Minipass = /*#__PURE__*/function (_Stream) {
     _this2[BUFFERLENGTH] = 0;
     _this2[DESTROYED] = false;
     if (options && options.debugExposeBuffer === true) {
-      Object.defineProperty(_assertThisInitialized(_this2), 'buffer', {
+      Object.defineProperty((0,assertThisInitialized/* default */.Z)(_this2), 'buffer', {
         get: function get() {
           return _this2[BUFFER];
         }
       });
     }
     if (options && options.debugExposePipes === true) {
-      Object.defineProperty(_assertThisInitialized(_this2), 'pipes', {
+      Object.defineProperty((0,assertThisInitialized/* default */.Z)(_this2), 'pipes', {
         get: function get() {
           return _this2[PIPES];
         }
@@ -20461,7 +22186,7 @@ var Minipass = /*#__PURE__*/function (_Stream) {
     }
     return _this2;
   }
-  _createClass(Minipass, [{
+  (0,createClass/* default */.Z)(Minipass, [{
     key: "bufferLength",
     get: function get() {
       return this[BUFFERLENGTH];
@@ -20730,9 +22455,9 @@ var Minipass = /*#__PURE__*/function (_Stream) {
     key: "on",
     value: function on(ev, fn) {
       var _this5 = this;
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "on", this).call(this, ev, fn);
-      if (ev === 'data' && !this[PIPES].length && !this.flowing) this[RESUME]();else if (ev === 'readable' && this[BUFFERLENGTH] !== 0) _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'readable');else if (isEndish(ev) && this[EMITTED_END]) {
-        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "on", this).call(this, ev, fn);
+      if (ev === 'data' && !this[PIPES].length && !this.flowing) this[RESUME]();else if (ev === 'readable' && this[BUFFERLENGTH] !== 0) _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'readable');else if (isEndish(ev) && this[EMITTED_END]) {
+        _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, ev);
         this.removeAllListeners(ev);
       } else if (ev === 'error' && this[EMITTED_ERROR]) {
         if (this[ASYNC]) defer(function () {
@@ -20774,21 +22499,21 @@ var Minipass = /*#__PURE__*/function (_Stream) {
         this[CLOSED] = true;
         // don't emit close before 'end' and 'finish'
         if (!this[EMITTED_END] && !this[DESTROYED]) return;
-        var _ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'close');
+        var _ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'close');
         this.removeAllListeners('close');
         return _ret;
       } else if (ev === 'error') {
         this[EMITTED_ERROR] = data;
-        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ERROR, data);
-        var _ret2 = !this[SIGNAL] || this.listeners('error').length ? _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'error', data) : false;
+        _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, ERROR, data);
+        var _ret2 = !this[SIGNAL] || this.listeners('error').length ? _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'error', data) : false;
         this[MAYBE_EMIT_END]();
         return _ret2;
       } else if (ev === 'resume') {
-        var _ret3 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'resume');
+        var _ret3 = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'resume');
         this[MAYBE_EMIT_END]();
         return _ret3;
       } else if (ev === 'finish' || ev === 'prefinish') {
-        var _ret4 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        var _ret4 = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, ev);
         this.removeAllListeners(ev);
         return _ret4;
       }
@@ -20797,14 +22522,14 @@ var Minipass = /*#__PURE__*/function (_Stream) {
       for (var _len = arguments.length, extra = new Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
         extra[_key - 2] = arguments[_key];
       }
-      var ret = (_get2 = _get(_getPrototypeOf(Minipass.prototype), "emit", this)).call.apply(_get2, [this, ev, data].concat(extra));
+      var ret = (_get2 = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this)).call.apply(_get2, [this, ev, data].concat(extra));
       this[MAYBE_EMIT_END]();
       return ret;
     }
   }, {
     key: EMITDATA,
     value: function value(data) {
-      var _iterator = _createForOfIteratorHelper(this[PIPES]),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(this[PIPES]),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -20816,7 +22541,7 @@ var Minipass = /*#__PURE__*/function (_Stream) {
       } finally {
         _iterator.f();
       }
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'data', data);
       this[MAYBE_EMIT_END]();
       return ret;
     }
@@ -20837,7 +22562,7 @@ var Minipass = /*#__PURE__*/function (_Stream) {
       if (this[DECODER]) {
         var data = this[DECODER].end();
         if (data) {
-          var _iterator2 = _createForOfIteratorHelper(this[PIPES]),
+          var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(this[PIPES]),
             _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -20849,10 +22574,10 @@ var Minipass = /*#__PURE__*/function (_Stream) {
           } finally {
             _iterator2.f();
           }
-          _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+          _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'data', data);
         }
       }
-      var _iterator3 = _createForOfIteratorHelper(this[PIPES]),
+      var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(this[PIPES]),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -20864,7 +22589,7 @@ var Minipass = /*#__PURE__*/function (_Stream) {
       } finally {
         _iterator3.f();
       }
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'end');
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'end');
       this.removeAllListeners('end');
       return ret;
     }
@@ -21156,15 +22881,15 @@ var normalizeNocase = function normalizeNocase(s) {
  * @internal
  */
 var ResolveCache = /*#__PURE__*/function (_LRUCache) {
-  _inherits(ResolveCache, _LRUCache);
-  var _super = _createSuper(ResolveCache);
+  (0,inherits/* default */.Z)(ResolveCache, _LRUCache);
+  var _super = (0,createSuper/* default */.Z)(ResolveCache);
   function ResolveCache() {
-    _classCallCheck(this, ResolveCache);
+    (0,classCallCheck/* default */.Z)(this, ResolveCache);
     return _super.call(this, {
       max: 256
     });
   }
-  return _createClass(ResolveCache);
+  return (0,createClass/* default */.Z)(ResolveCache);
 }(LRUCache);
 // In order to prevent blowing out the js heap by allocating hundreds of
 // thousands of Path entries when walking extremely large trees, the "children"
@@ -21182,11 +22907,11 @@ var ResolveCache = /*#__PURE__*/function (_LRUCache) {
  * @internal
  */
 var ChildrenCache = /*#__PURE__*/function (_LRUCache2) {
-  _inherits(ChildrenCache, _LRUCache2);
-  var _super2 = _createSuper(ChildrenCache);
+  (0,inherits/* default */.Z)(ChildrenCache, _LRUCache2);
+  var _super2 = (0,createSuper/* default */.Z)(ChildrenCache);
   function ChildrenCache() {
     var maxSize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 16 * 1024;
-    _classCallCheck(this, ChildrenCache);
+    (0,classCallCheck/* default */.Z)(this, ChildrenCache);
     return _super2.call(this, {
       maxSize: maxSize,
       // parent + children
@@ -21195,7 +22920,7 @@ var ChildrenCache = /*#__PURE__*/function (_LRUCache2) {
       }
     });
   }
-  return _createClass(ChildrenCache);
+  return (0,createClass/* default */.Z)(ChildrenCache);
 }(LRUCache);
 var setAsCwd = Symbol('PathScurry setAsCwd');
 /**
@@ -21272,7 +22997,7 @@ var PathBase = /*#__PURE__*/function () {
     var nocase = arguments.length > 4 ? arguments[4] : undefined;
     var _children2 = arguments.length > 5 ? arguments[5] : undefined;
     var opts = arguments.length > 6 ? arguments[6] : undefined;
-    _classCallCheck(this, PathBase);
+    (0,classCallCheck/* default */.Z)(this, PathBase);
     _classPrivateMethodInitSpec(this, _callOnReaddirCB);
     _classPrivateMethodInitSpec(this, _applyStat);
     _classPrivateMethodInitSpec(this, _readdirPromoteChild);
@@ -21323,150 +23048,150 @@ var PathBase = /*#__PURE__*/function () {
      */
     _defineProperty(this, "nocase", void 0);
     // potential default fs override
-    _classPrivateFieldInitSpec(this, _fs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _fs, {
       writable: true,
       value: void 0
     });
     // Stats fields
-    _classPrivateFieldInitSpec(this, _dev, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _dev, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _mode, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _mode, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _nlink, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _nlink, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _uid, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _uid, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _gid, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _gid, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _rdev, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _rdev, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _blksize, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _blksize, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _ino, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _ino, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, mjs_size, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, mjs_size, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _blocks, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _blocks, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _atimeMs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _atimeMs, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _mtimeMs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _mtimeMs, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _ctimeMs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _ctimeMs, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _birthtimeMs, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _birthtimeMs, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _atime, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _atime, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _mtime, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _mtime, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _ctime, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _ctime, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _birthtime, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _birthtime, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _matchName, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _matchName, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _depth, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _depth, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _fullpath, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _fullpath, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _fullpathPosix, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _fullpathPosix, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _relative, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _relative, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _relativePosix, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _relativePosix, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _type, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _type, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _children, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _children, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _linkTarget, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _linkTarget, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _realpath, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _realpath, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _onReaddirCB, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _onReaddirCB, {
       writable: true,
       value: []
     });
-    _classPrivateFieldInitSpec(this, _readdirCBInFlight, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _readdirCBInFlight, {
       writable: true,
       value: false
     });
-    _classPrivateFieldInitSpec(this, _asyncReaddirInFlight, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _asyncReaddirInFlight, {
       writable: true,
       value: void 0
     });
     this.name = _name;
-    _classPrivateFieldSet(this, _matchName, nocase ? normalizeNocase(_name) : normalize(_name));
-    _classPrivateFieldSet(this, _type, _type2 & TYPEMASK);
+    (0,classPrivateFieldSet/* default */.Z)(this, _matchName, nocase ? normalizeNocase(_name) : normalize(_name));
+    (0,classPrivateFieldSet/* default */.Z)(this, _type, _type2 & TYPEMASK);
     this.nocase = nocase;
     this.roots = roots;
     this.root = root || this;
-    _classPrivateFieldSet(this, _children, _children2);
-    _classPrivateFieldSet(this, _fullpath, opts.fullpath);
-    _classPrivateFieldSet(this, _relative, opts.relative);
-    _classPrivateFieldSet(this, _relativePosix, opts.relativePosix);
+    (0,classPrivateFieldSet/* default */.Z)(this, _children, _children2);
+    (0,classPrivateFieldSet/* default */.Z)(this, _fullpath, opts.fullpath);
+    (0,classPrivateFieldSet/* default */.Z)(this, _relative, opts.relative);
+    (0,classPrivateFieldSet/* default */.Z)(this, _relativePosix, opts.relativePosix);
     this.parent = opts.parent;
     if (this.parent) {
-      _classPrivateFieldSet(this, _fs, _classPrivateFieldGet(this.parent, _fs));
+      (0,classPrivateFieldSet/* default */.Z)(this, _fs, (0,classPrivateFieldGet/* default */.Z)(this.parent, _fs));
     } else {
-      _classPrivateFieldSet(this, _fs, fsFromOption(opts.fs));
+      (0,classPrivateFieldSet/* default */.Z)(this, _fs, fsFromOption(opts.fs));
     }
   }
   /**
@@ -21474,95 +23199,95 @@ var PathBase = /*#__PURE__*/function () {
    *
    * For example, a path at `/foo/bar` would have a depth of 2.
    */
-  _createClass(PathBase, [{
+  (0,createClass/* default */.Z)(PathBase, [{
     key: "dev",
     get: function get() {
-      return _classPrivateFieldGet(this, _dev);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _dev);
     }
   }, {
     key: "mode",
     get: function get() {
-      return _classPrivateFieldGet(this, _mode);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _mode);
     }
   }, {
     key: "nlink",
     get: function get() {
-      return _classPrivateFieldGet(this, _nlink);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _nlink);
     }
   }, {
     key: "uid",
     get: function get() {
-      return _classPrivateFieldGet(this, _uid);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _uid);
     }
   }, {
     key: "gid",
     get: function get() {
-      return _classPrivateFieldGet(this, _gid);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _gid);
     }
   }, {
     key: "rdev",
     get: function get() {
-      return _classPrivateFieldGet(this, _rdev);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _rdev);
     }
   }, {
     key: "blksize",
     get: function get() {
-      return _classPrivateFieldGet(this, _blksize);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _blksize);
     }
   }, {
     key: "ino",
     get: function get() {
-      return _classPrivateFieldGet(this, _ino);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _ino);
     }
   }, {
     key: "size",
     get: function get() {
-      return _classPrivateFieldGet(this, mjs_size);
+      return (0,classPrivateFieldGet/* default */.Z)(this, mjs_size);
     }
   }, {
     key: "blocks",
     get: function get() {
-      return _classPrivateFieldGet(this, _blocks);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _blocks);
     }
   }, {
     key: "atimeMs",
     get: function get() {
-      return _classPrivateFieldGet(this, _atimeMs);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _atimeMs);
     }
   }, {
     key: "mtimeMs",
     get: function get() {
-      return _classPrivateFieldGet(this, _mtimeMs);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _mtimeMs);
     }
   }, {
     key: "ctimeMs",
     get: function get() {
-      return _classPrivateFieldGet(this, _ctimeMs);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _ctimeMs);
     }
   }, {
     key: "birthtimeMs",
     get: function get() {
-      return _classPrivateFieldGet(this, _birthtimeMs);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _birthtimeMs);
     }
   }, {
     key: "atime",
     get: function get() {
-      return _classPrivateFieldGet(this, _atime);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _atime);
     }
   }, {
     key: "mtime",
     get: function get() {
-      return _classPrivateFieldGet(this, _mtime);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _mtime);
     }
   }, {
     key: "ctime",
     get: function get() {
-      return _classPrivateFieldGet(this, _ctime);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _ctime);
     }
   }, {
     key: "birthtime",
     get: function get() {
-      return _classPrivateFieldGet(this, _birthtime);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _birthtime);
     }
   }, {
     key: "path",
@@ -21580,9 +23305,9 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "depth",
     value: function depth() {
-      if (_classPrivateFieldGet(this, _depth) !== undefined) return _classPrivateFieldGet(this, _depth);
-      if (!this.parent) return _classPrivateFieldSet(this, _depth, 0);
-      return _classPrivateFieldSet(this, _depth, this.parent.depth() + 1);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _depth) !== undefined) return (0,classPrivateFieldGet/* default */.Z)(this, _depth);
+      if (!this.parent) return (0,classPrivateFieldSet/* default */.Z)(this, _depth, 0);
+      return (0,classPrivateFieldSet/* default */.Z)(this, _depth, this.parent.depth() + 1);
     }
     /**
      * @internal
@@ -21590,7 +23315,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "childrenCache",
     value: function childrenCache() {
-      return _classPrivateFieldGet(this, _children);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _children);
     }
     /**
      * Get the Path object referenced by the string path, resolved from this Path
@@ -21620,15 +23345,15 @@ var PathBase = /*#__PURE__*/function () {
      * @internal
      */
     function children() {
-      var cached = _classPrivateFieldGet(this, _children).get(this);
+      var cached = (0,classPrivateFieldGet/* default */.Z)(this, _children).get(this);
       if (cached) {
         return cached;
       }
       var children = Object.assign([], {
         provisional: 0
       });
-      _classPrivateFieldGet(this, _children).set(this, children);
-      _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) & ~READDIR_CALLED);
+      (0,classPrivateFieldGet/* default */.Z)(this, _children).set(this, children);
+      (0,classPrivateFieldSet/* default */.Z)(this, _type, (0,classPrivateFieldGet/* default */.Z)(this, _type) & ~READDIR_CALLED);
       return children;
     }
     /**
@@ -21656,12 +23381,12 @@ var PathBase = /*#__PURE__*/function () {
       // find the child
       var children = this.children();
       var name = this.nocase ? normalizeNocase(pathPart) : normalize(pathPart);
-      var _iterator = _createForOfIteratorHelper(children),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(children),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var p = _step.value;
-          if (_classPrivateFieldGet(p, _matchName) === name) {
+          if ((0,classPrivateFieldGet/* default */.Z)(p, _matchName) === name) {
             return p;
           }
         }
@@ -21674,13 +23399,13 @@ var PathBase = /*#__PURE__*/function () {
         _iterator.f();
       }
       var s = this.parent ? this.sep : '';
-      var fullpath = _classPrivateFieldGet(this, _fullpath) ? _classPrivateFieldGet(this, _fullpath) + s + pathPart : undefined;
+      var fullpath = (0,classPrivateFieldGet/* default */.Z)(this, _fullpath) ? (0,classPrivateFieldGet/* default */.Z)(this, _fullpath) + s + pathPart : undefined;
       var pchild = this.newChild(pathPart, UNKNOWN, _objectSpread2(_objectSpread2({}, opts), {}, {
         parent: this,
         fullpath: fullpath
       }));
       if (!this.canReaddir()) {
-        _classPrivateFieldSet(pchild, _type, _classPrivateFieldGet(pchild, _type) | ENOENT);
+        (0,classPrivateFieldSet/* default */.Z)(pchild, _type, (0,classPrivateFieldGet/* default */.Z)(pchild, _type) | ENOENT);
       }
       // don't have to update provisional, because if we have real children,
       // then provisional is set to children.length, otherwise a lower number
@@ -21694,13 +23419,13 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "relative",
     value: function relative() {
-      if (_classPrivateFieldGet(this, _relative) !== undefined) {
-        return _classPrivateFieldGet(this, _relative);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _relative) !== undefined) {
+        return (0,classPrivateFieldGet/* default */.Z)(this, _relative);
       }
       var name = this.name;
       var p = this.parent;
       if (!p) {
-        return _classPrivateFieldSet(this, _relative, this.name);
+        return (0,classPrivateFieldSet/* default */.Z)(this, _relative, this.name);
       }
       var pv = p.relative();
       return pv + (!pv || !p.parent ? '' : this.sep) + name;
@@ -21715,11 +23440,11 @@ var PathBase = /*#__PURE__*/function () {
     key: "relativePosix",
     value: function relativePosix() {
       if (this.sep === '/') return this.relative();
-      if (_classPrivateFieldGet(this, _relativePosix) !== undefined) return _classPrivateFieldGet(this, _relativePosix);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _relativePosix) !== undefined) return (0,classPrivateFieldGet/* default */.Z)(this, _relativePosix);
       var name = this.name;
       var p = this.parent;
       if (!p) {
-        return _classPrivateFieldSet(this, _relativePosix, this.fullpathPosix());
+        return (0,classPrivateFieldSet/* default */.Z)(this, _relativePosix, this.fullpathPosix());
       }
       var pv = p.relativePosix();
       return pv + (!pv || !p.parent ? '' : '/') + name;
@@ -21730,17 +23455,17 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "fullpath",
     value: function fullpath() {
-      if (_classPrivateFieldGet(this, _fullpath) !== undefined) {
-        return _classPrivateFieldGet(this, _fullpath);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _fullpath) !== undefined) {
+        return (0,classPrivateFieldGet/* default */.Z)(this, _fullpath);
       }
       var name = this.name;
       var p = this.parent;
       if (!p) {
-        return _classPrivateFieldSet(this, _fullpath, this.name);
+        return (0,classPrivateFieldSet/* default */.Z)(this, _fullpath, this.name);
       }
       var pv = p.fullpath();
       var fp = pv + (!p.parent ? '' : this.sep) + name;
-      return _classPrivateFieldSet(this, _fullpath, fp);
+      return (0,classPrivateFieldSet/* default */.Z)(this, _fullpath, fp);
     }
     /**
      * On platforms other than windows, this is identical to fullpath.
@@ -21751,20 +23476,20 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "fullpathPosix",
     value: function fullpathPosix() {
-      if (_classPrivateFieldGet(this, _fullpathPosix) !== undefined) return _classPrivateFieldGet(this, _fullpathPosix);
-      if (this.sep === '/') return _classPrivateFieldSet(this, _fullpathPosix, this.fullpath());
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _fullpathPosix) !== undefined) return (0,classPrivateFieldGet/* default */.Z)(this, _fullpathPosix);
+      if (this.sep === '/') return (0,classPrivateFieldSet/* default */.Z)(this, _fullpathPosix, this.fullpath());
       if (!this.parent) {
         var _p = this.fullpath().replace(/\\/g, '/');
         if (/^[a-z]:\//i.test(_p)) {
-          return _classPrivateFieldSet(this, _fullpathPosix, "//?/".concat(_p));
+          return (0,classPrivateFieldSet/* default */.Z)(this, _fullpathPosix, "//?/".concat(_p));
         } else {
-          return _classPrivateFieldSet(this, _fullpathPosix, _p);
+          return (0,classPrivateFieldSet/* default */.Z)(this, _fullpathPosix, _p);
         }
       }
       var p = this.parent;
       var pfpp = p.fullpathPosix();
       var fpp = pfpp + (!pfpp || !p.parent ? '' : '/') + this.name;
-      return _classPrivateFieldSet(this, _fullpathPosix, fpp);
+      return (0,classPrivateFieldSet/* default */.Z)(this, _fullpathPosix, fpp);
     }
     /**
      * Is the Path of an unknown type?
@@ -21776,7 +23501,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isUnknown",
     value: function isUnknown() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === UNKNOWN;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === UNKNOWN;
     }
   }, {
     key: "isType",
@@ -21795,7 +23520,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isFile",
     value: function isFile() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === IFREG;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === IFREG;
     }
     /**
      * Is the Path a directory?
@@ -21803,7 +23528,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isDirectory",
     value: function isDirectory() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === IFDIR;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === IFDIR;
     }
     /**
      * Is the path a character device?
@@ -21811,7 +23536,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isCharacterDevice",
     value: function isCharacterDevice() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === IFCHR;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === IFCHR;
     }
     /**
      * Is the path a block device?
@@ -21819,7 +23544,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isBlockDevice",
     value: function isBlockDevice() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === IFBLK;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === IFBLK;
     }
     /**
      * Is the path a FIFO pipe?
@@ -21827,7 +23552,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isFIFO",
     value: function isFIFO() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === IFIFO;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === IFIFO;
     }
     /**
      * Is the path a socket?
@@ -21835,7 +23560,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isSocket",
     value: function isSocket() {
-      return (_classPrivateFieldGet(this, _type) & IFMT) === IFSOCK;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT) === IFSOCK;
     }
     /**
      * Is the path a symbolic link?
@@ -21843,7 +23568,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isSymbolicLink",
     value: function isSymbolicLink() {
-      return (_classPrivateFieldGet(this, _type) & IFLNK) === IFLNK;
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFLNK) === IFLNK;
     }
     /**
      * Return the entry if it has been subject of a successful lstat, or
@@ -21855,7 +23580,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "lstatCached",
     value: function lstatCached() {
-      return _classPrivateFieldGet(this, _type) & LSTAT_CALLED ? this : undefined;
+      return (0,classPrivateFieldGet/* default */.Z)(this, _type) & LSTAT_CALLED ? this : undefined;
     }
     /**
      * Return the cached link target if the entry has been the subject of a
@@ -21868,7 +23593,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "readlinkCached",
     value: function readlinkCached() {
-      return _classPrivateFieldGet(this, _linkTarget);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _linkTarget);
     }
     /**
      * Returns the cached realpath target if the entry has been the subject
@@ -21881,7 +23606,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "realpathCached",
     value: function realpathCached() {
-      return _classPrivateFieldGet(this, _realpath);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _realpath);
     }
     /**
      * Returns the cached child Path entries array if the entry has been the
@@ -21907,11 +23632,11 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "canReadlink",
     value: function canReadlink() {
-      if (_classPrivateFieldGet(this, _linkTarget)) return true;
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _linkTarget)) return true;
       if (!this.parent) return false;
       // cases where it cannot possibly succeed
-      var ifmt = _classPrivateFieldGet(this, _type) & IFMT;
-      return !(ifmt !== UNKNOWN && ifmt !== IFLNK || _classPrivateFieldGet(this, _type) & ENOREADLINK || _classPrivateFieldGet(this, _type) & ENOENT);
+      var ifmt = (0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT;
+      return !(ifmt !== UNKNOWN && ifmt !== IFLNK || (0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOREADLINK || (0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOENT);
     }
     /**
      * Return true if readdir has previously been successfully called on this
@@ -21920,7 +23645,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "calledReaddir",
     value: function calledReaddir() {
-      return !!(_classPrivateFieldGet(this, _type) & READDIR_CALLED);
+      return !!((0,classPrivateFieldGet/* default */.Z)(this, _type) & READDIR_CALLED);
     }
     /**
      * Returns true if the path is known to not exist. That is, a previous lstat
@@ -21930,7 +23655,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isENOENT",
     value: function isENOENT() {
-      return !!(_classPrivateFieldGet(this, _type) & ENOENT);
+      return !!((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOENT);
     }
     /**
      * Return true if the path is a match for the given path name.  This handles
@@ -21946,7 +23671,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "isNamed",
     value: function isNamed(n) {
-      return !this.nocase ? _classPrivateFieldGet(this, _matchName) === normalize(n) : _classPrivateFieldGet(this, _matchName) === normalizeNocase(n);
+      return !this.nocase ? (0,classPrivateFieldGet/* default */.Z)(this, _matchName) === normalize(n) : (0,classPrivateFieldGet/* default */.Z)(this, _matchName) === normalizeNocase(n);
     }
     /**
      * Return the Path object corresponding to the target of a symbolic link.
@@ -21959,12 +23684,12 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "readlink",
     value: function () {
-      var _readlink = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _readlink = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee() {
         var target, read, linkTarget;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              target = _classPrivateFieldGet(this, _linkTarget);
+              target = (0,classPrivateFieldGet/* default */.Z)(this, _linkTarget);
               if (!target) {
                 _context.next = 3;
                 break;
@@ -21985,7 +23710,7 @@ var PathBase = /*#__PURE__*/function () {
             case 7:
               _context.prev = 7;
               _context.next = 10;
-              return _classPrivateFieldGet(this, _fs).promises.readlink(this.fullpath());
+              return (0,classPrivateFieldGet/* default */.Z)(this, _fs).promises.readlink(this.fullpath());
             case 10:
               read = _context.sent;
               linkTarget = this.parent.resolve(read);
@@ -21993,7 +23718,7 @@ var PathBase = /*#__PURE__*/function () {
                 _context.next = 14;
                 break;
               }
-              return _context.abrupt("return", _classPrivateFieldSet(this, _linkTarget, linkTarget));
+              return _context.abrupt("return", (0,classPrivateFieldSet/* default */.Z)(this, _linkTarget, linkTarget));
             case 14:
               _context.next = 20;
               break;
@@ -22019,7 +23744,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "readlinkSync",
     value: function readlinkSync() {
-      var target = _classPrivateFieldGet(this, _linkTarget);
+      var target = (0,classPrivateFieldGet/* default */.Z)(this, _linkTarget);
       if (target) {
         return target;
       }
@@ -22033,10 +23758,10 @@ var PathBase = /*#__PURE__*/function () {
       }
       /* c8 ignore stop */
       try {
-        var read = _classPrivateFieldGet(this, _fs).readlinkSync(this.fullpath());
+        var read = (0,classPrivateFieldGet/* default */.Z)(this, _fs).readlinkSync(this.fullpath());
         var linkTarget = this.parent.resolve(read);
         if (linkTarget) {
-          return _classPrivateFieldSet(this, _linkTarget, linkTarget);
+          return (0,classPrivateFieldSet/* default */.Z)(this, _linkTarget, linkTarget);
         }
       } catch (er) {
         _classPrivateMethodGet(this, _readlinkFail, _readlinkFail2).call(this, er.code);
@@ -22062,11 +23787,11 @@ var PathBase = /*#__PURE__*/function () {
      * mutated.
      */
     function () {
-      var _lstat = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      var _lstat = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2() {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
-              if (!((_classPrivateFieldGet(this, _type) & ENOENT) === 0)) {
+              if (!(((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOENT) === 0)) {
                 _context2.next = 14;
                 break;
               }
@@ -22074,7 +23799,7 @@ var PathBase = /*#__PURE__*/function () {
               _context2.t0 = _classPrivateMethodGet(this, _applyStat, _applyStat2);
               _context2.t1 = this;
               _context2.next = 6;
-              return _classPrivateFieldGet(this, _fs).promises.lstat(this.fullpath());
+              return (0,classPrivateFieldGet/* default */.Z)(this, _fs).promises.lstat(this.fullpath());
             case 6:
               _context2.t2 = _context2.sent;
               _context2.t0.call.call(_context2.t0, _context2.t1, _context2.t2);
@@ -22100,9 +23825,9 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "lstatSync",
     value: function lstatSync() {
-      if ((_classPrivateFieldGet(this, _type) & ENOENT) === 0) {
+      if (((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOENT) === 0) {
         try {
-          _classPrivateMethodGet(this, _applyStat, _applyStat2).call(this, _classPrivateFieldGet(this, _fs).lstatSync(this.fullpath()));
+          _classPrivateMethodGet(this, _applyStat, _applyStat2).call(this, (0,classPrivateFieldGet/* default */.Z)(this, _fs).lstatSync(this.fullpath()));
           return this;
         } catch (er) {
           _classPrivateMethodGet(this, _lstatFail, _lstatFail2).call(this, er.code);
@@ -22146,15 +23871,15 @@ var PathBase = /*#__PURE__*/function () {
         return;
       }
       // don't have to worry about zalgo at this point.
-      _classPrivateFieldGet(this, _onReaddirCB).push(cb);
-      if (_classPrivateFieldGet(this, _readdirCBInFlight)) {
+      (0,classPrivateFieldGet/* default */.Z)(this, _onReaddirCB).push(cb);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _readdirCBInFlight)) {
         return;
       }
-      _classPrivateFieldSet(this, _readdirCBInFlight, true);
+      (0,classPrivateFieldSet/* default */.Z)(this, _readdirCBInFlight, true);
       // else read the directory, fill up children
       // de-provisionalize any provisional children.
       var fullpath = this.fullpath();
-      _classPrivateFieldGet(this, _fs).readdir(fullpath, {
+      (0,classPrivateFieldGet/* default */.Z)(this, _fs).readdir(fullpath, {
         withFileTypes: true
       }, function (er, entries) {
         if (er) {
@@ -22163,7 +23888,7 @@ var PathBase = /*#__PURE__*/function () {
         } else {
           // if we didn't get an error, we always get entries.
           //@ts-ignore
-          var _iterator2 = _createForOfIteratorHelper(entries),
+          var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(entries),
             _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -22194,9 +23919,9 @@ var PathBase = /*#__PURE__*/function () {
      * mutated.
      */
     function () {
-      var _readdir = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _readdir = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3() {
         var children, fullpath, resolve, _iterator3, _step3, e;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               if (this.canReaddir()) {
@@ -22215,12 +23940,12 @@ var PathBase = /*#__PURE__*/function () {
               // else read the directory, fill up children
               // de-provisionalize any provisional children.
               fullpath = this.fullpath();
-              if (!_classPrivateFieldGet(this, _asyncReaddirInFlight)) {
+              if (!(0,classPrivateFieldGet/* default */.Z)(this, _asyncReaddirInFlight)) {
                 _context3.next = 11;
                 break;
               }
               _context3.next = 9;
-              return _classPrivateFieldGet(this, _asyncReaddirInFlight);
+              return (0,classPrivateFieldGet/* default */.Z)(this, _asyncReaddirInFlight);
             case 9:
               _context3.next = 29;
               break;
@@ -22228,13 +23953,13 @@ var PathBase = /*#__PURE__*/function () {
               /* c8 ignore start */
               resolve = function resolve() {};
               /* c8 ignore stop */
-              _classPrivateFieldSet(this, _asyncReaddirInFlight, new Promise(function (res) {
+              (0,classPrivateFieldSet/* default */.Z)(this, _asyncReaddirInFlight, new Promise(function (res) {
                 return resolve = res;
               }));
               _context3.prev = 13;
-              _context3.t0 = _createForOfIteratorHelper;
+              _context3.t0 = createForOfIteratorHelper/* default */.Z;
               _context3.next = 17;
-              return _classPrivateFieldGet(this, _fs).promises.readdir(fullpath, {
+              return (0,classPrivateFieldGet/* default */.Z)(this, _fs).promises.readdir(fullpath, {
                 withFileTypes: true
               });
             case 17:
@@ -22259,7 +23984,7 @@ var PathBase = /*#__PURE__*/function () {
               _classPrivateMethodGet(this, _readdirFail, _readdirFail2).call(this, _context3.t2.code);
               children.provisional = 0;
             case 27:
-              _classPrivateFieldSet(this, _asyncReaddirInFlight, undefined);
+              (0,classPrivateFieldSet/* default */.Z)(this, _asyncReaddirInFlight, undefined);
               resolve();
             case 29:
               return _context3.abrupt("return", children.slice(0, children.provisional));
@@ -22291,7 +24016,7 @@ var PathBase = /*#__PURE__*/function () {
       // de-provisionalize any provisional children.
       var fullpath = this.fullpath();
       try {
-        var _iterator4 = _createForOfIteratorHelper(_classPrivateFieldGet(this, _fs).readdirSync(fullpath, {
+        var _iterator4 = (0,createForOfIteratorHelper/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _fs).readdirSync(fullpath, {
             withFileTypes: true
           })),
           _step4;
@@ -22315,8 +24040,8 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "canReaddir",
     value: function canReaddir() {
-      if (_classPrivateFieldGet(this, _type) & ENOCHILD) return false;
-      var ifmt = IFMT & _classPrivateFieldGet(this, _type);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOCHILD) return false;
+      var ifmt = IFMT & (0,classPrivateFieldGet/* default */.Z)(this, _type);
       // we always set ENOTDIR when setting IFMT, so should be impossible
       /* c8 ignore start */
       if (!(ifmt === UNKNOWN || ifmt === IFDIR || ifmt === IFLNK)) {
@@ -22328,7 +24053,7 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "shouldWalk",
     value: function shouldWalk(dirs, walkFilter) {
-      return (_classPrivateFieldGet(this, _type) & IFDIR) === IFDIR && !(_classPrivateFieldGet(this, _type) & ENOCHILD) && !dirs.has(this) && (!walkFilter || walkFilter(this));
+      return ((0,classPrivateFieldGet/* default */.Z)(this, _type) & IFDIR) === IFDIR && !((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOCHILD) && !dirs.has(this) && (!walkFilter || walkFilter(this));
     }
     /**
      * Return the Path object corresponding to path as resolved
@@ -22342,18 +24067,18 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "realpath",
     value: function () {
-      var _realpath2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
+      var _realpath2 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee4() {
         var rp;
-        return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee4$(_context4) {
           while (1) switch (_context4.prev = _context4.next) {
             case 0:
-              if (!_classPrivateFieldGet(this, _realpath)) {
+              if (!(0,classPrivateFieldGet/* default */.Z)(this, _realpath)) {
                 _context4.next = 2;
                 break;
               }
-              return _context4.abrupt("return", _classPrivateFieldGet(this, _realpath));
+              return _context4.abrupt("return", (0,classPrivateFieldGet/* default */.Z)(this, _realpath));
             case 2:
-              if (!((ENOREALPATH | ENOREADLINK | ENOENT) & _classPrivateFieldGet(this, _type))) {
+              if (!((ENOREALPATH | ENOREADLINK | ENOENT) & (0,classPrivateFieldGet/* default */.Z)(this, _type))) {
                 _context4.next = 4;
                 break;
               }
@@ -22361,10 +24086,10 @@ var PathBase = /*#__PURE__*/function () {
             case 4:
               _context4.prev = 4;
               _context4.next = 7;
-              return _classPrivateFieldGet(this, _fs).promises.realpath(this.fullpath());
+              return (0,classPrivateFieldGet/* default */.Z)(this, _fs).promises.realpath(this.fullpath());
             case 7:
               rp = _context4.sent;
-              return _context4.abrupt("return", _classPrivateFieldSet(this, _realpath, this.resolve(rp)));
+              return _context4.abrupt("return", (0,classPrivateFieldSet/* default */.Z)(this, _realpath, this.resolve(rp)));
             case 11:
               _context4.prev = 11;
               _context4.t0 = _context4["catch"](4);
@@ -22386,11 +24111,11 @@ var PathBase = /*#__PURE__*/function () {
   }, {
     key: "realpathSync",
     value: function realpathSync() {
-      if (_classPrivateFieldGet(this, _realpath)) return _classPrivateFieldGet(this, _realpath);
-      if ((ENOREALPATH | ENOREADLINK | ENOENT) & _classPrivateFieldGet(this, _type)) return undefined;
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _realpath)) return (0,classPrivateFieldGet/* default */.Z)(this, _realpath);
+      if ((ENOREALPATH | ENOREADLINK | ENOENT) & (0,classPrivateFieldGet/* default */.Z)(this, _type)) return undefined;
       try {
-        var rp = _classPrivateFieldGet(this, _fs).realpathSync(this.fullpath());
-        return _classPrivateFieldSet(this, _realpath, this.resolve(rp));
+        var rp = (0,classPrivateFieldGet/* default */.Z)(this, _fs).realpathSync(this.fullpath());
+        return (0,classPrivateFieldSet/* default */.Z)(this, _realpath, this.resolve(rp));
       } catch (_) {
         _classPrivateMethodGet(this, _markENOREALPATH, _markENOREALPATH2).call(this);
       }
@@ -22410,16 +24135,16 @@ var PathBase = /*#__PURE__*/function () {
       var p = this;
       while (p && p.parent) {
         changed.add(p);
-        _classPrivateFieldSet(p, _relative, rp.join(this.sep));
-        _classPrivateFieldSet(p, _relativePosix, rp.join('/'));
+        (0,classPrivateFieldSet/* default */.Z)(p, _relative, rp.join(this.sep));
+        (0,classPrivateFieldSet/* default */.Z)(p, _relativePosix, rp.join('/'));
         p = p.parent;
         rp.push('..');
       }
       // now un-memoize parents of old cwd
       p = oldCwd;
       while (p && p.parent && !changed.has(p)) {
-        _classPrivateFieldSet(p, _relative, undefined);
-        _classPrivateFieldSet(p, _relativePosix, undefined);
+        (0,classPrivateFieldSet/* default */.Z)(p, _relative, undefined);
+        (0,classPrivateFieldSet/* default */.Z)(p, _relativePosix, undefined);
         p = p.parent;
       }
     }
@@ -22434,7 +24159,7 @@ var PathBase = /*#__PURE__*/function () {
  */
 function _resolveParts2(dirParts) {
   var p = this;
-  var _iterator16 = _createForOfIteratorHelper(dirParts),
+  var _iterator16 = (0,createForOfIteratorHelper/* default */.Z)(dirParts),
     _step16;
   try {
     for (_iterator16.s(); !(_step16 = _iterator16.n()).done;) {
@@ -22450,7 +24175,7 @@ function _resolveParts2(dirParts) {
 }
 function _readdirSuccess2(children) {
   // succeeded, mark readdir called bit
-  _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) | READDIR_CALLED);
+  (0,classPrivateFieldSet/* default */.Z)(this, _type, (0,classPrivateFieldGet/* default */.Z)(this, _type) | READDIR_CALLED);
   // mark all remaining provisional children as ENOENT
   for (var p = children.provisional; p < children.length; p++) {
     var _children$p;
@@ -22459,15 +24184,15 @@ function _readdirSuccess2(children) {
 }
 function _markENOENT2() {
   // mark as UNKNOWN and ENOENT
-  if (_classPrivateFieldGet(this, _type) & ENOENT) return;
-  _classPrivateFieldSet(this, _type, (_classPrivateFieldGet(this, _type) | ENOENT) & IFMT_UNKNOWN);
+  if ((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOENT) return;
+  (0,classPrivateFieldSet/* default */.Z)(this, _type, ((0,classPrivateFieldGet/* default */.Z)(this, _type) | ENOENT) & IFMT_UNKNOWN);
   _classPrivateMethodGet(this, _markChildrenENOENT, _markChildrenENOENT2).call(this);
 }
 function _markChildrenENOENT2() {
   // all children are provisional and do not exist
   var children = this.children();
   children.provisional = 0;
-  var _iterator17 = _createForOfIteratorHelper(children),
+  var _iterator17 = (0,createForOfIteratorHelper/* default */.Z)(children),
     _step17;
   try {
     for (_iterator17.s(); !(_step17 = _iterator17.n()).done;) {
@@ -22481,7 +24206,7 @@ function _markChildrenENOENT2() {
   }
 }
 function _markENOREALPATH2() {
-  _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) | ENOREALPATH);
+  (0,classPrivateFieldSet/* default */.Z)(this, _type, (0,classPrivateFieldGet/* default */.Z)(this, _type) | ENOREALPATH);
   _classPrivateMethodGet(this, _markENOTDIR, _markENOTDIR2).call(this);
 }
 function _markENOTDIR2() {
@@ -22490,13 +24215,13 @@ function _markENOTDIR2() {
   // after it's been marked ENOTDIR should be marked ENOENT,
   // so it won't even get to this point.
   /* c8 ignore start */
-  if (_classPrivateFieldGet(this, _type) & ENOTDIR) return;
+  if ((0,classPrivateFieldGet/* default */.Z)(this, _type) & ENOTDIR) return;
   /* c8 ignore stop */
-  var t = _classPrivateFieldGet(this, _type);
+  var t = (0,classPrivateFieldGet/* default */.Z)(this, _type);
   // this could happen if we stat a dir, then delete it,
   // then try to read it or one of its children.
   if ((t & IFMT) === IFDIR) t &= IFMT_UNKNOWN;
-  _classPrivateFieldSet(this, _type, t | ENOTDIR);
+  (0,classPrivateFieldSet/* default */.Z)(this, _type, t | ENOTDIR);
   _classPrivateMethodGet(this, _markChildrenENOENT, _markChildrenENOENT2).call(this);
 }
 function _readdirFail2() {
@@ -22525,7 +24250,7 @@ function _lstatFail2() {
 }
 function _readlinkFail2() {
   var code = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  var ter = _classPrivateFieldGet(this, _type);
+  var ter = (0,classPrivateFieldGet/* default */.Z)(this, _type);
   ter |= ENOREADLINK;
   if (code === 'ENOENT') ter |= ENOENT;
   // windows gets a weird error when you try to readlink a file
@@ -22534,7 +24259,7 @@ function _readlinkFail2() {
     // all IFMT bits.
     ter &= IFMT_UNKNOWN;
   }
-  _classPrivateFieldSet(this, _type, ter);
+  (0,classPrivateFieldSet/* default */.Z)(this, _type, ter);
   // windows just gets ENOENT in this case.  We do cover the case,
   // just disabled because it's impossible on Windows CI
   /* c8 ignore start */
@@ -22553,9 +24278,9 @@ function _readdirAddNewChild2(e, c) {
   var child = this.newChild(e.name, type, {
     parent: this
   });
-  var ifmt = _classPrivateFieldGet(child, _type) & IFMT;
+  var ifmt = (0,classPrivateFieldGet/* default */.Z)(child, _type) & IFMT;
   if (ifmt !== IFDIR && ifmt !== IFLNK && ifmt !== UNKNOWN) {
-    _classPrivateFieldSet(child, _type, _classPrivateFieldGet(child, _type) | ENOTDIR);
+    (0,classPrivateFieldSet/* default */.Z)(child, _type, (0,classPrivateFieldGet/* default */.Z)(child, _type) | ENOTDIR);
   }
   c.unshift(child);
   c.provisional++;
@@ -22565,7 +24290,7 @@ function _readdirMaybePromoteChild2(e, c) {
   for (var p = c.provisional; p < c.length; p++) {
     var pchild = c[p];
     var name = this.nocase ? normalizeNocase(e.name) : normalize(e.name);
-    if (name !== _classPrivateFieldGet(pchild, _matchName)) {
+    if (name !== (0,classPrivateFieldGet/* default */.Z)(pchild, _matchName)) {
       continue;
     }
     return _classPrivateMethodGet(this, _readdirPromoteChild, _readdirPromoteChild2).call(this, e, pchild, p, c);
@@ -22574,7 +24299,7 @@ function _readdirMaybePromoteChild2(e, c) {
 function _readdirPromoteChild2(e, p, index, c) {
   var v = p.name;
   // retain any other flags, but set ifmt from dirent
-  _classPrivateFieldSet(p, _type, _classPrivateFieldGet(p, _type) & IFMT_UNKNOWN | entToType(e));
+  (0,classPrivateFieldSet/* default */.Z)(p, _type, (0,classPrivateFieldGet/* default */.Z)(p, _type) & IFMT_UNKNOWN | entToType(e));
   // case sensitivity fixing when we learn the true name.
   if (v !== e.name) p.name = e.name;
   // just advance provisional index (potentially off the list),
@@ -22605,42 +24330,42 @@ function _applyStat2(st) {
     rdev = st.rdev,
     size = st.size,
     uid = st.uid;
-  _classPrivateFieldSet(this, _atime, atime);
-  _classPrivateFieldSet(this, _atimeMs, atimeMs);
-  _classPrivateFieldSet(this, _birthtime, birthtime);
-  _classPrivateFieldSet(this, _birthtimeMs, birthtimeMs);
-  _classPrivateFieldSet(this, _blksize, blksize);
-  _classPrivateFieldSet(this, _blocks, blocks);
-  _classPrivateFieldSet(this, _ctime, ctime);
-  _classPrivateFieldSet(this, _ctimeMs, ctimeMs);
-  _classPrivateFieldSet(this, _dev, dev);
-  _classPrivateFieldSet(this, _gid, gid);
-  _classPrivateFieldSet(this, _ino, ino);
-  _classPrivateFieldSet(this, _mode, mode);
-  _classPrivateFieldSet(this, _mtime, mtime);
-  _classPrivateFieldSet(this, _mtimeMs, mtimeMs);
-  _classPrivateFieldSet(this, _nlink, nlink);
-  _classPrivateFieldSet(this, _rdev, rdev);
-  _classPrivateFieldSet(this, mjs_size, size);
-  _classPrivateFieldSet(this, _uid, uid);
+  (0,classPrivateFieldSet/* default */.Z)(this, _atime, atime);
+  (0,classPrivateFieldSet/* default */.Z)(this, _atimeMs, atimeMs);
+  (0,classPrivateFieldSet/* default */.Z)(this, _birthtime, birthtime);
+  (0,classPrivateFieldSet/* default */.Z)(this, _birthtimeMs, birthtimeMs);
+  (0,classPrivateFieldSet/* default */.Z)(this, _blksize, blksize);
+  (0,classPrivateFieldSet/* default */.Z)(this, _blocks, blocks);
+  (0,classPrivateFieldSet/* default */.Z)(this, _ctime, ctime);
+  (0,classPrivateFieldSet/* default */.Z)(this, _ctimeMs, ctimeMs);
+  (0,classPrivateFieldSet/* default */.Z)(this, _dev, dev);
+  (0,classPrivateFieldSet/* default */.Z)(this, _gid, gid);
+  (0,classPrivateFieldSet/* default */.Z)(this, _ino, ino);
+  (0,classPrivateFieldSet/* default */.Z)(this, _mode, mode);
+  (0,classPrivateFieldSet/* default */.Z)(this, _mtime, mtime);
+  (0,classPrivateFieldSet/* default */.Z)(this, _mtimeMs, mtimeMs);
+  (0,classPrivateFieldSet/* default */.Z)(this, _nlink, nlink);
+  (0,classPrivateFieldSet/* default */.Z)(this, _rdev, rdev);
+  (0,classPrivateFieldSet/* default */.Z)(this, mjs_size, size);
+  (0,classPrivateFieldSet/* default */.Z)(this, _uid, uid);
   var ifmt = entToType(st);
   // retain any other flags, but set the ifmt
-  _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) & IFMT_UNKNOWN | ifmt | LSTAT_CALLED);
+  (0,classPrivateFieldSet/* default */.Z)(this, _type, (0,classPrivateFieldGet/* default */.Z)(this, _type) & IFMT_UNKNOWN | ifmt | LSTAT_CALLED);
   if (ifmt !== UNKNOWN && ifmt !== IFDIR && ifmt !== IFLNK) {
-    _classPrivateFieldSet(this, _type, _classPrivateFieldGet(this, _type) | ENOTDIR);
+    (0,classPrivateFieldSet/* default */.Z)(this, _type, (0,classPrivateFieldGet/* default */.Z)(this, _type) | ENOTDIR);
   }
 }
 function _callOnReaddirCB2(children) {
-  _classPrivateFieldSet(this, _readdirCBInFlight, false);
-  var cbs = _classPrivateFieldGet(this, _onReaddirCB).slice();
-  _classPrivateFieldGet(this, _onReaddirCB).length = 0;
+  (0,classPrivateFieldSet/* default */.Z)(this, _readdirCBInFlight, false);
+  var cbs = (0,classPrivateFieldGet/* default */.Z)(this, _onReaddirCB).slice();
+  (0,classPrivateFieldGet/* default */.Z)(this, _onReaddirCB).length = 0;
   cbs.forEach(function (cb) {
     return cb(null, children);
   });
 }
 var PathWin32 = /*#__PURE__*/function (_PathBase) {
-  _inherits(PathWin32, _PathBase);
-  var _super3 = _createSuper(PathWin32);
+  (0,inherits/* default */.Z)(PathWin32, _PathBase);
+  var _super3 = (0,createSuper/* default */.Z)(PathWin32);
   /**
    * Separator for generating path strings.
    */
@@ -22663,16 +24388,16 @@ var PathWin32 = /*#__PURE__*/function (_PathBase) {
     var nocase = arguments.length > 4 ? arguments[4] : undefined;
     var children = arguments.length > 5 ? arguments[5] : undefined;
     var opts = arguments.length > 6 ? arguments[6] : undefined;
-    _classCallCheck(this, PathWin32);
+    (0,classCallCheck/* default */.Z)(this, PathWin32);
     _this2 = _super3.call(this, name, type, root, roots, nocase, children, opts);
-    _defineProperty(_assertThisInitialized(_this2), "sep", '\\');
-    _defineProperty(_assertThisInitialized(_this2), "splitSep", eitherSep);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), "sep", '\\');
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), "splitSep", eitherSep);
     return _this2;
   }
   /**
    * @internal
    */
-  _createClass(PathWin32, [{
+  (0,createClass/* default */.Z)(PathWin32, [{
     key: "newChild",
     value: function newChild(name) {
       var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UNKNOWN;
@@ -22699,7 +24424,7 @@ var PathWin32 = /*#__PURE__*/function (_PathBase) {
       }
       // ok, not that one, check if it matches another we know about
       for (var _i = 0, _Object$entries = Object.entries(this.roots); _i < _Object$entries.length; _i++) {
-        var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
+        var _Object$entries$_i = (0,slicedToArray/* default */.Z)(_Object$entries[_i], 2),
           compare = _Object$entries$_i[0],
           root = _Object$entries$_i[1];
         if (this.sameRoot(rootPath, compare)) {
@@ -22731,8 +24456,8 @@ var PathWin32 = /*#__PURE__*/function (_PathBase) {
  * Uses `'/'` as the path separator.
  */
 var PathPosix = /*#__PURE__*/function (_PathBase2) {
-  _inherits(PathPosix, _PathBase2);
-  var _super4 = _createSuper(PathPosix);
+  (0,inherits/* default */.Z)(PathPosix, _PathBase2);
+  var _super4 = (0,createSuper/* default */.Z)(PathPosix);
   /**
    * separator for parsing path strings
    */
@@ -22755,16 +24480,16 @@ var PathPosix = /*#__PURE__*/function (_PathBase2) {
     var nocase = arguments.length > 4 ? arguments[4] : undefined;
     var children = arguments.length > 5 ? arguments[5] : undefined;
     var opts = arguments.length > 6 ? arguments[6] : undefined;
-    _classCallCheck(this, PathPosix);
+    (0,classCallCheck/* default */.Z)(this, PathPosix);
     _this3 = _super4.call(this, name, type, root, roots, nocase, children, opts);
-    _defineProperty(_assertThisInitialized(_this3), "splitSep", '/');
-    _defineProperty(_assertThisInitialized(_this3), "sep", '/');
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this3), "splitSep", '/');
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this3), "sep", '/');
     return _this3;
   }
   /**
    * @internal
    */
-  _createClass(PathPosix, [{
+  (0,createClass/* default */.Z)(PathPosix, [{
     key: "getRootString",
     value: function getRootString(path) {
       return path.startsWith('/') ? '/' : '';
@@ -22844,29 +24569,29 @@ var PathScurryBase = /*#__PURE__*/function () {
       childrenCacheSize = _ref$childrenCacheSiz === void 0 ? 16 * 1024 : _ref$childrenCacheSiz,
       _ref$fs = _ref.fs,
       fs = _ref$fs === void 0 ? defaultFS : _ref$fs;
-    _classCallCheck(this, PathScurryBase);
+    (0,classCallCheck/* default */.Z)(this, PathScurryBase);
     _defineProperty(this, "root", void 0);
     _defineProperty(this, "rootPath", void 0);
     _defineProperty(this, "roots", void 0);
     _defineProperty(this, "cwd", void 0);
-    _classPrivateFieldInitSpec(this, _resolveCache, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _resolveCache, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _resolvePosixCache, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _resolvePosixCache, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _children3, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _children3, {
       writable: true,
       value: void 0
     });
     _defineProperty(this, "nocase", void 0);
-    _classPrivateFieldInitSpec(this, _fs2, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _fs2, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldSet(this, _fs2, fsFromOption(fs));
+    (0,classPrivateFieldSet/* default */.Z)(this, _fs2, fsFromOption(fs));
     if (cwd instanceof URL || cwd.startsWith('file://')) {
       cwd = (0,external_url_.fileURLToPath)(cwd);
     }
@@ -22875,9 +24600,9 @@ var PathScurryBase = /*#__PURE__*/function () {
     var cwdPath = pathImpl.resolve(cwd);
     this.roots = Object.create(null);
     this.rootPath = this.parseRootPath(cwdPath);
-    _classPrivateFieldSet(this, _resolveCache, new ResolveCache());
-    _classPrivateFieldSet(this, _resolvePosixCache, new ResolveCache());
-    _classPrivateFieldSet(this, _children3, new ChildrenCache(childrenCacheSize));
+    (0,classPrivateFieldSet/* default */.Z)(this, _resolveCache, new ResolveCache());
+    (0,classPrivateFieldSet/* default */.Z)(this, _resolvePosixCache, new ResolveCache());
+    (0,classPrivateFieldSet/* default */.Z)(this, _children3, new ChildrenCache(childrenCacheSize));
     var split = cwdPath.substring(this.rootPath.length).split(sep);
     // resolve('/') leaves '', splits to [''], we don't want that.
     if (split.length === 1 && !split[0]) {
@@ -22889,14 +24614,14 @@ var PathScurryBase = /*#__PURE__*/function () {
     }
     /* c8 ignore stop */
     this.nocase = nocase;
-    this.root = this.newRoot(_classPrivateFieldGet(this, _fs2));
+    this.root = this.newRoot((0,classPrivateFieldGet/* default */.Z)(this, _fs2));
     this.roots[this.rootPath] = this.root;
     var prev = this.root;
     var len = split.length - 1;
     var joinSep = pathImpl.sep;
     var abs = this.rootPath;
     var sawFirst = false;
-    var _iterator5 = _createForOfIteratorHelper(split),
+    var _iterator5 = (0,createForOfIteratorHelper/* default */.Z)(split),
       _step5;
     try {
       for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
@@ -22919,7 +24644,7 @@ var PathScurryBase = /*#__PURE__*/function () {
   /**
    * Get the depth of a provided path, string, or the cwd
    */
-  _createClass(PathScurryBase, [{
+  (0,createClass/* default */.Z)(PathScurryBase, [{
     key: "depth",
     value: function depth() {
       var path = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
@@ -22937,7 +24662,7 @@ var PathScurryBase = /*#__PURE__*/function () {
   }, {
     key: "childrenCache",
     value: function childrenCache() {
-      return _classPrivateFieldGet(this, _children3);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _children3);
     }
     /**
      * Resolve one or more path strings to a resolved string
@@ -22962,12 +24687,12 @@ var PathScurryBase = /*#__PURE__*/function () {
           break;
         }
       }
-      var cached = _classPrivateFieldGet(this, _resolveCache).get(r);
+      var cached = (0,classPrivateFieldGet/* default */.Z)(this, _resolveCache).get(r);
       if (cached !== undefined) {
         return cached;
       }
       var result = this.cwd.resolve(r).fullpath();
-      _classPrivateFieldGet(this, _resolveCache).set(r, result);
+      (0,classPrivateFieldGet/* default */.Z)(this, _resolveCache).set(r, result);
       return result;
     }
     /**
@@ -22995,12 +24720,12 @@ var PathScurryBase = /*#__PURE__*/function () {
           break;
         }
       }
-      var cached = _classPrivateFieldGet(this, _resolvePosixCache).get(r);
+      var cached = (0,classPrivateFieldGet/* default */.Z)(this, _resolvePosixCache).get(r);
       if (cached !== undefined) {
         return cached;
       }
       var result = this.cwd.resolve(r).fullpathPosix();
-      _classPrivateFieldGet(this, _resolvePosixCache).set(r, result);
+      (0,classPrivateFieldGet/* default */.Z)(this, _resolvePosixCache).set(r, result);
       return result;
     }
     /**
@@ -23055,14 +24780,14 @@ var PathScurryBase = /*#__PURE__*/function () {
   }, {
     key: "readdir",
     value: function () {
-      var _readdir2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee5() {
+      var _readdir2 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee5() {
         var entry,
           opts,
           _opts,
           withFileTypes,
           p,
           _args5 = arguments;
-        return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee5$(_context5) {
           while (1) switch (_context5.prev = _context5.next) {
             case 0:
               entry = _args5.length > 0 && _args5[0] !== undefined ? _args5[0] : this.cwd;
@@ -23144,10 +24869,10 @@ var PathScurryBase = /*#__PURE__*/function () {
   }, {
     key: "lstat",
     value: function () {
-      var _lstat2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+      var _lstat2 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee6() {
         var entry,
           _args6 = arguments;
-        return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee6$(_context6) {
           while (1) switch (_context6.prev = _context6.next) {
             case 0:
               entry = _args6.length > 0 && _args6[0] !== undefined ? _args6[0] : this.cwd;
@@ -23181,13 +24906,13 @@ var PathScurryBase = /*#__PURE__*/function () {
   }, {
     key: "readlink",
     value: function () {
-      var _readlink2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee7() {
+      var _readlink2 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee7() {
         var entry,
           _ref2,
           withFileTypes,
           e,
           _args7 = arguments;
-        return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee7$(_context7) {
           while (1) switch (_context7.prev = _context7.next) {
             case 0:
               entry = _args7.length > 0 && _args7[0] !== undefined ? _args7[0] : this.cwd;
@@ -23236,13 +24961,13 @@ var PathScurryBase = /*#__PURE__*/function () {
   }, {
     key: "realpath",
     value: function () {
-      var _realpath3 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee8() {
+      var _realpath3 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee8() {
         var entry,
           _ref4,
           withFileTypes,
           e,
           _args8 = arguments;
-        return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee8$(_context8) {
           while (1) switch (_context8.prev = _context8.next) {
             case 0:
               entry = _args8.length > 0 && _args8[0] !== undefined ? _args8[0] : this.cwd;
@@ -23291,7 +25016,7 @@ var PathScurryBase = /*#__PURE__*/function () {
   }, {
     key: "walk",
     value: function () {
-      var _walk = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee9() {
+      var _walk = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee9() {
         var entry,
           opts,
           _opts3,
@@ -23306,7 +25031,7 @@ var PathScurryBase = /*#__PURE__*/function () {
           walk,
           start,
           _args9 = arguments;
-        return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee9$(_context9) {
           while (1) switch (_context9.prev = _context9.next) {
             case 0:
               entry = _args9.length > 0 && _args9[0] !== undefined ? _args9[0] : this.cwd;
@@ -23338,7 +25063,7 @@ var PathScurryBase = /*#__PURE__*/function () {
                       cb();
                     }
                   };
-                  var _iterator6 = _createForOfIteratorHelper(entries),
+                  var _iterator6 = (0,createForOfIteratorHelper/* default */.Z)(entries),
                     _step6;
                   try {
                     for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
@@ -23410,13 +25135,13 @@ var PathScurryBase = /*#__PURE__*/function () {
         results.push(withFileTypes ? entry : entry.fullpath());
       }
       var dirs = new Set([entry]);
-      var _iterator7 = _createForOfIteratorHelper(dirs),
+      var _iterator7 = (0,createForOfIteratorHelper/* default */.Z)(dirs),
         _step7;
       try {
         for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
           var dir = _step7.value;
           var entries = dir.readdirSync();
-          var _iterator8 = _createForOfIteratorHelper(entries),
+          var _iterator8 = (0,createForOfIteratorHelper/* default */.Z)(entries),
             _step8;
           try {
             for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
@@ -23492,9 +25217,9 @@ var PathScurryBase = /*#__PURE__*/function () {
       var _this4 = this;
       var entry = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.cwd;
       var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      return /*#__PURE__*/_regeneratorRuntime().mark(function _callee10() {
+      return /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee10() {
         var _opts5, _opts5$withFileTypes, withFileTypes, _opts5$follow, follow, filter, walkFilter, dirs, _iterator9, _step9, dir, entries, _iterator10, _step10, e, r;
-        return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee10$(_context10) {
           while (1) switch (_context10.prev = _context10.next) {
             case 0:
               if (typeof entry === 'string') {
@@ -23512,7 +25237,7 @@ var PathScurryBase = /*#__PURE__*/function () {
               return withFileTypes ? entry : entry.fullpath();
             case 5:
               dirs = new Set([entry]);
-              _iterator9 = _createForOfIteratorHelper(dirs);
+              _iterator9 = (0,createForOfIteratorHelper/* default */.Z)(dirs);
               _context10.prev = 7;
               _iterator9.s();
             case 9:
@@ -23522,7 +25247,7 @@ var PathScurryBase = /*#__PURE__*/function () {
               }
               dir = _step9.value;
               entries = dir.readdirSync();
-              _iterator10 = _createForOfIteratorHelper(entries);
+              _iterator10 = (0,createForOfIteratorHelper/* default */.Z)(entries);
               _context10.prev = 13;
               _iterator10.s();
             case 15:
@@ -23635,7 +25360,7 @@ var PathScurryBase = /*#__PURE__*/function () {
             /* c8 ignore stop */
             if (follow && !didRealpaths) {
               var promises = [];
-              var _iterator11 = _createForOfIteratorHelper(entries),
+              var _iterator11 = (0,createForOfIteratorHelper/* default */.Z)(entries),
                 _step11;
               try {
                 for (_iterator11.s(); !(_step11 = _iterator11.n()).done;) {
@@ -23658,7 +25383,7 @@ var PathScurryBase = /*#__PURE__*/function () {
                 return;
               }
             }
-            var _iterator12 = _createForOfIteratorHelper(entries),
+            var _iterator12 = (0,createForOfIteratorHelper/* default */.Z)(entries),
               _step12;
             try {
               for (_iterator12.s(); !(_step12 = _iterator12.n()).done;) {
@@ -23675,7 +25400,7 @@ var PathScurryBase = /*#__PURE__*/function () {
               _iterator12.f();
             }
             processing--;
-            var _iterator13 = _createForOfIteratorHelper(entries),
+            var _iterator13 = (0,createForOfIteratorHelper/* default */.Z)(entries),
               _step13;
             try {
               for (_iterator13.s(); !(_step13 = _iterator13.n()).done;) {
@@ -23747,7 +25472,7 @@ var PathScurryBase = /*#__PURE__*/function () {
           processing++;
           dirs.add(dir);
           var entries = dir.readdirSync();
-          var _iterator14 = _createForOfIteratorHelper(entries),
+          var _iterator14 = (0,createForOfIteratorHelper/* default */.Z)(entries),
             _step14;
           try {
             for (_iterator14.s(); !(_step14 = _iterator14.n()).done;) {
@@ -23764,7 +25489,7 @@ var PathScurryBase = /*#__PURE__*/function () {
             _iterator14.f();
           }
           processing--;
-          var _iterator15 = _createForOfIteratorHelper(entries),
+          var _iterator15 = (0,createForOfIteratorHelper/* default */.Z)(entries),
             _step15;
           try {
             for (_iterator15.s(); !(_step15 = _iterator15.n()).done;) {
@@ -23807,8 +25532,8 @@ var PathScurryBase = /*#__PURE__*/function () {
  * {@link PathWin32} for Path objects.
  */
 var PathScurryWin32 = /*#__PURE__*/function (_PathScurryBase) {
-  _inherits(PathScurryWin32, _PathScurryBase);
-  var _super5 = _createSuper(PathScurryWin32);
+  (0,inherits/* default */.Z)(PathScurryWin32, _PathScurryBase);
+  var _super5 = (0,createSuper/* default */.Z)(PathScurryWin32);
   /**
    * separator for generating path strings
    */
@@ -23817,13 +25542,13 @@ var PathScurryWin32 = /*#__PURE__*/function (_PathScurryBase) {
     var _this5;
     var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
     var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    _classCallCheck(this, PathScurryWin32);
+    (0,classCallCheck/* default */.Z)(this, PathScurryWin32);
     var _opts$nocase = opts.nocase,
       nocase = _opts$nocase === void 0 ? true : _opts$nocase;
     _this5 = _super5.call(this, cwd, external_path_.win32, '\\', _objectSpread2(_objectSpread2({}, opts), {}, {
       nocase: nocase
     }));
-    _defineProperty(_assertThisInitialized(_this5), "sep", '\\');
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this5), "sep", '\\');
     _this5.nocase = nocase;
     for (var p = _this5.cwd; p; p = p.parent) {
       p.nocase = _this5.nocase;
@@ -23833,7 +25558,7 @@ var PathScurryWin32 = /*#__PURE__*/function (_PathScurryBase) {
   /**
    * @internal
    */
-  _createClass(PathScurryWin32, [{
+  (0,createClass/* default */.Z)(PathScurryWin32, [{
     key: "parseRootPath",
     value: function parseRootPath(dir) {
       // if the path starts with a single separator, it's not a UNC, and we'll
@@ -23870,8 +25595,8 @@ var PathScurryWin32 = /*#__PURE__*/function (_PathScurryBase) {
  * Uses {@link PathPosix} for Path objects.
  */
 var PathScurryPosix = /*#__PURE__*/function (_PathScurryBase2) {
-  _inherits(PathScurryPosix, _PathScurryBase2);
-  var _super6 = _createSuper(PathScurryPosix);
+  (0,inherits/* default */.Z)(PathScurryPosix, _PathScurryBase2);
+  var _super6 = (0,createSuper/* default */.Z)(PathScurryPosix);
   /**
    * separator for generating path strings
    */
@@ -23880,20 +25605,20 @@ var PathScurryPosix = /*#__PURE__*/function (_PathScurryBase2) {
     var _this6;
     var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
     var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    _classCallCheck(this, PathScurryPosix);
+    (0,classCallCheck/* default */.Z)(this, PathScurryPosix);
     var _opts$nocase2 = opts.nocase,
       nocase = _opts$nocase2 === void 0 ? false : _opts$nocase2;
     _this6 = _super6.call(this, cwd, external_path_.posix, '/', _objectSpread2(_objectSpread2({}, opts), {}, {
       nocase: nocase
     }));
-    _defineProperty(_assertThisInitialized(_this6), "sep", '/');
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this6), "sep", '/');
     _this6.nocase = nocase;
     return _this6;
   }
   /**
    * @internal
    */
-  _createClass(PathScurryPosix, [{
+  (0,createClass/* default */.Z)(PathScurryPosix, [{
     key: "parseRootPath",
     value: function parseRootPath(_dir) {
       return '/';
@@ -23928,19 +25653,19 @@ var PathScurryPosix = /*#__PURE__*/function (_PathScurryBase2) {
  * Uses {@link PathPosix} for Path objects.
  */
 var PathScurryDarwin = /*#__PURE__*/function (_PathScurryPosix) {
-  _inherits(PathScurryDarwin, _PathScurryPosix);
-  var _super7 = _createSuper(PathScurryDarwin);
+  (0,inherits/* default */.Z)(PathScurryDarwin, _PathScurryPosix);
+  var _super7 = (0,createSuper/* default */.Z)(PathScurryDarwin);
   function PathScurryDarwin() {
     var cwd = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : process.cwd();
     var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    _classCallCheck(this, PathScurryDarwin);
+    (0,classCallCheck/* default */.Z)(this, PathScurryDarwin);
     var _opts$nocase3 = opts.nocase,
       nocase = _opts$nocase3 === void 0 ? true : _opts$nocase3;
     return _super7.call(this, cwd, _objectSpread2(_objectSpread2({}, opts), {}, {
       nocase: nocase
     }));
   }
-  return _createClass(PathScurryDarwin);
+  return (0,createClass/* default */.Z)(PathScurryDarwin);
 }(PathScurryPosix);
 /**
  * Default {@link PathBase} implementation for the current platform.
@@ -23955,13 +25680,21 @@ var Path = process.platform === 'win32' ? PathWin32 : PathPosix;
  * Darwin (macOS) systems, {@link PathScurryPosix} on all others.
  */
 var PathScurry = process.platform === 'win32' ? PathScurryWin32 : process.platform === 'darwin' ? PathScurryDarwin : PathScurryPosix;
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/arrayWithHoles.js
+var arrayWithHoles = __webpack_require__(9868);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/iterableToArray.js
+var iterableToArray = __webpack_require__(1079);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+var unsupportedIterableToArray = __webpack_require__(9147);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/nonIterableRest.js
+var nonIterableRest = __webpack_require__(4434);
 ;// CONCATENATED MODULE: ../../node_modules/@babel/runtime/helpers/esm/toArray.js
 
 
 
 
 function _toArray(arr) {
-  return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
+  return (0,arrayWithHoles/* default */.Z)(arr) || (0,iterableToArray/* default */.Z)(arr) || (0,unsupportedIterableToArray/* default */.Z)(arr) || (0,nonIterableRest/* default */.Z)();
 }
 ;// CONCATENATED MODULE: ../cli/node_modules/glob/dist/esm/pattern.js
 
@@ -23996,45 +25729,45 @@ var _isAbsolute = /*#__PURE__*/new WeakMap();
 var _followGlobstar = /*#__PURE__*/new WeakMap();
 var Pattern = /*#__PURE__*/function () {
   function Pattern(patternList, globList, index, platform) {
-    _classCallCheck(this, Pattern);
-    _classPrivateFieldInitSpec(this, _patternList, {
+    (0,classCallCheck/* default */.Z)(this, Pattern);
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _patternList, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _globList, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _globList, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _index, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _index, {
       writable: true,
       value: void 0
     });
     _defineProperty(this, "length", void 0);
-    _classPrivateFieldInitSpec(this, _platform, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _platform, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _rest, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _rest, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _globString, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _globString, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _isDrive, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _isDrive, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _isUNC, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _isUNC, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _isAbsolute, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _isAbsolute, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _followGlobstar, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _followGlobstar, {
       writable: true,
       value: true
     });
@@ -24051,12 +25784,12 @@ var Pattern = /*#__PURE__*/function () {
     if (index < 0 || index >= this.length) {
       throw new TypeError('index out of range');
     }
-    _classPrivateFieldSet(this, _patternList, patternList);
-    _classPrivateFieldSet(this, _globList, globList);
-    _classPrivateFieldSet(this, _index, index);
-    _classPrivateFieldSet(this, _platform, platform);
+    (0,classPrivateFieldSet/* default */.Z)(this, _patternList, patternList);
+    (0,classPrivateFieldSet/* default */.Z)(this, _globList, globList);
+    (0,classPrivateFieldSet/* default */.Z)(this, _index, index);
+    (0,classPrivateFieldSet/* default */.Z)(this, _platform, platform);
     // normalize root entries of absolute patterns on initial creation.
-    if (_classPrivateFieldGet(this, _index) === 0) {
+    if ((0,classPrivateFieldGet/* default */.Z)(this, _index) === 0) {
       // c: => ['c:/']
       // C:/ => ['C:/']
       // C:/x => ['C:/', 'x']
@@ -24067,14 +25800,14 @@ var Pattern = /*#__PURE__*/function () {
       // / => ['/']
       if (this.isUNC()) {
         // '' / '' / 'host' / 'share'
-        var _classPrivateFieldGet2 = _classPrivateFieldGet(this, _patternList),
+        var _classPrivateFieldGet2 = (0,classPrivateFieldGet/* default */.Z)(this, _patternList),
           _classPrivateFieldGet3 = _toArray(_classPrivateFieldGet2),
           p0 = _classPrivateFieldGet3[0],
           p1 = _classPrivateFieldGet3[1],
           p2 = _classPrivateFieldGet3[2],
           p3 = _classPrivateFieldGet3[3],
           prest = _classPrivateFieldGet3.slice(4);
-        var _classPrivateFieldGet4 = _classPrivateFieldGet(this, _globList),
+        var _classPrivateFieldGet4 = (0,classPrivateFieldGet/* default */.Z)(this, _globList),
           _classPrivateFieldGet5 = _toArray(_classPrivateFieldGet4),
           g0 = _classPrivateFieldGet5[0],
           g1 = _classPrivateFieldGet5[1],
@@ -24088,15 +25821,15 @@ var Pattern = /*#__PURE__*/function () {
         }
         var p = [p0, p1, p2, p3, ''].join('/');
         var g = [g0, g1, g2, g3, ''].join('/');
-        _classPrivateFieldSet(this, _patternList, [p].concat(toConsumableArray_toConsumableArray(prest)));
-        _classPrivateFieldSet(this, _globList, [g].concat(toConsumableArray_toConsumableArray(grest)));
-        this.length = _classPrivateFieldGet(this, _patternList).length;
+        (0,classPrivateFieldSet/* default */.Z)(this, _patternList, [p].concat((0,toConsumableArray/* default */.Z)(prest)));
+        (0,classPrivateFieldSet/* default */.Z)(this, _globList, [g].concat((0,toConsumableArray/* default */.Z)(grest)));
+        this.length = (0,classPrivateFieldGet/* default */.Z)(this, _patternList).length;
       } else if (this.isDrive() || this.isAbsolute()) {
-        var _classPrivateFieldGet6 = _classPrivateFieldGet(this, _patternList),
+        var _classPrivateFieldGet6 = (0,classPrivateFieldGet/* default */.Z)(this, _patternList),
           _classPrivateFieldGet7 = _toArray(_classPrivateFieldGet6),
           _p = _classPrivateFieldGet7[0],
           _prest = _classPrivateFieldGet7.slice(1);
-        var _classPrivateFieldGet8 = _classPrivateFieldGet(this, _globList),
+        var _classPrivateFieldGet8 = (0,classPrivateFieldGet/* default */.Z)(this, _globList),
           _classPrivateFieldGet9 = _toArray(_classPrivateFieldGet8),
           _g = _classPrivateFieldGet9[0],
           _grest = _classPrivateFieldGet9.slice(1);
@@ -24107,19 +25840,19 @@ var Pattern = /*#__PURE__*/function () {
         }
         var _p2 = _p + '/';
         var _g2 = _g + '/';
-        _classPrivateFieldSet(this, _patternList, [_p2].concat(toConsumableArray_toConsumableArray(_prest)));
-        _classPrivateFieldSet(this, _globList, [_g2].concat(toConsumableArray_toConsumableArray(_grest)));
-        this.length = _classPrivateFieldGet(this, _patternList).length;
+        (0,classPrivateFieldSet/* default */.Z)(this, _patternList, [_p2].concat((0,toConsumableArray/* default */.Z)(_prest)));
+        (0,classPrivateFieldSet/* default */.Z)(this, _globList, [_g2].concat((0,toConsumableArray/* default */.Z)(_grest)));
+        this.length = (0,classPrivateFieldGet/* default */.Z)(this, _patternList).length;
       }
     }
   }
   /**
    * The first entry in the parsed list of patterns
    */
-  _createClass(Pattern, [{
+  (0,createClass/* default */.Z)(Pattern, [{
     key: "pattern",
     value: function pattern() {
-      return _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)];
+      return (0,classPrivateFieldGet/* default */.Z)(this, _patternList)[(0,classPrivateFieldGet/* default */.Z)(this, _index)];
     }
     /**
      * true of if pattern() returns a string
@@ -24127,7 +25860,7 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "isString",
     value: function isString() {
-      return typeof _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)] === 'string';
+      return typeof (0,classPrivateFieldGet/* default */.Z)(this, _patternList)[(0,classPrivateFieldGet/* default */.Z)(this, _index)] === 'string';
     }
     /**
      * true of if pattern() returns GLOBSTAR
@@ -24135,7 +25868,7 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "isGlobstar",
     value: function isGlobstar() {
-      return _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)] === GLOBSTAR;
+      return (0,classPrivateFieldGet/* default */.Z)(this, _patternList)[(0,classPrivateFieldGet/* default */.Z)(this, _index)] === GLOBSTAR;
     }
     /**
      * true if pattern() returns a regexp
@@ -24143,7 +25876,7 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "isRegExp",
     value: function isRegExp() {
-      return _classPrivateFieldGet(this, _patternList)[_classPrivateFieldGet(this, _index)] instanceof RegExp;
+      return (0,classPrivateFieldGet/* default */.Z)(this, _patternList)[(0,classPrivateFieldGet/* default */.Z)(this, _index)] instanceof RegExp;
     }
     /**
      * The /-joined set of glob parts that make up this pattern
@@ -24151,7 +25884,7 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "globString",
     value: function globString() {
-      return _classPrivateFieldSet(this, _globString, _classPrivateFieldGet(this, _globString) || (_classPrivateFieldGet(this, _index) === 0 ? this.isAbsolute() ? _classPrivateFieldGet(this, _globList)[0] + _classPrivateFieldGet(this, _globList).slice(1).join('/') : _classPrivateFieldGet(this, _globList).join('/') : _classPrivateFieldGet(this, _globList).slice(_classPrivateFieldGet(this, _index)).join('/')));
+      return (0,classPrivateFieldSet/* default */.Z)(this, _globString, (0,classPrivateFieldGet/* default */.Z)(this, _globString) || ((0,classPrivateFieldGet/* default */.Z)(this, _index) === 0 ? this.isAbsolute() ? (0,classPrivateFieldGet/* default */.Z)(this, _globList)[0] + (0,classPrivateFieldGet/* default */.Z)(this, _globList).slice(1).join('/') : (0,classPrivateFieldGet/* default */.Z)(this, _globList).join('/') : (0,classPrivateFieldGet/* default */.Z)(this, _globList).slice((0,classPrivateFieldGet/* default */.Z)(this, _index)).join('/')));
     }
     /**
      * true if there are more pattern parts after this one
@@ -24159,7 +25892,7 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "hasMore",
     value: function hasMore() {
-      return this.length > _classPrivateFieldGet(this, _index) + 1;
+      return this.length > (0,classPrivateFieldGet/* default */.Z)(this, _index) + 1;
     }
     /**
      * The rest of the pattern after this part, or null if this is the end
@@ -24167,13 +25900,13 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "rest",
     value: function rest() {
-      if (_classPrivateFieldGet(this, _rest) !== undefined) return _classPrivateFieldGet(this, _rest);
-      if (!this.hasMore()) return _classPrivateFieldSet(this, _rest, null);
-      _classPrivateFieldSet(this, _rest, new Pattern(_classPrivateFieldGet(this, _patternList), _classPrivateFieldGet(this, _globList), _classPrivateFieldGet(this, _index) + 1, _classPrivateFieldGet(this, _platform)));
-      _classPrivateFieldSet(_classPrivateFieldGet(this, _rest), _isAbsolute, _classPrivateFieldGet(this, _isAbsolute));
-      _classPrivateFieldSet(_classPrivateFieldGet(this, _rest), _isUNC, _classPrivateFieldGet(this, _isUNC));
-      _classPrivateFieldSet(_classPrivateFieldGet(this, _rest), _isDrive, _classPrivateFieldGet(this, _isDrive));
-      return _classPrivateFieldGet(this, _rest);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _rest) !== undefined) return (0,classPrivateFieldGet/* default */.Z)(this, _rest);
+      if (!this.hasMore()) return (0,classPrivateFieldSet/* default */.Z)(this, _rest, null);
+      (0,classPrivateFieldSet/* default */.Z)(this, _rest, new Pattern((0,classPrivateFieldGet/* default */.Z)(this, _patternList), (0,classPrivateFieldGet/* default */.Z)(this, _globList), (0,classPrivateFieldGet/* default */.Z)(this, _index) + 1, (0,classPrivateFieldGet/* default */.Z)(this, _platform)));
+      (0,classPrivateFieldSet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _rest), _isAbsolute, (0,classPrivateFieldGet/* default */.Z)(this, _isAbsolute));
+      (0,classPrivateFieldSet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _rest), _isUNC, (0,classPrivateFieldGet/* default */.Z)(this, _isUNC));
+      (0,classPrivateFieldSet/* default */.Z)((0,classPrivateFieldGet/* default */.Z)(this, _rest), _isDrive, (0,classPrivateFieldGet/* default */.Z)(this, _isDrive));
+      return (0,classPrivateFieldGet/* default */.Z)(this, _rest);
     }
     /**
      * true if the pattern represents a //unc/path/ on windows
@@ -24181,8 +25914,8 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "isUNC",
     value: function isUNC() {
-      var pl = _classPrivateFieldGet(this, _patternList);
-      return _classPrivateFieldGet(this, _isUNC) !== undefined ? _classPrivateFieldGet(this, _isUNC) : _classPrivateFieldSet(this, _isUNC, _classPrivateFieldGet(this, _platform) === 'win32' && _classPrivateFieldGet(this, _index) === 0 && pl[0] === '' && pl[1] === '' && typeof pl[2] === 'string' && !!pl[2] && typeof pl[3] === 'string' && !!pl[3]);
+      var pl = (0,classPrivateFieldGet/* default */.Z)(this, _patternList);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _isUNC) !== undefined ? (0,classPrivateFieldGet/* default */.Z)(this, _isUNC) : (0,classPrivateFieldSet/* default */.Z)(this, _isUNC, (0,classPrivateFieldGet/* default */.Z)(this, _platform) === 'win32' && (0,classPrivateFieldGet/* default */.Z)(this, _index) === 0 && pl[0] === '' && pl[1] === '' && typeof pl[2] === 'string' && !!pl[2] && typeof pl[3] === 'string' && !!pl[3]);
     }
     // pattern like C:/...
     // split = ['C:', ...]
@@ -24195,8 +25928,8 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "isDrive",
     value: function isDrive() {
-      var pl = _classPrivateFieldGet(this, _patternList);
-      return _classPrivateFieldGet(this, _isDrive) !== undefined ? _classPrivateFieldGet(this, _isDrive) : _classPrivateFieldSet(this, _isDrive, _classPrivateFieldGet(this, _platform) === 'win32' && _classPrivateFieldGet(this, _index) === 0 && this.length > 1 && typeof pl[0] === 'string' && /^[a-z]:$/i.test(pl[0]));
+      var pl = (0,classPrivateFieldGet/* default */.Z)(this, _patternList);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _isDrive) !== undefined ? (0,classPrivateFieldGet/* default */.Z)(this, _isDrive) : (0,classPrivateFieldSet/* default */.Z)(this, _isDrive, (0,classPrivateFieldGet/* default */.Z)(this, _platform) === 'win32' && (0,classPrivateFieldGet/* default */.Z)(this, _index) === 0 && this.length > 1 && typeof pl[0] === 'string' && /^[a-z]:$/i.test(pl[0]));
     }
     // pattern = '/' or '/...' or '/x/...'
     // split = ['', ''] or ['', ...] or ['', 'x', ...]
@@ -24207,8 +25940,8 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "isAbsolute",
     value: function isAbsolute() {
-      var pl = _classPrivateFieldGet(this, _patternList);
-      return _classPrivateFieldGet(this, _isAbsolute) !== undefined ? _classPrivateFieldGet(this, _isAbsolute) : _classPrivateFieldSet(this, _isAbsolute, pl[0] === '' && pl.length > 1 || this.isDrive() || this.isUNC());
+      var pl = (0,classPrivateFieldGet/* default */.Z)(this, _patternList);
+      return (0,classPrivateFieldGet/* default */.Z)(this, _isAbsolute) !== undefined ? (0,classPrivateFieldGet/* default */.Z)(this, _isAbsolute) : (0,classPrivateFieldSet/* default */.Z)(this, _isAbsolute, pl[0] === '' && pl.length > 1 || this.isDrive() || this.isUNC());
     }
     /**
      * consume the root of the pattern, and return it
@@ -24216,8 +25949,8 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "root",
     value: function root() {
-      var p = _classPrivateFieldGet(this, _patternList)[0];
-      return typeof p === 'string' && this.isAbsolute() && _classPrivateFieldGet(this, _index) === 0 ? p : '';
+      var p = (0,classPrivateFieldGet/* default */.Z)(this, _patternList)[0];
+      return typeof p === 'string' && this.isAbsolute() && (0,classPrivateFieldGet/* default */.Z)(this, _index) === 0 ? p : '';
     }
     /**
      * Check to see if the current globstar pattern is allowed to follow
@@ -24226,7 +25959,7 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "checkFollowGlobstar",
     value: function checkFollowGlobstar() {
-      return !(_classPrivateFieldGet(this, _index) === 0 || !this.isGlobstar() || !_classPrivateFieldGet(this, _followGlobstar));
+      return !((0,classPrivateFieldGet/* default */.Z)(this, _index) === 0 || !this.isGlobstar() || !(0,classPrivateFieldGet/* default */.Z)(this, _followGlobstar));
     }
     /**
      * Mark that the current globstar pattern is following a symbolic link
@@ -24234,8 +25967,8 @@ var Pattern = /*#__PURE__*/function () {
   }, {
     key: "markFollowGlobstar",
     value: function markFollowGlobstar() {
-      if (_classPrivateFieldGet(this, _index) === 0 || !this.isGlobstar() || !_classPrivateFieldGet(this, _followGlobstar)) return false;
-      _classPrivateFieldSet(this, _followGlobstar, false);
+      if ((0,classPrivateFieldGet/* default */.Z)(this, _index) === 0 || !this.isGlobstar() || !(0,classPrivateFieldGet/* default */.Z)(this, _followGlobstar)) return false;
+      (0,classPrivateFieldSet/* default */.Z)(this, _followGlobstar, false);
       return true;
     }
   }]);
@@ -24337,7 +26070,7 @@ var mjs_isArrayBufferView = function isArrayBufferView(b) {
  */
 var mjs_Pipe = /*#__PURE__*/function () {
   function Pipe(src, dest, opts) {
-    _classCallCheck(this, Pipe);
+    (0,classCallCheck/* default */.Z)(this, Pipe);
     _defineProperty(this, "src", void 0);
     _defineProperty(this, "dest", void 0);
     _defineProperty(this, "opts", void 0);
@@ -24350,7 +26083,7 @@ var mjs_Pipe = /*#__PURE__*/function () {
     };
     this.dest.on('drain', this.ondrain);
   }
-  _createClass(Pipe, [{
+  (0,createClass/* default */.Z)(Pipe, [{
     key: "unpipe",
     value: function unpipe() {
       this.dest.removeListener('drain', this.ondrain);
@@ -24377,11 +26110,11 @@ var mjs_Pipe = /*#__PURE__*/function () {
  * @internal
  */
 var mjs_PipeProxyErrors = /*#__PURE__*/function (_Pipe) {
-  _inherits(PipeProxyErrors, _Pipe);
-  var _super = _createSuper(PipeProxyErrors);
+  (0,inherits/* default */.Z)(PipeProxyErrors, _Pipe);
+  var _super = (0,createSuper/* default */.Z)(PipeProxyErrors);
   function PipeProxyErrors(src, dest, opts) {
     var _this;
-    _classCallCheck(this, PipeProxyErrors);
+    (0,classCallCheck/* default */.Z)(this, PipeProxyErrors);
     _this = _super.call(this, src, dest, opts);
     _this.proxyErrors = function (er) {
       return dest.emit('error', er);
@@ -24389,11 +26122,11 @@ var mjs_PipeProxyErrors = /*#__PURE__*/function (_Pipe) {
     src.on('error', _this.proxyErrors);
     return _this;
   }
-  _createClass(PipeProxyErrors, [{
+  (0,createClass/* default */.Z)(PipeProxyErrors, [{
     key: "unpipe",
     value: function unpipe() {
       this.src.removeListener('error', this.proxyErrors);
-      _get(_getPrototypeOf(PipeProxyErrors.prototype), "unpipe", this).call(this);
+      _get((0,getPrototypeOf/* default */.Z)(PipeProxyErrors.prototype), "unpipe", this).call(this);
     }
   }]);
   return PipeProxyErrors;
@@ -24418,8 +26151,8 @@ var isEncodingOptions = function isEncodingOptions(o) {
 mjs_Symbol$asyncIterator = Symbol.asyncIterator;
 dist_mjs_Symbol$iterator = Symbol.iterator;
 var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
-  _inherits(Minipass, _EventEmitter);
-  var _super2 = _createSuper(Minipass);
+  (0,inherits/* default */.Z)(Minipass, _EventEmitter);
+  var _super2 = (0,createSuper/* default */.Z)(Minipass);
   /**
    * true if the stream can be written
    */
@@ -24436,30 +26169,30 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
    */
   function Minipass() {
     var _this2;
-    _classCallCheck(this, Minipass);
+    (0,classCallCheck/* default */.Z)(this, Minipass);
     var options = (arguments.length <= 0 ? undefined : arguments[0]) || {};
     _this2 = _super2.call(this);
-    _defineProperty(_assertThisInitialized(_this2), mjs_FLOWING, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_PAUSED, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_PIPES, []);
-    _defineProperty(_assertThisInitialized(_this2), mjs_BUFFER, []);
-    _defineProperty(_assertThisInitialized(_this2), mjs_OBJECTMODE, void 0);
-    _defineProperty(_assertThisInitialized(_this2), mjs_ENCODING, void 0);
-    _defineProperty(_assertThisInitialized(_this2), mjs_ASYNC, void 0);
-    _defineProperty(_assertThisInitialized(_this2), mjs_DECODER, void 0);
-    _defineProperty(_assertThisInitialized(_this2), mjs_EOF, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_EMITTED_END, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_EMITTING_END, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_CLOSED, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_EMITTED_ERROR, null);
-    _defineProperty(_assertThisInitialized(_this2), mjs_BUFFERLENGTH, 0);
-    _defineProperty(_assertThisInitialized(_this2), mjs_DESTROYED, false);
-    _defineProperty(_assertThisInitialized(_this2), mjs_SIGNAL, void 0);
-    _defineProperty(_assertThisInitialized(_this2), mjs_ABORTED, false);
-    _defineProperty(_assertThisInitialized(_this2), DATALISTENERS, 0);
-    _defineProperty(_assertThisInitialized(_this2), DISCARDED, false);
-    _defineProperty(_assertThisInitialized(_this2), "writable", true);
-    _defineProperty(_assertThisInitialized(_this2), "readable", true);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_FLOWING, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_PAUSED, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_PIPES, []);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_BUFFER, []);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_OBJECTMODE, void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_ENCODING, void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_ASYNC, void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_DECODER, void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_EOF, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_EMITTED_END, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_EMITTING_END, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_CLOSED, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_EMITTED_ERROR, null);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_BUFFERLENGTH, 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_DESTROYED, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_SIGNAL, void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), mjs_ABORTED, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), DATALISTENERS, 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), DISCARDED, false);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), "writable", true);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this2), "readable", true);
     if (options.objectMode && typeof options.encoding === 'string') {
       throw new TypeError('Encoding and objectMode may not be used together');
     }
@@ -24477,7 +26210,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
     _this2[mjs_DECODER] = _this2[mjs_ENCODING] ? new external_string_decoder_namespaceObject.StringDecoder(_this2[mjs_ENCODING]) : null;
     //@ts-ignore - private option for debugging and testing
     if (options && options.debugExposeBuffer === true) {
-      Object.defineProperty(_assertThisInitialized(_this2), 'buffer', {
+      Object.defineProperty((0,assertThisInitialized/* default */.Z)(_this2), 'buffer', {
         get: function get() {
           return _this2[mjs_BUFFER];
         }
@@ -24485,7 +26218,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
     }
     //@ts-ignore - private option for debugging and testing
     if (options && options.debugExposePipes === true) {
-      Object.defineProperty(_assertThisInitialized(_this2), 'pipes', {
+      Object.defineProperty((0,assertThisInitialized/* default */.Z)(_this2), 'pipes', {
         get: function get() {
           return _this2[mjs_PIPES];
         }
@@ -24513,7 +26246,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
    * For objectMode streams, this is a count of the items waiting to be
    * emitted.
    */
-  _createClass(Minipass, [{
+  (0,createClass/* default */.Z)(Minipass, [{
     key: "bufferLength",
     get: function get() {
       return this[mjs_BUFFERLENGTH];
@@ -24908,7 +26641,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
     key: "on",
     value: function on(ev, handler) {
       var _this4 = this;
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "on", this).call(this, ev, handler);
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "on", this).call(this, ev, handler);
       if (ev === 'data') {
         this[DISCARDED] = false;
         this[DATALISTENERS]++;
@@ -24916,9 +26649,9 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
           this[mjs_RESUME]();
         }
       } else if (ev === 'readable' && this[mjs_BUFFERLENGTH] !== 0) {
-        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'readable');
+        _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'readable');
       } else if (mjs_isEndish(ev) && this[mjs_EMITTED_END]) {
-        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, ev);
         this.removeAllListeners(ev);
       } else if (ev === 'error' && this[mjs_EMITTED_ERROR]) {
         var h = handler;
@@ -24947,7 +26680,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "off",
     value: function off(ev, handler) {
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "off", this).call(this, ev, handler);
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "off", this).call(this, ev, handler);
       // if we previously had listeners, and now we don't, and we don't
       // have any pipes, then stop the flow, unless it's been explicitly
       // put in a discarded flowing state via stream.resume().
@@ -24970,7 +26703,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "removeAllListeners",
     value: function removeAllListeners(ev) {
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "removeAllListeners", this).call(this, ev);
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "removeAllListeners", this).call(this, ev);
       if (ev === 'data' || ev === undefined) {
         this[DATALISTENERS] = 0;
         if (!this[DISCARDED] && !this[mjs_PIPES].length) {
@@ -25045,33 +26778,33 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
         this[mjs_CLOSED] = true;
         // don't emit close before 'end' and 'finish'
         if (!this[mjs_EMITTED_END] && !this[mjs_DESTROYED]) return false;
-        var _ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'close');
+        var _ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'close');
         this.removeAllListeners('close');
         return _ret;
       } else if (ev === 'error') {
         this[mjs_EMITTED_ERROR] = data;
-        _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, mjs_ERROR, data);
-        var _ret2 = !this[mjs_SIGNAL] || this.listeners('error').length ? _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'error', data) : false;
+        _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, mjs_ERROR, data);
+        var _ret2 = !this[mjs_SIGNAL] || this.listeners('error').length ? _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'error', data) : false;
         this[mjs_MAYBE_EMIT_END]();
         return _ret2;
       } else if (ev === 'resume') {
-        var _ret3 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'resume');
+        var _ret3 = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'resume');
         this[mjs_MAYBE_EMIT_END]();
         return _ret3;
       } else if (ev === 'finish' || ev === 'prefinish') {
-        var _ret4 = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, ev);
+        var _ret4 = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, ev);
         this.removeAllListeners(ev);
         return _ret4;
       }
       // Some other unknown event
-      var ret = (_get2 = _get(_getPrototypeOf(Minipass.prototype), "emit", this)).call.apply(_get2, [this, ev].concat(args));
+      var ret = (_get2 = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this)).call.apply(_get2, [this, ev].concat(args));
       this[mjs_MAYBE_EMIT_END]();
       return ret;
     }
   }, {
     key: mjs_EMITDATA,
     value: function value(data) {
-      var _iterator = _createForOfIteratorHelper(this[mjs_PIPES]),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(this[mjs_PIPES]),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -25083,7 +26816,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
       } finally {
         _iterator.f();
       }
-      var ret = this[DISCARDED] ? false : _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+      var ret = this[DISCARDED] ? false : _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'data', data);
       this[mjs_MAYBE_EMIT_END]();
       return ret;
     }
@@ -25104,7 +26837,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
       if (this[mjs_DECODER]) {
         var data = this[mjs_DECODER].end();
         if (data) {
-          var _iterator2 = _createForOfIteratorHelper(this[mjs_PIPES]),
+          var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(this[mjs_PIPES]),
             _step2;
           try {
             for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -25116,10 +26849,10 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
           } finally {
             _iterator2.f();
           }
-          if (!this[DISCARDED]) _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'data', data);
+          if (!this[DISCARDED]) _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'data', data);
         }
       }
-      var _iterator3 = _createForOfIteratorHelper(this[mjs_PIPES]),
+      var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(this[mjs_PIPES]),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -25131,7 +26864,7 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
       } finally {
         _iterator3.f();
       }
-      var ret = _get(_getPrototypeOf(Minipass.prototype), "emit", this).call(this, 'end');
+      var ret = _get((0,getPrototypeOf/* default */.Z)(Minipass.prototype), "emit", this).call(this, 'end');
       this.removeAllListeners('end');
       return ret;
     }
@@ -25142,10 +26875,10 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "collect",
     value: function () {
-      var _collect = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
+      var _collect = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee() {
         var _this7 = this;
         var buf, p;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               buf = Object.assign([], {
@@ -25183,9 +26916,9 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "concat",
     value: function () {
-      var _concat = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2() {
+      var _concat = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2() {
         var buf;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               if (!this[mjs_OBJECTMODE]) {
@@ -25216,9 +26949,9 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
   }, {
     key: "promise",
     value: function () {
-      var _promise = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _promise = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3() {
         var _this8 = this;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               return _context3.abrupt("return", new Promise(function (resolve, reject) {
@@ -25257,8 +26990,8 @@ var mjs_Minipass = /*#__PURE__*/function (_EventEmitter) {
       this[DISCARDED] = false;
       var stopped = false;
       var stop = /*#__PURE__*/function () {
-        var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee4() {
-          return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+        var _ref = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee4() {
+          return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee4$(_context4) {
             while (1) switch (_context4.prev = _context4.next) {
               case 0:
                 _this9.pause();
@@ -25447,7 +27180,7 @@ var Ignore = /*#__PURE__*/function () {
       noglobstar = _ref.noglobstar,
       _ref$platform = _ref.platform,
       platform = _ref$platform === void 0 ? ignore_defaultPlatform : _ref$platform;
-    _classCallCheck(this, Ignore);
+    (0,classCallCheck/* default */.Z)(this, Ignore);
     _defineProperty(this, "relative", void 0);
     _defineProperty(this, "relativeChildren", void 0);
     _defineProperty(this, "absolute", void 0);
@@ -25479,7 +27212,7 @@ var Ignore = /*#__PURE__*/function () {
     // for absolute-ness.
     // Yet another way, Minimatch could take an array of glob strings, and
     // a cwd option, and do the right thing.
-    var _iterator = _createForOfIteratorHelper(ignored),
+    var _iterator = (0,createForOfIteratorHelper/* default */.Z)(ignored),
       _step;
     try {
       for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -25509,14 +27242,14 @@ var Ignore = /*#__PURE__*/function () {
       _iterator.f();
     }
   }
-  _createClass(Ignore, [{
+  (0,createClass/* default */.Z)(Ignore, [{
     key: "ignored",
     value: function ignored(p) {
       var fullpath = p.fullpath();
       var fullpaths = "".concat(fullpath, "/");
       var relative = p.relative() || '.';
       var relatives = "".concat(relative, "/");
-      var _iterator2 = _createForOfIteratorHelper(this.relative),
+      var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(this.relative),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
@@ -25528,7 +27261,7 @@ var Ignore = /*#__PURE__*/function () {
       } finally {
         _iterator2.f();
       }
-      var _iterator3 = _createForOfIteratorHelper(this.absolute),
+      var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(this.absolute),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -25547,7 +27280,7 @@ var Ignore = /*#__PURE__*/function () {
     value: function childrenIgnored(p) {
       var fullpath = p.fullpath() + '/';
       var relative = (p.relative() || '.') + '/';
-      var _iterator4 = _createForOfIteratorHelper(this.relativeChildren),
+      var _iterator4 = (0,createForOfIteratorHelper/* default */.Z)(this.relativeChildren),
         _step4;
       try {
         for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
@@ -25559,7 +27292,7 @@ var Ignore = /*#__PURE__*/function () {
       } finally {
         _iterator4.f();
       }
-      var _iterator5 = _createForOfIteratorHelper(this.absoluteChildren),
+      var _iterator5 = (0,createForOfIteratorHelper/* default */.Z)(this.absoluteChildren),
         _step5;
       try {
         for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
@@ -25591,11 +27324,11 @@ var Ignore = /*#__PURE__*/function () {
 var HasWalkedCache = /*#__PURE__*/function () {
   function HasWalkedCache() {
     var store = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Map();
-    _classCallCheck(this, HasWalkedCache);
+    (0,classCallCheck/* default */.Z)(this, HasWalkedCache);
     _defineProperty(this, "store", void 0);
     this.store = store;
   }
-  _createClass(HasWalkedCache, [{
+  (0,createClass/* default */.Z)(HasWalkedCache, [{
     key: "copy",
     value: function copy() {
       return new HasWalkedCache(new Map(this.store));
@@ -25623,10 +27356,10 @@ var HasWalkedCache = /*#__PURE__*/function () {
  */
 var MatchRecord = /*#__PURE__*/function () {
   function MatchRecord() {
-    _classCallCheck(this, MatchRecord);
+    (0,classCallCheck/* default */.Z)(this, MatchRecord);
     _defineProperty(this, "store", new Map());
   }
-  _createClass(MatchRecord, [{
+  (0,createClass/* default */.Z)(MatchRecord, [{
     key: "add",
     value: function add(target, absolute, ifDir) {
       var n = (absolute ? 2 : 0) | (ifDir ? 1 : 0);
@@ -25637,8 +27370,8 @@ var MatchRecord = /*#__PURE__*/function () {
   }, {
     key: "entries",
     value: function entries() {
-      return toConsumableArray_toConsumableArray(this.store.entries()).map(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
+      return (0,toConsumableArray/* default */.Z)(this.store.entries()).map(function (_ref) {
+        var _ref2 = (0,slicedToArray/* default */.Z)(_ref, 2),
           path = _ref2[0],
           n = _ref2[1];
         return [path, !!(n & 2), !!(n & 1)];
@@ -25653,10 +27386,10 @@ var MatchRecord = /*#__PURE__*/function () {
  */
 var SubWalks = /*#__PURE__*/function () {
   function SubWalks() {
-    _classCallCheck(this, SubWalks);
+    (0,classCallCheck/* default */.Z)(this, SubWalks);
     _defineProperty(this, "store", new Map());
   }
-  _createClass(SubWalks, [{
+  (0,createClass/* default */.Z)(SubWalks, [{
     key: "add",
     value: function add(target, pattern) {
       if (!target.canReaddir()) {
@@ -25693,7 +27426,7 @@ var SubWalks = /*#__PURE__*/function () {
   }, {
     key: "keys",
     value: function keys() {
-      return toConsumableArray_toConsumableArray(this.store.keys()).filter(function (t) {
+      return (0,toConsumableArray/* default */.Z)(this.store.keys()).filter(function (t) {
         return t.canReaddir();
       });
     }
@@ -25708,7 +27441,7 @@ var SubWalks = /*#__PURE__*/function () {
  */
 var Processor = /*#__PURE__*/function () {
   function Processor(opts, hasWalkedCache) {
-    _classCallCheck(this, Processor);
+    (0,classCallCheck/* default */.Z)(this, Processor);
     _defineProperty(this, "hasWalkedCache", void 0);
     _defineProperty(this, "matches", new MatchRecord());
     _defineProperty(this, "subwalks", new SubWalks());
@@ -25721,7 +27454,7 @@ var Processor = /*#__PURE__*/function () {
     this.dot = !!opts.dot;
     this.hasWalkedCache = hasWalkedCache ? hasWalkedCache.copy() : new HasWalkedCache();
   }
-  _createClass(Processor, [{
+  (0,createClass/* default */.Z)(Processor, [{
     key: "processPatterns",
     value: function processPatterns(target, patterns) {
       this.patterns = patterns;
@@ -25730,11 +27463,11 @@ var Processor = /*#__PURE__*/function () {
       });
       // map of paths to the magic-starting subwalks they need to walk
       // first item in patterns is the filter
-      var _iterator = _createForOfIteratorHelper(processingSet),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(processingSet),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _step$value = _slicedToArray(_step.value, 2),
+          var _step$value = (0,slicedToArray/* default */.Z)(_step.value, 2),
             t = _step$value[0],
             pattern = _step$value[1];
           this.hasWalkedCache.storeWalked(t, pattern);
@@ -25835,12 +27568,12 @@ var Processor = /*#__PURE__*/function () {
       var patterns = this.subwalks.get(parent);
       // put matches and entry walks into the results processor
       var results = this.child();
-      var _iterator2 = _createForOfIteratorHelper(entries),
+      var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(entries),
         _step2;
       try {
         for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
           var e = _step2.value;
-          var _iterator3 = _createForOfIteratorHelper(patterns),
+          var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(patterns),
             _step3;
           try {
             for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
@@ -25974,7 +27707,7 @@ var _childrenIgnored = /*#__PURE__*/new WeakSet();
 var GlobUtil = /*#__PURE__*/function () {
   function GlobUtil(patterns, _path, opts) {
     var _this = this;
-    _classCallCheck(this, GlobUtil);
+    (0,classCallCheck/* default */.Z)(this, GlobUtil);
     _classPrivateMethodInitSpec(this, _childrenIgnored);
     _classPrivateMethodInitSpec(this, _ignored);
     _defineProperty(this, "path", void 0);
@@ -25983,15 +27716,15 @@ var GlobUtil = /*#__PURE__*/function () {
     _defineProperty(this, "seen", new Set());
     _defineProperty(this, "paused", false);
     _defineProperty(this, "aborted", false);
-    _classPrivateFieldInitSpec(this, _onResume, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _onResume, {
       writable: true,
       value: []
     });
-    _classPrivateFieldInitSpec(this, _ignore, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _ignore, {
       writable: true,
       value: void 0
     });
-    _classPrivateFieldInitSpec(this, _sep, {
+    (0,classPrivateFieldInitSpec/* default */.Z)(this, _sep, {
       writable: true,
       value: void 0
     });
@@ -26000,9 +27733,9 @@ var GlobUtil = /*#__PURE__*/function () {
     this.patterns = patterns;
     this.path = _path;
     this.opts = opts;
-    _classPrivateFieldSet(this, _sep, !opts.posix && opts.platform === 'win32' ? '\\' : '/');
+    (0,classPrivateFieldSet/* default */.Z)(this, _sep, !opts.posix && opts.platform === 'win32' ? '\\' : '/');
     if (opts.ignore) {
-      _classPrivateFieldSet(this, _ignore, makeIgnore(opts.ignore, opts));
+      (0,classPrivateFieldSet/* default */.Z)(this, _ignore, makeIgnore(opts.ignore, opts));
     }
     // ignore, always set with maxDepth, but it's optional on the
     // GlobOptions type
@@ -26012,11 +27745,11 @@ var GlobUtil = /*#__PURE__*/function () {
     if (opts.signal) {
       this.signal = opts.signal;
       this.signal.addEventListener('abort', function () {
-        _classPrivateFieldGet(_this, _onResume).length = 0;
+        (0,classPrivateFieldGet/* default */.Z)(_this, _onResume).length = 0;
       });
     }
   }
-  _createClass(GlobUtil, [{
+  (0,createClass/* default */.Z)(GlobUtil, [{
     key: "pause",
     value:
     // backpressure mechanism
@@ -26032,7 +27765,7 @@ var GlobUtil = /*#__PURE__*/function () {
       /* c8 ignore stop */
       this.paused = false;
       var fn = undefined;
-      while (!this.paused && (fn = _classPrivateFieldGet(this, _onResume).shift())) {
+      while (!this.paused && (fn = (0,classPrivateFieldGet/* default */.Z)(this, _onResume).shift())) {
         fn();
       }
     }
@@ -26046,7 +27779,7 @@ var GlobUtil = /*#__PURE__*/function () {
         fn();
       } else {
         /* c8 ignore stop */
-        _classPrivateFieldGet(this, _onResume).push(fn);
+        (0,classPrivateFieldGet/* default */.Z)(this, _onResume).push(fn);
       }
     }
     // do the requisite realpath/stat checking, and return the path
@@ -26054,9 +27787,9 @@ var GlobUtil = /*#__PURE__*/function () {
   }, {
     key: "matchCheck",
     value: function () {
-      var _matchCheck = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(e, ifDir) {
+      var _matchCheck = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(e, ifDir) {
         var rpc, needStat;
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
               if (!(ifDir && this.opts.nodir)) {
@@ -26141,7 +27874,7 @@ var GlobUtil = /*#__PURE__*/function () {
       if (_classPrivateMethodGet(this, _ignored, _ignored2).call(this, e)) return;
       var abs = this.opts.absolute === undefined ? absolute : this.opts.absolute;
       this.seen.add(e);
-      var mark = this.opts.mark && e.isDirectory() ? _classPrivateFieldGet(this, _sep) : '';
+      var mark = this.opts.mark && e.isDirectory() ? (0,classPrivateFieldGet/* default */.Z)(this, _sep) : '';
       // ok, we have what we need!
       if (this.opts.withFileTypes) {
         this.matchEmit(e);
@@ -26150,16 +27883,16 @@ var GlobUtil = /*#__PURE__*/function () {
         this.matchEmit(_abs + mark);
       } else {
         var rel = this.opts.posix ? e.relativePosix() : e.relative();
-        var pre = this.opts.dotRelative && !rel.startsWith('..' + _classPrivateFieldGet(this, _sep)) ? '.' + _classPrivateFieldGet(this, _sep) : '';
+        var pre = this.opts.dotRelative && !rel.startsWith('..' + (0,classPrivateFieldGet/* default */.Z)(this, _sep)) ? '.' + (0,classPrivateFieldGet/* default */.Z)(this, _sep) : '';
         this.matchEmit(!rel ? '.' + mark : pre + rel + mark);
       }
     }
   }, {
     key: "match",
     value: function () {
-      var _match = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(e, absolute, ifDir) {
+      var _match = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2(e, absolute, ifDir) {
         var p;
-        return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
           while (1) switch (_context2.prev = _context2.next) {
             case 0:
               _context2.next = 2;
@@ -26214,11 +27947,11 @@ var GlobUtil = /*#__PURE__*/function () {
       var next = function next() {
         if (--tasks === 0) cb();
       };
-      var _iterator = _createForOfIteratorHelper(processor.matches.entries()),
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(processor.matches.entries()),
         _step;
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
-          var _step$value = _slicedToArray(_step.value, 3),
+          var _step$value = (0,slicedToArray/* default */.Z)(_step.value, 3),
             m = _step$value[0],
             absolute = _step$value[1],
             ifDir = _step$value[2];
@@ -26233,7 +27966,7 @@ var GlobUtil = /*#__PURE__*/function () {
       } finally {
         _iterator.f();
       }
-      var _iterator2 = _createForOfIteratorHelper(processor.subwalkTargets()),
+      var _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(processor.subwalkTargets()),
         _step2;
       try {
         var _loop = function _loop() {
@@ -26268,11 +28001,11 @@ var GlobUtil = /*#__PURE__*/function () {
       var next = function next() {
         if (--tasks === 0) cb();
       };
-      var _iterator3 = _createForOfIteratorHelper(processor.matches.entries()),
+      var _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(processor.matches.entries()),
         _step3;
       try {
         for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
-          var _step3$value = _slicedToArray(_step3.value, 3),
+          var _step3$value = (0,slicedToArray/* default */.Z)(_step3.value, 3),
             m = _step3$value[0],
             absolute = _step3$value[1],
             ifDir = _step3$value[2];
@@ -26287,11 +28020,11 @@ var GlobUtil = /*#__PURE__*/function () {
       } finally {
         _iterator3.f();
       }
-      var _iterator4 = _createForOfIteratorHelper(processor.subwalks.entries()),
+      var _iterator4 = (0,createForOfIteratorHelper/* default */.Z)(processor.subwalks.entries()),
         _step4;
       try {
         for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
-          var _step4$value = _slicedToArray(_step4.value, 2),
+          var _step4$value = (0,slicedToArray/* default */.Z)(_step4.value, 2),
             _target = _step4$value[0],
             patterns = _step4$value[1];
           tasks++;
@@ -26334,11 +28067,11 @@ var GlobUtil = /*#__PURE__*/function () {
       var next = function next() {
         if (--tasks === 0) cb();
       };
-      var _iterator5 = _createForOfIteratorHelper(processor.matches.entries()),
+      var _iterator5 = (0,createForOfIteratorHelper/* default */.Z)(processor.matches.entries()),
         _step5;
       try {
         for (_iterator5.s(); !(_step5 = _iterator5.n()).done;) {
-          var _step5$value = _slicedToArray(_step5.value, 3),
+          var _step5$value = (0,slicedToArray/* default */.Z)(_step5.value, 3),
             m = _step5$value[0],
             absolute = _step5$value[1],
             ifDir = _step5$value[2];
@@ -26350,7 +28083,7 @@ var GlobUtil = /*#__PURE__*/function () {
       } finally {
         _iterator5.f();
       }
-      var _iterator6 = _createForOfIteratorHelper(processor.subwalkTargets()),
+      var _iterator6 = (0,createForOfIteratorHelper/* default */.Z)(processor.subwalkTargets()),
         _step6;
       try {
         for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
@@ -26377,11 +28110,11 @@ var GlobUtil = /*#__PURE__*/function () {
       var next = function next() {
         if (--tasks === 0) cb();
       };
-      var _iterator7 = _createForOfIteratorHelper(processor.matches.entries()),
+      var _iterator7 = (0,createForOfIteratorHelper/* default */.Z)(processor.matches.entries()),
         _step7;
       try {
         for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-          var _step7$value = _slicedToArray(_step7.value, 3),
+          var _step7$value = (0,slicedToArray/* default */.Z)(_step7.value, 3),
             m = _step7$value[0],
             absolute = _step7$value[1],
             ifDir = _step7$value[2];
@@ -26393,11 +28126,11 @@ var GlobUtil = /*#__PURE__*/function () {
       } finally {
         _iterator7.f();
       }
-      var _iterator8 = _createForOfIteratorHelper(processor.subwalks.entries()),
+      var _iterator8 = (0,createForOfIteratorHelper/* default */.Z)(processor.subwalks.entries()),
         _step8;
       try {
         for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-          var _step8$value = _slicedToArray(_step8.value, 2),
+          var _step8$value = (0,slicedToArray/* default */.Z)(_step8.value, 2),
             _target2 = _step8$value[0],
             patterns = _step8$value[1];
           tasks++;
@@ -26415,24 +28148,24 @@ var GlobUtil = /*#__PURE__*/function () {
 }();
 function _ignored2(path) {
   var _classPrivateFieldGet2, _classPrivateFieldGet3;
-  return this.seen.has(path) || !!((_classPrivateFieldGet2 = _classPrivateFieldGet(this, _ignore)) !== null && _classPrivateFieldGet2 !== void 0 && (_classPrivateFieldGet3 = _classPrivateFieldGet2.ignored) !== null && _classPrivateFieldGet3 !== void 0 && _classPrivateFieldGet3.call(_classPrivateFieldGet2, path));
+  return this.seen.has(path) || !!((_classPrivateFieldGet2 = (0,classPrivateFieldGet/* default */.Z)(this, _ignore)) !== null && _classPrivateFieldGet2 !== void 0 && (_classPrivateFieldGet3 = _classPrivateFieldGet2.ignored) !== null && _classPrivateFieldGet3 !== void 0 && _classPrivateFieldGet3.call(_classPrivateFieldGet2, path));
 }
 function _childrenIgnored2(path) {
   var _classPrivateFieldGet4, _classPrivateFieldGet5;
-  return !!((_classPrivateFieldGet4 = _classPrivateFieldGet(this, _ignore)) !== null && _classPrivateFieldGet4 !== void 0 && (_classPrivateFieldGet5 = _classPrivateFieldGet4.childrenIgnored) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.call(_classPrivateFieldGet4, path));
+  return !!((_classPrivateFieldGet4 = (0,classPrivateFieldGet/* default */.Z)(this, _ignore)) !== null && _classPrivateFieldGet4 !== void 0 && (_classPrivateFieldGet5 = _classPrivateFieldGet4.childrenIgnored) !== null && _classPrivateFieldGet5 !== void 0 && _classPrivateFieldGet5.call(_classPrivateFieldGet4, path));
 }
 var GlobWalker = /*#__PURE__*/function (_GlobUtil) {
-  _inherits(GlobWalker, _GlobUtil);
-  var _super = _createSuper(GlobWalker);
+  (0,inherits/* default */.Z)(GlobWalker, _GlobUtil);
+  var _super = (0,createSuper/* default */.Z)(GlobWalker);
   function GlobWalker(patterns, path, opts) {
     var _this4;
-    _classCallCheck(this, GlobWalker);
+    (0,classCallCheck/* default */.Z)(this, GlobWalker);
     _this4 = _super.call(this, patterns, path, opts);
-    _defineProperty(_assertThisInitialized(_this4), "matches", void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this4), "matches", void 0);
     _this4.matches = new Set();
     return _this4;
   }
-  _createClass(GlobWalker, [{
+  (0,createClass/* default */.Z)(GlobWalker, [{
     key: "matchEmit",
     value: function matchEmit(e) {
       this.matches.add(e);
@@ -26440,10 +28173,10 @@ var GlobWalker = /*#__PURE__*/function (_GlobUtil) {
   }, {
     key: "walk",
     value: function () {
-      var _walk = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee3() {
+      var _walk = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3() {
         var _this$signal7,
           _this5 = this;
-        return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3) {
           while (1) switch (_context3.prev = _context3.next) {
             case 0:
               if (!((_this$signal7 = this.signal) !== null && _this$signal7 !== void 0 && _this$signal7.aborted)) {
@@ -26503,13 +28236,13 @@ var GlobWalker = /*#__PURE__*/function (_GlobUtil) {
   return GlobWalker;
 }(GlobUtil);
 var GlobStream = /*#__PURE__*/function (_GlobUtil2) {
-  _inherits(GlobStream, _GlobUtil2);
-  var _super2 = _createSuper(GlobStream);
+  (0,inherits/* default */.Z)(GlobStream, _GlobUtil2);
+  var _super2 = (0,createSuper/* default */.Z)(GlobStream);
   function GlobStream(patterns, path, opts) {
     var _this7;
-    _classCallCheck(this, GlobStream);
+    (0,classCallCheck/* default */.Z)(this, GlobStream);
     _this7 = _super2.call(this, patterns, path, opts);
-    _defineProperty(_assertThisInitialized(_this7), "results", void 0);
+    _defineProperty((0,assertThisInitialized/* default */.Z)(_this7), "results", void 0);
     _this7.results = new mjs_Minipass({
       signal: _this7.signal,
       objectMode: true
@@ -26522,7 +28255,7 @@ var GlobStream = /*#__PURE__*/function (_GlobUtil2) {
     });
     return _this7;
   }
-  _createClass(GlobStream, [{
+  (0,createClass/* default */.Z)(GlobStream, [{
     key: "matchEmit",
     value: function matchEmit(e) {
       this.results.write(e);
@@ -26607,7 +28340,7 @@ var Glob = /*#__PURE__*/function () {
    */
   function Glob(pattern, opts) {
     var _this = this;
-    _classCallCheck(this, Glob);
+    (0,classCallCheck/* default */.Z)(this, Glob);
     _defineProperty(this, "absolute", void 0);
     _defineProperty(this, "cwd", void 0);
     _defineProperty(this, "root", void 0);
@@ -26723,11 +28456,11 @@ var Glob = /*#__PURE__*/function () {
     });
     var _mms$reduce = mms.reduce(function (set, m) {
         var _set$, _set$2;
-        (_set$ = set[0]).push.apply(_set$, toConsumableArray_toConsumableArray(m.set));
-        (_set$2 = set[1]).push.apply(_set$2, toConsumableArray_toConsumableArray(m.globParts));
+        (_set$ = set[0]).push.apply(_set$, (0,toConsumableArray/* default */.Z)(m.set));
+        (_set$2 = set[1]).push.apply(_set$2, (0,toConsumableArray/* default */.Z)(m.globParts));
         return set;
       }, [[], []]),
-      _mms$reduce2 = _slicedToArray(_mms$reduce, 2),
+      _mms$reduce2 = (0,slicedToArray/* default */.Z)(_mms$reduce, 2),
       matchSet = _mms$reduce2[0],
       globParts = _mms$reduce2[1];
     this.patterns = matchSet.map(function (set, i) {
@@ -26738,14 +28471,14 @@ var Glob = /*#__PURE__*/function () {
       return new Pattern(set, g, 0, _this.platform);
     });
   }
-  _createClass(Glob, [{
+  (0,createClass/* default */.Z)(Glob, [{
     key: "walk",
     value: function () {
-      var _walk = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-        return _regeneratorRuntime().wrap(function _callee$(_context) {
+      var _walk = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee() {
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
           while (1) switch (_context.prev = _context.next) {
             case 0:
-              _context.t0 = toConsumableArray_toConsumableArray;
+              _context.t0 = toConsumableArray/* default */.Z;
               _context.next = 3;
               return new GlobWalker(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
                 maxDepth: this.maxDepth !== Infinity ? this.maxDepth + this.scurry.cwd.depth() : Infinity,
@@ -26769,7 +28502,7 @@ var Glob = /*#__PURE__*/function () {
   }, {
     key: "walkSync",
     value: function walkSync() {
-      return toConsumableArray_toConsumableArray(new GlobWalker(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
+      return (0,toConsumableArray/* default */.Z)(new GlobWalker(this.patterns, this.scurry.cwd, _objectSpread2(_objectSpread2({}, this.opts), {}, {
         maxDepth: this.maxDepth !== Infinity ? this.maxDepth + this.scurry.cwd.depth() : Infinity,
         platform: this.platform,
         nocase: this.nocase
@@ -26843,7 +28576,7 @@ var hasMagic = function hasMagic(pattern) {
   if (!Array.isArray(pattern)) {
     pattern = [pattern];
   }
-  var _iterator = _createForOfIteratorHelper(pattern),
+  var _iterator = (0,createForOfIteratorHelper/* default */.Z)(pattern),
     _step;
   try {
     for (_iterator.s(); !(_step = _iterator.n()).done;) {
@@ -26879,10 +28612,10 @@ function glob_(_x) {
   return _glob_.apply(this, arguments);
 }
 function _glob_() {
-  _glob_ = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(pattern) {
+  _glob_ = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(pattern) {
     var options,
       _args = arguments;
-    return _regeneratorRuntime().wrap(function _callee$(_context) {
+    return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           options = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
@@ -27045,8 +28778,8 @@ function index(value) {
  * Message.
  */
 var VFileMessage = /*#__PURE__*/function (_Error) {
-  _inherits(VFileMessage, _Error);
-  var _super = _createSuper(VFileMessage);
+  (0,inherits/* default */.Z)(VFileMessage, _Error);
+  var _super = (0,createSuper/* default */.Z)(VFileMessage);
   /**
    * Create a message for `reason` at `place` from `origin`.
    *
@@ -27067,7 +28800,7 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
   // To do: next major: expose `undefined` everywhere instead of `null`.
   function VFileMessage(reason, place, origin) {
     var _this;
-    _classCallCheck(this, VFileMessage);
+    (0,classCallCheck/* default */.Z)(this, VFileMessage);
     /** @type {[string | null, string | null]} */
     var parts = [null, null];
     /** @type {Position} */
@@ -27249,7 +28982,7 @@ var VFileMessage = /*#__PURE__*/function (_Error) {
     /* eslint-enable no-unused-expressions */
     return _this;
   }
-  return _createClass(VFileMessage);
+  return (0,createClass/* default */.Z)(VFileMessage);
 }( /*#__PURE__*/_wrapNativeSuper(Error));
 VFileMessage.prototype.file = '';
 VFileMessage.prototype.name = '';
@@ -27426,7 +29159,7 @@ var VFile = /*#__PURE__*/function () {
    *   New instance.
    */
   function VFile(value) {
-    _classCallCheck(this, VFile);
+    (0,classCallCheck/* default */.Z)(this, VFile);
     /** @type {Options | VFile} */
     var options;
     if (!value) {
@@ -27526,7 +29259,7 @@ var VFile = /*#__PURE__*/function () {
       // `vfile`s too.
       if (_prop in options && options[_prop] !== undefined && options[_prop] !== null) {
         // @ts-expect-error: TS doesn’t understand basic reality.
-        this[_prop] = _prop === 'history' ? toConsumableArray_toConsumableArray(options[_prop]) : options[_prop];
+        this[_prop] = _prop === 'history' ? (0,toConsumableArray/* default */.Z)(options[_prop]) : options[_prop];
       }
     }
 
@@ -27548,7 +29281,7 @@ var VFile = /*#__PURE__*/function () {
    *
    * @returns {string}
    */
-  _createClass(VFile, [{
+  (0,createClass/* default */.Z)(VFile, [{
     key: "path",
     get: function get() {
       return this.history[this.history.length - 1];
@@ -27887,7 +29620,7 @@ function trough() {
     if (typeof callback !== 'function') {
       throw new TypeError('Expected function as last argument, not ' + callback);
     }
-    next.apply(void 0, [null].concat(toConsumableArray_toConsumableArray(values)));
+    next.apply(void 0, [null].concat((0,toConsumableArray/* default */.Z)(values)));
 
     /**
      * Run the next `fn`, or we’re done.
@@ -28093,7 +29826,7 @@ function base() {
     var destination = base();
     var index = -1;
     while (++index < attachers.length) {
-      destination.use.apply(destination, toConsumableArray_toConsumableArray(attachers[index]));
+      destination.use.apply(destination, (0,toConsumableArray/* default */.Z)(attachers[index]));
     }
     destination.data(extend(true, {}, namespace));
     return destination;
@@ -28145,7 +29878,7 @@ function base() {
       }
 
       /** @type {Transformer|void} */
-      var transformer = attacher.call.apply(attacher, [processor].concat(toConsumableArray_toConsumableArray(options)));
+      var transformer = attacher.call.apply(attacher, [processor].concat((0,toConsumableArray/* default */.Z)(options)));
       if (typeof transformer === 'function') {
         transformers.use(transformer);
       }
@@ -28197,7 +29930,7 @@ function base() {
           var _value = _toArray(value),
             plugin = _value[0],
             _options = _value.slice(1);
-          addPlugin.apply(void 0, [plugin].concat(toConsumableArray_toConsumableArray(_options)));
+          addPlugin.apply(void 0, [plugin].concat((0,toConsumableArray/* default */.Z)(_options)));
         } else {
           addPreset(value);
         }
@@ -31464,9 +33197,9 @@ function findAndReplace(tree, find, replace, options) {
         index: match.index,
         input: match.input,
         // @ts-expect-error: stack is fine.
-        stack: [].concat(toConsumableArray_toConsumableArray(parents), [node])
+        stack: [].concat((0,toConsumableArray/* default */.Z)(parents), [node])
       };
-      var value = replace.apply(void 0, toConsumableArray_toConsumableArray(match).concat([matchObject]));
+      var value = replace.apply(void 0, (0,toConsumableArray/* default */.Z)(match).concat([matchObject]));
       if (typeof value === 'string') {
         value = value.length > 0 ? {
           type: 'text',
@@ -31484,7 +33217,7 @@ function findAndReplace(tree, find, replace, options) {
         }
         if (Array.isArray(value)) {
           var _nodes;
-          (_nodes = nodes).push.apply(_nodes, toConsumableArray_toConsumableArray(value));
+          (_nodes = nodes).push.apply(_nodes, (0,toConsumableArray/* default */.Z)(value));
         } else if (value) {
           nodes.push(value);
         }
@@ -31504,7 +33237,7 @@ function findAndReplace(tree, find, replace, options) {
           value: node.value.slice(start)
         });
       }
-      (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(toConsumableArray_toConsumableArray(nodes)));
+      (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat((0,toConsumableArray/* default */.Z)(nodes)));
     } else {
       nodes = [node];
     }
@@ -37490,7 +39223,7 @@ function createTokenizer(parser, initialize, from) {
         function start(code) {
           var def = code !== null && map[code];
           var all = code !== null && map["null"];
-          var list = [].concat(toConsumableArray_toConsumableArray(Array.isArray(def) ? def : def ? [def] : []), toConsumableArray_toConsumableArray(Array.isArray(all) ? all : all ? [all] : []));
+          var list = [].concat((0,toConsumableArray/* default */.Z)(Array.isArray(def) ? def : def ? [def] : []), (0,toConsumableArray/* default */.Z)(Array.isArray(all) ? all : all ? [all] : []));
           return handleListOfConstructs(list)(code);
         }
       }
@@ -42413,13 +44146,13 @@ function extension(combined, extension) {
         var right = extension[key];
         if (right) {
           var _combined$key;
-          (_combined$key = combined[key]).push.apply(_combined$key, toConsumableArray_toConsumableArray(right));
+          (_combined$key = combined[key]).push.apply(_combined$key, (0,toConsumableArray/* default */.Z)(right));
         }
       } else if (key === 'transforms') {
         var _right = extension[key];
         if (_right) {
           var _combined$key2;
-          (_combined$key2 = combined[key]).push.apply(_combined$key2, toConsumableArray_toConsumableArray(_right));
+          (_combined$key2 = combined[key]).push.apply(_combined$key2, (0,toConsumableArray/* default */.Z)(_right));
         }
       } else if (key === 'enter' || key === 'exit') {
         var _right2 = extension[key];
@@ -43585,7 +45318,7 @@ function list_item_listItem(state, node, parent) {
       });
     }
     if (child.type === 'element' && child.tagName === 'p' && !loose) {
-      children.push.apply(children, toConsumableArray_toConsumableArray(child.children));
+      children.push.apply(children, (0,toConsumableArray/* default */.Z)(child.children));
     } else {
       children.push(child);
     }
@@ -44598,7 +46331,7 @@ function state_all(state, parent) {
           }
         }
         if (Array.isArray(result)) {
-          values.push.apply(values, toConsumableArray_toConsumableArray(result));
+          values.push.apply(values, (0,toConsumableArray/* default */.Z)(result));
         } else {
           values.push(result);
         }
@@ -44923,8 +46656,8 @@ var properties = {
   style: 'max-height:640px;'
 };
 var queryStringToObject = function queryStringToObject(url) {
-  return toConsumableArray_toConsumableArray(new URLSearchParams(url.split('?!#')[1])).reduce(function (a, _ref) {
-    var _ref2 = _slicedToArray(_ref, 2),
+  return (0,toConsumableArray/* default */.Z)(new URLSearchParams(url.split('?!#')[1])).reduce(function (a, _ref) {
+    var _ref2 = (0,slicedToArray/* default */.Z)(_ref, 2),
       k = _ref2[0],
       v = _ref2[1];
     return a[k] = v, a;
@@ -44990,7 +46723,7 @@ var SourceLocation = /*#__PURE__*/function () {
   // Start offset, zero-based inclusive.
   // End offset, zero-based exclusive.
   function SourceLocation(lexer, start, end) {
-    _classCallCheck(this, SourceLocation);
+    (0,classCallCheck/* default */.Z)(this, SourceLocation);
     this.lexer = void 0;
     this.start = void 0;
     this.end = void 0;
@@ -45006,7 +46739,7 @@ var SourceLocation = /*#__PURE__*/function () {
    *   and their lexers match.
    * - Otherwise, returns null.
    */
-  _createClass(SourceLocation, null, [{
+  (0,createClass/* default */.Z)(SourceLocation, null, [{
     key: "range",
     value: function range(first, second) {
       if (!second) {
@@ -45043,7 +46776,7 @@ var Token = /*#__PURE__*/function () {
   function Token(text,
   // the text of this token
   loc) {
-    _classCallCheck(this, Token);
+    (0,classCallCheck/* default */.Z)(this, Token);
     this.text = void 0;
     this.loc = void 0;
     this.noexpand = void 0;
@@ -45055,7 +46788,7 @@ var Token = /*#__PURE__*/function () {
    * Given a pair of tokens (this and endToken), compute a `Token` encompassing
    * the whole input range enclosed by these two.
    */
-  _createClass(Token, [{
+  (0,createClass/* default */.Z)(Token, [{
     key: "range",
     value: function range(endToken,
     // last token of the range, inclusive
@@ -45074,13 +46807,13 @@ var Token = /*#__PURE__*/function () {
  * If possible, a caller should provide a Token or ParseNode with information
  * about where in the source string the problem occurred.
  */
-var ParseError = /*#__PURE__*/_createClass(
+var ParseError = /*#__PURE__*/(0,createClass/* default */.Z)(
 // Error position based on passed-in Token or ParseNode.
 function ParseError(message,
 // The error message
 token // An object providing position information
 ) {
-  _classCallCheck(this, ParseError);
+  (0,classCallCheck/* default */.Z)(this, ParseError);
   this.position = void 0;
   var error = "KaTeX parse error: " + message;
   var start;
@@ -45364,7 +47097,7 @@ function getDefaultValue(schema) {
  */
 var Settings = /*#__PURE__*/function () {
   function Settings(options) {
-    _classCallCheck(this, Settings);
+    (0,classCallCheck/* default */.Z)(this, Settings);
     this.displayMode = void 0;
     this.output = void 0;
     this.leqno = void 0;
@@ -45395,7 +47128,7 @@ var Settings = /*#__PURE__*/function () {
    * Report nonstrict (non-LaTeX-compatible) input.
    * Can safely not be called if `this.strict` is false in JavaScript.
    */
-  _createClass(Settings, [{
+  (0,createClass/* default */.Z)(Settings, [{
     key: "reportNonstrict",
     value: function reportNonstrict(errorCode, errorMsg, token) {
       var strict = this.strict;
@@ -45484,7 +47217,7 @@ var Settings = /*#__PURE__*/function () {
  */
 var Style = /*#__PURE__*/function () {
   function Style(id, size, cramped) {
-    _classCallCheck(this, Style);
+    (0,classCallCheck/* default */.Z)(this, Style);
     this.id = void 0;
     this.size = void 0;
     this.cramped = void 0;
@@ -45495,7 +47228,7 @@ var Style = /*#__PURE__*/function () {
   /**
    * Get the style of a superscript given a base in the current style.
    */
-  _createClass(Style, [{
+  (0,createClass/* default */.Z)(Style, [{
     key: "sup",
     value: function sup() {
       return styles[_sup[this.id]];
@@ -45678,7 +47411,7 @@ function scriptFromCodepoint(codepoint) {
 var allBlocks = [];
 scriptData.forEach(function (s) {
   return s.blocks.forEach(function (b) {
-    return allBlocks.push.apply(allBlocks, toConsumableArray_toConsumableArray(b));
+    return allBlocks.push.apply(allBlocks, (0,toConsumableArray/* default */.Z)(b));
   });
 });
 /**
@@ -45895,7 +47628,7 @@ var DocumentFragment = /*#__PURE__*/function () {
   // HtmlDomNode
   // Never used; needed for satisfying interface.
   function DocumentFragment(children) {
-    _classCallCheck(this, DocumentFragment);
+    (0,classCallCheck/* default */.Z)(this, DocumentFragment);
     this.children = void 0;
     this.classes = void 0;
     this.height = void 0;
@@ -45909,7 +47642,7 @@ var DocumentFragment = /*#__PURE__*/function () {
     this.maxFontSize = 0;
     this.style = {};
   }
-  _createClass(DocumentFragment, [{
+  (0,createClass/* default */.Z)(DocumentFragment, [{
     key: "hasClass",
     value: function hasClass(className) {
       return utils.contains(this.classes, className);
@@ -48354,7 +50087,7 @@ var Options = /*#__PURE__*/function () {
    * The base size index.
    */
   function Options(data) {
-    _classCallCheck(this, Options);
+    (0,classCallCheck/* default */.Z)(this, Options);
     this.style = void 0;
     this.color = void 0;
     this.size = void 0;
@@ -48386,7 +50119,7 @@ var Options = /*#__PURE__*/function () {
    * Returns a new options object with the same properties as "this".  Properties
    * from "extension" will be copied to the new options object.
    */
-  _createClass(Options, [{
+  (0,createClass/* default */.Z)(Options, [{
     key: "extend",
     value: function extend(extension) {
       var data = {
@@ -48742,7 +50475,7 @@ var makeEm = function makeEm(n) {
  * Create an HTML className based on a list of classes. In addition to joining
  * with spaces, we also remove empty classes.
  */
-var createClass = function createClass(classes) {
+var katex_createClass = function createClass(classes) {
   return classes.filter(function (cls) {
     return cls;
   }).join(" ");
@@ -48771,7 +50504,7 @@ var initNode = function initNode(classes, options, style) {
 var _toNode = function toNode(tagName) {
   var node = document.createElement(tagName); // Apply the class
 
-  node.className = createClass(this.classes); // Apply inline styles
+  node.className = katex_createClass(this.classes); // Apply inline styles
 
   for (var style in this.style) {
     if (this.style.hasOwnProperty(style)) {
@@ -48799,7 +50532,7 @@ var _toMarkup = function toMarkup(tagName) {
   var markup = "<" + tagName; // Add the class
 
   if (this.classes.length) {
-    markup += " class=\"" + utils.escape(createClass(this.classes)) + "\"";
+    markup += " class=\"" + utils.escape(katex_createClass(this.classes)) + "\"";
   }
   var styles = ""; // Add the styles, after hyphenation
 
@@ -48843,7 +50576,7 @@ var _toMarkup = function toMarkup(tagName) {
  */
 var Span = /*#__PURE__*/function () {
   function Span(classes, children, options, style) {
-    _classCallCheck(this, Span);
+    (0,classCallCheck/* default */.Z)(this, Span);
     this.children = void 0;
     this.attributes = void 0;
     this.classes = void 0;
@@ -48860,7 +50593,7 @@ var Span = /*#__PURE__*/function () {
    * all browsers support attributes the same, and having too many custom
    * attributes is probably bad.
    */
-  _createClass(Span, [{
+  (0,createClass/* default */.Z)(Span, [{
     key: "setAttribute",
     value: function setAttribute(attribute, value) {
       this.attributes[attribute] = value;
@@ -48889,7 +50622,7 @@ var Span = /*#__PURE__*/function () {
  */
 var Anchor = /*#__PURE__*/function () {
   function Anchor(href, classes, children, options) {
-    _classCallCheck(this, Anchor);
+    (0,classCallCheck/* default */.Z)(this, Anchor);
     this.children = void 0;
     this.attributes = void 0;
     this.classes = void 0;
@@ -48901,7 +50634,7 @@ var Anchor = /*#__PURE__*/function () {
     this.children = children || [];
     this.setAttribute('href', href);
   }
-  _createClass(Anchor, [{
+  (0,createClass/* default */.Z)(Anchor, [{
     key: "setAttribute",
     value: function setAttribute(attribute, value) {
       this.attributes[attribute] = value;
@@ -48929,7 +50662,7 @@ var Anchor = /*#__PURE__*/function () {
  */
 var Img = /*#__PURE__*/function () {
   function Img(src, alt, style) {
-    _classCallCheck(this, Img);
+    (0,classCallCheck/* default */.Z)(this, Img);
     this.src = void 0;
     this.alt = void 0;
     this.classes = void 0;
@@ -48942,7 +50675,7 @@ var Img = /*#__PURE__*/function () {
     this.classes = ["mord"];
     this.style = style;
   }
-  _createClass(Img, [{
+  (0,createClass/* default */.Z)(Img, [{
     key: "hasClass",
     value: function hasClass(className) {
       return utils.contains(this.classes, className);
@@ -48997,7 +50730,7 @@ var iCombinations = {
  */
 var SymbolNode = /*#__PURE__*/function () {
   function SymbolNode(text, height, depth, italic, skew, width, classes, style) {
-    _classCallCheck(this, SymbolNode);
+    (0,classCallCheck/* default */.Z)(this, SymbolNode);
     this.text = void 0;
     this.height = void 0;
     this.depth = void 0;
@@ -49032,7 +50765,7 @@ var SymbolNode = /*#__PURE__*/function () {
       this.text = iCombinations[this.text];
     }
   }
-  _createClass(SymbolNode, [{
+  (0,createClass/* default */.Z)(SymbolNode, [{
     key: "hasClass",
     value: function hasClass(className) {
       return utils.contains(this.classes, className);
@@ -49052,7 +50785,7 @@ var SymbolNode = /*#__PURE__*/function () {
       }
       if (this.classes.length > 0) {
         span = span || document.createElement("span");
-        span.className = createClass(this.classes);
+        span.className = katex_createClass(this.classes);
       }
       for (var style in this.style) {
         if (this.style.hasOwnProperty(style)) {
@@ -49081,7 +50814,7 @@ var SymbolNode = /*#__PURE__*/function () {
       if (this.classes.length) {
         needsSpan = true;
         markup += " class=\"";
-        markup += utils.escape(createClass(this.classes));
+        markup += utils.escape(katex_createClass(this.classes));
         markup += "\"";
       }
       var styles = "";
@@ -49115,13 +50848,13 @@ var SymbolNode = /*#__PURE__*/function () {
  */
 var SvgNode = /*#__PURE__*/function () {
   function SvgNode(children, attributes) {
-    _classCallCheck(this, SvgNode);
+    (0,classCallCheck/* default */.Z)(this, SvgNode);
     this.children = void 0;
     this.attributes = void 0;
     this.children = children || [];
     this.attributes = attributes || {};
   }
-  _createClass(SvgNode, [{
+  (0,createClass/* default */.Z)(SvgNode, [{
     key: "toNode",
     value: function toNode() {
       var svgNS = "http://www.w3.org/2000/svg";
@@ -49159,13 +50892,13 @@ var SvgNode = /*#__PURE__*/function () {
 }();
 var PathNode = /*#__PURE__*/function () {
   function PathNode(pathName, alternate) {
-    _classCallCheck(this, PathNode);
+    (0,classCallCheck/* default */.Z)(this, PathNode);
     this.pathName = void 0;
     this.alternate = void 0;
     this.pathName = pathName;
     this.alternate = alternate; // Used only for \sqrt, \phase, & tall delims
   }
-  _createClass(PathNode, [{
+  (0,createClass/* default */.Z)(PathNode, [{
     key: "toNode",
     value: function toNode() {
       var svgNS = "http://www.w3.org/2000/svg";
@@ -49191,11 +50924,11 @@ var PathNode = /*#__PURE__*/function () {
 }();
 var LineNode = /*#__PURE__*/function () {
   function LineNode(attributes) {
-    _classCallCheck(this, LineNode);
+    (0,classCallCheck/* default */.Z)(this, LineNode);
     this.attributes = void 0;
     this.attributes = attributes || {};
   }
-  _createClass(LineNode, [{
+  (0,createClass/* default */.Z)(LineNode, [{
     key: "toNode",
     value: function toNode() {
       var svgNS = "http://www.w3.org/2000/svg";
@@ -50328,7 +52061,7 @@ var makeOrd = function makeOrd(group, options, type) {
   if (text.charCodeAt(0) === 0xD835) {
     // surrogate pairs get special treatment
     var _wideCharacterFont = wideCharacterFont(text, mode),
-      _wideCharacterFont2 = _slicedToArray(_wideCharacterFont, 2),
+      _wideCharacterFont2 = (0,slicedToArray/* default */.Z)(_wideCharacterFont, 2),
       wideFontName = _wideCharacterFont2[0],
       wideFontClass = _wideCharacterFont2[1];
     return makeSymbol(text, wideFontName, mode, options, classes.concat(wideFontClass));
@@ -50384,7 +52117,7 @@ var makeOrd = function makeOrd(group, options, type) {
  */
 
 var canCombine = function canCombine(prev, next) {
-  if (createClass(prev.classes) !== createClass(next.classes) || prev.skew !== next.skew || prev.maxFontSize !== next.maxFontSize) {
+  if (katex_createClass(prev.classes) !== katex_createClass(next.classes) || prev.skew !== next.skew || prev.maxFontSize !== next.maxFontSize) {
     return false;
   } // If prev and next both are just "mbin"s or "mord"s we don't combine them
   // so that the proper spacing can be preserved.
@@ -50769,7 +52502,7 @@ var svgData = {
 };
 var staticSvg = function staticSvg(value, options) {
   // Create a span with inline SVG for the element.
-  var _svgData$value = _slicedToArray(svgData[value], 3),
+  var _svgData$value = (0,slicedToArray/* default */.Z)(svgData[value], 3),
     pathName = _svgData$value[0],
     width = _svgData$value[1],
     height = _svgData$value[2];
@@ -51044,7 +52777,7 @@ var buildExpression$1 = function buildExpression(expression, options, isRealGrou
     var output = buildGroup$1(expression[i], options);
     if (output instanceof DocumentFragment) {
       var children = output.children;
-      groups.push.apply(groups, toConsumableArray_toConsumableArray(children));
+      groups.push.apply(groups, (0,toConsumableArray/* default */.Z)(children));
     } else {
       groups.push(output);
     }
@@ -51341,7 +53074,7 @@ function newDocumentFragment(children) {
  */
 var MathNode = /*#__PURE__*/function () {
   function MathNode(type, children, classes) {
-    _classCallCheck(this, MathNode);
+    (0,classCallCheck/* default */.Z)(this, MathNode);
     this.type = void 0;
     this.attributes = void 0;
     this.children = void 0;
@@ -51355,7 +53088,7 @@ var MathNode = /*#__PURE__*/function () {
    * Sets an attribute on a MathML node. MathML depends on attributes to convey a
    * semantic content, so this is used heavily.
    */
-  _createClass(MathNode, [{
+  (0,createClass/* default */.Z)(MathNode, [{
     key: "setAttribute",
     value: function setAttribute(name, value) {
       this.attributes[name] = value;
@@ -51381,7 +53114,7 @@ var MathNode = /*#__PURE__*/function () {
         }
       }
       if (this.classes.length > 0) {
-        node.className = createClass(this.classes);
+        node.className = katex_createClass(this.classes);
       }
       for (var i = 0; i < this.children.length; i++) {
         node.appendChild(this.children[i].toNode());
@@ -51404,7 +53137,7 @@ var MathNode = /*#__PURE__*/function () {
         }
       }
       if (this.classes.length > 0) {
-        markup += " class =\"" + utils.escape(createClass(this.classes)) + "\"";
+        markup += " class =\"" + utils.escape(katex_createClass(this.classes)) + "\"";
       }
       markup += ">";
       for (var i = 0; i < this.children.length; i++) {
@@ -51431,14 +53164,14 @@ var MathNode = /*#__PURE__*/function () {
  */
 var TextNode = /*#__PURE__*/function () {
   function TextNode(text) {
-    _classCallCheck(this, TextNode);
+    (0,classCallCheck/* default */.Z)(this, TextNode);
     this.text = void 0;
     this.text = text;
   }
   /**
    * Converts the text node into a DOM text node.
    */
-  _createClass(TextNode, [{
+  (0,createClass/* default */.Z)(TextNode, [{
     key: "toNode",
     value: function toNode() {
       return document.createTextNode(this.text);
@@ -51473,7 +53206,7 @@ var SpaceNode = /*#__PURE__*/function () {
    * Create a Space node with width given in CSS ems.
    */
   function SpaceNode(width) {
-    _classCallCheck(this, SpaceNode);
+    (0,classCallCheck/* default */.Z)(this, SpaceNode);
     this.width = void 0;
     this.character = void 0;
     this.width = width; // See https://www.w3.org/TR/2000/WD-MathML2-20000328/chapter6.html
@@ -51504,7 +53237,7 @@ var SpaceNode = /*#__PURE__*/function () {
   /**
    * Converts the math node into a MathML-namespaced DOM element.
    */
-  _createClass(SpaceNode, [{
+  (0,createClass/* default */.Z)(SpaceNode, [{
     key: "toNode",
     value: function toNode() {
       if (this.character) {
@@ -51665,17 +53398,17 @@ var buildExpression = function buildExpression(expression, options, isOrdgroup) 
       // Concatenate adjacent <mtext>s
       if (_group.type === 'mtext' && lastGroup.type === 'mtext' && _group.getAttribute('mathvariant') === lastGroup.getAttribute('mathvariant')) {
         var _lastGroup$children;
-        (_lastGroup$children = lastGroup.children).push.apply(_lastGroup$children, toConsumableArray_toConsumableArray(_group.children));
+        (_lastGroup$children = lastGroup.children).push.apply(_lastGroup$children, (0,toConsumableArray/* default */.Z)(_group.children));
         continue; // Concatenate adjacent <mn>s
       } else if (_group.type === 'mn' && lastGroup.type === 'mn') {
         var _lastGroup$children2;
-        (_lastGroup$children2 = lastGroup.children).push.apply(_lastGroup$children2, toConsumableArray_toConsumableArray(_group.children));
+        (_lastGroup$children2 = lastGroup.children).push.apply(_lastGroup$children2, (0,toConsumableArray/* default */.Z)(_group.children));
         continue; // Concatenate <mn>...</mn> followed by <mi>.</mi>
       } else if (_group.type === 'mi' && _group.children.length === 1 && lastGroup.type === 'mn') {
         var child = _group.children[0];
         if (child instanceof TextNode && child.text === '.') {
           var _lastGroup$children3;
-          (_lastGroup$children3 = lastGroup.children).push.apply(_lastGroup$children3, toConsumableArray_toConsumableArray(_group.children));
+          (_lastGroup$children3 = lastGroup.children).push.apply(_lastGroup$children3, (0,toConsumableArray/* default */.Z)(_group.children));
           continue;
         }
       } else if (lastGroup.type === 'mi' && lastGroup.children.length === 1) {
@@ -52009,7 +53742,7 @@ var svgSpan = function svgSpan(group, options) {
     } else {
       var spans = [];
       var data = katexImagesData[label];
-      var _data = _slicedToArray(data, 3),
+      var _data = (0,slicedToArray/* default */.Z)(data, 3),
         paths = _data[0],
         _minWidth = _data[1],
         _viewBoxHeight = _data[2];
@@ -55229,7 +56962,7 @@ defineEnvironment({
     }
     var res = parseArray(context.parser, payload, dCellStyle(context.envName)); // Populate cols with the correct number of column alignment specs.
 
-    var numCols = Math.max.apply(Math, [0].concat(toConsumableArray_toConsumableArray(res.body.map(function (row) {
+    var numCols = Math.max.apply(Math, [0].concat((0,toConsumableArray/* default */.Z)(res.body.map(function (row) {
       return row.length;
     }))));
     res.cols = new Array(numCols).fill({
@@ -56519,7 +58252,7 @@ defineFunction({
     var elements = buildExpression$1(group.body, options, false);
     var classes = ["enclosing"];
     if (group.attributes["class"]) {
-      classes.push.apply(classes, toConsumableArray_toConsumableArray(group.attributes["class"].trim().split(/\s+/)));
+      classes.push.apply(classes, (0,toConsumableArray/* default */.Z)(group.attributes["class"].trim().split(/\s+/)));
     }
     var span = buildCommon.makeSpan(classes, elements, options);
     for (var attr in group.attributes) {
@@ -58628,7 +60361,7 @@ var Lexer = /*#__PURE__*/function () {
   // Category codes. The lexer only supports comment characters (14) for now.
   // MacroExpander additionally distinguishes active (13).
   function Lexer(input, settings) {
-    _classCallCheck(this, Lexer);
+    (0,classCallCheck/* default */.Z)(this, Lexer);
     this.input = void 0;
     this.settings = void 0;
     this.tokenRegex = void 0;
@@ -58643,7 +60376,7 @@ var Lexer = /*#__PURE__*/function () {
       "~": 13 // active character
     };
   }
-  _createClass(Lexer, [{
+  (0,createClass/* default */.Z)(Lexer, [{
     key: "setCatcode",
     value: function setCatcode(_char, code) {
       this.catcodes[_char] = code;
@@ -58696,7 +60429,7 @@ var Namespace = /*#__PURE__*/function () {
    * according to any global/top-level `set`s done.
    */
   function Namespace(builtins, globalMacros) {
-    _classCallCheck(this, Namespace);
+    (0,classCallCheck/* default */.Z)(this, Namespace);
     if (builtins === void 0) {
       builtins = {};
     }
@@ -58713,7 +60446,7 @@ var Namespace = /*#__PURE__*/function () {
   /**
    * Start a new nested group, affecting future local `set`s.
    */
-  _createClass(Namespace, [{
+  (0,createClass/* default */.Z)(Namespace, [{
     key: "beginGroup",
     value: function beginGroup() {
       this.undefStack.push({});
@@ -59668,7 +61401,7 @@ var braketHelper = function braketHelper(one) {
       context.macros.set("\\|", midMacro(true));
     }
     var arg = context.consumeArg().tokens;
-    var expanded = context.expandTokens([].concat(toConsumableArray_toConsumableArray(right), toConsumableArray_toConsumableArray(arg), toConsumableArray_toConsumableArray(left)));
+    var expanded = context.expandTokens([].concat((0,toConsumableArray/* default */.Z)(right), (0,toConsumableArray/* default */.Z)(arg), (0,toConsumableArray/* default */.Z)(left)));
     context.macros.endGroup();
     return {
       tokens: expanded.reverse(),
@@ -59760,7 +61493,7 @@ var implicitCommands = {
 };
 var MacroExpander = /*#__PURE__*/function () {
   function MacroExpander(input, settings, mode) {
-    _classCallCheck(this, MacroExpander);
+    (0,classCallCheck/* default */.Z)(this, MacroExpander);
     this.settings = void 0;
     this.expansionCount = void 0;
     this.lexer = void 0;
@@ -59779,7 +61512,7 @@ var MacroExpander = /*#__PURE__*/function () {
    * Feed a new input string to the same MacroExpander
    * (with existing macros etc.).
    */
-  _createClass(MacroExpander, [{
+  (0,createClass/* default */.Z)(MacroExpander, [{
     key: "feed",
     value: function feed(input) {
       this.lexer = new Lexer(input, this.settings);
@@ -59855,7 +61588,7 @@ var MacroExpander = /*#__PURE__*/function () {
     key: "pushTokens",
     value: function pushTokens(tokens) {
       var _this$stack;
-      (_this$stack = this.stack).push.apply(_this$stack, toConsumableArray_toConsumableArray(tokens));
+      (_this$stack = this.stack).push.apply(_this$stack, (0,toConsumableArray/* default */.Z)(tokens));
     }
     /**
      * Find an macro argument without expanding tokens and append the array of
@@ -60050,7 +61783,7 @@ var MacroExpander = /*#__PURE__*/function () {
             } else if (/^[1-9]$/.test(tok.text)) {
               var _tokens;
               // replace the placeholder with the indicated argument
-              (_tokens = tokens).splice.apply(_tokens, [i, 2].concat(toConsumableArray_toConsumableArray(args[+tok.text - 1])));
+              (_tokens = tokens).splice.apply(_tokens, [i, 2].concat((0,toConsumableArray/* default */.Z)(args[+tok.text - 1])));
             } else {
               throw new ParseError("Not a valid argument number", tok);
             }
@@ -60749,7 +62482,7 @@ var unicodeSymbols = {
  */
 var Parser = /*#__PURE__*/function () {
   function Parser(input, settings) {
-    _classCallCheck(this, Parser);
+    (0,classCallCheck/* default */.Z)(this, Parser);
     this.mode = void 0;
     this.gullet = void 0;
     this.settings = void 0;
@@ -60769,7 +62502,7 @@ var Parser = /*#__PURE__*/function () {
    * Checks a result to make sure it has the right type, and throws an
    * appropriate error otherwise.
    */
-  _createClass(Parser, [{
+  (0,createClass/* default */.Z)(Parser, [{
     key: "expect",
     value: function expect(text, consume) {
       if (consume === void 0) {
@@ -62475,7 +64208,7 @@ function toText(tree) {
   // Nodes without children are treated as a void element, so `doctype` is thus
   // ignored.
   if (tree.type === 'text' || tree.type === 'comment') {
-    results.push.apply(results, toConsumableArray_toConsumableArray(collectText(tree, {
+    results.push.apply(results, (0,toConsumableArray/* default */.Z)(collectText(tree, {
       whitespace: whitespace,
       breakBefore: true,
       breakAfter: true
@@ -62502,7 +64235,7 @@ function toText(tree) {
     //      Each item in results will either be a JavaScript string or a
     //      positive integer (a required line break count).
     // 3.2. For each item item in current, append item to results.
-    results.push.apply(results, toConsumableArray_toConsumableArray(innerTextCollection(children[index], tree, {
+    results.push.apply(results, (0,toConsumableArray/* default */.Z)(innerTextCollection(children[index], tree, {
       whitespace: whitespace,
       breakBefore: index ? undefined : block,
       breakAfter: index < children.length - 1 ? br(children[index + 1]) : block
@@ -62876,7 +64609,7 @@ var lib_parser = __webpack_require__(9795);
  * @typedef {Record<string, string>} Normal
  */
 
-var Schema = /*#__PURE__*/_createClass(
+var Schema = /*#__PURE__*/(0,createClass/* default */.Z)(
 /**
  * @constructor
  * @param {Properties} property
@@ -62884,7 +64617,7 @@ var Schema = /*#__PURE__*/_createClass(
  * @param {string} [space]
  */
 function Schema(property, normal, space) {
-  _classCallCheck(this, Schema);
+  (0,classCallCheck/* default */.Z)(this, Schema);
   this.property = property;
   this.normal = normal;
   if (space) {
@@ -62934,14 +64667,14 @@ function normalize_normalize(value) {
 ;// CONCATENATED MODULE: ../../node_modules/property-information/lib/util/info.js
 
 
-var Info = /*#__PURE__*/_createClass(
+var Info = /*#__PURE__*/(0,createClass/* default */.Z)(
 /**
  * @constructor
  * @param {string} property
  * @param {string} attribute
  */
 function Info(property, attribute) {
-  _classCallCheck(this, Info);
+  (0,classCallCheck/* default */.Z)(this, Info);
   /** @type {string} */
   this.property = property;
   /** @type {string} */
@@ -62985,8 +64718,8 @@ function increment() {
 // @ts-expect-error: hush.
 var checks = Object.keys(types_namespaceObject);
 var DefinedInfo = /*#__PURE__*/function (_Info) {
-  _inherits(DefinedInfo, _Info);
-  var _super = _createSuper(DefinedInfo);
+  (0,inherits/* default */.Z)(DefinedInfo, _Info);
+  var _super = (0,createSuper/* default */.Z)(DefinedInfo);
   /**
    * @constructor
    * @param {string} property
@@ -62996,19 +64729,19 @@ var DefinedInfo = /*#__PURE__*/function (_Info) {
    */
   function DefinedInfo(property, attribute, mask, space) {
     var _this;
-    _classCallCheck(this, DefinedInfo);
+    (0,classCallCheck/* default */.Z)(this, DefinedInfo);
     var index = -1;
     _this = _super.call(this, property, attribute);
-    mark(_assertThisInitialized(_this), 'space', space);
+    mark((0,assertThisInitialized/* default */.Z)(_this), 'space', space);
     if (typeof mask === 'number') {
       while (++index < checks.length) {
         var check = checks[index];
-        mark(_assertThisInitialized(_this), checks[index], (mask & types_namespaceObject[check]) === types_namespaceObject[check]);
+        mark((0,assertThisInitialized/* default */.Z)(_this), checks[index], (mask & types_namespaceObject[check]) === types_namespaceObject[check]);
       }
     }
     return _this;
   }
-  return _createClass(DefinedInfo);
+  return (0,createClass/* default */.Z)(DefinedInfo);
 }(Info);
 DefinedInfo.prototype.defined = true;
 
@@ -64338,7 +66071,7 @@ function comma_separated_tokens_stringify(values, options) {
   var settings = options || {};
 
   // Ensure the last empty entry is seen.
-  var input = values[values.length - 1] === '' ? [].concat(toConsumableArray_toConsumableArray(values), ['']) : values;
+  var input = values[values.length - 1] === '' ? [].concat((0,toConsumableArray/* default */.Z)(values), ['']) : values;
   return input.join((settings.padRight ? ' ' : '') + ',' + (settings.padLeft === false ? '' : ' ')).trim();
 }
 ;// CONCATENATED MODULE: ../../node_modules/hastscript/lib/core.js
@@ -68450,7 +70183,7 @@ function applySelectors(state, rules, node, index, parent) {
  * @returns {Array<RuleSet>}
  */
 function combine(left, right) {
-  return left && right && left.length > 0 && right.length > 0 ? [].concat(toConsumableArray_toConsumableArray(left), toConsumableArray_toConsumableArray(right)) : left && left.length > 0 ? left : right && right.length > 0 ? right : walk_empty;
+  return left && right && left.length > 0 && right.length > 0 ? [].concat((0,toConsumableArray/* default */.Z)(left), (0,toConsumableArray/* default */.Z)(right)) : left && left.length > 0 ? left : right && right.length > 0 ? right : walk_empty;
 }
 
 /**
@@ -75370,7 +77103,7 @@ function core_stringify(value, language) {
   };
   if (value.alias) {
     var _env$classes;
-    (_env$classes = env.classes).push.apply(_env$classes, toConsumableArray_toConsumableArray(typeof value.alias === 'string' ? [value.alias] : value.alias));
+    (_env$classes = env.classes).push.apply(_env$classes, (0,toConsumableArray/* default */.Z)(typeof value.alias === 'string' ? [value.alias] : value.alias));
   }
 
   // @ts-expect-error Prism.
@@ -93149,14 +94882,14 @@ function lib_markdown() {
     showLineNumbers = _options$showLineNumb === void 0 ? true : _options$showLineNumb,
     _options$katexOptions = options.katexOptions,
     katexOptions = _options$katexOptions === void 0 ? {} : _options$katexOptions;
-  var remarkPlugins = [remarkGfm].concat(toConsumableArray_toConsumableArray(options.remarkPlugins || []));
+  var remarkPlugins = [remarkGfm].concat((0,toConsumableArray/* default */.Z)(options.remarkPlugins || []));
   var rehypePlugins = [rehype_video_lib, [m, {
     ignoreMissing: true,
     showLineNumbers: showLineNumbers
   }], [lib, {
     properties: 'attr',
     codeBlockParames: false
-  }], rehype_ignore_lib].concat(toConsumableArray_toConsumableArray(options.rehypePlugins || []), [[rehype_rewrite_lib, {
+  }], rehype_ignore_lib].concat((0,toConsumableArray/* default */.Z)(options.rehypePlugins || []), [[rehype_rewrite_lib, {
     rewrite: function rewrite(node, index, parent) {
       if (node.type == 'element' && node.tagName === 'code') {
         var _ref = node.properties || {},
@@ -93526,7 +95259,7 @@ function rehypeAutolinkHeadings() {
         nodes = [grouping];
       }
     }
-    (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat(toConsumableArray_toConsumableArray(nodes)));
+    (_parent$children = parent.children).splice.apply(_parent$children, [index, 1].concat((0,toConsumableArray/* default */.Z)(nodes)));
     return [SKIP, index + nodes.length];
   }
 
@@ -93593,7 +95326,7 @@ var BananaSlug = /*#__PURE__*/function () {
    * Create a new slug class.
    */
   function BananaSlug() {
-    _classCallCheck(this, BananaSlug);
+    (0,classCallCheck/* default */.Z)(this, BananaSlug);
     /** @type {Record<string, number>} */
     // eslint-disable-next-line no-unused-expressions
     this.occurrences;
@@ -93614,7 +95347,7 @@ var BananaSlug = /*#__PURE__*/function () {
    * @return {string}
    *   A unique slug string
    */
-  _createClass(BananaSlug, [{
+  (0,createClass/* default */.Z)(BananaSlug, [{
     key: "slug",
     value: function slug(value, maintainCase) {
       var self = this;
@@ -109167,6 +110900,2553 @@ function octiconLink() {
     children: []
   };
 }
+;// CONCATENATED MODULE: external "node:http"
+const external_node_http_namespaceObject = require("node:http");
+;// CONCATENATED MODULE: external "node:https"
+const external_node_https_namespaceObject = require("node:https");
+;// CONCATENATED MODULE: external "node:zlib"
+const external_node_zlib_namespaceObject = require("node:zlib");
+;// CONCATENATED MODULE: external "node:stream"
+const external_node_stream_namespaceObject = require("node:stream");
+;// CONCATENATED MODULE: external "node:buffer"
+const external_node_buffer_namespaceObject = require("node:buffer");
+;// CONCATENATED MODULE: ../../node_modules/data-uri-to-buffer/dist/index.js
+/**
+ * Returns a `Buffer` instance from the given data URI `uri`.
+ *
+ * @param {String} uri Data URI to turn into a Buffer instance
+ * @returns {Buffer} Buffer instance from Data URI
+ * @api public
+ */
+function dataUriToBuffer(uri) {
+  if (!/^data:/i.test(uri)) {
+    throw new TypeError('`uri` does not appear to be a Data URI (must begin with "data:")');
+  }
+  // strip newlines
+  uri = uri.replace(/\r?\n/g, '');
+  // split the URI up into the "metadata" and the "data" portions
+  var firstComma = uri.indexOf(',');
+  if (firstComma === -1 || firstComma <= 4) {
+    throw new TypeError('malformed data: URI');
+  }
+  // remove the "data:" scheme and parse the metadata
+  var meta = uri.substring(5, firstComma).split(';');
+  var charset = '';
+  var base64 = false;
+  var type = meta[0] || 'text/plain';
+  var typeFull = type;
+  for (var i = 1; i < meta.length; i++) {
+    if (meta[i] === 'base64') {
+      base64 = true;
+    } else if (meta[i]) {
+      typeFull += ";".concat(meta[i]);
+      if (meta[i].indexOf('charset=') === 0) {
+        charset = meta[i].substring(8);
+      }
+    }
+  }
+  // defaults to US-ASCII only if type is not provided
+  if (!meta[0] && !charset.length) {
+    typeFull += ';charset=US-ASCII';
+    charset = 'US-ASCII';
+  }
+  // get the encoded data portion and decode URI-encoded chars
+  var encoding = base64 ? 'base64' : 'ascii';
+  var data = unescape(uri.substring(firstComma + 1));
+  var buffer = Buffer.from(data, encoding);
+  // set `.type` and `.typeFull` properties to MIME type
+  buffer.type = type;
+  buffer.typeFull = typeFull;
+  // set the `.charset` property
+  buffer.charset = charset;
+  return buffer;
+}
+/* harmony default export */ const dist = (dataUriToBuffer);
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/asyncIterator.js
+var asyncIterator = __webpack_require__(9621);
+;// CONCATENATED MODULE: external "node:util"
+const external_node_util_namespaceObject = require("node:util");
+// EXTERNAL MODULE: ../../node_modules/fetch-blob/index.js + 3 modules
+var fetch_blob = __webpack_require__(7674);
+// EXTERNAL MODULE: ../../node_modules/formdata-polyfill/esm.min.js
+var esm_min = __webpack_require__(7409);
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/errors/base.js
+
+
+
+
+
+
+var FetchBaseError = /*#__PURE__*/function (_Error, _Symbol$toStringTag) {
+  (0,inherits/* default */.Z)(FetchBaseError, _Error);
+  var _super = (0,createSuper/* default */.Z)(FetchBaseError);
+  function FetchBaseError(message, type) {
+    var _this;
+    (0,classCallCheck/* default */.Z)(this, FetchBaseError);
+    _this = _super.call(this, message);
+    // Hide custom error implementation details from end-users
+    Error.captureStackTrace((0,assertThisInitialized/* default */.Z)(_this), _this.constructor);
+    _this.type = type;
+    return _this;
+  }
+  (0,createClass/* default */.Z)(FetchBaseError, [{
+    key: "name",
+    get: function get() {
+      return this.constructor.name;
+    }
+  }, {
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return this.constructor.name;
+    }
+  }]);
+  return FetchBaseError;
+}( /*#__PURE__*/_wrapNativeSuper(Error), Symbol.toStringTag);
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/errors/fetch-error.js
+
+
+
+
+
+
+/**
+ * @typedef {{ address?: string, code: string, dest?: string, errno: number, info?: object, message: string, path?: string, port?: number, syscall: string}} SystemError
+*/
+
+/**
+ * FetchError interface for operational errors
+ */
+var FetchError = /*#__PURE__*/function (_FetchBaseError) {
+  (0,inherits/* default */.Z)(FetchError, _FetchBaseError);
+  var _super = (0,createSuper/* default */.Z)(FetchError);
+  /**
+   * @param  {string} message -      Error message for human
+   * @param  {string} [type] -        Error type for machine
+   * @param  {SystemError} [systemError] - For Node.js system error
+   */
+  function FetchError(message, type, systemError) {
+    var _this;
+    (0,classCallCheck/* default */.Z)(this, FetchError);
+    _this = _super.call(this, message, type);
+    // When err.type is `system`, err.erroredSysCall contains system error and err.code contains system error code
+    if (systemError) {
+      // eslint-disable-next-line no-multi-assign
+      _this.code = _this.errno = systemError.code;
+      _this.erroredSysCall = systemError.syscall;
+    }
+    return _this;
+  }
+  return (0,createClass/* default */.Z)(FetchError);
+}(FetchBaseError);
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/utils/is.js
+/**
+ * Is.js
+ *
+ * Object type checks.
+ */
+
+var NAME = Symbol.toStringTag;
+
+/**
+ * Check if `obj` is a URLSearchParams object
+ * ref: https://github.com/node-fetch/node-fetch/issues/296#issuecomment-307598143
+ * @param {*} object - Object to check for
+ * @return {boolean}
+ */
+var isURLSearchParameters = function isURLSearchParameters(object) {
+  return typeof object === 'object' && typeof object.append === 'function' && typeof object["delete"] === 'function' && typeof object.get === 'function' && typeof object.getAll === 'function' && typeof object.has === 'function' && typeof object.set === 'function' && typeof object.sort === 'function' && object[NAME] === 'URLSearchParams';
+};
+
+/**
+ * Check if `object` is a W3C `Blob` object (which `File` inherits from)
+ * @param {*} object - Object to check for
+ * @return {boolean}
+ */
+var isBlob = function isBlob(object) {
+  return object && typeof object === 'object' && typeof object.arrayBuffer === 'function' && typeof object.type === 'string' && typeof object.stream === 'function' && typeof object.constructor === 'function' && /^(Blob|File)$/.test(object[NAME]);
+};
+
+/**
+ * Check if `obj` is an instance of AbortSignal.
+ * @param {*} object - Object to check for
+ * @return {boolean}
+ */
+var isAbortSignal = function isAbortSignal(object) {
+  return typeof object === 'object' && (object[NAME] === 'AbortSignal' || object[NAME] === 'EventTarget');
+};
+
+/**
+ * isDomainOrSubdomain reports whether sub is a subdomain (or exact match) of
+ * the parent domain.
+ *
+ * Both domains must already be in canonical form.
+ * @param {string|URL} original
+ * @param {string|URL} destination
+ */
+var isDomainOrSubdomain = function isDomainOrSubdomain(destination, original) {
+  var orig = new URL(original).hostname;
+  var dest = new URL(destination).hostname;
+  return orig === dest || orig.endsWith(".".concat(dest));
+};
+
+/**
+ * isSameProtocol reports whether the two provided URLs use the same protocol.
+ *
+ * Both domains must already be in canonical form.
+ * @param {string|URL} original
+ * @param {string|URL} destination
+ */
+var isSameProtocol = function isSameProtocol(destination, original) {
+  var orig = new URL(original).protocol;
+  var dest = new URL(destination).protocol;
+  return orig === dest;
+};
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/body.js
+
+
+
+
+
+
+
+/**
+ * Body.js
+ *
+ * Body interface provides common methods for Request and Response
+ */
+
+
+
+
+
+
+
+
+
+var pipeline = (0,external_node_util_namespaceObject.promisify)(external_node_stream_namespaceObject.pipeline);
+var INTERNALS = Symbol('Body internals');
+
+/**
+ * Body mixin
+ *
+ * Ref: https://fetch.spec.whatwg.org/#body
+ *
+ * @param   Stream  body  Readable stream
+ * @param   Object  opts  Response options
+ * @return  Void
+ */
+var Body = /*#__PURE__*/function () {
+  function Body(body) {
+    var _this = this;
+    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+      _ref$size = _ref.size,
+      size = _ref$size === void 0 ? 0 : _ref$size;
+    (0,classCallCheck/* default */.Z)(this, Body);
+    var boundary = null;
+    if (body === null) {
+      // Body is undefined or null
+      body = null;
+    } else if (isURLSearchParameters(body)) {
+      // Body is a URLSearchParams
+      body = external_node_buffer_namespaceObject.Buffer.from(body.toString());
+    } else if (isBlob(body)) {
+      // Body is blob
+    } else if (external_node_buffer_namespaceObject.Buffer.isBuffer(body)) {
+      // Body is Buffer
+    } else if (external_node_util_namespaceObject.types.isAnyArrayBuffer(body)) {
+      // Body is ArrayBuffer
+      body = external_node_buffer_namespaceObject.Buffer.from(body);
+    } else if (ArrayBuffer.isView(body)) {
+      // Body is ArrayBufferView
+      body = external_node_buffer_namespaceObject.Buffer.from(body.buffer, body.byteOffset, body.byteLength);
+    } else if (body instanceof external_node_stream_namespaceObject) {
+      // Body is stream
+    } else if (body instanceof esm_min/* FormData */.Ct) {
+      // Body is FormData
+      body = (0,esm_min/* formDataToBlob */.au)(body);
+      boundary = body.type.split('=')[1];
+    } else {
+      // None of the above
+      // coerce to string then buffer
+      body = external_node_buffer_namespaceObject.Buffer.from(String(body));
+    }
+    var stream = body;
+    if (external_node_buffer_namespaceObject.Buffer.isBuffer(body)) {
+      stream = external_node_stream_namespaceObject.Readable.from(body);
+    } else if (isBlob(body)) {
+      stream = external_node_stream_namespaceObject.Readable.from(body.stream());
+    }
+    this[INTERNALS] = {
+      body: body,
+      stream: stream,
+      boundary: boundary,
+      disturbed: false,
+      error: null
+    };
+    this.size = size;
+    if (body instanceof external_node_stream_namespaceObject) {
+      body.on('error', function (error_) {
+        var error = error_ instanceof FetchBaseError ? error_ : new FetchError("Invalid response body while trying to fetch ".concat(_this.url, ": ").concat(error_.message), 'system', error_);
+        _this[INTERNALS].error = error;
+      });
+    }
+  }
+  (0,createClass/* default */.Z)(Body, [{
+    key: "body",
+    get: function get() {
+      return this[INTERNALS].stream;
+    }
+  }, {
+    key: "bodyUsed",
+    get: function get() {
+      return this[INTERNALS].disturbed;
+    }
+
+    /**
+     * Decode response as ArrayBuffer
+     *
+     * @return  Promise
+     */
+  }, {
+    key: "arrayBuffer",
+    value: function () {
+      var _arrayBuffer = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee() {
+        var _yield$consumeBody, buffer, byteOffset, byteLength;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
+          while (1) switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return consumeBody(this);
+            case 2:
+              _yield$consumeBody = _context.sent;
+              buffer = _yield$consumeBody.buffer;
+              byteOffset = _yield$consumeBody.byteOffset;
+              byteLength = _yield$consumeBody.byteLength;
+              return _context.abrupt("return", buffer.slice(byteOffset, byteOffset + byteLength));
+            case 7:
+            case "end":
+              return _context.stop();
+          }
+        }, _callee, this);
+      }));
+      function arrayBuffer() {
+        return _arrayBuffer.apply(this, arguments);
+      }
+      return arrayBuffer;
+    }()
+  }, {
+    key: "formData",
+    value: function () {
+      var _formData = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee2() {
+        var ct, _formData2, parameters, _iterator2, _step2, _step2$value, name, value, _yield$import, toFormData;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee2$(_context2) {
+          while (1) switch (_context2.prev = _context2.next) {
+            case 0:
+              ct = this.headers.get('content-type');
+              if (!ct.startsWith('application/x-www-form-urlencoded')) {
+                _context2.next = 11;
+                break;
+              }
+              _formData2 = new esm_min/* FormData */.Ct();
+              _context2.t0 = URLSearchParams;
+              _context2.next = 6;
+              return this.text();
+            case 6:
+              _context2.t1 = _context2.sent;
+              parameters = new _context2.t0(_context2.t1);
+              _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(parameters);
+              try {
+                for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+                  _step2$value = (0,slicedToArray/* default */.Z)(_step2.value, 2), name = _step2$value[0], value = _step2$value[1];
+                  _formData2.append(name, value);
+                }
+              } catch (err) {
+                _iterator2.e(err);
+              } finally {
+                _iterator2.f();
+              }
+              return _context2.abrupt("return", _formData2);
+            case 11:
+              _context2.next = 13;
+              return __webpack_require__.e(/* import() */ 327).then(__webpack_require__.bind(__webpack_require__, 9327));
+            case 13:
+              _yield$import = _context2.sent;
+              toFormData = _yield$import.toFormData;
+              return _context2.abrupt("return", toFormData(this.body, ct));
+            case 16:
+            case "end":
+              return _context2.stop();
+          }
+        }, _callee2, this);
+      }));
+      function formData() {
+        return _formData.apply(this, arguments);
+      }
+      return formData;
+    }()
+    /**
+     * Return raw response as Blob
+     *
+     * @return Promise
+     */
+  }, {
+    key: "blob",
+    value: function () {
+      var _blob = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee3() {
+        var ct, buf;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee3$(_context3) {
+          while (1) switch (_context3.prev = _context3.next) {
+            case 0:
+              ct = this.headers && this.headers.get('content-type') || this[INTERNALS].body && this[INTERNALS].body.type || '';
+              _context3.next = 3;
+              return this.arrayBuffer();
+            case 3:
+              buf = _context3.sent;
+              return _context3.abrupt("return", new fetch_blob/* default */.Z([buf], {
+                type: ct
+              }));
+            case 5:
+            case "end":
+              return _context3.stop();
+          }
+        }, _callee3, this);
+      }));
+      function blob() {
+        return _blob.apply(this, arguments);
+      }
+      return blob;
+    }()
+    /**
+     * Decode response as json
+     *
+     * @return  Promise
+     */
+  }, {
+    key: "json",
+    value: function () {
+      var _json = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee4() {
+        var text;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee4$(_context4) {
+          while (1) switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.next = 2;
+              return this.text();
+            case 2:
+              text = _context4.sent;
+              return _context4.abrupt("return", JSON.parse(text));
+            case 4:
+            case "end":
+              return _context4.stop();
+          }
+        }, _callee4, this);
+      }));
+      function json() {
+        return _json.apply(this, arguments);
+      }
+      return json;
+    }()
+    /**
+     * Decode response as text
+     *
+     * @return  Promise
+     */
+  }, {
+    key: "text",
+    value: function () {
+      var _text = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee5() {
+        var buffer;
+        return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee5$(_context5) {
+          while (1) switch (_context5.prev = _context5.next) {
+            case 0:
+              _context5.next = 2;
+              return consumeBody(this);
+            case 2:
+              buffer = _context5.sent;
+              return _context5.abrupt("return", new TextDecoder().decode(buffer));
+            case 4:
+            case "end":
+              return _context5.stop();
+          }
+        }, _callee5, this);
+      }));
+      function text() {
+        return _text.apply(this, arguments);
+      }
+      return text;
+    }()
+    /**
+     * Decode response as buffer (non-spec api)
+     *
+     * @return  Promise
+     */
+  }, {
+    key: "buffer",
+    value: function buffer() {
+      return consumeBody(this);
+    }
+  }]);
+  return Body;
+}();
+
+Body.prototype.buffer = (0,external_node_util_namespaceObject.deprecate)(Body.prototype.buffer, 'Please use \'response.arrayBuffer()\' instead of \'response.buffer()\'', 'node-fetch#buffer');
+
+// In browsers, all properties are enumerable.
+Object.defineProperties(Body.prototype, {
+  body: {
+    enumerable: true
+  },
+  bodyUsed: {
+    enumerable: true
+  },
+  arrayBuffer: {
+    enumerable: true
+  },
+  blob: {
+    enumerable: true
+  },
+  json: {
+    enumerable: true
+  },
+  text: {
+    enumerable: true
+  },
+  data: {
+    get: (0,external_node_util_namespaceObject.deprecate)(function () {}, 'data doesn\'t exist, use json(), text(), arrayBuffer(), or body instead', 'https://github.com/node-fetch/node-fetch/issues/1000 (response)')
+  }
+});
+
+/**
+ * Consume and convert an entire Body to a Buffer.
+ *
+ * Ref: https://fetch.spec.whatwg.org/#concept-body-consume-body
+ *
+ * @return Promise
+ */
+function consumeBody(_x) {
+  return _consumeBody.apply(this, arguments);
+}
+/**
+ * Clone body given Res/Req instance
+ *
+ * @param   Mixed   instance       Response or Request instance
+ * @param   String  highWaterMark  highWaterMark for both PassThrough body streams
+ * @return  Mixed
+ */
+function _consumeBody() {
+  _consumeBody = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee7(data) {
+    var body, accum, accumBytes, _iteratorAbruptCompletion, _didIteratorError, _iteratorError, _iterator, _step, chunk, error, error_;
+    return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          if (!data[INTERNALS].disturbed) {
+            _context7.next = 2;
+            break;
+          }
+          throw new TypeError("body used already for: ".concat(data.url));
+        case 2:
+          data[INTERNALS].disturbed = true;
+          if (!data[INTERNALS].error) {
+            _context7.next = 5;
+            break;
+          }
+          throw data[INTERNALS].error;
+        case 5:
+          body = data.body; // Body is null
+          if (!(body === null)) {
+            _context7.next = 8;
+            break;
+          }
+          return _context7.abrupt("return", external_node_buffer_namespaceObject.Buffer.alloc(0));
+        case 8:
+          if (body instanceof external_node_stream_namespaceObject) {
+            _context7.next = 10;
+            break;
+          }
+          return _context7.abrupt("return", external_node_buffer_namespaceObject.Buffer.alloc(0));
+        case 10:
+          // Body is stream
+          // get ready to actually consume the body
+          accum = [];
+          accumBytes = 0;
+          _context7.prev = 12;
+          _iteratorAbruptCompletion = false;
+          _didIteratorError = false;
+          _context7.prev = 15;
+          _iterator = (0,asyncIterator/* default */.Z)(body);
+        case 17:
+          _context7.next = 19;
+          return _iterator.next();
+        case 19:
+          if (!(_iteratorAbruptCompletion = !(_step = _context7.sent).done)) {
+            _context7.next = 30;
+            break;
+          }
+          chunk = _step.value;
+          if (!(data.size > 0 && accumBytes + chunk.length > data.size)) {
+            _context7.next = 25;
+            break;
+          }
+          error = new FetchError("content size at ".concat(data.url, " over limit: ").concat(data.size), 'max-size');
+          body.destroy(error);
+          throw error;
+        case 25:
+          accumBytes += chunk.length;
+          accum.push(chunk);
+        case 27:
+          _iteratorAbruptCompletion = false;
+          _context7.next = 17;
+          break;
+        case 30:
+          _context7.next = 36;
+          break;
+        case 32:
+          _context7.prev = 32;
+          _context7.t0 = _context7["catch"](15);
+          _didIteratorError = true;
+          _iteratorError = _context7.t0;
+        case 36:
+          _context7.prev = 36;
+          _context7.prev = 37;
+          if (!(_iteratorAbruptCompletion && _iterator["return"] != null)) {
+            _context7.next = 41;
+            break;
+          }
+          _context7.next = 41;
+          return _iterator["return"]();
+        case 41:
+          _context7.prev = 41;
+          if (!_didIteratorError) {
+            _context7.next = 44;
+            break;
+          }
+          throw _iteratorError;
+        case 44:
+          return _context7.finish(41);
+        case 45:
+          return _context7.finish(36);
+        case 46:
+          _context7.next = 52;
+          break;
+        case 48:
+          _context7.prev = 48;
+          _context7.t1 = _context7["catch"](12);
+          error_ = _context7.t1 instanceof FetchBaseError ? _context7.t1 : new FetchError("Invalid response body while trying to fetch ".concat(data.url, ": ").concat(_context7.t1.message), 'system', _context7.t1);
+          throw error_;
+        case 52:
+          if (!(body.readableEnded === true || body._readableState.ended === true)) {
+            _context7.next = 64;
+            break;
+          }
+          _context7.prev = 53;
+          if (!accum.every(function (c) {
+            return typeof c === 'string';
+          })) {
+            _context7.next = 56;
+            break;
+          }
+          return _context7.abrupt("return", external_node_buffer_namespaceObject.Buffer.from(accum.join('')));
+        case 56:
+          return _context7.abrupt("return", external_node_buffer_namespaceObject.Buffer.concat(accum, accumBytes));
+        case 59:
+          _context7.prev = 59;
+          _context7.t2 = _context7["catch"](53);
+          throw new FetchError("Could not create Buffer from response body for ".concat(data.url, ": ").concat(_context7.t2.message), 'system', _context7.t2);
+        case 62:
+          _context7.next = 65;
+          break;
+        case 64:
+          throw new FetchError("Premature close of server response while trying to fetch ".concat(data.url));
+        case 65:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7, null, [[12, 48], [15, 32, 36, 46], [37,, 41, 45], [53, 59]]);
+  }));
+  return _consumeBody.apply(this, arguments);
+}
+var body_clone = function clone(instance, highWaterMark) {
+  var p1;
+  var p2;
+  var body = instance[INTERNALS].body;
+
+  // Don't allow cloning a used body
+  if (instance.bodyUsed) {
+    throw new Error('cannot clone body after it is used');
+  }
+
+  // Check that body is a stream and not form-data object
+  // note: we can't clone the form-data object without having it as a dependency
+  if (body instanceof external_node_stream_namespaceObject && typeof body.getBoundary !== 'function') {
+    // Tee instance body
+    p1 = new external_node_stream_namespaceObject.PassThrough({
+      highWaterMark: highWaterMark
+    });
+    p2 = new external_node_stream_namespaceObject.PassThrough({
+      highWaterMark: highWaterMark
+    });
+    body.pipe(p1);
+    body.pipe(p2);
+    // Set instance body to teed body and return the other teed body
+    instance[INTERNALS].stream = p1;
+    body = p2;
+  }
+  return body;
+};
+var getNonSpecFormDataBoundary = (0,external_node_util_namespaceObject.deprecate)(function (body) {
+  return body.getBoundary();
+}, 'form-data doesn\'t follow the spec and requires special treatment. Use alternative package', 'https://github.com/node-fetch/node-fetch/issues/1167');
+
+/**
+ * Performs the operation "extract a `Content-Type` value from |object|" as
+ * specified in the specification:
+ * https://fetch.spec.whatwg.org/#concept-bodyinit-extract
+ *
+ * This function assumes that instance.body is present.
+ *
+ * @param {any} body Any options.body input
+ * @returns {string | null}
+ */
+var extractContentType = function extractContentType(body, request) {
+  // Body is null or undefined
+  if (body === null) {
+    return null;
+  }
+
+  // Body is string
+  if (typeof body === 'string') {
+    return 'text/plain;charset=UTF-8';
+  }
+
+  // Body is a URLSearchParams
+  if (isURLSearchParameters(body)) {
+    return 'application/x-www-form-urlencoded;charset=UTF-8';
+  }
+
+  // Body is blob
+  if (isBlob(body)) {
+    return body.type || null;
+  }
+
+  // Body is a Buffer (Buffer, ArrayBuffer or ArrayBufferView)
+  if (external_node_buffer_namespaceObject.Buffer.isBuffer(body) || external_node_util_namespaceObject.types.isAnyArrayBuffer(body) || ArrayBuffer.isView(body)) {
+    return null;
+  }
+  if (body instanceof esm_min/* FormData */.Ct) {
+    return "multipart/form-data; boundary=".concat(request[INTERNALS].boundary);
+  }
+
+  // Detect form data input from form-data module
+  if (body && typeof body.getBoundary === 'function') {
+    return "multipart/form-data;boundary=".concat(getNonSpecFormDataBoundary(body));
+  }
+
+  // Body is stream - can't really do much about this
+  if (body instanceof external_node_stream_namespaceObject) {
+    return null;
+  }
+
+  // Body constructor defaults other things to string
+  return 'text/plain;charset=UTF-8';
+};
+
+/**
+ * The Fetch Standard treats this as if "total bytes" is a property on the body.
+ * For us, we have to explicitly get it with a function.
+ *
+ * ref: https://fetch.spec.whatwg.org/#concept-body-total-bytes
+ *
+ * @param {any} obj.body Body object from the Body instance.
+ * @returns {number | null}
+ */
+var getTotalBytes = function getTotalBytes(request) {
+  var body = request[INTERNALS].body;
+
+  // Body is null or undefined
+  if (body === null) {
+    return 0;
+  }
+
+  // Body is Blob
+  if (isBlob(body)) {
+    return body.size;
+  }
+
+  // Body is Buffer
+  if (external_node_buffer_namespaceObject.Buffer.isBuffer(body)) {
+    return body.length;
+  }
+
+  // Detect form data input from form-data module
+  if (body && typeof body.getLengthSync === 'function') {
+    return body.hasKnownLength && body.hasKnownLength() ? body.getLengthSync() : null;
+  }
+
+  // Body is stream
+  return null;
+};
+
+/**
+ * Write a Body to a Node.js WritableStream (e.g. http.Request) object.
+ *
+ * @param {Stream.Writable} dest The stream to write to.
+ * @param obj.body Body object from the Body instance.
+ * @returns {Promise<void>}
+ */
+var writeToStream = /*#__PURE__*/function () {
+  var _ref3 = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee6(dest, _ref2) {
+    var body;
+    return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          body = _ref2.body;
+          if (!(body === null)) {
+            _context6.next = 5;
+            break;
+          }
+          // Body is null
+          dest.end();
+          _context6.next = 7;
+          break;
+        case 5:
+          _context6.next = 7;
+          return pipeline(body, dest);
+        case 7:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+  return function writeToStream(_x2, _x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+// EXTERNAL MODULE: ../../node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(1987);
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/headers.js
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Headers.js
+ *
+ * Headers class offers convenient helpers
+ */
+
+
+
+
+/* c8 ignore next 9 */
+var validateHeaderName = typeof external_node_http_namespaceObject.validateHeaderName === 'function' ? external_node_http_namespaceObject.validateHeaderName : function (name) {
+  if (!/^[\^`\-\w!#$%&'*+.|~]+$/.test(name)) {
+    var error = new TypeError("Header name must be a valid HTTP token [".concat(name, "]"));
+    Object.defineProperty(error, 'code', {
+      value: 'ERR_INVALID_HTTP_TOKEN'
+    });
+    throw error;
+  }
+};
+
+/* c8 ignore next 9 */
+var validateHeaderValue = typeof external_node_http_namespaceObject.validateHeaderValue === 'function' ? external_node_http_namespaceObject.validateHeaderValue : function (name, value) {
+  if (/[^\t\u0020-\u007E\u0080-\u00FF]/.test(value)) {
+    var error = new TypeError("Invalid character in header content [\"".concat(name, "\"]"));
+    Object.defineProperty(error, 'code', {
+      value: 'ERR_INVALID_CHAR'
+    });
+    throw error;
+  }
+};
+
+/**
+ * @typedef {Headers | Record<string, string> | Iterable<readonly [string, string]> | Iterable<Iterable<string>>} HeadersInit
+ */
+
+/**
+ * This Fetch API interface allows you to perform various actions on HTTP request and response headers.
+ * These actions include retrieving, setting, adding to, and removing.
+ * A Headers object has an associated header list, which is initially empty and consists of zero or more name and value pairs.
+ * You can add to this using methods like append() (see Examples.)
+ * In all methods of this interface, header names are matched by case-insensitive byte sequence.
+ *
+ */
+var Headers = /*#__PURE__*/function (_URLSearchParams, _Symbol$toStringTag, _Symbol$iterator, _Symbol$for) {
+  (0,inherits/* default */.Z)(Headers, _URLSearchParams);
+  var _super = (0,createSuper/* default */.Z)(Headers);
+  /**
+   * Headers class
+   *
+   * @constructor
+   * @param {HeadersInit} [init] - Response headers
+   */
+  function Headers(init) {
+    var _this;
+    (0,classCallCheck/* default */.Z)(this, Headers);
+    // Validate and normalize init object in [name, value(s)][]
+    /** @type {string[][]} */
+    var result = [];
+    if (init instanceof Headers) {
+      var raw = init.raw();
+      var _loop = function _loop() {
+        var _result;
+        var _Object$entries$_i = (0,slicedToArray/* default */.Z)(_Object$entries[_i], 2),
+          name = _Object$entries$_i[0],
+          values = _Object$entries$_i[1];
+        (_result = result).push.apply(_result, (0,toConsumableArray/* default */.Z)(values.map(function (value) {
+          return [name, value];
+        })));
+      };
+      for (var _i = 0, _Object$entries = Object.entries(raw); _i < _Object$entries.length; _i++) {
+        _loop();
+      }
+    } else if (init == null) {// eslint-disable-line no-eq-null, eqeqeq
+      // No op
+    } else if (typeof init === 'object' && !external_node_util_namespaceObject.types.isBoxedPrimitive(init)) {
+      var method = init[Symbol.iterator];
+      // eslint-disable-next-line no-eq-null, eqeqeq
+      if (method == null) {
+        var _result2;
+        // Record<ByteString, ByteString>
+        (_result2 = result).push.apply(_result2, (0,toConsumableArray/* default */.Z)(Object.entries(init)));
+      } else {
+        if (typeof method !== 'function') {
+          throw new TypeError('Header pairs must be iterable');
+        }
+
+        // Sequence<sequence<ByteString>>
+        // Note: per spec we have to first exhaust the lists then process them
+        result = (0,toConsumableArray/* default */.Z)(init).map(function (pair) {
+          if (typeof pair !== 'object' || external_node_util_namespaceObject.types.isBoxedPrimitive(pair)) {
+            throw new TypeError('Each header pair must be an iterable object');
+          }
+          return (0,toConsumableArray/* default */.Z)(pair);
+        }).map(function (pair) {
+          if (pair.length !== 2) {
+            throw new TypeError('Each header pair must be a name/value tuple');
+          }
+          return (0,toConsumableArray/* default */.Z)(pair);
+        });
+      }
+    } else {
+      throw new TypeError('Failed to construct \'Headers\': The provided value is not of type \'(sequence<sequence<ByteString>> or record<ByteString, ByteString>)');
+    }
+
+    // Validate and lowercase
+    result = result.length > 0 ? result.map(function (_ref) {
+      var _ref2 = (0,slicedToArray/* default */.Z)(_ref, 2),
+        name = _ref2[0],
+        value = _ref2[1];
+      validateHeaderName(name);
+      validateHeaderValue(name, String(value));
+      return [String(name).toLowerCase(), String(value)];
+    }) : undefined;
+    _this = _super.call(this, result);
+
+    // Returning a Proxy that will lowercase key names, validate parameters and sort keys
+    // eslint-disable-next-line no-constructor-return
+    return (0,possibleConstructorReturn/* default */.Z)(_this, new Proxy((0,assertThisInitialized/* default */.Z)(_this), {
+      get: function get(target, p, receiver) {
+        switch (p) {
+          case 'append':
+          case 'set':
+            return function (name, value) {
+              validateHeaderName(name);
+              validateHeaderValue(name, String(value));
+              return URLSearchParams.prototype[p].call(target, String(name).toLowerCase(), String(value));
+            };
+          case 'delete':
+          case 'has':
+          case 'getAll':
+            return function (name) {
+              validateHeaderName(name);
+              return URLSearchParams.prototype[p].call(target, String(name).toLowerCase());
+            };
+          case 'keys':
+            return function () {
+              target.sort();
+              return new Set(URLSearchParams.prototype.keys.call(target)).keys();
+            };
+          default:
+            return Reflect.get(target, p, receiver);
+        }
+      }
+    }));
+    /* c8 ignore next */
+  }
+  (0,createClass/* default */.Z)(Headers, [{
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return this.constructor.name;
+    }
+  }, {
+    key: "toString",
+    value: function toString() {
+      return Object.prototype.toString.call(this);
+    }
+  }, {
+    key: "get",
+    value: function get(name) {
+      var values = this.getAll(name);
+      if (values.length === 0) {
+        return null;
+      }
+      var value = values.join(', ');
+      if (/^content-encoding$/i.test(name)) {
+        value = value.toLowerCase();
+      }
+      return value;
+    }
+  }, {
+    key: "forEach",
+    value: function forEach(callback) {
+      var thisArg = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : undefined;
+      var _iterator = (0,createForOfIteratorHelper/* default */.Z)(this.keys()),
+        _step;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var name = _step.value;
+          Reflect.apply(callback, thisArg, [this.get(name), name, this]);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+    }
+  }, {
+    key: "values",
+    value: /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function values() {
+      var _iterator2, _step2, name;
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function values$(_context) {
+        while (1) switch (_context.prev = _context.next) {
+          case 0:
+            _iterator2 = (0,createForOfIteratorHelper/* default */.Z)(this.keys());
+            _context.prev = 1;
+            _iterator2.s();
+          case 3:
+            if ((_step2 = _iterator2.n()).done) {
+              _context.next = 9;
+              break;
+            }
+            name = _step2.value;
+            _context.next = 7;
+            return this.get(name);
+          case 7:
+            _context.next = 3;
+            break;
+          case 9:
+            _context.next = 14;
+            break;
+          case 11:
+            _context.prev = 11;
+            _context.t0 = _context["catch"](1);
+            _iterator2.e(_context.t0);
+          case 14:
+            _context.prev = 14;
+            _iterator2.f();
+            return _context.finish(14);
+          case 17:
+          case "end":
+            return _context.stop();
+        }
+      }, values, this, [[1, 11, 14, 17]]);
+    })
+    /**
+     * @type {() => IterableIterator<[string, string]>}
+     */
+  }, {
+    key: "entries",
+    value:
+    /*#__PURE__*/
+    (0,regeneratorRuntime/* default */.Z)().mark(function entries() {
+      var _iterator3, _step3, name;
+      return (0,regeneratorRuntime/* default */.Z)().wrap(function entries$(_context2) {
+        while (1) switch (_context2.prev = _context2.next) {
+          case 0:
+            _iterator3 = (0,createForOfIteratorHelper/* default */.Z)(this.keys());
+            _context2.prev = 1;
+            _iterator3.s();
+          case 3:
+            if ((_step3 = _iterator3.n()).done) {
+              _context2.next = 9;
+              break;
+            }
+            name = _step3.value;
+            _context2.next = 7;
+            return [name, this.get(name)];
+          case 7:
+            _context2.next = 3;
+            break;
+          case 9:
+            _context2.next = 14;
+            break;
+          case 11:
+            _context2.prev = 11;
+            _context2.t0 = _context2["catch"](1);
+            _iterator3.e(_context2.t0);
+          case 14:
+            _context2.prev = 14;
+            _iterator3.f();
+            return _context2.finish(14);
+          case 17:
+          case "end":
+            return _context2.stop();
+        }
+      }, entries, this, [[1, 11, 14, 17]]);
+    })
+  }, {
+    key: _Symbol$iterator,
+    value: function value() {
+      return this.entries();
+    }
+
+    /**
+     * Node-fetch non-spec method
+     * returning all headers and their values as array
+     * @returns {Record<string, string[]>}
+     */
+  }, {
+    key: "raw",
+    value: function raw() {
+      var _this2 = this;
+      return (0,toConsumableArray/* default */.Z)(this.keys()).reduce(function (result, key) {
+        result[key] = _this2.getAll(key);
+        return result;
+      }, {});
+    }
+
+    /**
+     * For better console.log(headers) and also to convert Headers into Node.js Request compatible format
+     */
+  }, {
+    key: _Symbol$for,
+    value: function value() {
+      var _this3 = this;
+      return (0,toConsumableArray/* default */.Z)(this.keys()).reduce(function (result, key) {
+        var values = _this3.getAll(key);
+        // Http.request() only supports string as Host header.
+        // This hack makes specifying custom Host header possible.
+        if (key === 'host') {
+          result[key] = values[0];
+        } else {
+          result[key] = values.length > 1 ? values : values[0];
+        }
+        return result;
+      }, {});
+    }
+  }]);
+  return Headers;
+}( /*#__PURE__*/_wrapNativeSuper(URLSearchParams), Symbol.toStringTag, Symbol.iterator, Symbol["for"]('nodejs.util.inspect.custom'));
+/**
+ * Re-shaping object for Web IDL tests
+ * Only need to do it for overridden methods
+ */
+
+Object.defineProperties(Headers.prototype, ['get', 'entries', 'forEach', 'values'].reduce(function (result, property) {
+  result[property] = {
+    enumerable: true
+  };
+  return result;
+}, {}));
+
+/**
+ * Create a Headers object from an http.IncomingMessage.rawHeaders, ignoring those that do
+ * not conform to HTTP grammar productions.
+ * @param {import('http').IncomingMessage['rawHeaders']} headers
+ */
+function fromRawHeaders() {
+  var headers = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  return new Headers(headers
+  // Split into pairs
+  .reduce(function (result, value, index, array) {
+    if (index % 2 === 0) {
+      result.push(array.slice(index, index + 2));
+    }
+    return result;
+  }, []).filter(function (_ref3) {
+    var _ref4 = (0,slicedToArray/* default */.Z)(_ref3, 2),
+      name = _ref4[0],
+      value = _ref4[1];
+    try {
+      validateHeaderName(name);
+      validateHeaderValue(name, String(value));
+      return true;
+    } catch (_unused) {
+      return false;
+    }
+  }));
+}
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/utils/is-redirect.js
+var redirectStatus = new Set([301, 302, 303, 307, 308]);
+
+/**
+ * Redirect code matching
+ *
+ * @param {number} code - Status code
+ * @return {boolean}
+ */
+var isRedirect = function isRedirect(code) {
+  return redirectStatus.has(code);
+};
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/response.js
+
+
+
+
+
+
+/**
+ * Response.js
+ *
+ * Response class provides content decoding
+ */
+
+
+
+
+var response_INTERNALS = Symbol('Response internals');
+
+/**
+ * Response class
+ *
+ * Ref: https://fetch.spec.whatwg.org/#response-class
+ *
+ * @param   Stream  body  Readable stream
+ * @param   Object  opts  Response options
+ * @return  Void
+ */
+var Response = /*#__PURE__*/function (_Body, _Symbol$toStringTag) {
+  (0,inherits/* default */.Z)(Response, _Body);
+  var _super = (0,createSuper/* default */.Z)(Response);
+  function Response() {
+    var _this;
+    var body = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    (0,classCallCheck/* default */.Z)(this, Response);
+    _this = _super.call(this, body, options);
+
+    // eslint-disable-next-line no-eq-null, eqeqeq, no-negated-condition
+    var status = options.status != null ? options.status : 200;
+    var headers = new Headers(options.headers);
+    if (body !== null && !headers.has('Content-Type')) {
+      var contentType = extractContentType(body, (0,assertThisInitialized/* default */.Z)(_this));
+      if (contentType) {
+        headers.append('Content-Type', contentType);
+      }
+    }
+    _this[response_INTERNALS] = {
+      type: 'default',
+      url: options.url,
+      status: status,
+      statusText: options.statusText || '',
+      headers: headers,
+      counter: options.counter,
+      highWaterMark: options.highWaterMark
+    };
+    return _this;
+  }
+  (0,createClass/* default */.Z)(Response, [{
+    key: "type",
+    get: function get() {
+      return this[response_INTERNALS].type;
+    }
+  }, {
+    key: "url",
+    get: function get() {
+      return this[response_INTERNALS].url || '';
+    }
+  }, {
+    key: "status",
+    get: function get() {
+      return this[response_INTERNALS].status;
+    }
+
+    /**
+     * Convenience property representing if the request ended normally
+     */
+  }, {
+    key: "ok",
+    get: function get() {
+      return this[response_INTERNALS].status >= 200 && this[response_INTERNALS].status < 300;
+    }
+  }, {
+    key: "redirected",
+    get: function get() {
+      return this[response_INTERNALS].counter > 0;
+    }
+  }, {
+    key: "statusText",
+    get: function get() {
+      return this[response_INTERNALS].statusText;
+    }
+  }, {
+    key: "headers",
+    get: function get() {
+      return this[response_INTERNALS].headers;
+    }
+  }, {
+    key: "highWaterMark",
+    get: function get() {
+      return this[response_INTERNALS].highWaterMark;
+    }
+
+    /**
+     * Clone this response
+     *
+     * @return  Response
+     */
+  }, {
+    key: "clone",
+    value: function clone() {
+      return new Response(body_clone(this, this.highWaterMark), {
+        type: this.type,
+        url: this.url,
+        status: this.status,
+        statusText: this.statusText,
+        headers: this.headers,
+        ok: this.ok,
+        redirected: this.redirected,
+        size: this.size,
+        highWaterMark: this.highWaterMark
+      });
+    }
+
+    /**
+     * @param {string} url    The URL that the new response is to originate from.
+     * @param {number} status An optional status code for the response (e.g., 302.)
+     * @returns {Response}    A Response object.
+     */
+  }, {
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return 'Response';
+    }
+  }], [{
+    key: "redirect",
+    value: function redirect(url) {
+      var status = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 302;
+      if (!isRedirect(status)) {
+        throw new RangeError('Failed to execute "redirect" on "response": Invalid status code');
+      }
+      return new Response(null, {
+        headers: {
+          location: new URL(url).toString()
+        },
+        status: status
+      });
+    }
+  }, {
+    key: "error",
+    value: function error() {
+      var response = new Response(null, {
+        status: 0,
+        statusText: ''
+      });
+      response[response_INTERNALS].type = 'error';
+      return response;
+    }
+  }, {
+    key: "json",
+    value: function json() {
+      var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
+      var init = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var body = JSON.stringify(data);
+      if (body === undefined) {
+        throw new TypeError('data is not JSON serializable');
+      }
+      var headers = new Headers(init && init.headers);
+      if (!headers.has('content-type')) {
+        headers.set('content-type', 'application/json');
+      }
+      return new Response(body, _objectSpread2(_objectSpread2({}, init), {}, {
+        headers: headers
+      }));
+    }
+  }]);
+  return Response;
+}(Body, Symbol.toStringTag);
+
+Object.defineProperties(Response.prototype, {
+  type: {
+    enumerable: true
+  },
+  url: {
+    enumerable: true
+  },
+  status: {
+    enumerable: true
+  },
+  ok: {
+    enumerable: true
+  },
+  redirected: {
+    enumerable: true
+  },
+  statusText: {
+    enumerable: true
+  },
+  headers: {
+    enumerable: true
+  },
+  clone: {
+    enumerable: true
+  }
+});
+;// CONCATENATED MODULE: external "node:url"
+const external_node_url_namespaceObject = require("node:url");
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/utils/get-search.js
+var getSearch = function getSearch(parsedURL) {
+  if (parsedURL.search) {
+    return parsedURL.search;
+  }
+  var lastOffset = parsedURL.href.length - 1;
+  var hash = parsedURL.hash || (parsedURL.href[lastOffset] === '#' ? '#' : '');
+  return parsedURL.href[lastOffset - hash.length] === '?' ? '?' : '';
+};
+;// CONCATENATED MODULE: external "node:net"
+const external_node_net_namespaceObject = require("node:net");
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/utils/referrer.js
+
+
+
+/**
+ * @external URL
+ * @see {@link https://developer.mozilla.org/en-US/docs/Web/API/URL|URL}
+ */
+
+/**
+ * @module utils/referrer
+ * @private
+ */
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#strip-url|Referrer Policy §8.4. Strip url for use as a referrer}
+ * @param {string} URL
+ * @param {boolean} [originOnly=false]
+ */
+function stripURLForUseAsAReferrer(url) {
+  var originOnly = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  // 1. If url is null, return no referrer.
+  if (url == null) {
+    // eslint-disable-line no-eq-null, eqeqeq
+    return 'no-referrer';
+  }
+  url = new URL(url);
+
+  // 2. If url's scheme is a local scheme, then return no referrer.
+  if (/^(about|blob|data):$/.test(url.protocol)) {
+    return 'no-referrer';
+  }
+
+  // 3. Set url's username to the empty string.
+  url.username = '';
+
+  // 4. Set url's password to null.
+  // Note: `null` appears to be a mistake as this actually results in the password being `"null"`.
+  url.password = '';
+
+  // 5. Set url's fragment to null.
+  // Note: `null` appears to be a mistake as this actually results in the fragment being `"#null"`.
+  url.hash = '';
+
+  // 6. If the origin-only flag is true, then:
+  if (originOnly) {
+    // 6.1. Set url's path to null.
+    // Note: `null` appears to be a mistake as this actually results in the path being `"/null"`.
+    url.pathname = '';
+
+    // 6.2. Set url's query to null.
+    // Note: `null` appears to be a mistake as this actually results in the query being `"?null"`.
+    url.search = '';
+  }
+
+  // 7. Return url.
+  return url;
+}
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#enumdef-referrerpolicy|enum ReferrerPolicy}
+ */
+var ReferrerPolicy = new Set(['', 'no-referrer', 'no-referrer-when-downgrade', 'same-origin', 'origin', 'strict-origin', 'origin-when-cross-origin', 'strict-origin-when-cross-origin', 'unsafe-url']);
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#default-referrer-policy|default referrer policy}
+ */
+var DEFAULT_REFERRER_POLICY = 'strict-origin-when-cross-origin';
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#referrer-policies|Referrer Policy §3. Referrer Policies}
+ * @param {string} referrerPolicy
+ * @returns {string} referrerPolicy
+ */
+function validateReferrerPolicy(referrerPolicy) {
+  if (!ReferrerPolicy.has(referrerPolicy)) {
+    throw new TypeError("Invalid referrerPolicy: ".concat(referrerPolicy));
+  }
+  return referrerPolicy;
+}
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-secure-contexts/#is-origin-trustworthy|Referrer Policy §3.2. Is origin potentially trustworthy?}
+ * @param {external:URL} url
+ * @returns `true`: "Potentially Trustworthy", `false`: "Not Trustworthy"
+ */
+function isOriginPotentiallyTrustworthy(url) {
+  // 1. If origin is an opaque origin, return "Not Trustworthy".
+  // Not applicable
+
+  // 2. Assert: origin is a tuple origin.
+  // Not for implementations
+
+  // 3. If origin's scheme is either "https" or "wss", return "Potentially Trustworthy".
+  if (/^(http|ws)s:$/.test(url.protocol)) {
+    return true;
+  }
+
+  // 4. If origin's host component matches one of the CIDR notations 127.0.0.0/8 or ::1/128 [RFC4632], return "Potentially Trustworthy".
+  var hostIp = url.host.replace(/(^\[)|(]$)/g, '');
+  var hostIPVersion = (0,external_node_net_namespaceObject.isIP)(hostIp);
+  if (hostIPVersion === 4 && /^127\./.test(hostIp)) {
+    return true;
+  }
+  if (hostIPVersion === 6 && /^(((0+:){7})|(::(0+:){0,6}))0*1$/.test(hostIp)) {
+    return true;
+  }
+
+  // 5. If origin's host component is "localhost" or falls within ".localhost", and the user agent conforms to the name resolution rules in [let-localhost-be-localhost], return "Potentially Trustworthy".
+  // We are returning FALSE here because we cannot ensure conformance to
+  // let-localhost-be-loalhost (https://tools.ietf.org/html/draft-west-let-localhost-be-localhost)
+  if (url.host === 'localhost' || url.host.endsWith('.localhost')) {
+    return false;
+  }
+
+  // 6. If origin's scheme component is file, return "Potentially Trustworthy".
+  if (url.protocol === 'file:') {
+    return true;
+  }
+
+  // 7. If origin's scheme component is one which the user agent considers to be authenticated, return "Potentially Trustworthy".
+  // Not supported
+
+  // 8. If origin has been configured as a trustworthy origin, return "Potentially Trustworthy".
+  // Not supported
+
+  // 9. Return "Not Trustworthy".
+  return false;
+}
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-secure-contexts/#is-url-trustworthy|Referrer Policy §3.3. Is url potentially trustworthy?}
+ * @param {external:URL} url
+ * @returns `true`: "Potentially Trustworthy", `false`: "Not Trustworthy"
+ */
+function isUrlPotentiallyTrustworthy(url) {
+  // 1. If url is "about:blank" or "about:srcdoc", return "Potentially Trustworthy".
+  if (/^about:(blank|srcdoc)$/.test(url)) {
+    return true;
+  }
+
+  // 2. If url's scheme is "data", return "Potentially Trustworthy".
+  if (url.protocol === 'data:') {
+    return true;
+  }
+
+  // Note: The origin of blob: and filesystem: URLs is the origin of the context in which they were
+  // created. Therefore, blobs created in a trustworthy origin will themselves be potentially
+  // trustworthy.
+  if (/^(blob|filesystem):$/.test(url.protocol)) {
+    return true;
+  }
+
+  // 3. Return the result of executing §3.2 Is origin potentially trustworthy? on url's origin.
+  return isOriginPotentiallyTrustworthy(url);
+}
+
+/**
+ * Modifies the referrerURL to enforce any extra security policy considerations.
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#determine-requests-referrer|Referrer Policy §8.3. Determine request's Referrer}, step 7
+ * @callback module:utils/referrer~referrerURLCallback
+ * @param {external:URL} referrerURL
+ * @returns {external:URL} modified referrerURL
+ */
+
+/**
+ * Modifies the referrerOrigin to enforce any extra security policy considerations.
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#determine-requests-referrer|Referrer Policy §8.3. Determine request's Referrer}, step 7
+ * @callback module:utils/referrer~referrerOriginCallback
+ * @param {external:URL} referrerOrigin
+ * @returns {external:URL} modified referrerOrigin
+ */
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#determine-requests-referrer|Referrer Policy §8.3. Determine request's Referrer}
+ * @param {Request} request
+ * @param {object} o
+ * @param {module:utils/referrer~referrerURLCallback} o.referrerURLCallback
+ * @param {module:utils/referrer~referrerOriginCallback} o.referrerOriginCallback
+ * @returns {external:URL} Request's referrer
+ */
+function determineRequestsReferrer(request) {
+  var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+    referrerURLCallback = _ref.referrerURLCallback,
+    referrerOriginCallback = _ref.referrerOriginCallback;
+  // There are 2 notes in the specification about invalid pre-conditions.  We return null, here, for
+  // these cases:
+  // > Note: If request's referrer is "no-referrer", Fetch will not call into this algorithm.
+  // > Note: If request's referrer policy is the empty string, Fetch will not call into this
+  // > algorithm.
+  if (request.referrer === 'no-referrer' || request.referrerPolicy === '') {
+    return null;
+  }
+
+  // 1. Let policy be request's associated referrer policy.
+  var policy = request.referrerPolicy;
+
+  // 2. Let environment be request's client.
+  // not applicable to node.js
+
+  // 3. Switch on request's referrer:
+  if (request.referrer === 'about:client') {
+    return 'no-referrer';
+  }
+
+  // "a URL": Let referrerSource be request's referrer.
+  var referrerSource = request.referrer;
+
+  // 4. Let request's referrerURL be the result of stripping referrerSource for use as a referrer.
+  var referrerURL = stripURLForUseAsAReferrer(referrerSource);
+
+  // 5. Let referrerOrigin be the result of stripping referrerSource for use as a referrer, with the
+  //    origin-only flag set to true.
+  var referrerOrigin = stripURLForUseAsAReferrer(referrerSource, true);
+
+  // 6. If the result of serializing referrerURL is a string whose length is greater than 4096, set
+  //    referrerURL to referrerOrigin.
+  if (referrerURL.toString().length > 4096) {
+    referrerURL = referrerOrigin;
+  }
+
+  // 7. The user agent MAY alter referrerURL or referrerOrigin at this point to enforce arbitrary
+  //    policy considerations in the interests of minimizing data leakage. For example, the user
+  //    agent could strip the URL down to an origin, modify its host, replace it with an empty
+  //    string, etc.
+  if (referrerURLCallback) {
+    referrerURL = referrerURLCallback(referrerURL);
+  }
+  if (referrerOriginCallback) {
+    referrerOrigin = referrerOriginCallback(referrerOrigin);
+  }
+
+  // 8.Execute the statements corresponding to the value of policy:
+  var currentURL = new URL(request.url);
+  switch (policy) {
+    case 'no-referrer':
+      return 'no-referrer';
+    case 'origin':
+      return referrerOrigin;
+    case 'unsafe-url':
+      return referrerURL;
+    case 'strict-origin':
+      // 1. If referrerURL is a potentially trustworthy URL and request's current URL is not a
+      //    potentially trustworthy URL, then return no referrer.
+      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
+        return 'no-referrer';
+      }
+
+      // 2. Return referrerOrigin.
+      return referrerOrigin.toString();
+    case 'strict-origin-when-cross-origin':
+      // 1. If the origin of referrerURL and the origin of request's current URL are the same, then
+      //    return referrerURL.
+      if (referrerURL.origin === currentURL.origin) {
+        return referrerURL;
+      }
+
+      // 2. If referrerURL is a potentially trustworthy URL and request's current URL is not a
+      //    potentially trustworthy URL, then return no referrer.
+      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
+        return 'no-referrer';
+      }
+
+      // 3. Return referrerOrigin.
+      return referrerOrigin;
+    case 'same-origin':
+      // 1. If the origin of referrerURL and the origin of request's current URL are the same, then
+      //    return referrerURL.
+      if (referrerURL.origin === currentURL.origin) {
+        return referrerURL;
+      }
+
+      // 2. Return no referrer.
+      return 'no-referrer';
+    case 'origin-when-cross-origin':
+      // 1. If the origin of referrerURL and the origin of request's current URL are the same, then
+      //    return referrerURL.
+      if (referrerURL.origin === currentURL.origin) {
+        return referrerURL;
+      }
+
+      // Return referrerOrigin.
+      return referrerOrigin;
+    case 'no-referrer-when-downgrade':
+      // 1. If referrerURL is a potentially trustworthy URL and request's current URL is not a
+      //    potentially trustworthy URL, then return no referrer.
+      if (isUrlPotentiallyTrustworthy(referrerURL) && !isUrlPotentiallyTrustworthy(currentURL)) {
+        return 'no-referrer';
+      }
+
+      // 2. Return referrerURL.
+      return referrerURL;
+    default:
+      throw new TypeError("Invalid referrerPolicy: ".concat(policy));
+  }
+}
+
+/**
+ * @see {@link https://w3c.github.io/webappsec-referrer-policy/#parse-referrer-policy-from-header|Referrer Policy §8.1. Parse a referrer policy from a Referrer-Policy header}
+ * @param {Headers} headers Response headers
+ * @returns {string} policy
+ */
+function parseReferrerPolicyFromHeader(headers) {
+  // 1. Let policy-tokens be the result of extracting header list values given `Referrer-Policy`
+  //    and response’s header list.
+  var policyTokens = (headers.get('referrer-policy') || '').split(/[,\s]+/);
+
+  // 2. Let policy be the empty string.
+  var policy = '';
+
+  // 3. For each token in policy-tokens, if token is a referrer policy and token is not the empty
+  //    string, then set policy to token.
+  // Note: This algorithm loops over multiple policy values to allow deployment of new policy
+  // values with fallbacks for older user agents, as described in § 11.1 Unknown Policy Values.
+  var _iterator = (0,createForOfIteratorHelper/* default */.Z)(policyTokens),
+    _step;
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var token = _step.value;
+      if (token && ReferrerPolicy.has(token)) {
+        policy = token;
+      }
+    }
+
+    // 4. Return policy.
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+  return policy;
+}
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/request.js
+
+
+
+
+
+/**
+ * Request.js
+ *
+ * Request class contains server only options
+ *
+ * All spec algorithm step numbers are based on https://fetch.spec.whatwg.org/commit-snapshots/ae716822cb3a61843226cd090eefc6589446c1d2/.
+ */
+
+
+
+
+
+
+
+
+var request_INTERNALS = Symbol('Request internals');
+
+/**
+ * Check if `obj` is an instance of Request.
+ *
+ * @param  {*} object
+ * @return {boolean}
+ */
+var isRequest = function isRequest(object) {
+  return typeof object === 'object' && typeof object[request_INTERNALS] === 'object';
+};
+var doBadDataWarn = (0,external_node_util_namespaceObject.deprecate)(function () {}, '.data is not a valid RequestInit property, use .body instead', 'https://github.com/node-fetch/node-fetch/issues/1000 (request)');
+
+/**
+ * Request class
+ *
+ * Ref: https://fetch.spec.whatwg.org/#request-class
+ *
+ * @param   Mixed   input  Url or Request instance
+ * @param   Object  init   Custom options
+ * @return  Void
+ */
+var Request = /*#__PURE__*/function (_Body, _Symbol$toStringTag) {
+  (0,inherits/* default */.Z)(Request, _Body);
+  var _super = (0,createSuper/* default */.Z)(Request);
+  function Request(input) {
+    var _this;
+    var init = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    (0,classCallCheck/* default */.Z)(this, Request);
+    var parsedURL;
+
+    // Normalize input and force URL to be encoded as UTF-8 (https://github.com/node-fetch/node-fetch/issues/245)
+    if (isRequest(input)) {
+      parsedURL = new URL(input.url);
+    } else {
+      parsedURL = new URL(input);
+      input = {};
+    }
+    if (parsedURL.username !== '' || parsedURL.password !== '') {
+      throw new TypeError("".concat(parsedURL, " is an url with embedded credentials."));
+    }
+    var method = init.method || input.method || 'GET';
+    if (/^(delete|get|head|options|post|put)$/i.test(method)) {
+      method = method.toUpperCase();
+    }
+    if (!isRequest(init) && 'data' in init) {
+      doBadDataWarn();
+    }
+
+    // eslint-disable-next-line no-eq-null, eqeqeq
+    if ((init.body != null || isRequest(input) && input.body !== null) && (method === 'GET' || method === 'HEAD')) {
+      throw new TypeError('Request with GET/HEAD method cannot have body');
+    }
+    var inputBody = init.body ? init.body : isRequest(input) && input.body !== null ? body_clone(input) : null;
+    _this = _super.call(this, inputBody, {
+      size: init.size || input.size || 0
+    });
+    var headers = new Headers(init.headers || input.headers || {});
+    if (inputBody !== null && !headers.has('Content-Type')) {
+      var contentType = extractContentType(inputBody, (0,assertThisInitialized/* default */.Z)(_this));
+      if (contentType) {
+        headers.set('Content-Type', contentType);
+      }
+    }
+    var signal = isRequest(input) ? input.signal : null;
+    if ('signal' in init) {
+      signal = init.signal;
+    }
+
+    // eslint-disable-next-line no-eq-null, eqeqeq
+    if (signal != null && !isAbortSignal(signal)) {
+      throw new TypeError('Expected signal to be an instanceof AbortSignal or EventTarget');
+    }
+
+    // §5.4, Request constructor steps, step 15.1
+    // eslint-disable-next-line no-eq-null, eqeqeq
+    var referrer = init.referrer == null ? input.referrer : init.referrer;
+    if (referrer === '') {
+      // §5.4, Request constructor steps, step 15.2
+      referrer = 'no-referrer';
+    } else if (referrer) {
+      // §5.4, Request constructor steps, step 15.3.1, 15.3.2
+      var parsedReferrer = new URL(referrer);
+      // §5.4, Request constructor steps, step 15.3.3, 15.3.4
+      referrer = /^about:(\/\/)?client$/.test(parsedReferrer) ? 'client' : parsedReferrer;
+    } else {
+      referrer = undefined;
+    }
+    _this[request_INTERNALS] = {
+      method: method,
+      redirect: init.redirect || input.redirect || 'follow',
+      headers: headers,
+      parsedURL: parsedURL,
+      signal: signal,
+      referrer: referrer
+    };
+
+    // Node-fetch-only options
+    _this.follow = init.follow === undefined ? input.follow === undefined ? 20 : input.follow : init.follow;
+    _this.compress = init.compress === undefined ? input.compress === undefined ? true : input.compress : init.compress;
+    _this.counter = init.counter || input.counter || 0;
+    _this.agent = init.agent || input.agent;
+    _this.highWaterMark = init.highWaterMark || input.highWaterMark || 16384;
+    _this.insecureHTTPParser = init.insecureHTTPParser || input.insecureHTTPParser || false;
+
+    // §5.4, Request constructor steps, step 16.
+    // Default is empty string per https://fetch.spec.whatwg.org/#concept-request-referrer-policy
+    _this.referrerPolicy = init.referrerPolicy || input.referrerPolicy || '';
+    return _this;
+  }
+
+  /** @returns {string} */
+  (0,createClass/* default */.Z)(Request, [{
+    key: "method",
+    get: function get() {
+      return this[request_INTERNALS].method;
+    }
+
+    /** @returns {string} */
+  }, {
+    key: "url",
+    get: function get() {
+      return (0,external_node_url_namespaceObject.format)(this[request_INTERNALS].parsedURL);
+    }
+
+    /** @returns {Headers} */
+  }, {
+    key: "headers",
+    get: function get() {
+      return this[request_INTERNALS].headers;
+    }
+  }, {
+    key: "redirect",
+    get: function get() {
+      return this[request_INTERNALS].redirect;
+    }
+
+    /** @returns {AbortSignal} */
+  }, {
+    key: "signal",
+    get: function get() {
+      return this[request_INTERNALS].signal;
+    }
+
+    // https://fetch.spec.whatwg.org/#dom-request-referrer
+  }, {
+    key: "referrer",
+    get: function get() {
+      if (this[request_INTERNALS].referrer === 'no-referrer') {
+        return '';
+      }
+      if (this[request_INTERNALS].referrer === 'client') {
+        return 'about:client';
+      }
+      if (this[request_INTERNALS].referrer) {
+        return this[request_INTERNALS].referrer.toString();
+      }
+      return undefined;
+    }
+  }, {
+    key: "referrerPolicy",
+    get: function get() {
+      return this[request_INTERNALS].referrerPolicy;
+    },
+    set: function set(referrerPolicy) {
+      this[request_INTERNALS].referrerPolicy = validateReferrerPolicy(referrerPolicy);
+    }
+
+    /**
+     * Clone this request
+     *
+     * @return  Request
+     */
+  }, {
+    key: "clone",
+    value: function clone() {
+      return new Request(this);
+    }
+  }, {
+    key: _Symbol$toStringTag,
+    get: function get() {
+      return 'Request';
+    }
+  }]);
+  return Request;
+}(Body, Symbol.toStringTag);
+
+Object.defineProperties(Request.prototype, {
+  method: {
+    enumerable: true
+  },
+  url: {
+    enumerable: true
+  },
+  headers: {
+    enumerable: true
+  },
+  redirect: {
+    enumerable: true
+  },
+  clone: {
+    enumerable: true
+  },
+  signal: {
+    enumerable: true
+  },
+  referrer: {
+    enumerable: true
+  },
+  referrerPolicy: {
+    enumerable: true
+  }
+});
+
+/**
+ * Convert a Request to Node.js http request options.
+ *
+ * @param {Request} request - A Request instance
+ * @return The options object to be passed to http.request
+ */
+var getNodeRequestOptions = function getNodeRequestOptions(request) {
+  var parsedURL = request[request_INTERNALS].parsedURL;
+  var headers = new Headers(request[request_INTERNALS].headers);
+
+  // Fetch step 1.3
+  if (!headers.has('Accept')) {
+    headers.set('Accept', '*/*');
+  }
+
+  // HTTP-network-or-cache fetch steps 2.4-2.7
+  var contentLengthValue = null;
+  if (request.body === null && /^(post|put)$/i.test(request.method)) {
+    contentLengthValue = '0';
+  }
+  if (request.body !== null) {
+    var totalBytes = getTotalBytes(request);
+    // Set Content-Length if totalBytes is a number (that is not NaN)
+    if (typeof totalBytes === 'number' && !Number.isNaN(totalBytes)) {
+      contentLengthValue = String(totalBytes);
+    }
+  }
+  if (contentLengthValue) {
+    headers.set('Content-Length', contentLengthValue);
+  }
+
+  // 4.1. Main fetch, step 2.6
+  // > If request's referrer policy is the empty string, then set request's referrer policy to the
+  // > default referrer policy.
+  if (request.referrerPolicy === '') {
+    request.referrerPolicy = DEFAULT_REFERRER_POLICY;
+  }
+
+  // 4.1. Main fetch, step 2.7
+  // > If request's referrer is not "no-referrer", set request's referrer to the result of invoking
+  // > determine request's referrer.
+  if (request.referrer && request.referrer !== 'no-referrer') {
+    request[request_INTERNALS].referrer = determineRequestsReferrer(request);
+  } else {
+    request[request_INTERNALS].referrer = 'no-referrer';
+  }
+
+  // 4.5. HTTP-network-or-cache fetch, step 6.9
+  // > If httpRequest's referrer is a URL, then append `Referer`/httpRequest's referrer, serialized
+  // >  and isomorphic encoded, to httpRequest's header list.
+  if (request[request_INTERNALS].referrer instanceof URL) {
+    headers.set('Referer', request.referrer);
+  }
+
+  // HTTP-network-or-cache fetch step 2.11
+  if (!headers.has('User-Agent')) {
+    headers.set('User-Agent', 'node-fetch');
+  }
+
+  // HTTP-network-or-cache fetch step 2.15
+  if (request.compress && !headers.has('Accept-Encoding')) {
+    headers.set('Accept-Encoding', 'gzip, deflate, br');
+  }
+  var agent = request.agent;
+  if (typeof agent === 'function') {
+    agent = agent(parsedURL);
+  }
+
+  // HTTP-network fetch step 4.2
+  // chunked encoding is handled by Node.js
+
+  var search = getSearch(parsedURL);
+
+  // Pass the full URL directly to request(), but overwrite the following
+  // options:
+  var options = {
+    // Overwrite search to retain trailing ? (issue #776)
+    path: parsedURL.pathname + search,
+    // The following options are not expressed in the URL
+    method: request.method,
+    headers: headers[Symbol["for"]('nodejs.util.inspect.custom')](),
+    insecureHTTPParser: request.insecureHTTPParser,
+    agent: agent
+  };
+  return {
+    /** @type {URL} */
+    parsedURL: parsedURL,
+    options: options
+  };
+};
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/errors/abort-error.js
+
+
+
+
+
+
+/**
+ * AbortError interface for cancelled requests
+ */
+var AbortError = /*#__PURE__*/function (_FetchBaseError) {
+  (0,inherits/* default */.Z)(AbortError, _FetchBaseError);
+  var _super = (0,createSuper/* default */.Z)(AbortError);
+  function AbortError(message) {
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'aborted';
+    (0,classCallCheck/* default */.Z)(this, AbortError);
+    return _super.call(this, message, type);
+  }
+  return (0,createClass/* default */.Z)(AbortError);
+}(FetchBaseError);
+// EXTERNAL MODULE: ../../node_modules/fetch-blob/from.js + 2 modules
+var from = __webpack_require__(6002);
+;// CONCATENATED MODULE: ../../node_modules/image2uri/node_modules/node-fetch/src/index.js
+
+
+/**
+ * Index.js
+ *
+ * a request API compatible with window.fetch
+ *
+ * All spec algorithm step numbers are based on https://fetch.spec.whatwg.org/commit-snapshots/ae716822cb3a61843226cd090eefc6589446c1d2/.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var supportedSchemas = new Set(['data:', 'http:', 'https:']);
+
+/**
+ * Fetch function
+ *
+ * @param   {string | URL | import('./request').default} url - Absolute url or Request instance
+ * @param   {*} [options_] - Fetch options
+ * @return  {Promise<import('./response').default>}
+ */
+function fetch(_x, _x2) {
+  return _fetch.apply(this, arguments);
+}
+function _fetch() {
+  _fetch = (0,asyncToGenerator/* default */.Z)( /*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(url, options_) {
+    return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          return _context.abrupt("return", new Promise(function (resolve, reject) {
+            // Build request object
+            var request = new Request(url, options_);
+            var _getNodeRequestOption = getNodeRequestOptions(request),
+              parsedURL = _getNodeRequestOption.parsedURL,
+              options = _getNodeRequestOption.options;
+            if (!supportedSchemas.has(parsedURL.protocol)) {
+              throw new TypeError("node-fetch cannot load ".concat(url, ". URL scheme \"").concat(parsedURL.protocol.replace(/:$/, ''), "\" is not supported."));
+            }
+            if (parsedURL.protocol === 'data:') {
+              var data = dist(request.url);
+              var _response = new Response(data, {
+                headers: {
+                  'Content-Type': data.typeFull
+                }
+              });
+              resolve(_response);
+              return;
+            }
+
+            // Wrap http.request into fetch
+            var send = (parsedURL.protocol === 'https:' ? external_node_https_namespaceObject : external_node_http_namespaceObject).request;
+            var signal = request.signal;
+            var response = null;
+            var abort = function abort() {
+              var error = new AbortError('The operation was aborted.');
+              reject(error);
+              if (request.body && request.body instanceof external_node_stream_namespaceObject.Readable) {
+                request.body.destroy(error);
+              }
+              if (!response || !response.body) {
+                return;
+              }
+              response.body.emit('error', error);
+            };
+            if (signal && signal.aborted) {
+              abort();
+              return;
+            }
+            var abortAndFinalize = function abortAndFinalize() {
+              abort();
+              finalize();
+            };
+
+            // Send request
+            var request_ = send(parsedURL.toString(), options);
+            if (signal) {
+              signal.addEventListener('abort', abortAndFinalize);
+            }
+            var finalize = function finalize() {
+              request_.abort();
+              if (signal) {
+                signal.removeEventListener('abort', abortAndFinalize);
+              }
+            };
+            request_.on('error', function (error) {
+              reject(new FetchError("request to ".concat(request.url, " failed, reason: ").concat(error.message), 'system', error));
+              finalize();
+            });
+            fixResponseChunkedTransferBadEnding(request_, function (error) {
+              if (response && response.body) {
+                response.body.destroy(error);
+              }
+            });
+
+            /* c8 ignore next 18 */
+            if (process.version < 'v14') {
+              // Before Node.js 14, pipeline() does not fully support async iterators and does not always
+              // properly handle when the socket close/end events are out of order.
+              request_.on('socket', function (s) {
+                var endedWithEventsCount;
+                s.prependListener('end', function () {
+                  endedWithEventsCount = s._eventsCount;
+                });
+                s.prependListener('close', function (hadError) {
+                  // if end happened before close but the socket didn't emit an error, do it now
+                  if (response && endedWithEventsCount < s._eventsCount && !hadError) {
+                    var error = new Error('Premature close');
+                    error.code = 'ERR_STREAM_PREMATURE_CLOSE';
+                    response.body.emit('error', error);
+                  }
+                });
+              });
+            }
+            request_.on('response', function (response_) {
+              request_.setTimeout(0);
+              var headers = fromRawHeaders(response_.rawHeaders);
+
+              // HTTP fetch step 5
+              if (isRedirect(response_.statusCode)) {
+                // HTTP fetch step 5.2
+                var location = headers.get('Location');
+
+                // HTTP fetch step 5.3
+                var locationURL = null;
+                try {
+                  locationURL = location === null ? null : new URL(location, request.url);
+                } catch (_unused) {
+                  // error here can only be invalid URL in Location: header
+                  // do not throw when options.redirect == manual
+                  // let the user extract the errorneous redirect URL
+                  if (request.redirect !== 'manual') {
+                    reject(new FetchError("uri requested responds with an invalid redirect URL: ".concat(location), 'invalid-redirect'));
+                    finalize();
+                    return;
+                  }
+                }
+
+                // HTTP fetch step 5.5
+                switch (request.redirect) {
+                  case 'error':
+                    reject(new FetchError("uri requested responds with a redirect, redirect mode is set to error: ".concat(request.url), 'no-redirect'));
+                    finalize();
+                    return;
+                  case 'manual':
+                    // Nothing to do
+                    break;
+                  case 'follow':
+                    {
+                      // HTTP-redirect fetch step 2
+                      if (locationURL === null) {
+                        break;
+                      }
+
+                      // HTTP-redirect fetch step 5
+                      if (request.counter >= request.follow) {
+                        reject(new FetchError("maximum redirect reached at: ".concat(request.url), 'max-redirect'));
+                        finalize();
+                        return;
+                      }
+
+                      // HTTP-redirect fetch step 6 (counter increment)
+                      // Create a new Request object.
+                      var requestOptions = {
+                        headers: new Headers(request.headers),
+                        follow: request.follow,
+                        counter: request.counter + 1,
+                        agent: request.agent,
+                        compress: request.compress,
+                        method: request.method,
+                        body: body_clone(request),
+                        signal: request.signal,
+                        size: request.size,
+                        referrer: request.referrer,
+                        referrerPolicy: request.referrerPolicy
+                      };
+
+                      // when forwarding sensitive headers like "Authorization",
+                      // "WWW-Authenticate", and "Cookie" to untrusted targets,
+                      // headers will be ignored when following a redirect to a domain
+                      // that is not a subdomain match or exact match of the initial domain.
+                      // For example, a redirect from "foo.com" to either "foo.com" or "sub.foo.com"
+                      // will forward the sensitive headers, but a redirect to "bar.com" will not.
+                      // headers will also be ignored when following a redirect to a domain using
+                      // a different protocol. For example, a redirect from "https://foo.com" to "http://foo.com"
+                      // will not forward the sensitive headers
+                      if (!isDomainOrSubdomain(request.url, locationURL) || !isSameProtocol(request.url, locationURL)) {
+                        for (var _i = 0, _arr = ['authorization', 'www-authenticate', 'cookie', 'cookie2']; _i < _arr.length; _i++) {
+                          var name = _arr[_i];
+                          requestOptions.headers["delete"](name);
+                        }
+                      }
+
+                      // HTTP-redirect fetch step 9
+                      if (response_.statusCode !== 303 && request.body && options_.body instanceof external_node_stream_namespaceObject.Readable) {
+                        reject(new FetchError('Cannot follow redirect with body being a readable stream', 'unsupported-redirect'));
+                        finalize();
+                        return;
+                      }
+
+                      // HTTP-redirect fetch step 11
+                      if (response_.statusCode === 303 || (response_.statusCode === 301 || response_.statusCode === 302) && request.method === 'POST') {
+                        requestOptions.method = 'GET';
+                        requestOptions.body = undefined;
+                        requestOptions.headers["delete"]('content-length');
+                      }
+
+                      // HTTP-redirect fetch step 14
+                      var responseReferrerPolicy = parseReferrerPolicyFromHeader(headers);
+                      if (responseReferrerPolicy) {
+                        requestOptions.referrerPolicy = responseReferrerPolicy;
+                      }
+
+                      // HTTP-redirect fetch step 15
+                      resolve(fetch(new Request(locationURL, requestOptions)));
+                      finalize();
+                      return;
+                    }
+                  default:
+                    return reject(new TypeError("Redirect option '".concat(request.redirect, "' is not a valid value of RequestRedirect")));
+                }
+              }
+
+              // Prepare response
+              if (signal) {
+                response_.once('end', function () {
+                  signal.removeEventListener('abort', abortAndFinalize);
+                });
+              }
+              var body = (0,external_node_stream_namespaceObject.pipeline)(response_, new external_node_stream_namespaceObject.PassThrough(), function (error) {
+                if (error) {
+                  reject(error);
+                }
+              });
+              // see https://github.com/nodejs/node/pull/29376
+              /* c8 ignore next 3 */
+              if (process.version < 'v12.10') {
+                response_.on('aborted', abortAndFinalize);
+              }
+              var responseOptions = {
+                url: request.url,
+                status: response_.statusCode,
+                statusText: response_.statusMessage,
+                headers: headers,
+                size: request.size,
+                counter: request.counter,
+                highWaterMark: request.highWaterMark
+              };
+
+              // HTTP-network fetch step 12.1.1.3
+              var codings = headers.get('Content-Encoding');
+
+              // HTTP-network fetch step 12.1.1.4: handle content codings
+
+              // in following scenarios we ignore compression support
+              // 1. compression support is disabled
+              // 2. HEAD request
+              // 3. no Content-Encoding header
+              // 4. no content response (204)
+              // 5. content not modified response (304)
+              if (!request.compress || request.method === 'HEAD' || codings === null || response_.statusCode === 204 || response_.statusCode === 304) {
+                response = new Response(body, responseOptions);
+                resolve(response);
+                return;
+              }
+
+              // For Node v6+
+              // Be less strict when decoding compressed responses, since sometimes
+              // servers send slightly invalid responses that are still accepted
+              // by common browsers.
+              // Always using Z_SYNC_FLUSH is what cURL does.
+              var zlibOptions = {
+                flush: external_node_zlib_namespaceObject.Z_SYNC_FLUSH,
+                finishFlush: external_node_zlib_namespaceObject.Z_SYNC_FLUSH
+              };
+
+              // For gzip
+              if (codings === 'gzip' || codings === 'x-gzip') {
+                body = (0,external_node_stream_namespaceObject.pipeline)(body, external_node_zlib_namespaceObject.createGunzip(zlibOptions), function (error) {
+                  if (error) {
+                    reject(error);
+                  }
+                });
+                response = new Response(body, responseOptions);
+                resolve(response);
+                return;
+              }
+
+              // For deflate
+              if (codings === 'deflate' || codings === 'x-deflate') {
+                // Handle the infamous raw deflate response from old servers
+                // a hack for old IIS and Apache servers
+                var raw = (0,external_node_stream_namespaceObject.pipeline)(response_, new external_node_stream_namespaceObject.PassThrough(), function (error) {
+                  if (error) {
+                    reject(error);
+                  }
+                });
+                raw.once('data', function (chunk) {
+                  // See http://stackoverflow.com/questions/37519828
+                  if ((chunk[0] & 0x0F) === 0x08) {
+                    body = (0,external_node_stream_namespaceObject.pipeline)(body, external_node_zlib_namespaceObject.createInflate(), function (error) {
+                      if (error) {
+                        reject(error);
+                      }
+                    });
+                  } else {
+                    body = (0,external_node_stream_namespaceObject.pipeline)(body, external_node_zlib_namespaceObject.createInflateRaw(), function (error) {
+                      if (error) {
+                        reject(error);
+                      }
+                    });
+                  }
+                  response = new Response(body, responseOptions);
+                  resolve(response);
+                });
+                raw.once('end', function () {
+                  // Some old IIS servers return zero-length OK deflate responses, so
+                  // 'data' is never emitted. See https://github.com/node-fetch/node-fetch/pull/903
+                  if (!response) {
+                    response = new Response(body, responseOptions);
+                    resolve(response);
+                  }
+                });
+                return;
+              }
+
+              // For br
+              if (codings === 'br') {
+                body = (0,external_node_stream_namespaceObject.pipeline)(body, external_node_zlib_namespaceObject.createBrotliDecompress(), function (error) {
+                  if (error) {
+                    reject(error);
+                  }
+                });
+                response = new Response(body, responseOptions);
+                resolve(response);
+                return;
+              }
+
+              // Otherwise, use response as-is
+              response = new Response(body, responseOptions);
+              resolve(response);
+            });
+
+            // eslint-disable-next-line promise/prefer-await-to-then
+            writeToStream(request_, request)["catch"](reject);
+          }));
+        case 1:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee);
+  }));
+  return _fetch.apply(this, arguments);
+}
+function fixResponseChunkedTransferBadEnding(request, errorCallback) {
+  var LAST_CHUNK = external_node_buffer_namespaceObject.Buffer.from('0\r\n\r\n');
+  var isChunkedTransfer = false;
+  var properLastChunkReceived = false;
+  var previousChunk;
+  request.on('response', function (response) {
+    var headers = response.headers;
+    isChunkedTransfer = headers['transfer-encoding'] === 'chunked' && !headers['content-length'];
+  });
+  request.on('socket', function (socket) {
+    var onSocketClose = function onSocketClose() {
+      if (isChunkedTransfer && !properLastChunkReceived) {
+        var error = new Error('Premature close');
+        error.code = 'ERR_STREAM_PREMATURE_CLOSE';
+        errorCallback(error);
+      }
+    };
+    var onData = function onData(buf) {
+      properLastChunkReceived = external_node_buffer_namespaceObject.Buffer.compare(buf.slice(-5), LAST_CHUNK) === 0;
+
+      // Sometimes final 0-length chunk and end of message code are in separate packets
+      if (!properLastChunkReceived && previousChunk) {
+        properLastChunkReceived = external_node_buffer_namespaceObject.Buffer.compare(previousChunk.slice(-3), LAST_CHUNK.slice(0, 3)) === 0 && external_node_buffer_namespaceObject.Buffer.compare(buf.slice(-2), LAST_CHUNK.slice(3)) === 0;
+      }
+      previousChunk = buf;
+    };
+    socket.prependListener('close', onSocketClose);
+    socket.on('data', onData);
+    request.on('close', function () {
+      socket.removeListener('close', onSocketClose);
+      socket.removeListener('data', onData);
+    });
+  });
+}
+;// CONCATENATED MODULE: ../../node_modules/image2uri/lib/index.js
+
+
+
+var validUrl = function validUrl(url) {
+  return /http(s)?:\/\/(\w+:?\w*@)?(\S+)(:\d+)?((?<=\.)\w+)+(\/([\w#!:.?+=&%@!\-/])*)?/gi.test(url);
+};
+var extTypeMap = {
+  '.png': 'image/png',
+  '.apng': 'image/apng',
+  '.gif': 'image/gif',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.bm': 'image/bmp',
+  '.bmp': 'image/bmp',
+  '.webp': 'image/webp',
+  '.ico': 'image/x-icon',
+  '.svg': 'image/svg+xml'
+};
+function image2uri(file) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var ext = options.ext || external_path_.extname(file);
+  var contentType = extTypeMap[ext];
+  if (validUrl(file)) {
+    return fetch(file).then(function (response) {
+      return response.buffer();
+    }).then(function (buffer) {
+      return contentType ? "data:".concat(contentType, ";base64,").concat(buffer.toString('base64')) : buffer.toString('base64');
+    });
+  }
+  var image = external_fs_.readFileSync(file);
+  return contentType ? "data:".concat(contentType, ";base64,").concat(image.toString('base64')) : image.toString('base64');
+}
+// EXTERNAL MODULE: ../cli/node_modules/fs-extra/lib/index.js
+var fs_extra_lib = __webpack_require__(7433);
+;// CONCATENATED MODULE: ../cli/lib/nodes/imgBase64.js
+
+
+
+function imgBase64_imgBase64(src) {
+  if (src && !validUrl(src) && /(png|apng|gif|jpg|jpeg|bm|bmp|webp|ico|svg)/i.test(src)) {
+    var imgPath = external_path_.resolve(src);
+    if (fs_extra_lib.existsSync(imgPath)) {
+      var base64 = image2uri(imgPath);
+      if (base64 && typeof base64 === 'string') {
+        return base64;
+      }
+    }
+  }
+  return src;
+}
 ;// CONCATENATED MODULE: ../cli/lib/nodes/markdown-style.js
 var octiconLinkStyle = "\nmarkdown-style h1:hover a.anchor .octicon-link:before,\nmarkdown-style h2:hover a.anchor .octicon-link:before,\nmarkdown-style h3:hover a.anchor .octicon-link:before,\nmarkdown-style h4:hover a.anchor .octicon-link:before,\nmarkdown-style h5:hover a.anchor .octicon-link:before,\nmarkdown-style h6:hover a.anchor .octicon-link:before {\n  width: 16px;\n  height: 16px;\n  content: ' ';\n  display: inline-block;\n  background-color: currentColor;\n  -webkit-mask-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>\");\n  mask-image: url(\"data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>\");\n}";
 /**
@@ -109342,10 +113622,13 @@ function darkMode(permanent, mode) {
 
 
 
+
 function lib_create_create() {
   var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var string = options.markdown,
     document = options.document,
+    _options$imgBase = options['img-base64'],
+    imgBase64 = _options$imgBase === void 0 ? false : _options$imgBase,
     _options$corners = options.corners,
     corners = _options$corners === void 0 ? true : _options$corners,
     _rewrite = options.rewrite,
@@ -109392,6 +113675,11 @@ function lib_create_create() {
           });
         }
       }
+      if (node.type == 'element' && node.tagName === 'img' && imgBase64) {
+        node.properties = _objectSpread2(_objectSpread2({}, node.properties), {}, {
+          src: imgBase64_imgBase64(node.properties.src)
+        });
+      }
       if (node.type == 'element' && /h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
         var child = node.children[0];
         if (child && child.type === 'element' && child.properties) {
@@ -109432,8 +113720,6 @@ function lib_create_create() {
   }
   return markdown_to_html_lib(string || '', mdOptions);
 }
-// EXTERNAL MODULE: ../cli/node_modules/fs-extra/lib/index.js
-var fs_extra_lib = __webpack_require__(7433);
 ;// CONCATENATED MODULE: ../cli/lib/utils.js
 
 
@@ -109523,6 +113809,7 @@ function utils_formatConfig(opts) {
 
 
 function run() {
+  var _opts$imgBase;
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var argvs = minimist(process.argv.slice(2), {
     alias: {
@@ -109536,6 +113823,7 @@ function run() {
       version: opts.v || opts.version || false,
       help: opts.h || opts.help || false,
       ignoreFile: opts.ignoreFile || '(node_modules)',
+      'img-base64': (_opts$imgBase = opts.imgBase64) !== null && _opts$imgBase !== void 0 ? _opts$imgBase : false,
       source: opts.s || opts.source || 'README.md',
       markdown: opts.markdown || '',
       'markdown-style': 'max-width: 960px;',
@@ -109593,10 +113881,10 @@ function run() {
     });
   }
 }
-var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --no-corners            Hide Github corner from your project page.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --markdown-style        Markdown wrapper style.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --ignore-file           Ignore markdown files under certain paths. Default: \"(node_modules)\"\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
+var cliHelp = "\n  Usage: markdown-to-html [options] [--help|h]\n\n  Options:\n\n    --author                Define the author of a page.\n    --config, -o            Specify the configuration file. Default: \"<process.cwd()>/package.json\".\n    --description           Define a description of your web page.\n    --favicon               Add a Favicon to your Site.\n    --no-corners            Hide Github corner from your project page.\n    --github-corners        Add a Github corner to your project page.\n    --github-corners-fork   Github corners style.\n    --keywords              Define keywords for search engines.\n    --no-dark-mode          Disable light and dark theme styles button.\n    --markdown              Markdown string.\n    --img-base64            Convert images in HTML to base64.\n    --style                 Override default styles. css file path or css string.\n    --markdown-style-theme  Setting markdown-style light/dark theme.\n    --markdown-style        Markdown wrapper style.\n    --output, -o            Output static pages to the specified directory. Default: \"index.html\"\n    --source, -s            The path of the target file \"README.md\". Default: \"README.md\"\n    --title                 The `<title>` tag is required in HTML documents!\n    --ignore-file           Ignore markdown files under certain paths. Default: \"(node_modules)\"\n    --version, -v           Show version number\n    --help, -h              Displays help information.\n";
 var exampleHelp = "\n  Example:\n\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli **/*.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli **/*.md --ignore-file=\"(test)\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--title\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html     \x1B[33m--config\x1B[0m=\"config/conf.json\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown\x1B[0m=\"Hello World!\"\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--no-dark-mode\x1B[0m\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--markdown-style-theme\x1B[0m dark\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove/markdown-to-html-cli\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--github-corners\x1B[0m https://github.com/jaywcjlove --github-corners-fork\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--output\x1B[0m coverage/index.html\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style=./style.css\n    \x1B[35mnpm\x1B[0m markdown-to-html-cli \x1B[33m--source\x1B[0m README.md --style='body { color: red; }'\n  \n";
 ;// CONCATENATED MODULE: ./src/action.ts
-;_asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyle,style,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return _regeneratorRuntime().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyle=(0,lib_core.getInput)('markdown-style');style=(0,lib_core.getInput)('style');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=20;break;}_context.next=17;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 17:options.markdown=_context.sent.toString();_context.next=21;break;case 20:options.markdown=markdown;case 21:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;options['markdown-style']=markdownStyle;options['style']=style;if(corners){_context.next=36;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=36;break;}_context.next=32;return external_fs_default().promises.readFile(projectPkg);case 32:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 36:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=57;break;case 53:_context.prev=53;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 57:case"end":return _context.stop();}},_callee,null,[[0,53]]);}))();
+;(0,asyncToGenerator/* default */.Z)(/*#__PURE__*/(0,regeneratorRuntime/* default */.Z)().mark(function _callee(){var output,source,description,favicon,config,markdown,corners,darkMode,markdownStyle,style,markdownStyleTheme,options,projectPkg,pkgStr,pkg,outputPath,opts,htmlStr;return (0,regeneratorRuntime/* default */.Z)().wrap(function _callee$(_context){while(1)switch(_context.prev=_context.next){case 0:_context.prev=0;output=(0,lib_core.getInput)('output')||'index.html';source=(0,lib_core.getInput)('source')||'README.md';description=(0,lib_core.getInput)('description');favicon=(0,lib_core.getInput)('favicon');config=(0,lib_core.getInput)('config');markdown=(0,lib_core.getInput)('markdown');corners=(0,lib_core.getInput)('github-corners');darkMode=(0,lib_core.getInput)('dark-mode');markdownStyle=(0,lib_core.getInput)('markdown-style');style=(0,lib_core.getInput)('style');markdownStyleTheme=(0,lib_core.getInput)('markdown-style-theme');options={};(0,lib_core.info)("source: ".concat(external_path_default().resolve(source)));if(!(source&&!markdown)){_context.next=20;break;}_context.next=17;return external_fs_default().promises.readFile(external_path_default().resolve(source));case 17:options.markdown=_context.sent.toString();_context.next=21;break;case 20:options.markdown=markdown;case 21:options.favicon=favicon;options.config=config;options.description=description;options['github-corners']=corners;options['markdown-style']=markdownStyle;options['style']=style;if(corners){_context.next=36;break;}projectPkg=external_path_default().resolve(process.cwd(),config||'package.json');if(!external_fs_default().existsSync(projectPkg)){_context.next=36;break;}_context.next=32;return external_fs_default().promises.readFile(projectPkg);case 32:pkgStr=_context.sent;pkg={};try{pkg=JSON.parse(pkgStr.toString());}catch(error){}if(pkg.repository&&!corners){options['github-corners']=typeof pkg.repository==='string'?pkg.repository:pkg.repository.url;}case 36:outputPath=external_path_default().resolve(output);(0,lib_core.setOutput)('output',outputPath);(0,lib_core.startGroup)("Options: \x1B[34m(Action Inputs)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(options,null,2)));(0,lib_core.endGroup)();opts=utils_formatConfig(_objectSpread2(_objectSpread2({},options),{},{'dark-mode':darkMode,'markdown-style-theme':markdownStyleTheme}));(0,lib_core.setOutput)('markdown',opts.markdown);(0,lib_core.info)("Config Path: \"".concat(opts.config,"\""));(0,lib_core.startGroup)("Options: \x1B[34m(Format Config)\x1B[0m");(0,lib_core.info)("".concat(JSON.stringify(opts,null,2)));(0,lib_core.endGroup)();htmlStr=lib_create_create(_objectSpread2({},opts));(0,lib_core.info)("Output Path: \"".concat(outputPath,"\""));(0,lib_core.setOutput)('html',htmlStr);external_fs_default().writeFileSync(outputPath,htmlStr);_context.next=57;break;case 53:_context.prev=53;_context.t0=_context["catch"](0);console.log('error::',_context.t0);(0,lib_core.setFailed)(_context.t0.message);case 57:case"end":return _context.stop();}},_callee,null,[[0,53]]);}))();
 })();
 
 module.exports = __webpack_exports__;

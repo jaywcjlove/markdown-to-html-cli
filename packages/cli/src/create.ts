@@ -10,6 +10,7 @@ import rehypeFormat from 'rehype-format';
 import { githubCorners } from './nodes/github-corners';
 import { githubCornersFork } from './nodes/github-corners-fork';
 import { octiconLink } from './nodes/octiconLink';
+import { imgBase64 as toBase64 } from './nodes/imgBase64';
 import { markdownStyle } from './nodes/markdown-style';
 import { copyElement, copyStyle, copyScript } from './nodes/copy';
 import { darkMode } from './nodes/dark-mode';
@@ -23,7 +24,7 @@ import { MDToHTMLOptions } from './index';
 export interface CreateOptions extends MDToHTMLOptions { }
 
 export function create(options: MDToHTMLOptions = {}) {
-  const { markdown: string, document, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
+  const { markdown: string, document, 'img-base64': imgBase64 = false, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
   const mdOptions: Options = {
     hastNode: false,
     remarkPlugins: [remarkGemoji],
@@ -60,6 +61,9 @@ export function create(options: MDToHTMLOptions = {}) {
             node.children.unshift(item)
           });
         }
+      }
+      if (node.type == 'element' && node.tagName === 'img' && imgBase64) {
+        node.properties = { ...node.properties, src: toBase64(node.properties.src as string) };
       }
       if (node.type == 'element' && /h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
         const child = node.children[0];

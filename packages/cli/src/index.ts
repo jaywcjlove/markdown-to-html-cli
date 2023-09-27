@@ -44,6 +44,8 @@ export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   style?: string;
   /** @example `(node_modules)` */
   ignoreFile?: string;
+  /** Convert images in HTML to base64. @default `false` */
+  'img-base64'?: boolean;
 }
 
 export interface MDToHTMLOptions extends RunArgvs {
@@ -68,6 +70,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
       version: opts.v || opts.version || false,
       help: opts.h || opts.help || false,
       ignoreFile: opts.ignoreFile || '(node_modules)',
+      'img-base64': opts.imgBase64 ?? false,
       source: opts.s || opts.source || 'README.md',
       markdown: opts.markdown || '',
       'markdown-style': 'max-width: 960px;',
@@ -141,6 +144,7 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
     --keywords              Define keywords for search engines.
     --no-dark-mode          Disable light and dark theme styles button.
     --markdown              Markdown string.
+    --img-base64            Convert images in HTML to base64.
     --style                 Override default styles. css file path or css string.
     --markdown-style-theme  Setting markdown-style light/dark theme.
     --markdown-style        Markdown wrapper style.
