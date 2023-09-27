@@ -94,6 +94,10 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     console.log(`\n \x1b[35mmarkdown-to-html-cli\x1b[0m v${pkg.version}\n`);
     return pkg.version;
   }
+  // One File
+  if (argvs.source && !argvs.markdown) {
+    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
+  } 
   const options = formatConfig({ ...opts, ...argvs });
   const output = path.resolve(argvs.output);
 
@@ -108,9 +112,6 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     }
   }
   // One File
-  if (argvs.source && !argvs.markdown) {
-    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
-  } 
   if (mdFilesPath.length === 0) {
     const strMarkdown = create({ ...argvs, ...options });
     fs.writeFileSync(output, strMarkdown);

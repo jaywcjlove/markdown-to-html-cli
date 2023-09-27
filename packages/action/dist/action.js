@@ -109561,6 +109561,10 @@ function run() {
     console.log("\n \x1B[35mmarkdown-to-html-cli\x1B[0m v".concat(pkg.version, "\n"));
     return pkg.version;
   }
+  // One File
+  if (argvs.source && !argvs.markdown) {
+    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
+  }
   var options = formatConfig(_objectSpread(_objectSpread({}, opts), argvs));
   var output = path.resolve(argvs.output);
   if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
@@ -109574,9 +109578,6 @@ function run() {
     }
   }
   // One File
-  if (argvs.source && !argvs.markdown) {
-    argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
-  }
   if (mdFilesPath.length === 0) {
     var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
     fs.writeFileSync(output, strMarkdown);
