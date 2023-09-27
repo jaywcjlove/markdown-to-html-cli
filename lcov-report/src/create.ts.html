@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.55% </span>
+                <span class="strong">93.61% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>43/45</span>
+                <span class='fraction'>44/47</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">93.67% </span>
+                <span class="strong">92.94% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>74/79</span>
+                <span class='fraction'>79/85</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.45% </span>
+                <span class="strong">93.47% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>42/44</span>
+                <span class='fraction'>43/46</span>
             </div>
         
             
@@ -169,7 +169,12 @@
 <a name='L104'></a><a href='#L104'>104</a>
 <a name='L105'></a><a href='#L105'>105</a>
 <a name='L106'></a><a href='#L106'>106</a>
-<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,19 +215,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">32x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">6x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -232,22 +237,25 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-yes">40x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-yes">16x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-yes">28x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">4472x</span>
+<span class="cline-any cline-yes">4482x</span>
 <span class="cline-any cline-yes">31x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -287,6 +295,7 @@ import rehypeFormat from 'rehype-format';
 import { githubCorners } from './nodes/github-corners';
 import { githubCornersFork } from './nodes/github-corners-fork';
 import { octiconLink } from './nodes/octiconLink';
+import { imgBase64 as toBase64 } from './nodes/imgBase64';
 import { markdownStyle } from './nodes/markdown-style';
 import { copyElement, copyStyle, copyScript } from './nodes/copy';
 import { darkMode } from './nodes/dark-mode';
@@ -300,7 +309,7 @@ import { MDToHTMLOptions } from './index';
 export interface CreateOptions extends MDToHTMLOptions { }
 &nbsp;
 export function create(options: MDToHTMLOptions = {}) {
-  const { markdown: string, document, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
+  const { markdown: string, document, 'img-base64': imgBase64 = false, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
   const mdOptions: Options = {
     hastNode: false,
     remarkPlugins: [remarkGemoji],
@@ -337,6 +346,9 @@ export function create(options: MDToHTMLOptions = {}) {
             node.children.unshift(item)
           });
         }
+      }
+      <span class="missing-if-branch" title="if path not taken" >I</span>if (node.type == 'element' &amp;&amp; node.tagName === 'img' &amp;&amp; imgBase64) {
+<span class="cstat-no" title="statement not covered" >        node.properties = { ...node.properties, src: toBase64(node.properties.src as string) };</span>
       }
       if (node.type == 'element' &amp;&amp; /h(1|2|3|4|5|6)/.test(node.tagName) &amp;&amp; node.children &amp;&amp; Array.isArray(node.children) &amp;&amp; node.children.length &gt; 0) {
         const child = node.children[0];
@@ -388,7 +400,7 @@ export function create(options: MDToHTMLOptions = {}) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-09-27T09:25:53.886Z
+                at 2023-09-27T16:03:26.694Z
             </div>
         <script src="../prettify.js"></script>
         <script>

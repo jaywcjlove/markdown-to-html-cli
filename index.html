@@ -331,35 +331,36 @@ const html = create({
 </span><span class="code-line line-number" line="12">  <span class="token parameter variable">--keywords</span>              Define keywords <span class="token keyword">for</span> search engines.
 </span><span class="code-line line-number" line="13">  --no-dark-mode          Disable light and dark theme styles button.
 </span><span class="code-line line-number" line="14">  <span class="token parameter variable">--markdown</span>              Markdown string.
-</span><span class="code-line line-number" line="15">  <span class="token parameter variable">--style</span>                 Override default styles. css <span class="token function">file</span> path or css string.
-</span><span class="code-line line-number" line="16">  --markdown-style-theme  Setting markdown-style light/dark theme.
-</span><span class="code-line line-number" line="17">  --markdown-style        Markdown wrapper style
-</span><span class="code-line line-number" line="18">  --ignore-file           Ignore markdown files under certain paths. Default: <span class="token string">"(node_modules)"</span>
-</span><span class="code-line line-number" line="19">  --output, <span class="token parameter variable">-o</span>            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
-</span><span class="code-line line-number" line="20">  --source, <span class="token parameter variable">-s</span>            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
-</span><span class="code-line line-number" line="21">  <span class="token parameter variable">--title</span>                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
-</span><span class="code-line line-number" line="22">  --version, <span class="token parameter variable">-v</span>           Show version number
-</span><span class="code-line line-number" line="23">  --help, <span class="token parameter variable">-h</span>              Displays <span class="token builtin class-name">help</span> information.
-</span><span class="code-line line-number" line="24">
-</span><span class="code-line line-number" line="25">Example:
-</span><span class="code-line line-number" line="26">
-</span><span class="code-line line-number" line="27">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
-</span><span class="code-line line-number" line="28">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
-</span><span class="code-line line-number" line="29">  npx markdown-to-html-cli
-</span><span class="code-line line-number" line="30">  <span class="token function">npm</span> markdown-to-html-cli **/*.md
-</span><span class="code-line line-number" line="31">  <span class="token function">npm</span> markdown-to-html-cli **/*.md --ignore-file<span class="token operator">=</span><span class="token string">"(test)"</span>
-</span><span class="code-line line-number" line="32">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
-</span><span class="code-line line-number" line="33">  npx markdown-to-html-cli --no-dark-mode
-</span><span class="code-line line-number" line="34">  npx markdown-to-html-cli --dark-mode auto
-</span><span class="code-line line-number" line="35">  npx markdown-to-html-cli --dark-mode auto --markdown-style-theme dark
-</span><span class="code-line line-number" line="36">  npx markdown-to-html-cli --no-dark-mode --markdown-style-theme dark
-</span><span class="code-line line-number" line="37">  npx markdown-to-html-cli --markdown-style-theme dark
-</span><span class="code-line line-number" line="38">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
-</span><span class="code-line line-number" line="39">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
-</span><span class="code-line line-number" line="40">  npx markdown-to-html-cli <span class="token parameter variable">--output</span> coverage/index.html
-</span><span class="code-line line-number" line="41">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md
-</span><span class="code-line line-number" line="42">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span>./style.css
-</span><span class="code-line line-number" line="43">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span><span class="token string">'body { color: red; }'</span>
+</span><span class="code-line line-number" line="15">  --img-base64            Convert images <span class="token keyword">in</span> HTML to base64.
+</span><span class="code-line line-number" line="16">  <span class="token parameter variable">--style</span>                 Override default styles. css <span class="token function">file</span> path or css string.
+</span><span class="code-line line-number" line="17">  --markdown-style-theme  Setting markdown-style light/dark theme.
+</span><span class="code-line line-number" line="18">  --markdown-style        Markdown wrapper style
+</span><span class="code-line line-number" line="19">  --ignore-file           Ignore markdown files under certain paths. Default: <span class="token string">"(node_modules)"</span>
+</span><span class="code-line line-number" line="20">  --output, <span class="token parameter variable">-o</span>            Output static pages to the specified directory. Default: <span class="token string">"index.html"</span>
+</span><span class="code-line line-number" line="21">  --source, <span class="token parameter variable">-s</span>            The path of the target <span class="token function">file</span> <span class="token string">"README.md"</span><span class="token builtin class-name">.</span> Default: <span class="token string">"README.md"</span>
+</span><span class="code-line line-number" line="22">  <span class="token parameter variable">--title</span>                 The <span class="token variable"><span class="token variable">`</span><span class="token operator">&#x3C;</span>title<span class="token operator">></span><span class="token variable">`</span></span> tag is required <span class="token keyword">in</span> HTML documents<span class="token operator">!</span>
+</span><span class="code-line line-number" line="23">  --version, <span class="token parameter variable">-v</span>           Show version number
+</span><span class="code-line line-number" line="24">  --help, <span class="token parameter variable">-h</span>              Displays <span class="token builtin class-name">help</span> information.
+</span><span class="code-line line-number" line="25">
+</span><span class="code-line line-number" line="26">Example:
+</span><span class="code-line line-number" line="27">
+</span><span class="code-line line-number" line="28">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line line-number" line="29">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
+</span><span class="code-line line-number" line="30">  npx markdown-to-html-cli
+</span><span class="code-line line-number" line="31">  <span class="token function">npm</span> markdown-to-html-cli **/*.md
+</span><span class="code-line line-number" line="32">  <span class="token function">npm</span> markdown-to-html-cli **/*.md --ignore-file<span class="token operator">=</span><span class="token string">"(test)"</span>
+</span><span class="code-line line-number" line="33">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
+</span><span class="code-line line-number" line="34">  npx markdown-to-html-cli --no-dark-mode
+</span><span class="code-line line-number" line="35">  npx markdown-to-html-cli --dark-mode auto
+</span><span class="code-line line-number" line="36">  npx markdown-to-html-cli --dark-mode auto --markdown-style-theme dark
+</span><span class="code-line line-number" line="37">  npx markdown-to-html-cli --no-dark-mode --markdown-style-theme dark
+</span><span class="code-line line-number" line="38">  npx markdown-to-html-cli --markdown-style-theme dark
+</span><span class="code-line line-number" line="39">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove/markdown-to-html-cli
+</span><span class="code-line line-number" line="40">  npx markdown-to-html-cli --github-corners https://github.com/jaywcjlove --github-corners-fork
+</span><span class="code-line line-number" line="41">  npx markdown-to-html-cli <span class="token parameter variable">--output</span> coverage/index.html
+</span><span class="code-line line-number" line="42">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md
+</span><span class="code-line line-number" line="43">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span>./style.css
+</span><span class="code-line line-number" line="44">  npx markdown-to-html-cli <span class="token parameter variable">--source</span> README.md <span class="token parameter variable">--style</span><span class="token operator">=</span><span class="token string">'body { color: red; }'</span>
 </span></code><div onclick="copied(this)" data-code="Usage: markdown-to-html [options] [--help|h]
 
 Options:
@@ -374,6 +375,7 @@ Options:
   --keywords              Define keywords for search engines.
   --no-dark-mode          Disable light and dark theme styles button.
   --markdown              Markdown string.
+  --img-base64            Convert images in HTML to base64.
   --style                 Override default styles. css file path or css string.
   --markdown-style-theme  Setting markdown-style light/dark theme.
   --markdown-style        Markdown wrapper style
