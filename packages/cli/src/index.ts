@@ -76,7 +76,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
       'markdown-style': 'max-width: 960px;',
       description: opts.description || '',
       corners: opts.corners || true,
-      output: opts.o || opts.output || 'index.html',
+      output: opts.o || opts.output,
     },
   });
   if (argvs.h || argvs.help) {
@@ -102,7 +102,7 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   } 
   const options = formatConfig({ ...opts, ...argvs });
-  const output = path.resolve(argvs.output);
+  const output = path.resolve(argvs.output  || 'index.html');
 
   if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
   if (options.style) {
@@ -123,10 +123,17 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   if (mdFilesPath.length > 0) {
     mdFilesPath.forEach((mdFile) => {
       options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
-      opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
+
+      const htmlPath = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
+      const mdFilePath = path.resolve(
+        process.cwd(),
+        (argvs.output || 'dist') + htmlPath.replace(process.cwd(), '')
+      );
+      options.output = mdFilePath;
       const strMarkdown = create({ ...argvs, ...options });
-      fs.writeFileSync(opts.output, strMarkdown);
-      console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), opts.output)}\x1b[0m\n`);
+      fs.ensureDirSync(path.dirname(options.output));
+      fs.writeFileSync(options.output, strMarkdown);
+      console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), options.output)}\x1b[0m\n`);
     });
   }
 }

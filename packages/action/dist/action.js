@@ -113829,7 +113829,7 @@ function run() {
       'markdown-style': 'max-width: 960px;',
       description: opts.description || '',
       corners: opts.corners || true,
-      output: opts.o || opts.output || 'index.html'
+      output: opts.o || opts.output
     }
   });
   if (argvs.h || argvs.help) {
@@ -113854,7 +113854,7 @@ function run() {
     argvs.markdown = fs.readFileSync(path.resolve(argvs.source)).toString();
   }
   var options = formatConfig(_objectSpread(_objectSpread({}, opts), argvs));
-  var output = path.resolve(argvs.output);
+  var output = path.resolve(argvs.output || 'index.html');
   if (!Array.isArray(options.document.style)) options.document.style = [options.document.style].flat().filter(Boolean);
   if (options.style) {
     var stylePath = path.resolve(process.cwd(), options.style);
@@ -113874,10 +113874,13 @@ function run() {
   if (mdFilesPath.length > 0) {
     mdFilesPath.forEach(function (mdFile) {
       options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
-      opts.output = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
+      var htmlPath = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
+      var mdFilePath = path.resolve(process.cwd(), (argvs.output || 'dist') + htmlPath.replace(process.cwd(), ''));
+      options.output = mdFilePath;
       var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
-      fs.writeFileSync(opts.output, strMarkdown);
-      console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), opts.output), "\x1B[0m\n"));
+      fs.ensureDirSync(path.dirname(options.output));
+      fs.writeFileSync(options.output, strMarkdown);
+      console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), options.output), "\x1B[0m\n"));
     });
   }
 }

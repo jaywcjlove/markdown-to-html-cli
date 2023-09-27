@@ -129,5 +129,5 @@ it('github-corners-fork test case', async () => {
 
 it(' test case', async () => {
   const output = execSync(`node ./packages/cli/lib/cli.js "**/*.md"`).toString().trim();
-  expect(output).toBe(`markdown-to-html: \x1b[32;1mindex.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mindex-zh.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mpackages/cli/index.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mpackages/action/index.html\x1b[0m`);
+  expect(output).toBe(`markdown-to-html: \x1b[32;1mdist/index.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mdist/index-zh.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mdist/packages/cli/index.html\x1b[0m\n\n\nmarkdown-to-html: \x1b[32;1mdist/packages/action/index.html\x1b[0m`);
 });
