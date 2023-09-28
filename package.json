@@ -7,8 +7,7 @@
     "package": "npm run build && lerna exec \"ncc build src/action.ts -o dist\" --scope action",
     "start": "node packages/cli/lib/cli.js --github-corners-fork --github-corners 'https://jaywcjlove.github.io'",
     "watch": "lerna exec \"tsbb watch src/*.ts\" --scope markdown-to-html-cli",
-    "build": "lerna exec \"tsbb build src/*.ts\" --scope markdown-to-html-cli && npm run fix",
-    "fix": "lerna exec \"tsc-esm-fix --target='lib' --ext='.js'\" --scope markdown-to-html-cli  ",
+    "build": "lerna exec \"tsbb build src/*.ts\" --scope markdown-to-html-cli",
     "test": "tsbb test",
     "coverage": "tsbb test --coverage --bail",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push",
@@ -33,6 +32,10 @@
     ]
   },
   "jest": {
+    "extensionsToTreatAsEsm": [".ts"],
+    "moduleNameMapper": {
+      "^(\\.{1,2}/.*)\\.js$": "$1"
+    },
     "collectCoverageFrom": [
       "<rootDir>/packages/cli/**/*.{tsx,ts}"
     ],
@@ -57,12 +60,9 @@
     "@kkt/ncc": "1.0.15",
     "ajv": "^8.8.0",
     "husky": "^8.0.1",
-    "jest": "^29.0.0",
-    "jest-environment-jsdom": "^29.5.0",
     "lerna": "^7.3.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.0",
-    "tsbb": "^4.1.5",
-    "tsc-esm-fix": "^2.20.14"
+    "tsbb": "^4.2.3"
   }
 }

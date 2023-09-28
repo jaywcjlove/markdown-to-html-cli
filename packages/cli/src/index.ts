@@ -4,11 +4,11 @@ import minimist, { type ParsedArgs } from 'minimist';
 import { type Options } from 'rehype-document';
 import { type RehypeRewriteOptions } from 'rehype-rewrite';
 import { globSync } from "glob";
-import { create } from './create';
-import { formatConfig } from './utils';
+import { create } from './create.js';
+import { formatConfig } from './utils.js';
 
-export * from './create';
-export * from './utils';
+export * from './create.js';
+export * from './utils.js';
 
 export interface RunArgvs extends Omit<ParsedArgs, '_'>  {
   version?: string;

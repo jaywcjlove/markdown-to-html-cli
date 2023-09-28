@@ -116,6 +116,7 @@ export function githubCornersFork(opts: GithubCorners): Element {
       {
         type: 'element',
         tagName: 'style',
+        properties: {},
         children: [
           {
             type: 'text',

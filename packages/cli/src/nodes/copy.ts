@@ -45,6 +45,7 @@ export function copyStyle(): Element {
   return {
     type: 'element',
     tagName: 'style',
+    properties: {},
     children: [
       {
         type: 'text',
@@ -70,6 +71,7 @@ export function copyScript(): Element {
   return {
     type: 'element',
     tagName: 'script',
+    properties: {},
     children: [
       {
         type: 'text',

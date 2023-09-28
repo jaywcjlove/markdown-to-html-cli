@@ -86,6 +86,7 @@ export function markdownStyle(child: ElementContent[], markdownStyleTheme?: 'dar
   return [{
     type: 'element',
     tagName: 'script',
+    properties: {},
     // properties: {
     //   // type: 'module',
     //   // src: 'https://unpkg.com/@wcj/markdown-style?module',

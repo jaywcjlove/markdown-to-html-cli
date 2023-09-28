@@ -24,6 +24,7 @@ export function darkMode(permanent?: boolean | 'auto', mode?: string): Element[]
   return [{
     type: 'element',
     tagName: 'script',
+    properties: {},
     // properties: {
     //   src: 'https://unpkg.com/@wcj/dark-mode',
     // },

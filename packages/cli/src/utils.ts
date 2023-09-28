@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import { type RunArgvs, type MDToHTMLOptions } from './index';
+import { type RunArgvs, type MDToHTMLOptions } from './index.js';
 
 export type Options = Omit<RunArgvs, '_'>
 
