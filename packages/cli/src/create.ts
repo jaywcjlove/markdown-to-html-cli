@@ -21,7 +21,9 @@ import { MDToHTMLOptions } from './index';
 // const filename = fileURLToPath(import.meta.url);
 // const dirname = path.dirname(filename);
 
-export interface CreateOptions extends MDToHTMLOptions { }
+export interface CreateOptions extends MDToHTMLOptions {
+  sourcePath?: string;
+}
 
 export function create(options: MDToHTMLOptions = {}) {
   const { markdown: string, document, 'img-base64': imgBase64 = false, corners = true, rewrite, reurls = {}, 'markdown-style-theme': markdownStyleTheme, 'dark-mode': darkModeTheme = true, 'markdown-style': wrapperStyle } = options;
@@ -63,7 +65,7 @@ export function create(options: MDToHTMLOptions = {}) {
         }
       }
       if (node.type == 'element' && node.tagName === 'img' && imgBase64) {
-        node.properties = { ...node.properties, src: toBase64(node.properties.src as string) };
+        node.properties = { ...node.properties, src: toBase64(node.properties.src as string, options.sourcePath) };
       }
       if (node.type == 'element' && /h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
         const child = node.children[0];

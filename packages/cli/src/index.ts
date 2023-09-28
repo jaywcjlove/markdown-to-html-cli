@@ -116,12 +116,14 @@ export function run(opts = {} as Omit<RunArgvs, '_'>) {
   }
   // One File
   if (mdFilesPath.length === 0) {
+    options.sourcePath = path.resolve(argvs.source);
     const strMarkdown = create({ ...argvs, ...options });
     fs.writeFileSync(output, strMarkdown);
     console.log(`\nmarkdown-to-html: \x1b[32;1m${path.relative(process.cwd(), output)}\x1b[0m\n`);
   }
   if (mdFilesPath.length > 0) {
     mdFilesPath.forEach((mdFile) => {
+      options.sourcePath = path.resolve(mdFile);
       options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
 
       const htmlPath = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));

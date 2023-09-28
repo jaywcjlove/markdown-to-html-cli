@@ -113435,9 +113435,9 @@ var fs_extra_lib = __webpack_require__(7433);
 
 
 
-function imgBase64_imgBase64(src) {
+function imgBase64_imgBase64(src, output) {
   if (src && !validUrl(src) && /(png|apng|gif|jpg|jpeg|bm|bmp|webp|ico|svg)/i.test(src)) {
-    var imgPath = external_path_.resolve(src);
+    var imgPath = external_path_.resolve(external_path_.dirname(output), src);
     if (fs_extra_lib.existsSync(imgPath)) {
       var base64 = image2uri(imgPath);
       if (base64 && typeof base64 === 'string') {
@@ -113677,7 +113677,7 @@ function lib_create_create() {
       }
       if (node.type == 'element' && node.tagName === 'img' && imgBase64) {
         node.properties = _objectSpread2(_objectSpread2({}, node.properties), {}, {
-          src: imgBase64_imgBase64(node.properties.src)
+          src: imgBase64_imgBase64(node.properties.src, options.sourcePath)
         });
       }
       if (node.type == 'element' && /h(1|2|3|4|5|6)/.test(node.tagName) && node.children && Array.isArray(node.children) && node.children.length > 0) {
@@ -113867,12 +113867,14 @@ function run() {
   }
   // One File
   if (mdFilesPath.length === 0) {
+    options.sourcePath = path.resolve(argvs.source);
     var strMarkdown = create(_objectSpread(_objectSpread({}, argvs), options));
     fs.writeFileSync(output, strMarkdown);
     console.log("\nmarkdown-to-html: \x1B[32;1m".concat(path.relative(process.cwd(), output), "\x1B[0m\n"));
   }
   if (mdFilesPath.length > 0) {
     mdFilesPath.forEach(function (mdFile) {
+      options.sourcePath = path.resolve(mdFile);
       options.markdown = fs.readFileSync(path.resolve(mdFile)).toString();
       var htmlPath = path.resolve(mdFile.replace(/\.md$/i, '.html').replace(/README\.html$/i, 'index.html').replace(/README-(.*)\.html$/i, 'index-$1.html'));
       var mdFilePath = path.resolve(process.cwd(), (argvs.output || 'dist') + htmlPath.replace(process.cwd(), ''));
