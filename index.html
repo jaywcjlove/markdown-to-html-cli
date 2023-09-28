@@ -347,8 +347,8 @@ const html = create({
 </span><span class="code-line line-number" line="28">  markdown-to-html     <span class="token parameter variable">--title</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
 </span><span class="code-line line-number" line="29">  markdown-to-html     <span class="token parameter variable">--config</span><span class="token operator">=</span><span class="token string">"config/conf.json"</span>
 </span><span class="code-line line-number" line="30">  npx markdown-to-html-cli
-</span><span class="code-line line-number" line="31">  <span class="token function">npm</span> markdown-to-html-cli **/*.md
-</span><span class="code-line line-number" line="32">  <span class="token function">npm</span> markdown-to-html-cli **/*.md --ignore-file<span class="token operator">=</span><span class="token string">"(test)"</span>
+</span><span class="code-line line-number" line="31">  npx markdown-to-html-cli **/*.md <span class="token parameter variable">--output</span> <span class="token string">"dist"</span>
+</span><span class="code-line line-number" line="32">  npx markdown-to-html-cli **/*.md --ignore-file<span class="token operator">=</span><span class="token string">"(test)"</span>
 </span><span class="code-line line-number" line="33">  npx markdown-to-html-cli <span class="token parameter variable">--markdown</span><span class="token operator">=</span><span class="token string">"Hello World!"</span>
 </span><span class="code-line line-number" line="34">  npx markdown-to-html-cli --no-dark-mode
 </span><span class="code-line line-number" line="35">  npx markdown-to-html-cli --dark-mode auto
@@ -391,8 +391,8 @@ Example:
   markdown-to-html     --title=&#x22;Hello World!&#x22;
   markdown-to-html     --config=&#x22;config/conf.json&#x22;
   npx markdown-to-html-cli
-  npm markdown-to-html-cli **/*.md
-  npm markdown-to-html-cli **/*.md --ignore-file=&#x22;(test)&#x22;
+  npx markdown-to-html-cli **/*.md --output &#x22;dist&#x22;
+  npx markdown-to-html-cli **/*.md --ignore-file=&#x22;(test)&#x22;
   npx markdown-to-html-cli --markdown=&#x22;Hello World!&#x22;
   npx markdown-to-html-cli --no-dark-mode
   npx markdown-to-html-cli --dark-mode auto
