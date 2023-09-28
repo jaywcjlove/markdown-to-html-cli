@@ -11,7 +11,6 @@
     "fix": "lerna exec \"tsc-esm-fix --target='lib' --ext='.js'\" --scope markdown-to-html-cli  ",
     "test": "tsbb test",
     "coverage": "tsbb test --coverage --bail",
-    "hoist": "lerna bootstrap --hoist",
     "version": "lerna version --no-changelog --no-git-tag-version --no-push",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "updated": "lerna updated",
