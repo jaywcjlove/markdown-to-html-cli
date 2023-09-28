@@ -165,19 +165,19 @@ export const cliHelp: string = `\n  Usage: markdown-to-html [options] [--help|h]
 
 export const exampleHelp: string =`\n  Example:
 
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli **/*.md
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli **/*.md --ignore-file="(test)"
-    \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--title\x1b[0m="Hello World!"
-    \x1b[35mnpm\x1b[0m markdown-to-html     \x1b[33m--config\x1b[0m="config/conf.json"
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--no-dark-mode\x1b[0m
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--markdown-style-theme\x1b[0m dark
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove --github-corners-fork
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md --style=./style.css
-    \x1b[35mnpm\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md --style='body { color: red; }'
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli **/*.md \x1b[33m--output\x1b[0m "dist"
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli **/*.md \x1b[33m--ignore-file\x1b[0m="(test)"
+    \x1b[35mmarkdown-to-html\x1b[0m         \x1b[33m--title\x1b[0m="Hello World!"
+    \x1b[35mmarkdown-to-html\x1b[0m         \x1b[33m--config\x1b[0m="config/conf.json"
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--markdown\x1b[0m="Hello World!"
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--no-dark-mode\x1b[0m
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--markdown-style-theme\x1b[0m dark
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove/markdown-to-html-cli
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--github-corners\x1b[0m https://github.com/jaywcjlove --github-corners-fork
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--output\x1b[0m coverage/index.html
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md --style=./style.css
+    \x1b[35mnpx\x1b[0m markdown-to-html-cli \x1b[33m--source\x1b[0m README.md --style='body { color: red; }'
   
 `;

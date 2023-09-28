@@ -158,8 +158,8 @@ Example:
   markdown-to-html     --title="Hello World!"
   markdown-to-html     --config="config/conf.json"
   npx markdown-to-html-cli
-  npm markdown-to-html-cli **/*.md
-  npm markdown-to-html-cli **/*.md --ignore-file="(test)"
+  npx markdown-to-html-cli **/*.md --output "dist"
+  npx markdown-to-html-cli **/*.md --ignore-file="(test)"
   npx markdown-to-html-cli --markdown="Hello World!"
   npx markdown-to-html-cli --no-dark-mode
   npx markdown-to-html-cli --dark-mode auto
