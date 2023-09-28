@@ -48,7 +48,7 @@
     "minimist": "~1.2.5",
     "rehype-autolink-headings": "~7.0.0",
     "rehype-document": "~7.0.0",
-    "rehype-format": "~4.0.1",
+    "rehype-format": "~5.0.0",
     "rehype-prism-plus": "1.6.3",
     "rehype-slug": "~6.0.0",
     "rehype-urls": "~1.1.1",
