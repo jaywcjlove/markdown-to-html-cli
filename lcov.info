@@ -448,8 +448,8 @@ end_of_record
 TN:
 SF:packages/cli/src/nodes/copy.ts
 FN:44,copyStyle
-FN:69,copyScript
-FN:82,copyElement
+FN:70,copyScript
+FN:84,copyElement
 FNF:3
 FNH:3
 FNDA:16,copyStyle
@@ -457,12 +457,12 @@ FNDA:16,copyScript
 FNDA:29,copyElement
 DA:3,3
 DA:45,16
-DA:57,3
-DA:70,16
-DA:83,29
+DA:58,3
+DA:71,16
+DA:85,29
 LF:5
 LH:5
-BRDA:82,0,0,1
+BRDA:84,0,0,1
 BRF:1
 BRH:1
 end_of_record
