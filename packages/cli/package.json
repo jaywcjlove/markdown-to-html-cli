@@ -24,7 +24,7 @@
     "cli"
   ],
   "engines": {
-    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+    "node": ">=16"
   },
   "markdown-to-html": {
     "reurls": {
