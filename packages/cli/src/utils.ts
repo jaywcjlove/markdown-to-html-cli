@@ -5,7 +5,10 @@ import { type RunArgvs, type MDToHTMLOptions } from './index.js';
 export type Options = Omit<RunArgvs, '_'>
 
 export function formatConfig(opts: Options) {
-  let options = { ...opts, document: { title: opts.title, meta: [], link: [], style: [] } } as MDToHTMLOptions;
+  let options = { ...opts } as MDToHTMLOptions;
+  if (!options.document) {
+    options.document = { title: opts.title, meta: [], link: [], style: [] }
+  }
   const projectPkg = path.resolve(process.cwd(), opts.config || 'package.json');
   let pgkData: any = {};
   if (fs.existsSync(projectPkg)) {
@@ -14,19 +17,19 @@ export function formatConfig(opts: Options) {
       options.document.title = pgkData.name;
     }
     if (pgkData.repository && !opts['github-corners']) {
-      opts['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
+      options['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
     }
     if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
       options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
       if (mth['github-corners']) {
-        opts['github-corners'] = mth['github-corners'];
+        options['github-corners'] = mth['github-corners'];
       }
     }
   }
   if (opts['github-corners'] && typeof opts['github-corners'] === 'string') {
-    opts['github-corners'] = opts['github-corners'].replace(/^git[+]/, '')
+    options['github-corners'] = opts['github-corners'].replace(/^git[+]/, '')
   }
   if (Array.isArray(options.document.link) && options.favicon) {
     options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });
