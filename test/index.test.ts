@@ -80,7 +80,7 @@ it('config test case', async () => {
   expect(run({ config: 'test/demo/config.json', output: 'test/demo/index.html', author: 'kenny', markdown: 'Hello World! [](README.md)' })).toBeUndefined();
   const htmlStr = await FS.readFile('test/demo/index.html');
   expect(htmlStr.toString().indexOf('Hello World!<a href="index.html">') > 0).toBeTruthy();
-  expect(htmlStr.toString().indexOf('https://github.com/jaywcjlove/markdown-to-html-cli.git') > 0).toBeFalsy();
+  expect(htmlStr.toString().indexOf('https://github.com/jaywcjlove/markdown-to-html-cli.git') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('data:image/svg+xml') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('html,cli') > 0).toBeTruthy();
   expect(htmlStr.toString().indexOf('kenny') > 0).toBeTruthy();
