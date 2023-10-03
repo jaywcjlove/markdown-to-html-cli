@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { setFailed, setOutput, getInput, info, startGroup, endGroup } from '@actions/core';
-import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
+import { Options, formatConfig, create } from 'markdown-to-html-cli';
 
 ;(async () => {
   try {
@@ -16,7 +16,9 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     const markdownStyle = getInput('markdown-style');
     const style = getInput('style');
     const markdownStyleTheme = getInput('markdown-style-theme');
-    const options: RunArgvs = {}
+    const options: Options = {
+      document: { meta: [], link: [], style: [] }
+    }
     info(`source: ${path.resolve(source)}`);
     if (source && !markdown) {
       options.markdown = (await fs.promises.readFile(path.resolve(source))).toString();
@@ -28,7 +30,6 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     options.description = description;
     options['github-corners'] = corners;
     options['markdown-style'] = markdownStyle;
-    options['style'] = style;
 
     if (!corners) {
       const projectPkg = path.resolve(process.cwd(), config || 'package.json');
@@ -47,11 +48,23 @@ import { RunArgvs, formatConfig, create } from 'markdown-to-html-cli';
     const outputPath = path.resolve(output);
     setOutput('output', outputPath);
 
+    if (style) {
+      const stylePath = path.resolve(process.cwd(), style);
+      if (fs.existsSync(stylePath)) {
+        const cssString = fs.readFileSync(stylePath).toString();
+        options.document.style.push(cssString);
+      } else {
+        options.document.style.push(style);
+      }
+    }
+
     startGroup(`Options: \x1b[34m(Action Inputs)\x1b[0m`);
     info(`${JSON.stringify(options, null, 2)}`);
     endGroup();
-
-    const opts = formatConfig({ ...options, 'dark-mode': darkMode, 'markdown-style-theme': markdownStyleTheme });
+    
+    const opts = formatConfig({
+      ...options, 'dark-mode': darkMode, 'markdown-style-theme': markdownStyleTheme,
+    });
 
     setOutput('markdown', opts.markdown);
     info(`Config Path: "${opts.config}"`);

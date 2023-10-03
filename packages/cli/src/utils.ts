@@ -5,7 +5,7 @@ import { type RunArgvs, type MDToHTMLOptions } from './index.js';
 export type Options = Omit<RunArgvs, '_'>
 
 export function formatConfig(opts: Options) {
-  let options = { ...opts, document: { title: opts.title, meta: [], link: [] } } as MDToHTMLOptions;
+  let options = { ...opts, document: { title: opts.title, meta: [], link: [], style: [] } } as MDToHTMLOptions;
   const projectPkg = path.resolve(process.cwd(), opts.config || 'package.json');
   let pgkData: any = {};
   if (fs.existsSync(projectPkg)) {
