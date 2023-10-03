@@ -22,7 +22,7 @@ export function formatConfig(opts: Options) {
     if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
-      options = { ...options, ...mth, document: { title, meta, link, ...mth.document } }
+      options = { ...options, ...mth, document: { ...options.document, title, meta, link, ...mth.document } }
       if (mth['github-corners']) {
         options['github-corners'] = mth['github-corners'];
       }
