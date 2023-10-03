@@ -5,7 +5,7 @@
   "scripts": {
     "prepare": "husky install",
     "package": "npm run build && lerna exec \"ncc build src/action.ts -o dist\" --scope action",
-    "start": "node packages/cli/lib/cli.js --github-corners-fork --github-corners 'https://jaywcjlove.github.io'",
+    "start": "node packages/cli/lib/cli.js --github-corners-fork --github-corners 'https://jaywcjlove.github.io' --style='body { margin: 0; }'",
     "watch": "lerna exec \"tsbb watch src/*.ts\" --scope markdown-to-html-cli",
     "build": "lerna exec \"tsbb build src/*.ts\" --scope markdown-to-html-cli",
     "test": "tsbb test",

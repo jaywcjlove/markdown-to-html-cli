@@ -41,7 +41,7 @@
     "@types/minimist": "^1.2.3",
     "@uiw/github-corners": "^1.5.15",
     "@wcj/markdown-style": "^1.0.25",
-    "@wcj/markdown-to-html": "^3.0.0",
+    "@wcj/markdown-to-html": "^3.0.1",
     "fs-extra": "^11.1.1",
     "glob": "^10.3.10",
     "image2uri": "^2.1.1",
