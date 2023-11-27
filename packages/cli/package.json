@@ -4,6 +4,7 @@
   "license": "MIT",
   "description": "Command line tool generates markdown as html.",
   "homepage": "https://jaywcjlove.github.io/markdown-to-html-cli",
+  "funding": "https://jaywcjlove.github.io/#/sponsor",
   "type": "module",
   "main": "./lib/index.js",
   "exports": "./lib/index.js",
