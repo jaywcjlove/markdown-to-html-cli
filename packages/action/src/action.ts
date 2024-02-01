@@ -15,6 +15,7 @@ import { Options, formatConfig, create } from 'markdown-to-html-cli';
     const darkMode = getInput('dark-mode');
     const markdownStyle = getInput('markdown-style');
     const style = getInput('style');
+    const title = getInput('title');
     const markdownStyleTheme = getInput('markdown-style-theme');
     const options: Options = {
       document: { meta: [], link: [], style: [] }
@@ -58,10 +59,14 @@ import { Options, formatConfig, create } from 'markdown-to-html-cli';
       }
     }
 
+    if (title) {
+      options['title'] = title;
+    }
+
     startGroup(`Options: \x1b[34m(Action Inputs)\x1b[0m`);
     info(`${JSON.stringify(options, null, 2)}`);
     endGroup();
-    
+
     const opts = formatConfig({
       ...options, 'dark-mode': darkMode, 'markdown-style-theme': markdownStyleTheme,
     });

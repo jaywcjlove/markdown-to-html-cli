@@ -88,6 +88,7 @@ $ npm i markdown-to-html-cli
 - `markdown-style` - Markdown wrapper style. 
 - `markdown-style-theme` - Setting markdown-style light/dark theme. (`dark | light`)
 - `style` - Override default styles. css file path or css string
+- `title` - Define the content of the "<title>" document title!
 
 ### Output Parameters
 

@@ -88,6 +88,7 @@ $ npm i markdown-to-html-cli
 - `markdown-style` - Markdown 包裹样式修改. 
 - `markdown-style-theme` - 设置 Markdown 风格的浅色/深色主题。
 - `style` - 覆盖默认样式。 css 文件路径或 css 字符串
+- `title` - 定义 `<title>` 文档标题的内容！
 
 ### Output Parameters
 
