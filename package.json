@@ -59,7 +59,7 @@
   "devDependencies": {
     "@kkt/ncc": "^1.1.1",
     "ajv": "^8.8.0",
-    "husky": "^8.0.1",
+    "husky": "^9.0.0",
     "lerna": "^7.3.0",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.0",
