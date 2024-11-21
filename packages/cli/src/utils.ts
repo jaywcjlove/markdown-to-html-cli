@@ -22,6 +22,7 @@ export function formatConfig(opts: Options) {
         options['github-corners'] = mth['github-corners'];
       }
     } else {
+      options.reurls = { ...options.reurls, ...pgkData.reurls }
       options.document = { ...options.document, ...pgkData.document }
     }
     if (pgkData.name && !options.document.title) {
