@@ -48,6 +48,14 @@
     ]
   },
   "markdown-to-html": {
+    "document": {
+      "title": "markdown-to-html-cli",
+      "description": "Converts markdown text to HTML, Provide command line tools and methods. If you are simply converting a small number of Markdown files (or text) into HTML pages, this is very helpful for you.",
+      "meta": [
+        { "description": "Converts markdown text to HTML, Provide command line tools and methods. If you are simply converting a small number of Markdown files (or text) into HTML pages, this is very helpful for you." },
+        { "keywords": "markdown,markdown-to-html,markdown-to-html-cli,markdown to HTML,markdown converter,command line tools,convert markdown,markdown to HTML pages,HTML generation,markdown tools" }
+      ]
+    },
     "reurls": {
       "README-zh.md": "index.zh.html",
       "README.md": "index.html"
