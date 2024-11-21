@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.96% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>32/33</span>
+                <span class='fraction'>32/34</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.96% </span>
+                <span class="strong">94.11% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>32/33</span>
+                <span class='fraction'>32/34</span>
             </div>
         
             
@@ -115,7 +115,11 @@
 <a name='L50'></a><a href='#L50'>50</a>
 <a name='L51'></a><a href='#L51'>51</a>
 <a name='L52'></a><a href='#L52'>52</a>
-<a name='L53'></a><a href='#L53'>53</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -130,11 +134,6 @@
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -144,12 +143,21 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">7x</span>
@@ -182,19 +190,22 @@ export function formatConfig(opts: Options) {
   let pgkData: any = {};
   <span class="missing-if-branch" title="else path not taken" >E</span>if (fs.existsSync(projectPkg)) {
     pgkData = fs.readJSONSync(projectPkg);
-    if (pgkData.name &amp;&amp; !options.document.title) {
-      options.document.title = pgkData.name;
-    }
-    if (pgkData.repository &amp;&amp; !opts['github-corners']) {
-      options['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
-    }
-    <span class="missing-if-branch" title="else path not taken" >E</span>if (pgkData['markdown-to-html']) {
+&nbsp;
+    if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
       options = { ...options, ...mth, document: { ...options.document, title, meta, link, ...mth.document } }
       if (mth['github-corners']) {
         options['github-corners'] = mth['github-corners'];
       }
+    } else <span class="missing-if-branch" title="else path not taken" >E</span>{
+<span class="cstat-no" title="statement not covered" >      options.document = { ...options.document, ...pgkData.document }</span>
+    }
+    if (pgkData.name &amp;&amp; !options.document.title) {
+      options.document.title = pgkData.name;
+    }
+    if (pgkData.repository &amp;&amp; !opts['github-corners']) {
+      options['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
     }
   }
   <span class="missing-if-branch" title="if path not taken" >I</span>if (opts['github-corners'] &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >typeof opts['github-corners'] === 'string')</span> {
@@ -203,6 +214,7 @@ export function formatConfig(opts: Options) {
   if (Array.isArray(options.document.link) &amp;&amp; options.favicon) {
     options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });
   }
+&nbsp;
   <span class="missing-if-branch" title="else path not taken" >E</span>if (Array.isArray(options.document.meta)) {
     if (options.description) {
       options.document.meta.push({ description: options.description });
@@ -226,7 +238,7 @@ export function formatConfig(opts: Options) {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2024-11-21T03:06:02.278Z
+                at 2024-11-21T03:34:01.547Z
             </div>
         <script src="../prettify.js"></script>
         <script>
