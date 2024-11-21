@@ -43,7 +43,7 @@ jobs:
 
       - name: Create README-zh.md Config.
         run: |
-          cat > conf.json << EOF
+          cat > conf.zh.json << EOF
           {
             "document": {
               "title": "markdown-to-html-cli",
@@ -62,7 +62,7 @@ jobs:
       - run: |
           node packages/cli/lib/cli.js --output coverage/index.html --config="conf.json" --github-corners https://github.com/jaywcjlove/markdown-to-html-cli --style "body { margin: 0; }" --favicon "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>"
       - run: |
-          node packages/cli/lib/cli.js -s README-zh.md --output coverage/index.zh.html --config="conf.json" --github-corners https://github.com/jaywcjlove/markdown-to-html-cli --style "body { margin: 0; }" --favicon "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>"
+          node packages/cli/lib/cli.js -s README-zh.md --output coverage/index.zh.html --config="conf.zh.json" --github-corners https://github.com/jaywcjlove/markdown-to-html-cli --style "body { margin: 0; }" --favicon "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌐</text></svg>"
 
       - name: Test Converts markdown text to HTML
         uses: ./

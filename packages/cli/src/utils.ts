@@ -13,12 +13,7 @@ export function formatConfig(opts: Options) {
   let pgkData: any = {};
   if (fs.existsSync(projectPkg)) {
     pgkData = fs.readJSONSync(projectPkg);
-    if (pgkData.name && !options.document.title) {
-      options.document.title = pgkData.name;
-    }
-    if (pgkData.repository && !opts['github-corners']) {
-      options['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
-    }
+
     if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
@@ -26,6 +21,14 @@ export function formatConfig(opts: Options) {
       if (mth['github-corners']) {
         options['github-corners'] = mth['github-corners'];
       }
+    } else {
+      options.document = { ...options.document, ...pgkData.document }
+    }
+    if (pgkData.name && !options.document.title) {
+      options.document.title = pgkData.name;
+    }
+    if (pgkData.repository && !opts['github-corners']) {
+      options['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
     }
   }
   if (opts['github-corners'] && typeof opts['github-corners'] === 'string') {
@@ -34,6 +37,7 @@ export function formatConfig(opts: Options) {
   if (Array.isArray(options.document.link) && options.favicon) {
     options.document.link.push({ rel: 'icon', href: options.favicon, type: 'image/x-icon' });
   }
+
   if (Array.isArray(options.document.meta)) {
     if (options.description) {
       options.document.meta.push({ description: options.description });
