@@ -13,24 +13,16 @@ export function formatConfig(opts: Options) {
   let pgkData: any = {};
   if (fs.existsSync(projectPkg)) {
     pgkData = fs.readJSONSync(projectPkg);
-
     if (pgkData['markdown-to-html']) {
       const mth = pgkData['markdown-to-html'] as MDToHTMLOptions;
       const { title, meta, link } = options.document;
       options = { ...options, ...mth, document: { ...options.document, title, meta, link, ...mth.document } }
-      if (mth['github-corners']) {
-        options['github-corners'] = mth['github-corners'];
-      }
     } else {
       options.reurls = { ...options.reurls, ...pgkData.reurls }
       options.document = { ...options.document, ...pgkData.document }
     }
-    if (pgkData.name && !options.document.title) {
-      options.document.title = pgkData.name;
-    }
-    if (pgkData.repository && !opts['github-corners']) {
-      options['github-corners'] = typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url;
-    }
+    options.document.title = options.document.title ?? pgkData.name;
+    options['github-corners'] = opts['github-corners'] ?? options['github-corners'] ?? (typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url);
   }
   if (opts['github-corners'] && typeof opts['github-corners'] === 'string') {
     options['github-corners'] = opts['github-corners'].replace(/^git[+]/, '')
