@@ -1,61 +1,6 @@
 import { Element } from 'hast';
 
-const style = `markdown-style pre .copied {
-  display: flex;
-  position: absolute;
-  cursor: pointer;
-  color: #a5afbb;
-  top: 6px;
-  right: 6px;
-  border-radius: 5px;
-  background: #82828226;
-  padding: 6px;
-  font-size: 12px;
-  transition: all .3s;
-}
-markdown-style pre .copied:not(.active) {
-  visibility: hidden;
-}
-markdown-style pre:hover .copied {
-  visibility: visible;
-}
-markdown-style pre:hover .copied:hover {
-  background: #4caf50;
-  color: #fff;
-}
-markdown-style pre:hover .copied:active,
-markdown-style pre .copied.active {
-  background: #2e9b33;
-  color: #fff;
-}
-markdown-style pre .copied .octicon-copy {
-  display: block;
-}
-markdown-style pre .copied .octicon-check {
-  display: none;
-}
-markdown-style pre .active .octicon-copy {
-  display: none;
-}
-markdown-style pre .active .octicon-check {
-  display: block;
-}`;
-
-export function copyStyle(): Element {
-  return {
-    type: 'element',
-    tagName: 'style',
-    properties: {},
-    children: [
-      {
-        type: 'text',
-        value: style
-      }
-    ]
-  }
-}
-
-const script = `/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
+export const copyScript = `/*! @uiw/copy-to-clipboard v1.0.12 | MIT (c) 2021 Kenny Wang | https://github.com/uiwjs/copy-to-clipboard.git */
 !function(e,t){"object"==typeof exports&&"undefined"!=typeof module?module.exports=t():"function"==typeof define&&define.amd?define(t):(e="undefined"!=typeof globalThis?globalThis:e||self).copyTextToClipboard=t()}(this,(function(){"use strict";return function(e,t){const o=document.createElement("textarea");o.value=e,o.setAttribute("readonly",""),o.style={position:"absolute",left:"-9999px"},document.body.appendChild(o);const n=document.getSelection().rangeCount>0&&document.getSelection().getRangeAt(0);o.select();let c=!1;try{c=!!document.execCommand("copy")}catch(e){c=!1}document.body.removeChild(o),n&&document.getSelection&&(document.getSelection().removeAllRanges(),document.getSelection().addRange(n)),t&&t(c)}}));
 
 function copied(target, str) {
@@ -66,20 +11,6 @@ function copied(target, str) {
     }, 2000);
   });
 }`;
-
-export function copyScript(): Element {
-  return {
-    type: 'element',
-    tagName: 'script',
-    properties: {},
-    children: [
-      {
-        type: 'text',
-        value: script
-      }
-    ]
-  }
-}
 
 export function copyElement(str: string = ''): Element {
   return {

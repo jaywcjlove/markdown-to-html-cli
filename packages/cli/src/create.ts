@@ -11,8 +11,8 @@ import { githubCorners } from './nodes/github-corners.js';
 import { githubCornersFork } from './nodes/github-corners-fork.js';
 import { octiconLink } from './nodes/octiconLink.js';
 import { imgBase64 as toBase64 } from './nodes/imgBase64.js';
-import { markdownStyle } from './nodes/markdown-style.js';
-import { copyElement, copyStyle, copyScript } from './nodes/copy.js';
+import { markdownStyle, mdStyle } from './nodes/markdown-style.js';
+import { copyElement, copyScript } from './nodes/copy.js';
 import { darkMode } from './nodes/dark-mode.js';
 import { MDToHTMLOptions } from './index.js';
 
@@ -74,10 +74,6 @@ export function create(options: MDToHTMLOptions = {}) {
           child.children = [octiconLink()];
         }
       }
-      if (node.type == 'element' && node.tagName === 'markdown-style') {
-        node.children.push(copyStyle());
-        node.children.push(copyScript());
-      }
       if (node.type == 'element' && node.tagName === 'pre') {
         const code = getCodeString(node.children);
         node.children.push(copyElement(code));
@@ -104,6 +100,18 @@ export function create(options: MDToHTMLOptions = {}) {
 
     if (document.style) {
       documentOptions.style = Array.isArray(document.style) ? document.style : [document.style];
+    }
+
+    if (Array.isArray(documentOptions.style)) {
+      documentOptions.style.push(mdStyle);
+    } else if (typeof documentOptions.style === 'string') {
+      documentOptions.style = [documentOptions.style, mdStyle];
+    }
+    documentOptions.script = documentOptions.script || [];
+    if (Array.isArray(documentOptions.script)) {
+      documentOptions.script.push(copyScript);
+    } else if (typeof documentOptions.script === 'string') {
+      documentOptions.script = [documentOptions.script, copyScript];
     }
 
     mdOptions.rehypePlugins.unshift([rehypeDocument, documentOptions]);
