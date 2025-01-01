@@ -22,7 +22,9 @@ export function formatConfig(opts: Options) {
       options.document = { ...options.document, ...pgkData.document }
     }
     options.document.title = options.document.title ?? pgkData.name;
-    options['github-corners'] = opts['github-corners'] ?? options['github-corners'] ?? (typeof pgkData.repository === 'string' ? pgkData.repository : pgkData.repository.url);
+    options['github-corners'] = opts['github-corners'] ?? options['github-corners'] ?? (
+      typeof pgkData.repository === 'string' ? pgkData.repository : (typeof pgkData.repository === 'object' && pgkData.repository?.url ? pgkData.repository.url : undefined)
+    );
   }
   if (opts['github-corners'] && typeof opts['github-corners'] === 'string') {
     options['github-corners'] = opts['github-corners'].replace(/^git[+]/, '')
