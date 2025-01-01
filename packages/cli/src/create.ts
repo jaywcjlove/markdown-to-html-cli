@@ -7,8 +7,8 @@ import remarkGemoji from 'remark-gemoji';
 // @ts-ignore
 import rehypeUrls from 'rehype-urls';
 import rehypeFormat from 'rehype-format';
-import { githubCorners } from './nodes/github-corners.js';
-import { githubCornersFork } from './nodes/github-corners-fork.js';
+import { githubCorners, githubCornersStyle } from './nodes/github-corners.js';
+import { githubCornersFork, githubCornersForkStyle } from './nodes/github-corners-fork.js';
 import { octiconLink } from './nodes/octiconLink.js';
 import { imgBase64 as toBase64 } from './nodes/imgBase64.js';
 import { markdownStyle, mdStyle } from './nodes/markdown-style.js';
@@ -104,8 +104,20 @@ export function create(options: MDToHTMLOptions = {}) {
 
     if (Array.isArray(documentOptions.style)) {
       documentOptions.style.push(mdStyle);
+      if (options['github-corners']) {
+        documentOptions.style.push(githubCornersStyle);
+      }
+      if (options['github-corners-fork']) {
+        documentOptions.style.push(githubCornersForkStyle);
+      }
     } else if (typeof documentOptions.style === 'string') {
       documentOptions.style = [documentOptions.style, mdStyle];
+      if (options['github-corners']) {
+        documentOptions.style.push(githubCornersStyle);
+      }
+      if (options['github-corners-fork']) {
+        documentOptions.style.push(githubCornersForkStyle);
+      }
     }
     documentOptions.script = documentOptions.script || [];
     if (Array.isArray(documentOptions.script)) {
