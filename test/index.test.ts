@@ -12,7 +12,7 @@ console.log = jest.fn();
 it('githubCorners test case', async () => {
   expect(githubCorners({ })).toBeUndefined();
   expect(githubCornersFork({ })).toBeUndefined();
-  expect(Object.keys(githubCorners({ href: 'https://github.com/jaywcjlove/markdown-to-html-cli' }))).toEqual(expect.arrayContaining(["0", "1"]));
+  expect(Object.keys(githubCorners({ href: 'https://github.com/jaywcjlove/markdown-to-html-cli' }))).toEqual(expect.arrayContaining(["0"]));
 });
 
 it('copyElement test case', async () => {

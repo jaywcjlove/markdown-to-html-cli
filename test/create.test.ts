@@ -86,7 +86,7 @@ it('github-corners test case', async () => {
     document: {},
   });
   expect(html.indexOf('<dark-mode style=') > 0).toBeTruthy();
-  expect(html.indexOf('<github-corners target="__blank"') > 0).toBeTruthy();
+  expect(html.indexOf('<a xlink:href="') > 0).toBeTruthy();
   expect(html.indexOf('max-width: 960px; margin: 0 auto 60px auto; padding: 8px') > 0).toBeTruthy();
   expect(html.indexOf('class="markdown-style"') > 0).toBeTruthy();
 
@@ -95,7 +95,7 @@ it('github-corners test case', async () => {
     'github-corners': 'https://github.com/jaywcjlove/markdown-to-html-cli',
     document: undefined,
   });
-  expect(html.indexOf('<github-corners target="__blank" position="fixed" z-index="999" href="https://github.com/jaywcjlove/markdown-to-html-cli"></github-corners>') > 0).toBeTruthy();
+  expect(html.indexOf('<a xlink:href="https://github.com/jaywcjlove/markdown-to-html-cli"') > 0).toBeTruthy();
   expect(html.indexOf('https://github.com/jaywcjlove/markdown-to-html-cli') > -1).toBeTruthy();
 
   html = create({
