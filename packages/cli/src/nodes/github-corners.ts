@@ -1,14 +1,11 @@
 import { Element } from 'hast';
-import fs from 'fs-extra';
-import path from 'path';
+import { cssCorners } from './github-corners.css.js';
 
 interface GithubCorners {
   href?: string;
 }
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const cssFilePath = path.join(__dirname, 'github-corners.css');
-export const githubCornersStyle = fs.readFileSync(cssFilePath, 'utf-8');
+export const githubCornersStyle = cssCorners;
 
 export function githubCorners(opts: GithubCorners): Element[] {
   const { href } = opts;

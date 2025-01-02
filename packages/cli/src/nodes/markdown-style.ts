@@ -1,10 +1,7 @@
 import { Element, ElementContent } from 'hast';
-import fs from 'fs-extra';
-import path from 'path';
+import { cssMarkdown } from './markdown-style.css.js';
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const cssFilePath = path.join(__dirname, 'markdown.css');
-export const mdStyle = fs.readFileSync(cssFilePath, 'utf-8');
+export const mdStyle = cssMarkdown;
 
 export function markdownStyle(child: ElementContent[], markdownStyleTheme?: 'dark' | 'light', style: string = ''): Element[] {
   const properties: Record<string, string> = {

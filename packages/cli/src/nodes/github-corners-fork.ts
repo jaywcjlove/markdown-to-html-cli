@@ -1,10 +1,7 @@
 import { Element } from 'hast';
-import fs from 'fs-extra';
-import path from 'path';
+import {cssCornersFork} from './github-corners-fork.css.js'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-const cssFilePath = path.join(__dirname, 'github-corners-fork.css');
-export const githubCornersForkStyle = fs.readFileSync(cssFilePath, 'utf-8');
+export const githubCornersForkStyle = cssCornersFork
 
 interface GithubCorners {
   href?: string;

@@ -1,3 +1,4 @@
+export const cssCornersFork = `
 .github-fork-ribbon {
   width: 12.1em;
   height: 12.1em;
@@ -89,3 +90,4 @@
   border-color: #fff;
   border-color: rgba(255, 255, 255, 0.7);
 }
+`;
