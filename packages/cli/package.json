@@ -44,7 +44,7 @@
     "@wcj/markdown-style": "^1.0.25",
     "@wcj/markdown-to-html": "^3.0.1",
     "fs-extra": "^11.1.1",
-    "glob": "^10.3.10",
+    "glob": "^11.0.0",
     "image2uri": "^2.1.1",
     "minimist": "^1.2.8",
     "rehype-autolink-headings": "^7.0.0",
