@@ -51,8 +51,6 @@ export function create(options: MDToHTMLOptions = {}) {
       if ((node.type === 'element' && node.tagName === 'body') || (!document && node.type === 'root')) {
         node.children = markdownStyle(node.children as any, markdownStyleTheme, wrapperStyle);
         darkMode(darkModeTheme, markdownStyleTheme).forEach(item => node.children.unshift(item));
-        if (darkModeTheme) {
-        }
       }
       if (corners && options['github-corners'] && ((document && node.type == 'element' && node.tagName === 'body') || (!document && node.type === 'root'))) {
         node.children = Array.isArray(node.children) ? node.children : [];
