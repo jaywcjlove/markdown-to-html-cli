@@ -10,12 +10,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   toFormData: () => (/* binding */ toFormData)
 /* harmony export */ });
-/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(1258);
-/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6330);
-/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5152);
-/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(414);
-/* harmony import */ var _Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncIterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1148);
-/* harmony import */ var fetch_blob_from_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(6683);
+/* harmony import */ var _Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regenerator_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(9993);
+/* harmony import */ var _Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(6330);
+/* harmony import */ var _Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5152);
+/* harmony import */ var _Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(414);
+/* harmony import */ var _Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncIterator_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(1148);
+/* harmony import */ var fetch_blob_from_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(733);
 /* harmony import */ var formdata_polyfill_esm_min_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(140);
 
 
@@ -58,7 +58,7 @@ var MultipartParser = /*#__PURE__*/function () {
    * @param {string} boundary
    */
   function MultipartParser(boundary) {
-    (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .A)(this, MultipartParser);
+    (0,_Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_classCallCheck_js__WEBPACK_IMPORTED_MODULE_2__/* ["default"] */ .A)(this, MultipartParser);
     this.index = 0;
     this.flags = 0;
     this.onHeaderEnd = noop;
@@ -83,7 +83,7 @@ var MultipartParser = /*#__PURE__*/function () {
   /**
    * @param {Uint8Array} data
    */
-  (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .A)(MultipartParser, [{
+  return (0,_Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_createClass_js__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .A)(MultipartParser, [{
     key: "write",
     value: function write(data) {
       var _this = this;
@@ -313,7 +313,6 @@ var MultipartParser = /*#__PURE__*/function () {
       }
     }
   }]);
-  return MultipartParser;
 }();
 function _fileName(headerValue) {
   // matches either a quoted-string or a token (RFC 2616 section 19.5.1)
@@ -333,24 +332,24 @@ function toFormData(_x, _x2) {
   return _toFormData.apply(this, arguments);
 }
 function _toFormData() {
-  _toFormData = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)( /*#__PURE__*/(0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .A)().mark(function _callee(Body, ct) {
-    var m, parser, headerField, headerValue, entryValue, entryName, contentType, filename, entryChunks, formData, onPartData, appendToFile, appendFileToFormData, appendEntryToFormData, decoder, _iteratorAbruptCompletion, _didIteratorError, _iteratorError, _iterator, _step, chunk;
-    return (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regeneratorRuntime_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .A)().wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
+  _toFormData = (0,_Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncToGenerator_js__WEBPACK_IMPORTED_MODULE_4__/* ["default"] */ .A)(/*#__PURE__*/(0,_Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regenerator_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .A)().m(function _callee(Body, ct) {
+    var m, parser, headerField, headerValue, entryValue, entryName, contentType, filename, entryChunks, formData, onPartData, appendToFile, appendFileToFormData, appendEntryToFormData, decoder, _iteratorAbruptCompletion, _didIteratorError, _iteratorError, _iterator, _step, chunk, _t;
+    return (0,_Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_regenerator_js__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .A)().w(function (_context) {
+      while (1) switch (_context.n) {
         case 0:
           if (/multipart/i.test(ct)) {
-            _context.next = 2;
+            _context.n = 1;
             break;
           }
           throw new TypeError('Failed to fetch');
-        case 2:
+        case 1:
           m = ct.match(/boundary=(?:"([^"]+)"|([^;]+))/i);
           if (m) {
-            _context.next = 5;
+            _context.n = 2;
             break;
           }
           throw new TypeError('no or bad content-type header, no multipart boundary');
-        case 5:
+        case 2:
           parser = new MultipartParser(m[1] || m[2]);
           entryChunks = [];
           formData = new formdata_polyfill_esm_min_js__WEBPACK_IMPORTED_MODULE_1__/* .FormData */ .fS();
@@ -416,58 +415,55 @@ function _toFormData() {
           };
           _iteratorAbruptCompletion = false;
           _didIteratorError = false;
-          _context.prev = 20;
-          _iterator = (0,_Users_wangchujiang_git_project_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncIterator_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .A)(Body);
-        case 22:
-          _context.next = 24;
+          _context.p = 3;
+          _iterator = (0,_Users_wong_git_github_markdown_to_html_cli_node_modules_babel_runtime_helpers_esm_asyncIterator_js__WEBPACK_IMPORTED_MODULE_6__/* ["default"] */ .A)(Body);
+        case 4:
+          _context.n = 5;
           return _iterator.next();
-        case 24:
-          if (!(_iteratorAbruptCompletion = !(_step = _context.sent).done)) {
-            _context.next = 30;
+        case 5:
+          if (!(_iteratorAbruptCompletion = !(_step = _context.v).done)) {
+            _context.n = 7;
             break;
           }
           chunk = _step.value;
           parser.write(chunk);
-        case 27:
+        case 6:
           _iteratorAbruptCompletion = false;
-          _context.next = 22;
+          _context.n = 4;
           break;
-        case 30:
-          _context.next = 36;
+        case 7:
+          _context.n = 9;
           break;
-        case 32:
-          _context.prev = 32;
-          _context.t0 = _context["catch"](20);
+        case 8:
+          _context.p = 8;
+          _t = _context.v;
           _didIteratorError = true;
-          _iteratorError = _context.t0;
-        case 36:
-          _context.prev = 36;
-          _context.prev = 37;
+          _iteratorError = _t;
+        case 9:
+          _context.p = 9;
+          _context.p = 10;
           if (!(_iteratorAbruptCompletion && _iterator["return"] != null)) {
-            _context.next = 41;
+            _context.n = 11;
             break;
           }
-          _context.next = 41;
+          _context.n = 11;
           return _iterator["return"]();
-        case 41:
-          _context.prev = 41;
+        case 11:
+          _context.p = 11;
           if (!_didIteratorError) {
-            _context.next = 44;
+            _context.n = 12;
             break;
           }
           throw _iteratorError;
-        case 44:
-          return _context.finish(41);
-        case 45:
-          return _context.finish(36);
-        case 46:
+        case 12:
+          return _context.f(11);
+        case 13:
+          return _context.f(9);
+        case 14:
           parser.end();
-          return _context.abrupt("return", formData);
-        case 48:
-        case "end":
-          return _context.stop();
+          return _context.a(2, formData);
       }
-    }, _callee, null, [[20, 32, 36, 46], [37,, 41, 45]]);
+    }, _callee, null, [[10,, 11, 13], [3, 8, 9, 14]]);
   }));
   return _toFormData.apply(this, arguments);
 }
